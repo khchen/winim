@@ -77,4 +77,4 @@ comScript:
 ## License
 Read license.txt for more details.
 
-Copyright (c) 2016-2017 Kai-Hung Chen (Ward). All rights reserved.
+Copyright (c) 2016-2017 Kai-Hung Chen, Ward. All rights reserved.
