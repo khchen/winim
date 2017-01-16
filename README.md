@@ -14,11 +14,11 @@ See winstr.nim and com.nim for details.
 ```nimrod
 import winim
 ```
-or  
+or
 ```nimrod
 import winim.com # for windows COM support.
 ```
-## Compile 
+## Compile
     nim c -d:release source.nim
       add -d:winansi for ansi mode (unicode by default)
       add -d:win_no_discardable if not like discardable windows API
@@ -72,9 +72,9 @@ comScript:
 
   for key in dict:
     echo key, " => ", dict.item(key)
-
 ```
 
 ## License
-Copyright (c) 2016-2017 Kai-Hung Chen (Ward). All rights reserved.
+Read license.txt for more details.
 
+Copyright (c) 2016-2017 Kai-Hung Chen (Ward). All rights reserved.
