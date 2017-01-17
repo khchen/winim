@@ -21,6 +21,7 @@ import winim.com # for windows COM support.
 ## Compile
     nim c -d:release source.nim
       add -d:winansi for ansi mode (unicode by default)
+      add -d:winstyle to enable windows visual styles
       add -d:win_no_discardable if not like discardable windows API
 
 ## Examples

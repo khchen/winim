@@ -25,8 +25,21 @@
 
 {.deadCodeElim: on.}
 
-import winapi, winstr
+import private/winapi, private/winstr
 export winapi, winstr
+
+static:
+  when defined(winstyle):
+    import os
+    const winimPrivateDir = parentDir(currentSourcePath()) & r"\private\"
+
+    when defined(cpu64):
+      const resourceFile = winimPrivateDir & "winim64.res"
+    else:
+      const resourceFile = winimPrivateDir & "winim32.res"
+
+    {.passL: resourceFile.}
+
 
 # todo: need more converter?
 converter winim_converter*(x: bool): BOOL =
