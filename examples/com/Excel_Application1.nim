@@ -1,8 +1,5 @@
 import winim.com
 
-MessageBox(0, T"Hello, world !", T"Nim is Powerful", 0)
-
-quit()
 comScript:
   var obj = CreateObject("Excel.Application")
 
