@@ -21,17 +21,19 @@
 ##    .. code-block:: Nim
 ##       nim c -d:release source.nim
 ##         add -d:winansi for ansi mode (unicode by default)
+##         add -d:winstyle to enable windows visual styles
 ##         add -d:win_no_discardable if not like discardable windows API
+##
 
 {.deadCodeElim: on.}
 
-import private/winapi, private/winstr
-export winapi, winstr
+import winim.winapi, winim.winstr
+export winim.winapi, winim.winstr
 
 static:
   when defined(winstyle):
     import os
-    const winimPrivateDir = parentDir(currentSourcePath()) & r"\private\"
+    const winimPrivateDir = parentDir(currentSourcePath()) & r"\winim\"
 
     when defined(cpu64):
       const resourceFile = winimPrivateDir & "winim64.res"
