@@ -74,6 +74,10 @@ comScript:
   for key in dict:
     echo key, " => ", dict.item(key)
 ```
+## Docs
+* https://khchen.github.io/winim/winim.html
+* https://khchen.github.io/winim/winstr.html
+* https://khchen.github.io/winim/com.html
 
 ## License
 Read license.txt for more details.
