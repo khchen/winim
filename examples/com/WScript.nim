@@ -6,7 +6,7 @@ echo obj.userDomain
 echo obj.computerName
 echo obj.userName
 
-obj =CreateObject("WScript.Shell")
+obj = CreateObject("WScript.Shell")
 echo obj.specialFolders("Desktop")
 
 for i in obj.specialFolders:
