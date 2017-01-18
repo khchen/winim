@@ -8,8 +8,17 @@ The module also include some windows string type utilities and windows COM suppo
 See winstr.nim and com.nim for details.
 
 ## Install
+With git on windows:
+
     nimble install winim
 
+Without git:
+
+    1. Download and unzip this moudle (by click "Clone or download" button).
+    2. Start a console, change current dir to the folder which include "winim.nimble" file. 
+       (for example: C:\winim-master\winim-master>)
+    3. Run "nimble install"
+    
 ## Usage
 ```nimrod
 import winim
@@ -37,7 +46,7 @@ import winim
 # T macro generate unicode string or ansi string depend on conditional symbol: winansi.
 MessageBox(0, T"Hello, world !", T"Nim is Powerful 中文測試", 0)
 ```
-Example to use the IID_IShellLink interface:
+Example to use the IShellLink interface:
 ```nimrod
 import os, winim
 
