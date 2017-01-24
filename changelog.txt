@@ -1,0 +1,22 @@
+====================================================================
+
+               Winim - Nim's Windows API Module
+                 (c) Copyright 2016-2017 Ward
+
+====================================================================
+
+Version 1.2
+-----------
+winapi: redefine const to int literals is possible
+winapi: convert enum to const definition
+winapi: add more definition in shobjidl.h, propsys.h, shtypes.h,
+  and structuredquerycondition.h
+com: better error message on COMError exception
+
+Version 1.1
+-----------
+winapi: add -d:winstyle to enable windows visual styles
+
+Version 1.0
+-----------
+Initial release
