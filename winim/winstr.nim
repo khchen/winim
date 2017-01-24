@@ -206,6 +206,10 @@ iterator WCHARs(source: cstring, L: int): WCHAR =
       yield WCHAR((ch shr halfShift) +% UNI_SUR_HIGH_START)
       yield WCHAR((ch and halfMask) +% UNI_SUR_LOW_START)
 
+proc free(x: pointer) =
+  if not x.isNil:
+    system.dealloc(x)
+
 type
   # todo: add capacity for optimization
   wstring* = ref object
@@ -305,7 +309,7 @@ proc `UTF8->mstring`(source: ptr char, L: int, alloc: bool): pointer =
   var
     pws = cast[pwstring](`UTF8->wstring`(source, L, alloc=true))
     mLen = WideCharToMultiByte(CP_ACP, 0, pws.data[0].addr, pws.length.int32, nil, 0, nil, nil)
-  defer: dealloc(pws)
+  defer: free(pws)
 
   result = mstringBuffer(mLen, alloc)
   discard WideCharToMultiByte(CP_ACP, 0, pws.data[0].addr, pws.length.int32, &(cast[string](result)), mLen, nil, nil)
@@ -329,7 +333,7 @@ proc `ANSI->string`(source: ptr char, L: int, alloc: bool): pointer =
   var
     pws = cast[pwstring](`ANSI->wstring`(source, L, alloc=true))
     mLen = WideCharToMultiByte(CP_UTF8, 0, pws.data[0].addr, pws.length.int32, nil, 0, nil, nil)
-  defer: dealloc(pws)
+  defer: free(pws)
 
   result = stringBuffer(mLen, alloc)
   discard WideCharToMultiByte(CP_UTF8, 0, pws.data[0].addr, pws.length.int32, &(cast[string](result)), mLen, nil, nil)
@@ -491,7 +495,7 @@ proc repr*(s: wstring): string =
     else:
       var wchar = u
       var pstr = cast[pstring](`UNICODE->string`(wchar.addr, 1, alloc=true))
-      defer: dealloc(pstr)
+      defer: free(pstr)
       result &= cast[string](pstr)
 
   result &= "\""
@@ -533,24 +537,24 @@ proc len*(s: mstring): int =
 
 iterator items*(s: mstring): mstring =
   var pws = cast[pwstring](`ANSI->wstring`(&s, s.len, alloc=true))
-  defer: dealloc(pws)
+  defer: free(pws)
 
   for w in cast[wstring](pws):
     var wchar = w
     var pms = cast[pmstring](`UNICODE->mstring`(wchar.addr, 1, alloc=true))
-    defer: dealloc(pms)
+    defer: free(pms)
 
     yield cast[mstring](pms)
 
 iterator pairs*(s: mstring): tuple[key: int, val: mstring] =
   var pws = cast[pwstring](`ANSI->wstring`(&s, s.len, alloc=true))
-  defer: dealloc(pws)
+  defer: free(pws)
 
   var i = 0
   for w in cast[wstring](pws):
     var wchar = w
     var pms = cast[pmstring](`UNICODE->mstring`(wchar.addr, 1, alloc=true))
-    defer: dealloc(pms)
+    defer: free(pms)
 
     yield (i, cast[mstring](pms))
     i += pms.length
@@ -562,7 +566,7 @@ proc repr*(s: mstring): string =
       result &= "\\0"
     else:
       var pstr = cast[pstring](`ANSI->string`(&sub, sub.len, alloc=true))
-      defer: dealloc(pstr)
+      defer: free(pstr)
       result &= cast[string](pstr)
 
   result &= "\""

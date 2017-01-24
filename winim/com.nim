@@ -56,12 +56,17 @@ else:
 
 type
   COMError* = object of Exception
+    hresult*: HRESULT
   COMException* = object of COMError
   VariantConversionError* = object of ValueError
 
 proc notNil[T](x: T): bool =
   when T is BSTR: not cast[pointer](x).isNil
   else: not x.isNil
+
+proc free(x: pointer) =
+  if not x.isNil:
+    system.dealloc(x)
 
 converter voidpp_converter(x: ptr ptr object): ptr pointer = cast[ptr pointer](x)
 
@@ -92,6 +97,38 @@ when hasTraceTable:
 
   comTrace = newTable[pointer, bool]()
   varTrace = newTable[pointer, bool]()
+
+var hresult {.threadvar.}: HRESULT
+
+template ERR(x: HRESULT): bool =
+  hresult = x
+  hresult.FAILED()
+
+template OK(x: HRESULT): bool =
+  hresult = x
+  hresult.SUCCEEDED()
+
+proc newCOMError(msg: string, hr: HRESULT = hresult): ref COMError =
+  result = newException(COMError, msg)
+  result.hresult = hr
+
+proc newCOMException(msg: string, hr: HRESULT = hresult): ref COMException =
+  result = newException(COMException, msg)
+  result.hresult = hr
+
+proc getCurrentCOMError*(): ref COMError =
+  result = (ref COMError)(getCurrentException())
+
+proc desc*(e: ref COMError): string =
+  var buffer = allocWString(4096)
+  defer: dealloc(buffer)
+
+  FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM or FORMAT_MESSAGE_IGNORE_INSERTS,
+               nil,
+               e.hresult.DWORD,
+               MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+               cast[wstring](buffer), 4096, nil)
+  result = $cast[wstring](buffer)
 
 proc del*(x: com) =
   when hasTraceTable:
@@ -135,25 +172,69 @@ when hasTraceTable:
     varTrace.clear
     comTrace.clear
 
-proc typeDesc(VT: VARTYPE, d: UINT = 0): string =
-  if VT == VT_ILLEGAL.VARTYPE:
+proc typeDesc(vt: VARTYPE, d: UINT = 0): string =
+  proc typeStr(vt: VARTYPE): string =
+    case vt
+    of 0: "VT_EMPTY"
+    of 1: "VT_NULL"
+    of 2: "VT_I2"
+    of 3: "VT_I4"
+    of 4: "VT_R4"
+    of 5: "VT_R8"
+    of 6: "VT_CY"
+    of 7: "VT_DATE"
+    of 8: "VT_BSTR"
+    of 9: "VT_DISPATCH"
+    of 10: "VT_ERROR"
+    of 11: "VT_BOOL"
+    of 12: "VT_VARIANT"
+    of 13: "VT_UNKNOWN"
+    of 14: "VT_DECIMAL"
+    of 16: "VT_I1"
+    of 17: "VT_UI1"
+    of 18: "VT_UI2"
+    of 19: "VT_UI4"
+    of 20: "VT_I8"
+    of 21: "VT_UI8"
+    of 22: "VT_INT"
+    of 23: "VT_UINT"
+    of 24: "VT_VOID"
+    of 25: "VT_HRESULT"
+    of 26: "VT_PTR"
+    of 27: "VT_SAFEARRAY"
+    of 28: "VT_CARRAY"
+    of 29: "VT_USERDEFINED"
+    of 30: "VT_LPSTR"
+    of 31: "VT_LPWSTR"
+    of 36: "VT_RECORD"
+    of 37: "VT_INT_PTR"
+    of 38: "VT_UINT_PTR"
+    of 64: "VT_FILETIME"
+    of 65: "VT_BLOB"
+    of 66: "VT_STREAM"
+    of 67: "VT_STORAGE"
+    of 68: "VT_STREAMED_OBJECT"
+    of 69: "VT_STORED_OBJECT"
+    of 70: "VT_BLOB_OBJECT"
+    of 71: "VT_CF"
+    of 72: "VT_CLSID"
+    of 0xfff: "VT_BSTR_BLOB"
+    else: "VT_ILLEGAL"
+
+  if vt == VT_ILLEGAL:
     result = "VT_ILLEGAL"
   else:
-    var vt = VT
     result = ""
-    template deflag(e: VARENUM) =
-      if (vt and e.VARTYPE) != 0:
-        if e == VT_ARRAY and d != 0:
-          result &= $e & "(" & $d & "D)|"
-        else:
-          result &= $e & "|"
-        vt = vt and (not e.VARTYPE)
 
-    deflag(VT_VECTOR)
-    deflag(VT_BYREF)
-    deflag(VT_ARRAY)
-    deflag(VT_RESERVED)
-    result &= $vt.VARENUM
+    if (vt and VT_VECTOR) != 0: result &= "VT_VECTOR|"
+    if (vt and VT_BYREF) != 0: result &= "VT_BYREF|"
+    if (vt and VT_RESERVED) != 0: result &= "VT_RESERVED|"
+    if (vt and VT_ARRAY) != 0:
+      if d != 0: result &= "VT_ARRAY(" & $d & "D)|"
+      else: result &= "VT_ARRAY|"
+
+    result &= typeStr(vt and 0xfff)
+
 
 proc vcErrorMsg(f: string, t: string = nil): string =
   "convert from " & f & " to " & (if t.isNil: f else: t)
@@ -197,7 +278,9 @@ proc copy*(x: variant): variant =
 proc toVariant*(x: string|cstring|mstring): variant =
   result.init
   result.raw.vt = VT_BSTR.VARTYPE
-  result.raw.bstrVal = SysAllocString(&(+$x))
+  var pws = allocWString(x)
+  result.raw.bstrVal = SysAllocString(&(cast[wstring](pws)))
+  free(pws)
 
 proc toVariant*(x: wstring): variant =
   result.init
@@ -625,7 +708,7 @@ converter variantConverter*(x: variant): comarray3d = fromVariant[comarray3d](x)
 
 proc invokeRaw(self: com, name: string, invokeType: WORD, vargs: varargs[variant, toVariant]): variant =
   if vargs.len > 128:
-    raise newException(COMError, "too mary parameters")
+    raise newCOMError("too mary parameters", DISP_E_BADPARAMCOUNT)
 
   var
     i = 0
@@ -646,10 +729,10 @@ proc invokeRaw(self: com, name: string, invokeType: WORD, vargs: varargs[variant
     wstr = allocWString(name)
     pwstr = &(cast[wstring](wstr))
 
-  defer: dealloc(wstr)
+  defer: free(wstr)
 
-  if self.disp.GetIDsOfNames(&IID_NULL, cast[ptr LPOLESTR](&pwstr), 1, LOCALE_USER_DEFAULT, &dispid).FAILED:
-    raise newException(COMError, "unsupported method: " & name)
+  if self.disp.GetIDsOfNames(&IID_NULL, cast[ptr LPOLESTR](&pwstr), 1, LOCALE_USER_DEFAULT, &dispid).ERR:
+    raise newCOMError("unsupported method: " & name)
 
   if vargs.len != 0:
     dp.rgvarg = &args[0]
@@ -659,7 +742,7 @@ proc invokeRaw(self: com, name: string, invokeType: WORD, vargs: varargs[variant
       dp.rgdispidNamedArgs = &dispidNamed
       dp.cNamedArgs = 1
 
-  if self.disp.Invoke(dispid, &IID_NULL, LOCALE_USER_DEFAULT, invokeType, &dp, &ret, &excep, nil).FAILED:
+  if self.disp.Invoke(dispid, &IID_NULL, LOCALE_USER_DEFAULT, invokeType, &dp, &ret, &excep, nil).ERR:
     if excep.pfnDeferredFillIn.notNil:
       discard excep.pfnDeferredFillIn(&excep)
 
@@ -669,9 +752,9 @@ proc invokeRaw(self: com, name: string, invokeType: WORD, vargs: varargs[variant
       SysFreeString(excep.bstrSource)
       SysFreeString(excep.bstrDescription)
       SysFreeString(excep.bstrHelpFile)
-      raise newException(COMException, err)
+      raise newCOMException(err)
 
-    raise newException(COMError, "invoke method failed: " & name)
+    raise newCOMError("invoke method failed: " & name)
 
   result = newVariant(ret)
   discard VariantClear(&ret)
@@ -709,11 +792,11 @@ iterator items*(x: com): variant =
     dp: DISPPARAMS
     enumvar: ptr IEnumVARIANT
 
-  if x.disp.Invoke(DISPID_NEWENUM, &IID_NULL, LOCALE_USER_DEFAULT, DISPATCH_METHOD or DISPATCH_PROPERTYGET, &dp, &ret, nil, nil).FAILED:
-    raise newException(COMError, "object is not iterable")
+  if x.disp.Invoke(DISPID_NEWENUM, &IID_NULL, LOCALE_USER_DEFAULT, DISPATCH_METHOD or DISPATCH_PROPERTYGET, &dp, &ret, nil, nil).ERR:
+    raise newCOMError("object is not iterable")
 
-  if ret.punkVal.QueryInterface(&IID_IEnumVARIANT, &enumvar).FAILED:
-    raise newException(COMError, "object is not iterable")
+  if ret.punkVal.QueryInterface(&IID_IEnumVARIANT, &enumvar).ERR:
+    raise newCOMError("object is not iterable")
 
   while enumvar.Next(1, &item, nil) == 0:
     yield newVariant(item)
@@ -741,17 +824,17 @@ proc CreateObject*(progId: string): com =
     clsid: GUID
     pCf: ptr IClassFactory
 
-  if GetCLSID(progId, clsid).SUCCEEDED:
+  if GetCLSID(progId, clsid).OK:
     # better than CoCreateInstance:
     # some IClassFactory.CreateInstance return SUCCEEDED with nil pointer, this crash CoCreateInstance
     # for example: {D5F7E36B-5B38-445D-A50F-439B8FCBB87A}
-    if CoGetClassObject(&clsid, CLSCTX_LOCAL_SERVER or CLSCTX_INPROC_SERVER, nil, &IID_IClassFactory, &pCf).SUCCEEDED:
+    if CoGetClassObject(&clsid, CLSCTX_LOCAL_SERVER or CLSCTX_INPROC_SERVER, nil, &IID_IClassFactory, &pCf).OK:
       defer: pCf.Release()
 
-      if pCf.CreateInstance(nil, &IID_IDispatch, &(result.disp)).SUCCEEDED and result.disp.notNil:
+      if pCf.CreateInstance(nil, &IID_IDispatch, &(result.disp)).OK and result.disp.notNil:
         return result
 
-  raise newException(COMError, "unable to create object from " & progId)
+  raise newCOMError("unable to create object from " & progId)
 
 
 proc GetObject*(file: string, progId: string = nil): com =
@@ -766,32 +849,31 @@ proc GetObject*(file: string, progId: string = nil): com =
     pPf: ptr IPersistFile
 
   if progId.isVaild:
-    if GetCLSID(progId, clsid).SUCCEEDED:
+    if GetCLSID(progId, clsid).OK:
       if file.isVaild:
-        if CoCreateInstance(&clsid, nil, CLSCTX_LOCAL_SERVER or CLSCTX_INPROC_SERVER, &IID_IPersistFile, &pPf).SUCCEEDED:
+        if CoCreateInstance(&clsid, nil, CLSCTX_LOCAL_SERVER or CLSCTX_INPROC_SERVER, &IID_IPersistFile, &pPf).OK:
           defer: pPf.Release()
 
-          if pPf.Load(file, 0).SUCCEEDED and pPf.QueryInterface(&IID_IDispatch, &(result.disp)).SUCCEEDED:
+          if pPf.Load(file, 0).OK and pPf.QueryInterface(&IID_IDispatch, &(result.disp)).OK:
             return result
       else:
-        if GetActiveObject(&clsid, nil, &pUk).SUCCEEDED:
+        if GetActiveObject(&clsid, nil, &pUk).OK:
           defer: pUk.Release()
 
-          if pUk.QueryInterface(&IID_IDispatch, &(result.disp)).SUCCEEDED:
+          if pUk.QueryInterface(&IID_IDispatch, &(result.disp)).OK:
             return result
 
   elif file.isVaild:
-    if CoGetObject(file, nil, &IID_IDispatch, &(result.disp)).SUCCEEDED:
+    if CoGetObject(file, nil, &IID_IDispatch, &(result.disp)).OK:
       return result
 
-  raise newException(COMError, "unable to get object")
+  raise newCOMError("unable to get object")
 
 proc newCom*(progId: string): com =
   result = CreateObject(progId)
 
 proc newCom*(file, progId: string): com =
   result = GetObject(file, progId)
-
 
 type
   comEventHandler* = proc(self: com, name: string, params: varargs[variant]): variant
@@ -824,7 +906,7 @@ proc Sink_Release(self: ptr IUnknown): ULONG {.stdcall.} =
   this.refCount.dec
   if this.refCount == 0:
     this.typeInfo.Release()
-    dealloc(self)
+    free(self)
     result = 0
   else:
     result = this.refCount
@@ -916,33 +998,35 @@ proc connectRaw(self: com, riid: REFIID = nil, cookie: DWORD, handler: comEventH
     if enu.notNil: enu.Release()
 
   block:
-    if self.disp.GetTypeInfoCount(&count).FAILED or count != 1: break
-    if self.disp.GetTypeInfo(0, 0, &dispTypeInfo).FAILED: break
-    if dispTypeInfo.GetContainingTypeLib(&typeLib, &index).FAILED: break
-    if self.disp.QueryInterface(&IID_IConnectionPointContainer, &container).FAILED: break
+    if self.disp.GetTypeInfoCount(&count).ERR or count != 1: break
+    if self.disp.GetTypeInfo(0, 0, &dispTypeInfo).ERR: break
+    if dispTypeInfo.GetContainingTypeLib(&typeLib, &index).ERR: break
+    if self.disp.QueryInterface(&IID_IConnectionPointContainer, &container).ERR: break
 
     if riid.isNil:
-      if container.EnumConnectionPoints(&enu).FAILED: break
+      if container.EnumConnectionPoints(&enu).ERR: break
       enu.Reset()
       while enu.Next(1, &connection, nil) != S_FALSE:
-        if connection.GetConnectionInterface(&iid).SUCCEEDED and
-          typeLib.GetTypeInfoOfGuid(&iid, &typeInfo).SUCCEEDED:
+        if connection.GetConnectionInterface(&iid).OK and
+          typeLib.GetTypeInfoOfGuid(&iid, &typeInfo).OK:
             break
 
         connection.Release()
         connection = nil
 
     else:
-      if container.FindConnectionPoint(riid, &connection).FAILED: break
-      if connection.GetConnectionInterface(&iid).FAILED: break
-      if typeLib.GetTypeInfoOfGuid(riid, &typeInfo).FAILED: break
+      if container.FindConnectionPoint(riid, &connection).ERR: break
+      if connection.GetConnectionInterface(&iid).ERR: break
+      if typeLib.GetTypeInfoOfGuid(riid, &typeInfo).ERR: break
 
     if handler.notNil:
       sink = newSink(self, iid, typeInfo, handler)
-      if connection.Advise(cast[ptr IUnknown](sink), &result).FAILED: result = 0
+      if connection.Advise(cast[ptr IUnknown](sink), &result).OK: return result
 
     elif cookie != 0:
-      if connection.Unadvise(cookie).SUCCEEDED: result = 1
+      if connection.Unadvise(cookie).OK: return 1
+
+  raise newCOMError("unable to connect/disconnect event")
 
 
 proc connect*(self: com, handler: comEventHandler, riid: REFIID = nil): DWORD {.discardable.} =
@@ -1008,9 +1092,9 @@ macro comScript*(x: untyped): untyped =
   result = comReformat(x)
 
 when isMainModule:
-
   comScript:
     var dict = CreateObject("Scripting.Dictionary")
+
     dict.add("a", "the")
     dict.add("b", "quick")
     dict.add("c", "fox")

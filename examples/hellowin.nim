@@ -46,16 +46,16 @@ proc main() =
     return
 
   hwnd = CreateWindow(appName,                    # window class name
-                       "The Hello Program",       # window caption
-                       WS_OVERLAPPEDWINDOW.DWORD, # window style
-                       CW_USEDEFAULT,             # initial x position
-                       CW_USEDEFAULT,             # initial y position
-                       CW_USEDEFAULT,             # initial x size
-                       CW_USEDEFAULT,             # initial y size
-                       0,                         # parent window handle
-                       0,                         # window menu handle
-                       hInstance,                 # program instance handle
-                       nil)                       # creation parameters
+                     "The Hello Program",       # window caption
+                     WS_OVERLAPPEDWINDOW,       # window style
+                     CW_USEDEFAULT,             # initial x position
+                     CW_USEDEFAULT,             # initial y position
+                     CW_USEDEFAULT,             # initial x size
+                     CW_USEDEFAULT,             # initial y size
+                     0,                         # parent window handle
+                     0,                         # window menu handle
+                     hInstance,                 # program instance handle
+                     nil)                       # creation parameters
 
   ShowWindow(hwnd, SW_SHOW)
   UpdateWindow(hwnd)
