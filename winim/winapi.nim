@@ -31790,6 +31790,7 @@ proc SHGetFolderPathW*(P1: HWND, P2: int32, P3: HANDLE, P4: DWORD, P5: LPWSTR): 
 proc SHGetFolderLocation*(P1: HWND, P2: int32, P3: HANDLE, P4: DWORD, P5: ptr LPITEMIDLIST): HRESULT {.winapi, dynlib: "shell32", importc.}
 proc SHCreateDirectoryExA*(P1: HWND, P2: LPCSTR, P3: LPSECURITY_ATTRIBUTES): INT {.winapi, dynlib: "shell32", importc.}
 proc SHCreateDirectoryExW*(P1: HWND, P2: LPCWSTR, P3: LPSECURITY_ATTRIBUTES): INT {.winapi, dynlib: "shell32", importc.}
+proc SHCreateItemFromParsingName*(P1: PCWSTR, P2: ptr IBindCtx, P3: REFIID, P4: ptr PVOID): HRESULT {.winapi, dynlib: "shell32", importc.}
 proc SHBindToParent*(P1: LPCITEMIDLIST, P2: REFIID, P3: ptr ptr VOID, P4: ptr LPCITEMIDLIST): HRESULT {.winapi, dynlib: "shell32", importc.}
 proc SHGetFolderPathAndSubDirA*(P1: HWND, P2: int32, P3: HANDLE, P4: DWORD, P5: LPCSTR, P6: LPSTR): HRESULT {.winapi, dynlib: "shell32", importc.}
 proc SHGetFolderPathAndSubDirW*(P1: HWND, P2: int32, P3: HANDLE, P4: DWORD, P5: LPCWSTR, P6: LPWSTR): HRESULT {.winapi, dynlib: "shell32", importc.}
