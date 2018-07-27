@@ -1306,8 +1306,8 @@ function main() {
     title="toVariant(x: bool): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,_2"
     title="toVariant(x: SomeInteger | enum): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#toVariant,SomeReal"
-    title="toVariant(x: SomeReal): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#toVariant,SomeFloat"
+    title="toVariant(x: SomeFloat): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,char"
     title="toVariant(x: char): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,pointer"
@@ -1323,7 +1323,7 @@ function main() {
   <li><a class="reference" href="#toVariant,FILETIME"
     title="toVariant(x: FILETIME): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,_3"
-    title="toVariant(x: ptr SomeInteger | ptr SomeReal | ptr char | ptr bool | ptr BSTR): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+    title="toVariant(x: ptr SomeInteger | ptr SomeFloat | ptr char | ptr bool | ptr BSTR): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,VARIANT"
     title="toVariant(x: VARIANT): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,variant_2"
@@ -1372,62 +1372,62 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#16" id="66">Converters</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#variantConverter.c,variant"
-    title="variantConverter(x: variant): string"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_2"
-    title="variantConverter(x: variant): cstring"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_3"
-    title="variantConverter(x: variant): mstring"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_4"
-    title="variantConverter(x: variant): wstring"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_5"
-    title="variantConverter(x: variant): char"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_6"
-    title="variantConverter(x: variant): bool"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_7"
-    title="variantConverter(x: variant): com"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_8"
-    title="variantConverter(x: variant): ptr IDispatch"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_9"
-    title="variantConverter(x: variant): ptr IUnknown"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_10"
-    title="variantConverter(x: variant): pointer"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_11"
-    title="variantConverter(x: variant): int"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_12"
-    title="variantConverter(x: variant): uint"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_13"
-    title="variantConverter(x: variant): int8"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_14"
-    title="variantConverter(x: variant): uint8"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_15"
-    title="variantConverter(x: variant): int16"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_16"
-    title="variantConverter(x: variant): uint16"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_17"
-    title="variantConverter(x: variant): int32"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_18"
-    title="variantConverter(x: variant): uint32"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_19"
-    title="variantConverter(x: variant): int64"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_20"
-    title="variantConverter(x: variant): uint64"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_21"
-    title="variantConverter(x: variant): float32"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_22"
-    title="variantConverter(x: variant): float64"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_23"
-    title="variantConverter(x: variant): FILETIME"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_24"
-    title="variantConverter(x: variant): SYSTEMTIME"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_25"
-    title="variantConverter(x: variant): VARIANT"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_26"
-    title="variantConverter(x: variant): COMArray1D"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_27"
-    title="variantConverter(x: variant): COMArray2D"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
-  <li><a class="reference" href="#variantConverter.c,variant_28"
-    title="variantConverter(x: variant): COMArray3D"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+      <li><a class="reference" href="#variantConverterToString.c,variant"
+    title="variantConverterToString(x: variant): string"><wbr />variant<wbr />Converter<wbr />To<wbr />String<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToCString.c,variant"
+    title="variantConverterToCString(x: variant): cstring"><wbr />variant<wbr />Converter<wbr />To<wbr />CString<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToMString.c,variant"
+    title="variantConverterToMString(x: variant): mstring"><wbr />variant<wbr />Converter<wbr />To<wbr />MString<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToWString.c,variant"
+    title="variantConverterToWString(x: variant): wstring"><wbr />variant<wbr />Converter<wbr />To<wbr />WString<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToChar.c,variant"
+    title="variantConverterToChar(x: variant): char"><wbr />variant<wbr />Converter<wbr />To<wbr />Char<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToBool.c,variant"
+    title="variantConverterToBool(x: variant): bool"><wbr />variant<wbr />Converter<wbr />To<wbr />Bool<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToCom.c,variant"
+    title="variantConverterToCom(x: variant): com"><wbr />variant<wbr />Converter<wbr />To<wbr />Com<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToIDispatch.c,variant"
+    title="variantConverterToIDispatch(x: variant): ptr IDispatch"><wbr />variant<wbr />Converter<wbr />To<wbr />IDispatch<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToIUnknown.c,variant"
+    title="variantConverterToIUnknown(x: variant): ptr IUnknown"><wbr />variant<wbr />Converter<wbr />To<wbr />IUnknown<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToPointer.c,variant"
+    title="variantConverterToPointer(x: variant): pointer"><wbr />variant<wbr />Converter<wbr />To<wbr />Pointer<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToInt.c,variant"
+    title="variantConverterToInt(x: variant): int"><wbr />variant<wbr />Converter<wbr />To<wbr />Int<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToUInt.c,variant"
+    title="variantConverterToUInt(x: variant): uint"><wbr />variant<wbr />Converter<wbr />To<wbr />UInt<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToInt8.c,variant"
+    title="variantConverterToInt8(x: variant): int8"><wbr />variant<wbr />Converter<wbr />To<wbr />Int8<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToUInt8.c,variant"
+    title="variantConverterToUInt8(x: variant): uint8"><wbr />variant<wbr />Converter<wbr />To<wbr />UInt8<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToInt16.c,variant"
+    title="variantConverterToInt16(x: variant): int16"><wbr />variant<wbr />Converter<wbr />To<wbr />Int16<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToUInt16.c,variant"
+    title="variantConverterToUInt16(x: variant): uint16"><wbr />variant<wbr />Converter<wbr />To<wbr />UInt16<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToInt32.c,variant"
+    title="variantConverterToInt32(x: variant): int32"><wbr />variant<wbr />Converter<wbr />To<wbr />Int32<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToUInt32.c,variant"
+    title="variantConverterToUInt32(x: variant): uint32"><wbr />variant<wbr />Converter<wbr />To<wbr />UInt32<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToInt64.c,variant"
+    title="variantConverterToInt64(x: variant): int64"><wbr />variant<wbr />Converter<wbr />To<wbr />Int64<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToUInt64.c,variant"
+    title="variantConverterToUInt64(x: variant): uint64"><wbr />variant<wbr />Converter<wbr />To<wbr />UInt64<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToFloat32.c,variant"
+    title="variantConverterToFloat32(x: variant): float32"><wbr />variant<wbr />Converter<wbr />To<wbr />Float32<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToFloat64.c,variant"
+    title="variantConverterToFloat64(x: variant): float64"><wbr />variant<wbr />Converter<wbr />To<wbr />Float64<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToFILETIME.c,variant"
+    title="variantConverterToFILETIME(x: variant): FILETIME"><wbr />variant<wbr />Converter<wbr />To<wbr />FILETIME<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToSYSTEMTIME.c,variant"
+    title="variantConverterToSYSTEMTIME(x: variant): SYSTEMTIME"><wbr />variant<wbr />Converter<wbr />To<wbr />SYSTEMTIME<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToVARIANT.c,variant"
+    title="variantConverterToVARIANT(x: variant): VARIANT"><wbr />variant<wbr />Converter<wbr />To<wbr />VARIANT<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToCOMArray1D.c,variant"
+    title="variantConverterToCOMArray1D(x: variant): COMArray1D"><wbr />variant<wbr />Converter<wbr />To<wbr />COMArray1D<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToCOMArray2D.c,variant"
+    title="variantConverterToCOMArray2D(x: variant): COMArray2D"><wbr />variant<wbr />Converter<wbr />To<wbr />COMArray2D<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+  <li><a class="reference" href="#variantConverterToCOMArray3D.c,variant"
+    title="variantConverterToCOMArray3D(x: variant): COMArray3D"><wbr />variant<wbr />Converter<wbr />To<wbr />COMArray3D<span class="attachedType" style="visibility:hidden">variant</span></a></li>
 
   </ul>
 </li>
@@ -1637,7 +1637,7 @@ function main() {
 
 
 </dd>
-<dt id="toVariant"><a name="toVariant,SomeReal"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">SomeReal</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
+<dt id="toVariant"><a name="toVariant,SomeFloat"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">SomeFloat</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
 <dd>
 
 
@@ -1677,7 +1677,7 @@ function main() {
 
 
 </dd>
-<dt id="toVariant"><a name="toVariant,_3"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">SomeInteger</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">SomeReal</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">char</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">bool</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">BSTR</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
+<dt id="toVariant"><a name="toVariant,_3"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">SomeInteger</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">SomeFloat</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">char</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">bool</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">BSTR</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
 <dd>
 
 
@@ -1797,168 +1797,168 @@ Disconnect a COM object from a comEventHandler.
 <div class="section" id="16">
 <h1><a class="toc-backref" href="#16">Converters</a></h1>
 <dl class="item">
-<dt id="variantConverter"><a name="variantConverter.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="variantConverterToString"><a name="variantConverterToString.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToString</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_2"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cstring</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="variantConverterToCString"><a name="variantConverterToCString.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToCString</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cstring</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_3"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">mstring</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="variantConverterToMString"><a name="variantConverterToMString.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToMString</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">mstring</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_4"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wstring</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="variantConverterToWString"><a name="variantConverterToWString.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToWString</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wstring</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_5"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">char</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_6"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_7"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">com</span> <span class="Other pragmabegin">{.</span><div class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_8"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">IDispatch</span> <span class="Other pragmabegin">{.</span><div class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_9"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">IUnknown</span> <span class="Other pragmabegin">{.</span><div class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_10"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">pointer</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_11"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_12"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_13"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int8</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_14"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_15"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int16</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_16"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint16</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_17"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int32</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_18"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint32</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_19"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int64</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_20"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint64</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_21"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float32</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_22"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float64</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_23"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">FILETIME</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_24"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">SYSTEMTIME</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="variantConverterToChar"><a name="variantConverterToChar.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToChar</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">char</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_25"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">VARIANT</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_26"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">COMArray1D</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="variantConverterToBool"><a name="variantConverterToBool.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToBool</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_27"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">COMArray2D</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="variantConverterToCom"><a name="variantConverterToCom.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToCom</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">com</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToIDispatch"><a name="variantConverterToIDispatch.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToIDispatch</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">IDispatch</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToIUnknown"><a name="variantConverterToIUnknown.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToIUnknown</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">IUnknown</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToPointer"><a name="variantConverterToPointer.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToPointer</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">pointer</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_28"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">COMArray3D</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="variantConverterToInt"><a name="variantConverterToInt.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToInt</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToUInt"><a name="variantConverterToUInt.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToUInt</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToInt8"><a name="variantConverterToInt8.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToInt8</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int8</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToUInt8"><a name="variantConverterToUInt8.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToUInt8</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToInt16"><a name="variantConverterToInt16.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToInt16</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int16</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToUInt16"><a name="variantConverterToUInt16.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToUInt16</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint16</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToInt32"><a name="variantConverterToInt32.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToInt32</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int32</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToUInt32"><a name="variantConverterToUInt32.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToUInt32</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint32</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToInt64"><a name="variantConverterToInt64.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToInt64</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int64</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToUInt64"><a name="variantConverterToUInt64.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToUInt64</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint64</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToFloat32"><a name="variantConverterToFloat32.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToFloat32</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float32</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToFloat64"><a name="variantConverterToFloat64.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToFloat64</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float64</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToFILETIME"><a name="variantConverterToFILETIME.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToFILETIME</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">FILETIME</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToSYSTEMTIME"><a name="variantConverterToSYSTEMTIME.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToSYSTEMTIME</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">SYSTEMTIME</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToVARIANT"><a name="variantConverterToVARIANT.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToVARIANT</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">VARIANT</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToCOMArray1D"><a name="variantConverterToCOMArray1D.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToCOMArray1D</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">COMArray1D</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToCOMArray2D"><a name="variantConverterToCOMArray2D.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToCOMArray2D</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">COMArray2D</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="variantConverterToCOMArray3D"><a name="variantConverterToCOMArray3D.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverterToCOMArray3D</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">COMArray3D</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
@@ -2006,7 +2006,7 @@ Nim's dot operators <cite>.=</cite> only allow &quot;a.b = c&quot;. With this ma
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-07-27 10:37:05 UTC</small>
+        <small>Made with Nim. Generated: 2018-07-28 00:05:02 UTC</small>
       </div>
     </div>
   </div>

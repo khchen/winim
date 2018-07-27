@@ -96,7 +96,7 @@
 ##      # Generate wstring or mstring buffer depend on conditional symbol: useWinAnsi.
 ##      # Use `&` to get the buffer address and then pass to Windows API.
 ##
-##    converter winstring_converter(s: SomeString): SomeString
+##    converter winstringConverter(s: SomeString): SomeString
 ##      # With these converters, pass string to Windows API is more easy.
 ##      #   Following converters don't need encoding conversion:
 ##      #     string => LPSTR (built-in)|ptr char
@@ -278,13 +278,10 @@ proc `&`*(s: string): ptr char {.inline.} =
   ## Get address of the first char of a string.
   ## For string, it has the same meaning as cstring(string), but it checks the nil well.
 
-  var dummy: string # nil string
-  when defined(cpu64):
-    assert(cast[int](dummy.cstring) == 16)
-    result = cast[ptr char](cast[uint](s) + (if s.isNil: 0 else: 16))
+  if s.isNil:
+    result = nil
   else:
-    assert(cast[int](dummy.cstring) == 8)
-    result = cast[ptr char](cast[uint](s) + (if s.isNil: 0 else: 8))
+    result = s[0].unsafeaddr
 
 proc `&`*(s: cstring): ptr char {.inline.} =
   ## Get address of the first char of a string.
@@ -1072,32 +1069,32 @@ template `>>>`*(a: typed, b: typed) =
   b <<< a
 
 # generics has problems on converters, define one by one
-converter winstring_converter*(x: string): LPWSTR = cast[LPWSTR](&(+$x))
-converter winstring_converter*(x: cstring): LPWSTR = cast[LPWSTR](&(+$x))
-converter winstring_converter*(x: wstring): LPWSTR = cast[LPWSTR](&x)
-converter winstring_converter*(x: BSTR): LPWSTR = cast[LPWSTR](x)
+converter winstringConverterStringToLPWSTR*(x: string): LPWSTR = cast[LPWSTR](&(+$x))
+converter winstringConverterCStringToLPWSTR*(x: cstring): LPWSTR = cast[LPWSTR](&(+$x))
+converter winstringConverterWStringToLPWSTR*(x: wstring): LPWSTR = cast[LPWSTR](&x)
+converter winstringConverterBSTRToLPWSTR*(x: BSTR): LPWSTR = cast[LPWSTR](x)
 
-converter winstring_converter*(x: string): BSTR = cast[BSTR](&(+$x))
-converter winstring_converter*(x: cstring): BSTR = cast[BSTR](&(+$x))
-converter winstring_converter*(x: wstring): BSTR = cast[BSTR](&x)
+converter winstringConverterStringToBSTR*(x: string): BSTR = cast[BSTR](&(+$x))
+converter winstringConverterCStringToBSTR*(x: cstring): BSTR = cast[BSTR](&(+$x))
+converter winstringConverterWStringToBSTR*(x: wstring): BSTR = cast[BSTR](&x)
 
-converter winstring_converter*(x: string): ptr char = cast[ptr char](&x)
-converter winstring_converter*(x: cstring): ptr char = cast[ptr char](x)
-converter winstring_converter*(x: mstring): ptr char = cast[ptr char](&x)
-converter winstring_converter*(x: mstring): LPSTR = cast[LPSTR](&x)
+converter winstringConverterStringToPtrChar*(x: string): ptr char = cast[ptr char](&x)
+converter winstringConverterCStringToPtrChar*(x: cstring): ptr char = cast[ptr char](x)
+converter winstringConverterMStringToPtrChar*(x: mstring): ptr char = cast[ptr char](&x)
+converter winstringConverterMStringToLPSTR*(x: mstring): LPSTR = cast[LPSTR](&x)
 
-converter winstring_converter*[I, T: char](x: array[I, T]): LPSTR = cast[LPSTR](x.unsafeaddr)
-converter winstring_converter*[I, T: char](x: ptr array[I, T]): LPSTR = cast[LPSTR](x)
+converter winstringConverterArrayToLPSTR*[I, T: char](x: array[I, T]): LPSTR = cast[LPSTR](x.unsafeaddr)
+converter winstringConverterPtrArrayToLPSTR*[I, T: char](x: ptr array[I, T]): LPSTR = cast[LPSTR](x)
 
-converter winstring_converter*[I, T: char](x: array[I, T]): ptr char = cast[ptr char](x.unsafeaddr)
-converter winstring_converter*[I, T: char](x: ptr array[I, T]): ptr char = cast[ptr char](x)
+converter winstringConverterArrayToPtrChar*[I, T: char](x: array[I, T]): ptr char = cast[ptr char](x.unsafeaddr)
+converter winstringConverterPtrArrayToPtrChar*[I, T: char](x: ptr array[I, T]): ptr char = cast[ptr char](x)
 
-converter winstring_converter*[I, T: WCHAR](x: array[I, T]): LPWSTR = cast[LPWSTR](x.unsafeaddr)
-converter winstring_converter*[I, T: WCHAR](x: ptr array[I, T]): LPWSTR = cast[LPWSTR](x)
+converter winstringConverterArrayToLPWSTR*[I, T: WCHAR](x: array[I, T]): LPWSTR = cast[LPWSTR](x.unsafeaddr)
+converter winstringConverterPtrArrayToLPWSTR*[I, T: WCHAR](x: ptr array[I, T]): LPWSTR = cast[LPWSTR](x)
 
-converter winstring_converter*(x: WideCString): LPWSTR = cast[LPWSTR](x[0].unsafeaddr)
-converter winstring_converter*(x: WideCString): wstring = +$cast[LPWSTR](x[0].unsafeaddr)
-converter winstring_converter*(x: wstring): WideCString =
+converter winstringConverterWideCStringToLPWSTR*(x: WideCString): LPWSTR = cast[LPWSTR](x[0].unsafeaddr)
+converter winstringConverterWideCStringToWString*(x: WideCString): wstring = +$cast[LPWSTR](x[0].unsafeaddr)
+converter winstringConverterWStringToWideCString*(x: wstring): WideCString =
   unsafeNew(result, x.length * 2 + 2)
   copyMem(result[0].unsafeaddr, &x, x.length * 2)
 

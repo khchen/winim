@@ -66,6 +66,7 @@ type
     hresult*: HRESULT
   COMException* = object of COMError
   VariantConversionError* = object of ValueError
+  SomeFloat = float | float32 | float64 # SomeReal is deprecated in devel
 
 proc notNil[T](x: T): bool =
   when T is BSTR: not cast[pointer](x).isNil
@@ -333,7 +334,7 @@ proc toVariant*(x: SomeInteger|enum): variant =
       result.raw.vt = VT_UI8.VARTYPE
       result.raw.ullVal = x.uint64
 
-proc toVariant*(x: SomeReal): variant =
+proc toVariant*(x: SomeFloat): variant =
   result.init
   when sizeof(x) == 4:
     result.raw.vt = VT_R4.VARTYPE
@@ -399,7 +400,7 @@ proc toVariant*(x: FILETIME): variant =
 
   result.raw.date = date
 
-proc toVariant*(x: ptr SomeInteger|ptr SomeReal|ptr char|ptr bool|ptr BSTR): variant =
+proc toVariant*(x: ptr SomeInteger|ptr SomeFloat|ptr char|ptr bool|ptr BSTR): variant =
   result = toVariant(x[])
   result.raw.byref = cast[pointer](x)
   result.raw.vt = result.raw.vt or VT_BYREF.VARTYPE
@@ -631,7 +632,7 @@ proc fromVariant*[T](x: variant): T =
       elif T is wstring:        targetVt = VT_BSTR;     targetName = "wstring"
       elif T is char:           targetVt = VT_UI1;      targetName = "char"
       elif T is SomeInteger:    targetVt = VT_I8;       targetName = "integer"
-      elif T is SomeReal:       targetVt = VT_R8;       targetName = "float"
+      elif T is SomeFloat:     targetVt = VT_R8;       targetName = "float"
       elif T is bool:           targetVt = VT_BOOL;     targetName = "bool"
       elif T is com:            targetVt = VT_DISPATCH; targetName = "com object"
       elif T is ptr IDispatch:  targetVt = VT_DISPATCH; targetName = "ptr IDispatch"
@@ -716,39 +717,39 @@ proc fromVariant*[T](x: variant): T =
         result = ret.byref
 
       elif T is SomeInteger:  result = cast[T](ret.llVal)
-      elif T is SomeReal:     result = T(ret.dblVal)
+      elif T is SomeFloat:    result = T(ret.dblVal)
       elif T is char:         result = char(ret.bVal)
       elif T is bool:         result = if ret.boolVal != 0: true else: false
 
 proc `$`*(x: variant): string = fromVariant[string](x)
-converter variantConverter*(x: variant): string = fromVariant[string](x)
-converter variantConverter*(x: variant): cstring = fromVariant[cstring](x)
-converter variantConverter*(x: variant): mstring = fromVariant[mstring](x)
-converter variantConverter*(x: variant): wstring = fromVariant[wstring](x)
-converter variantConverter*(x: variant): char = fromVariant[char](x)
-converter variantConverter*(x: variant): bool = fromVariant[bool](x)
-converter variantConverter*(x: variant): com = fromVariant[com](x)
-converter variantConverter*(x: variant): ptr IDispatch = fromVariant[ptr IDispatch](x)
-converter variantConverter*(x: variant): ptr IUnknown = fromVariant[ptr IUnknown](x)
-converter variantConverter*(x: variant): pointer = fromVariant[pointer](x)
-converter variantConverter*(x: variant): int = fromVariant[int](x)
-converter variantConverter*(x: variant): uint = fromVariant[uint](x)
-converter variantConverter*(x: variant): int8 = fromVariant[int8](x)
-converter variantConverter*(x: variant): uint8 = fromVariant[uint8](x)
-converter variantConverter*(x: variant): int16 = fromVariant[int16](x)
-converter variantConverter*(x: variant): uint16 = fromVariant[uint16](x)
-converter variantConverter*(x: variant): int32 = fromVariant[int32](x)
-converter variantConverter*(x: variant): uint32 = fromVariant[uint32](x)
-converter variantConverter*(x: variant): int64 = fromVariant[int64](x)
-converter variantConverter*(x: variant): uint64 = fromVariant[uint64](x)
-converter variantConverter*(x: variant): float32 = fromVariant[float32](x)
-converter variantConverter*(x: variant): float64 = fromVariant[float64](x)
-converter variantConverter*(x: variant): FILETIME = fromVariant[FILETIME](x)
-converter variantConverter*(x: variant): SYSTEMTIME = fromVariant[SYSTEMTIME](x)
-converter variantConverter*(x: variant): VARIANT = fromVariant[VARIANT](x)
-converter variantConverter*(x: variant): COMArray1D = fromVariant[COMArray1D](x)
-converter variantConverter*(x: variant): COMArray2D = fromVariant[COMArray2D](x)
-converter variantConverter*(x: variant): COMArray3D = fromVariant[COMArray3D](x)
+converter variantConverterToString*(x: variant): string = fromVariant[string](x)
+converter variantConverterToCString*(x: variant): cstring = fromVariant[cstring](x)
+converter variantConverterToMString*(x: variant): mstring = fromVariant[mstring](x)
+converter variantConverterToWString*(x: variant): wstring = fromVariant[wstring](x)
+converter variantConverterToChar*(x: variant): char = fromVariant[char](x)
+converter variantConverterToBool*(x: variant): bool = fromVariant[bool](x)
+converter variantConverterToCom*(x: variant): com = fromVariant[com](x)
+converter variantConverterToIDispatch*(x: variant): ptr IDispatch = fromVariant[ptr IDispatch](x)
+converter variantConverterToIUnknown*(x: variant): ptr IUnknown = fromVariant[ptr IUnknown](x)
+converter variantConverterToPointer*(x: variant): pointer = fromVariant[pointer](x)
+converter variantConverterToInt*(x: variant): int = fromVariant[int](x)
+converter variantConverterToUInt*(x: variant): uint = fromVariant[uint](x)
+converter variantConverterToInt8*(x: variant): int8 = fromVariant[int8](x)
+converter variantConverterToUInt8*(x: variant): uint8 = fromVariant[uint8](x)
+converter variantConverterToInt16*(x: variant): int16 = fromVariant[int16](x)
+converter variantConverterToUInt16*(x: variant): uint16 = fromVariant[uint16](x)
+converter variantConverterToInt32*(x: variant): int32 = fromVariant[int32](x)
+converter variantConverterToUInt32*(x: variant): uint32 = fromVariant[uint32](x)
+converter variantConverterToInt64*(x: variant): int64 = fromVariant[int64](x)
+converter variantConverterToUInt64*(x: variant): uint64 = fromVariant[uint64](x)
+converter variantConverterToFloat32*(x: variant): float32 = fromVariant[float32](x)
+converter variantConverterToFloat64*(x: variant): float64 = fromVariant[float64](x)
+converter variantConverterToFILETIME*(x: variant): FILETIME = fromVariant[FILETIME](x)
+converter variantConverterToSYSTEMTIME*(x: variant): SYSTEMTIME = fromVariant[SYSTEMTIME](x)
+converter variantConverterToVARIANT*(x: variant): VARIANT = fromVariant[VARIANT](x)
+converter variantConverterToCOMArray1D*(x: variant): COMArray1D = fromVariant[COMArray1D](x)
+converter variantConverterToCOMArray2D*(x: variant): COMArray2D = fromVariant[COMArray2D](x)
+converter variantConverterToCOMArray3D*(x: variant): COMArray3D = fromVariant[COMArray3D](x)
 
 proc invokeRaw(self: com, name: string, invokeType: WORD, vargs: varargs[variant, toVariant]): variant =
   if vargs.len > 128:
@@ -884,17 +885,15 @@ proc CreateObject*(progId: string): com =
 proc GetObject*(file: string, progId: string = nil): com =
   ## Retrieves a reference to a COM object from an existing process or filename.
 
-  proc isVaild(x: string): bool = not x.isNilOrEmpty()
-
   result.init
   var
     clsid: GUID
     pUk: ptr IUnknown
     pPf: ptr IPersistFile
 
-  if progId.isVaild:
+  if progId.len != 0:
     if GetCLSID(progId, clsid).OK:
-      if file.isVaild:
+      if file.len != 0:
         if CoCreateInstance(&clsid, nil, CLSCTX_LOCAL_SERVER or CLSCTX_INPROC_SERVER, &IID_IPersistFile, &pPf).OK:
           defer: pPf.Release()
 
@@ -907,7 +906,7 @@ proc GetObject*(file: string, progId: string = nil): com =
           if pUk.QueryInterface(&IID_IDispatch, &(result.disp)).OK:
             return result
 
-  elif file.isVaild:
+  elif file.len != 0:
     if CoGetObject(file, nil, &IID_IDispatch, &(result.disp)).OK:
       return result
 
