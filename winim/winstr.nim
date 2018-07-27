@@ -281,7 +281,7 @@ proc `&`*(s: string): ptr char {.inline.} =
   if s.isNil:
     result = nil
   else:
-    result = s[0].unsafeaddr
+    result = cast[ptr char](cstring s)
 
 proc `&`*(s: cstring): ptr char {.inline.} =
   ## Get address of the first char of a string.
