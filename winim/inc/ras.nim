@@ -2448,7 +2448,7 @@ proc MprAdminConnectionClearStats*(hRasServer: RAS_SERVER_HANDLE, hConnection: H
 proc MprAdminPortClearStats*(hRasServer: RAS_SERVER_HANDLE, hPort: HANDLE): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
 proc MprAdminPortReset*(hRasServer: RAS_SERVER_HANDLE, hPort: HANDLE): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
 proc MprAdminPortDisconnect*(hRasServer: RAS_SERVER_HANDLE, hPort: HANDLE): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
-proc MprAdminConnectionRemoveQuarantine*(hRasServer: HANDLE, hRasConnection: HANDLE, fIsIpAddress: WINBOOL): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
+proc MprAdminConnectionRemoveQuarantine*(hRasServer: HANDLE, hRasConnection: HANDLE, fIsIpAddress: WINBOOL): DWORD {.winapi, xpincompatible, stdcall, dynlib: "mprapi", importc.}
 proc MprAdminUserGetInfo*(lpszServer: ptr WCHAR, lpszUser: ptr WCHAR, dwLevel: DWORD, lpbBuffer: LPBYTE): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
 proc MprAdminUserSetInfo*(lpszServer: ptr WCHAR, lpszUser: ptr WCHAR, dwLevel: DWORD, lpbBuffer: LPBYTE): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
 proc MprAdminSendUserMessage*(hMprServer: MPR_SERVER_HANDLE, hConnection: HANDLE, lpwszMessage: LPWSTR): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
@@ -2461,7 +2461,7 @@ proc MprAdminServerSetCredentials*(hMprServer: MPR_SERVER_HANDLE, dwLevel: DWORD
 proc MprAdminBufferFree*(pBuffer: LPVOID): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
 proc MprAdminGetErrorString*(dwError: DWORD, lpwsErrorString: ptr LPWSTR): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
 proc MprAdminServerGetInfo*(hMprServer: MPR_SERVER_HANDLE, dwLevel: DWORD, lplpbBuffer: ptr LPBYTE): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
-proc MprAdminServerSetInfo*(hMprServer: MPR_SERVER_HANDLE, dwLevel: DWORD, lpbBuffer: LPBYTE): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
+proc MprAdminServerSetInfo*(hMprServer: MPR_SERVER_HANDLE, dwLevel: DWORD, lpbBuffer: LPBYTE): DWORD {.winapi, xpincompatible, stdcall, dynlib: "mprapi", importc.}
 proc MprAdminEstablishDomainRasServer*(pszDomain: PWCHAR, pszMachine: PWCHAR, bEnable: WINBOOL): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
 proc MprAdminIsDomainRasServer*(pszDomain: PWCHAR, pszMachine: PWCHAR, pbIsRasServer: PBOOL): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
 proc MprAdminTransportCreate*(hMprServer: MPR_SERVER_HANDLE, dwTransportId: DWORD, lpwsTransportName: LPWSTR, pGlobalInfo: LPBYTE, dwGlobalInfoSize: DWORD, pClientInterfaceInfo: LPBYTE, dwClientInterfaceInfoSize: DWORD, lpwsDLLPath: LPWSTR): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
@@ -2506,7 +2506,7 @@ proc MprConfigServerDisconnect*(hMprConfig: HANDLE): VOID {.winapi, stdcall, dyn
 proc MprConfigServerRefresh*(hMprConfig: HANDLE): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
 proc MprConfigBufferFree*(pBuffer: LPVOID): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
 proc MprConfigServerGetInfo*(hMprConfig: HANDLE, dwLevel: DWORD, lplpbBuffer: ptr LPBYTE): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
-proc MprConfigServerSetInfo*(hMprServer: MPR_SERVER_HANDLE, dwLevel: DWORD, lpbBuffer: LPBYTE): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
+proc MprConfigServerSetInfo*(hMprServer: MPR_SERVER_HANDLE, dwLevel: DWORD, lpbBuffer: LPBYTE): DWORD {.winapi, xpincompatible, stdcall, dynlib: "mprapi", importc.}
 proc MprConfigServerBackup*(hMprConfig: HANDLE, lpwsPath: LPWSTR): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
 proc MprConfigServerRestore*(hMprConfig: HANDLE, lpwsPath: LPWSTR): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
 proc MprConfigTransportCreate*(hMprConfig: HANDLE, dwTransportId: DWORD, lpwsTransportName: LPWSTR, pGlobalInfo: LPBYTE, dwGlobalInfoSize: DWORD, pClientInterfaceInfo: LPBYTE, dwClientInterfaceInfoSize: DWORD, lpwsDLLPath: LPWSTR, phRouterTransport: ptr HANDLE): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
@@ -2538,8 +2538,8 @@ proc MprInfoBlockRemove*(lpHeader: LPVOID, dwInfoType: DWORD, lplpNewHeader: ptr
 proc MprInfoBlockSet*(lpHeader: LPVOID, dwInfoType: DWORD, dwItemSize: DWORD, dwItemCount: DWORD, lpItemData: LPBYTE, lplpNewHeader: ptr LPVOID): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
 proc MprInfoBlockFind*(lpHeader: LPVOID, dwInfoType: DWORD, lpdwItemSize: LPDWORD, lpdwItemCount: LPDWORD, lplpItemData: ptr LPBYTE): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
 proc MprInfoBlockQuerySize*(lpHeader: LPVOID): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
-proc MprConfigFilterGetInfo*(hMprConfig: HANDLE, dwLevel: DWORD, dwTransportId: DWORD, lpBuffer: LPBYTE): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
-proc MprConfigFilterSetInfo*(hMprConfig: HANDLE, dwLevel: DWORD, dwTransportId: DWORD, lpBuffer: LPBYTE): DWORD {.winapi, stdcall, dynlib: "mprapi", importc.}
+proc MprConfigFilterGetInfo*(hMprConfig: HANDLE, dwLevel: DWORD, dwTransportId: DWORD, lpBuffer: LPBYTE): DWORD {.winapi, xpincompatible, stdcall, dynlib: "mprapi", importc.}
+proc MprConfigFilterSetInfo*(hMprConfig: HANDLE, dwLevel: DWORD, dwTransportId: DWORD, lpBuffer: LPBYTE): DWORD {.winapi, xpincompatible, stdcall, dynlib: "mprapi", importc.}
 proc RasSecurityDialogSend*(hPort: HPORT, pBuffer: PBYTE, BufferLength: WORD): DWORD {.winapi, stdcall, dynlib: "rasman", importc.}
 proc RasSecurityDialogReceive*(hPort: HPORT, pBuffer: PBYTE, pBufferLength: PWORD, Timeout: DWORD, hEvent: HANDLE): DWORD {.winapi, stdcall, dynlib: "rasman", importc.}
 proc RasSecurityDialogGetInfo*(hPort: HPORT, pBuffer: ptr RAS_SECURITY_INFO): DWORD {.winapi, stdcall, dynlib: "rasman", importc.}

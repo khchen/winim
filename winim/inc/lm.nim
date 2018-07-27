@@ -3885,17 +3885,17 @@ proc RxNetAccessGetInfo*(servername: LPCWSTR, resource: LPCWSTR, level: DWORD, b
 proc RxNetAccessSetInfo*(servername: LPCWSTR, resource: LPCWSTR, level: DWORD, buf: LPBYTE, parm_err: LPDWORD): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
 proc RxNetAccessDel*(servername: LPCWSTR, resource: LPCWSTR): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
 proc RxNetAccessGetUserPerms*(servername: LPCWSTR, UGname: LPCWSTR, resource: LPCWSTR, Perms: LPDWORD): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
-proc NetValidatePasswordPolicy*(ServerName: LPCWSTR, Qualifier: LPVOID, ValidationType: NET_VALIDATE_PASSWORD_TYPE, InputArg: LPVOID, OutputArg: ptr LPVOID): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
-proc NetValidatePasswordPolicyFree*(OutputArg: ptr LPVOID): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
+proc NetValidatePasswordPolicy*(ServerName: LPCWSTR, Qualifier: LPVOID, ValidationType: NET_VALIDATE_PASSWORD_TYPE, InputArg: LPVOID, OutputArg: ptr LPVOID): NET_API_STATUS {.winapi, xpincompatible, stdcall, dynlib: "netapi32", importc.}
+proc NetValidatePasswordPolicyFree*(OutputArg: ptr LPVOID): NET_API_STATUS {.winapi, xpincompatible, stdcall, dynlib: "netapi32", importc.}
 proc NetGetDCName*(servername: LPCWSTR, domainname: LPCWSTR, bufptr: ptr LPBYTE): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
 proc NetGetAnyDCName*(servername: LPCWSTR, domainname: LPCWSTR, bufptr: ptr LPBYTE): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
 proc I_NetLogonControl*(ServerName: LPCWSTR, FunctionCode: DWORD, QueryLevel: DWORD, Buffer: ptr LPBYTE): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
 proc I_NetLogonControl2*(ServerName: LPCWSTR, FunctionCode: DWORD, QueryLevel: DWORD, Data: LPBYTE, Buffer: ptr LPBYTE): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
 proc NetEnumerateTrustedDomains*(ServerName: LPWSTR, DomainNames: ptr LPWSTR): NTSTATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
-proc NetAddServiceAccount*(ServerName: LPWSTR, AccountName: LPWSTR, Reserved: LPWSTR, Flags: DWORD): NTSTATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
-proc NetRemoveServiceAccount*(ServerName: LPWSTR, AccountName: LPWSTR, Flags: DWORD): NTSTATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
-proc NetIsServiceAccount*(ServerName: LPWSTR, AccountName: LPWSTR, IsService: ptr BOOL): NTSTATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
-proc NetEnumerateServiceAccounts*(ServerName: LPWSTR, Flags: DWORD, AccountsCount: ptr DWORD, Accounts: ptr PZPWSTR): NTSTATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
+proc NetAddServiceAccount*(ServerName: LPWSTR, AccountName: LPWSTR, Reserved: LPWSTR, Flags: DWORD): NTSTATUS {.winapi, xpincompatible, stdcall, dynlib: "netapi32", importc.}
+proc NetRemoveServiceAccount*(ServerName: LPWSTR, AccountName: LPWSTR, Flags: DWORD): NTSTATUS {.winapi, xpincompatible, stdcall, dynlib: "netapi32", importc.}
+proc NetIsServiceAccount*(ServerName: LPWSTR, AccountName: LPWSTR, IsService: ptr BOOL): NTSTATUS {.winapi, xpincompatible, stdcall, dynlib: "netapi32", importc.}
+proc NetEnumerateServiceAccounts*(ServerName: LPWSTR, Flags: DWORD, AccountsCount: ptr DWORD, Accounts: ptr PZPWSTR): NTSTATUS {.winapi, xpincompatible, stdcall, dynlib: "netapi32", importc.}
 proc NetAlertRaise*(AlertEventName: LPCWSTR, Buffer: LPVOID, BufferSize: DWORD): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
 proc NetAlertRaiseEx*(AlertEventName: LPCWSTR, VariableInfo: LPVOID, VariableInfoSize: DWORD, ServiceName: LPCWSTR): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
 proc NetShareAdd*(servername: LMSTR, level: DWORD, buf: LPBYTE, parm_err: LPDWORD): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
@@ -3994,7 +3994,7 @@ proc NetScheduleJobAdd*(Servername: LPCWSTR, Buffer: LPBYTE, JobId: LPDWORD): NE
 proc NetScheduleJobDel*(Servername: LPCWSTR, MinJobId: DWORD, MaxJobId: DWORD): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
 proc NetScheduleJobEnum*(Servername: LPCWSTR, PointerToBuffer: ptr LPBYTE, PrefferedMaximumLength: DWORD, EntriesRead: LPDWORD, TotalEntries: LPDWORD, ResumeHandle: LPDWORD): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
 proc NetScheduleJobGetInfo*(Servername: LPCWSTR, JobId: DWORD, PointerToBuffer: ptr LPBYTE): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
-proc NetShareDelEx*(servername: LMSTR, level: DWORD, buf: LPBYTE): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
+proc NetShareDelEx*(servername: LMSTR, level: DWORD, buf: LPBYTE): NET_API_STATUS {.winapi, xpincompatible, stdcall, dynlib: "netapi32", importc.}
 proc NetDfsAdd*(DfsEntryPath: LPWSTR, ServerName: LPWSTR, ShareName: LPWSTR, Comment: LPWSTR, Flags: DWORD): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
 proc NetDfsAddStdRoot*(ServerName: LPWSTR, RootShare: LPWSTR, Comment: LPWSTR, Flags: DWORD): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
 proc NetDfsRemoveStdRoot*(ServerName: LPWSTR, RootShare: LPWSTR, Flags: DWORD): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}

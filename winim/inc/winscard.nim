@@ -410,11 +410,11 @@ proc SCardUIDlgSelectCardW*(P1: LPOPENCARDNAMEW_EX): LONG {.winapi, stdcall, dyn
 proc GetOpenCardNameA*(P1: LPOPENCARDNAMEA): LONG {.winapi, stdcall, dynlib: "scarddlg", importc.}
 proc GetOpenCardNameW*(P1: LPOPENCARDNAMEW): LONG {.winapi, stdcall, dynlib: "scarddlg", importc.}
 proc SCardDlgExtendedError*(): LONG {.winapi, stdcall, dynlib: "scarddlg", importc.}
-proc SCardGetTransmitCount*(hCard: SCARDHANDLE, pcTransmitCount: LPDWORD): LONG {.winapi, stdcall, dynlib: "winscard", importc.}
-proc SCardReadCacheA*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPSTR, Data: PBYTE, DataLen: ptr DWORD): LONG {.winapi, stdcall, dynlib: "winscard", importc.}
-proc SCardReadCacheW*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPWSTR, Data: PBYTE, DataLen: ptr DWORD): LONG {.winapi, stdcall, dynlib: "winscard", importc.}
-proc SCardWriteCacheA*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPSTR, Data: PBYTE, DataLen: DWORD): LONG {.winapi, stdcall, dynlib: "winscard", importc.}
-proc SCardWriteCacheW*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPWSTR, Data: PBYTE, DataLen: DWORD): LONG {.winapi, stdcall, dynlib: "winscard", importc.}
+proc SCardGetTransmitCount*(hCard: SCARDHANDLE, pcTransmitCount: LPDWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "winscard", importc.}
+proc SCardReadCacheA*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPSTR, Data: PBYTE, DataLen: ptr DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "winscard", importc.}
+proc SCardReadCacheW*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPWSTR, Data: PBYTE, DataLen: ptr DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "winscard", importc.}
+proc SCardWriteCacheA*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPSTR, Data: PBYTE, DataLen: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "winscard", importc.}
+proc SCardWriteCacheW*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPWSTR, Data: PBYTE, DataLen: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "winscard", importc.}
 proc `CmdBytes=`*(self: var SCARD_T0_REQUEST, x: SCARD_T0_COMMAND) {.inline.} = self.union1.CmdBytes = x
 proc CmdBytes*(self: SCARD_T0_REQUEST): SCARD_T0_COMMAND {.inline.} = self.union1.CmdBytes
 proc `rgbHeader=`*(self: var SCARD_T0_REQUEST, x: array[5, BYTE]) {.inline.} = self.union1.rgbHeader = x
@@ -460,8 +460,8 @@ when winimUnicode:
   proc SCardStatus*(hCard: SCARDHANDLE, szReaderName: LPWSTR, pcchReaderLen: LPDWORD, pdwState: LPDWORD, pdwProtocol: LPDWORD, pbAtr: LPBYTE, pcbAtrLen: LPDWORD): LONG {.winapi, stdcall, dynlib: "winscard", importc: "SCardStatusW".}
   proc SCardUIDlgSelectCard*(P1: LPOPENCARDNAMEW_EX): LONG {.winapi, stdcall, dynlib: "scarddlg", importc: "SCardUIDlgSelectCardW".}
   proc GetOpenCardName*(P1: LPOPENCARDNAMEW): LONG {.winapi, stdcall, dynlib: "scarddlg", importc: "GetOpenCardNameW".}
-  proc SCardReadCache*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPWSTR, Data: PBYTE, DataLen: ptr DWORD): LONG {.winapi, stdcall, dynlib: "winscard", importc: "SCardReadCacheW".}
-  proc SCardWriteCache*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPWSTR, Data: PBYTE, DataLen: DWORD): LONG {.winapi, stdcall, dynlib: "winscard", importc: "SCardWriteCacheW".}
+  proc SCardReadCache*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPWSTR, Data: PBYTE, DataLen: ptr DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "winscard", importc: "SCardReadCacheW".}
+  proc SCardWriteCache*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPWSTR, Data: PBYTE, DataLen: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "winscard", importc: "SCardWriteCacheW".}
 when winimAnsi:
   type
     SCARD_READERSTATE* = SCARD_READERSTATEA
@@ -503,5 +503,5 @@ when winimAnsi:
   proc SCardStatus*(hCard: SCARDHANDLE, szReaderName: LPSTR, pcchReaderLen: LPDWORD, pdwState: LPDWORD, pdwProtocol: LPDWORD, pbAtr: LPBYTE, pcbAtrLen: LPDWORD): LONG {.winapi, stdcall, dynlib: "winscard", importc: "SCardStatusA".}
   proc SCardUIDlgSelectCard*(P1: LPOPENCARDNAMEA_EX): LONG {.winapi, stdcall, dynlib: "scarddlg", importc: "SCardUIDlgSelectCardA".}
   proc GetOpenCardName*(P1: LPOPENCARDNAMEA): LONG {.winapi, stdcall, dynlib: "scarddlg", importc: "GetOpenCardNameA".}
-  proc SCardReadCache*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPSTR, Data: PBYTE, DataLen: ptr DWORD): LONG {.winapi, stdcall, dynlib: "winscard", importc: "SCardReadCacheA".}
-  proc SCardWriteCache*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPSTR, Data: PBYTE, DataLen: DWORD): LONG {.winapi, stdcall, dynlib: "winscard", importc: "SCardWriteCacheA".}
+  proc SCardReadCache*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPSTR, Data: PBYTE, DataLen: ptr DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "winscard", importc: "SCardReadCacheA".}
+  proc SCardWriteCache*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPSTR, Data: PBYTE, DataLen: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "winscard", importc: "SCardWriteCacheA".}

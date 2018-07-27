@@ -639,7 +639,7 @@ proc WTHelperProvDataFromStateData*(hStateData: HANDLE): ptr CRYPT_PROVIDER_DATA
 proc WTHelperGetProvPrivateDataFromChain*(pProvData: ptr CRYPT_PROVIDER_DATA, pgProviderID: ptr GUID): ptr CRYPT_PROVIDER_PRIVDATA {.winapi, stdcall, dynlib: "wintrust", importc.}
 proc WTHelperCertIsSelfSigned*(dwEncoding: DWORD, pCert: ptr CERT_INFO): WINBOOL {.winapi, stdcall, dynlib: "wintrust", importc.}
 proc WTHelperCertCheckValidSignature*(pProvData: ptr CRYPT_PROVIDER_DATA): HRESULT {.winapi, stdcall, dynlib: "wintrust", importc.}
-proc WintrustSetDefaultIncludePEPageHashes*(fIncludePEPageHashes: WINBOOL): void {.winapi, stdcall, dynlib: "wintrust", importc.}
+proc WintrustSetDefaultIncludePEPageHashes*(fIncludePEPageHashes: WINBOOL): void {.winapi, xpincompatible, stdcall, dynlib: "wintrust", importc.}
 proc CryptSIPGetSignedDataMsg*(pSubjectInfo: ptr SIP_SUBJECTINFO, pdwEncodingType: ptr DWORD, dwIndex: DWORD, pcbSignedDataMsg: ptr DWORD, pbSignedDataMsg: ptr BYTE): WINBOOL {.winapi, stdcall, dynlib: "crypt32", importc.}
 proc CryptSIPPutSignedDataMsg*(pSubjectInfo: ptr SIP_SUBJECTINFO, dwEncodingType: DWORD, pdwIndex: ptr DWORD, cbSignedDataMsg: DWORD, pbSignedDataMsg: ptr BYTE): WINBOOL {.winapi, stdcall, dynlib: "crypt32", importc.}
 proc CryptSIPCreateIndirectData*(pSubjectInfo: ptr SIP_SUBJECTINFO, pcbIndirectData: ptr DWORD, pIndirectData: ptr SIP_INDIRECT_DATA): WINBOOL {.winapi, stdcall, dynlib: "crypt32", importc.}

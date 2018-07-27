@@ -1244,17 +1244,17 @@ proc DeletePrintProvidorA*(pName: LPSTR, pEnvironment: LPSTR, pPrintProvidorName
 proc DeletePrintProvidorW*(pName: LPWSTR, pEnvironment: LPWSTR, pPrintProvidorName: LPWSTR): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc.}
 proc IsValidDevmodeA*(pDevmode: PDEVMODEA, DevmodeSize: int): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc.}
 proc IsValidDevmodeW*(pDevmode: PDEVMODEW, DevmodeSize: int): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc.}
-proc AddPrinterConnection2W*(hWnd: HWND, pszName: LPCWSTR, dwLevel: DWORD, pConnectionInfo: PVOID): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc.}
-proc AddPrinterConnection2A*(hWnd: HWND, pszName: LPCSTR, dwLevel: DWORD, pConnectionInfo: PVOID): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc.}
-proc DeletePrinterDriverPackageA*(pszServer: LPCSTR, pszInfPath: LPCSTR, pszEnvironment: LPCSTR): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc.}
-proc DeletePrinterDriverPackageW*(pszServer: LPCWSTR, pszInfPath: LPCWSTR, pszEnvironment: LPCWSTR): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc.}
-proc ReportJobProcessingProgress*(printerHandle: HANDLE, jobId: ULONG, jobOperation: EPrintXPSJobOperation, jobProgress: EPrintXPSJobProgress): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc.}
-proc GetCorePrinterDriversA*(pszServer: LPCSTR, pszEnvironment: LPCSTR, pszzCoreDriverDependencies: LPCSTR, cCorePrinterDrivers: DWORD, pCorePrinterDrivers: PCORE_PRINTER_DRIVERA): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc.}
-proc GetCorePrinterDriversW*(pszServer: LPCWSTR, pszEnvironment: LPCWSTR, pszzCoreDriverDependencies: LPCWSTR, cCorePrinterDrivers: DWORD, pCorePrinterDrivers: PCORE_PRINTER_DRIVERW): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc.}
-proc GetPrinterDriver2A*(hWnd: HWND, hPrinter: HANDLE, pEnvironment: LPSTR, Level: DWORD, pDriverInfo: LPBYTE, cbBuf: DWORD, pcbNeeded: LPDWORD): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc.}
-proc GetPrinterDriver2W*(hWnd: HWND, hPrinter: HANDLE, pEnvironment: LPWSTR, Level: DWORD, pDriverInfo: LPBYTE, cbBuf: DWORD, pcbNeeded: LPDWORD): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc.}
-proc GetPrinterDriverPackagePathA*(pszServer: LPCSTR, pszEnvironment: LPCSTR, pszLanguage: LPCSTR, pszPackageID: LPCSTR, pszDriverPackageCab: LPSTR, cchDriverPackageCab: DWORD, pcchRequiredSize: LPDWORD): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc.}
-proc GetPrinterDriverPackagePathW*(pszServer: LPCWSTR, pszEnvironment: LPCWSTR, pszLanguage: LPCWSTR, pszPackageID: LPCWSTR, pszDriverPackageCab: LPWSTR, cchDriverPackageCab: DWORD, pcchRequiredSize: LPDWORD): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc.}
+proc AddPrinterConnection2W*(hWnd: HWND, pszName: LPCWSTR, dwLevel: DWORD, pConnectionInfo: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc.}
+proc AddPrinterConnection2A*(hWnd: HWND, pszName: LPCSTR, dwLevel: DWORD, pConnectionInfo: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc.}
+proc DeletePrinterDriverPackageA*(pszServer: LPCSTR, pszInfPath: LPCSTR, pszEnvironment: LPCSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc.}
+proc DeletePrinterDriverPackageW*(pszServer: LPCWSTR, pszInfPath: LPCWSTR, pszEnvironment: LPCWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc.}
+proc ReportJobProcessingProgress*(printerHandle: HANDLE, jobId: ULONG, jobOperation: EPrintXPSJobOperation, jobProgress: EPrintXPSJobProgress): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc.}
+proc GetCorePrinterDriversA*(pszServer: LPCSTR, pszEnvironment: LPCSTR, pszzCoreDriverDependencies: LPCSTR, cCorePrinterDrivers: DWORD, pCorePrinterDrivers: PCORE_PRINTER_DRIVERA): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc.}
+proc GetCorePrinterDriversW*(pszServer: LPCWSTR, pszEnvironment: LPCWSTR, pszzCoreDriverDependencies: LPCWSTR, cCorePrinterDrivers: DWORD, pCorePrinterDrivers: PCORE_PRINTER_DRIVERW): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc.}
+proc GetPrinterDriver2A*(hWnd: HWND, hPrinter: HANDLE, pEnvironment: LPSTR, Level: DWORD, pDriverInfo: LPBYTE, cbBuf: DWORD, pcbNeeded: LPDWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc.}
+proc GetPrinterDriver2W*(hWnd: HWND, hPrinter: HANDLE, pEnvironment: LPWSTR, Level: DWORD, pDriverInfo: LPBYTE, cbBuf: DWORD, pcbNeeded: LPDWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc.}
+proc GetPrinterDriverPackagePathA*(pszServer: LPCSTR, pszEnvironment: LPCSTR, pszLanguage: LPCSTR, pszPackageID: LPCSTR, pszDriverPackageCab: LPSTR, cchDriverPackageCab: DWORD, pcchRequiredSize: LPDWORD): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc.}
+proc GetPrinterDriverPackagePathW*(pszServer: LPCWSTR, pszEnvironment: LPCWSTR, pszLanguage: LPCWSTR, pszPackageID: LPCWSTR, pszDriverPackageCab: LPWSTR, cchDriverPackageCab: DWORD, pcchRequiredSize: LPDWORD): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc.}
 proc CommitSpoolData*(hPrinter: HANDLE, hSpoolFile: HANDLE, cbCommit: DWORD): HANDLE {.winapi, stdcall, dynlib: "winspool.drv", importc.}
 proc CloseSpoolFileHandle*(hPrinter: HANDLE, hSpoolFile: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc.}
 when winimUnicode:
@@ -1263,10 +1263,10 @@ when winimUnicode:
 when winimAnsi:
   type
     LPPRINTER_DEFAULTS* = LPPRINTER_DEFAULTSA
-proc OpenPrinter2A*(pPrinterName: LPCSTR, phPrinter: LPHANDLE, pDefault: LPPRINTER_DEFAULTS, pOptions: PPRINTER_OPTIONS): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc.}
-proc OpenPrinter2W*(pPrinterName: LPCWSTR, phPrinter: LPHANDLE, pDefault: LPPRINTER_DEFAULTS, pOptions: PPRINTER_OPTIONS): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc.}
-proc UploadPrinterDriverPackageA*(pszServer: LPCSTR, pszInfPath: LPCSTR, pszEnvironment: LPCSTR, dwFlags: DWORD, hwnd: HWND, pszDestInfPath: LPSTR, pcchDestInfPath: PULONG): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc.}
-proc UploadPrinterDriverPackageW*(pszServer: LPCWSTR, pszInfPath: LPCWSTR, pszEnvironment: LPCWSTR, dwFlags: DWORD, hwnd: HWND, pszDestInfPath: LPWSTR, pcchDestInfPath: PULONG): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc.}
+proc OpenPrinter2A*(pPrinterName: LPCSTR, phPrinter: LPHANDLE, pDefault: LPPRINTER_DEFAULTS, pOptions: PPRINTER_OPTIONS): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc.}
+proc OpenPrinter2W*(pPrinterName: LPCWSTR, phPrinter: LPHANDLE, pDefault: LPPRINTER_DEFAULTS, pOptions: PPRINTER_OPTIONS): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc.}
+proc UploadPrinterDriverPackageA*(pszServer: LPCSTR, pszInfPath: LPCSTR, pszEnvironment: LPCSTR, dwFlags: DWORD, hwnd: HWND, pszDestInfPath: LPSTR, pcchDestInfPath: PULONG): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc.}
+proc UploadPrinterDriverPackageW*(pszServer: LPCWSTR, pszInfPath: LPCWSTR, pszEnvironment: LPCWSTR, dwFlags: DWORD, hwnd: HWND, pszDestInfPath: LPWSTR, pcchDestInfPath: PULONG): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc.}
 when winimUnicode:
   type
     PRINTER_INFO_1* = PRINTER_INFO_1W
@@ -1424,13 +1424,13 @@ when winimUnicode:
   proc AddPrintProvidor*(pName: LPWSTR, level: DWORD, pProvidorInfo: LPBYTE): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc: "AddPrintProvidorW".}
   proc DeletePrintProvidor*(pName: LPWSTR, pEnvironment: LPWSTR, pPrintProvidorName: LPWSTR): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc: "DeletePrintProvidorW".}
   proc IsValidDevmode*(pDevmode: PDEVMODEW, DevmodeSize: int): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc: "IsValidDevmodeW".}
-  proc AddPrinterConnection2*(hWnd: HWND, pszName: LPCWSTR, dwLevel: DWORD, pConnectionInfo: PVOID): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc: "AddPrinterConnection2W".}
-  proc DeletePrinterDriverPackage*(pszServer: LPCWSTR, pszInfPath: LPCWSTR, pszEnvironment: LPCWSTR): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc: "DeletePrinterDriverPackageW".}
-  proc GetCorePrinterDrivers*(pszServer: LPCWSTR, pszEnvironment: LPCWSTR, pszzCoreDriverDependencies: LPCWSTR, cCorePrinterDrivers: DWORD, pCorePrinterDrivers: PCORE_PRINTER_DRIVERW): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc: "GetCorePrinterDriversW".}
-  proc GetPrinterDriver2*(hWnd: HWND, hPrinter: HANDLE, pEnvironment: LPWSTR, Level: DWORD, pDriverInfo: LPBYTE, cbBuf: DWORD, pcbNeeded: LPDWORD): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc: "GetPrinterDriver2W".}
-  proc GetPrinterDriverPackagePath*(pszServer: LPCWSTR, pszEnvironment: LPCWSTR, pszLanguage: LPCWSTR, pszPackageID: LPCWSTR, pszDriverPackageCab: LPWSTR, cchDriverPackageCab: DWORD, pcchRequiredSize: LPDWORD): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc: "GetPrinterDriverPackagePathW".}
-  proc OpenPrinter2*(pPrinterName: LPCWSTR, phPrinter: LPHANDLE, pDefault: LPPRINTER_DEFAULTS, pOptions: PPRINTER_OPTIONS): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc: "OpenPrinter2W".}
-  proc UploadPrinterDriverPackage*(pszServer: LPCWSTR, pszInfPath: LPCWSTR, pszEnvironment: LPCWSTR, dwFlags: DWORD, hwnd: HWND, pszDestInfPath: LPWSTR, pcchDestInfPath: PULONG): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc: "UploadPrinterDriverPackageW".}
+  proc AddPrinterConnection2*(hWnd: HWND, pszName: LPCWSTR, dwLevel: DWORD, pConnectionInfo: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc: "AddPrinterConnection2W".}
+  proc DeletePrinterDriverPackage*(pszServer: LPCWSTR, pszInfPath: LPCWSTR, pszEnvironment: LPCWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc: "DeletePrinterDriverPackageW".}
+  proc GetCorePrinterDrivers*(pszServer: LPCWSTR, pszEnvironment: LPCWSTR, pszzCoreDriverDependencies: LPCWSTR, cCorePrinterDrivers: DWORD, pCorePrinterDrivers: PCORE_PRINTER_DRIVERW): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc: "GetCorePrinterDriversW".}
+  proc GetPrinterDriver2*(hWnd: HWND, hPrinter: HANDLE, pEnvironment: LPWSTR, Level: DWORD, pDriverInfo: LPBYTE, cbBuf: DWORD, pcbNeeded: LPDWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc: "GetPrinterDriver2W".}
+  proc GetPrinterDriverPackagePath*(pszServer: LPCWSTR, pszEnvironment: LPCWSTR, pszLanguage: LPCWSTR, pszPackageID: LPCWSTR, pszDriverPackageCab: LPWSTR, cchDriverPackageCab: DWORD, pcchRequiredSize: LPDWORD): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc: "GetPrinterDriverPackagePathW".}
+  proc OpenPrinter2*(pPrinterName: LPCWSTR, phPrinter: LPHANDLE, pDefault: LPPRINTER_DEFAULTS, pOptions: PPRINTER_OPTIONS): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc: "OpenPrinter2W".}
+  proc UploadPrinterDriverPackage*(pszServer: LPCWSTR, pszInfPath: LPCWSTR, pszEnvironment: LPCWSTR, dwFlags: DWORD, hwnd: HWND, pszDestInfPath: LPWSTR, pcchDestInfPath: PULONG): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc: "UploadPrinterDriverPackageW".}
 when winimAnsi:
   type
     PRINTER_INFO_1* = PRINTER_INFO_1A
@@ -1588,10 +1588,10 @@ when winimAnsi:
   proc AddPrintProvidor*(pName: LPSTR, level: DWORD, pProvidorInfo: LPBYTE): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc: "AddPrintProvidorA".}
   proc DeletePrintProvidor*(pName: LPSTR, pEnvironment: LPSTR, pPrintProvidorName: LPSTR): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc: "DeletePrintProvidorA".}
   proc IsValidDevmode*(pDevmode: PDEVMODEA, DevmodeSize: int): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc: "IsValidDevmodeA".}
-  proc AddPrinterConnection2*(hWnd: HWND, pszName: LPCSTR, dwLevel: DWORD, pConnectionInfo: PVOID): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc: "AddPrinterConnection2A".}
-  proc DeletePrinterDriverPackage*(pszServer: LPCSTR, pszInfPath: LPCSTR, pszEnvironment: LPCSTR): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc: "DeletePrinterDriverPackageA".}
-  proc GetCorePrinterDrivers*(pszServer: LPCSTR, pszEnvironment: LPCSTR, pszzCoreDriverDependencies: LPCSTR, cCorePrinterDrivers: DWORD, pCorePrinterDrivers: PCORE_PRINTER_DRIVERA): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc: "GetCorePrinterDriversA".}
-  proc GetPrinterDriver2*(hWnd: HWND, hPrinter: HANDLE, pEnvironment: LPSTR, Level: DWORD, pDriverInfo: LPBYTE, cbBuf: DWORD, pcbNeeded: LPDWORD): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc: "GetPrinterDriver2A".}
-  proc GetPrinterDriverPackagePath*(pszServer: LPCSTR, pszEnvironment: LPCSTR, pszLanguage: LPCSTR, pszPackageID: LPCSTR, pszDriverPackageCab: LPSTR, cchDriverPackageCab: DWORD, pcchRequiredSize: LPDWORD): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc: "GetPrinterDriverPackagePathA".}
-  proc OpenPrinter2*(pPrinterName: LPCSTR, phPrinter: LPHANDLE, pDefault: LPPRINTER_DEFAULTS, pOptions: PPRINTER_OPTIONS): WINBOOL {.winapi, stdcall, dynlib: "winspool.drv", importc: "OpenPrinter2A".}
-  proc UploadPrinterDriverPackage*(pszServer: LPCSTR, pszInfPath: LPCSTR, pszEnvironment: LPCSTR, dwFlags: DWORD, hwnd: HWND, pszDestInfPath: LPSTR, pcchDestInfPath: PULONG): HRESULT {.winapi, stdcall, dynlib: "winspool.drv", importc: "UploadPrinterDriverPackageA".}
+  proc AddPrinterConnection2*(hWnd: HWND, pszName: LPCSTR, dwLevel: DWORD, pConnectionInfo: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc: "AddPrinterConnection2A".}
+  proc DeletePrinterDriverPackage*(pszServer: LPCSTR, pszInfPath: LPCSTR, pszEnvironment: LPCSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc: "DeletePrinterDriverPackageA".}
+  proc GetCorePrinterDrivers*(pszServer: LPCSTR, pszEnvironment: LPCSTR, pszzCoreDriverDependencies: LPCSTR, cCorePrinterDrivers: DWORD, pCorePrinterDrivers: PCORE_PRINTER_DRIVERA): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc: "GetCorePrinterDriversA".}
+  proc GetPrinterDriver2*(hWnd: HWND, hPrinter: HANDLE, pEnvironment: LPSTR, Level: DWORD, pDriverInfo: LPBYTE, cbBuf: DWORD, pcbNeeded: LPDWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc: "GetPrinterDriver2A".}
+  proc GetPrinterDriverPackagePath*(pszServer: LPCSTR, pszEnvironment: LPCSTR, pszLanguage: LPCSTR, pszPackageID: LPCSTR, pszDriverPackageCab: LPSTR, cchDriverPackageCab: DWORD, pcchRequiredSize: LPDWORD): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc: "GetPrinterDriverPackagePathA".}
+  proc OpenPrinter2*(pPrinterName: LPCSTR, phPrinter: LPHANDLE, pDefault: LPPRINTER_DEFAULTS, pOptions: PPRINTER_OPTIONS): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc: "OpenPrinter2A".}
+  proc UploadPrinterDriverPackage*(pszServer: LPCSTR, pszInfPath: LPCSTR, pszEnvironment: LPCSTR, dwFlags: DWORD, hwnd: HWND, pszDestInfPath: LPSTR, pcchDestInfPath: PULONG): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "winspool.drv", importc: "UploadPrinterDriverPackageA".}

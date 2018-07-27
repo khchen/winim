@@ -323,10 +323,10 @@ proc StartServiceCtrlDispatcherW*(lpServiceStartTable: ptr SERVICE_TABLE_ENTRYW)
 proc StartServiceA*(hService: SC_HANDLE, dwNumServiceArgs: DWORD, lpServiceArgVectors: ptr LPCSTR): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc StartServiceW*(hService: SC_HANDLE, dwNumServiceArgs: DWORD, lpServiceArgVectors: ptr LPCWSTR): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc UnlockServiceDatabase*(ScLock: SC_LOCK): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc ControlServiceExA*(hService: SC_HANDLE, dwControl: DWORD, dwInfoLevel: DWORD, pControlParams: PVOID): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc ControlServiceExW*(hService: SC_HANDLE, dwControl: DWORD, dwInfoLevel: DWORD, pControlParams: PVOID): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc NotifyServiceStatusChangeA*(hService: SC_HANDLE, dwNotifyMask: DWORD, pNotifyBuffer: PSERVICE_NOTIFYA): DWORD {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc NotifyServiceStatusChangeW*(hService: SC_HANDLE, dwNotifyMask: DWORD, pNotifyBuffer: PSERVICE_NOTIFYW): DWORD {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc ControlServiceExA*(hService: SC_HANDLE, dwControl: DWORD, dwInfoLevel: DWORD, pControlParams: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc ControlServiceExW*(hService: SC_HANDLE, dwControl: DWORD, dwInfoLevel: DWORD, pControlParams: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc NotifyServiceStatusChangeA*(hService: SC_HANDLE, dwNotifyMask: DWORD, pNotifyBuffer: PSERVICE_NOTIFYA): DWORD {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc NotifyServiceStatusChangeW*(hService: SC_HANDLE, dwNotifyMask: DWORD, pNotifyBuffer: PSERVICE_NOTIFYW): DWORD {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
 when winimUnicode:
   type
     SERVICE_DESCRIPTION* = SERVICE_DESCRIPTIONW
@@ -370,8 +370,8 @@ when winimUnicode:
   proc RegisterServiceCtrlHandlerEx*(lpServiceName: LPCWSTR, lpHandlerProc: LPHANDLER_FUNCTION_EX, lpContext: LPVOID): SERVICE_STATUS_HANDLE {.winapi, stdcall, dynlib: "advapi32", importc: "RegisterServiceCtrlHandlerExW".}
   proc StartServiceCtrlDispatcher*(lpServiceStartTable: ptr SERVICE_TABLE_ENTRYW): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc: "StartServiceCtrlDispatcherW".}
   proc StartService*(hService: SC_HANDLE, dwNumServiceArgs: DWORD, lpServiceArgVectors: ptr LPCWSTR): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc: "StartServiceW".}
-  proc ControlServiceEx*(hService: SC_HANDLE, dwControl: DWORD, dwInfoLevel: DWORD, pControlParams: PVOID): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc: "ControlServiceExW".}
-  proc NotifyServiceStatusChange*(hService: SC_HANDLE, dwNotifyMask: DWORD, pNotifyBuffer: PSERVICE_NOTIFYW): DWORD {.winapi, stdcall, dynlib: "advapi32", importc: "NotifyServiceStatusChangeW".}
+  proc ControlServiceEx*(hService: SC_HANDLE, dwControl: DWORD, dwInfoLevel: DWORD, pControlParams: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "ControlServiceExW".}
+  proc NotifyServiceStatusChange*(hService: SC_HANDLE, dwNotifyMask: DWORD, pNotifyBuffer: PSERVICE_NOTIFYW): DWORD {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "NotifyServiceStatusChangeW".}
 when winimAnsi:
   type
     SERVICE_DESCRIPTION* = SERVICE_DESCRIPTIONA
@@ -415,5 +415,5 @@ when winimAnsi:
   proc RegisterServiceCtrlHandlerEx*(lpServiceName: LPCSTR, lpHandlerProc: LPHANDLER_FUNCTION_EX, lpContext: LPVOID): SERVICE_STATUS_HANDLE {.winapi, stdcall, dynlib: "advapi32", importc: "RegisterServiceCtrlHandlerExA".}
   proc StartServiceCtrlDispatcher*(lpServiceStartTable: ptr SERVICE_TABLE_ENTRYA): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc: "StartServiceCtrlDispatcherA".}
   proc StartService*(hService: SC_HANDLE, dwNumServiceArgs: DWORD, lpServiceArgVectors: ptr LPCSTR): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc: "StartServiceA".}
-  proc ControlServiceEx*(hService: SC_HANDLE, dwControl: DWORD, dwInfoLevel: DWORD, pControlParams: PVOID): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc: "ControlServiceExA".}
-  proc NotifyServiceStatusChange*(hService: SC_HANDLE, dwNotifyMask: DWORD, pNotifyBuffer: PSERVICE_NOTIFYA): DWORD {.winapi, stdcall, dynlib: "advapi32", importc: "NotifyServiceStatusChangeA".}
+  proc ControlServiceEx*(hService: SC_HANDLE, dwControl: DWORD, dwInfoLevel: DWORD, pControlParams: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "ControlServiceExA".}
+  proc NotifyServiceStatusChange*(hService: SC_HANDLE, dwNotifyMask: DWORD, pNotifyBuffer: PSERVICE_NOTIFYA): DWORD {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "NotifyServiceStatusChangeA".}

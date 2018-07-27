@@ -296,7 +296,7 @@ proc WNetUseConnectionA*(hwndOwner: HWND, lpNetResource: LPNETRESOURCEA, lpPassw
 proc WNetUseConnectionW*(hwndOwner: HWND, lpNetResource: LPNETRESOURCEW, lpPassword: LPCWSTR, lpUserID: LPCWSTR, dwFlags: DWORD, lpAccessName: LPWSTR, lpBufferSize: LPDWORD, lpResult: LPDWORD): DWORD {.winapi, stdcall, dynlib: "mpr", importc.}
 proc WNetConnectionDialog*(hwnd: HWND, dwType: DWORD): DWORD {.winapi, stdcall, dynlib: "mpr", importc.}
 proc WNetDisconnectDialog*(hwnd: HWND, dwType: DWORD): DWORD {.winapi, stdcall, dynlib: "mpr", importc.}
-proc WNetRestoreSingleConnectionW*(hwndParent: HWND, lpDevice: LPCWSTR, fUseUI: BOOL): DWORD {.winapi, stdcall, dynlib: "mpr", importc.}
+proc WNetRestoreSingleConnectionW*(hwndParent: HWND, lpDevice: LPCWSTR, fUseUI: BOOL): DWORD {.winapi, xpincompatible, stdcall, dynlib: "mpr", importc.}
 proc WNetConnectionDialog1A*(lpConnDlgStruct: LPCONNECTDLGSTRUCTA): DWORD {.winapi, stdcall, dynlib: "mpr", importc.}
 proc WNetConnectionDialog1W*(lpConnDlgStruct: LPCONNECTDLGSTRUCTW): DWORD {.winapi, stdcall, dynlib: "mpr", importc.}
 proc WNetDisconnectDialog1A*(lpConnDlgStruct: LPDISCDLGSTRUCTA): DWORD {.winapi, stdcall, dynlib: "mpr", importc.}

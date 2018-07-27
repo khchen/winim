@@ -632,22 +632,22 @@ proc HttpReadFragmentFromCache*(ReqQueueHandle: HANDLE, pUrlPrefix: PCWSTR, pByt
 proc HttpSetServiceConfiguration*(ServiceHandle: HANDLE, ConfigId: HTTP_SERVICE_CONFIG_ID, pConfigInformation: PVOID, ConfigInformationLength: ULONG, pOverlapped: LPOVERLAPPED): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
 proc HttpDeleteServiceConfiguration*(ServiceHandle: HANDLE, ConfigId: HTTP_SERVICE_CONFIG_ID, pConfigInformation: PVOID, ConfigInformationLength: ULONG, pOverlapped: LPOVERLAPPED): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
 proc HttpQueryServiceConfiguration*(ServiceHandle: HANDLE, ConfigId: HTTP_SERVICE_CONFIG_ID, pInputConfigInformation: PVOID, InputConfigInformationLength: ULONG, pOutputConfigInformation: PVOID, OutputConfigInformationLength: ULONG, pReturnLength: PULONG, pOverlapped: LPOVERLAPPED): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpSetRequestQueueProperty*(Handle: HANDLE, Property: HTTP_SERVER_PROPERTY, pPropertyInformation: PVOID, PropertyInformationLength: ULONG, Reserved: ULONG, pReserved: PVOID): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpQueryRequestQueueProperty*(Handle: HANDLE, Property: HTTP_SERVER_PROPERTY, pPropertyInformation: PVOID, PropertyInformationLength: ULONG, Reserved: ULONG, pReturnLength: PULONG, pReserved: PVOID): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpCreateRequestQueue*(Version: HTTPAPI_VERSION, pName: PCWSTR, pSecurityAttributes: PSECURITY_ATTRIBUTES, Flags: ULONG, pReqQueueHandle: PHANDLE): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpAddUrlToUrlGroup*(UrlGroupId: HTTP_URL_GROUP_ID, pFullyQualifiedUrl: PCWSTR, UrlContext: HTTP_URL_CONTEXT, Reserved: ULONG): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpCancelHttpRequest*(ReqQueueHandle: HANDLE, RequestId: HTTP_REQUEST_ID, pOverlapped: LPOVERLAPPED): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpCloseRequestQueue*(ReqQueueHandle: HANDLE): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpCloseServerSession*(ServerSessionId: HTTP_SERVER_SESSION_ID): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpCloseUrlGroup*(UrlGroupId: HTTP_URL_GROUP_ID): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpCreateServerSession*(Version: HTTPAPI_VERSION, pServerSessionId: PHTTP_SERVER_SESSION_ID, Reserved: ULONG): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpCreateUrlGroup*(ServerSessionId: HTTP_SERVER_SESSION_ID, pUrlGroupId: PHTTP_URL_GROUP_ID, Reserved: ULONG): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpQueryServerSessionProperty*(ServerSessionId: HTTP_SERVER_SESSION_ID, Property: HTTP_SERVER_PROPERTY, pPropertyInformation: PVOID, PropertyInformationLength: ULONG, pReturnLength: PULONG): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpQueryUrlGroupProperty*(UrlGroupId: HTTP_URL_GROUP_ID, Property: HTTP_SERVER_PROPERTY, pPropertyInformation: PVOID, PropertyInformationLength: ULONG, pReturnLength: PULONG): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpRemoveUrlFromUrlGroup*(UrlGroupId: HTTP_URL_GROUP_ID, pFullyQualifiedUrl: PCWSTR, Flags: ULONG): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpSetServerSessionProperty*(ServerSessionId: HTTP_SERVER_SESSION_ID, Property: HTTP_SERVER_PROPERTY, pPropertyInformation: PVOID, PropertyInformationLength: ULONG): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpSetUrlGroupProperty*(UrlGroupId: HTTP_URL_GROUP_ID, Property: HTTP_SERVER_PROPERTY, pPropertyInformation: PVOID, PropertyInformationLength: ULONG): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
-proc HttpShutdownRequestQueue*(ReqQueueHandle: HANDLE): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
+proc HttpSetRequestQueueProperty*(Handle: HANDLE, Property: HTTP_SERVER_PROPERTY, pPropertyInformation: PVOID, PropertyInformationLength: ULONG, Reserved: ULONG, pReserved: PVOID): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
+proc HttpQueryRequestQueueProperty*(Handle: HANDLE, Property: HTTP_SERVER_PROPERTY, pPropertyInformation: PVOID, PropertyInformationLength: ULONG, Reserved: ULONG, pReturnLength: PULONG, pReserved: PVOID): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
+proc HttpCreateRequestQueue*(Version: HTTPAPI_VERSION, pName: PCWSTR, pSecurityAttributes: PSECURITY_ATTRIBUTES, Flags: ULONG, pReqQueueHandle: PHANDLE): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
+proc HttpAddUrlToUrlGroup*(UrlGroupId: HTTP_URL_GROUP_ID, pFullyQualifiedUrl: PCWSTR, UrlContext: HTTP_URL_CONTEXT, Reserved: ULONG): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
+proc HttpCancelHttpRequest*(ReqQueueHandle: HANDLE, RequestId: HTTP_REQUEST_ID, pOverlapped: LPOVERLAPPED): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
+proc HttpCloseRequestQueue*(ReqQueueHandle: HANDLE): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
+proc HttpCloseServerSession*(ServerSessionId: HTTP_SERVER_SESSION_ID): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
+proc HttpCloseUrlGroup*(UrlGroupId: HTTP_URL_GROUP_ID): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
+proc HttpCreateServerSession*(Version: HTTPAPI_VERSION, pServerSessionId: PHTTP_SERVER_SESSION_ID, Reserved: ULONG): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
+proc HttpCreateUrlGroup*(ServerSessionId: HTTP_SERVER_SESSION_ID, pUrlGroupId: PHTTP_URL_GROUP_ID, Reserved: ULONG): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
+proc HttpQueryServerSessionProperty*(ServerSessionId: HTTP_SERVER_SESSION_ID, Property: HTTP_SERVER_PROPERTY, pPropertyInformation: PVOID, PropertyInformationLength: ULONG, pReturnLength: PULONG): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
+proc HttpQueryUrlGroupProperty*(UrlGroupId: HTTP_URL_GROUP_ID, Property: HTTP_SERVER_PROPERTY, pPropertyInformation: PVOID, PropertyInformationLength: ULONG, pReturnLength: PULONG): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
+proc HttpRemoveUrlFromUrlGroup*(UrlGroupId: HTTP_URL_GROUP_ID, pFullyQualifiedUrl: PCWSTR, Flags: ULONG): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
+proc HttpSetServerSessionProperty*(ServerSessionId: HTTP_SERVER_SESSION_ID, Property: HTTP_SERVER_PROPERTY, pPropertyInformation: PVOID, PropertyInformationLength: ULONG): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
+proc HttpSetUrlGroupProperty*(UrlGroupId: HTTP_URL_GROUP_ID, Property: HTTP_SERVER_PROPERTY, pPropertyInformation: PVOID, PropertyInformationLength: ULONG): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
+proc HttpShutdownRequestQueue*(ReqQueueHandle: HANDLE): ULONG {.winapi, xpincompatible, stdcall, dynlib: "httpapi", importc.}
 proc HttpWaitForDemandStart*(ReqQueueHandle: HANDLE, pOverlapped: LPOVERLAPPED): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
 proc `FromMemory=`*(self: var HTTP_DATA_CHUNK, x: HTTP_DATA_CHUNK_UNION1_FromMemory) {.inline.} = self.union1.FromMemory = x
 proc FromMemory*(self: HTTP_DATA_CHUNK): HTTP_DATA_CHUNK_UNION1_FromMemory {.inline.} = self.union1.FromMemory

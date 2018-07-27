@@ -1375,9 +1375,9 @@ proc RpcMgmtEpEltInqNextA*(InquiryContext: RPC_EP_INQ_HANDLE, IfId: ptr RPC_IF_I
 proc RpcMgmtEpEltInqNextW*(InquiryContext: RPC_EP_INQ_HANDLE, IfId: ptr RPC_IF_ID, Binding: ptr RPC_BINDING_HANDLE, ObjectUuid: ptr UUID, Annotation: ptr RPC_WSTR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc RpcMgmtEpUnregister*(EpBinding: RPC_BINDING_HANDLE, IfId: ptr RPC_IF_ID, Binding: RPC_BINDING_HANDLE, ObjectUuid: ptr UUID): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc RpcMgmtSetAuthorizationFn*(AuthorizationFn: RPC_MGMT_AUTHORIZATION_FN): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-proc RpcBindingCreateA*(Template: ptr RPC_BINDING_HANDLE_TEMPLATE, Security: ptr RPC_BINDING_HANDLE_SECURITY, Options: ptr RPC_BINDING_HANDLE_OPTIONS, Binding: ptr RPC_BINDING_HANDLE): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-proc RpcBindingCreateW*(Template: ptr RPC_BINDING_HANDLE_TEMPLATE, Security: ptr RPC_BINDING_HANDLE_SECURITY, Options: ptr RPC_BINDING_HANDLE_OPTIONS, Binding: ptr RPC_BINDING_HANDLE): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-proc RpcServerInqBindingHandle*(Binding: ptr RPC_BINDING_HANDLE): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
+proc RpcBindingCreateA*(Template: ptr RPC_BINDING_HANDLE_TEMPLATE, Security: ptr RPC_BINDING_HANDLE_SECURITY, Options: ptr RPC_BINDING_HANDLE_OPTIONS, Binding: ptr RPC_BINDING_HANDLE): RPC_STATUS {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc.}
+proc RpcBindingCreateW*(Template: ptr RPC_BINDING_HANDLE_TEMPLATE, Security: ptr RPC_BINDING_HANDLE_SECURITY, Options: ptr RPC_BINDING_HANDLE_OPTIONS, Binding: ptr RPC_BINDING_HANDLE): RPC_STATUS {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc.}
+proc RpcServerInqBindingHandle*(Binding: ptr RPC_BINDING_HANDLE): RPC_STATUS {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc.}
 proc I_RpcNegotiateTransferSyntax*(Message: ptr RPC_MESSAGE): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc I_RpcGetBuffer*(Message: ptr RPC_MESSAGE): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc I_RpcGetBufferWithObject*(Message: ptr RPC_MESSAGE, ObjectUuid: ptr UUID): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
@@ -1400,7 +1400,7 @@ proc I_RpcNsInterfaceUnexported*(EntryNameSyntax: int32, EntryName: ptr uint16, 
 proc I_RpcBindingToStaticStringBindingW*(Binding: RPC_BINDING_HANDLE, StringBinding: ptr ptr uint16): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc I_RpcBindingInqSecurityContext*(Binding: RPC_BINDING_HANDLE, SecurityContextHandle: ptr pointer): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc I_RpcBindingInqWireIdForSnego*(Binding: RPC_BINDING_HANDLE, WireId: RPC_CSTR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-proc I_RpcBindingInqMarshalledTargetInfo*(Binding: RPC_BINDING_HANDLE, MarshalledTargetInfoLength: ptr int32, MarshalledTargetInfo: ptr RPC_CSTR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
+proc I_RpcBindingInqMarshalledTargetInfo*(Binding: RPC_BINDING_HANDLE, MarshalledTargetInfoLength: ptr int32, MarshalledTargetInfo: ptr RPC_CSTR): RPC_STATUS {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc.}
 proc I_RpcBindingInqLocalClientPID*(Binding: RPC_BINDING_HANDLE, Pid: ptr int32): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc I_RpcBindingHandleToAsyncHandle*(Binding: RPC_BINDING_HANDLE, AsyncHandle: ptr pointer): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc I_RpcNsBindingSetEntryNameW*(Binding: RPC_BINDING_HANDLE, EntryNameSyntax: int32, EntryName: RPC_WSTR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
@@ -1426,7 +1426,7 @@ proc I_RpcSessionStrictContextHandle*(): void {.winapi, stdcall, dynlib: "rpcrt4
 proc I_RpcTurnOnEEInfoPropagation*(): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc I_RpcServerInqTransportType*(Type: ptr int32): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc I_RpcMapWin32Status*(Status: RPC_STATUS): LONG32 {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-proc I_RpcRecordCalloutFailure*(RpcStatus: RPC_STATUS, CallOutState: ptr RDR_CALLOUT_STATE, DllName: ptr uint16): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
+proc I_RpcRecordCalloutFailure*(RpcStatus: RPC_STATUS, CallOutState: ptr RDR_CALLOUT_STATE, DllName: ptr uint16): void {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc.}
 proc RpcNsBindingExportA*(EntryNameSyntax: int32, EntryName: RPC_CSTR, IfSpec: RPC_IF_HANDLE, BindingVec: ptr RPC_BINDING_VECTOR, ObjectUuidVec: ptr UUID_VECTOR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcns4", importc.}
 proc RpcNsBindingUnexportA*(EntryNameSyntax: int32, EntryName: RPC_CSTR, IfSpec: RPC_IF_HANDLE, ObjectUuidVec: ptr UUID_VECTOR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcns4", importc.}
 proc RpcNsBindingExportW*(EntryNameSyntax: int32, EntryName: RPC_WSTR, IfSpec: RPC_IF_HANDLE, BindingVec: ptr RPC_BINDING_VECTOR, ObjectUuidVec: ptr UUID_VECTOR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcns4", importc.}
@@ -1507,10 +1507,10 @@ proc RpcServerInqCallAttributesA*(ClientBinding: RPC_BINDING_HANDLE, RpcCallAttr
 proc I_RpcAsyncSetHandle*(Message: PRPC_MESSAGE, pAsync: PRPC_ASYNC_STATE): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc I_RpcAsyncAbortCall*(pAsync: PRPC_ASYNC_STATE, ExceptionCode: int32): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc I_RpcExceptionFilter*(ExceptionCode: int32): int32 {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-proc RpcBindingBind*(pAsync: PRPC_ASYNC_STATE, Binding: RPC_BINDING_HANDLE, IfSpec: RPC_IF_HANDLE): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-proc RpcBindingUnbind*(Binding: RPC_BINDING_HANDLE): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-proc RpcServerSubscribeForNotification*(Binding: RPC_BINDING_HANDLE, Notification: DWORD, NotificationType: RPC_NOTIFICATION_TYPES, NotificationInfo: ptr RPC_ASYNC_NOTIFICATION_INFO): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-proc RpcServerUnsubscribeForNotification*(Binding: RPC_BINDING_HANDLE, Notification: RPC_NOTIFICATIONS, NotificationsQueued: ptr int32): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
+proc RpcBindingBind*(pAsync: PRPC_ASYNC_STATE, Binding: RPC_BINDING_HANDLE, IfSpec: RPC_IF_HANDLE): RPC_STATUS {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc.}
+proc RpcBindingUnbind*(Binding: RPC_BINDING_HANDLE): RPC_STATUS {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc.}
+proc RpcServerSubscribeForNotification*(Binding: RPC_BINDING_HANDLE, Notification: DWORD, NotificationType: RPC_NOTIFICATION_TYPES, NotificationInfo: ptr RPC_ASYNC_NOTIFICATION_INFO): RPC_STATUS {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc.}
+proc RpcServerUnsubscribeForNotification*(Binding: RPC_BINDING_HANDLE, Notification: RPC_NOTIFICATIONS, NotificationsQueued: ptr int32): RPC_STATUS {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc.}
 proc NdrProxyInitialize*(This: pointer, pRpcMsg: PRPC_MESSAGE, pStubMsg: PMIDL_STUB_MESSAGE, pStubDescriptor: PMIDL_STUB_DESC, ProcNum: int32): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc NdrProxyGetBuffer*(This: pointer, pStubMsg: PMIDL_STUB_MESSAGE): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc NdrProxySendReceive*(This: pointer, pStubMsg: ptr MIDL_STUB_MESSAGE): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
@@ -1579,7 +1579,7 @@ when winimUnicode:
   proc RpcEpRegister*(IfSpec: RPC_IF_HANDLE, BindingVector: ptr RPC_BINDING_VECTOR, UuidVector: ptr UUID_VECTOR, Annotation: RPC_WSTR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "RpcEpRegisterW".}
   proc DceErrorInqText*(RpcStatus: RPC_STATUS, ErrorText: RPC_WSTR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "DceErrorInqTextW".}
   proc RpcMgmtEpEltInqNext*(InquiryContext: RPC_EP_INQ_HANDLE, IfId: ptr RPC_IF_ID, Binding: ptr RPC_BINDING_HANDLE, ObjectUuid: ptr UUID, Annotation: ptr RPC_WSTR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "RpcMgmtEpEltInqNextW".}
-  proc RpcBindingCreate*(Template: ptr RPC_BINDING_HANDLE_TEMPLATE, Security: ptr RPC_BINDING_HANDLE_SECURITY, Options: ptr RPC_BINDING_HANDLE_OPTIONS, Binding: ptr RPC_BINDING_HANDLE): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "RpcBindingCreateW".}
+  proc RpcBindingCreate*(Template: ptr RPC_BINDING_HANDLE_TEMPLATE, Security: ptr RPC_BINDING_HANDLE_SECURITY, Options: ptr RPC_BINDING_HANDLE_OPTIONS, Binding: ptr RPC_BINDING_HANDLE): RPC_STATUS {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc: "RpcBindingCreateW".}
   proc I_RpcNsBindingSetEntryName*(Binding: RPC_BINDING_HANDLE, EntryNameSyntax: int32, EntryName: RPC_WSTR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "I_RpcNsBindingSetEntryNameW".}
   proc I_RpcServerUseProtseqEp2*(NetworkAddress: RPC_WSTR, Protseq: RPC_WSTR, MaxCalls: int32, Endpoint: RPC_WSTR, SecurityDescriptor: pointer, Policy: pointer): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "I_RpcServerUseProtseqEp2W".}
   proc I_RpcServerUseProtseq2*(NetworkAddress: RPC_WSTR, Protseq: RPC_WSTR, MaxCalls: int32, SecurityDescriptor: pointer, Policy: pointer): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "I_RpcServerUseProtseq2W".}
@@ -1651,7 +1651,7 @@ when winimAnsi:
   proc RpcEpRegister*(IfSpec: RPC_IF_HANDLE, BindingVector: ptr RPC_BINDING_VECTOR, UuidVector: ptr UUID_VECTOR, Annotation: RPC_CSTR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "RpcEpRegisterA".}
   proc DceErrorInqText*(RpcStatus: RPC_STATUS, ErrorText: RPC_CSTR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "DceErrorInqTextA".}
   proc RpcMgmtEpEltInqNext*(InquiryContext: RPC_EP_INQ_HANDLE, IfId: ptr RPC_IF_ID, Binding: ptr RPC_BINDING_HANDLE, ObjectUuid: ptr UUID, Annotation: ptr RPC_CSTR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "RpcMgmtEpEltInqNextA".}
-  proc RpcBindingCreate*(Template: ptr RPC_BINDING_HANDLE_TEMPLATE, Security: ptr RPC_BINDING_HANDLE_SECURITY, Options: ptr RPC_BINDING_HANDLE_OPTIONS, Binding: ptr RPC_BINDING_HANDLE): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "RpcBindingCreateA".}
+  proc RpcBindingCreate*(Template: ptr RPC_BINDING_HANDLE_TEMPLATE, Security: ptr RPC_BINDING_HANDLE_SECURITY, Options: ptr RPC_BINDING_HANDLE_OPTIONS, Binding: ptr RPC_BINDING_HANDLE): RPC_STATUS {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc: "RpcBindingCreateA".}
   proc I_RpcNsBindingSetEntryName*(Binding: RPC_BINDING_HANDLE, EntryNameSyntax: int32, EntryName: RPC_CSTR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "I_RpcNsBindingSetEntryNameA".}
   proc I_RpcServerUseProtseqEp2*(NetworkAddress: RPC_CSTR, Protseq: RPC_CSTR, MaxCalls: int32, Endpoint: RPC_CSTR, SecurityDescriptor: pointer, Policy: pointer): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "I_RpcServerUseProtseqEp2A".}
   proc I_RpcServerUseProtseq2*(NetworkAddress: RPC_CSTR, Protseq: RPC_CSTR, MaxCalls: int32, SecurityDescriptor: pointer, Policy: pointer): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "I_RpcServerUseProtseq2A".}
@@ -1681,9 +1681,9 @@ when winimAnsi:
   proc RpcServerInqCallAttributes*(ClientBinding: RPC_BINDING_HANDLE, RpcCallAttributes: pointer): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "RpcServerInqCallAttributesA".}
   proc RpcCertGeneratePrincipalName*(Context: PCCERT_CONTEXT, Flags: DWORD, pBuffer: ptr RPC_CSTR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "RpcCertGeneratePrincipalNameA".}
 when winimCpu64:
-  proc Ndr64AsyncServerCall64*(pRpcMsg: PRPC_MESSAGE): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-  proc Ndr64AsyncServerCallAll*(pRpcMsg: PRPC_MESSAGE): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-  proc Ndr64DcomAsyncStubCall*(pThis: ptr IRpcStubBuffer, pChannel: ptr IRpcChannelBuffer, pRpcMsg: PRPC_MESSAGE, pdwStubPhase: ptr int32): LONG32 {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-  proc NdrStubCall3*(pThis: ptr IRpcStubBuffer, pChannel: ptr IRpcChannelBuffer, pRpcMsg: PRPC_MESSAGE, pdwStubPhase: ptr int32): LONG32 {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-  proc NdrServerCallAll*(pRpcMsg: PRPC_MESSAGE): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-  proc NdrServerCallNdr64*(pRpcMsg: PRPC_MESSAGE): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
+  proc Ndr64AsyncServerCall64*(pRpcMsg: PRPC_MESSAGE): void {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc.}
+  proc Ndr64AsyncServerCallAll*(pRpcMsg: PRPC_MESSAGE): void {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc.}
+  proc Ndr64DcomAsyncStubCall*(pThis: ptr IRpcStubBuffer, pChannel: ptr IRpcChannelBuffer, pRpcMsg: PRPC_MESSAGE, pdwStubPhase: ptr int32): LONG32 {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc.}
+  proc NdrStubCall3*(pThis: ptr IRpcStubBuffer, pChannel: ptr IRpcChannelBuffer, pRpcMsg: PRPC_MESSAGE, pdwStubPhase: ptr int32): LONG32 {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc.}
+  proc NdrServerCallAll*(pRpcMsg: PRPC_MESSAGE): void {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc.}
+  proc NdrServerCallNdr64*(pRpcMsg: PRPC_MESSAGE): void {.winapi, xpincompatible, stdcall, dynlib: "rpcrt4", importc.}

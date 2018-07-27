@@ -29,7 +29,7 @@
 ##         add -d:win32_lean_and_mean same as import winim.mean
 ##         add -d:mshtml same as import winim.html
 ##         add -d:notrace disable COM objects trace. See com.nim for details.
-
+##         add -d:useWinXP for Windows XP compatibility.
 
 {.deadCodeElim: on.}
 

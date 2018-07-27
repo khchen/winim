@@ -1767,24 +1767,24 @@ proc LsaNtStatusToWinError*(Status: NTSTATUS): ULONG {.winapi, stdcall, dynlib: 
 proc SystemFunction036*(RandomBuffer: PVOID, RandomBufferLength: ULONG): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc SystemFunction040*(Memory: PVOID, MemorySize: ULONG, OptionFlags: ULONG): NTSTATUS {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc SystemFunction041*(Memory: PVOID, MemorySize: ULONG, OptionFlags: ULONG): NTSTATUS {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditComputeEffectivePolicyBySid*(pSid: PSID, pSubCategoryGuids: ptr GUID, PolicyCount: ULONG, ppAuditPolicy: ptr PAUDIT_POLICY_INFORMATION): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditFree*(Buffer: PVOID): VOID {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditSetSystemPolicy*(pAuditPolicy: PCAUDIT_POLICY_INFORMATION, PolicyCount: ULONG): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditQuerySystemPolicy*(pSubCategoryGuids: ptr GUID, PolicyCount: ULONG, ppAuditPolicy: ptr PAUDIT_POLICY_INFORMATION): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditSetPerUserPolicy*(pSid: PSID, pAuditPolicy: PCAUDIT_POLICY_INFORMATION, PolicyCount: ULONG): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditQueryPerUserPolicy*(pSid: PSID, pSubCategoryGuids: ptr GUID, PolicyCount: ULONG, ppAuditPolicy: ptr PAUDIT_POLICY_INFORMATION): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditComputeEffectivePolicyByToken*(hTokenHandle: HANDLE, pSubCategoryGuids: ptr GUID, PolicyCount: ULONG, ppAuditPolicy: ptr PAUDIT_POLICY_INFORMATION): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditEnumerateCategories*(ppAuditCategoriesArray: ptr ptr GUID, pCountReturned: PULONG): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditEnumeratePerUserPolicy*(ppAuditSidArray: ptr PPOLICY_AUDIT_SID_ARRAY): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditEnumerateSubCategories*(pAuditCategoryGuid: ptr GUID, bRetrieveAllSubCategories: BOOLEAN, ppAuditSubCategoriesArray: ptr ptr GUID, pCountReturned: PULONG): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditLookupCategoryGuidFromCategoryId*(AuditCategoryId: POLICY_AUDIT_EVENT_TYPE, pAuditCategoryGuid: ptr GUID): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditQuerySecurity*(SecurityInformation: SECURITY_INFORMATION, ppSecurityDescriptor: ptr PSECURITY_DESCRIPTOR): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditLookupSubCategoryNameA*(pAuditSubCategoryGuid: ptr GUID, ppszSubCategoryName: ptr LPSTR): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditLookupSubCategoryNameW*(pAuditSubCategoryGuid: ptr GUID, ppszSubCategoryName: ptr LPWSTR): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditLookupCategoryNameA*(pAuditCategoryGuid: ptr GUID, ppszCategoryName: ptr LPSTR): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditLookupCategoryNameW*(pAuditCategoryGuid: ptr GUID, ppszCategoryName: ptr LPWSTR): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditLookupCategoryIdFromCategoryGuid*(pAuditCategoryGuid: ptr GUID, pAuditCategoryId: PPOLICY_AUDIT_EVENT_TYPE): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AuditSetSecurity*(SecurityInformation: SECURITY_INFORMATION, pSecurityDescriptor: PSECURITY_DESCRIPTOR): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc AuditComputeEffectivePolicyBySid*(pSid: PSID, pSubCategoryGuids: ptr GUID, PolicyCount: ULONG, ppAuditPolicy: ptr PAUDIT_POLICY_INFORMATION): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditFree*(Buffer: PVOID): VOID {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditSetSystemPolicy*(pAuditPolicy: PCAUDIT_POLICY_INFORMATION, PolicyCount: ULONG): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditQuerySystemPolicy*(pSubCategoryGuids: ptr GUID, PolicyCount: ULONG, ppAuditPolicy: ptr PAUDIT_POLICY_INFORMATION): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditSetPerUserPolicy*(pSid: PSID, pAuditPolicy: PCAUDIT_POLICY_INFORMATION, PolicyCount: ULONG): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditQueryPerUserPolicy*(pSid: PSID, pSubCategoryGuids: ptr GUID, PolicyCount: ULONG, ppAuditPolicy: ptr PAUDIT_POLICY_INFORMATION): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditComputeEffectivePolicyByToken*(hTokenHandle: HANDLE, pSubCategoryGuids: ptr GUID, PolicyCount: ULONG, ppAuditPolicy: ptr PAUDIT_POLICY_INFORMATION): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditEnumerateCategories*(ppAuditCategoriesArray: ptr ptr GUID, pCountReturned: PULONG): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditEnumeratePerUserPolicy*(ppAuditSidArray: ptr PPOLICY_AUDIT_SID_ARRAY): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditEnumerateSubCategories*(pAuditCategoryGuid: ptr GUID, bRetrieveAllSubCategories: BOOLEAN, ppAuditSubCategoriesArray: ptr ptr GUID, pCountReturned: PULONG): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditLookupCategoryGuidFromCategoryId*(AuditCategoryId: POLICY_AUDIT_EVENT_TYPE, pAuditCategoryGuid: ptr GUID): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditQuerySecurity*(SecurityInformation: SECURITY_INFORMATION, ppSecurityDescriptor: ptr PSECURITY_DESCRIPTOR): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditLookupSubCategoryNameA*(pAuditSubCategoryGuid: ptr GUID, ppszSubCategoryName: ptr LPSTR): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditLookupSubCategoryNameW*(pAuditSubCategoryGuid: ptr GUID, ppszSubCategoryName: ptr LPWSTR): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditLookupCategoryNameA*(pAuditCategoryGuid: ptr GUID, ppszCategoryName: ptr LPSTR): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditLookupCategoryNameW*(pAuditCategoryGuid: ptr GUID, ppszCategoryName: ptr LPWSTR): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditLookupCategoryIdFromCategoryGuid*(pAuditCategoryGuid: ptr GUID, pAuditCategoryId: PPOLICY_AUDIT_EVENT_TYPE): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc AuditSetSecurity*(SecurityInformation: SECURITY_INFORMATION, pSecurityDescriptor: PSECURITY_DESCRIPTOR): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
 proc AcquireCredentialsHandleW*(pszPrincipal: ptr SEC_WCHAR, pszPackage: ptr SEC_WCHAR, fCredentialUse: int32, pvLogonId: pointer, pAuthData: pointer, pGetKeyFn: SEC_GET_KEY_FN, pvGetKeyArgument: pointer, phCredential: PCredHandle, ptsExpiry: PTimeStamp): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
 proc AcquireCredentialsHandleA*(pszPrincipal: ptr SEC_CHAR, pszPackage: ptr SEC_CHAR, fCredentialUse: int32, pvLogonId: pointer, pAuthData: pointer, pGetKeyFn: SEC_GET_KEY_FN, pvGetKeyArgument: pointer, phCredential: PCredHandle, ptsExpiry: PTimeStamp): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
 proc FreeCredentialsHandle*(phCredential: PCredHandle): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
@@ -1805,15 +1805,15 @@ proc SetContextAttributesW*(phContext: PCtxtHandle, ulAttribute: int32, pBuffer:
 proc SetContextAttributesA*(phContext: PCtxtHandle, ulAttribute: int32, pBuffer: pointer, cbBuffer: int32): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
 proc QueryCredentialsAttributesW*(phCredential: PCredHandle, ulAttribute: int32, pBuffer: pointer): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
 proc QueryCredentialsAttributesA*(phCredential: PCredHandle, ulAttribute: int32, pBuffer: pointer): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
-proc SetCredentialsAttributesW*(phCredential: PCredHandle, ulAttribute: int32, pBuffer: pointer, cbBuffer: int32): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
-proc SetCredentialsAttributesA*(phCredential: PCredHandle, ulAttribute: int32, pBuffer: pointer, cbBuffer: int32): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
+proc SetCredentialsAttributesW*(phCredential: PCredHandle, ulAttribute: int32, pBuffer: pointer, cbBuffer: int32): SECURITY_STATUS {.winapi, xpincompatible, stdcall, dynlib: "secur32", importc.}
+proc SetCredentialsAttributesA*(phCredential: PCredHandle, ulAttribute: int32, pBuffer: pointer, cbBuffer: int32): SECURITY_STATUS {.winapi, xpincompatible, stdcall, dynlib: "secur32", importc.}
 proc FreeContextBuffer*(pvContextBuffer: pointer): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
 proc MakeSignature*(phContext: PCtxtHandle, fQOP: int32, pMessage: PSecBufferDesc, MessageSeqNo: int32): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
 proc VerifySignature*(phContext: PCtxtHandle, pMessage: PSecBufferDesc, MessageSeqNo: int32, pfQOP: ptr int32): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
 proc EncryptMessage*(phContext: PCtxtHandle, fQOP: int32, pMessage: PSecBufferDesc, MessageSeqNo: int32): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
 proc DecryptMessage*(phContext: PCtxtHandle, pMessage: PSecBufferDesc, MessageSeqNo: int32, pfQOP: ptr int32): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
-proc EnumerateSecurityPackagesW*(pcPackages: ptr int32, ppPackageInfo: ptr PSecPkgInfoW): SECURITY_STATUS {.winapi, stdcall, dynlib: "sspicli", importc.}
-proc EnumerateSecurityPackagesA*(pcPackages: ptr int32, ppPackageInfo: ptr PSecPkgInfoA): SECURITY_STATUS {.winapi, stdcall, dynlib: "sspicli", importc.}
+proc EnumerateSecurityPackagesW*(pcPackages: ptr int32, ppPackageInfo: ptr PSecPkgInfoW): SECURITY_STATUS {.winapi, xpincompatible, stdcall, dynlib: "sspicli", importc.}
+proc EnumerateSecurityPackagesA*(pcPackages: ptr int32, ppPackageInfo: ptr PSecPkgInfoA): SECURITY_STATUS {.winapi, xpincompatible, stdcall, dynlib: "sspicli", importc.}
 proc QuerySecurityPackageInfoW*(pszPackageName: ptr SEC_WCHAR, ppPackageInfo: ptr PSecPkgInfoW): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
 proc QuerySecurityPackageInfoA*(pszPackageName: ptr SEC_CHAR, ppPackageInfo: ptr PSecPkgInfoA): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
 proc ExportSecurityContext*(phContext: PCtxtHandle, fFlags: ULONG, pPackedContext: PSecBuffer, pToken: ptr pointer): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
@@ -1831,8 +1831,8 @@ proc SaslIdentifyPackageW*(pInput: PSecBufferDesc, PackageInfo: ptr PSecPkgInfoW
 proc SaslInitializeSecurityContextW*(phCredential: PCredHandle, phContext: PCtxtHandle, pszTargetName: LPWSTR, fContextReq: int32, Reserved1: int32, TargetDataRep: int32, pInput: PSecBufferDesc, Reserved2: int32, phNewContext: PCtxtHandle, pOutput: PSecBufferDesc, pfContextAttr: ptr int32, ptsExpiry: PTimeStamp): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
 proc SaslInitializeSecurityContextA*(phCredential: PCredHandle, phContext: PCtxtHandle, pszTargetName: LPSTR, fContextReq: int32, Reserved1: int32, TargetDataRep: int32, pInput: PSecBufferDesc, Reserved2: int32, phNewContext: PCtxtHandle, pOutput: PSecBufferDesc, pfContextAttr: ptr int32, ptsExpiry: PTimeStamp): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
 proc SaslAcceptSecurityContext*(phCredential: PCredHandle, phContext: PCtxtHandle, pInput: PSecBufferDesc, fContextReq: int32, TargetDataRep: int32, phNewContext: PCtxtHandle, pOutput: PSecBufferDesc, pfContextAttr: ptr int32, ptsExpiry: PTimeStamp): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
-proc SaslSetContextOption*(ContextHandle: PCtxtHandle, Option: ULONG, Value: PVOID, Size: ULONG): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
-proc SaslGetContextOption*(ContextHandle: PCtxtHandle, Option: ULONG, Value: PVOID, Size: ULONG, Needed: PULONG): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
+proc SaslSetContextOption*(ContextHandle: PCtxtHandle, Option: ULONG, Value: PVOID, Size: ULONG): SECURITY_STATUS {.winapi, xpincompatible, stdcall, dynlib: "secur32", importc.}
+proc SaslGetContextOption*(ContextHandle: PCtxtHandle, Option: ULONG, Value: PVOID, Size: ULONG, Needed: PULONG): SECURITY_STATUS {.winapi, xpincompatible, stdcall, dynlib: "secur32", importc.}
 proc AddSecurityPackageA*(pszPackageName: LPSTR, pOptions: PSECURITY_PACKAGE_OPTIONS): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
 proc AddSecurityPackageW*(pszPackageName: LPWSTR, pOptions: PSECURITY_PACKAGE_OPTIONS): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
 proc DeleteSecurityPackageA*(pszPackageName: ptr SEC_CHAR): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc.}
@@ -1896,16 +1896,16 @@ when winimUnicode:
     NEGOSSP_NAME* = NEGOSSP_NAME_W
     SECURITY_ENTRYPOINT* = SECURITY_ENTRYPOINTW
     SECURITY_ENTRYPOINT_ANSI* = SECURITY_ENTRYPOINT_ANSIW
-  proc AuditLookupSubCategoryName*(pAuditSubCategoryGuid: ptr GUID, ppszSubCategoryName: ptr LPWSTR): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc: "AuditLookupSubCategoryNameW".}
-  proc AuditLookupCategoryName*(pAuditCategoryGuid: ptr GUID, ppszCategoryName: ptr LPWSTR): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc: "AuditLookupCategoryNameW".}
+  proc AuditLookupSubCategoryName*(pAuditSubCategoryGuid: ptr GUID, ppszSubCategoryName: ptr LPWSTR): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "AuditLookupSubCategoryNameW".}
+  proc AuditLookupCategoryName*(pAuditCategoryGuid: ptr GUID, ppszCategoryName: ptr LPWSTR): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "AuditLookupCategoryNameW".}
   proc AcquireCredentialsHandle*(pszPrincipal: ptr SEC_WCHAR, pszPackage: ptr SEC_WCHAR, fCredentialUse: int32, pvLogonId: pointer, pAuthData: pointer, pGetKeyFn: SEC_GET_KEY_FN, pvGetKeyArgument: pointer, phCredential: PCredHandle, ptsExpiry: PTimeStamp): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "AcquireCredentialsHandleW".}
   proc AddCredentials*(hCredentials: PCredHandle, pszPrincipal: ptr SEC_WCHAR, pszPackage: ptr SEC_WCHAR, fCredentialUse: int32, pAuthData: pointer, pGetKeyFn: SEC_GET_KEY_FN, pvGetKeyArgument: pointer, ptsExpiry: PTimeStamp): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "AddCredentialsW".}
   proc InitializeSecurityContext*(phCredential: PCredHandle, phContext: PCtxtHandle, pszTargetName: ptr SEC_WCHAR, fContextReq: int32, Reserved1: int32, TargetDataRep: int32, pInput: PSecBufferDesc, Reserved2: int32, phNewContext: PCtxtHandle, pOutput: PSecBufferDesc, pfContextAttr: ptr int32, ptsExpiry: PTimeStamp): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "InitializeSecurityContextW".}
   proc QueryContextAttributes*(phContext: PCtxtHandle, ulAttribute: int32, pBuffer: pointer): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "QueryContextAttributesW".}
   proc SetContextAttributes*(phContext: PCtxtHandle, ulAttribute: int32, pBuffer: pointer, cbBuffer: int32): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "SetContextAttributesW".}
   proc QueryCredentialsAttributes*(phCredential: PCredHandle, ulAttribute: int32, pBuffer: pointer): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "QueryCredentialsAttributesW".}
-  proc SetCredentialsAttributes*(phCredential: PCredHandle, ulAttribute: int32, pBuffer: pointer, cbBuffer: int32): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "SetCredentialsAttributesW".}
-  proc EnumerateSecurityPackages*(pcPackages: ptr int32, ppPackageInfo: ptr PSecPkgInfoW): SECURITY_STATUS {.winapi, stdcall, dynlib: "sspicli", importc: "EnumerateSecurityPackagesW".}
+  proc SetCredentialsAttributes*(phCredential: PCredHandle, ulAttribute: int32, pBuffer: pointer, cbBuffer: int32): SECURITY_STATUS {.winapi, xpincompatible, stdcall, dynlib: "secur32", importc: "SetCredentialsAttributesW".}
+  proc EnumerateSecurityPackages*(pcPackages: ptr int32, ppPackageInfo: ptr PSecPkgInfoW): SECURITY_STATUS {.winapi, xpincompatible, stdcall, dynlib: "sspicli", importc: "EnumerateSecurityPackagesW".}
   proc QuerySecurityPackageInfo*(pszPackageName: ptr SEC_WCHAR, ppPackageInfo: ptr PSecPkgInfoW): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "QuerySecurityPackageInfoW".}
   proc ImportSecurityContext*(pszPackage: ptr SEC_WCHAR, pPackedContext: PSecBuffer, Token: pointer, phContext: PCtxtHandle): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "ImportSecurityContextW".}
   proc InitSecurityInterface*(): PSecurityFunctionTableW {.winapi, stdcall, dynlib: "secur32", importc: "InitSecurityInterfaceW".}
@@ -1964,16 +1964,16 @@ when winimAnsi:
     NEGOSSP_NAME* = NEGOSSP_NAME_A
     SECURITY_ENTRYPOINT* = SECURITY_ENTRYPOINTA
     SECURITY_ENTRYPOINT_ANSI* = SECURITY_ENTRYPOINT_ANSIA
-  proc AuditLookupSubCategoryName*(pAuditSubCategoryGuid: ptr GUID, ppszSubCategoryName: ptr LPSTR): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc: "AuditLookupSubCategoryNameA".}
-  proc AuditLookupCategoryName*(pAuditCategoryGuid: ptr GUID, ppszCategoryName: ptr LPSTR): BOOLEAN {.winapi, stdcall, dynlib: "advapi32", importc: "AuditLookupCategoryNameA".}
+  proc AuditLookupSubCategoryName*(pAuditSubCategoryGuid: ptr GUID, ppszSubCategoryName: ptr LPSTR): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "AuditLookupSubCategoryNameA".}
+  proc AuditLookupCategoryName*(pAuditCategoryGuid: ptr GUID, ppszCategoryName: ptr LPSTR): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "AuditLookupCategoryNameA".}
   proc AcquireCredentialsHandle*(pszPrincipal: ptr SEC_CHAR, pszPackage: ptr SEC_CHAR, fCredentialUse: int32, pvLogonId: pointer, pAuthData: pointer, pGetKeyFn: SEC_GET_KEY_FN, pvGetKeyArgument: pointer, phCredential: PCredHandle, ptsExpiry: PTimeStamp): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "AcquireCredentialsHandleA".}
   proc AddCredentials*(hCredentials: PCredHandle, pszPrincipal: ptr SEC_CHAR, pszPackage: ptr SEC_CHAR, fCredentialUse: int32, pAuthData: pointer, pGetKeyFn: SEC_GET_KEY_FN, pvGetKeyArgument: pointer, ptsExpiry: PTimeStamp): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "AddCredentialsA".}
   proc InitializeSecurityContext*(phCredential: PCredHandle, phContext: PCtxtHandle, pszTargetName: ptr SEC_CHAR, fContextReq: int32, Reserved1: int32, TargetDataRep: int32, pInput: PSecBufferDesc, Reserved2: int32, phNewContext: PCtxtHandle, pOutput: PSecBufferDesc, pfContextAttr: ptr int32, ptsExpiry: PTimeStamp): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "InitializeSecurityContextA".}
   proc QueryContextAttributes*(phContext: PCtxtHandle, ulAttribute: int32, pBuffer: pointer): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "QueryContextAttributesA".}
   proc SetContextAttributes*(phContext: PCtxtHandle, ulAttribute: int32, pBuffer: pointer, cbBuffer: int32): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "SetContextAttributesA".}
   proc QueryCredentialsAttributes*(phCredential: PCredHandle, ulAttribute: int32, pBuffer: pointer): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "QueryCredentialsAttributesA".}
-  proc SetCredentialsAttributes*(phCredential: PCredHandle, ulAttribute: int32, pBuffer: pointer, cbBuffer: int32): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "SetCredentialsAttributesA".}
-  proc EnumerateSecurityPackages*(pcPackages: ptr int32, ppPackageInfo: ptr PSecPkgInfoA): SECURITY_STATUS {.winapi, stdcall, dynlib: "sspicli", importc: "EnumerateSecurityPackagesA".}
+  proc SetCredentialsAttributes*(phCredential: PCredHandle, ulAttribute: int32, pBuffer: pointer, cbBuffer: int32): SECURITY_STATUS {.winapi, xpincompatible, stdcall, dynlib: "secur32", importc: "SetCredentialsAttributesA".}
+  proc EnumerateSecurityPackages*(pcPackages: ptr int32, ppPackageInfo: ptr PSecPkgInfoA): SECURITY_STATUS {.winapi, xpincompatible, stdcall, dynlib: "sspicli", importc: "EnumerateSecurityPackagesA".}
   proc QuerySecurityPackageInfo*(pszPackageName: ptr SEC_CHAR, ppPackageInfo: ptr PSecPkgInfoA): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "QuerySecurityPackageInfoA".}
   proc ImportSecurityContext*(pszPackage: ptr SEC_CHAR, pPackedContext: PSecBuffer, Token: pointer, phContext: PCtxtHandle): SECURITY_STATUS {.winapi, stdcall, dynlib: "secur32", importc: "ImportSecurityContextA".}
   proc InitSecurityInterface*(): PSecurityFunctionTableA {.winapi, stdcall, dynlib: "secur32", importc: "InitSecurityInterfaceA".}

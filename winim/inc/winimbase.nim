@@ -23,6 +23,12 @@ macro winapi*(x: untyped): untyped =
 
   result = x
 
+macro xpincompatible*(x: untyped): untyped =
+  when defined(useWinXP):
+    discard
+  else:
+    result = x
+
 proc discardable*[T](x: T): T {.discardable, inline.} = x
 
 const

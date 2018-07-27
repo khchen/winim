@@ -7074,7 +7074,7 @@ proc CoUninitialize*(): void {.winapi, stdcall, dynlib: "ole32", importc.}
 proc CoInitializeEx*(pvReserved: LPVOID, dwCoInit: DWORD): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
 proc CoGetCurrentLogicalThreadId*(pguid: ptr GUID): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
 proc CoGetContextToken*(pToken: ptr ULONG_PTR): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
-proc CoGetApartmentType*(pAptType: ptr APTTYPE, pAptQualifier: ptr APTTYPEQUALIFIER): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
+proc CoGetApartmentType*(pAptType: ptr APTTYPE, pAptQualifier: ptr APTTYPEQUALIFIER): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "ole32", importc.}
 proc CoGetObjectContext*(riid: REFIID, ppv: ptr LPVOID): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
 proc CoRegisterClassObject*(rclsid: REFCLSID, pUnk: LPUNKNOWN, dwClsContext: DWORD, flags: DWORD, lpdwRegister: LPDWORD): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
 proc CoRevokeClassObject*(dwRegister: DWORD): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
@@ -7108,7 +7108,7 @@ proc CoFreeUnusedLibrariesEx*(dwUnloadDelay: DWORD, dwReserved: DWORD): void {.w
 proc CoInitializeSecurity*(pSecDesc: PSECURITY_DESCRIPTOR, cAuthSvc: LONG, asAuthSvc: ptr SOLE_AUTHENTICATION_SERVICE, pReserved1: pointer, dwAuthnLevel: DWORD, dwImpLevel: DWORD, pAuthList: pointer, dwCapabilities: DWORD, pReserved3: pointer): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
 proc CoSwitchCallContext*(pNewObject: ptr IUnknown, ppOldObject: ptr ptr IUnknown): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
 proc CoIsHandlerConnected*(pUnk: LPUNKNOWN): WINBOOL {.winapi, stdcall, dynlib: "ole32", importc.}
-proc CoDisconnectContext*(dwTimeout: DWORD): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
+proc CoDisconnectContext*(dwTimeout: DWORD): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "ole32", importc.}
 proc CoGetCallContext*(riid: REFIID, ppInterface: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
 proc CoQueryProxyBlanket*(pProxy: ptr IUnknown, pwAuthnSvc: ptr DWORD, pAuthzSvc: ptr DWORD, pServerPrincName: ptr LPOLESTR, pAuthnLevel: ptr DWORD, pImpLevel: ptr DWORD, pAuthInfo: ptr RPC_AUTH_IDENTITY_HANDLE, pCapabilites: ptr DWORD): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
 proc CoSetProxyBlanket*(pProxy: ptr IUnknown, dwAuthnSvc: DWORD, dwAuthzSvc: DWORD, pServerPrincName: ptr OLECHAR, dwAuthnLevel: DWORD, dwImpLevel: DWORD, pAuthInfo: RPC_AUTH_IDENTITY_HANDLE, dwCapabilities: DWORD): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
@@ -7199,7 +7199,7 @@ proc CreateURLMoniker*(pMkCtx: LPMONIKER, szURL: LPCWSTR, ppmk: ptr LPMONIKER): 
 proc CreateURLMonikerEx*(pMkCtx: LPMONIKER, szURL: LPCWSTR, ppmk: ptr LPMONIKER, dwFlags: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc GetClassURL*(szURL: LPCWSTR, pClsID: ptr CLSID): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc CreateAsyncBindCtx*(reserved: DWORD, pBSCb: ptr IBindStatusCallback, pEFetc: ptr IEnumFORMATETC, ppBC: ptr ptr IBindCtx): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
-proc CreateURLMonikerEx2*(pMkCtx: LPMONIKER, pUri: ptr IUri, ppmk: ptr LPMONIKER, dwFlags: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
+proc CreateURLMonikerEx2*(pMkCtx: LPMONIKER, pUri: ptr IUri, ppmk: ptr LPMONIKER, dwFlags: DWORD): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "urlmon", importc.}
 proc CreateAsyncBindCtxEx*(pbc: ptr IBindCtx, dwOptions: DWORD, pBSCb: ptr IBindStatusCallback, pEnum: ptr IEnumFORMATETC, ppBC: ptr ptr IBindCtx, reserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc MkParseDisplayNameEx*(pbc: ptr IBindCtx, szDisplayName: LPCWSTR, pchEaten: ptr ULONG, ppmk: ptr LPMONIKER): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc RegisterBindStatusCallback*(pBC: LPBC, pBSCb: ptr IBindStatusCallback, ppBSCBPrev: ptr ptr IBindStatusCallback, dwReserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
@@ -7207,7 +7207,7 @@ proc RevokeBindStatusCallback*(pBC: LPBC, pBSCb: ptr IBindStatusCallback): HRESU
 proc GetClassFileOrMime*(pBC: LPBC, szFilename: LPCWSTR, pBuffer: LPVOID, cbSize: DWORD, szMime: LPCWSTR, dwReserved: DWORD, pclsid: ptr CLSID): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc IsValidURL*(pBC: LPBC, szURL: LPCWSTR, dwReserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc CoGetClassObjectFromURL*(rCLASSID: REFCLSID, szCODE: LPCWSTR, dwFileVersionMS: DWORD, dwFileVersionLS: DWORD, szTYPE: LPCWSTR, pBindCtx: LPBINDCTX, dwClsContext: DWORD, pvReserved: LPVOID, riid: REFIID, ppv: ptr LPVOID): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
-proc IEInstallScope*(pdwScope: LPDWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
+proc IEInstallScope*(pdwScope: LPDWORD): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "urlmon", importc.}
 proc FaultInIEFeature*(hWnd: HWND, pClassSpec: ptr uCLSSPEC, pQuery: ptr QUERYCONTEXT, dwFlags: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc GetComponentIDFromCLSSPEC*(pClassspec: ptr uCLSSPEC, ppszComponentID: ptr LPSTR): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc IsAsyncMoniker*(pmk: ptr IMoniker): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
@@ -7224,10 +7224,10 @@ proc FindMimeFromData*(pBC: LPBC, pwzUrl: LPCWSTR, pBuffer: LPVOID, cbSize: DWOR
 proc ObtainUserAgentString*(dwOption: DWORD, pszUAOut: LPSTR, cbSize: ptr DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc CompareSecurityIds*(pbSecurityId1: ptr BYTE, dwLen1: DWORD, pbSecurityId2: ptr BYTE, dwLen2: DWORD, dwReserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc CompatFlagsFromClsid*(pclsid: ptr CLSID, pdwCompatFlags: LPDWORD, pdwMiscStatusFlags: LPDWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
-proc CreateUri*(pwzURI: LPCWSTR, dwFlags: DWORD, dwReserved: DWORD_PTR, ppURI: ptr ptr IUri): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
-proc CreateUriWithFragment*(pwzURI: LPCWSTR, pwzFragment: LPCWSTR, dwFlags: DWORD, dwReserved: DWORD_PTR, ppURI: ptr ptr IUri): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
-proc CreateUriFromMultiByteString*(pszANSIInputUri: LPCSTR, dwEncodingFlags: DWORD, dwCodePage: DWORD, dwCreateFlags: DWORD, dwReserved: DWORD_PTR, ppUri: ptr ptr IUri): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
-proc CreateIUriBuilder*(pIUri: ptr IUri, dwFlags: DWORD, dwReserved: DWORD_PTR, ppIUriBuilder: ptr ptr IUriBuilder): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
+proc CreateUri*(pwzURI: LPCWSTR, dwFlags: DWORD, dwReserved: DWORD_PTR, ppURI: ptr ptr IUri): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "urlmon", importc.}
+proc CreateUriWithFragment*(pwzURI: LPCWSTR, pwzFragment: LPCWSTR, dwFlags: DWORD, dwReserved: DWORD_PTR, ppURI: ptr ptr IUri): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "urlmon", importc.}
+proc CreateUriFromMultiByteString*(pszANSIInputUri: LPCSTR, dwEncodingFlags: DWORD, dwCodePage: DWORD, dwCreateFlags: DWORD, dwReserved: DWORD_PTR, ppUri: ptr ptr IUri): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "urlmon", importc.}
+proc CreateIUriBuilder*(pIUri: ptr IUri, dwFlags: DWORD, dwReserved: DWORD_PTR, ppIUriBuilder: ptr ptr IUriBuilder): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "urlmon", importc.}
 proc HlinkSimpleNavigateToString*(szTarget: LPCWSTR, szLocation: LPCWSTR, szTargetFrameName: LPCWSTR, pUnk: ptr IUnknown, pbc: ptr IBindCtx, P6: ptr IBindStatusCallback, grfHLNF: DWORD, dwReserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc HlinkSimpleNavigateToMoniker*(pmkTarget: ptr IMoniker, szLocation: LPCWSTR, szTargetFrameName: LPCWSTR, pUnk: ptr IUnknown, pbc: ptr IBindCtx, P6: ptr IBindStatusCallback, grfHLNF: DWORD, dwReserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc URLOpenStreamA*(P1: LPUNKNOWN, P2: LPCSTR, P3: DWORD, P4: LPBINDSTATUSCALLBACK): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
@@ -7245,29 +7245,29 @@ proc HlinkGoForward*(pUnk: ptr IUnknown): HRESULT {.winapi, stdcall, dynlib: "ur
 proc HlinkNavigateString*(pUnk: ptr IUnknown, szTarget: LPCWSTR): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc HlinkNavigateMoniker*(pUnk: ptr IUnknown, pmkTarget: ptr IMoniker): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc CoInternetParseUrl*(pwzUrl: LPCWSTR, ParseAction: PARSEACTION, dwFlags: DWORD, pszResult: LPWSTR, cchResult: DWORD, pcchResult: ptr DWORD, dwReserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
-proc CoInternetParseIUri*(pIUri: ptr IUri, ParseAction: PARSEACTION, dwFlags: DWORD, pwzResult: LPWSTR, cchResult: DWORD, pcchResult: ptr DWORD, dwReserved: DWORD_PTR): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
+proc CoInternetParseIUri*(pIUri: ptr IUri, ParseAction: PARSEACTION, dwFlags: DWORD, pwzResult: LPWSTR, cchResult: DWORD, pcchResult: ptr DWORD, dwReserved: DWORD_PTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "urlmon", importc.}
 proc CoInternetCombineUrl*(pwzBaseUrl: LPCWSTR, pwzRelativeUrl: LPCWSTR, dwCombineFlags: DWORD, pszResult: LPWSTR, cchResult: DWORD, pcchResult: ptr DWORD, dwReserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
-proc CoInternetCombineUrlEx*(pBaseUri: ptr IUri, pwzRelativeUrl: LPCWSTR, dwCombineFlags: DWORD, ppCombinedUri: ptr ptr IUri, dwReserved: DWORD_PTR): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
-proc CoInternetCombineIUri*(pBaseUri: ptr IUri, pRelativeUri: ptr IUri, dwCombineFlags: DWORD, ppCombinedUri: ptr ptr IUri, dwReserved: DWORD_PTR): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
+proc CoInternetCombineUrlEx*(pBaseUri: ptr IUri, pwzRelativeUrl: LPCWSTR, dwCombineFlags: DWORD, ppCombinedUri: ptr ptr IUri, dwReserved: DWORD_PTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "urlmon", importc.}
+proc CoInternetCombineIUri*(pBaseUri: ptr IUri, pRelativeUri: ptr IUri, dwCombineFlags: DWORD, ppCombinedUri: ptr ptr IUri, dwReserved: DWORD_PTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "urlmon", importc.}
 proc CoInternetCompareUrl*(pwzUrl1: LPCWSTR, pwzUrl2: LPCWSTR, dwFlags: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc CoInternetGetProtocolFlags*(pwzUrl: LPCWSTR, pdwFlags: ptr DWORD, dwReserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc CoInternetQueryInfo*(pwzUrl: LPCWSTR, QueryOptions: QUERYOPTION, dwQueryFlags: DWORD, pvBuffer: LPVOID, cbBuffer: DWORD, pcbBuffer: ptr DWORD, dwReserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc CoInternetGetSession*(dwSessionMode: DWORD, ppIInternetSession: ptr ptr IInternetSession, dwReserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc CoInternetGetSecurityUrl*(pwszUrl: LPCWSTR, ppwszSecUrl: ptr LPWSTR, psuAction: PSUACTION, dwReserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc AsyncInstallDistributionUnit*(szDistUnit: LPCWSTR, szTYPE: LPCWSTR, szExt: LPCWSTR, dwFileVersionMS: DWORD, dwFileVersionLS: DWORD, szURL: LPCWSTR, pbc: ptr IBindCtx, pvReserved: LPVOID, flags: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
-proc CoInternetGetSecurityUrlEx*(pUri: ptr IUri, ppSecUri: ptr ptr IUri, psuAction: PSUACTION, dwReserved: DWORD_PTR): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
+proc CoInternetGetSecurityUrlEx*(pUri: ptr IUri, ppSecUri: ptr ptr IUri, psuAction: PSUACTION, dwReserved: DWORD_PTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "urlmon", importc.}
 proc CoInternetSetFeatureEnabled*(FeatureEntry: INTERNETFEATURELIST, dwFlags: DWORD, fEnable: WINBOOL): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc CoInternetIsFeatureEnabled*(FeatureEntry: INTERNETFEATURELIST, dwFlags: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc CoInternetIsFeatureEnabledForUrl*(FeatureEntry: INTERNETFEATURELIST, dwFlags: DWORD, szURL: LPCWSTR, pSecMgr: ptr IInternetSecurityManager): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
-proc CoInternetIsFeatureEnabledForIUri*(FeatureEntry: INTERNETFEATURELIST, dwFlags: DWORD, pIUri: ptr IUri, pSecMgr: ptr IInternetSecurityManagerEx2): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
+proc CoInternetIsFeatureEnabledForIUri*(FeatureEntry: INTERNETFEATURELIST, dwFlags: DWORD, pIUri: ptr IUri, pSecMgr: ptr IInternetSecurityManagerEx2): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "urlmon", importc.}
 proc CoInternetIsFeatureZoneElevationEnabled*(szFromURL: LPCWSTR, szToURL: LPCWSTR, pSecMgr: ptr IInternetSecurityManager, dwFlags: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc CopyStgMedium*(pcstgmedSrc: ptr STGMEDIUM, pstgmedDest: ptr STGMEDIUM): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc CopyBindInfo*(pcbiSrc: ptr BINDINFO, pbiDest: ptr BINDINFO): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc ReleaseBindInfo*(pbindinfo: ptr BINDINFO): void {.winapi, stdcall, dynlib: "urlmon", importc.}
 proc OInetParseUrl*(pwzUrl: LPCWSTR, ParseAction: PARSEACTION, dwFlags: DWORD, pszResult: LPWSTR, cchResult: DWORD, pcchResult: ptr DWORD, dwReserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc: "CoInternetParseUrl".}
 proc OInetCombineUrl*(pwzBaseUrl: LPCWSTR, pwzRelativeUrl: LPCWSTR, dwCombineFlags: DWORD, pszResult: LPWSTR, cchResult: DWORD, pcchResult: ptr DWORD, dwReserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc: "CoInternetCombineUrl".}
-proc OInetCombineUrlEx*(pBaseUri: ptr IUri, pwzRelativeUrl: LPCWSTR, dwCombineFlags: DWORD, ppCombinedUri: ptr ptr IUri, dwReserved: DWORD_PTR): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc: "CoInternetCombineUrlEx".}
-proc OInetCombineIUri*(pBaseUri: ptr IUri, pRelativeUri: ptr IUri, dwCombineFlags: DWORD, ppCombinedUri: ptr ptr IUri, dwReserved: DWORD_PTR): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc: "CoInternetCombineIUri".}
+proc OInetCombineUrlEx*(pBaseUri: ptr IUri, pwzRelativeUrl: LPCWSTR, dwCombineFlags: DWORD, ppCombinedUri: ptr ptr IUri, dwReserved: DWORD_PTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "urlmon", importc: "CoInternetCombineUrlEx".}
+proc OInetCombineIUri*(pBaseUri: ptr IUri, pRelativeUri: ptr IUri, dwCombineFlags: DWORD, ppCombinedUri: ptr ptr IUri, dwReserved: DWORD_PTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "urlmon", importc: "CoInternetCombineIUri".}
 proc OInetCompareUrl*(pwzUrl1: LPCWSTR, pwzUrl2: LPCWSTR, dwFlags: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc: "CoInternetCompareUrl".}
 proc OInetQueryInfo*(pwzUrl: LPCWSTR, QueryOptions: QUERYOPTION, dwQueryFlags: DWORD, pvBuffer: LPVOID, cbBuffer: DWORD, pcbBuffer: ptr DWORD, dwReserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc: "CoInternetQueryInfo".}
 proc OInetGetSession*(dwSessionMode: DWORD, ppIInternetSession: ptr ptr IInternetSession, dwReserved: DWORD): HRESULT {.winapi, stdcall, dynlib: "urlmon", importc: "CoInternetGetSession".}
@@ -7284,71 +7284,71 @@ proc StgCreatePropSetStg*(pStorage: ptr IStorage, dwReserved: DWORD, ppPropSetSt
 proc FmtIdToPropStgName*(pfmtid: ptr FMTID, oszName: LPOLESTR): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
 proc PropStgNameToFmtId*(oszName: LPOLESTR, pfmtid: ptr FMTID): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
 proc CreateStdProgressIndicator*(hwndParent: HWND, pszTitle: LPCOLESTR, pIbscCaller: ptr IBindStatusCallback, ppIbsc: ptr ptr IBindStatusCallback): HRESULT {.winapi, stdcall, dynlib: "ole32", importc.}
-proc PSCoerceToCanonicalValue*(key: REFPROPERTYKEY, ppropvar: ptr PROPVARIANT): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSCreateAdapterFromPropertyStore*(pps: ptr IPropertyStore, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSCreateDelayedMultiplexPropertyStore*(flags: GETPROPERTYSTOREFLAGS, pdpsf: ptr IDelayedPropertyStoreFactory, rgStoreIds: ptr DWORD, cStores: DWORD, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSCreateMemoryPropertyStore*(riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSCreateMultiplexPropertyStore*(prgpunkStores: ptr ptr IUnknown, cStores: DWORD, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSCreatePropertyChangeArray*(rgpropkey: ptr PROPERTYKEY, rgflags: ptr PKA_FLAGS, rgpropvar: ptr PROPVARIANT, cChanges: UINT, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSCreatePropertyStoreFromObject*(punk: ptr IUnknown, grfMode: DWORD, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSCreatePropertyStoreFromPropertySetStorage*(ppss: ptr IPropertySetStorage, grfMode: DWORD, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSCreateSimplePropertyChange*(flags: PKA_FLAGS, key: REFPROPERTYKEY, propvar: REFPROPVARIANT, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSEnumeratePropertyDescriptions*(filterOn: PROPDESC_ENUMFILTER, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSFormatForDisplay*(propkey: REFPROPERTYKEY, propvar: REFPROPVARIANT, pdfFlags: PROPDESC_FORMAT_FLAGS, pwszText: LPWSTR, cchText: DWORD): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSFormatForDisplayAlloc*(key: REFPROPERTYKEY, propvar: REFPROPVARIANT, pdff: PROPDESC_FORMAT_FLAGS, ppszDisplay: ptr PWSTR): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSFormatPropertyValue*(pps: ptr IPropertyStore, ppd: ptr IPropertyDescription, pdff: PROPDESC_FORMAT_FLAGS, ppszDisplay: ptr LPWSTR): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSGetImageReferenceForValue*(propkey: REFPROPERTYKEY, propvar: REFPROPVARIANT, ppszImageRes: ptr PWSTR): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSGetItemPropertyHandler*(punkItem: ptr IUnknown, fReadWrite: BOOL, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSGetItemPropertyHandlerWithCreateObject*(punkItem: ptr IUnknown, fReadWrite: BOOL, punkCreateObject: ptr IUnknown, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSGetNamedPropertyFromPropertyStorage*(psps: PCUSERIALIZEDPROPSTORAGE, cb: DWORD, pszName: LPCWSTR, ppropvar: ptr PROPVARIANT): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSGetNameFromPropertyKey*(propkey: REFPROPERTYKEY, ppszCanonicalName: ptr PWSTR): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSGetPropertyDescription*(propkey: REFPROPERTYKEY, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSGetPropertyDescriptionByName*(pszCanonicalName: LPCWSTR, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSGetPropertyDescriptionListFromString*(pszPropList: LPCWSTR, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSGetPropertyFromPropertyStorage*(psps: PCUSERIALIZEDPROPSTORAGE, cb: DWORD, rpkey: REFPROPERTYKEY, ppropvar: ptr PROPVARIANT): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSGetPropertyKeyFromName*(pszName: PCWSTR, ppropkey: ptr PROPERTYKEY): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSGetPropertySystem*(riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSGetPropertyValue*(pps: ptr IPropertyStore, ppd: ptr IPropertyDescription, ppropvar: ptr PROPVARIANT): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSLookupPropertyHandlerCLSID*(pszFilePath: PCWSTR, pclsid: ptr CLSID): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_Delete*(propBag: ptr IPropertyBag, propName: LPCWSTR): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadBOOL*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr BOOL): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadBSTR*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr BSTR): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadDWORD*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr DWORD): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadGUID*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr GUID): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadInt*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr INT): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadLONG*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr LONG): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadPOINTL*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr POINTL): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadPOINTS*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr POINTS): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadPropertyKey*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr PROPERTYKEY): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadRECTL*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr RECTL): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadSHORT*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr SHORT): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadStr*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: LPWSTR, characterCount: int32): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadStrAlloc*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr PWSTR): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadStream*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr ptr IStream): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadType*(propBag: ptr IPropertyBag, propName: LPCWSTR, `var`: ptr VARIANT, `type`: VARTYPE): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadULONGLONG*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr ULONGLONG): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_ReadUnknown*(propBag: ptr IPropertyBag, propName: LPCWSTR, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_WriteBOOL*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: BOOL): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_WriteBSTR*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: BSTR): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_WriteDWORD*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: DWORD): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_WriteGUID*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr GUID): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_WriteInt*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: INT): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_WriteLONG*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: LONG): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_WritePOINTL*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr POINTL): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_WritePOINTS*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr POINTS): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_WritePropertyKey*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: REFPROPERTYKEY): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_WriteRECTL*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr RECTL): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_WriteSHORT*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: SHORT): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_WriteStr*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: LPCWSTR): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_WriteStream*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr IStream): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_WriteULONGLONG*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ULONGLONG): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyBag_WriteUnknown*(propBag: ptr IPropertyBag, propName: LPCWSTR, punk: ptr IUnknown): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSPropertyKeyFromString*(pszString: LPCWSTR, pkey: ptr PROPERTYKEY): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSRefreshPropertySchema*(): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSRegisterPropertySchema*(pszPath: PCWSTR): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSSetPropertyValue*(pps: ptr IPropertyStore, ppd: ptr IPropertyDescription, propvar: REFPROPVARIANT): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSStringFromPropertyKey*(pkey: REFPROPERTYKEY, psz: LPWSTR, cch: UINT): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
-proc PSUnregisterPropertySchema*(pszPath: PCWSTR): HRESULT {.winapi, stdcall, dynlib: "propsys", importc.}
+proc PSCoerceToCanonicalValue*(key: REFPROPERTYKEY, ppropvar: ptr PROPVARIANT): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSCreateAdapterFromPropertyStore*(pps: ptr IPropertyStore, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSCreateDelayedMultiplexPropertyStore*(flags: GETPROPERTYSTOREFLAGS, pdpsf: ptr IDelayedPropertyStoreFactory, rgStoreIds: ptr DWORD, cStores: DWORD, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSCreateMemoryPropertyStore*(riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSCreateMultiplexPropertyStore*(prgpunkStores: ptr ptr IUnknown, cStores: DWORD, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSCreatePropertyChangeArray*(rgpropkey: ptr PROPERTYKEY, rgflags: ptr PKA_FLAGS, rgpropvar: ptr PROPVARIANT, cChanges: UINT, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSCreatePropertyStoreFromObject*(punk: ptr IUnknown, grfMode: DWORD, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSCreatePropertyStoreFromPropertySetStorage*(ppss: ptr IPropertySetStorage, grfMode: DWORD, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSCreateSimplePropertyChange*(flags: PKA_FLAGS, key: REFPROPERTYKEY, propvar: REFPROPVARIANT, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSEnumeratePropertyDescriptions*(filterOn: PROPDESC_ENUMFILTER, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSFormatForDisplay*(propkey: REFPROPERTYKEY, propvar: REFPROPVARIANT, pdfFlags: PROPDESC_FORMAT_FLAGS, pwszText: LPWSTR, cchText: DWORD): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSFormatForDisplayAlloc*(key: REFPROPERTYKEY, propvar: REFPROPVARIANT, pdff: PROPDESC_FORMAT_FLAGS, ppszDisplay: ptr PWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSFormatPropertyValue*(pps: ptr IPropertyStore, ppd: ptr IPropertyDescription, pdff: PROPDESC_FORMAT_FLAGS, ppszDisplay: ptr LPWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSGetImageReferenceForValue*(propkey: REFPROPERTYKEY, propvar: REFPROPVARIANT, ppszImageRes: ptr PWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSGetItemPropertyHandler*(punkItem: ptr IUnknown, fReadWrite: BOOL, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSGetItemPropertyHandlerWithCreateObject*(punkItem: ptr IUnknown, fReadWrite: BOOL, punkCreateObject: ptr IUnknown, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSGetNamedPropertyFromPropertyStorage*(psps: PCUSERIALIZEDPROPSTORAGE, cb: DWORD, pszName: LPCWSTR, ppropvar: ptr PROPVARIANT): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSGetNameFromPropertyKey*(propkey: REFPROPERTYKEY, ppszCanonicalName: ptr PWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSGetPropertyDescription*(propkey: REFPROPERTYKEY, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSGetPropertyDescriptionByName*(pszCanonicalName: LPCWSTR, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSGetPropertyDescriptionListFromString*(pszPropList: LPCWSTR, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSGetPropertyFromPropertyStorage*(psps: PCUSERIALIZEDPROPSTORAGE, cb: DWORD, rpkey: REFPROPERTYKEY, ppropvar: ptr PROPVARIANT): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSGetPropertyKeyFromName*(pszName: PCWSTR, ppropkey: ptr PROPERTYKEY): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSGetPropertySystem*(riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSGetPropertyValue*(pps: ptr IPropertyStore, ppd: ptr IPropertyDescription, ppropvar: ptr PROPVARIANT): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSLookupPropertyHandlerCLSID*(pszFilePath: PCWSTR, pclsid: ptr CLSID): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_Delete*(propBag: ptr IPropertyBag, propName: LPCWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadBOOL*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr BOOL): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadBSTR*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr BSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadDWORD*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr DWORD): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadGUID*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr GUID): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadInt*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr INT): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadLONG*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr LONG): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadPOINTL*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr POINTL): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadPOINTS*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr POINTS): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadPropertyKey*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr PROPERTYKEY): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadRECTL*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr RECTL): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadSHORT*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr SHORT): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadStr*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: LPWSTR, characterCount: int32): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadStrAlloc*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr PWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadStream*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr ptr IStream): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadType*(propBag: ptr IPropertyBag, propName: LPCWSTR, `var`: ptr VARIANT, `type`: VARTYPE): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadULONGLONG*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr ULONGLONG): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_ReadUnknown*(propBag: ptr IPropertyBag, propName: LPCWSTR, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_WriteBOOL*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: BOOL): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_WriteBSTR*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: BSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_WriteDWORD*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: DWORD): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_WriteGUID*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr GUID): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_WriteInt*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: INT): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_WriteLONG*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: LONG): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_WritePOINTL*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr POINTL): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_WritePOINTS*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr POINTS): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_WritePropertyKey*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: REFPROPERTYKEY): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_WriteRECTL*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr RECTL): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_WriteSHORT*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: SHORT): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_WriteStr*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: LPCWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_WriteStream*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ptr IStream): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_WriteULONGLONG*(propBag: ptr IPropertyBag, propName: LPCWSTR, value: ULONGLONG): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyBag_WriteUnknown*(propBag: ptr IPropertyBag, propName: LPCWSTR, punk: ptr IUnknown): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSPropertyKeyFromString*(pszString: LPCWSTR, pkey: ptr PROPERTYKEY): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSRefreshPropertySchema*(): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSRegisterPropertySchema*(pszPath: PCWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSSetPropertyValue*(pps: ptr IPropertyStore, ppd: ptr IPropertyDescription, propvar: REFPROPVARIANT): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSStringFromPropertyKey*(pkey: REFPROPERTYKEY, psz: LPWSTR, cch: UINT): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
+proc PSUnregisterPropertySchema*(pszPath: PCWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "propsys", importc.}
 proc VarUI4FromUI4*(ulIn: ULONG, pulOut: ptr ULONG): HRESULT {.winapi, inline.} = pulOut[] = ulIn
 proc VarI4FromI4*(lIn: LONG, plOut: ptr LONG): HRESULT {.winapi, inline.} = plOut[] = lIn
 proc VarUI8FromUI8*(ui64In: ULONG64, pi64Out: ptr ULONG64): HRESULT {.winapi, inline.} = pi64Out[] = ui64In

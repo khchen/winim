@@ -3822,41 +3822,41 @@ proc MakeDragList*(hLB: HWND): WINBOOL {.winapi, stdcall, dynlib: "comctl32", im
 proc DrawInsert*(handParent: HWND, hLB: HWND, nItem: int32): void {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc LBItemFromPt*(hLB: HWND, pt: POINT, bAutoScroll: WINBOOL): int32 {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc CreateUpDownControl*(dwStyle: DWORD, x: int32, y: int32, cx: int32, cy: int32, hParent: HWND, nID: int32, hInst: HINSTANCE, hBuddy: HWND, nUpper: int32, nLower: int32, nPos: int32): HWND {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc TaskDialogIndirect*(pTaskConfig: ptr TASKDIALOGCONFIG, pnButton: ptr int32, pnRadioButton: ptr int32, pfVerificationFlagChecked: ptr WINBOOL): HRESULT {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc TaskDialog*(hwndOwner: HWND, hInstance: HINSTANCE, pszWindowTitle: PCWSTR, pszMainInstruction: PCWSTR, pszContent: PCWSTR, dwCommonButtons: TASKDIALOG_COMMON_BUTTON_FLAGS, pszIcon: PCWSTR, pnButton: ptr int32): HRESULT {.winapi, stdcall, dynlib: "comctl32", importc.}
+proc TaskDialogIndirect*(pTaskConfig: ptr TASKDIALOGCONFIG, pnButton: ptr int32, pnRadioButton: ptr int32, pfVerificationFlagChecked: ptr WINBOOL): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc TaskDialog*(hwndOwner: HWND, hInstance: HINSTANCE, pszWindowTitle: PCWSTR, pszMainInstruction: PCWSTR, pszContent: PCWSTR, dwCommonButtons: TASKDIALOG_COMMON_BUTTON_FLAGS, pszIcon: PCWSTR, pnButton: ptr int32): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
 proc InitMUILanguage*(uiLang: LANGID): void {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc GetMUILanguage*(): LANGID {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc DSA_Create*(cbItem: int32, cItemGrow: int32): HDSA {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc DSA_Destroy*(hdsa: HDSA): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc DSA_DestroyCallback*(hdsa: HDSA, pfnCB: PFNDAENUMCALLBACK, pData: pointer): void {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DSA_DeleteItem*(hdsa: HDSA, i: int32): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DSA_DeleteAllItems*(hdsa: HDSA): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DSA_EnumCallback*(hdsa: HDSA, pfnCB: PFNDAENUMCALLBACK, pData: pointer): void {.winapi, stdcall, dynlib: "comctl32", importc.}
+proc DSA_DeleteItem*(hdsa: HDSA, i: int32): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc DSA_DeleteAllItems*(hdsa: HDSA): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc DSA_EnumCallback*(hdsa: HDSA, pfnCB: PFNDAENUMCALLBACK, pData: pointer): void {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
 proc DSA_InsertItem*(hdsa: HDSA, i: int32, pitem: pointer): int32 {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc DSA_GetItemPtr*(hdsa: HDSA, i: int32): PVOID {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DSA_GetItem*(hdsa: HDSA, i: int32, pitem: pointer): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DSA_SetItem*(hdsa: HDSA, i: int32, pitem: pointer): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DSA_Clone*(hdsa: HDSA): HDSA {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DSA_GetSize*(hdsa: HDSA): ULONGLONG {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DSA_Sort*(pdsa: HDSA, pfnCompare: PFNDACOMPARE, lParam: LPARAM): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DPA_Create*(cItemGrow: int32): HDPA {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DPA_CreateEx*(cpGrow: int32, hheap: HANDLE): HDPA {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DPA_Clone*(hdpa: HDPA, hdpaNew: HDPA): HDPA {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DPA_Destroy*(hdpa: HDPA): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
+proc DSA_GetItem*(hdsa: HDSA, i: int32, pitem: pointer): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc DSA_SetItem*(hdsa: HDSA, i: int32, pitem: pointer): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc DSA_Clone*(hdsa: HDSA): HDSA {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc DSA_GetSize*(hdsa: HDSA): ULONGLONG {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc DSA_Sort*(pdsa: HDSA, pfnCompare: PFNDACOMPARE, lParam: LPARAM): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc DPA_Create*(cItemGrow: int32): HDPA {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc DPA_CreateEx*(cpGrow: int32, hheap: HANDLE): HDPA {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc DPA_Clone*(hdpa: HDPA, hdpaNew: HDPA): HDPA {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc DPA_Destroy*(hdpa: HDPA): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
 proc DPA_DestroyCallback*(hdpa: HDPA, pfnCB: PFNDAENUMCALLBACK, pData: pointer): void {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc DPA_DeletePtr*(hdpa: HDPA, i: int32): PVOID {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc DPA_DeleteAllPtrs*(hdpa: HDPA): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc DPA_EnumCallback*(hdpa: HDPA, pfnCB: PFNDAENUMCALLBACK, pData: pointer): void {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DPA_Grow*(pdpa: HDPA, cp: int32): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
+proc DPA_Grow*(pdpa: HDPA, cp: int32): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
 proc DPA_InsertPtr*(hdpa: HDPA, i: int32, p: pointer): int32 {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc DPA_SetPtr*(hdpa: HDPA, i: int32, p: pointer): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DPA_GetPtr*(hdpa: HDPA, i: INT_PTR): PVOID {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DPA_GetPtrIndex*(hdpa: HDPA, p: pointer): int32 {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DPA_GetSize*(hdpa: HDPA): ULONGLONG {.winapi, stdcall, dynlib: "comctl32", importc.}
+proc DPA_GetPtr*(hdpa: HDPA, i: INT_PTR): PVOID {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc DPA_GetPtrIndex*(hdpa: HDPA, p: pointer): int32 {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc DPA_GetSize*(hdpa: HDPA): ULONGLONG {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
 proc DPA_Sort*(hdpa: HDPA, pfnCompare: PFNDACOMPARE, lParam: LPARAM): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DPA_LoadStream*(phdpa: ptr HDPA, pfn: PFNDPASTREAM, pstream: ptr IStream, pvInstData: pointer): HRESULT {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DPA_SaveStream*(hdpa: HDPA, pfn: PFNDPASTREAM, pstream: ptr IStream, pvInstData: pointer): HRESULT {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc DPA_Merge*(hdpaDest: HDPA, hdpaSrc: HDPA, dwFlags: DWORD, pfnCompare: PFNDACOMPARE, pfnMerge: PFNDPAMERGE, lParam: LPARAM): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
+proc DPA_LoadStream*(phdpa: ptr HDPA, pfn: PFNDPASTREAM, pstream: ptr IStream, pvInstData: pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc DPA_SaveStream*(hdpa: HDPA, pfn: PFNDPASTREAM, pstream: ptr IStream, pvInstData: pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc DPA_Merge*(hdpaDest: HDPA, hdpaSrc: HDPA, dwFlags: DWORD, pfnCompare: PFNDACOMPARE, pfnMerge: PFNDPAMERGE, lParam: LPARAM): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
 proc DPA_Search*(hdpa: HDPA, pFind: pointer, iStart: int32, pfnCompare: PFNDACOMPARE, lParam: LPARAM, options: UINT): int32 {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc Str_SetPtrW*(ppsz: ptr LPWSTR, psz: LPCWSTR): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc COMCTL32_TrackMouseEvent*(lpEventTrack: LPTRACKMOUSEEVENT): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc: "_TrackMouseEvent".}
@@ -3878,8 +3878,8 @@ proc GetWindowSubclass*(hWnd: HWND, pfnSubclass: SUBCLASSPROC, uIdSubclass: UINT
 proc RemoveWindowSubclass*(hWnd: HWND, pfnSubclass: SUBCLASSPROC, uIdSubclass: UINT_PTR): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc DefSubclassProc*(hWnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM): LRESULT {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc DrawShadowText*(hdc: HDC, pszText: LPCWSTR, cch: UINT, prc: ptr RECT, dwFlags: DWORD, crText: COLORREF, crShadow: COLORREF, ixOffset: int32, iyOffset: int32): int32 {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc LoadIconMetric*(hinst: HINSTANCE, pszName: PCWSTR, lims: int32, phico: ptr HICON): HRESULT {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc LoadIconWithScaleDown*(hinst: HINSTANCE, pszName: PCWSTR, cx: int32, cy: int32, phico: ptr HICON): HRESULT {.winapi, stdcall, dynlib: "comctl32", importc.}
+proc LoadIconMetric*(hinst: HINSTANCE, pszName: PCWSTR, lims: int32, phico: ptr HICON): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc LoadIconWithScaleDown*(hinst: HINSTANCE, pszName: PCWSTR, cx: int32, cy: int32, phico: ptr HICON): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
 template HANDLE_WM_NOTIFY*(hwnd: HWND, wParam: WPARAM, lParam: LPARAM, fn: proc(hwnd: HWND, wParam: WPARAM, nmhdr: ptr NMHDR)) = fn(hwnd, wParam, cast[ptr NMHDR](lParam))
 template FORWARD_WM_NOTIFY*(hwnd: HWND, idFrom: int32, pnmhdr: ptr NMHDR, fn: SendMessage.type|PostMessage.type): untyped = fn(hwnd, WM_NOTIFY, WPARAM idFrom, cast[LPARAM](pnmhdr))
 template INDEXTOOVERLAYMASK*(i: untyped): untyped = i shl 8
@@ -4947,7 +4947,7 @@ when winimCpu64:
   type
     PTBBUTTON* = ptr TBBUTTON
     LPTBBUTTON* = ptr TBBUTTON
-  proc FlatSB_GetScrollPropPtr*(P1: HWND, propIndex: int32, P3: PINT_PTR): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
+  proc FlatSB_GetScrollPropPtr*(P1: HWND, propIndex: int32, P3: PINT_PTR): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
 when winimCpu32:
   type
     PTBBUTTON* = ptr TBBUTTON

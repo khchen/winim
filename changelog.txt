@@ -5,9 +5,10 @@
 
 ====================================================================
 
-Version 2.1
+Version 2.2
 -----------
-# Fix converter names lead to ambiguous problem.
+# Fix converter ambiguous problems.
+# Add -d:useWinXP for Windows XP compatibility.
 
 Version 2.1
 -----------

@@ -1555,13 +1555,13 @@ proc WSAGetServiceClassNameByClassIdW*(lpServiceClassId: LPGUID, lpszServiceClas
 proc WSASetServiceA*(lpqsRegInfo: LPWSAQUERYSETA, essoperation: WSAESETSERVICEOP, dwControlFlags: DWORD): INT {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc WSASetServiceW*(lpqsRegInfo: LPWSAQUERYSETW, essoperation: WSAESETSERVICEOP, dwControlFlags: DWORD): INT {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc WSAProviderConfigChange*(lpNotificationHandle: LPHANDLE, lpOverlapped: LPWSAOVERLAPPED, lpCompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE): INT {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc WSAConnectByList*(s: SOCKET, SocketAddressList: PSOCKET_ADDRESS_LIST, LocalAddressLength: LPDWORD, LocalAddress: LPSOCKADDR, RemoteAddressLength: LPDWORD, RemoteAddress: LPSOCKADDR, timeout: PTIMEVAL, Reserved: LPWSAOVERLAPPED): WINBOOL {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc WSAConnectByNameA*(s: SOCKET, nodename: LPSTR, servicename: LPSTR, LocalAddressLength: LPDWORD, LocalAddress: LPSOCKADDR, RemoteAddressLength: LPDWORD, RemoteAddress: LPSOCKADDR, timeout: PTIMEVAL, Reserved: LPWSAOVERLAPPED): WINBOOL {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc WSAConnectByNameW*(s: SOCKET, nodename: LPWSTR, servicename: LPWSTR, LocalAddressLength: LPDWORD, LocalAddress: LPSOCKADDR, RemoteAddressLength: LPDWORD, RemoteAddress: LPSOCKADDR, timeout: PTIMEVAL, Reserved: LPWSAOVERLAPPED): WINBOOL {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc WSAEnumNameSpaceProvidersExA*(lpdwBufferLength: LPDWORD, lpnspBuffer: LPWSANAMESPACE_INFOEXA): INT {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc WSAEnumNameSpaceProvidersExW*(lpdwBufferLength: LPDWORD, lpnspBuffer: LPWSANAMESPACE_INFOEXW): INT {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc WSAPoll*(fdarray: ptr WSAPOLLFD, nfds: ULONG, timeout: INT): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc WSASendMsg*(s: SOCKET, lpMsg: LPWSAMSG, dwFlags: DWORD, lpNumberOfBytesSent: LPDWORD, lpOverlapped: LPWSAOVERLAPPED, lpCompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc WSAConnectByList*(s: SOCKET, SocketAddressList: PSOCKET_ADDRESS_LIST, LocalAddressLength: LPDWORD, LocalAddress: LPSOCKADDR, RemoteAddressLength: LPDWORD, RemoteAddress: LPSOCKADDR, timeout: PTIMEVAL, Reserved: LPWSAOVERLAPPED): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
+proc WSAConnectByNameA*(s: SOCKET, nodename: LPSTR, servicename: LPSTR, LocalAddressLength: LPDWORD, LocalAddress: LPSOCKADDR, RemoteAddressLength: LPDWORD, RemoteAddress: LPSOCKADDR, timeout: PTIMEVAL, Reserved: LPWSAOVERLAPPED): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
+proc WSAConnectByNameW*(s: SOCKET, nodename: LPWSTR, servicename: LPWSTR, LocalAddressLength: LPDWORD, LocalAddress: LPSOCKADDR, RemoteAddressLength: LPDWORD, RemoteAddress: LPSOCKADDR, timeout: PTIMEVAL, Reserved: LPWSAOVERLAPPED): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
+proc WSAEnumNameSpaceProvidersExA*(lpdwBufferLength: LPDWORD, lpnspBuffer: LPWSANAMESPACE_INFOEXA): INT {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
+proc WSAEnumNameSpaceProvidersExW*(lpdwBufferLength: LPDWORD, lpnspBuffer: LPWSANAMESPACE_INFOEXW): INT {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
+proc WSAPoll*(fdarray: ptr WSAPOLLFD, nfds: ULONG, timeout: INT): int32 {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
+proc WSASendMsg*(s: SOCKET, lpMsg: LPWSAMSG, dwFlags: DWORD, lpNumberOfBytesSent: LPDWORD, lpOverlapped: LPWSAOVERLAPPED, lpCompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE): int32 {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
 proc getaddrinfo*(nodename: cstring, servname: cstring, hints: ptr ADDRINFOA, res: ptr ptr ADDRINFOA): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc GetAddrInfoW*(pNodeName: PCWSTR, pServiceName: PCWSTR, pHints: ptr ADDRINFOW, ppResult: ptr PADDRINFOW): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc GetAddrInfoA*(nodename: cstring, servname: cstring, hints: ptr ADDRINFOA, res: ptr ptr ADDRINFOA): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "getaddrinfo".}
@@ -1585,26 +1585,26 @@ proc RtlIpv4StringToAddressExA*(AddressString: PCSTR, Strict: BOOLEAN, Address: 
 proc RtlIpv4StringToAddressExW*(AddressString: PCWSTR, Strict: BOOLEAN, Address: ptr IN_ADDR, Port: PUSHORT): LONG {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc RtlIpv6StringToAddressExA*(AddressString: PCSTR, Address: ptr IN6_ADDR, ScopeId: PULONG, Port: PUSHORT): LONG {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc RtlIpv6StringToAddressExW*(AddressString: PCWSTR, Address: ptr IN6_ADDR, ScopeId: PULONG, Port: PUSHORT): LONG {.winapi, stdcall, dynlib: "ntdll", importc.}
-proc GetAddrInfoExA*(pName: PCSTR, pServiceName: PCSTR, dwNameSpace: DWORD, lpNspId: LPGUID, pHints: ptr ADDRINFOEXA, ppResult: ptr PADDRINFOEXA, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc GetAddrInfoExW*(pName: PCWSTR, pServiceName: PCWSTR, dwNameSpace: DWORD, lpNspId: LPGUID, pHints: ptr ADDRINFOEXW, ppResult: ptr PADDRINFOEXW, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc SetAddrInfoExA*(pName: PCSTR, pServiceName: PCSTR, pAddresses: ptr SOCKET_ADDRESS, dwAddressCount: DWORD, lpBlob: LPBLOB, dwFlags: DWORD, dwNameSpace: DWORD, lpNspId: LPGUID, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc SetAddrInfoExW*(pName: PCWSTR, pServiceName: PCWSTR, pAddresses: ptr SOCKET_ADDRESS, dwAddressCount: DWORD, lpBlob: LPBLOB, dwFlags: DWORD, dwNameSpace: DWORD, lpNspId: LPGUID, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc FreeAddrInfoExW*(pAddrInfo: PADDRINFOEXW): void {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc WSAImpersonateSocketPeer*(Socket: SOCKET, PeerAddress: ptr sockaddr, peerAddressLen: ULONG): int32 {.winapi, stdcall, dynlib: "fwpuclnt", importc.}
-proc WSAQuerySocketSecurity*(Socket: SOCKET, SecurityQueryTemplate: ptr SOCKET_SECURITY_QUERY_TEMPLATE, SecurityQueryTemplateLen: ULONG, SecurityQueryInfo: ptr SOCKET_SECURITY_QUERY_INFO, SecurityQueryInfoLen: ptr ULONG, Overlapped: LPWSAOVERLAPPED, CompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE): int32 {.winapi, stdcall, dynlib: "fwpuclnt", importc.}
-proc WSARevertImpersonation*(): int32 {.winapi, stdcall, dynlib: "fwpuclnt", importc.}
-proc WSASetSocketPeerTargetName*(Socket: SOCKET, PeerTargetName: ptr SOCKET_PEER_TARGET_NAME, PeerTargetNameLen: ULONG, Overlapped: LPWSAOVERLAPPED, CompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE): int32 {.winapi, stdcall, dynlib: "fwpuclnt", importc.}
-proc WSASetSocketSecurity*(Socket: SOCKET, SecuritySettings: ptr SOCKET_SECURITY_SETTINGS, SecuritySettingsLen: ULONG, Overlapped: LPWSAOVERLAPPED, CompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE): int32 {.winapi, stdcall, dynlib: "fwpuclnt", importc.}
-proc InetNtopW*(Family: INT, pAddr: PVOID, pStringBuf: LPWSTR, StringBufSIze: int): LPCWSTR {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc inet_ntop*(Family: INT, pAddr: PVOID, pStringBuf: LPSTR, StringBufSize: int): LPCSTR {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc InetPtonW*(Family: INT, pStringBuf: LPCWSTR, pAddr: PVOID): INT {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc inet_pton*(Family: INT, pStringBuf: LPCSTR, pAddr: PVOID): INT {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc GetAddrInfoExA*(pName: PCSTR, pServiceName: PCSTR, dwNameSpace: DWORD, lpNspId: LPGUID, pHints: ptr ADDRINFOEXA, ppResult: ptr PADDRINFOEXA, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
+proc GetAddrInfoExW*(pName: PCWSTR, pServiceName: PCWSTR, dwNameSpace: DWORD, lpNspId: LPGUID, pHints: ptr ADDRINFOEXW, ppResult: ptr PADDRINFOEXW, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
+proc SetAddrInfoExA*(pName: PCSTR, pServiceName: PCSTR, pAddresses: ptr SOCKET_ADDRESS, dwAddressCount: DWORD, lpBlob: LPBLOB, dwFlags: DWORD, dwNameSpace: DWORD, lpNspId: LPGUID, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
+proc SetAddrInfoExW*(pName: PCWSTR, pServiceName: PCWSTR, pAddresses: ptr SOCKET_ADDRESS, dwAddressCount: DWORD, lpBlob: LPBLOB, dwFlags: DWORD, dwNameSpace: DWORD, lpNspId: LPGUID, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
+proc FreeAddrInfoExW*(pAddrInfo: PADDRINFOEXW): void {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
+proc WSAImpersonateSocketPeer*(Socket: SOCKET, PeerAddress: ptr sockaddr, peerAddressLen: ULONG): int32 {.winapi, xpincompatible, stdcall, dynlib: "fwpuclnt", importc.}
+proc WSAQuerySocketSecurity*(Socket: SOCKET, SecurityQueryTemplate: ptr SOCKET_SECURITY_QUERY_TEMPLATE, SecurityQueryTemplateLen: ULONG, SecurityQueryInfo: ptr SOCKET_SECURITY_QUERY_INFO, SecurityQueryInfoLen: ptr ULONG, Overlapped: LPWSAOVERLAPPED, CompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE): int32 {.winapi, xpincompatible, stdcall, dynlib: "fwpuclnt", importc.}
+proc WSARevertImpersonation*(): int32 {.winapi, xpincompatible, stdcall, dynlib: "fwpuclnt", importc.}
+proc WSASetSocketPeerTargetName*(Socket: SOCKET, PeerTargetName: ptr SOCKET_PEER_TARGET_NAME, PeerTargetNameLen: ULONG, Overlapped: LPWSAOVERLAPPED, CompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE): int32 {.winapi, xpincompatible, stdcall, dynlib: "fwpuclnt", importc.}
+proc WSASetSocketSecurity*(Socket: SOCKET, SecuritySettings: ptr SOCKET_SECURITY_SETTINGS, SecuritySettingsLen: ULONG, Overlapped: LPWSAOVERLAPPED, CompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE): int32 {.winapi, xpincompatible, stdcall, dynlib: "fwpuclnt", importc.}
+proc InetNtopW*(Family: INT, pAddr: PVOID, pStringBuf: LPWSTR, StringBufSIze: int): LPCWSTR {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
+proc inet_ntop*(Family: INT, pAddr: PVOID, pStringBuf: LPSTR, StringBufSize: int): LPCSTR {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
+proc InetPtonW*(Family: INT, pStringBuf: LPCWSTR, pAddr: PVOID): INT {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
+proc inet_pton*(Family: INT, pStringBuf: LPCSTR, pAddr: PVOID): INT {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}
 proc WSARecvEx*(s: SOCKET, buf: cstring, len: int32, flags: ptr int32): int32 {.winapi, stdcall, dynlib: "mswsock", importc.}
 proc TransmitFile*(hSocket: SOCKET, hFile: HANDLE, nNumberOfBytesToWrite: DWORD, nNumberOfBytesPerSend: DWORD, lpOverlapped: LPOVERLAPPED, lpTransmitBuffers: LPTRANSMIT_FILE_BUFFERS, dwReserved: DWORD): WINBOOL {.winapi, stdcall, dynlib: "mswsock", importc.}
 proc AcceptEx*(sListenSocket: SOCKET, sAcceptSocket: SOCKET, lpOutputBuffer: PVOID, dwReceiveDataLength: DWORD, dwLocalAddressLength: DWORD, dwRemoteAddressLength: DWORD, lpdwBytesReceived: LPDWORD, lpOverlapped: LPOVERLAPPED): WINBOOL {.winapi, stdcall, dynlib: "mswsock", importc.}
 proc GetAcceptExSockaddrs*(lpOutputBuffer: PVOID, dwReceiveDataLength: DWORD, dwLocalAddressLength: DWORD, dwRemoteAddressLength: DWORD, LocalSockaddr: ptr ptr sockaddr, LocalSockaddrLength: LPINT, RemoteSockaddr: ptr ptr sockaddr, RemoteSockaddrLength: LPINT): VOID {.winapi, stdcall, dynlib: "mswsock", importc.}
-proc InetNtopA*(Family: INT, pAddr: PVOID, pStringBuf: LPSTR, StringBufSize: int): LPCSTR {.winapi, stdcall, dynlib: "ws2_32", importc: "inet_ntop".}
-proc InetPtonA*(Family: INT, pStringBuf: LPCSTR, pAddr: PVOID): INT {.winapi, stdcall, dynlib: "ws2_32", importc: "inet_pton".}
+proc InetNtopA*(Family: INT, pAddr: PVOID, pStringBuf: LPSTR, StringBufSize: int): LPCSTR {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "inet_ntop".}
+proc InetPtonA*(Family: INT, pStringBuf: LPCSTR, pAddr: PVOID): INT {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "inet_pton".}
 template `<`*(x: TIMEVAL, y: TIMEVAL): bool = (x.tv_sec < y.tv_sec or (x.tv_sec == y.tv_sec and x.tv_usec < y.tv_usec))
 template `<=`*(x: TIMEVAL, y: TIMEVAL): bool = (x.tv_sec < y.tv_sec or (x.tv_sec == y.tv_sec and x.tv_usec <= y.tv_usec))
 template timerisset*(tvp: TIMEVAL): bool = tvp.tv_sec != 0 or tvp.tv_usec != 0
@@ -1625,7 +1625,7 @@ proc FD_SET*(fd: SOCKET, s: ptr fd_set): void {.importc: "FD_SET", header: "<win
 proc FD_ZERO*(s: ptr fd_set): void {.importc: "FD_ZERO", header: "<winsock2.h>".}
 proc FD_ISSET*(fd: SOCKET, s: ptr fd_set): bool {.winapi, inline.} = bool WSAFDIsSet(fd, s)
 proc IN6_ADDR_EQUAL*(a: ptr IN6_ADDR, b: ptr IN6_ADDR): bool {.winapi, inline.} = equalMem(a, b, sizeof(IN6_ADDR))
-proc FreeAddrInfoExA*(pAddrInfo: PADDRINFOEXA): void {.winapi, stdcall, dynlib: "ws2_32", importc: "FreeAddrInfoEx".}
+proc FreeAddrInfoExA*(pAddrInfo: PADDRINFOEXA): void {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "FreeAddrInfoEx".}
 proc `Zone=`*(self: var SCOPE_ID, x: ULONG) {.inline.} = self.union1.struct1.Zone = x
 proc Zone*(self: SCOPE_ID): ULONG {.inline.} = self.union1.struct1.Zone
 proc `Level=`*(self: var SCOPE_ID, x: ULONG) {.inline.} = self.union1.struct1.Level = x
@@ -1699,8 +1699,8 @@ when winimUnicode:
   proc WSAEnumNameSpaceProviders*(lpdwBufferLength: LPDWORD, lpnspBuffer: LPWSANAMESPACE_INFOW): INT {.winapi, stdcall, dynlib: "ws2_32", importc: "WSAEnumNameSpaceProvidersW".}
   proc WSAGetServiceClassNameByClassId*(lpServiceClassId: LPGUID, lpszServiceClassName: LPWSTR, lpdwBufferLength: LPDWORD): INT {.winapi, stdcall, dynlib: "ws2_32", importc: "WSAGetServiceClassNameByClassIdW".}
   proc WSASetService*(lpqsRegInfo: LPWSAQUERYSETW, essoperation: WSAESETSERVICEOP, dwControlFlags: DWORD): INT {.winapi, stdcall, dynlib: "ws2_32", importc: "WSASetServiceW".}
-  proc WSAConnectByName*(s: SOCKET, nodename: LPWSTR, servicename: LPWSTR, LocalAddressLength: LPDWORD, LocalAddress: LPSOCKADDR, RemoteAddressLength: LPDWORD, RemoteAddress: LPSOCKADDR, timeout: PTIMEVAL, Reserved: LPWSAOVERLAPPED): WINBOOL {.winapi, stdcall, dynlib: "ws2_32", importc: "WSAConnectByNameW".}
-  proc WSAEnumNameSpaceProvidersEx*(lpdwBufferLength: LPDWORD, lpnspBuffer: LPWSANAMESPACE_INFOEXW): INT {.winapi, stdcall, dynlib: "ws2_32", importc: "WSAEnumNameSpaceProvidersExW".}
+  proc WSAConnectByName*(s: SOCKET, nodename: LPWSTR, servicename: LPWSTR, LocalAddressLength: LPDWORD, LocalAddress: LPSOCKADDR, RemoteAddressLength: LPDWORD, RemoteAddress: LPSOCKADDR, timeout: PTIMEVAL, Reserved: LPWSAOVERLAPPED): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "WSAConnectByNameW".}
+  proc WSAEnumNameSpaceProvidersEx*(lpdwBufferLength: LPDWORD, lpnspBuffer: LPWSANAMESPACE_INFOEXW): INT {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "WSAEnumNameSpaceProvidersExW".}
   proc GetAddrInfo*(pNodeName: PCWSTR, pServiceName: PCWSTR, pHints: ptr ADDRINFOW, ppResult: ptr PADDRINFOW): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "GetAddrInfoW".}
   proc FreeAddrInfo*(pAddrInfo: PADDRINFOW): void {.winapi, stdcall, dynlib: "ws2_32", importc: "FreeAddrInfoW".}
   proc GetNameInfo*(pSockaddr: ptr SOCKADDR, SockaddrLength: socklen_t, pNodeBuffer: PWCHAR, NodeBufferSize: DWORD, pServiceBuffer: PWCHAR, ServiceBufferSize: DWORD, Flags: INT): INT {.winapi, stdcall, dynlib: "ws2_32", importc: "GetNameInfoW".}
@@ -1711,11 +1711,11 @@ when winimUnicode:
   proc RtlIpv4StringToAddress*(S: PCWSTR, Strict: BOOLEAN, Terminator: ptr LPWSTR, Addr: ptr IN_ADDR): LONG {.winapi, stdcall, dynlib: "ntdll", importc: "RtlIpv4StringToAddressW".}
   proc RtlIpv4StringToAddressEx*(AddressString: PCWSTR, Strict: BOOLEAN, Address: ptr IN_ADDR, Port: PUSHORT): LONG {.winapi, stdcall, dynlib: "ntdll", importc: "RtlIpv4StringToAddressExW".}
   proc RtlIpv6StringToAddressEx*(AddressString: PCWSTR, Address: ptr IN6_ADDR, ScopeId: PULONG, Port: PUSHORT): LONG {.winapi, stdcall, dynlib: "ntdll", importc: "RtlIpv6StringToAddressExW".}
-  proc GetAddrInfoEx*(pName: PCWSTR, pServiceName: PCWSTR, dwNameSpace: DWORD, lpNspId: LPGUID, pHints: ptr ADDRINFOEXW, ppResult: ptr PADDRINFOEXW, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "GetAddrInfoExW".}
-  proc SetAddrInfoEx*(pName: PCWSTR, pServiceName: PCWSTR, pAddresses: ptr SOCKET_ADDRESS, dwAddressCount: DWORD, lpBlob: LPBLOB, dwFlags: DWORD, dwNameSpace: DWORD, lpNspId: LPGUID, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "SetAddrInfoExW".}
-  proc FreeAddrInfoEx*(pAddrInfo: PADDRINFOEXW): void {.winapi, stdcall, dynlib: "ws2_32", importc: "FreeAddrInfoExW".}
-  proc InetNtop*(Family: INT, pAddr: PVOID, pStringBuf: LPWSTR, StringBufSIze: int): LPCWSTR {.winapi, stdcall, dynlib: "ws2_32", importc: "InetNtopW".}
-  proc InetPton*(Family: INT, pStringBuf: LPCWSTR, pAddr: PVOID): INT {.winapi, stdcall, dynlib: "ws2_32", importc: "InetPtonW".}
+  proc GetAddrInfoEx*(pName: PCWSTR, pServiceName: PCWSTR, dwNameSpace: DWORD, lpNspId: LPGUID, pHints: ptr ADDRINFOEXW, ppResult: ptr PADDRINFOEXW, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "GetAddrInfoExW".}
+  proc SetAddrInfoEx*(pName: PCWSTR, pServiceName: PCWSTR, pAddresses: ptr SOCKET_ADDRESS, dwAddressCount: DWORD, lpBlob: LPBLOB, dwFlags: DWORD, dwNameSpace: DWORD, lpNspId: LPGUID, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "SetAddrInfoExW".}
+  proc FreeAddrInfoEx*(pAddrInfo: PADDRINFOEXW): void {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "FreeAddrInfoExW".}
+  proc InetNtop*(Family: INT, pAddr: PVOID, pStringBuf: LPWSTR, StringBufSIze: int): LPCWSTR {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "InetNtopW".}
+  proc InetPton*(Family: INT, pStringBuf: LPCWSTR, pAddr: PVOID): INT {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "InetPtonW".}
 when winimAnsi:
   type
     WSAPROTOCOL_INFO* = WSAPROTOCOL_INFOA
@@ -1773,8 +1773,8 @@ when winimAnsi:
   proc WSAEnumNameSpaceProviders*(lpdwBufferLength: LPDWORD, lpnspBuffer: LPWSANAMESPACE_INFOA): INT {.winapi, stdcall, dynlib: "ws2_32", importc: "WSAEnumNameSpaceProvidersA".}
   proc WSAGetServiceClassNameByClassId*(lpServiceClassId: LPGUID, lpszServiceClassName: LPSTR, lpdwBufferLength: LPDWORD): INT {.winapi, stdcall, dynlib: "ws2_32", importc: "WSAGetServiceClassNameByClassIdA".}
   proc WSASetService*(lpqsRegInfo: LPWSAQUERYSETA, essoperation: WSAESETSERVICEOP, dwControlFlags: DWORD): INT {.winapi, stdcall, dynlib: "ws2_32", importc: "WSASetServiceA".}
-  proc WSAConnectByName*(s: SOCKET, nodename: LPSTR, servicename: LPSTR, LocalAddressLength: LPDWORD, LocalAddress: LPSOCKADDR, RemoteAddressLength: LPDWORD, RemoteAddress: LPSOCKADDR, timeout: PTIMEVAL, Reserved: LPWSAOVERLAPPED): WINBOOL {.winapi, stdcall, dynlib: "ws2_32", importc: "WSAConnectByNameA".}
-  proc WSAEnumNameSpaceProvidersEx*(lpdwBufferLength: LPDWORD, lpnspBuffer: LPWSANAMESPACE_INFOEXA): INT {.winapi, stdcall, dynlib: "ws2_32", importc: "WSAEnumNameSpaceProvidersExA".}
+  proc WSAConnectByName*(s: SOCKET, nodename: LPSTR, servicename: LPSTR, LocalAddressLength: LPDWORD, LocalAddress: LPSOCKADDR, RemoteAddressLength: LPDWORD, RemoteAddress: LPSOCKADDR, timeout: PTIMEVAL, Reserved: LPWSAOVERLAPPED): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "WSAConnectByNameA".}
+  proc WSAEnumNameSpaceProvidersEx*(lpdwBufferLength: LPDWORD, lpnspBuffer: LPWSANAMESPACE_INFOEXA): INT {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "WSAEnumNameSpaceProvidersExA".}
   proc GetAddrInfo*(nodename: cstring, servname: cstring, hints: ptr ADDRINFOA, res: ptr ptr ADDRINFOA): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "getaddrinfo".}
   proc FreeAddrInfo*(pAddrInfo: LPADDRINFO): void {.winapi, stdcall, dynlib: "ws2_32", importc: "freeaddrinfo".}
   proc GetNameInfo*(sa: ptr sockaddr, salen: socklen_t, host: cstring, hostlen: DWORD, serv: cstring, servlen: DWORD, flags: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "getnameinfo".}
@@ -1785,8 +1785,8 @@ when winimAnsi:
   proc RtlIpv4StringToAddress*(S: PCSTR, Strict: BOOLEAN, Terminator: ptr LPSTR, Addr: ptr IN_ADDR): LONG {.winapi, stdcall, dynlib: "ntdll", importc: "RtlIpv4StringToAddressA".}
   proc RtlIpv4StringToAddressEx*(AddressString: PCSTR, Strict: BOOLEAN, Address: ptr IN_ADDR, Port: PUSHORT): LONG {.winapi, stdcall, dynlib: "ntdll", importc: "RtlIpv4StringToAddressExA".}
   proc RtlIpv6StringToAddressEx*(AddressString: PCSTR, Address: ptr IN6_ADDR, ScopeId: PULONG, Port: PUSHORT): LONG {.winapi, stdcall, dynlib: "ntdll", importc: "RtlIpv6StringToAddressExA".}
-  proc GetAddrInfoEx*(pName: PCSTR, pServiceName: PCSTR, dwNameSpace: DWORD, lpNspId: LPGUID, pHints: ptr ADDRINFOEXA, ppResult: ptr PADDRINFOEXA, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "GetAddrInfoExA".}
-  proc SetAddrInfoEx*(pName: PCSTR, pServiceName: PCSTR, pAddresses: ptr SOCKET_ADDRESS, dwAddressCount: DWORD, lpBlob: LPBLOB, dwFlags: DWORD, dwNameSpace: DWORD, lpNspId: LPGUID, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "SetAddrInfoExA".}
-  proc InetNtop*(Family: INT, pAddr: PVOID, pStringBuf: LPSTR, StringBufSize: int): LPCSTR {.winapi, stdcall, dynlib: "ws2_32", importc: "inet_ntop".}
-  proc InetPton*(Family: INT, pStringBuf: LPCSTR, pAddr: PVOID): INT {.winapi, stdcall, dynlib: "ws2_32", importc: "inet_pton".}
-  proc FreeAddrInfoEx*(pAddrInfo: PADDRINFOEXA): void {.winapi, stdcall, dynlib: "ws2_32", importc.}
+  proc GetAddrInfoEx*(pName: PCSTR, pServiceName: PCSTR, dwNameSpace: DWORD, lpNspId: LPGUID, pHints: ptr ADDRINFOEXA, ppResult: ptr PADDRINFOEXA, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "GetAddrInfoExA".}
+  proc SetAddrInfoEx*(pName: PCSTR, pServiceName: PCSTR, pAddresses: ptr SOCKET_ADDRESS, dwAddressCount: DWORD, lpBlob: LPBLOB, dwFlags: DWORD, dwNameSpace: DWORD, lpNspId: LPGUID, timeout: PTIMEVAL, lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: LPHANDLE): int32 {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "SetAddrInfoExA".}
+  proc InetNtop*(Family: INT, pAddr: PVOID, pStringBuf: LPSTR, StringBufSize: int): LPCSTR {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "inet_ntop".}
+  proc InetPton*(Family: INT, pStringBuf: LPCSTR, pAddr: PVOID): INT {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc: "inet_pton".}
+  proc FreeAddrInfoEx*(pAddrInfo: PADDRINFOEXA): void {.winapi, xpincompatible, stdcall, dynlib: "ws2_32", importc.}

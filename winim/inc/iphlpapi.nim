@@ -5770,23 +5770,23 @@ proc GetOwnerModuleFromTcpEntry*(pTcpEntry: PMIB_TCPROW_OWNER_MODULE, Class: TCP
 proc GetUdpTable*(UdpTable: PMIB_UDPTABLE, SizePointer: PULONG, Order: WINBOOL): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc GetExtendedUdpTable*(pUdpTable: PVOID, pdwSize: PDWORD, bOrder: WINBOOL, ulAf: ULONG, TableClass: UDP_TABLE_CLASS, Reserved: ULONG): DWORD {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc GetOwnerModuleFromUdpEntry*(pUdpEntry: PMIB_UDPROW_OWNER_MODULE, Class: TCPIP_OWNER_MODULE_INFO_CLASS, pBuffer: PVOID, pdwSize: PDWORD): DWORD {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetTcpTable2*(TcpTable: PMIB_TCPTABLE2, SizePointer: PULONG, Order: WINBOOL): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetTcp6Table*(TcpTable: PMIB_TCP6TABLE, SizePointer: PULONG, Order: WINBOOL): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetTcp6Table2*(TcpTable: PMIB_TCP6TABLE2, SizePointer: PULONG, Order: WINBOOL): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetPerTcpConnectionEStats*(Row: PMIB_TCPROW, EstatsType: TCP_ESTATS_TYPE, Rw: PUCHAR, RwVersion: ULONG, RwSize: ULONG, Ros: PUCHAR, RosVersion: ULONG, RosSize: ULONG, Rod: PUCHAR, RodVersion: ULONG, RodSize: ULONG): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc SetPerTcpConnectionEStats*(Row: PMIB_TCPROW, EstatsType: TCP_ESTATS_TYPE, Rw: PUCHAR, RwVersion: ULONG, RwSize: ULONG, Offset: ULONG): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetPerTcp6ConnectionEStats*(Row: PMIB_TCP6ROW, EstatsType: TCP_ESTATS_TYPE, Rw: PUCHAR, RwVersion: ULONG, RwSize: ULONG, Ros: PUCHAR, RosVersion: ULONG, RosSize: ULONG, Rod: PUCHAR, RodVersion: ULONG, RodSize: ULONG): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc SetPerTcp6ConnectionEStats*(Row: PMIB_TCP6ROW, EstatsType: TCP_ESTATS_TYPE, Rw: PUCHAR, RwVersion: ULONG, RwSize: ULONG, Offset: ULONG): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetUdp6Table*(Udp6Table: PMIB_UDP6TABLE, SizePointer: PULONG, Order: WINBOOL): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
+proc GetTcpTable2*(TcpTable: PMIB_TCPTABLE2, SizePointer: PULONG, Order: WINBOOL): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetTcp6Table*(TcpTable: PMIB_TCP6TABLE, SizePointer: PULONG, Order: WINBOOL): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetTcp6Table2*(TcpTable: PMIB_TCP6TABLE2, SizePointer: PULONG, Order: WINBOOL): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetPerTcpConnectionEStats*(Row: PMIB_TCPROW, EstatsType: TCP_ESTATS_TYPE, Rw: PUCHAR, RwVersion: ULONG, RwSize: ULONG, Ros: PUCHAR, RosVersion: ULONG, RosSize: ULONG, Rod: PUCHAR, RodVersion: ULONG, RodSize: ULONG): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc SetPerTcpConnectionEStats*(Row: PMIB_TCPROW, EstatsType: TCP_ESTATS_TYPE, Rw: PUCHAR, RwVersion: ULONG, RwSize: ULONG, Offset: ULONG): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetPerTcp6ConnectionEStats*(Row: PMIB_TCP6ROW, EstatsType: TCP_ESTATS_TYPE, Rw: PUCHAR, RwVersion: ULONG, RwSize: ULONG, Ros: PUCHAR, RosVersion: ULONG, RosSize: ULONG, Rod: PUCHAR, RodVersion: ULONG, RodSize: ULONG): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc SetPerTcp6ConnectionEStats*(Row: PMIB_TCP6ROW, EstatsType: TCP_ESTATS_TYPE, Rw: PUCHAR, RwVersion: ULONG, RwSize: ULONG, Offset: ULONG): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetUdp6Table*(Udp6Table: PMIB_UDP6TABLE, SizePointer: PULONG, Order: WINBOOL): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
 proc GetOwnerModuleFromTcp6Entry*(pTcpEntry: PMIB_TCP6ROW_OWNER_MODULE, Class: TCPIP_OWNER_MODULE_INFO_CLASS, pBuffer: PVOID, pdwSize: PDWORD): DWORD {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc GetOwnerModuleFromUdp6Entry*(pUdpEntry: PMIB_UDP6ROW_OWNER_MODULE, Class: TCPIP_OWNER_MODULE_INFO_CLASS, pBuffer: PVOID, pdwSize: PDWORD): DWORD {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetOwnerModuleFromPidAndInfo*(ulPid: ULONG, pInfo: ptr ULONGLONG, Class: TCPIP_OWNER_MODULE_INFO_CLASS, pBuffer: PVOID, pdwSize: PDWORD): DWORD {.winapi, stdcall, dynlib: "iphlpapi", importc.}
+proc GetOwnerModuleFromPidAndInfo*(ulPid: ULONG, pInfo: ptr ULONGLONG, Class: TCPIP_OWNER_MODULE_INFO_CLASS, pBuffer: PVOID, pdwSize: PDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
 proc GetIpStatistics*(Statistics: PMIB_IPSTATS): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc GetIcmpStatistics*(Statistics: PMIB_ICMP): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc GetTcpStatistics*(Statistics: PMIB_TCPSTATS): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc GetUdpStatistics*(Stats: PMIB_UDPSTATS): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc GetIpStatisticsEx*(Statistics: PMIB_IPSTATS, Family: ULONG): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc SetIpStatisticsEx*(Statistics: PMIB_IPSTATS, Family: ULONG): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
+proc SetIpStatisticsEx*(Statistics: PMIB_IPSTATS, Family: ULONG): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
 proc GetIcmpStatisticsEx*(Statistics: PMIB_ICMP_EX, Family: ULONG): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc GetTcpStatisticsEx*(Statistics: PMIB_TCPSTATS, Family: ULONG): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc GetUdpStatisticsEx*(Statistics: PMIB_UDPSTATS, Family: ULONG): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
@@ -5829,82 +5829,82 @@ proc EnableRouter*(pHandle: ptr HANDLE, pOverlapped: ptr OVERLAPPED): DWORD {.wi
 proc UnenableRouter*(pOverlapped: ptr OVERLAPPED, lpdwEnableCount: LPDWORD): DWORD {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc DisableMediaSense*(pHandle: ptr HANDLE, pOverLapped: ptr OVERLAPPED): DWORD {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc RestoreMediaSense*(pOverlapped: ptr OVERLAPPED, lpdwEnableCount: LPDWORD): DWORD {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ParseNetworkString*(NetworkString: ptr WCHAR, Types: DWORD, AddressInfo: PNET_ADDRESS_INFO, PortNumber: ptr USHORT, PrefixLength: ptr BYTE): DWORD {.winapi, stdcall, dynlib: "iphlpapi", importc.}
+proc ParseNetworkString*(NetworkString: ptr WCHAR, Types: DWORD, AddressInfo: PNET_ADDRESS_INFO, PortNumber: ptr USHORT, PrefixLength: ptr BYTE): DWORD {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
 proc GetIpErrorString*(ErrorCode: IP_STATUS, Buffer: PWSTR, Size: PDWORD): DWORD {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ResolveNeighbor*(NetworkAddress: ptr SOCKADDR, PhysicalAddress: PVOID, PhysicalAddressLength: PULONG): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc CreatePersistentTcpPortReservation*(StartPort: USHORT, NumberOfPorts: USHORT, Token: PULONG64): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc CreatePersistentUdpPortReservation*(StartPort: USHORT, NumberOfPorts: USHORT, Token: PULONG64): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc DeletePersistentTcpPortReservation*(StartPort: USHORT, NumberOfPorts: USHORT): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc DeletePersistentUdpPortReservation*(StartPort: USHORT, NumberOfPorts: USHORT): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc LookupPersistentTcpPortReservation*(StartPort: USHORT, NumberOfPorts: USHORT, Token: PULONG64): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc LookupPersistentUdpPortReservation*(StartPort: USHORT, NumberOfPorts: USHORT, Token: PULONG64): ULONG {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetIfEntry2*(Row: PMIB_IF_ROW2): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetIfTable2*(Table: ptr PMIB_IF_TABLE2): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetIfTable2Ex*(Level: MIB_IF_TABLE_LEVEL, Table: ptr PMIB_IF_TABLE2): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetIfStackTable*(Table: ptr PMIB_IFSTACK_TABLE): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetInvertedIfStackTable*(Table: ptr PMIB_INVERTEDIFSTACK_TABLE): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetIpInterfaceEntry*(Row: PMIB_IPINTERFACE_ROW): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetIpInterfaceTable*(Family: ADDRESS_FAMILY, Table: ptr PMIB_IPINTERFACE_TABLE): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc InitializeIpInterfaceEntry*(Row: PMIB_IPINTERFACE_ROW): VOID {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc NotifyIpInterfaceChange*(Family: ADDRESS_FAMILY, Callback: PIPINTERFACE_CHANGE_CALLBACK, CallerContext: PVOID, InitialNotification: BOOLEAN, NotificationHandle: ptr HANDLE): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc SetIpInterfaceEntry*(Row: PMIB_IPINTERFACE_ROW): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc CreateUnicastIpAddressEntry*(Row: ptr MIB_UNICASTIPADDRESS_ROW): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc DeleteUnicastIpAddressEntry*(Row: ptr MIB_UNICASTIPADDRESS_ROW): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetUnicastIpAddressEntry*(Row: PMIB_UNICASTIPADDRESS_ROW): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetUnicastIpAddressTable*(Family: ADDRESS_FAMILY, Table: ptr PMIB_UNICASTIPADDRESS_TABLE): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc InitializeUnicastIpAddressEntry*(Row: PMIB_UNICASTIPADDRESS_ROW): VOID {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc NotifyUnicastIpAddressChange*(Family: ADDRESS_FAMILY, Callback: PUNICAST_IPADDRESS_CHANGE_CALLBACK, CallerContext: PVOID, InitialNotification: BOOLEAN, NotificationHandle: ptr HANDLE): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc CreateAnycastIpAddressEntry*(Row: ptr MIB_ANYCASTIPADDRESS_ROW): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc DeleteAnycastIpAddressEntry*(Row: ptr MIB_ANYCASTIPADDRESS_ROW): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetAnycastIpAddressEntry*(Row: PMIB_ANYCASTIPADDRESS_ROW): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetAnycastIpAddressTable*(Family: ADDRESS_FAMILY, Table: ptr PMIB_ANYCASTIPADDRESS_TABLE): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc NotifyStableUnicastIpAddressTable*(Family: ADDRESS_FAMILY, Table: ptr PMIB_UNICASTIPADDRESS_TABLE, CallerCallback: PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK, CallerContext: PVOID, NotificationHandle: ptr HANDLE): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc SetUnicastIpAddressEntry*(Row: ptr MIB_UNICASTIPADDRESS_ROW): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetMulticastIpAddressEntry*(Row: PMIB_MULTICASTIPADDRESS_ROW): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetMulticastIpAddressTable*(Family: ADDRESS_FAMILY, Table: ptr PMIB_MULTICASTIPADDRESS_TABLE): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc CreateIpForwardEntry2*(Row: ptr MIB_IPFORWARD_ROW2): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc DeleteIpForwardEntry2*(Row: ptr MIB_IPFORWARD_ROW2): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetBestRoute2*(InterfaceLuid: ptr NET_LUID, InterfaceIndex: NET_IFINDEX, SourceAddress: ptr SOCKADDR_INET, DestinationAddress: ptr SOCKADDR_INET, AddressSortOptions: ULONG, BestRoute: PMIB_IPFORWARD_ROW2, BestSourceAddress: ptr SOCKADDR_INET): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetIpForwardEntry2*(Row: PMIB_IPFORWARD_ROW2): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetIpForwardTable2*(Family: ADDRESS_FAMILY, Table: ptr PMIB_IPFORWARD_TABLE2): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc InitializeIpForwardEntry*(Row: PMIB_IPFORWARD_ROW2): VOID {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc NotifyRouteChange2*(AddressFamily: ADDRESS_FAMILY, Callback: PIPFORWARD_CHANGE_CALLBACK, CallerContext: PVOID, InitialNotification: BOOLEAN, NotificationHandle: ptr HANDLE): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc SetIpForwardEntry2*(Route: ptr MIB_IPFORWARD_ROW2): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc FlushIpPathTable*(Family: ADDRESS_FAMILY): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetIpPathEntry*(Row: PMIB_IPPATH_ROW): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetIpPathTable*(Family: ADDRESS_FAMILY, Table: ptr PMIB_IPPATH_TABLE): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc CreateIpNetEntry2*(Row: ptr MIB_IPNET_ROW2): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc DeleteIpNetEntry2*(Row: ptr MIB_IPNET_ROW2): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc FlushIpNetTable2*(Family: ADDRESS_FAMILY, InterfaceIndex: NET_IFINDEX): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetIpNetEntry2*(Row: PMIB_IPNET_ROW2): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetIpNetTable2*(Family: ADDRESS_FAMILY, Table: ptr PMIB_IPNET_TABLE2): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ResolveIpNetEntry2*(Row: PMIB_IPNET_ROW2, SourceAddress: ptr SOCKADDR_INET): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc SetIpNetEntry2*(Row: PMIB_IPNET_ROW2): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc NotifyTeredoPortChange*(Callback: PTEREDO_PORT_CHANGE_CALLBACK, CallerContext: PVOID, InitialNotification: BOOLEAN, NotificationHandle: ptr HANDLE): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetTeredoPort*(Port: ptr USHORT): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc CancelMibChangeNotify2*(NotificationHandle: HANDLE): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc FreeMibTable*(Memory: PVOID): VOID {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc CreateSortedAddressPairs*(SourceAddressList: PSOCKADDR_IN6, SourceAddressCount: ULONG, DestinationAddressList: PSOCKADDR_IN6, DestinationAddressCount: ULONG, AddressSortOptions: ULONG, SortedAddressPairList: ptr PSOCKADDR_IN6_PAIR, SortedAddressPairCount: ptr ULONG): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ConvertInterfaceNameToLuidA*(InterfaceName: cstring, InterfaceLuid: ptr NET_LUID): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ConvertInterfaceNameToLuidW*(InterfaceName: ptr WCHAR, InterfaceLuid: ptr NET_LUID): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ConvertInterfaceLuidToNameA*(InterfaceLuid: ptr NET_LUID, InterfaceName: PSTR, Length: SIZE_T): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ConvertInterfaceLuidToNameW*(InterfaceLuid: ptr NET_LUID, InterfaceName: PWSTR, Length: SIZE_T): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ConvertInterfaceLuidToIndex*(InterfaceLuid: ptr NET_LUID, InterfaceIndex: PNET_IFINDEX): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ConvertInterfaceIndexToLuid*(InterfaceIndex: NET_IFINDEX, InterfaceLuid: PNET_LUID): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ConvertInterfaceLuidToAlias*(InterfaceLuid: ptr NET_LUID, InterfaceAlias: PWSTR, Length: SIZE_T): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ConvertInterfaceAliasToLuid*(InterfaceAlias: ptr WCHAR, InterfaceLuid: PNET_LUID): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ConvertInterfaceLuidToGuid*(InterfaceLuid: ptr NET_LUID, InterfaceGuid: ptr GUID): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ConvertInterfaceGuidToLuid*(InterfaceGuid: ptr GUID, InterfaceLuid: PNET_LUID): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc if_nametoindex*(InterfaceName: PCSTR): NET_IFINDEX {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc if_indextoname*(InterfaceIndex: NET_IFINDEX, InterfaceName: PCHAR): PCHAR {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetCurrentThreadCompartmentId*(): NET_IF_COMPARTMENT_ID {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc SetCurrentThreadCompartmentId*(CompartmentId: NET_IF_COMPARTMENT_ID): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetSessionCompartmentId*(SessionId: ULONG): NET_IF_COMPARTMENT_ID {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc SetSessionCompartmentId*(SessionId: ULONG, CompartmentId: NET_IF_COMPARTMENT_ID): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetNetworkInformation*(NetworkGuid: ptr NET_IF_NETWORK_GUID, CompartmentId: PNET_IF_COMPARTMENT_ID, SiteId: PULONG, NetworkName: PWCHAR, Length: ULONG): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc SetNetworkInformation*(NetworkGuid: ptr NET_IF_NETWORK_GUID, CompartmentId: NET_IF_COMPARTMENT_ID, NetworkName: ptr WCHAR): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ConvertLengthToIpv4Mask*(MaskLength: ULONG, Mask: PULONG): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ConvertIpv4MaskToLength*(Mask: ULONG, MaskLength: PUINT8): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
+proc ResolveNeighbor*(NetworkAddress: ptr SOCKADDR, PhysicalAddress: PVOID, PhysicalAddressLength: PULONG): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc CreatePersistentTcpPortReservation*(StartPort: USHORT, NumberOfPorts: USHORT, Token: PULONG64): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc CreatePersistentUdpPortReservation*(StartPort: USHORT, NumberOfPorts: USHORT, Token: PULONG64): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc DeletePersistentTcpPortReservation*(StartPort: USHORT, NumberOfPorts: USHORT): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc DeletePersistentUdpPortReservation*(StartPort: USHORT, NumberOfPorts: USHORT): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc LookupPersistentTcpPortReservation*(StartPort: USHORT, NumberOfPorts: USHORT, Token: PULONG64): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc LookupPersistentUdpPortReservation*(StartPort: USHORT, NumberOfPorts: USHORT, Token: PULONG64): ULONG {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetIfEntry2*(Row: PMIB_IF_ROW2): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetIfTable2*(Table: ptr PMIB_IF_TABLE2): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetIfTable2Ex*(Level: MIB_IF_TABLE_LEVEL, Table: ptr PMIB_IF_TABLE2): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetIfStackTable*(Table: ptr PMIB_IFSTACK_TABLE): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetInvertedIfStackTable*(Table: ptr PMIB_INVERTEDIFSTACK_TABLE): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetIpInterfaceEntry*(Row: PMIB_IPINTERFACE_ROW): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetIpInterfaceTable*(Family: ADDRESS_FAMILY, Table: ptr PMIB_IPINTERFACE_TABLE): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc InitializeIpInterfaceEntry*(Row: PMIB_IPINTERFACE_ROW): VOID {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc NotifyIpInterfaceChange*(Family: ADDRESS_FAMILY, Callback: PIPINTERFACE_CHANGE_CALLBACK, CallerContext: PVOID, InitialNotification: BOOLEAN, NotificationHandle: ptr HANDLE): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc SetIpInterfaceEntry*(Row: PMIB_IPINTERFACE_ROW): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc CreateUnicastIpAddressEntry*(Row: ptr MIB_UNICASTIPADDRESS_ROW): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc DeleteUnicastIpAddressEntry*(Row: ptr MIB_UNICASTIPADDRESS_ROW): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetUnicastIpAddressEntry*(Row: PMIB_UNICASTIPADDRESS_ROW): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetUnicastIpAddressTable*(Family: ADDRESS_FAMILY, Table: ptr PMIB_UNICASTIPADDRESS_TABLE): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc InitializeUnicastIpAddressEntry*(Row: PMIB_UNICASTIPADDRESS_ROW): VOID {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc NotifyUnicastIpAddressChange*(Family: ADDRESS_FAMILY, Callback: PUNICAST_IPADDRESS_CHANGE_CALLBACK, CallerContext: PVOID, InitialNotification: BOOLEAN, NotificationHandle: ptr HANDLE): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc CreateAnycastIpAddressEntry*(Row: ptr MIB_ANYCASTIPADDRESS_ROW): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc DeleteAnycastIpAddressEntry*(Row: ptr MIB_ANYCASTIPADDRESS_ROW): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetAnycastIpAddressEntry*(Row: PMIB_ANYCASTIPADDRESS_ROW): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetAnycastIpAddressTable*(Family: ADDRESS_FAMILY, Table: ptr PMIB_ANYCASTIPADDRESS_TABLE): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc NotifyStableUnicastIpAddressTable*(Family: ADDRESS_FAMILY, Table: ptr PMIB_UNICASTIPADDRESS_TABLE, CallerCallback: PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK, CallerContext: PVOID, NotificationHandle: ptr HANDLE): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc SetUnicastIpAddressEntry*(Row: ptr MIB_UNICASTIPADDRESS_ROW): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetMulticastIpAddressEntry*(Row: PMIB_MULTICASTIPADDRESS_ROW): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetMulticastIpAddressTable*(Family: ADDRESS_FAMILY, Table: ptr PMIB_MULTICASTIPADDRESS_TABLE): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc CreateIpForwardEntry2*(Row: ptr MIB_IPFORWARD_ROW2): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc DeleteIpForwardEntry2*(Row: ptr MIB_IPFORWARD_ROW2): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetBestRoute2*(InterfaceLuid: ptr NET_LUID, InterfaceIndex: NET_IFINDEX, SourceAddress: ptr SOCKADDR_INET, DestinationAddress: ptr SOCKADDR_INET, AddressSortOptions: ULONG, BestRoute: PMIB_IPFORWARD_ROW2, BestSourceAddress: ptr SOCKADDR_INET): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetIpForwardEntry2*(Row: PMIB_IPFORWARD_ROW2): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetIpForwardTable2*(Family: ADDRESS_FAMILY, Table: ptr PMIB_IPFORWARD_TABLE2): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc InitializeIpForwardEntry*(Row: PMIB_IPFORWARD_ROW2): VOID {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc NotifyRouteChange2*(AddressFamily: ADDRESS_FAMILY, Callback: PIPFORWARD_CHANGE_CALLBACK, CallerContext: PVOID, InitialNotification: BOOLEAN, NotificationHandle: ptr HANDLE): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc SetIpForwardEntry2*(Route: ptr MIB_IPFORWARD_ROW2): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc FlushIpPathTable*(Family: ADDRESS_FAMILY): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetIpPathEntry*(Row: PMIB_IPPATH_ROW): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetIpPathTable*(Family: ADDRESS_FAMILY, Table: ptr PMIB_IPPATH_TABLE): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc CreateIpNetEntry2*(Row: ptr MIB_IPNET_ROW2): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc DeleteIpNetEntry2*(Row: ptr MIB_IPNET_ROW2): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc FlushIpNetTable2*(Family: ADDRESS_FAMILY, InterfaceIndex: NET_IFINDEX): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetIpNetEntry2*(Row: PMIB_IPNET_ROW2): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetIpNetTable2*(Family: ADDRESS_FAMILY, Table: ptr PMIB_IPNET_TABLE2): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc ResolveIpNetEntry2*(Row: PMIB_IPNET_ROW2, SourceAddress: ptr SOCKADDR_INET): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc SetIpNetEntry2*(Row: PMIB_IPNET_ROW2): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc NotifyTeredoPortChange*(Callback: PTEREDO_PORT_CHANGE_CALLBACK, CallerContext: PVOID, InitialNotification: BOOLEAN, NotificationHandle: ptr HANDLE): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetTeredoPort*(Port: ptr USHORT): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc CancelMibChangeNotify2*(NotificationHandle: HANDLE): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc FreeMibTable*(Memory: PVOID): VOID {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc CreateSortedAddressPairs*(SourceAddressList: PSOCKADDR_IN6, SourceAddressCount: ULONG, DestinationAddressList: PSOCKADDR_IN6, DestinationAddressCount: ULONG, AddressSortOptions: ULONG, SortedAddressPairList: ptr PSOCKADDR_IN6_PAIR, SortedAddressPairCount: ptr ULONG): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc ConvertInterfaceNameToLuidA*(InterfaceName: cstring, InterfaceLuid: ptr NET_LUID): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc ConvertInterfaceNameToLuidW*(InterfaceName: ptr WCHAR, InterfaceLuid: ptr NET_LUID): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc ConvertInterfaceLuidToNameA*(InterfaceLuid: ptr NET_LUID, InterfaceName: PSTR, Length: SIZE_T): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc ConvertInterfaceLuidToNameW*(InterfaceLuid: ptr NET_LUID, InterfaceName: PWSTR, Length: SIZE_T): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc ConvertInterfaceLuidToIndex*(InterfaceLuid: ptr NET_LUID, InterfaceIndex: PNET_IFINDEX): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc ConvertInterfaceIndexToLuid*(InterfaceIndex: NET_IFINDEX, InterfaceLuid: PNET_LUID): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc ConvertInterfaceLuidToAlias*(InterfaceLuid: ptr NET_LUID, InterfaceAlias: PWSTR, Length: SIZE_T): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc ConvertInterfaceAliasToLuid*(InterfaceAlias: ptr WCHAR, InterfaceLuid: PNET_LUID): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc ConvertInterfaceLuidToGuid*(InterfaceLuid: ptr NET_LUID, InterfaceGuid: ptr GUID): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc ConvertInterfaceGuidToLuid*(InterfaceGuid: ptr GUID, InterfaceLuid: PNET_LUID): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc if_nametoindex*(InterfaceName: PCSTR): NET_IFINDEX {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc if_indextoname*(InterfaceIndex: NET_IFINDEX, InterfaceName: PCHAR): PCHAR {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetCurrentThreadCompartmentId*(): NET_IF_COMPARTMENT_ID {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc SetCurrentThreadCompartmentId*(CompartmentId: NET_IF_COMPARTMENT_ID): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetSessionCompartmentId*(SessionId: ULONG): NET_IF_COMPARTMENT_ID {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc SetSessionCompartmentId*(SessionId: ULONG, CompartmentId: NET_IF_COMPARTMENT_ID): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc GetNetworkInformation*(NetworkGuid: ptr NET_IF_NETWORK_GUID, CompartmentId: PNET_IF_COMPARTMENT_ID, SiteId: PULONG, NetworkName: PWCHAR, Length: ULONG): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc SetNetworkInformation*(NetworkGuid: ptr NET_IF_NETWORK_GUID, CompartmentId: NET_IF_COMPARTMENT_ID, NetworkName: ptr WCHAR): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc ConvertLengthToIpv4Mask*(MaskLength: ULONG, Mask: PULONG): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
+proc ConvertIpv4MaskToLength*(Mask: ULONG, MaskLength: PUINT8): NETIO_STATUS {.winapi, xpincompatible, stdcall, dynlib: "iphlpapi", importc.}
 proc `SpecificPortBind=`*(self: var MIB_UDPROW_OWNER_MODULE, x: DWORD) {.inline.} = self.union1.struct1.SpecificPortBind = x
 proc SpecificPortBind*(self: MIB_UDPROW_OWNER_MODULE): DWORD {.inline.} = self.union1.struct1.SpecificPortBind
 proc `dwFlags=`*(self: var MIB_UDPROW_OWNER_MODULE, x: DWORD) {.inline.} = self.union1.dwFlags = x

@@ -263,14 +263,14 @@ proc GetConsoleAliasesA*(AliasBuffer: LPSTR, AliasBufferLength: DWORD, ExeName: 
 proc GetConsoleAliasesW*(AliasBuffer: LPWSTR, AliasBufferLength: DWORD, ExeName: LPWSTR): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetConsoleAliasExesA*(ExeNameBuffer: LPSTR, ExeNameBufferLength: DWORD): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetConsoleAliasExesW*(ExeNameBuffer: LPWSTR, ExeNameBufferLength: DWORD): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetConsoleHistoryInfo*(lpConsoleHistoryInfo: PCONSOLE_HISTORY_INFO): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetConsoleOriginalTitleA*(lpConsoleTitle: LPSTR, nSize: DWORD): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetConsoleOriginalTitleW*(lpConsoleTitle: LPWSTR, nSize: DWORD): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetConsoleScreenBufferInfoEx*(hConsoleOutput: HANDLE, lpConsoleScreenBufferInfoEx: PCONSOLE_SCREEN_BUFFER_INFOEX): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetCurrentConsoleFontEx*(hConsoleOutput: HANDLE, bMaximumWindow: WINBOOL, lpConsoleCurrentFontEx: PCONSOLE_FONT_INFOEX): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc SetConsoleHistoryInfo*(lpConsoleHistoryInfo: PCONSOLE_HISTORY_INFO): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc SetConsoleScreenBufferInfoEx*(hConsoleOutput: HANDLE, lpConsoleScreenBufferInfoEx: PCONSOLE_SCREEN_BUFFER_INFOEX): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc SetCurrentConsoleFontEx*(hConsoleOutput: HANDLE, bMaximumWindow: WINBOOL, lpConsoleCurrentFontEx: PCONSOLE_FONT_INFOEX): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
+proc GetConsoleHistoryInfo*(lpConsoleHistoryInfo: PCONSOLE_HISTORY_INFO): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "kernel32", importc.}
+proc GetConsoleOriginalTitleA*(lpConsoleTitle: LPSTR, nSize: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "kernel32", importc.}
+proc GetConsoleOriginalTitleW*(lpConsoleTitle: LPWSTR, nSize: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "kernel32", importc.}
+proc GetConsoleScreenBufferInfoEx*(hConsoleOutput: HANDLE, lpConsoleScreenBufferInfoEx: PCONSOLE_SCREEN_BUFFER_INFOEX): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "kernel32", importc.}
+proc GetCurrentConsoleFontEx*(hConsoleOutput: HANDLE, bMaximumWindow: WINBOOL, lpConsoleCurrentFontEx: PCONSOLE_FONT_INFOEX): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "kernel32", importc.}
+proc SetConsoleHistoryInfo*(lpConsoleHistoryInfo: PCONSOLE_HISTORY_INFO): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "kernel32", importc.}
+proc SetConsoleScreenBufferInfoEx*(hConsoleOutput: HANDLE, lpConsoleScreenBufferInfoEx: PCONSOLE_SCREEN_BUFFER_INFOEX): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "kernel32", importc.}
+proc SetCurrentConsoleFontEx*(hConsoleOutput: HANDLE, bMaximumWindow: WINBOOL, lpConsoleCurrentFontEx: PCONSOLE_FONT_INFOEX): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "kernel32", importc.}
 when winimUnicode:
   proc PeekConsoleInput*(hConsoleInput: HANDLE, lpBuffer: PINPUT_RECORD, nLength: DWORD, lpNumberOfEventsRead: LPDWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "PeekConsoleInputW".}
   proc ReadConsoleInput*(hConsoleInput: HANDLE, lpBuffer: PINPUT_RECORD, nLength: DWORD, lpNumberOfEventsRead: LPDWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "ReadConsoleInputW".}
@@ -291,7 +291,7 @@ when winimUnicode:
   proc GetConsoleAliasExesLength*(): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "GetConsoleAliasExesLengthW".}
   proc GetConsoleAliases*(AliasBuffer: LPWSTR, AliasBufferLength: DWORD, ExeName: LPWSTR): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "GetConsoleAliasesW".}
   proc GetConsoleAliasExes*(ExeNameBuffer: LPWSTR, ExeNameBufferLength: DWORD): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "GetConsoleAliasExesW".}
-  proc GetConsoleOriginalTitle*(lpConsoleTitle: LPWSTR, nSize: DWORD): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "GetConsoleOriginalTitleW".}
+  proc GetConsoleOriginalTitle*(lpConsoleTitle: LPWSTR, nSize: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "kernel32", importc: "GetConsoleOriginalTitleW".}
 when winimAnsi:
   proc PeekConsoleInput*(hConsoleInput: HANDLE, lpBuffer: PINPUT_RECORD, nLength: DWORD, lpNumberOfEventsRead: LPDWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "PeekConsoleInputA".}
   proc ReadConsoleInput*(hConsoleInput: HANDLE, lpBuffer: PINPUT_RECORD, nLength: DWORD, lpNumberOfEventsRead: LPDWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "ReadConsoleInputA".}
@@ -312,4 +312,4 @@ when winimAnsi:
   proc GetConsoleAliasExesLength*(): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "GetConsoleAliasExesLengthA".}
   proc GetConsoleAliases*(AliasBuffer: LPSTR, AliasBufferLength: DWORD, ExeName: LPSTR): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "GetConsoleAliasesA".}
   proc GetConsoleAliasExes*(ExeNameBuffer: LPSTR, ExeNameBufferLength: DWORD): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "GetConsoleAliasExesA".}
-  proc GetConsoleOriginalTitle*(lpConsoleTitle: LPSTR, nSize: DWORD): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "GetConsoleOriginalTitleA".}
+  proc GetConsoleOriginalTitle*(lpConsoleTitle: LPSTR, nSize: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "kernel32", importc: "GetConsoleOriginalTitleA".}

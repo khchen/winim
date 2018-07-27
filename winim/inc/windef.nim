@@ -9255,12 +9255,12 @@ proc RtlInterlockedPushEntrySList*(ListHead: PSLIST_HEADER, ListEntry: PSLIST_EN
 proc RtlInterlockedFlushSList*(ListHead: PSLIST_HEADER): PSLIST_ENTRY {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc RtlQueryDepthSList*(ListHead: PSLIST_HEADER): WORD {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc VerSetConditionMask*(ConditionMask: ULONGLONG, TypeMask: DWORD, Condition: BYTE): ULONGLONG {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc RtlGetProductInfo*(OSMajorVersion: DWORD, OSMinorVersion: DWORD, SpMajorVersion: DWORD, SpMinorVersion: DWORD, ReturnedProductType: PDWORD): BOOLEAN {.winapi, stdcall, dynlib: "ntdll", importc.}
+proc RtlGetProductInfo*(OSMajorVersion: DWORD, OSMinorVersion: DWORD, SpMajorVersion: DWORD, SpMinorVersion: DWORD, ReturnedProductType: PDWORD): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "ntdll", importc.}
 proc RtlApplicationVerifierStop*(Code: ULONG_PTR, Message: PSTR, Param1: ULONG_PTR, Description1: PSTR, Param2: ULONG_PTR, Description2: PSTR, Param3: ULONG_PTR, Description3: PSTR, Param4: ULONG_PTR, Description4: PSTR): VOID {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc RtlSetHeapInformation*(HeapHandle: PVOID, HeapInformationClass: HEAP_INFORMATION_CLASS, HeapInformation: PVOID, HeapInformationLength: SIZE_T): DWORD {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc RtlQueryHeapInformation*(HeapHandle: PVOID, HeapInformationClass: HEAP_INFORMATION_CLASS, HeapInformation: PVOID, HeapInformationLength: SIZE_T, ReturnLength: PSIZE_T): DWORD {.winapi, stdcall, dynlib: "ntdll", importc.}
-proc RtlMultipleAllocateHeap*(HeapHandle: PVOID, Flags: DWORD, Size: SIZE_T, Count: DWORD, Array: ptr PVOID): DWORD {.winapi, stdcall, dynlib: "ntdll", importc.}
-proc RtlMultipleFreeHeap*(HeapHandle: PVOID, Flags: DWORD, Count: DWORD, Array: ptr PVOID): DWORD {.winapi, stdcall, dynlib: "ntdll", importc.}
+proc RtlMultipleAllocateHeap*(HeapHandle: PVOID, Flags: DWORD, Size: SIZE_T, Count: DWORD, Array: ptr PVOID): DWORD {.winapi, xpincompatible, stdcall, dynlib: "ntdll", importc.}
+proc RtlMultipleFreeHeap*(HeapHandle: PVOID, Flags: DWORD, Count: DWORD, Array: ptr PVOID): DWORD {.winapi, xpincompatible, stdcall, dynlib: "ntdll", importc.}
 proc NtClose*(Handle: HANDLE): NTSTATUS {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc NtCreateFile*(FileHandle: PHANDLE, DesiredAccess: ACCESS_MASK, ObjectAttributes: POBJECT_ATTRIBUTES, IoStatusBlock: PIO_STATUS_BLOCK, AllocationSize: PLARGE_INTEGER, FileAttributes: ULONG, ShareAccess: ULONG, CreateDisposition: ULONG, CreateOptions: ULONG, EaBuffer: PVOID, EaLength: ULONG): NTSTATUS {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc NtOpenFile*(FileHandle: PHANDLE, DesiredAccess: ACCESS_MASK, ObjectAttributes: POBJECT_ATTRIBUTES, IoStatusBlock: PIO_STATUS_BLOCK, ShareAccess: ULONG, OpenOptions: ULONG): NTSTATUS {.winapi, stdcall, dynlib: "ntdll", importc.}
@@ -9656,13 +9656,13 @@ when winimCpu64:
   type
     PGET_RUNTIME_FUNCTION_CALLBACK* = proc (ControlPc: DWORD64, Context: PVOID): PRUNTIME_FUNCTION {.stdcall.}
     POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK* = proc (Process: HANDLE, TableAddress: PVOID, Entries: PDWORD, Functions: ptr PRUNTIME_FUNCTION): DWORD {.stdcall.}
-  proc RtlAddFunctionTable*(FunctionTable: PRUNTIME_FUNCTION, EntryCount: DWORD, BaseAddress: DWORD64): BOOLEAN {.winapi, cdecl, dynlib: "ntdll", importc.}
-  proc RtlDeleteFunctionTable*(FunctionTable: PRUNTIME_FUNCTION): BOOLEAN {.winapi, cdecl, dynlib: "ntdll", importc.}
-  proc RtlInstallFunctionTableCallback*(TableIdentifier: DWORD64, BaseAddress: DWORD64, Length: DWORD, Callback: PGET_RUNTIME_FUNCTION_CALLBACK, Context: PVOID, OutOfProcessCallbackDll: PCWSTR): BOOLEAN {.winapi, cdecl, dynlib: "ntdll", importc.}
-  proc RtlRestoreContext*(ContextRecord: PCONTEXT, ExceptionRecord: ptr EXCEPTION_RECORD): VOID {.winapi, cdecl, dynlib: "ntdll", importc.}
-  proc RtlVirtualUnwind*(HandlerType: DWORD, ImageBase: DWORD64, ControlPc: DWORD64, FunctionEntry: PRUNTIME_FUNCTION, ContextRecord: PCONTEXT, HandlerData: ptr PVOID, EstablisherFrame: PDWORD64, ContextPointers: PKNONVOLATILE_CONTEXT_POINTERS): PEXCEPTION_ROUTINE {.winapi, stdcall, dynlib: "ntdll", importc.}
-  proc RtlLookupFunctionEntry*(ControlPc: DWORD64, ImageBase: PDWORD64, HistoryTable: PUNWIND_HISTORY_TABLE): PRUNTIME_FUNCTION {.winapi, stdcall, dynlib: "ntdll", importc.}
-  proc RtlUnwindEx*(TargetFrame: PVOID, TargetIp: PVOID, ExceptionRecord: PEXCEPTION_RECORD, ReturnValue: PVOID, ContextRecord: PCONTEXT, HistoryTable: PUNWIND_HISTORY_TABLE): VOID {.winapi, stdcall, dynlib: "ntdll", importc.}
+  proc RtlAddFunctionTable*(FunctionTable: PRUNTIME_FUNCTION, EntryCount: DWORD, BaseAddress: DWORD64): BOOLEAN {.winapi, xpincompatible, cdecl, dynlib: "ntdll", importc.}
+  proc RtlDeleteFunctionTable*(FunctionTable: PRUNTIME_FUNCTION): BOOLEAN {.winapi, xpincompatible, cdecl, dynlib: "ntdll", importc.}
+  proc RtlInstallFunctionTableCallback*(TableIdentifier: DWORD64, BaseAddress: DWORD64, Length: DWORD, Callback: PGET_RUNTIME_FUNCTION_CALLBACK, Context: PVOID, OutOfProcessCallbackDll: PCWSTR): BOOLEAN {.winapi, xpincompatible, cdecl, dynlib: "ntdll", importc.}
+  proc RtlRestoreContext*(ContextRecord: PCONTEXT, ExceptionRecord: ptr EXCEPTION_RECORD): VOID {.winapi, xpincompatible, cdecl, dynlib: "ntdll", importc.}
+  proc RtlVirtualUnwind*(HandlerType: DWORD, ImageBase: DWORD64, ControlPc: DWORD64, FunctionEntry: PRUNTIME_FUNCTION, ContextRecord: PCONTEXT, HandlerData: ptr PVOID, EstablisherFrame: PDWORD64, ContextPointers: PKNONVOLATILE_CONTEXT_POINTERS): PEXCEPTION_ROUTINE {.winapi, xpincompatible, stdcall, dynlib: "ntdll", importc.}
+  proc RtlLookupFunctionEntry*(ControlPc: DWORD64, ImageBase: PDWORD64, HistoryTable: PUNWIND_HISTORY_TABLE): PRUNTIME_FUNCTION {.winapi, xpincompatible, stdcall, dynlib: "ntdll", importc.}
+  proc RtlUnwindEx*(TargetFrame: PVOID, TargetIp: PVOID, ExceptionRecord: PEXCEPTION_RECORD, ReturnValue: PVOID, ContextRecord: PCONTEXT, HistoryTable: PUNWIND_HISTORY_TABLE): VOID {.winapi, xpincompatible, stdcall, dynlib: "ntdll", importc.}
   template IMAGE_ORDINAL*(Ordinal: untyped): int64 = Ordinal.int64 and 0xffff'i64
   template IMAGE_SNAP_BY_ORDINAL*(Ordinal: untyped): bool = (Ordinal and IMAGE_ORDINAL_FLAG64) != 0
   proc `FltSave=`*(self: var CONTEXT, x: XMM_SAVE_AREA32) {.inline.} = self.union1.FltSave = x

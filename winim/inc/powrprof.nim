@@ -136,55 +136,55 @@ proc CanUserWritePwrScheme*(): BOOLEAN {.winapi, stdcall, dynlib: "powrprof", im
 proc ReadProcessorPwrScheme*(P1: UINT, P2: PMACHINE_PROCESSOR_POWER_POLICY): BOOLEAN {.winapi, stdcall, dynlib: "powrprof", importc.}
 proc WriteProcessorPwrScheme*(P1: UINT, P2: PMACHINE_PROCESSOR_POWER_POLICY): BOOLEAN {.winapi, stdcall, dynlib: "powrprof", importc.}
 proc ValidatePowerPolicies*(P1: PGLOBAL_POWER_POLICY, P2: PPOWER_POLICY): BOOLEAN {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc DevicePowerClose*(): BOOLEAN {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc DevicePowerEnumDevices*(QueryIndex: ULONG, QueryInterpretationFlags: ULONG, QueryFlags: ULONG, pReturnBuffer: PBYTE, pBufferSize: PULONG): BOOLEAN {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc DevicePowerOpen*(Flags: ULONG): BOOLEAN {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc DevicePowerSetDeviceState*(DeviceDescription: LPCWSTR, SetFlags: ULONG, SetData: LPCVOID): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerCanRestoreIndividualDefaultPowerScheme*(SchemeGuid: ptr GUID): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerCreatePossibleSetting*(RootSystemPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, PossibleSettingIndex: ULONG): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerCreateSetting*(RootSystemPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerDeleteScheme*(RootPowerKey: HKEY, SchemeGuid: ptr GUID): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerDeterminePlatformRole*(): POWER_PLATFORM_ROLE {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerDuplicateScheme*(RootPowerKey: HKEY, SourceSchemeGuid: ptr GUID, DestinationSchemeGuid: ptr ptr GUID): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerEnumerate*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, AccessFlags: POWER_DATA_ACCESSOR, Index: ULONG, Buffer: ptr UCHAR, BufferSize: ptr DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerGetActiveScheme*(UserRootPowerKey: HKEY, ActivePolicyGuid: ptr ptr GUID): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerImportPowerScheme*(RootPowerKey: HKEY, ImportFileNamePath: LPCWSTR, DestinationSchemeGuid: ptr ptr GUID): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadACDefaultIndex*(RootPowerKey: HKEY, SchemePersonalityGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, AcDefaultIndex: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadACValue*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Type: PULONG, Buffer: LPBYTE, BufferSize: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadACValueIndex*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, AcValueIndex: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadDCDefaultIndex*(RootPowerKey: HKEY, SchemePersonalityGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, DcDefaultIndex: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadDCValue*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Type: PULONG, Buffer: PUCHAR, BufferSize: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadDCValueIndex*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, DcValueIndex: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadDescription*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: PUCHAR, BufferSize: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadFriendlyName*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: PUCHAR, BufferSize: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadIconResourceSpecifier*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: PUCHAR, BufferSize: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadPossibleDescription*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, PossibleSettingIndex: ULONG, Buffer: PUCHAR, BufferSize: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadPossibleFriendlyName*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, PossibleSettingIndex: ULONG, Buffer: PUCHAR, BufferSize: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadPossibleValue*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Type: PULONG, PossibleSettingIndex: ULONG, Buffer: PUCHAR, BufferSize: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadSettingAttributes*(SubGroupGuid: ptr GUID, PowerSettingGuid: ptr GUID): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadValueIncrement*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, ValueIncrement: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadValueMax*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, ValueMaximum: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadValueMin*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, ValueMinimum: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReadValueUnitsSpecifier*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: ptr UCHAR, BufferSize: LPDWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerRemovePowerSetting*(PowerSettingSubKeyGuid: ptr GUID, PowerSettingGuid: ptr GUID): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerReplaceDefaultPowerSchemes*(): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerRestoreDefaultPowerSchemes*(): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerRestoreIndividualDefaultPowerScheme*(SchemeGuid: ptr GUID): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerSetActiveScheme*(UserRootPowerKey: HKEY, SchemeGuid: ptr GUID): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerSettingAccessCheck*(AccessFlags: POWER_DATA_ACCESSOR, PowerGuid: ptr GUID): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerWriteACDefaultIndex*(RootSystemPowerKey: HKEY, SchemePersonalityGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, DefaultAcIndex: DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerWriteACValueIndex*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, AcValueIndex: DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerWriteDCDefaultIndex*(RootSystemPowerKey: HKEY, SchemePersonalityGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, DefaultDcIndex: DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerWriteDCValueIndex*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, DcValueIndex: DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerWriteDescription*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: ptr UCHAR, BufferSize: DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerWriteFriendlyName*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: ptr UCHAR, BufferSize: DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerWriteIconResourceSpecifier*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: ptr UCHAR, BufferSize: DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerWritePossibleDescription*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, PossibleSettingIndex: ULONG, Buffer: ptr UCHAR, BufferSize: DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerWritePossibleFriendlyName*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, PossibleSettingIndex: ULONG, Buffer: ptr UCHAR, BufferSize: DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerWritePossibleValue*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Type: ULONG, PossibleSettingIndex: ULONG, Buffer: ptr UCHAR, BufferSize: DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerWriteSettingAttributes*(SubGroupGuid: ptr GUID, PowerSettingGuid: ptr GUID, Attributes: DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerWriteValueIncrement*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, ValueIncrement: DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerWriteValueMax*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, ValueMaximum: DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerWriteValueMin*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, ValueMinimum: DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
-proc PowerWriteValueUnitsSpecifier*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: ptr UCHAR, BufferSize: DWORD): DWORD {.winapi, stdcall, dynlib: "powrprof", importc.}
+proc DevicePowerClose*(): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc DevicePowerEnumDevices*(QueryIndex: ULONG, QueryInterpretationFlags: ULONG, QueryFlags: ULONG, pReturnBuffer: PBYTE, pBufferSize: PULONG): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc DevicePowerOpen*(Flags: ULONG): BOOLEAN {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc DevicePowerSetDeviceState*(DeviceDescription: LPCWSTR, SetFlags: ULONG, SetData: LPCVOID): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerCanRestoreIndividualDefaultPowerScheme*(SchemeGuid: ptr GUID): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerCreatePossibleSetting*(RootSystemPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, PossibleSettingIndex: ULONG): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerCreateSetting*(RootSystemPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerDeleteScheme*(RootPowerKey: HKEY, SchemeGuid: ptr GUID): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerDeterminePlatformRole*(): POWER_PLATFORM_ROLE {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerDuplicateScheme*(RootPowerKey: HKEY, SourceSchemeGuid: ptr GUID, DestinationSchemeGuid: ptr ptr GUID): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerEnumerate*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, AccessFlags: POWER_DATA_ACCESSOR, Index: ULONG, Buffer: ptr UCHAR, BufferSize: ptr DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerGetActiveScheme*(UserRootPowerKey: HKEY, ActivePolicyGuid: ptr ptr GUID): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerImportPowerScheme*(RootPowerKey: HKEY, ImportFileNamePath: LPCWSTR, DestinationSchemeGuid: ptr ptr GUID): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadACDefaultIndex*(RootPowerKey: HKEY, SchemePersonalityGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, AcDefaultIndex: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadACValue*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Type: PULONG, Buffer: LPBYTE, BufferSize: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadACValueIndex*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, AcValueIndex: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadDCDefaultIndex*(RootPowerKey: HKEY, SchemePersonalityGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, DcDefaultIndex: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadDCValue*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Type: PULONG, Buffer: PUCHAR, BufferSize: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadDCValueIndex*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, DcValueIndex: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadDescription*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: PUCHAR, BufferSize: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadFriendlyName*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: PUCHAR, BufferSize: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadIconResourceSpecifier*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: PUCHAR, BufferSize: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadPossibleDescription*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, PossibleSettingIndex: ULONG, Buffer: PUCHAR, BufferSize: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadPossibleFriendlyName*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, PossibleSettingIndex: ULONG, Buffer: PUCHAR, BufferSize: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadPossibleValue*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Type: PULONG, PossibleSettingIndex: ULONG, Buffer: PUCHAR, BufferSize: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadSettingAttributes*(SubGroupGuid: ptr GUID, PowerSettingGuid: ptr GUID): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadValueIncrement*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, ValueIncrement: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadValueMax*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, ValueMaximum: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadValueMin*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, ValueMinimum: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReadValueUnitsSpecifier*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: ptr UCHAR, BufferSize: LPDWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerRemovePowerSetting*(PowerSettingSubKeyGuid: ptr GUID, PowerSettingGuid: ptr GUID): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerReplaceDefaultPowerSchemes*(): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerRestoreDefaultPowerSchemes*(): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerRestoreIndividualDefaultPowerScheme*(SchemeGuid: ptr GUID): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerSetActiveScheme*(UserRootPowerKey: HKEY, SchemeGuid: ptr GUID): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerSettingAccessCheck*(AccessFlags: POWER_DATA_ACCESSOR, PowerGuid: ptr GUID): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerWriteACDefaultIndex*(RootSystemPowerKey: HKEY, SchemePersonalityGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, DefaultAcIndex: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerWriteACValueIndex*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, AcValueIndex: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerWriteDCDefaultIndex*(RootSystemPowerKey: HKEY, SchemePersonalityGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, DefaultDcIndex: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerWriteDCValueIndex*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, DcValueIndex: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerWriteDescription*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: ptr UCHAR, BufferSize: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerWriteFriendlyName*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: ptr UCHAR, BufferSize: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerWriteIconResourceSpecifier*(RootPowerKey: HKEY, SchemeGuid: ptr GUID, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: ptr UCHAR, BufferSize: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerWritePossibleDescription*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, PossibleSettingIndex: ULONG, Buffer: ptr UCHAR, BufferSize: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerWritePossibleFriendlyName*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, PossibleSettingIndex: ULONG, Buffer: ptr UCHAR, BufferSize: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerWritePossibleValue*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Type: ULONG, PossibleSettingIndex: ULONG, Buffer: ptr UCHAR, BufferSize: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerWriteSettingAttributes*(SubGroupGuid: ptr GUID, PowerSettingGuid: ptr GUID, Attributes: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerWriteValueIncrement*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, ValueIncrement: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerWriteValueMax*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, ValueMaximum: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerWriteValueMin*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, ValueMinimum: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
+proc PowerWriteValueUnitsSpecifier*(RootPowerKey: HKEY, SubGroupOfPowerSettingsGuid: ptr GUID, PowerSettingGuid: ptr GUID, Buffer: ptr UCHAR, BufferSize: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "powrprof", importc.}
 proc CallNtPowerInformation*(P1: POWER_INFORMATION_LEVEL, P2: PVOID, P3: ULONG, P4: PVOID, P5: ULONG): NTSTATUS {.winapi, stdcall, dynlib: "powrprof", importc.}

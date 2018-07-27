@@ -1041,151 +1041,151 @@ proc UpdateDebugInfoFile*(ImageFileName: PCSTR, SymbolPath: PCSTR, DebugFilePath
 proc UpdateDebugInfoFileEx*(ImageFileName: PCSTR, SymbolPath: PCSTR, DebugFilePath: PSTR, NtHeaders: PIMAGE_NT_HEADERS32, OldChecksum: DWORD): WINBOOL {.winapi, stdcall, dynlib: "imagehlp", importc.}
 proc FindDebugInfoFile*(FileName: PCSTR, SymbolPath: PCSTR, DebugFilePath: PSTR): HANDLE {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc FindDebugInfoFileEx*(FileName: PCSTR, SymbolPath: PCSTR, DebugFilePath: PSTR, Callback: PFIND_DEBUG_FILE_CALLBACK, CallerData: PVOID): HANDLE {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc FindDebugInfoFileExW*(FileName: PCWSTR, SymbolPath: PCWSTR, DebugFilePath: PWSTR, Callback: PFIND_DEBUG_FILE_CALLBACKW, CallerData: PVOID): HANDLE {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc FindDebugInfoFileExW*(FileName: PCWSTR, SymbolPath: PCWSTR, DebugFilePath: PWSTR, Callback: PFIND_DEBUG_FILE_CALLBACKW, CallerData: PVOID): HANDLE {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymFindFileInPath*(hprocess: HANDLE, SearchPath: PCSTR, FileName: PCSTR, id: PVOID, two: DWORD, three: DWORD, flags: DWORD, FoundFile: LPSTR, callback: PFINDFILEINPATHCALLBACK, context: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymFindFileInPathW*(hprocess: HANDLE, SearchPath: PCWSTR, FileName: PCWSTR, id: PVOID, two: DWORD, three: DWORD, flags: DWORD, FoundFile: LPSTR, callback: PFINDFILEINPATHCALLBACKW, context: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymFindFileInPathW*(hprocess: HANDLE, SearchPath: PCWSTR, FileName: PCWSTR, id: PVOID, two: DWORD, three: DWORD, flags: DWORD, FoundFile: LPSTR, callback: PFINDFILEINPATHCALLBACKW, context: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc FindExecutableImage*(FileName: PCSTR, SymbolPath: PCSTR, ImageFilePath: PSTR): HANDLE {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc FindExecutableImageEx*(FileName: PCSTR, SymbolPath: PCSTR, ImageFilePath: PSTR, Callback: PFIND_EXE_FILE_CALLBACK, CallerData: PVOID): HANDLE {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc FindExecutableImageExW*(FileName: PCWSTR, SymbolPath: PCWSTR, ImageFilePath: PWSTR, Callback: PFIND_EXE_FILE_CALLBACKW, CallerData: PVOID): HANDLE {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc FindExecutableImageExW*(FileName: PCWSTR, SymbolPath: PCWSTR, ImageFilePath: PWSTR, Callback: PFIND_EXE_FILE_CALLBACKW, CallerData: PVOID): HANDLE {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc ImageNtHeader*(Base: PVOID): PIMAGE_NT_HEADERS {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc ImageDirectoryEntryToDataEx*(Base: PVOID, MappedAsImage: BOOLEAN, DirectoryEntry: USHORT, Size: PULONG, FoundHeader: ptr PIMAGE_SECTION_HEADER): PVOID {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc ImageDirectoryEntryToData*(Base: PVOID, MappedAsImage: BOOLEAN, DirectoryEntry: USHORT, Size: PULONG): PVOID {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc ImageRvaToSection*(NtHeaders: PIMAGE_NT_HEADERS, Base: PVOID, Rva: ULONG): PIMAGE_SECTION_HEADER {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc ImageRvaToVa*(NtHeaders: PIMAGE_NT_HEADERS, Base: PVOID, Rva: ULONG, LastRvaSection: ptr PIMAGE_SECTION_HEADER): PVOID {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SearchTreeForFile*(RootPath: PSTR, InputPathName: PSTR, OutputPathBuffer: PSTR): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SearchTreeForFileW*(RootPath: PWSTR, InputPathName: PWSTR, OutputPathBuffer: PWSTR): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc EnumDirTree*(hProcess: HANDLE, RootPath: PSTR, InputPathName: PSTR, OutputPathBuffer: PSTR, Callback: PENUMDIRTREE_CALLBACK, CallbackData: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SearchTreeForFileW*(RootPath: PWSTR, InputPathName: PWSTR, OutputPathBuffer: PWSTR): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc EnumDirTree*(hProcess: HANDLE, RootPath: PSTR, InputPathName: PSTR, OutputPathBuffer: PSTR, Callback: PENUMDIRTREE_CALLBACK, CallbackData: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc MakeSureDirectoryPathExists*(DirPath: PCSTR): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc UnDecorateSymbolNameA*(DecoratedName: PCSTR, UnDecoratedName: PSTR, UndecoratedLength: DWORD, Flags: DWORD): DWORD {.winapi, stdcall, dynlib: "dbghelp", importc: "UnDecorateSymbolName".}
-proc UnDecorateSymbolNameW*(DecoratedName: PCWSTR, UnDecoratedName: PWSTR, UndecoratedLength: DWORD, Flags: DWORD): DWORD {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc UnDecorateSymbolNameW*(DecoratedName: PCWSTR, UnDecoratedName: PWSTR, UndecoratedLength: DWORD, Flags: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc StackWalk64*(MachineType: DWORD, hProcess: HANDLE, hThread: HANDLE, StackFrame: LPSTACKFRAME64, ContextRecord: PVOID, ReadMemoryRoutine: PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine: PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine: PGET_MODULE_BASE_ROUTINE64, TranslateAddress: PTRANSLATE_ADDRESS_ROUTINE64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc ImagehlpApiVersion*(): LPAPI_VERSION {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc ImagehlpApiVersionEx*(AppVersion: LPAPI_VERSION): LPAPI_VERSION {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc GetTimestampForLoadedLibrary*(Module: HMODULE): DWORD {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymSetParentWindow*(hwnd: HWND): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymSetHomeDirectory*(hProcess: HANDLE, dir: PCSTR): PCHAR {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymSetHomeDirectoryW*(hProcess: HANDLE, dir: PCWSTR): PCHAR {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetHomeDirectory*(`type`: DWORD, dir: PSTR, size: int): PCHAR {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetHomeDirectoryW*(`type`: DWORD, dir: PWSTR, size: int): PWCHAR {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymSetParentWindow*(hwnd: HWND): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymSetHomeDirectory*(hProcess: HANDLE, dir: PCSTR): PCHAR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymSetHomeDirectoryW*(hProcess: HANDLE, dir: PCWSTR): PCHAR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetHomeDirectory*(`type`: DWORD, dir: PSTR, size: int): PCHAR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetHomeDirectoryW*(`type`: DWORD, dir: PWSTR, size: int): PWCHAR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymSetOptions*(SymOptions: DWORD): DWORD {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymGetOptions*(): DWORD {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymCleanup*(hProcess: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymMatchString*(string: PCSTR, expression: PCSTR, fCase: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymMatchStringW*(string: PCWSTR, expression: PCWSTR, fCase: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymMatchStringW*(string: PCWSTR, expression: PCWSTR, fCase: WINBOOL): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymEnumSourceFiles*(hProcess: HANDLE, ModBase: ULONG64, Mask: PCSTR, cbSrcFiles: PSYM_ENUMSOURCEFILES_CALLBACK, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymEnumSourceFilesW*(hProcess: HANDLE, ModBase: ULONG64, Mask: PCWSTR, cbSrcFiles: PSYM_ENUMSOURCEFILES_CALLBACKW, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymEnumSourceFilesW*(hProcess: HANDLE, ModBase: ULONG64, Mask: PCWSTR, cbSrcFiles: PSYM_ENUMSOURCEFILES_CALLBACKW, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymEnumerateModules64*(hProcess: HANDLE, EnumModulesCallback: PSYM_ENUMMODULES_CALLBACK64, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymEnumerateModulesW64*(hProcess: HANDLE, EnumModulesCallback: PSYM_ENUMMODULES_CALLBACKW64, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymEnumerateModulesW64*(hProcess: HANDLE, EnumModulesCallback: PSYM_ENUMMODULES_CALLBACKW64, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymEnumerateSymbols64*(hProcess: HANDLE, BaseOfDll: DWORD64, EnumSymbolsCallback: PSYM_ENUMSYMBOLS_CALLBACK64, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymEnumerateSymbolsW64*(hProcess: HANDLE, BaseOfDll: DWORD64, EnumSymbolsCallback: PSYM_ENUMSYMBOLS_CALLBACK64W, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc EnumerateLoadedModulesA64*(hProcess: HANDLE, EnumLoadedModulesCallback: PENUMLOADED_MODULES_CALLBACK64, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc: "EnumerateLoadedModules64".}
-proc EnumerateLoadedModulesW64*(hProcess: HANDLE, EnumLoadedModulesCallback: PENUMLOADED_MODULES_CALLBACKW64, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc EnumerateLoadedModulesW64*(hProcess: HANDLE, EnumLoadedModulesCallback: PENUMLOADED_MODULES_CALLBACKW64, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymFunctionTableAccess64*(hProcess: HANDLE, AddrBase: DWORD64): PVOID {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymGetModuleInfo64*(hProcess: HANDLE, qwAddr: DWORD64, ModuleInfo: PIMAGEHLP_MODULE64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymGetModuleInfoW64*(hProcess: HANDLE, qwAddr: DWORD64, ModuleInfo: PIMAGEHLP_MODULEW64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymGetModuleBase64*(hProcess: HANDLE, qwAddr: DWORD64): DWORD64 {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymGetSymNext64*(hProcess: HANDLE, Symbol: PIMAGEHLP_SYMBOL64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymGetSymPrev64*(hProcess: HANDLE, Symbol: PIMAGEHLP_SYMBOL64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymEnumLines*(hProcess: HANDLE, Base: ULONG64, Obj: PCSTR, File: PCSTR, EnumLinesCallback: PSYM_ENUMLINES_CALLBACK, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymEnumLinesW*(hProcess: HANDLE, Base: ULONG64, Obj: PCWSTR, File: PCSTR, EnumLinesCallback: PSYM_ENUMLINES_CALLBACKW, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymEnumLines*(hProcess: HANDLE, Base: ULONG64, Obj: PCSTR, File: PCSTR, EnumLinesCallback: PSYM_ENUMLINES_CALLBACK, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymEnumLinesW*(hProcess: HANDLE, Base: ULONG64, Obj: PCWSTR, File: PCSTR, EnumLinesCallback: PSYM_ENUMLINES_CALLBACKW, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymGetLineFromAddr64*(hProcess: HANDLE, qwAddr: DWORD64, pdwDisplacement: PDWORD, Line64: PIMAGEHLP_LINE64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetLineFromAddrW64*(hProcess: HANDLE, qwAddr: DWORD64, pdwDisplacement: PDWORD, Line64: PIMAGEHLP_LINEW64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetLineFromAddrW64*(hProcess: HANDLE, qwAddr: DWORD64, pdwDisplacement: PDWORD, Line64: PIMAGEHLP_LINEW64): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymGetLineFromName64*(hProcess: HANDLE, ModuleName: PCSTR, FileName: PCSTR, dwLineNumber: DWORD, plDisplacement: PLONG, Line: PIMAGEHLP_LINE64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetLineFromNameW64*(hProcess: HANDLE, ModuleName: PCWSTR, FileName: PCWSTR, dwLineNumber: DWORD, plDisplacement: PLONG, Line: PIMAGEHLP_LINEW64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetLineFromNameW64*(hProcess: HANDLE, ModuleName: PCWSTR, FileName: PCWSTR, dwLineNumber: DWORD, plDisplacement: PLONG, Line: PIMAGEHLP_LINEW64): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymGetLineNext64*(hProcess: HANDLE, Line: PIMAGEHLP_LINE64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetLineNextW64*(hProcess: HANDLE, Line: PIMAGEHLP_LINEW64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetLineNextW64*(hProcess: HANDLE, Line: PIMAGEHLP_LINEW64): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymGetLinePrev64*(hProcess: HANDLE, Line: PIMAGEHLP_LINE64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetLinePrevW64*(hProcess: HANDLE, Line: PIMAGEHLP_LINEW64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetLinePrevW64*(hProcess: HANDLE, Line: PIMAGEHLP_LINEW64): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymMatchFileName*(FileName: PCSTR, Match: PCSTR, FileNameStop: ptr PSTR, MatchStop: ptr PSTR): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymMatchFileNameW*(FileName: PCWSTR, Match: PCWSTR, FileNameStop: ptr PWSTR, MatchStop: ptr PWSTR): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymMatchFileNameW*(FileName: PCWSTR, Match: PCWSTR, FileNameStop: ptr PWSTR, MatchStop: ptr PWSTR): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymInitialize*(hProcess: HANDLE, UserSearchPath: PCSTR, fInvadeProcess: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymInitializeW*(hProcess: HANDLE, UserSearchPath: PCWSTR, fInvadeProcess: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymInitializeW*(hProcess: HANDLE, UserSearchPath: PCWSTR, fInvadeProcess: WINBOOL): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymGetSearchPath*(hProcess: HANDLE, SearchPath: PSTR, SearchPathLength: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetSearchPathW*(hProcess: HANDLE, SearchPath: PWSTR, SearchPathLength: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetSearchPathW*(hProcess: HANDLE, SearchPath: PWSTR, SearchPathLength: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymSetSearchPath*(hProcess: HANDLE, SearchPath: PCSTR): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymSetSearchPathW*(hProcess: HANDLE, SearchPath: PCWSTR): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymSetSearchPathW*(hProcess: HANDLE, SearchPath: PCWSTR): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymLoadModule64*(hProcess: HANDLE, hFile: HANDLE, ImageName: PSTR, ModuleName: PSTR, BaseOfDll: DWORD64, SizeOfDll: DWORD): DWORD64 {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymLoadModuleEx*(hProcess: HANDLE, hFile: HANDLE, ImageName: PCSTR, ModuleName: PCSTR, BaseOfDll: DWORD64, DllSize: DWORD, Data: PMODLOAD_DATA, Flags: DWORD): DWORD64 {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymLoadModuleExW*(hProcess: HANDLE, hFile: HANDLE, ImageName: PCWSTR, ModuleName: PCWSTR, BaseOfDll: DWORD64, DllSize: DWORD, Data: PMODLOAD_DATA, Flags: DWORD): DWORD64 {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymLoadModuleExW*(hProcess: HANDLE, hFile: HANDLE, ImageName: PCWSTR, ModuleName: PCWSTR, BaseOfDll: DWORD64, DllSize: DWORD, Data: PMODLOAD_DATA, Flags: DWORD): DWORD64 {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymUnloadModule64*(hProcess: HANDLE, BaseOfDll: DWORD64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymUnDName64*(sym: PIMAGEHLP_SYMBOL64, UnDecName: PSTR, UnDecNameLength: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymRegisterCallback64*(hProcess: HANDLE, CallbackFunction: PSYMBOL_REGISTERED_CALLBACK64, UserContext: ULONG64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymRegisterFunctionEntryCallback64*(hProcess: HANDLE, CallbackFunction: PSYMBOL_FUNCENTRY_CALLBACK64, UserContext: ULONG64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymSetContext*(hProcess: HANDLE, StackFrame: PIMAGEHLP_STACK_FRAME, Context: PIMAGEHLP_CONTEXT): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymFromAddr*(hProcess: HANDLE, Address: DWORD64, Displacement: PDWORD64, Symbol: PSYMBOL_INFO): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymFromAddrW*(hProcess: HANDLE, Address: DWORD64, Displacement: PDWORD64, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymFromToken*(hProcess: HANDLE, Base: DWORD64, Token: DWORD, Symbol: PSYMBOL_INFO): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymFromTokenW*(hProcess: HANDLE, Base: DWORD64, Token: DWORD, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymFromAddrW*(hProcess: HANDLE, Address: DWORD64, Displacement: PDWORD64, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymFromToken*(hProcess: HANDLE, Base: DWORD64, Token: DWORD, Symbol: PSYMBOL_INFO): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymFromTokenW*(hProcess: HANDLE, Base: DWORD64, Token: DWORD, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymFromName*(hProcess: HANDLE, Name: PCSTR, Symbol: PSYMBOL_INFO): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymFromNameW*(hProcess: HANDLE, Name: PCWSTR, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymFromNameW*(hProcess: HANDLE, Name: PCWSTR, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymEnumSymbols*(hProcess: HANDLE, BaseOfDll: ULONG64, Mask: PCSTR, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymEnumSymbolsW*(hProcess: HANDLE, BaseOfDll: ULONG64, Mask: PCWSTR, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymEnumSymbolsForAddr*(hProcess: HANDLE, Address: DWORD64, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymEnumSymbolsForAddrW*(hProcess: HANDLE, Address: DWORD64, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymEnumSymbolsW*(hProcess: HANDLE, BaseOfDll: ULONG64, Mask: PCWSTR, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymEnumSymbolsForAddr*(hProcess: HANDLE, Address: DWORD64, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymEnumSymbolsForAddrW*(hProcess: HANDLE, Address: DWORD64, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymGetTypeInfo*(hProcess: HANDLE, ModBase: DWORD64, TypeId: ULONG, GetType: IMAGEHLP_SYMBOL_TYPE_INFO, pInfo: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymEnumTypes*(hProcess: HANDLE, BaseOfDll: ULONG64, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymEnumTypesW*(hProcess: HANDLE, BaseOfDll: ULONG64, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymEnumTypesW*(hProcess: HANDLE, BaseOfDll: ULONG64, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc SymGetTypeFromName*(hProcess: HANDLE, BaseOfDll: ULONG64, Name: PCSTR, Symbol: PSYMBOL_INFO): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetTypeFromNameW*(hProcess: HANDLE, BaseOfDll: ULONG64, Name: PCWSTR, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymAddSymbol*(hProcess: HANDLE, BaseOfDll: ULONG64, Name: PCSTR, Address: DWORD64, Size: DWORD, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymAddSymbolW*(hProcess: HANDLE, BaseOfDll: ULONG64, Name: PCWSTR, Address: DWORD64, Size: DWORD, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymDeleteSymbol*(hProcess: HANDLE, BaseOfDll: ULONG64, Name: PCSTR, Address: DWORD64, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymDeleteSymbolW*(hProcess: HANDLE, BaseOfDll: ULONG64, Name: PCWSTR, Address: DWORD64, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetTypeFromNameW*(hProcess: HANDLE, BaseOfDll: ULONG64, Name: PCWSTR, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymAddSymbol*(hProcess: HANDLE, BaseOfDll: ULONG64, Name: PCSTR, Address: DWORD64, Size: DWORD, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymAddSymbolW*(hProcess: HANDLE, BaseOfDll: ULONG64, Name: PCWSTR, Address: DWORD64, Size: DWORD, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymDeleteSymbol*(hProcess: HANDLE, BaseOfDll: ULONG64, Name: PCSTR, Address: DWORD64, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymDeleteSymbolW*(hProcess: HANDLE, BaseOfDll: ULONG64, Name: PCWSTR, Address: DWORD64, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc DbgHelpCreateUserDump*(FileName: LPCSTR, Callback: PDBGHELP_CREATE_USER_DUMP_CALLBACK, UserData: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc DbgHelpCreateUserDumpW*(FileName: LPCWSTR, Callback: PDBGHELP_CREATE_USER_DUMP_CALLBACK, UserData: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymGetSymFromAddr64*(hProcess: HANDLE, qwAddr: DWORD64, pdwDisplacement: PDWORD64, Symbol: PIMAGEHLP_SYMBOL64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc SymGetSymFromName64*(hProcess: HANDLE, Name: PCSTR, Symbol: PIMAGEHLP_SYMBOL64): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc MiniDumpWriteDump*(hProcess: HANDLE, ProcessId: DWORD, hFile: HANDLE, DumpType: MINIDUMP_TYPE, ExceptionParam: PMINIDUMP_EXCEPTION_INFORMATION, UserStreamParam: PMINIDUMP_USER_STREAM_INFORMATION, CallbackParam: PMINIDUMP_CALLBACK_INFORMATION): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
 proc MiniDumpReadDumpStream*(BaseOfDump: PVOID, StreamNumber: ULONG, Dir: ptr PMINIDUMP_DIRECTORY, StreamPointer: ptr PVOID, StreamSize: ptr ULONG): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc EnumerateLoadedModulesEx*(hProcess: HANDLE, EnumLoadedModulesCallback: PENUMLOADED_MODULES_CALLBACK64, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc EnumerateLoadedModulesExW*(hProcess: HANDLE, EnumLoadedModulesCallback: PENUMLOADED_MODULES_CALLBACKW64, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymAddSourceStream*(hProcess: HANDLE, Base: ULONG64, StreamFile: PCSTR, Buffer: PBYTE, Size: int): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymAddSourceStreamW*(hProcess: HANDLE, Base: ULONG64, StreamFile: PCWSTR, Buffer: PBYTE, Size: int): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymEnumSourceLines*(hProcess: HANDLE, Base: ULONG64, Obj: PCSTR, File: PCSTR, Line: DWORD, Flags: DWORD, EnumLinesCallback: PSYM_ENUMLINES_CALLBACK, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymEnumSourceLinesW*(hProcess: HANDLE, Base: ULONG64, Obj: PCWSTR, File: PCWSTR, Line: DWORD, Flags: DWORD, EnumLinesCallback: PSYM_ENUMLINES_CALLBACKW, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymEnumTypesByName*(hProcess: HANDLE, BaseOfDll: ULONG64, mask: PCSTR, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymEnumTypesByNameW*(hProcess: HANDLE, BaseOfDll: ULONG64, mask: PCSTR, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymFindDebugInfoFile*(hProcess: HANDLE, FileName: PCSTR, DebugFilePath: PSTR, Callback: PFIND_DEBUG_FILE_CALLBACK, CallerData: PVOID): HANDLE {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymFindDebugInfoFileW*(hProcess: HANDLE, FileName: PCWSTR, DebugFilePath: PWSTR, Callback: PFIND_DEBUG_FILE_CALLBACKW, CallerData: PVOID): HANDLE {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymFindExecutableImage*(hProcess: HANDLE, FileName: PCSTR, ImageFilePath: PSTR, Callback: PFIND_EXE_FILE_CALLBACK, CallerData: PVOID): HANDLE {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymFindExecutableImageW*(hProcess: HANDLE, FileName: PCWSTR, ImageFilePath: PWSTR, Callback: PFIND_EXE_FILE_CALLBACKW, CallerData: PVOID): HANDLE {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymFromIndex*(hProcess: HANDLE, BaseOfDll: ULONG64, Index: DWORD, Symbol: PSYMBOL_INFO): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymFromIndexW*(hProcess: HANDLE, BaseOfDll: ULONG64, Index: DWORD, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetScope*(hProcess: HANDLE, BaseOfDll: ULONG64, Index: DWORD, Symbol: PSYMBOL_INFO): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetScopeW*(hProcess: HANDLE, BaseOfDll: ULONG64, Index: DWORD, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetSourceFileFromToken*(hProcess: HANDLE, Token: PVOID, Params: PCSTR, FilePath: PSTR, Size: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetSourceFileFromTokenW*(hProcess: HANDLE, Token: PVOID, Params: PCWSTR, FilePath: PWSTR, Size: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetSourceFileToken*(hProcess: HANDLE, Base: ULONG64, FileSpec: PCSTR, Token: ptr PVOID, Size: ptr DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetSourceFileTokenW*(hProcess: HANDLE, Base: ULONG64, FileSpec: PCWSTR, Token: ptr PVOID, Size: ptr DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetSourceFile*(hProcess: HANDLE, Base: ULONG64, Params: PCSTR, FileSpec: PCSTR, FilePath: PSTR, Size: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetSourceFileW*(hProcess: HANDLE, Base: ULONG64, Params: PCWSTR, FileSpec: PCWSTR, FilePath: PWSTR, Size: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetSourceVarFromToken*(hProcess: HANDLE, Token: PVOID, Params: PCSTR, VarName: PCSTR, Value: PSTR, Size: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetSourceVarFromTokenW*(hProcess: HANDLE, Token: PVOID, Params: PCWSTR, VarName: PCWSTR, Value: PWSTR, Size: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetSymbolFile*(hProcess: HANDLE, SymPath: PCSTR, ImageFile: PCSTR, Type: DWORD, SymbolFile: PSTR, cSymbolFile: int, DbgFile: PSTR, cDbgFile: int): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymGetSymbolFileW*(hProcess: HANDLE, SymPath: PCWSTR, ImageFile: PCWSTR, Type: DWORD, SymbolFile: PWSTR, cSymbolFile: int, DbgFile: PWSTR, cDbgFile: int): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymNext*(hProcess: HANDLE, Symbol: PSYMBOL_INFO): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymNextW*(hProcess: HANDLE, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymPrev*(hProcess: HANDLE, Symbol: PSYMBOL_INFO): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymPrevW*(hProcess: HANDLE, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymRefreshModuleList*(hProcess: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymSearch*(hProcess: HANDLE, BaseOfDll: ULONG64, Index: DWORD, SymTag: DWORD, Mask: PCSTR, Address: DWORD64, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: PVOID, Options: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymSearchW*(hProcess: HANDLE, BaseOfDll: ULONG64, Index: DWORD, SymTag: DWORD, Mask: PCWSTR, Address: DWORD64, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: PVOID, Options: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymSrvGetFileIndexStringA*(hProcess: HANDLE, SrvPath: PCSTR, File: PCSTR, Index: PSTR, Size: int, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvGetFileIndexString".}
-proc SymSrvGetFileIndexStringW*(hProcess: HANDLE, SrvPath: PCWSTR, File: PCWSTR, Index: PWSTR, Size: int, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymSrvGetFileIndexInfoA*(File: PCSTR, Info: PSYMSRV_INDEX_INFO, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvGetFileIndexInfo".}
-proc SymSrvGetFileIndexInfoW*(File: PCWSTR, Info: PSYMSRV_INDEX_INFOW, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymSrvGetFileIndexesA*(File: PCSTR, Id: ptr GUID, Val1: ptr DWORD, Val2: ptr DWORD, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvGetFileIndexes".}
-proc SymSrvGetFileIndexesW*(File: PCWSTR, Id: ptr GUID, Val1: ptr DWORD, Val2: ptr DWORD, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymSrvGetSupplementA*(hProcess: HANDLE, SymPath: PCSTR, Node: PCSTR, File: PCSTR): PCSTR {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvGetSupplement".}
-proc SymSrvGetSupplementW*(hProcess: HANDLE, SymPath: PCWSTR, Node: PCWSTR, File: PCWSTR): PCWSTR {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymSrvIsStoreA*(hProcess: HANDLE, path: PCSTR): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvIsStore".}
-proc SymSrvIsStoreW*(hProcess: HANDLE, path: PCWSTR): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymSrvStoreFileA*(hProcess: HANDLE, SrvPath: PCSTR, File: PCSTR, Flags: DWORD): PCSTR {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvStoreFile".}
-proc SymSrvStoreFileW*(hProcess: HANDLE, SrvPath: PCWSTR, File: PCWSTR, Flags: DWORD): PCWSTR {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymSrvStoreSupplementA*(hProcess: HANDLE, SymPath: PCTSTR, Node: PCSTR, File: PCSTR, Flags: DWORD): PCSTR {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvStoreSupplement".}
-proc SymSrvStoreSupplementW*(hProcess: HANDLE, SymPath: PCWSTR, Node: PCWSTR, File: PCWSTR, Flags: DWORD): PCWSTR {.winapi, stdcall, dynlib: "dbghelp", importc.}
-proc SymSrvDeltaNameA*(hProcess: HANDLE, SymPath: PCSTR, Type: PCSTR, File1: PCSTR, File2: PCSTR): PCSTR {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvDeltaName".}
-proc SymSrvDeltaNameW*(hProcess: HANDLE, SymPath: PCWSTR, Type: PCWSTR, File1: PCWSTR, File2: PCWSTR): PCWSTR {.winapi, stdcall, dynlib: "dbghelp", importc.}
+proc EnumerateLoadedModulesEx*(hProcess: HANDLE, EnumLoadedModulesCallback: PENUMLOADED_MODULES_CALLBACK64, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc EnumerateLoadedModulesExW*(hProcess: HANDLE, EnumLoadedModulesCallback: PENUMLOADED_MODULES_CALLBACKW64, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymAddSourceStream*(hProcess: HANDLE, Base: ULONG64, StreamFile: PCSTR, Buffer: PBYTE, Size: int): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymAddSourceStreamW*(hProcess: HANDLE, Base: ULONG64, StreamFile: PCWSTR, Buffer: PBYTE, Size: int): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymEnumSourceLines*(hProcess: HANDLE, Base: ULONG64, Obj: PCSTR, File: PCSTR, Line: DWORD, Flags: DWORD, EnumLinesCallback: PSYM_ENUMLINES_CALLBACK, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymEnumSourceLinesW*(hProcess: HANDLE, Base: ULONG64, Obj: PCWSTR, File: PCWSTR, Line: DWORD, Flags: DWORD, EnumLinesCallback: PSYM_ENUMLINES_CALLBACKW, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymEnumTypesByName*(hProcess: HANDLE, BaseOfDll: ULONG64, mask: PCSTR, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymEnumTypesByNameW*(hProcess: HANDLE, BaseOfDll: ULONG64, mask: PCSTR, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymFindDebugInfoFile*(hProcess: HANDLE, FileName: PCSTR, DebugFilePath: PSTR, Callback: PFIND_DEBUG_FILE_CALLBACK, CallerData: PVOID): HANDLE {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymFindDebugInfoFileW*(hProcess: HANDLE, FileName: PCWSTR, DebugFilePath: PWSTR, Callback: PFIND_DEBUG_FILE_CALLBACKW, CallerData: PVOID): HANDLE {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymFindExecutableImage*(hProcess: HANDLE, FileName: PCSTR, ImageFilePath: PSTR, Callback: PFIND_EXE_FILE_CALLBACK, CallerData: PVOID): HANDLE {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymFindExecutableImageW*(hProcess: HANDLE, FileName: PCWSTR, ImageFilePath: PWSTR, Callback: PFIND_EXE_FILE_CALLBACKW, CallerData: PVOID): HANDLE {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymFromIndex*(hProcess: HANDLE, BaseOfDll: ULONG64, Index: DWORD, Symbol: PSYMBOL_INFO): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymFromIndexW*(hProcess: HANDLE, BaseOfDll: ULONG64, Index: DWORD, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetScope*(hProcess: HANDLE, BaseOfDll: ULONG64, Index: DWORD, Symbol: PSYMBOL_INFO): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetScopeW*(hProcess: HANDLE, BaseOfDll: ULONG64, Index: DWORD, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetSourceFileFromToken*(hProcess: HANDLE, Token: PVOID, Params: PCSTR, FilePath: PSTR, Size: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetSourceFileFromTokenW*(hProcess: HANDLE, Token: PVOID, Params: PCWSTR, FilePath: PWSTR, Size: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetSourceFileToken*(hProcess: HANDLE, Base: ULONG64, FileSpec: PCSTR, Token: ptr PVOID, Size: ptr DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetSourceFileTokenW*(hProcess: HANDLE, Base: ULONG64, FileSpec: PCWSTR, Token: ptr PVOID, Size: ptr DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetSourceFile*(hProcess: HANDLE, Base: ULONG64, Params: PCSTR, FileSpec: PCSTR, FilePath: PSTR, Size: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetSourceFileW*(hProcess: HANDLE, Base: ULONG64, Params: PCWSTR, FileSpec: PCWSTR, FilePath: PWSTR, Size: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetSourceVarFromToken*(hProcess: HANDLE, Token: PVOID, Params: PCSTR, VarName: PCSTR, Value: PSTR, Size: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetSourceVarFromTokenW*(hProcess: HANDLE, Token: PVOID, Params: PCWSTR, VarName: PCWSTR, Value: PWSTR, Size: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetSymbolFile*(hProcess: HANDLE, SymPath: PCSTR, ImageFile: PCSTR, Type: DWORD, SymbolFile: PSTR, cSymbolFile: int, DbgFile: PSTR, cDbgFile: int): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymGetSymbolFileW*(hProcess: HANDLE, SymPath: PCWSTR, ImageFile: PCWSTR, Type: DWORD, SymbolFile: PWSTR, cSymbolFile: int, DbgFile: PWSTR, cDbgFile: int): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymNext*(hProcess: HANDLE, Symbol: PSYMBOL_INFO): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymNextW*(hProcess: HANDLE, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymPrev*(hProcess: HANDLE, Symbol: PSYMBOL_INFO): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymPrevW*(hProcess: HANDLE, Symbol: PSYMBOL_INFOW): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymRefreshModuleList*(hProcess: HANDLE): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymSearch*(hProcess: HANDLE, BaseOfDll: ULONG64, Index: DWORD, SymTag: DWORD, Mask: PCSTR, Address: DWORD64, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: PVOID, Options: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymSearchW*(hProcess: HANDLE, BaseOfDll: ULONG64, Index: DWORD, SymTag: DWORD, Mask: PCWSTR, Address: DWORD64, EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: PVOID, Options: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymSrvGetFileIndexStringA*(hProcess: HANDLE, SrvPath: PCSTR, File: PCSTR, Index: PSTR, Size: int, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvGetFileIndexString".}
+proc SymSrvGetFileIndexStringW*(hProcess: HANDLE, SrvPath: PCWSTR, File: PCWSTR, Index: PWSTR, Size: int, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymSrvGetFileIndexInfoA*(File: PCSTR, Info: PSYMSRV_INDEX_INFO, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvGetFileIndexInfo".}
+proc SymSrvGetFileIndexInfoW*(File: PCWSTR, Info: PSYMSRV_INDEX_INFOW, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymSrvGetFileIndexesA*(File: PCSTR, Id: ptr GUID, Val1: ptr DWORD, Val2: ptr DWORD, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvGetFileIndexes".}
+proc SymSrvGetFileIndexesW*(File: PCWSTR, Id: ptr GUID, Val1: ptr DWORD, Val2: ptr DWORD, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymSrvGetSupplementA*(hProcess: HANDLE, SymPath: PCSTR, Node: PCSTR, File: PCSTR): PCSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvGetSupplement".}
+proc SymSrvGetSupplementW*(hProcess: HANDLE, SymPath: PCWSTR, Node: PCWSTR, File: PCWSTR): PCWSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymSrvIsStoreA*(hProcess: HANDLE, path: PCSTR): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvIsStore".}
+proc SymSrvIsStoreW*(hProcess: HANDLE, path: PCWSTR): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymSrvStoreFileA*(hProcess: HANDLE, SrvPath: PCSTR, File: PCSTR, Flags: DWORD): PCSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvStoreFile".}
+proc SymSrvStoreFileW*(hProcess: HANDLE, SrvPath: PCWSTR, File: PCWSTR, Flags: DWORD): PCWSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymSrvStoreSupplementA*(hProcess: HANDLE, SymPath: PCTSTR, Node: PCSTR, File: PCSTR, Flags: DWORD): PCSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvStoreSupplement".}
+proc SymSrvStoreSupplementW*(hProcess: HANDLE, SymPath: PCWSTR, Node: PCWSTR, File: PCWSTR, Flags: DWORD): PCWSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+proc SymSrvDeltaNameA*(hProcess: HANDLE, SymPath: PCSTR, Type: PCSTR, File1: PCSTR, File2: PCSTR): PCSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvDeltaName".}
+proc SymSrvDeltaNameW*(hProcess: HANDLE, SymPath: PCWSTR, Type: PCWSTR, File1: PCWSTR, File2: PCWSTR): PCWSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc `Reserved=`*(self: var MINIDUMP_HEADER, x: ULONG32) {.inline.} = self.union1.Reserved = x
 proc Reserved*(self: MINIDUMP_HEADER): ULONG32 {.inline.} = self.union1.Reserved
 proc `TimeDateStamp=`*(self: var MINIDUMP_HEADER, x: ULONG32) {.inline.} = self.union1.TimeDateStamp = x
@@ -1231,28 +1231,28 @@ proc VmRegion*(self: MINIDUMP_CALLBACK_OUTPUT): MINIDUMP_MEMORY_INFO {.inline.} 
 proc `Continue=`*(self: var MINIDUMP_CALLBACK_OUTPUT, x: WINBOOL) {.inline.} = self.struct1.Continue = x
 proc Continue*(self: MINIDUMP_CALLBACK_OUTPUT): WINBOOL {.inline.} = self.struct1.Continue
 when winimUnicode:
-  proc UnDecorateSymbolName*(DecoratedName: PCSTR, UnDecoratedName: PSTR, UndecoratedLength: DWORD, Flags: DWORD): DWORD {.winapi, stdcall, dynlib: "dbghelp", importc: "UnDecorateSymbolNameW".}
-  proc EnumerateLoadedModules64*(hProcess: HANDLE, EnumLoadedModulesCallback: PENUMLOADED_MODULES_CALLBACK64, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc: "EnumerateLoadedModulesW64".}
-  proc SymSrvGetFileIndexString*(hProcess: HANDLE, SrvPath: PCSTR, File: PCSTR, Index: PSTR, Size: int, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvGetFileIndexStringW".}
-  proc SymSrvGetFileIndexInfo*(File: PCSTR, Info: PSYMSRV_INDEX_INFO, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvGetFileIndexInfoW".}
-  proc SymSrvGetFileIndexes*(File: PCSTR, Id: ptr GUID, Val1: ptr DWORD, Val2: ptr DWORD, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvGetFileIndexesW".}
-  proc SymSrvGetSupplement*(hProcess: HANDLE, SymPath: PCSTR, Node: PCSTR, File: PCSTR): PCSTR {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvGetSupplementW".}
-  proc SymSrvIsStore*(hProcess: HANDLE, path: PCSTR): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvIsStoreW".}
-  proc SymSrvStoreFile*(hProcess: HANDLE, SrvPath: PCSTR, File: PCSTR, Flags: DWORD): PCSTR {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvStoreFileW".}
-  proc SymSrvStoreSupplement*(hProcess: HANDLE, SymPath: PCTSTR, Node: PCSTR, File: PCSTR, Flags: DWORD): PCSTR {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvStoreSupplementW".}
-  proc SymSrvDeltaName*(hProcess: HANDLE, SymPath: PCSTR, Type: PCSTR, File1: PCSTR, File2: PCSTR): PCSTR {.winapi, stdcall, dynlib: "dbghelp", importc: "SymSrvDeltaNameW".}
+  proc UnDecorateSymbolName*(DecoratedName: PCSTR, UnDecoratedName: PSTR, UndecoratedLength: DWORD, Flags: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "UnDecorateSymbolNameW".}
+  proc EnumerateLoadedModules64*(hProcess: HANDLE, EnumLoadedModulesCallback: PENUMLOADED_MODULES_CALLBACK64, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "EnumerateLoadedModulesW64".}
+  proc SymSrvGetFileIndexString*(hProcess: HANDLE, SrvPath: PCSTR, File: PCSTR, Index: PSTR, Size: int, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvGetFileIndexStringW".}
+  proc SymSrvGetFileIndexInfo*(File: PCSTR, Info: PSYMSRV_INDEX_INFO, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvGetFileIndexInfoW".}
+  proc SymSrvGetFileIndexes*(File: PCSTR, Id: ptr GUID, Val1: ptr DWORD, Val2: ptr DWORD, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvGetFileIndexesW".}
+  proc SymSrvGetSupplement*(hProcess: HANDLE, SymPath: PCSTR, Node: PCSTR, File: PCSTR): PCSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvGetSupplementW".}
+  proc SymSrvIsStore*(hProcess: HANDLE, path: PCSTR): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvIsStoreW".}
+  proc SymSrvStoreFile*(hProcess: HANDLE, SrvPath: PCSTR, File: PCSTR, Flags: DWORD): PCSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvStoreFileW".}
+  proc SymSrvStoreSupplement*(hProcess: HANDLE, SymPath: PCTSTR, Node: PCSTR, File: PCSTR, Flags: DWORD): PCSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvStoreSupplementW".}
+  proc SymSrvDeltaName*(hProcess: HANDLE, SymPath: PCSTR, Type: PCSTR, File1: PCSTR, File2: PCSTR): PCSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "SymSrvDeltaNameW".}
   proc MapFileAndCheckSum*(Filename: PCWSTR, HeaderSum: PDWORD, CheckSum: PDWORD): DWORD {.winapi, stdcall, dynlib: "imagehlp", importc: "MapFileAndCheckSumW".}
 when winimAnsi:
   proc UnDecorateSymbolName*(DecoratedName: PCSTR, UnDecoratedName: PSTR, UndecoratedLength: DWORD, Flags: DWORD): DWORD {.winapi, stdcall, dynlib: "dbghelp", importc.}
   proc EnumerateLoadedModules64*(hProcess: HANDLE, EnumLoadedModulesCallback: PENUMLOADED_MODULES_CALLBACK64, UserContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-  proc SymSrvGetFileIndexString*(hProcess: HANDLE, SrvPath: PCSTR, File: PCSTR, Index: PSTR, Size: int, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-  proc SymSrvGetFileIndexInfo*(File: PCSTR, Info: PSYMSRV_INDEX_INFO, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-  proc SymSrvGetFileIndexes*(File: PCSTR, Id: ptr GUID, Val1: ptr DWORD, Val2: ptr DWORD, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-  proc SymSrvGetSupplement*(hProcess: HANDLE, SymPath: PCSTR, Node: PCSTR, File: PCSTR): PCSTR {.winapi, stdcall, dynlib: "dbghelp", importc.}
-  proc SymSrvIsStore*(hProcess: HANDLE, path: PCSTR): WINBOOL {.winapi, stdcall, dynlib: "dbghelp", importc.}
-  proc SymSrvStoreFile*(hProcess: HANDLE, SrvPath: PCSTR, File: PCSTR, Flags: DWORD): PCSTR {.winapi, stdcall, dynlib: "dbghelp", importc.}
-  proc SymSrvStoreSupplement*(hProcess: HANDLE, SymPath: PCTSTR, Node: PCSTR, File: PCSTR, Flags: DWORD): PCSTR {.winapi, stdcall, dynlib: "dbghelp", importc.}
-  proc SymSrvDeltaName*(hProcess: HANDLE, SymPath: PCSTR, Type: PCSTR, File1: PCSTR, File2: PCSTR): PCSTR {.winapi, stdcall, dynlib: "dbghelp", importc.}
+  proc SymSrvGetFileIndexString*(hProcess: HANDLE, SrvPath: PCSTR, File: PCSTR, Index: PSTR, Size: int, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+  proc SymSrvGetFileIndexInfo*(File: PCSTR, Info: PSYMSRV_INDEX_INFO, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+  proc SymSrvGetFileIndexes*(File: PCSTR, Id: ptr GUID, Val1: ptr DWORD, Val2: ptr DWORD, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+  proc SymSrvGetSupplement*(hProcess: HANDLE, SymPath: PCSTR, Node: PCSTR, File: PCSTR): PCSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+  proc SymSrvIsStore*(hProcess: HANDLE, path: PCSTR): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+  proc SymSrvStoreFile*(hProcess: HANDLE, SrvPath: PCSTR, File: PCSTR, Flags: DWORD): PCSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+  proc SymSrvStoreSupplement*(hProcess: HANDLE, SymPath: PCTSTR, Node: PCSTR, File: PCSTR, Flags: DWORD): PCSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
+  proc SymSrvDeltaName*(hProcess: HANDLE, SymPath: PCSTR, Type: PCSTR, File1: PCSTR, File2: PCSTR): PCSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
   proc MapFileAndCheckSum*(Filename: PCSTR, HeaderSum: PDWORD, CheckSum: PDWORD): DWORD {.winapi, stdcall, dynlib: "imagehlp", importc: "MapFileAndCheckSumA".}
 when winimCpu64:
   type
