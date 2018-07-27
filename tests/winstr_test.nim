@@ -1,235 +1,367 @@
-import winim
+#====================================================================
+#
+#               Winim - Nim's Windows API Module
+#                 (c) Copyright 2016-2018 Ward
+#====================================================================
 
-block:
-  var
-    str = "English Test 中文測試"
-    cstr = "English Test 中文測試".cstring
-    wstr = +$"English Test 中文測試"
-    mstr = -$"English Test 中文測試"
+import ../winim/core except FAILED # conflict with TestStatus.FAILED
+import ../winim/inc/objbase # for SysAllocString
+import ../winim/[winstr, utils]
+import unittest, strutils, unicode
 
-    lpwstr = &(L"English Test 中文測試")
-    bstr = SysAllocString(L"English Test 中文測試")
-    arrachar: array[30, char]
-    arruchar: array[30, char]
-    arrwchar: array[30, WCHAR]
-    parrachar = &arrachar
-    parruchar = &arruchar
-    parrwchar = &arrwchar
-
-  L"English Test 中文測試" >> arrwchar
-  "English Test 中文測試" >> arruchar
-  -$"English Test 中文測試" >> arrachar
-
-  var
-    nw1 = newWString("English Test 中文測試")
-    nw2 = newWString("English Test 中文測試".cstring)
-    nw3 = newWString(1024)
-    nm1 = newMString("English Test 中文測試")
-    nm2 = newMString("English Test 中文測試".cstring)
-    nm3 = newMString(1024)
-
-    ps1 = allocString("English Test 中文測試")
-    ps2 = allocString("English Test 中文測試".cstring)
-    ps3 = allocString(+$"English Test 中文測試")
-    ps4 = allocString(-$"English Test 中文測試")
-    ps5 = allocString(1024)
-
-    pw1 = allocWString("English Test 中文測試")
-    pw2 = allocWString("English Test 中文測試".cstring)
-    pw3 = allocWString(+$"English Test 中文測試")
-    pw4 = allocWString(-$"English Test 中文測試")
-    pw5 = allocWString(1024)
-
-    pm1 = allocMString("English Test 中文測試")
-    pm2 = allocMString("English Test 中文測試".cstring)
-    pm3 = allocMString(+$"English Test 中文測試")
-    pm4 = allocMString(-$"English Test 中文測試")
-    pm5 = allocMString(1024)
-
-    s1 = $(+$"English Test 中文測試")
-    s2 = $(-$"English Test 中文測試")
-    s3 = $(lpwstr)
-    s4 = $(bstr)
-    s5 = $arruchar
-    s6 = $arrwchar
-    s7 = $parruchar
-    s8 = $parrwchar
-
-    w1 = +$("English Test 中文測試")
-    w2 = +$("English Test 中文測試".cstring)
-    w3 = +$(cast[ptr char]("English Test 中文測試".cstring))
-    w4 = +$(L"English Test 中文測試")
-    w5 = +$(-$"English Test 中文測試")
-    w6 = +$(lpwstr)
-    w7 = +$(bstr)
-    w8 = +$'T'
-    w9 = +$(20061.WCHAR)
-    w10 = +$arruchar
-    w11 = +$arrwchar
-    w12 = +$parruchar
-    w13 = +$parrwchar
-
-    m1 = -$("English Test 中文測試")
-    m2 = -$("English Test 中文測試".cstring)
-    m3 = -$(cast[ptr char]("English Test 中文測試".cstring))
-    m4 = -$(L"English Test 中文測試")
-    m5 = -$(-$"English Test 中文測試")
-    m6 = -$(lpwstr)
-    m7 = -$(bstr)
-    m8 = -$'T'
-    m9 = -$(20061.WCHAR)
-    m10 = -$arruchar
-    m11 = -$arrwchar
-    m12 = -$parruchar
-    m13 = -$parrwchar
-
-    ss1 = $$("English Test 中文測試")
-    ss2 = $$("English Test 中文測試".cstring)
-    ss3 = $$(cast[ptr char]("English Test 中文測試".cstring))
-    ss4 = $$(L"English Test 中文測試")
-    ss5 = $$(-$"English Test 中文測試")
-    ss6 = $$(lpwstr)
-    ss7 = $$(bstr)
-    ss8 = $$'T'
-    ss9 = $$(20061.WCHAR)
-    ss10 = $$arrachar
-    ss11 = $$arrwchar
-    ss12 = $$parrachar
-    ss13 = $$parrwchar
-
-    ww1 = +$$("English Test 中文測試")
-    ww2 = +$$("English Test 中文測試".cstring)
-    ww3 = +$$(cast[ptr char]("English Test 中文測試".cstring))
-    ww4 = +$$(L"English Test 中文測試")
-    ww5 = +$$(-$"English Test 中文測試")
-    ww6 = +$$(lpwstr)
-    ww7 = +$$(bstr)
-    ww8 = +$$'T'
-    ww9 = +$$(20061.WCHAR)
-    ww10 = +$$arrachar
-    ww11 = +$$arrwchar
-    ww12 = +$$parrachar
-    ww13 = +$$parrwchar
-
-    mm1 = -$$("English Test 中文測試")
-    mm2 = -$$("English Test 中文測試".cstring)
-    mm3 = -$$(cast[ptr char]("English Test 中文測試".cstring))
-    mm4 = -$$(L"English Test 中文測試")
-    mm5 = -$$(-$"English Test 中文測試")
-    mm6 = -$$(lpwstr)
-    mm7 = -$$(bstr)
-    mm8 = -$$'T'
-    mm9 = -$$(20061.WCHAR)
-    mm10 = -$$arrachar
-    mm11 = -$$arrwchar
-    mm12 = -$$parrachar
-    mm13 = -$$parrwchar
-
-    arrc: array[100, char]
-    arrw: array[100, WCHAR]
-    parrc = arrc.addr
-    parrw = arrw.addr
-
-    arrc5: array[5..10, char]
-    arrw5: array[5..10, WCHAR]
-    parrc5 = arrc5.addr
-    parrw5 = arrw5.addr
-
-    buffs = newString(100)
-    buffw = newWString(100)
-    buffm = newMString(100)
-    buffc = newString(100).cstring
-
-    pchr = cast[ptr char](newString(100).cstring)
-    pwchr = cast[ptr WCHAR](&newWString(100))
-
-  "English Test 中文測試" >> arrc5
-  -$"English Test 中文測試" >> arrc5
-  "English Test 中文測試" >> parrc5
-  -$"English Test 中文測試" >> parrc5
-  arrc5 >> buffs
-  arrc5 >> buffm
-  parrc5 >> buffs
-  parrc5 >> buffm
-
-  +$"English Test 中文測試" >> arrw5
-  +$"English Test 中文測試" >> parrw5
-  arrw5 >> buffw
-  parrw5 >> buffw
-
-  "English Test 中文測試" >> arrc
-  -$"English Test 中文測試" >> arrc
-  "English Test 中文測試" >> parrc
-  -$"English Test 中文測試" >> parrc
-  arrc >> buffs
-  arrc >> buffm
-  parrc >> buffs
-  parrc >> buffm
-
-  +$"English Test 中文測試" >> arrw
-  +$"English Test 中文測試" >> parrw
-  arrw >> buffw
-  parrw >> buffw
-
-  "English Test 中文測試" >> buffc
-  -$"English Test 中文測試" >> buffc
-  "English Test 中文測試" >> pchr
-  -$"English Test 中文測試" >> pchr
-
-  +$"English Test 中文測試" >> pwchr
-
-  proc topch(s: ptr char) = echo cast[int](s), " is ptr char, len: ", $lstrlenA(s)
-  proc tostr(s: LPSTR) = echo cast[int](s), " is LPSTR, len: ", $lstrlenA(s)
-  proc towstr(s: LPWSTR) = echo cast[int](s), " is LPWSTR, len: ", $lstrlenW(s)
-  proc tobstr(s: BSTR) = echo cast[int](s), " is BSTR, len: ", $SysStringLen(s)
-
-  topch(str)
-  topch(cstr)
-  topch(mstr)
-
-  tostr(str)
-  tostr(cstr)
-  tostr(mstr)
-
-  towstr(str)
-  towstr(cstr)
-  towstr(wstr)
-  towstr(bstr)
-
-  tobstr(str)
-  tobstr(cstr)
-  tobstr(wstr)
-
-  tostr(arrc)
-  tostr(arrc5)
-  tostr(parrc)
-  tostr(parrc5)
-
-  topch(arrc)
-  topch(arrc5)
-  topch(parrc)
-  topch(parrc5)
-
-  towstr(arrw)
-  towstr(arrw5)
-  towstr(parrw)
-  towstr(parrw5)
-
-  proc test0(s: LPSTR) = echo cast[int](s)
-  proc test1(s: LPWSTR) = echo cast[int](s)
-
-  block:
+suite "Winim Winstr Module Test Suites":
+  setup:
     var
-      s1: string
-      s2 = "abc"
-      w1: wstring
-      w2 = L"abc"
-      m1: mstring
-      m2 = -$"abc"
+      str = "English Test 中文測試"
+      mstr = -$"English Test 中文測試"
+      wstr = +$"English Test 中文測試"
+      cstr = cstring "English Test 中文測試"
+      astr = cstring cast[string](mstr)
 
-    test0(&s1)
-    test0(&s2)
-    test1(&w1)
-    test1(&w2)
-    test0(&m1)
-    test0(&m2)
+      lpstr = &(-$"English Test 中文測試") # a.k.a cstring
+      lpwstr = &(L"English Test 中文測試")
+      bstr = SysAllocString(L"English Test 中文測試")
+
+      nilstr: string
+      nilmstr: mstring
+      nilwstr: wstring
+      nilcstr: cstring
+
+    proc resetFF(buffer: var string) =
+      for i in 0..<buffer.len:
+        buffer[i] = '\xff'
+
+    proc resetFF(buffer: pointer, L: int) =
+      for i in 0..<L:
+        cast[ptr byte](cast[int](buffer) + i)[] = 0xff
+
+    proc toHex(p: pointer, L: int): string =
+      const HexChars = "0123456789ABCDEF"
+      let a = cast[ptr UncheckedArray[byte]](p)
+      result = newStringOfCap(L * 2)
+      for i in 0 ..< L:
+        let
+          hi = int a[i] shr 4
+          lo = int a[i] and 0xF
+        result.add HexChars[hi]
+        result.add HexChars[lo]
+
+    proc toHex[I, T](a: array[I, T]): string =
+      toHex(a.unsafeaddr, sizeof(a))
+
+    proc resetFF[I, T](a: array[I, T]) =
+      resetFF(a.unsafeaddr, sizeof(a))
+
+  test "String Address":
+    check(cast[ptr char](&str)[] == 'E')
+    check(cast[ptr byte](&str)[] == byte 'E')
+    check(cast[ptr WCHAR](&wstr)[] == WCHAR ord 'E')
+    check(cast[ptr char](&cstr)[] == 'E')
+
+    check(&nilstr == nil)
+    check(&nilmstr == nil)
+    check(&nilwstr == nil)
+    check(&nilcstr == nil)
+
+  test "String Conversion":
+    # original
+    check(toHex(str) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
+    check(toHex(mstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
+    check(toHex(wstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
+    check(toHex(cstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
+    check(toHex(astr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
+
+    # convert to string (to utf8)
+    check(toHex($str) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
+    check(toHex($mstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
+    check(toHex($wstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
+    check(toHex($cstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
+    check(toHex($$astr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
+
+    # convert to mstring (to ansi)
+    check(toHex(-$str) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
+    check(toHex(-$mstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
+    check(toHex(-$wstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
+    check(toHex(-$cstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
+    check(toHex(-$$astr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
+
+    # convert to wstring (to unicode)
+    check(toHex(+$str) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
+    check(toHex(+$mstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
+    check(toHex(+$wstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
+    check(toHex(+$cstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
+    check(toHex(+$$astr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
+
+    # convert from windows' string buffer to nim's string
+    check(toHex($$lpstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
+    check(toHex(-$$lpstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
+    check(toHex(+$$lpstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
+    check(toHex($lpwstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
+    check(toHex(-$lpwstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
+    check(toHex(+$lpwstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
+    check(toHex($bstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
+    check(toHex(-$bstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
+    check(toHex(+$bstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
+
+    # char conversion
+
+    check($'A' == "A")
+    check(+$'A' == +$"A")
+    check(-$'A' == -$"A")
+
+    check($$(WCHAR 20013) == "中")
+    check(+$(WCHAR 20013) == +$"中")
+    check(-$(WCHAR 20013) == -$"中")
+
+    # fill nim's string to windows' string buffer
+
+    var
+      buffer = newString(40)
+      pstr = cast[PSTR](&buffer)
+      pwstr = cast[PWSTR](&buffer)
+
+    buffer.resetFF
+    str >> pstr
+    check(toHex(buffer) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
+
+    buffer.resetFF
+    str >>> pstr
+    check(toHex(buffer) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A600FFFFFFFFFFFFFFFFFFFFFFFFFFFF")
+
+    buffer.resetFF
+    wstr >> pwstr
+    check(toHex(buffer) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668AFFFFFFFFFFFF")
+
+    buffer.resetFF
+    wstr >>> pwstr
+    check(toHex(buffer) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A0000FFFFFFFF")
+
+  test "String Manipulation":
+    check(str[11] == 't')
+    check(mstr[11] == 't')
+    check(wstr[11] == WCHAR ord 't')
+
+    check(str[13..15] == "中")
+    check(mstr[13..14] == -$"中")
+    check(wstr[13..13] == +$"中")
+
+    check(str[^17..^14] == "Test")
+    check(mstr[^13..^10] == -$"Test")
+    check(wstr[^9..^6] == +$"Test")
+
+    check(str.substr(10) == "st 中文測試")
+    check(str.substr(10, 18) == "st 中文")
+    check(str.substr(10, 9) == "")
+
+    check(mstr.substr(10) == -$"st 中文測試")
+    check(mstr.substr(10, 16) == -$"st 中文")
+    check(mstr.substr(10, 9) == -$"")
+
+    check(wstr.substr(10) == +$"st 中文測試")
+    check(wstr.substr(10, 14) == +$"st 中文")
+    check(wstr.substr(10, 9) == +$"")
+
+    str[10..18] = "0123456789"
+    check(str == "English Te0123456789測試")
+
+    mstr[10..16] = -$"0123456789"
+    check(mstr == -$"English Te0123456789測試")
+
+    wstr[10..14] = L"0123456789"
+    check(wstr == L"English Te0123456789測試")
+
+  test "String Iterator":
+    var
+      s1 = newSeq[int]()
+      s2 = newSeq[int]()
+      s3 = newSeq[int]()
+
+    for i in str.runes:
+      s1.add int i
+
+    for i in mstr:
+      if i.len == 1:
+        s2.add int cast[ptr uint8](&i)[]
+      elif i.len == 2:
+        s2.add int cast[ptr uint16](&i)[]
+
+    for i in wstr:
+      s3.add int i
+
+    check(s1 == @[69, 110, 103, 108, 105, 115, 104, 32, 84, 101, 115, 116, 32, 20013, 25991, 28204, 35430])
+    check(s2 == @[69, 110, 103, 108, 105, 115, 104, 32, 84, 101, 115, 116, 32, 0xA4A4, 0xE5A4, 0xFAB4, 0xD5B8])
+    check(s3 == @[69, 110, 103, 108, 105, 115, 104, 32, 84, 101, 115, 116, 32, 20013, 25991, 28204, 35430])
+
+  test "Null Terminated String":
+    str[12] = '\0'
+    check(toHex(str) == "456E676C697368205465737400E4B8ADE69687E6B8ACE8A9A6")
+    check(toHex(str.nullTerminated) == "456E676C6973682054657374")
+    str.nullTerminate
+    check(toHex(str) == "456E676C6973682054657374")
+
+    mstr[12] = '\0'
+    check(toHex(mstr) == "456E676C697368205465737400A4A4A4E5B4FAB8D5")
+    check(toHex(mstr.nullTerminated) == "456E676C6973682054657374")
+    mstr.nullTerminate
+    check(toHex(mstr) == "456E676C6973682054657374")
+
+    wstr[12] = 0
+    check(toHex(wstr) == "45006E0067006C006900730068002000540065007300740000002D4E87652C6E668A")
+    check(toHex(wstr.nullTerminated) == "45006E0067006C0069007300680020005400650073007400")
+    wstr.nullTerminate
+    check(toHex(wstr) == "45006E0067006C0069007300680020005400650073007400")
+
+  test "String With Null Char":
+    var s = "123\x00456\x00中文\x00測試"
+    var c = L("123\x00456\x00中文\x00測試")
+    var w = +$s
+    var m = -$s
+    check(c == w)
+    check(c.len == 13)
+    check(m.mlen == 13)
+
+  test "String Bound Check":
+    var s = "12345"
+    var m = -$"12345"
+    var w = +$"12345"
+
+    # It shoud be 5 to raise the error, this is bug in Nim,
+    expect IndexError: discard s[6]
+    expect IndexError: discard m[6]
+    expect IndexError: discard w[5]
+
+    expect IndexError: discard s[-1..0]
+    expect IndexError: discard m[-1..0]
+    expect IndexError: discard w[-1..0]
+
+    expect IndexError: discard s[0..s.len+1]
+    expect IndexError: discard m[0..m.len+1]
+    expect IndexError: discard w[0..w.len]
+
+    check(s.substr(-1, 10) == s)
+    check(m.substr(-1, 10) == m)
+    check(w.substr(-1, 10) == w)
+
+  test "Assignment Behavior":
+    var newstr = str
+    var newmstr = mstr
+    var newwstr = wstr
+    check(&newstr != &str) # by value
+    check(&newmstr != &mstr) # by value
+    check(&newwstr == &wstr) # by ref
+
+  test "Low Level Buffer Fill":
+    var byteBuffer: array[10, byte]
+    var byteArray: array[2..10, byte]
+    var wcharBuffer: array[10, WCHAR]
+    var wcharArray: array[2..10, WCHAR]
+
+    byteBuffer.resetFF
+    byteBuffer << "中文"
+    check(byteBuffer.toHex == "E4B8ADE69687FFFFFFFF")
+
+    byteBuffer.resetFF
+    byteBuffer <<< "中文"
+    check(byteBuffer.toHex == "E4B8ADE6968700FFFFFF")
+
+    byteArray.resetFF
+    byteArray << "..中文" # skip two char
+    check(byteArray.toHex == "E4B8ADE69687FFFFFF")
+
+    byteBuffer.resetFF
+    byteBuffer << -$"中文"
+    check(byteBuffer.toHex == "A4A4A4E5FFFFFFFFFFFF")
+
+    byteBuffer.resetFF
+    byteBuffer <<< -$"中文"
+    check(byteBuffer.toHex == "A4A4A4E500FFFFFFFFFF")
+
+    byteArray.resetFF
+    byteArray << -$"..中文" # skip two char
+    check(byteArray.toHex == "A4A4A4E5FFFFFFFFFF")
+
+    byteBuffer.resetFF
+    expect IndexError:
+      byteBuffer << "01234567890"
+    check(byteBuffer.toHex == "30313233343536373839")
+
+    byteBuffer.resetFF
+    expect IndexError:
+      byteBuffer <<< "0123456789"
+    check(byteBuffer.toHex == "30313233343536373839")
+
+    byteArray.resetFF
+    expect IndexError:
+      byteArray << "0123456789AB"
+    check(byteArray.toHex == "323334353637383941")
+
+    byteArray.resetFF
+    expect IndexError:
+      byteArray <<< "0123456789A"
+    check(byteArray.toHex == "323334353637383941")
+
+    wcharBuffer.resetFF
+    wcharBuffer << L"中文"
+    check(wcharBuffer.toHex == "2D4E8765FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
+
+    wcharBuffer.resetFF
+    wcharBuffer <<< L"中文"
+    check(wcharBuffer.toHex == "2D4E87650000FFFFFFFFFFFFFFFFFFFFFFFFFFFF")
+
+    wcharArray.resetFF
+    wcharArray << L"..中文" # skip two wchar
+    check(wcharArray.toHex == "2D4E8765FFFFFFFFFFFFFFFFFFFFFFFFFFFF")
+
+    wcharBuffer.resetFF
+    expect IndexError:
+      wcharBuffer << L"01234567890"
+    check(wcharBuffer.toHex == "3000310032003300340035003600370038003900")
+
+    wcharBuffer.resetFF
+    expect IndexError:
+      wcharBuffer <<< L"0123456789"
+    check(wcharBuffer.toHex == "3000310032003300340035003600370038003900")
+
+    wcharArray.resetFF
+    expect IndexError:
+      wcharArray << L"0123456789AB"
+    check(wcharArray.toHex == "320033003400350036003700380039004100")
+
+    wcharArray.resetFF
+    expect IndexError:
+      wcharArray <<< L"0123456789A"
+    check(wcharArray.toHex == "320033003400350036003700380039004100")
+
+  test "Low Level Pointer Fill":
+    var utf8Buffer: array[7, byte]
+    var mbcsBuffer: array[5, byte]
+    var wcharBuffer: array[3, WCHAR]
+    var pUtf8Buffer = addr utf8Buffer
+    var pMbcsBuffer  = addr mbcsBuffer
+    var pWcharBuffer  = addr wcharBuffer
+
+    utf8Buffer.resetFF
+    pUtf8Buffer <<< "中文"
+    check(utf8Buffer.toHex == "E4B8ADE6968700")
+
+    mbcsBuffer.resetFF
+    pMbcsBuffer <<< -$"中文"
+    check(mbcsBuffer.toHex == "A4A4A4E500")
+
+    wcharBuffer.resetFF
+    pWcharBuffer <<< L"中文"
+    check(wcharBuffer.toHex == "2D4E87650000")
+
+  test "mIndex (mString Index)":
+    check(wstr[13] == L"中"[0])
+    check(mstr[mIndex 13] == -$"中")
+
+    wstr[13] = L"英"[0]
+    mstr[mIndex 13] = -$"英"
+    check(wstr == +$"English Test 英文測試")
+    check(mstr == -$"English Test 英文測試")
+
+    wstr[7..14] = +$" ABC "
+    mstr[7..14.mIndex] = -$" ABC "
+    check(wstr == +$"English ABC 測試")
+    check(mstr == -$"English ABC 測試")

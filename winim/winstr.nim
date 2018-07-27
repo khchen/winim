@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2017 Ward
+#                 (c) Copyright 2016-2018 Ward
 #
 #                Windows String Type Utilities
 #
@@ -22,7 +22,7 @@
 ##
 ##  By default, Nim's string type is utf8 encoding.
 ##  However, windows use wide character string (aka unicode string) or multibyte character string (aka ansi string).
-##  So, We have following string types.
+##  So, we have following string types.
 ##
 ##  .. code-block:: Nim
 ##    type
@@ -30,6 +30,9 @@
 ##      cstring # compatible to the type char* in Ansi C
 ##      wstring # new string type to store unicode string
 ##      mstring # new string type to store ansi string
+##
+##  *Warning: Assignment for wstring is copy by reference.
+##  However, built-in string and mstring is copy by value.*
 ##
 ##  Here are the pseudocode for most useful functions introduced by this module.
 ##
@@ -59,27 +62,38 @@
 ##
 ##    proc `<<`[S: SomeString, B: SomeBuffer](s: S, b: B)
 ##    proc `<<`[B: SomeBuffer, S: SomeString](b: B, s: S)
+##    proc `<<<`[B: SomeBuffer, S: SomeString](b: B, s: S)
 ##    template `>>`(a: typed, b: typed) = b << a
-##      # String >> Buffer | Buffer << String: Fill buffer by string.
-##      # Buffer >> String | String << Buffer: Fill string by buffer.
+##    template `>>>`(a: typed, b: typed) = b <<< a
+##      # String << Buffer or Buffer >> String: Fill string by buffer.
+##      # Buffer << String or String >> Buffer: Fill buffer by string.
+##      # Buffer <<< String or String >>> Buffer: Fill buffer by string, include a null.
 ##      # SomeString means: string|mstring|wstring
 ##      # SomeBuffer means: (ptr) char array|(ptr) WCHAR array|LPWSTR|cstring|ptr WCHAR|ptr char
 ##
-##      # These operators don't convert the encoding.
+##      # These operators don't convert the encoding (copy byte by byte).
 ##      # Please make sure both side have the same character size.
-##      # If destination is not array, please make sure the buffer size is large enough.
+##      # If destination is just a pointer, please make sure the buffer size is large enough.
+##
+##    proc nullTerminate(s: var string|var mstring|var wstring)
+##      # Assume a string is null terminated and set the correct length.
+##
+##    proc nullTerminated[T: string|mstring|wstring](s: T): T
+##      # Assume a string is null terminated and return the length-corrected string.
 ##
 ##    macro L(s: string): wstring
-##      # Generate unicode string at compile-time (thanks to Nim's powerful macro system).
+##      # Generate wstring at compile-time if possible.
+##      # Only string literals can convert to unicode string at compile-time,
+##      # otherwise it is just `+$`.
 ##
-##    template T(s: string): string|wstring
-##      ## Generate wstring or mstring depend on conditional symbol: winansi.
+##    macro T(s: string): mstring|wstring
+##      # Generate wstring or mstring depend on conditional symbol: useWinAnsi.
 ##      # For example: (this code works under both unicode and ansi mode)
 ##
 ##        MessageBox(0, T"hello, world", T"Nim is Powerful 中文測試", 0)
 ##
-##    template T(n: Natural): string|wstring
-##      # Generate wstring or mstring buffer depend on conditional symbol: winansi.
+##    template T(n: Natural): mstring|wstring
+##      # Generate wstring or mstring buffer depend on conditional symbol: useWinAnsi.
 ##      # Use `&` to get the buffer address and then pass to Windows API.
 ##
 ##    converter winstring_converter(s: SomeString): SomeString
@@ -102,42 +116,48 @@
 ##      #   WideCString => wstring
 ##      #   wstring => WideCString
 ##
-
-#  New String Functions (Deal with wstring and mstring just like built-in string type)
-#    newWString(s: string|cstring) => convert string to wstring (utf8 to unicode)
-#    newMString(s: string|cstring) => convert string to mstring (utf8 to ansi)
-#    newWString(len: Natural) => generate wstring buffer
-#    newMString(len: Natural) => generate mstring buffer
-#
-#    setLen(s: var mstring|var wstring, newLen: Natural)
-#    substr(s: wstring|mstring, first = 0)
-#    substr(s: wstring|mstring, first, last: int)
-#    len(s: wstring|mstring)
-#    high(s: wstring|mstring)
-#    low(s: wstring|mstring)
-#    repr(s: wstring|mstring)
-#
-#    [](s: wstring|mstring, i: int)
-#    []=(s: wstring|mstring, i: int, u: WCHAR|CHAR)
-#    []=(s: wstring|mstring, i: int, u: string)
-#    [](s: wstring|mstring, x: Slice[int])
-#    []=(s: var wstring|var mstring, x: Slice[int], b: wstring|mstring)
-#    ==(x, y: wstring|mstring): bool
-#    <=(x, y: wstring|mstring): bool
-#    <(x, y: wstring|mstring): bool
-#    cmp(x, y: wstring|mstring): int
-#    &(s: wstring|mstring, t: wstring|mstring): wstring|mstring
-#
-#    iterator items(s: wstring|mstring)
-#    iterator mitems(s: var wstring|mstring)
-#    iterator pairs(s: wstring|mstring)
-#    iterator mpairs(s: var wstring|mstring)
-
+##  There are also new string functions to deal with wstring and mstring just like built-in string type.
+##
+##  .. code-block:: Nim
+##    proc newWString(s: string|cstring): wstring
+##      # Convert string to wstring and return it (utf8 to unicode)
+##    proc newMString(s: string|cstring): mstring
+##      # Convert string to mstring and return it (utf8 to ansi)
+##    proc newWString(len: Natural): wstring
+##      # Generate wstring buffer
+##    proc newMString(len: Natural): mstring
+##      # Generate mstring buffer
+##
+##    proc setLen(s: var mstring|var wstring, newLen: Natural)
+##    proc substr(s: wstring|mstring, first = 0): wstring|mstring
+##    proc substr(s: wstring|mstring, first, last: int): wstring|mstring
+##    proc len(s: wstring|mstring): int
+##    proc high(s: wstring|mstring): int
+##    proc low(s: wstring|mstring): int
+##    proc repr(s: wstring|mstring): string
+##    proc toHex(s: wstring|mstring): string
+##
+##    proc `[]`(s: wstring|mstring, i: int): WCHAR|mstring
+##    proc `[]=`(s: wstring|mstring, i: int, u: WCHAR|CHAR)
+##    proc `[]=`(s: wstring|mstring, i: int, u: string)
+##    proc `[]`(s: wstring|mstring, x: HSlice)
+##    proc `[]=`(s: var wstring|var mstring, x: Slice[int], b: wstring|mstring)
+##    proc `==`(x, y: wstring|mstring): bool
+##    proc `<=`(x, y: wstring|mstring): bool
+##    proc `<`(x, y: wstring|mstring): bool
+##    proc cmp(x, y: wstring|mstring): int
+##    proc `&`(s: wstring|mstring, t: wstring|mstring): wstring|mstring
+##
+##    iterator items(s: wstring|mstring): WCHAR|mstring
+##    iterator mitems(s: var wstring): WCHAR
+##    iterator pairs(s: wstring|mstring): tuple[key: int, val: WCHAR|mstring]
+##    iterator mpairs(s: var wstring): WCHAR
+##
 
 {.deadCodeElim: on.}
 
-import macros, strutils
-import winapi
+import macros, strutils, inc.winimbase, core
+export strutils.toHex
 
 # copy from widestrs.nim, these functions used both compile-time and run-time
 # use WCHAR instead of Utf16Char
@@ -190,9 +210,6 @@ iterator runes(s: cstring, L: int): int =
     yield result
 
 iterator WCHARs(source: cstring, L: int): WCHAR =
-  var
-    L = source.len
-
   for ch in runes(source, L):
     if ch <=% UNI_MAX_BMP:
       if ch >=% UNI_SUR_HIGH_START and ch <=% UNI_SUR_LOW_END:
@@ -206,41 +223,62 @@ iterator WCHARs(source: cstring, L: int): WCHAR =
       yield WCHAR((ch shr halfShift) +% UNI_SUR_HIGH_START)
       yield WCHAR((ch and halfMask) +% UNI_SUR_LOW_START)
 
-proc free(x: pointer) =
+proc toHex(p: pointer, L: int): string =
+  const HexChars = "0123456789ABCDEF"
+  let a = cast[ptr UncheckedArray[byte]](p)
+  result = newStringOfCap(L * 2)
+  for i in 0 ..< L:
+    let
+      hi = int a[i] shr 4
+      lo = int a[i] and 0xF
+    result.add HexChars[hi]
+    result.add HexChars[lo]
+
+proc free(x: pointer) {.inline.} =
   if not x.isNil:
     system.dealloc(x)
 
+proc toHex*(s: cstring): string {.inline.} =
+  ## Converts a cstring to its hexadecimal representation.
+  ## No prefix like ``0x`` is generated.
+
+  result = toHex($s)
+
 type
+  mIndex* = distinct int
+    ## Use mIndex in [] or []= for mstring means
+    ## index by MBCS characters, not by bytes.
+
   # todo: add capacity for optimization
   wstring* = ref object
     size: uint32
-    data: array[0..1_000_000, WCHAR]
+    data: UncheckedArray[WCHAR]
 
   mstring* = distinct string
 
   # for alloc version
   pwstring* = ptr object
     size: uint32
-    data: array[0..1_000_000, WCHAR]
+    data: UncheckedArray[WCHAR]
 
   pmstring* = ptr object
     length: int
     capacity: int
-    data: array[0..1_000_000, char]
+    data: UncheckedArray[char]
 
   pstring* = pmstring
 
-proc length(x: wstring|pwstring): int =
+proc length(x: wstring|pwstring): int {.inline.} =
   result = (x[].size shr 1).int
 
-proc `length=`(x: wstring|pwstring, L: Natural) =
+proc `length=`(x: wstring|pwstring, L: Natural) {.inline.} =
   x[].size = L.uint32 shl 1
 
-proc `&`*(s: string): ptr char =
+proc `&`*(s: string): ptr char {.inline.} =
   ## Get address of the first char of a string.
   ## For string, it has the same meaning as cstring(string), but it checks the nil well.
 
-  var dummy: string
+  var dummy: string # nil string
   when defined(cpu64):
     assert(cast[int](dummy.cstring) == 16)
     result = cast[ptr char](cast[uint](s) + (if s.isNil: 0 else: 16))
@@ -248,13 +286,13 @@ proc `&`*(s: string): ptr char =
     assert(cast[int](dummy.cstring) == 8)
     result = cast[ptr char](cast[uint](s) + (if s.isNil: 0 else: 8))
 
-proc `&`*(s: cstring): ptr char =
+proc `&`*(s: cstring): ptr char {.inline.} =
   ## Get address of the first char of a string.
   ## For string, it has the same meaning as cstring(string), but it checks the nil well.
 
   result = cast[ptr char](s)
 
-proc `&`*(s: wstring): ptr WCHAR =
+proc `&`*(s: wstring): ptr WCHAR {.inline.} =
   ## Get address of the first char of a wstring.
   ## For string, it has the same meaning as cstring(string), but it checks the nil well.
 
@@ -263,7 +301,7 @@ proc `&`*(s: wstring): ptr WCHAR =
 
   result = cast[ptr WCHAR](cast[uint](s) + (if s.isNil: 0 else: 4))
 
-proc `&`*(s: mstring): ptr char =
+proc `&`*(s: mstring): ptr char {.inline.} =
   ## Get address of the first char of a string.
   ## For string, it has the same meaning as cstring(string), but it checks the nil well.
 
@@ -277,6 +315,7 @@ proc stringBuffer(L: Natural, alloc: bool): pointer =
     result = cast[pointer](newString(L))
 
 proc wstringBuffer(L: Natural, alloc: bool): pointer =
+  # make sure there are extra null after wstring
   let size = L * 2 + sizeof(int32) + 4
   if alloc:
     result = alloc0(size)
@@ -363,33 +402,33 @@ proc `UNICODE->wstring`(source: ptr WCHAR, L: int, alloc: bool): pointer =
 
 # wstring functions
 
-proc len*(x: wstring): int = x.length
-proc high*(x:wstring): int = x.length - 1
-proc low*(x:wstring): int = 0
+proc len*(x: wstring): int {.inline.} = x.length
+proc high*(x:wstring): int {.inline.} = x.length - 1
+proc low*(x:wstring): int {.inline.} = 0
 
 proc setLen*(s: var wstring, newLen: Natural) =
   if newLen < s.length:
-    s.data[newLen] = 0.WCHAR
+    s.data[int newLen] = 0.WCHAR
     s.length = newLen.int32
   else:
-    var new = cast[wstring](wstringBuffer(newLen, alloc=false))
-    copyMem(&new, &s, s.length * 2)
-    s = new
+    var n = cast[wstring](wstringBuffer(newLen, alloc=false))
+    copyMem(&n, &s, s.length * 2)
+    s = n
 
-proc `==`*(x, y: wstring): bool =
+proc `==`*(x, y: wstring): bool {.inline.} =
   if x.length == y.length:
     result = equalMem(&x, &y, x.length*2)
   else:
     result = false
 
-proc cmp*(x, y: wstring): int =
+proc cmp*(x, y: wstring): int {.inline.} =
   lstrcmpW(&x, &y)
 
-proc `<=`*(x, y: wstring): bool =
+proc `<=`*(x, y: wstring): bool {.inline.} =
   if cmp(x, y) <= 0: return true
   return false
 
-proc `<`*(x, y: wstring): bool =
+proc `<`*(x, y: wstring): bool {.inline.} =
   if cmp(x, y) < 0: return true
   return false
 
@@ -399,18 +438,23 @@ proc wstringFromPtr[P: ptr](src1: P, len1: int, src2: P = nil, len2: int = 0): w
   copyMem(result.data.unsafeaddr, src1, len1 * 2)
   if len2 != 0: copyMem(result.data[len1].unsafeaddr, src2, len2 * 2)
 
-proc substr*(s: wstring, first = 0): wstring =
+proc substr*(s: wstring, first = 0): wstring {.inline.} =
   result = wstringFromPtr(s.data[first].unsafeaddr, s.length - first)
 
 proc substr*(s: wstring, first, last: int): wstring =
-  result = wstringFromPtr(s.data[first].unsafeaddr, last - first + 1)
+  let first = if first < 0: 0 else: first
+  if last < first:
+    result = cast[wstring](wstringBuffer(0, alloc=false))
+  else:
+    let last = if last >= s.length: s.length - 1 else: last
+    result = wstringFromPtr(s.data[first].unsafeaddr, last - first + 1)
 
-proc `[]`*(s: wstring, i: int): WCHAR =
+proc `[]`*(s: wstring, i: int): WCHAR {.inline.} =
   if i >= s.length:
     raise newException(IndexError, "index out of bounds")
   s.data[i]
 
-proc `[]=`*(s: wstring, i: int, u: WCHAR|char) =
+proc `[]=`*(s: wstring, i: int, u: WCHAR|char) {.inline.} =
   if i >= s.length:
     raise newException(IndexError, "index out of bounds")
   s.data[i] = cast[WCHAR](u)
@@ -425,21 +469,28 @@ proc `[]=`*(s: wstring, i: int, u: string) =
       s[i] = cast[WCHAR](ch)
       break
 
-proc `[]`*(s: wstring, x: Slice[int]): wstring =
-  result = s.substr(x.a, x.b)
+template `^^`(s, i: untyped): untyped =
+  (when i is BackwardsIndex: s.len - int(i) else: int(i))
 
-proc `&`*(x, y: wstring): wstring =
+proc `[]`*[T, U](s: wstring, x: HSlice[T, U]): wstring =
+  let a = s ^^ x.a
+  let L = (s ^^ x.b) - a + 1
+  if a < 0 or a + L > s.length:
+    raise newException(IndexError, "index out of bounds")
+  result = s.substr(a, a + L-1)
+
+proc `&`*(x, y: wstring): wstring {.inline.} =
   result = wstringFromPtr(x.data.unsafeaddr, x.length, y.data.unsafeaddr, y.length)
 
-proc `&`*(x: wstring, y: WCHAR|char): wstring =
+proc `&`*(x: wstring, y: WCHAR|char): wstring {.inline.} =
   var c = y.WCHAR
   result = wstringFromPtr(x.data[0].unsafeaddr, x.length, c.addr, 1)
 
-proc `[]=`*(s: var wstring, x: Slice[int], b: wstring) =
-  var a = x.a
-  var L = x.b - a + 1
+proc `[]=`*[T, U](s: var wstring, x: HSlice[T, U], b: wstring) =
+  let a = s ^^ x.a
+  let L = (s ^^ x.b) - a + 1
   if L == b.length:
-    for i in 0 .. <L: s.data[i+a] = b.data[i]
+    for i in 0 ..< L: s.data[i+a] = b.data[i]
   else:
     var slen = s.length
     var shift = b.length - L
@@ -450,17 +501,23 @@ proc `[]=`*(s: var wstring, x: Slice[int], b: wstring) =
     else:
       for i in countup(a+b.length, s.length-1+shift): s.data[i] = s.data[i-shift]
       setLen(s, newLen)
-    for i in 0 .. <b.length: s.data[i+a] = b.data[i]
+    for i in 0 ..< b.length: s.data[i+a] = b.data[i]
 
-proc add*(x: var wstring, y: char|WCHAR) =
+proc add*(x: var wstring, y: char|WCHAR) {.inline.} =
   ## bad implement, don't use if possible !!
-  var new = x & y
-  shallowCopy(x, new)
+  var n = x & y
+  shallowCopy(x, n)
 
-proc add*(x: var wstring, y: wstring) =
+proc add*(x: var wstring, y: wstring) {.inline.} =
   ## bad implement, don't use if possible !!
-  var new = x & y
-  shallowCopy(x, new)
+  var n = x & y
+  shallowCopy(x, n)
+
+proc toHex*(s: wstring): string {.inline.} =
+  ## Converts a wstring to its hexadecimal representation.
+  ## No prefix like ``0x`` is generated.
+
+  result = toHex(&s, s.len * 2)
 
 iterator items*(a: wstring): WCHAR =
   var i = 0
@@ -488,23 +545,19 @@ iterator mpairs*(a: var wstring): tuple[key: int, val: var WCHAR] =
 
 proc repr*(s: wstring): string =
   result = $cast[int](s).tohex & "(wstring)\""
-
-  for u in s:
-    if u == 0.WCHAR:
-      result &= "\\0"
-    else:
-      var wchar = u
-      var pstr = cast[pstring](`UNICODE->string`(wchar.addr, 1, alloc=true))
-      defer: free(pstr)
-      result &= cast[string](pstr)
-
+  if not s.isNil:
+    for u in s:
+      if u == 0.WCHAR:
+        result &= "\\0"
+      else:
+        var wchar = u
+        var pstr = cast[pstring](`UNICODE->string`(wchar.addr, 1, alloc=true))
+        defer: free(pstr)
+        result &= cast[string](pstr)
   result &= "\""
 
 # mstring functions
 
-proc `[]`*(s: mstring, x: Slice[int]): mstring {.borrow.}
-proc `[]=`*(s: var mstring, x: Slice[int], b: mstring) {.borrow.}
-proc `[]=`*(s: var mstring, x: Slice[int], b: string) {.borrow.}
 proc `&` * (x: mstring, y: char): mstring {.borrow.}
 proc `&` * (x, y: mstring): mstring {.borrow.}
 proc `&` * (x: char, y: mstring): mstring {.borrow.}
@@ -519,41 +572,48 @@ proc `<=` *(x: mstring, y: string): bool {.borrow.}
 proc `<` *(x, y: mstring): bool {.borrow.}
 proc substr*(s: mstring, first = 0): mstring {.borrow.}
 proc substr*(s: mstring, first, last: int): mstring {.borrow.}
+proc isNil(x: mstring): bool {.borrow.}
 
-proc setLen*(s: var mstring, newLen: Natural) =
+proc setLen*(s: var mstring, newLen: Natural) {.inline.} =
   var pstr = cast[ptr string](s.unsafeaddr)
   setLen(pstr[], newLen)
 
-proc `[]`*(s: mstring, i: int): char =
+proc `[]`*(s: mstring, i: int): char {.inline.} =
   var pstr = cast[ptr string](s.unsafeaddr)
   result = pstr[i]
 
-proc `[]=`*(s: mstring, i: int, x: char) =
+proc `[]=`*(s: mstring, i: int, x: char) {.inline.} =
   var pstr = cast[ptr string](s.unsafeaddr)
   pstr[i] = x
 
-proc len*(s: mstring): int =
+proc len*(s: mstring): int {.inline.} =
   result = cast[string](s).len
 
+proc toHex*(s: mstring): string {.inline.} =
+  ## Converts a mstring to its hexadecimal representation.
+  ## No prefix like ``0x`` is generated.
+
+  result = toHex(&s, s.len)
+
 iterator items*(s: mstring): mstring =
-  var pws = cast[pwstring](`ANSI->wstring`(&s, s.len, alloc=true))
+  let pws = cast[pwstring](`ANSI->wstring`(&s, s.len, alloc=true))
   defer: free(pws)
 
   for w in cast[wstring](pws):
     var wchar = w
-    var pms = cast[pmstring](`UNICODE->mstring`(wchar.addr, 1, alloc=true))
+    let pms = cast[pmstring](`UNICODE->mstring`(wchar.addr, 1, alloc=true))
     defer: free(pms)
 
     yield cast[mstring](pms)
 
 iterator pairs*(s: mstring): tuple[key: int, val: mstring] =
-  var pws = cast[pwstring](`ANSI->wstring`(&s, s.len, alloc=true))
+  let pws = cast[pwstring](`ANSI->wstring`(&s, s.len, alloc=true))
   defer: free(pws)
 
   var i = 0
   for w in cast[wstring](pws):
     var wchar = w
-    var pms = cast[pmstring](`UNICODE->mstring`(wchar.addr, 1, alloc=true))
+    let pms = cast[pmstring](`UNICODE->mstring`(wchar.addr, 1, alloc=true))
     defer: free(pms)
 
     yield (i, cast[mstring](pms))
@@ -561,15 +621,80 @@ iterator pairs*(s: mstring): tuple[key: int, val: mstring] =
 
 proc repr*(s: mstring): string =
   result = $cast[int](s).tohex & "(mstring)\""
-  for sub in s:
-    if sub[0] == '\0':
-      result &= "\\0"
-    else:
-      var pstr = cast[pstring](`ANSI->string`(&sub, sub.len, alloc=true))
-      defer: free(pstr)
-      result &= cast[string](pstr)
+  if not s.isNil:
+    for sub in s:
+      if sub[0] == '\0':
+        result &= "\\0"
+      else:
+        var pstr = cast[pstring](`ANSI->string`(&sub, sub.len, alloc=true))
+        defer: free(pstr)
+        result &= cast[string](pstr)
 
   result &= "\""
+
+proc mlen*(s: mstring): int =
+  let pws = cast[pwstring](`ANSI->wstring`(&s, s.len, alloc=true))
+  defer: free(pws)
+  result = cast[wstring](pws).len
+
+proc `[]`*(s: mstring, i: mIndex): mstring =
+  let
+    pws = cast[pwstring](`ANSI->wstring`(&s, s.len, alloc=true))
+    L = cast[wstring](pws).len
+    i = int i
+  defer: free(pws)
+
+  if i >= L:
+    raise newException(IndexError, "index out of bounds")
+
+  var wchar = cast[wstring](pws)[i]
+  result = cast[mstring](`UNICODE->mstring`(wchar.addr, 1, alloc=false))
+
+proc `[]=`*(s: var mstring, i: mIndex, x: mstring) =
+  let
+    pws = cast[pwstring](`ANSI->wstring`(&s, s.len, alloc=true))
+    ws = cast[wstring](pws)
+    L = ws.len
+    i = int i
+  defer: free(pws)
+
+  if i >= L:
+    raise newException(IndexError, "index out of bounds")
+
+  var wchar: WCHAR = 0
+  if x.len > 0:
+    let pws2 = cast[pwstring](`ANSI->wstring`(&x, x.len, alloc=true))
+    defer: free(pws2)
+    wchar = cast[wstring](pws2)[0]
+
+  cast[wstring](pws)[i] = wchar
+  s = cast[mstring](`UNICODE->mstring`(&ws, L, alloc=false))
+
+proc `[]`*[T, U](s: mstring, x: HSlice[T, U]): mstring =
+  when T is mIndex or U is mIndex:
+    let
+      pws = cast[pwstring](`ANSI->wstring`(&s, s.len, alloc=true))
+      ws = `[]`(cast[wstring](pws), x)
+    defer: free(pws)
+
+    result = cast[mstring](`UNICODE->mstring`(&ws, ws.len, alloc=false))
+  else:
+    result = cast[mstring](`[]`(cast[string](s), x))
+
+proc `[]=`*[T, U](s: var mstring, x: HSlice[T, U], b: mstring) =
+  when T is mIndex or U is mIndex:
+    var
+      pws = cast[pwstring](`ANSI->wstring`(&s, s.len, alloc=true))
+      pwsb = cast[pwstring](`ANSI->wstring`(&b, b.len, alloc=true))
+      ws = cast[wstring](pws)
+    defer:
+      free(pws)
+      free(pwsb)
+
+    `[]=`(ws, x, cast[wstring](pwsb))
+    s = cast[mstring](`UNICODE->mstring`(&ws, ws.len, alloc=false))
+  else:
+    `[]=`(cast[var string](s.unsafeaddr), x, cast[string](b))
 
 
 proc newWString*(s: cstring|string|int): wstring =
@@ -632,11 +757,11 @@ proc allocMString*(s: string|cstring|wstring|mstring|int): pmstring =
     result = cast[pmstring](mstringBuffer(s, alloc=true))
 
 
-# used in template
-proc `&`[I, T](a: array[I, T]|var array[I, T]): ptr array[I, T] =
+proc `&`[I, T](a: array[I, T]|var array[I, T]): ptr array[I, T] {.inline.} =
   result = a.unsafeaddr
 
-template `$`*(s: wstring|mstring|LPWSTR|BSTR): string =
+# use proc instead of template to avoid re-evaluation of s
+proc `$`*(s: wstring|mstring|LPWSTR|BSTR): string {.inline.} =
   ## Convert any stringable type to string.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is utf8 encoding.
 
@@ -649,8 +774,7 @@ template `$`*(s: wstring|mstring|LPWSTR|BSTR): string =
   elif s is BSTR:
     cast[string](`UNICODE->string`(s, SysStringLen(s).int, alloc=false))
 
-
-template `$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): string =
+proc `$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): string {.inline.} =
   ## Convert any stringable type to string.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is utf8 encoding.
 
@@ -663,7 +787,7 @@ template `$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[
   elif a is ptr array[I, WCHAR]:
     cast[string](`UNICODE->string`(cast[ptr WCHAR](a), a[].len, alloc=false))
 
-template `+$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): wstring =
+proc `+$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): wstring {.inline.} =
   ## Convert any stringable type to wstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is utf8 encoding.
 
@@ -683,7 +807,7 @@ template `+$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR
     var wchar = s.WCHAR
     cast[wstring](`UNICODE->wstring`(wchar.addr, 1, alloc=false))
 
-template `+$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): wstring =
+proc `+$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): wstring {.inline.} =
   ## Convert any stringable type to wstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is utf8 encoding.
 
@@ -696,7 +820,7 @@ template `+$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array
   elif a is ptr array[I, WCHAR]:
     cast[wstring](`UNICODE->wstring`(cast[ptr WCHAR](a), a[].len, alloc=false))
 
-template `-$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): mstring =
+proc `-$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): mstring {.inline.} =
   ## Convert any stringable type to mstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is utf8 encoding.
 
@@ -720,7 +844,7 @@ template `-$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR
     cast[mstring](`UNICODE->mstring`(c.addr, 1, alloc=false))
 
 
-template `-$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): mstring =
+proc `-$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): mstring {.inline.} =
   ## Convert any stringable type to mstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is utf8 encoding.
 
@@ -734,7 +858,7 @@ template `-$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array
     cast[mstring](`UNICODE->mstring`(cast[ptr WCHAR](a), a[].len, alloc=false))
 
 
-template `$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): string =
+proc `$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): string {.inline.} =
   ## Convert any stringable type to string.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is ansi encoding.
 
@@ -749,7 +873,7 @@ template `$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR
     $s
 
 
-template `$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): string =
+proc `$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): string {.inline.} =
   ## Convert any stringable type to string.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is ansi encoding.
 
@@ -761,7 +885,7 @@ template `$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array
     $a
 
 
-template `+$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): wstring =
+proc `+$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): wstring {.inline.} =
   ## Convert any stringable type to wstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is ansi encoding.
 
@@ -773,7 +897,7 @@ template `+$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHA
     +$s
 
 
-template `+$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): wstring =
+proc `+$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): wstring {.inline.} =
   ## Convert any stringable type to wstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is ansi encoding.
 
@@ -785,7 +909,7 @@ template `+$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr arra
     +$a
 
 
-template `-$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): mstring =
+proc `-$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): mstring {.inline.} =
   ## Convert any stringable type to mstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is ansi encoding.
 
@@ -797,7 +921,7 @@ template `-$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHA
     -$s
 
 
-template `-$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): mstring =
+proc `-$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): mstring {.inline.} =
   ## Convert any stringable type to mstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is ansi encoding.
 
@@ -808,58 +932,144 @@ template `-$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr arra
   else:
     -$a
 
-proc `<<`*[I, T: char|byte](a: ptr array[I, T]|var array[I, T], s: mstring|string) =
-  ## Fill buffer by string.
+proc nullTerminate*(s: var string) {.inline.} =
+  ## Assume a string is null terminated and set the correct length
+
+  let L = lstrlenA(cast[LPCSTR](&s))
+  if L < s.len:
+    s.setLen(L)
+
+proc nullTerminate*(s: var mstring) {.inline.} =
+  ## Assume a string is null terminated and set the correct length
+
+  # why not use generics? because there is a bug about var string|string in generics version
+  # setLen there will complain s is "string" not var "string"
+  nullTerminate(cast[var string](s.unsafeaddr))
+
+proc nullTerminate*(s: var wstring) {.inline.} =
+  ## Assume a string is null terminated and set the correct length
+
+  let L = lstrlenW(cast[LPWSTR](&s))
+  if L < s.len:
+    s.setLen(L)
+
+proc nullTerminated*[T: string|mstring|wstring](s: T): T {.inline.} =
+  ## Assume a string is null terminated and return the length-corrected string
+
+  when s is wstring:
+    result = +$(&s)
+  elif s is mstring:
+    result = -$(&s)
+  else: # string
+    result = $(&s)
+
+template fastCharAt(s: string|mstring|wstring, i: int): untyped =
+  when s is wstring:
+    s.data[int i]
+  else:
+    s[i]
+
+proc fillArray[I, T: char|byte|WCHAR](a: ptr array[I, T]|var array[I, T], s: mstring|string|wstring, inclNull = false) =
+  when T is WCHAR and s is not wstring:
+    {.fatal: "type mismatch".}
 
   when a is ptr:
     for i in a[].low..min(a[].high, s.len-1):
-      a[i] = s[i]
-  else:
-    a.unsafeaddr << s
+      a[i] = cast[T](s.fastCharAt i)
 
-proc `<<`*[I, T: char|byte](s: var mstring|var string, a: ptr array[I, T]|array[I, T]) =
-  ## Fill string by buffer.
+    if inclNull and a[].high >= s.len:
+      a[s.len] = cast[T](0)
+
+    # fill as much as possible before raise an exception
+    if (not inclNull and a[].high < s.len-1) or (inclNull and a[].high < s.len):
+      raise newException(IndexError, "string length too long")
+
+  else:
+    fillArray(a.unsafeaddr, s, inclNull)
+
+proc fillPtr[T: char|byte|WCHAR](p: ptr T, s: mstring|string|wstring, inclNull = false) =
+  when T is WCHAR and s is not wstring:
+    {.fatal: "type mismatch".}
+
+  for i in 0..<s.len:
+    cast[ptr T](cast[int](p) + i*sizeof(T))[] = cast[T](s.fastCharAt i)
+
+  if inclNull:
+    cast[ptr T](cast[int](p) + s.len*sizeof(T))[] = cast[T](0)
+
+proc fillStr[I, T: char|byte|WCHAR](s: var mstring|var string|var wstring, a: ptr array[I, T]|array[I, T]) =
+  when T is WCHAR and s is not wstring:
+    {.fatal: "type mismatch".}
 
   when a is ptr:
-    var p = cast[a.type](cast[uint](&s) + a[].low)
+    var p = cast[a.type](cast[int](&s) + a[].low*sizeof(T))
     for i in a[].low..min(a[].high, s.len-1):
       p[i] = a[i]
-  else:
-    s << a.unsafeaddr
 
-proc `<<`*[I, T: WCHAR](a: ptr array[I, T]|var array[I, T], s: wstring) =
+    # fill as much as possible before raise an exception
+    if a[].high > s.len - 1:
+      raise newException(IndexError, "string length too short")
+
+  else:
+    fillStr(s, a.unsafeaddr)
+
+
+template `<<`*[I, T: char|byte](a: ptr array[I, T]|var array[I, T], s: mstring|string) =
   ## Fill buffer by string.
 
-  when a is ptr:
-    for i in a[].low..min(a[].high, s.len-1):
-      a[i] = s[i]
-  else:
-    a.unsafeaddr << s
+  fillArray(a, s, inclNull=false)
 
-proc `<<`*[I, T: WCHAR](s: var wstring, a: ptr array[I, T]|var array[I, T]) =
+template `<<<`*[I, T: char|byte](a: ptr array[I, T]|var array[I, T], s: mstring|string) =
+  ## Fill buffer by string, include a null
+
+  fillArray(a, s, inclNull=true)
+
+template `<<`*[I, T: WCHAR](a: ptr array[I, T]|var array[I, T], s: wstring) =
+  ## Fill buffer by string.
+
+  fillArray(a, s, inclNull=false)
+
+template `<<<`*[I, T: WCHAR](a: ptr array[I, T]|var array[I, T], s: wstring) =
+  ## Fill buffer by string, include a null
+
+  fillArray(a, s, inclNull=true)
+
+template `<<`*(p: ptr char|ptr byte|cstring, s: mstring|string) =
+  ## Fill buffer by string.
+
+  fillPtr(cast[ptr char](p), s, inclNull=false)
+
+template `<<<`*(p: ptr char|byte|cstring, s: mstring|string) =
+  ## Fill buffer by string, include a null
+
+  fillPtr(cast[ptr char](p), s, inclNull=true)
+
+template `<<`*(p: ptr WCHAR, s: wstring) =
+  ## Fill buffer by string.
+
+  fillPtr(p, s, inclNull=false)
+
+template `<<<`*(p: ptr WCHAR, s: wstring) =
+  ## Fill buffer by string, include a null
+
+  fillPtr(p, s, inclNull=true)
+
+template `<<`*[I, T: char|byte](s: var mstring|var string, a: ptr array[I, T]|array[I, T]) =
   ## Fill string by buffer.
 
-  when a is ptr:
-    for i in a[].low..min(a[].high, s.len-1):
-      s[i] = a[i]
-  else:
-    s << a.unsafeaddr
+  fillStr(s, a)
 
-proc `<<`*(p: ptr char|byte|cstring, s: mstring|string) =
-  ## Fill buffer by string.
+template `<<`*[I, T: WCHAR](s: var wstring, a: ptr array[I, T]|var array[I, T]) =
+  ## Fill string by buffer.
 
-  var pp = cast[cstring](p)
-  for i in 0..<s.len:
-    pp[i] = s[i]
+  fillStr(s, a)
 
-proc `<<`*(p: ptr WCHAR, s: wstring) =
-  ## Fill buffer by string.
-
-  for i in 0..<s.len:
-    cast[ptr WCHAR](cast[uint](p) + (i*sizeof(WCHAR)).uint)[] = s[i].WCHAR
 
 template `>>`*(a: typed, b: typed) =
   b << a
+
+template `>>>`*(a: typed, b: typed) =
+  b <<< a
 
 # generics has problems on converters, define one by one
 converter winstring_converter*(x: string): LPWSTR = cast[LPWSTR](&(+$x))
@@ -892,101 +1102,46 @@ converter winstring_converter*(x: wstring): WideCString =
   copyMem(result[0].unsafeaddr, &x, x.length * 2)
 
 macro L*(x: string): untyped =
-  ## Generate unicode string at compile-time.
+  ## Generate unicode string at compile-time if possible.
 
-  var str = $x
-  if str.len == 0:
-    result = parseStmt("+$\"\"")
+  if x.kind in {nnkStrLit, nnkRStrLit, nnkTripleStrLit}:
+    var str = x.strVal
+    if str.len == 0:
+      result = prefix(newStrLitNode(""), "+$")
+    else:
+      var node = newNimNode(nnkBracket)
+      for u in WCHARs(str, str.len):
+        node.add(newDotExpr(newIntLitNode(u.int), newIdentNode("WCHAR")))
+
+      result = prefix(node, "+$")
+
   else:
-    var node = newNimNode(nnkBracket)
-    for u in WCHARs(str, str.len):
-      if u == 0: break
-      node.add(newDotExpr(newIntLitNode(u.int), newIdentNode("WCHAR")))
+    result = prefix(x, "+$")
 
-    result = prefix(node, "+$")
+macro T*(x: string): untyped =
+  ## Generate wstring or mstring depend on conditional symbol: useWinAnsi.
 
-template T*(x: string): untyped =
-  ## Generate wstring or mstring depend on conditional symbol: winansi.
-
-  when not defined(winansi):
-    L(x)
+  when winimAnsi:
+    result = prefix(x, "-$")
   else:
-    -$x
+    if x.kind in {nnkStrLit, nnkRStrLit, nnkTripleStrLit}:
+      result = prefix(x, "L")
+    else:
+      result = prefix(x, "+$")
 
 template T*(x: Natural): untyped =
-  ## Generate wstring or mstring buffer depend on conditional symbol: winansi.
+  ## Generate wstring or mstring buffer depend on conditional symbol: useWinAnsi.
   ## Use `&` to get the buffer address and then pass to Windows API.
 
-  when not defined(winansi):
-    newWString(x)
+  when winimAnsi:
+    newMString(x)
   else:
-    newString(x)
+    newWString(x)
 
 when isMainModule:
-  from winim import winim_converter # for var object => ptr object
 
-  var bufferSize = 65536
-  converter intToDWORD(x: int): DWORD = x.DWORD
+  let str = "the quick brown fox jumps over the lazy dog"
+  echo +$str == L"the quick brown fox jumps over the lazy dog"
 
-  proc getseq(s: wstring|string): seq[string] =
-    result = newSeq[string]()
-    var p = &s # `&` get address for any string type
-
-    while true:
-      var str = $p
-      # for ansi versoin, $p grab the ansi string, no encoding conversion
-      # for unicode version, $p do unicode to utf8 convert
-
-      if str.len == 0: break
-      when s is string:
-        # for ansi version, str is ansi string now, use $$ convert it to utf8 encoding string
-        result.add($$str)
-
-      else:
-        # for unicode version, str is already utf8 enocding
-        result.add(str)
-
-      p = cast[p.type](cast[int](p) + (str.len + 1) * sizeof(s[0]))
-
-  proc ansi_test() =
-    var
-      buffer = newString(bufferSize)
-      o = OPENFILENAMEA(
-        lStructSize: OPENFILENAMEA.sizeof,
-        lpstrTitle: "ansi test", # string to LPSTR converter used here
-        lpstrFile: &buffer, # `&` get address for any string type
-        nMaxFile: bufferSize,
-        Flags: OFN_EXPLORER or OFN_ALLOWMULTISELECT)
-
-    if GetOpenFileNameA(o):
-      echo getseq(buffer)
-
-  proc unicode_test() =
-    var
-      buffer = newWString(bufferSize)
-      o = OPENFILENAMEW(
-        lStructSize: OPENFILENAMEW.sizeof,
-        lpstrTitle: L"unicode test", # without L the code still works, but need runtime encoding conversion
-        lpstrFile: &buffer, # `&` get address for any string type
-        nMaxFile: bufferSize,
-        Flags: OFN_EXPLORER or OFN_ALLOWMULTISELECT)
-
-    if GetOpenFileNameW(o):
-      echo getseq(buffer)
-
-  proc universal_test() =
-    var
-      buffer = T(bufferSize)
-      o = OPENFILENAME(
-        lStructSize: OPENFILENAME.sizeof,
-        lpstrTitle: T"universal test", # string to LPWSTR converter used here
-        lpstrFile: &buffer, # `&` get address for any string type
-        nMaxFile: bufferSize,
-        Flags: OFN_EXPLORER or OFN_ALLOWMULTISELECT)
-
-    if GetOpenFileName(o):
-      echo getseq(buffer)
-
-  ansi_test()
-  unicode_test()
-  universal_test()
+  # for some example to see how to use mstring/wstring
+  # see getopenfilename.nim in examples folder

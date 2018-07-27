@@ -1,94 +1,54 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2017 Ward
+#                 (c) Copyright 2016-2018 Ward
 #
 #====================================================================
 
-##  This module contains windows API and constant definitions.
-##  Most definitions are translated from "D WinAPI programming" by Andrej Mitrovic.
-##  Some others translated from MinGW's windows headers.
+##  This module contains Windows API, struct, and constant definitions.
+##  The definitions are translated from MinGW's Windows headers.
 ##
 ##  The module also include some windows string type utilities and COM support.
-##  See winstr.nim and com.nim for details.
+##  See utils.nim, winstr.nim, and com.nim for details.
 ##
 ##  Usage:
 ##    .. code-block:: Nim
-##       import winim
-##       # or import winim.com for COM support.
+##       import winim # impore all modules, except COM support and MSHTML
+##       # or import winim.lean for core SDK only
+##       # or import winim.mean for core SDK + Shell + OLE
+##       # or import winim.com for core SDK + Shell + OLE + COM support
+##       # add import winim.html for MSHTML
 ##
 ##  To compile:
 ##    .. code-block:: Nim
-##       nim c -d:release source.nim
-##         add -d:winansi for ansi mode (unicode by default)
-##         add -d:winstyle to enable windows visual styles
+##       nim c source.nim
+##         add -d:winansi or -d:useWinAnsi for Ansi version (Unicode by default)
 ##         add -d:win_no_discardable if not like discardable windows API
-##
+##         add -d:lean same as import winim.lean
+##         add -d:mean same as import winim.mean
+##         add -d:win32_lean_and_mean same as import winim.mean
+##         add -d:mshtml same as import winim.html
+##         add -d:notrace disable COM objects trace. See com.nim for details.
+
 
 {.deadCodeElim: on.}
 
-import winim.winapi, winim.winstr
-export winim.winapi, winim.winstr
+when defined(lean):
+  import winim/[core]
+  export core
+elif defined(mean) or defined(win32_lean_and_mean):
+  import winim/[core, shell, ole]
+  export core, shell, ole
+else:
+  import winim/[core, shell, net, ole, extra]
+  export core, shell, net, ole, extra
 
-static:
-  when defined(winstyle):
-    import os
-    const winimPrivateDir = parentDir(currentSourcePath()) & r"\winim\"
+when defined(mshtml):
+  import winim.html
+  export html
 
-    when defined(cpu64):
-      const resourceFile = winimPrivateDir & "winim64.res"
-    else:
-      const resourceFile = winimPrivateDir & "winim32.res"
-
-    {.passL: resourceFile.}
-
-
-# todo: need more converter?
-converter winim_converter*(x: bool): BOOL =
-  result = if x: TRUE else: FALSE
-
-converter winim_converter*(x: BOOL): bool =
-  result = if x == FALSE: false else: true
-
-converter winim_converter*[T: object](x: var T): ptr T =
-  ## Pass an object by address if target is "ptr object". For example:
-  ##
-  ## .. code-block:: Nim
-  ##    var msg: MSG
-  ##    while GetMessage(msg, 0, 0, 0) != 0:
-  ##      TranslateMessage(msg)
-  ##      DispatchMessage(msg)
-
-  result = x.addr
-
-proc `&`*[T](x: var T): ptr T {.inline.} =
-  ## Use `&` like it in C/C++ to get address for anything.
-
-  result = x.addr
-
-
-# todo: is there a better implement?
-template `&`*(name: object): ptr type(name) =
-  ## Template to get pointer for const object. For example:
-  ##
-  ## .. code-block:: Nim
-  ##    # pUk is "ptr IUnknown" for some object
-  ##    var pDisp: ptr IDispatch
-  ##    pUk.QueryInterface(&IID_IDispatch, &pDisp)
-
-  when not declared(`ConstAddr name`):
-    proc `ConstAddr name`(): ptr type(name) =
-      var
-        globalPtr {.global.}: ptr type(name)
-        globalVar {.global.}: type(name)
-
-      if globalPtr == nil:
-        globalVar = name
-        globalPtr = globalVar.addr
-
-      result = globalPtr
-
-  `ConstAddr name`()
+import winim/[utils, winstr]
+export utils, winstr
 
 when isMainModule:
   discard MessageBox(0, T"Hello, world !", T"Nim is Powerful", 0)

@@ -6,12 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <!-- Favicon -->
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='http://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
-<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
 <title>Module com</title>
@@ -43,18 +45,19 @@ html {
 
 /* Where we want fancier font if available */
 h1, h2, h3, h4, h5, h6, p.module-desc, table.docinfo + blockquote p, table.docinfo blockquote p, h1 + blockquote p {
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
 
 h1.title {
   font-weight: 900; }
 
 body {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
-  color: #666;
-  background-color: rgba(252, 248, 244, 0.75); }
+  color: #444;
+  letter-spacing: 0.15px;
+  background-color: rgba(252, 248, 244, 0.45); }
 
 /* Skeleton grid */
 .container {
@@ -170,8 +173,8 @@ cite {
   font-style: italic !important; }
 
 dt > pre {
-  border-color: rgba(0, 0, 0, 0.15);
-  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   margin: 15px 0px 5px; }
 
 dd > pre {
@@ -187,6 +190,17 @@ dd > pre {
 .line-nums-table {
   width: 100%;
   table-layout: fixed; }
+
+/* Nim search input */
+div#searchInput {
+  margin-bottom: 8px;
+}
+div#searchInput input#searchInput {
+  width: 10em;
+}
+div.search-groupby {
+  margin-bottom: 8px;
+}
 
 table.line-nums-table {
   border-radius: 4px;
@@ -331,7 +345,7 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
 
 p {
-  margin: 0 0 12px; }
+  margin: 0 0 8px; }
 
 small {
   font-size: 85%; }
@@ -351,7 +365,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 600;
   line-height: 20px;
   color: inherit;
@@ -359,6 +373,7 @@ h6 {
 
 h1 {
   font-size: 2em;
+  font-weight: 400;
   padding-bottom: .15em;
   border-bottom: 1px solid #aaaaaa;
   margin-top: 1.0em;
@@ -489,13 +504,13 @@ pre {
   box-sizing: border-box;
   min-width: calc(100% - 19.5px);
   padding: 9.5px;
-  margin: 0.25em 10px 0.25em 10px;
-  font-size: 14px;
+  margin: 0.25em 10px 10px 10px;
+  font-size: 15px;
   line-height: 20px;
   white-space: pre !important;
   overflow-y: hidden;
   overflow-x: visible;
-  background-color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.01);
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -774,14 +789,14 @@ div.admonition p.admonition-title, div.hint p.admonition-title,
 div.important p.admonition-title, div.note p.admonition-title,
 div.tip p.admonition-title {
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 div.attention p.admonition-title, div.caution p.admonition-title,
 div.danger p.admonition-title, div.error p.admonition-title,
 div.warning p.admonition-title, .code .error {
   color: #b30000;
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 /* Uncomment (and remove this text!) to get reduced vertical space in
    compound paragraphs.
@@ -828,7 +843,7 @@ div.sidebar {
   clear: right; }
 
 div.sidebar p.rubric {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-size: medium; }
 
 div.system-messages {
@@ -935,12 +950,12 @@ p.rubric {
   text-align: center; }
 
 p.sidebar-title {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: larger; }
 
 p.sidebar-subtitle {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 p.topic-title {
@@ -982,15 +997,15 @@ pre.code .inserted, code .inserted {
   background-color: #A3D289; }
 
 span.classifier {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-style: oblique; }
 
 span.classifier-delimiter {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 span.interpreted {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 span.option {
   white-space: nowrap; }
@@ -1013,7 +1028,7 @@ table.docinfo {
   margin: 0em;
   margin-top: 2em;
   margin-bottom: 2em;
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
   color: #444444; }
 
 table.docutils {
@@ -1143,21 +1158,26 @@ dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator
   background-repeat: no-repeat;
   background-image: url("data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA==");
   margin-bottom: -5px; }
-  div.pragma {
-    display: none;
-  }
-  span.pragmabegin {
-    cursor: pointer;
-  }
-  span.pragmaend {
-    cursor: pointer;
-  }
+div.pragma {
+  display: none;
+}
+span.pragmabegin {
+  cursor: pointer;
+}
+span.pragmaend {
+  cursor: pointer;
+}
 
 div.search_results {
   background-color: antiquewhite;
   margin: 3em;
   padding: 1em;
   border: 1px solid #4d4d4d;
+}
+
+div#global-links ul {
+  margin-left: 0;
+  list-style-type: none;
 }
 </style>
 
@@ -1196,7 +1216,11 @@ function main() {
     <h1 class="title">Module com</h1>
     <div class="row">
   <div class="three columns">
-  <div>
+  <div id="global-links">
+    <ul class="simple">
+    </ul>
+  </div>
+  <div id="searchInput">
     Search: <input type="text" id="searchInput"
       onkeyup="search()" />
   </div>
@@ -1218,7 +1242,8 @@ function main() {
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#COMError"
-    title="COMError = object of Exception"><wbr />COMError<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="COMError = object of Exception
+  hresult*: HRESULT"><wbr />COMError<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#COMException"
     title="COMException = object of COMError"><wbr />COMException<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#VariantConversionError"
@@ -1229,14 +1254,14 @@ function main() {
   <li><a class="reference" href="#variant"
     title="variant = ref object
   raw: VARIANT"><wbr />variant<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#comarray"
-    title="comarray = seq[variant]"><wbr />comarray<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#comarray1d"
-    title="comarray1d = seq[variant]"><wbr />comarray1d<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#comarray2d"
-    title="comarray2d = seq[seq[variant]]"><wbr />comarray2d<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#comarray3d"
-    title="comarray3d = seq[seq[seq[variant]]]"><wbr />comarray3d<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#COMArray"
+    title="COMArray = seq[variant]"><wbr />COMArray<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#COMArray1D"
+    title="COMArray1D = seq[variant]"><wbr />COMArray1D<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#COMArray2D"
+    title="COMArray2D = seq[seq[variant]]"><wbr />COMArray2D<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#COMArray3D"
+    title="COMArray3D = seq[seq[seq[variant]]]"><wbr />COMArray3D<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#comEventHandler"
     title="comEventHandler = proc (self: com; name: string; params: varargs[variant]): variant"><wbr />com<wbr />Event<wbr />Handler<span class="attachedType" style="visibility:hidden"></span></a></li>
 
@@ -1245,7 +1270,11 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#del,com"
+      <li><a class="reference" href="#getCurrentCOMError,"
+    title="getCurrentCOMError(): ref COMError"><wbr />get<wbr />Current<wbr />COMError<span class="attachedType" style="visibility:hidden">COMError</span></a></li>
+  <li><a class="reference" href="#desc,ref.COMError"
+    title="desc(e: ref COMError): string"><wbr />desc<span class="attachedType" style="visibility:hidden">COMError</span></a></li>
+  <li><a class="reference" href="#del,com"
     title="del(x: com)"><wbr />del<span class="attachedType" style="visibility:hidden">com</span></a></li>
   <li><a class="reference" href="#del,variant"
     title="del(x: variant)"><wbr />del<span class="attachedType" style="visibility:hidden">variant</span></a></li>
@@ -1268,7 +1297,7 @@ function main() {
   <li><a class="reference" href="#copy,variant"
     title="copy(x: variant): variant"><wbr />copy<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,"
-    title="toVariant[](x: string | cstring | mstring): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+    title="toVariant(x: string | cstring | mstring): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,wstring"
     title="toVariant(x: wstring): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,BSTR"
@@ -1276,9 +1305,9 @@ function main() {
   <li><a class="reference" href="#toVariant,bool"
     title="toVariant(x: bool): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,_2"
-    title="toVariant[](x: SomeInteger | enum): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+    title="toVariant(x: SomeInteger | enum): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,SomeReal"
-    title="toVariant[SomeReal](x: SomeReal): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+    title="toVariant(x: SomeReal): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,char"
     title="toVariant(x: char): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,pointer"
@@ -1294,7 +1323,7 @@ function main() {
   <li><a class="reference" href="#toVariant,FILETIME"
     title="toVariant(x: FILETIME): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,_3"
-    title="toVariant[](x: ptr SomeInteger | ptr SomeReal | ptr char | ptr bool | ptr BSTR): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+    title="toVariant(x: ptr SomeInteger | ptr SomeReal | ptr char | ptr bool | ptr BSTR): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,VARIANT"
     title="toVariant(x: VARIANT): variant"><wbr />to<wbr />Variant<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#toVariant,variant_2"
@@ -1327,17 +1356,11 @@ function main() {
     title="connect(self: com; handler: comEventHandler; riid: REFIID = nil): DWORD"><wbr />connect<span class="attachedType" style="visibility:hidden">com</span></a></li>
   <li><a class="reference" href="#disconnect,com,DWORD,REFIID"
     title="disconnect(self: com; cookie: DWORD; riid: REFIID = nil): bool"><wbr />disconnect<span class="attachedType" style="visibility:hidden">com</span></a></li>
-  <li><a class="reference" href="#.,com,string,varargs[variant,toVariant]"
-    title="`.`(self: com; name: string; vargs: varargs[variant, toVariant]): variant"><wbr />`.`<span class="attachedType" style="visibility:hidden">com</span></a></li>
-  <li><a class="reference" href="#.=,com,string,varargs[variant,toVariant]"
-    title="`.=`(self: com; name: string; vargs: varargs[variant, toVariant]): variant"><wbr />`.=`<span class="attachedType" style="visibility:hidden">com</span></a></li>
-  <li><a class="reference" href="#.(),com,string,varargs[variant,toVariant]"
-    title="`.()`(self: com; name: string; vargs: varargs[variant, toVariant]): variant"><wbr />`.()`<span class="attachedType" style="visibility:hidden">com</span></a></li>
 
   </ul>
 </li>
 <li>
-  <a class="reference reference-toplevel" href="#14" id="64">Iterators</a>
+  <a class="reference reference-toplevel" href="#15" id="65">Iterators</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#items.i,com"
     title="items(x: com): variant"><wbr />items<span class="attachedType" style="visibility:hidden">com</span></a></li>
@@ -1347,7 +1370,7 @@ function main() {
   </ul>
 </li>
 <li>
-  <a class="reference reference-toplevel" href="#15" id="65">Converters</a>
+  <a class="reference reference-toplevel" href="#16" id="66">Converters</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#variantConverter.c,variant"
     title="variantConverter(x: variant): string"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
@@ -1400,19 +1423,31 @@ function main() {
   <li><a class="reference" href="#variantConverter.c,variant_25"
     title="variantConverter(x: variant): VARIANT"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#variantConverter.c,variant_26"
-    title="variantConverter(x: variant): comarray1d"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+    title="variantConverter(x: variant): COMArray1D"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#variantConverter.c,variant_27"
-    title="variantConverter(x: variant): comarray2d"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+    title="variantConverter(x: variant): COMArray2D"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
   <li><a class="reference" href="#variantConverter.c,variant_28"
-    title="variantConverter(x: variant): comarray3d"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
+    title="variantConverter(x: variant): COMArray3D"><wbr />variant<wbr />Converter<span class="attachedType" style="visibility:hidden">variant</span></a></li>
 
   </ul>
 </li>
 <li>
-  <a class="reference reference-toplevel" href="#16" id="66">Macros</a>
+  <a class="reference reference-toplevel" href="#17" id="67">Macros</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#comScript.m,untyped"
     title="comScript(x: untyped): untyped"><wbr />com<wbr />Script<span class="attachedType" style="visibility:hidden"></span></a></li>
+
+  </ul>
+</li>
+<li>
+  <a class="reference reference-toplevel" href="#18" id="68">Templates</a>
+  <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#..t,com,untyped,varargs[variant,toVariant]"
+    title="`.`(self: com; name: untyped; vargs: varargs[variant, toVariant]): variant"><wbr />`.`<span class="attachedType" style="visibility:hidden">com</span></a></li>
+  <li><a class="reference" href="#.=.t,com,untyped,varargs[variant,toVariant]"
+    title="`.=`(self: com; name: untyped; vargs: varargs[variant, toVariant]): variant"><wbr />`.=`<span class="attachedType" style="visibility:hidden">com</span></a></li>
+  <li><a class="reference" href="#.().t,com,untyped,varargs[variant,toVariant]"
+    title="`.()`(self: com; name: untyped; vargs: varargs[variant, toVariant]): variant"><wbr />`.()`<span class="attachedType" style="visibility:hidden">com</span></a></li>
 
   </ul>
 </li>
@@ -1422,7 +1457,7 @@ function main() {
   </div>
   <div class="nine columns" id="content">
   <div id="tocRoot"></div>
-  <p class="module-desc">This module add windows COM support to Winim. So that we can use Nim to interact with COM object like a script language. For example:<pre class = "listing"><span class="Identifier">comScript</span><span class="Punctuation">:</span>
+  <p class="module-desc">This module add windows COM support to Winim. So that we can use Nim to interact with COM object like a script language. For example:<pre class="listing"><span class="Identifier">comScript</span><span class="Punctuation">:</span>
   <span class="Keyword">var</span> <span class="Identifier">dict</span> <span class="Operator">=</span> <span class="Identifier">CreateObject</span><span class="Punctuation">(</span><span class="StringLit">&quot;Scripting.Dictionary&quot;</span><span class="Punctuation">)</span>
   <span class="Identifier">dict</span><span class="Operator">.</span><span class="Identifier">add</span><span class="Punctuation">(</span><span class="StringLit">&quot;a&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;the&quot;</span><span class="Punctuation">)</span>
   <span class="Identifier">dict</span><span class="Operator">.</span><span class="Identifier">add</span><span class="Punctuation">(</span><span class="StringLit">&quot;b&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;quick&quot;</span><span class="Punctuation">)</span>
@@ -1431,7 +1466,7 @@ function main() {
   <span class="Keyword">for</span> <span class="Identifier">key</span> <span class="Keyword">in</span> <span class="Identifier">dict</span><span class="Punctuation">:</span>
     <span class="Identifier">echo</span> <span class="Identifier">key</span><span class="Punctuation">,</span> <span class="StringLit">&quot; =&gt; &quot;</span><span class="Punctuation">,</span> <span class="Identifier">dict</span><span class="Operator">.</span><span class="Identifier">item</span><span class="Punctuation">(</span><span class="Identifier">key</span><span class="Punctuation">)</span></pre><p>This module introduce two new types to deal with COM objects: &quot;com&quot; and &quot;variant&quot;. In summary, CreateObject() or GetObject() returned a &quot;com&quot; type value, and any input/ouput of COM method should be a &quot;variant&quot; type value.</p>
 <p>Most Nim's data type and Winim's string type can convert to/from &quot;variant&quot; type value. The conversion is usually done automatically. However, specific conversion is aslo welcome.</p>
-<pre class = "listing"><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Punctuation">[</span><span class="Identifier">T</span><span class="Punctuation">]</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span> <span class="Identifier">T</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">variant</span>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Punctuation">[</span><span class="Identifier">T</span><span class="Punctuation">]</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span> <span class="Identifier">T</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">variant</span>
 <span class="Keyword">proc</span> <span class="Identifier">fromVariant</span><span class="Punctuation">[</span><span class="Identifier">T</span><span class="Punctuation">]</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span> <span class="Identifier">variant</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">T</span>
   
   <span class="Comment"># Supported type:</span>
@@ -1439,40 +1474,30 @@ function main() {
   <span class="Comment">#   bool|enum|SomeInteger|SomeReal</span>
   <span class="Comment">#   com|variant|VARIANT|ptr IUnknown|ptr IDispatch|pointer</span>
   <span class="Comment">#   SYSTEMTIME|FILETIME</span>
-  <span class="Comment">#   1d~3d array|seq</span></pre></p>
+  <span class="Comment">#   1D~3D array|seq</span></pre></p>
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="strutils.html">strutils</a>, <a class="reference external" href="macros.html">macros</a>, <a class="reference external" href="winim.html">winim</a>, <a class="reference external" href="tables.html">tables</a>
+<a class="reference external" href="strutils.html">strutils</a>, <a class="reference external" href="macros.html">macros</a>, <a class="reference external" href="utils.html">utils</a>, <a class="reference external" href="winstr.html">winstr</a>, <a class="reference external" href="core.html">core</a>, <a class="reference external" href="shell.html">shell</a>, <a class="reference external" href="ole.html">ole</a>, <a class="reference external" href="tables.html">tables</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<dt id="COMError"><a name="COMError"></a><pre><span class="Identifier">COMError</span> <span class="Other">=</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Exception</span></pre></dt>
+<dt id="COMError"><a name="COMError"></a><pre><span class="Identifier">COMError</span> <span class="Other">=</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Exception</span>
+  <span class="Identifier">hresult</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">HRESULT</span>
+</pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L58"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L58" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="COMException"><a name="COMException"></a><pre><span class="Identifier">COMException</span> <span class="Other">=</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">COMError</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L59"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L59" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="VariantConversionError"><a name="VariantConversionError"></a><pre><span class="Identifier">VariantConversionError</span> <span class="Other">=</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">ValueError</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L60"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L60" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="com"><a name="com"></a><pre><span class="Identifier">com</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
@@ -1480,10 +1505,6 @@ class="link-seesrc" target="_blank">Source</a>
 </pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L75"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L75" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variant"><a name="variant"></a><pre><span class="Identifier">variant</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
@@ -1491,55 +1512,31 @@ class="link-seesrc" target="_blank">Source</a>
 </pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L78"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L78" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="comarray"><a name="comarray"></a><pre><span class="Identifier">comarray</span> <span class="Other">=</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">]</span></pre></dt>
+<dt id="COMArray"><a name="COMArray"></a><pre><span class="Identifier">COMArray</span> <span class="Other">=</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">]</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L81"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L81" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="comarray1d"><a name="comarray1d"></a><pre><span class="Identifier">comarray1d</span> <span class="Other">=</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">]</span></pre></dt>
+<dt id="COMArray1D"><a name="COMArray1D"></a><pre><span class="Identifier">COMArray1D</span> <span class="Other">=</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">]</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L82"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L82" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="comarray2d"><a name="comarray2d"></a><pre><span class="Identifier">comarray2d</span> <span class="Other">=</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">]</span><span class="Other">]</span></pre></dt>
+<dt id="COMArray2D"><a name="COMArray2D"></a><pre><span class="Identifier">COMArray2D</span> <span class="Other">=</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">]</span><span class="Other">]</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L83"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L83" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="comarray3d"><a name="comarray3d"></a><pre><span class="Identifier">comarray3d</span> <span class="Other">=</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">]</span><span class="Other">]</span><span class="Other">]</span></pre></dt>
+<dt id="COMArray3D"><a name="COMArray3D"></a><pre><span class="Identifier">COMArray3D</span> <span class="Other">=</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">]</span><span class="Other">]</span><span class="Other">]</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L84"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L84" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="comEventHandler"><a name="comEventHandler"></a><pre><span class="Identifier">comEventHandler</span> <span class="Other">=</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">params</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L797"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L797" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1547,277 +1544,167 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
+<dt id="getCurrentCOMError"><a name="getCurrentCOMError,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getCurrentCOMError</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ref</span> <span class="Identifier">COMError</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="desc"><a name="desc,ref.COMError"></a><pre><span class="Keyword">proc</span> <span class="Identifier">desc</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <span class="Keyword">ref</span> <span class="Identifier">COMError</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
 <dt id="del"><a name="del,com"></a><pre><span class="Keyword">proc</span> <span class="Identifier">del</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L96"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L96" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="del"><a name="del,variant"></a><pre><span class="Keyword">proc</span> <span class="Identifier">del</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L104"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L104" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="COM_FullRelease"><a name="COM_FullRelease,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">COM_FullRelease</span><span class="Other">(</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 <p>Clean up all COM objects and variants.</p>
 <p>Usually, we let garbage collector to release the objects. However, sometimes the garbage collector can't release all the object even we call GC_fullCollect(). Some object will create a endless process in this situation. (for example: Excel.Application). So we need this function.</p>
-<p>Use -d:nontrace to disable this function.</p>
+<p>Use -d:notrace to disable this function.</p>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L123"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L123" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="rawType"><a name="rawType,variant"></a><pre><span class="Keyword">proc</span> <span class="Identifier">rawType</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">VARTYPE</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L161"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L161" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="rawTypeDesc"><a name="rawTypeDesc,variant"></a><pre><span class="Keyword">proc</span> <span class="Identifier">rawTypeDesc</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L164"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L164" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newCom"><a name="newCom,ptr.IDispatch"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newCom</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">IDispatch</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">com</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L171"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L171" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="copy"><a name="copy,com"></a><pre><span class="Keyword">proc</span> <span class="Identifier">copy</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">com</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L176"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L176" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="warp"><a name="warp,ptr.IDispatch"></a><pre><span class="Keyword">proc</span> <span class="Identifier">warp</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">IDispatch</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">com</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L180"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L180" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="unwarp"><a name="unwarp,com"></a><pre><span class="Keyword">proc</span> <span class="Identifier">unwarp</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">IDispatch</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L183"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L183" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newVariant"><a name="newVariant,VARIANT"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">VARIANT</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L186"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L186" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="copy"><a name="copy,variant"></a><pre><span class="Keyword">proc</span> <span class="Identifier">copy</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L191"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L191" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="toVariant"><a name="toVariant,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">[</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Operator">|</span> <span class="Identifier">cstring</span> <span class="Operator">|</span> <span class="Identifier">mstring</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
+<dt id="toVariant"><a name="toVariant,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Operator">|</span> <span class="Identifier">cstring</span> <span class="Operator">|</span> <span class="Identifier">mstring</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L197"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L197" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="toVariant"><a name="toVariant,wstring"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">wstring</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L202"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L202" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="toVariant"><a name="toVariant,BSTR"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">BSTR</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L207"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L207" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="toVariant"><a name="toVariant,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L212"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L212" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="toVariant"><a name="toVariant,_2"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">[</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">SomeInteger</span> <span class="Operator">|</span> <span class="Keyword">enum</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
+<dt id="toVariant"><a name="toVariant,_2"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">SomeInteger</span> <span class="Operator">|</span> <span class="Keyword">enum</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L217"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L217" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="toVariant"><a name="toVariant,SomeReal"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">[</span><span class="Identifier">SomeReal</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">SomeReal</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
+<dt id="toVariant"><a name="toVariant,SomeReal"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">SomeReal</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L246"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L246" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="toVariant"><a name="toVariant,char"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">char</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L255"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L255" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="toVariant"><a name="toVariant,pointer"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">pointer</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L260"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L260" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="toVariant"><a name="toVariant,ptr.IDispatch"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">IDispatch</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L265"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L265" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="toVariant"><a name="toVariant,com"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L271"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L271" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="toVariant"><a name="toVariant,ptr.IUnknown"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">IUnknown</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L277"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L277" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="toVariant"><a name="toVariant,SYSTEMTIME"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">SYSTEMTIME</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L283"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L283" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="toVariant"><a name="toVariant,FILETIME"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">FILETIME</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L289"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L289" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="toVariant"><a name="toVariant,_3"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">[</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">SomeInteger</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">SomeReal</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">char</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">bool</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">BSTR</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
+<dt id="toVariant"><a name="toVariant,_3"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">SomeInteger</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">SomeReal</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">char</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">bool</span> <span class="Operator">|</span> <span class="Keyword">ptr</span> <span class="Identifier">BSTR</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L296"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L296" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="toVariant"><a name="toVariant,VARIANT"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">VARIANT</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L301"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L301" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="toVariant"><a name="toVariant,variant_2"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L306"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L306" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="toVariant"><a name="toVariant,openArray[T],VARENUM"></a><pre><span class="Keyword">proc</span> <span class="Identifier">toVariant</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">vt</span><span class="Other">:</span> <span class="Identifier">VARENUM</span> <span class="Other">=</span> <span class="Identifier">VT_VARIANT</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L384"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L384" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="fromVariant"><a name="fromVariant,variant"></a><pre><span class="Keyword">proc</span> <span class="Identifier">fromVariant</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L490"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L490" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="$"><a name="$,variant"></a><pre><span class="Keyword">proc</span> <span class="Identifier">`$`</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L596"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L596" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="call"><a name="call,com,string,varargs[variant,toVariant]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">call</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma">
@@ -1825,10 +1712,6 @@ class="link-seesrc" target="_blank">Source</a>
                         <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L691"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L691" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="set"><a name="set,com,string,varargs[variant,toVariant]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">set</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma">
@@ -1836,10 +1719,6 @@ class="link-seesrc" target="_blank">Source</a>
                         <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L694"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L694" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="setRef"><a name="setRef,com,string,varargs[variant,toVariant]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setRef</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma">
@@ -1847,10 +1726,6 @@ class="link-seesrc" target="_blank">Source</a>
                         <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L697"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L697" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="get"><a name="get,com,string,varargs[variant,toVariant]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">get</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span>
@@ -1858,436 +1733,267 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L700"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L700" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="getT"><a name="getT,com,string,varargs[variant,toVariant]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getT</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L703"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L703" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="CreateObject"><a name="CreateObject,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">CreateObject</span><span class="Other">(</span><span class="Identifier">progId</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">com</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">]</span><span class="Other">,</span>
                                      <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Creates a reference to a COM object.
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L736"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L736" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="GetObject"><a name="GetObject,string,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">GetObject</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">progId</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">com</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Retrieves a reference to a COM object from an existing process or filename.
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L757"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L757" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newCom"><a name="newCom,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newCom</span><span class="Other">(</span><span class="Identifier">progId</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">com</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L789"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L789" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="newCom"><a name="newCom,string,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newCom</span><span class="Other">(</span><span class="Identifier">file</span><span class="Other">,</span> <span class="Identifier">progId</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">com</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">]</span><span class="Other">,</span>
                                     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L792"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L792" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="connect"><a name="connect,com,comEventHandler,REFIID"></a><pre><span class="Keyword">proc</span> <span class="Identifier">connect</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">;</span> <span class="Identifier">handler</span><span class="Other">:</span> <span class="Identifier">comEventHandler</span><span class="Other">;</span> <span class="Identifier">riid</span><span class="Other">:</span> <span class="Identifier">REFIID</span> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">DWORD</span> <span class="Other pragmabegin">{.</span><div class="pragma">
-    <span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+    <span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
-Connect a COM object to a comEventHandler. Return a cookie to disconnect (if needed). Handler is a user defined proc to receive the COM event. comEventHandler is defined as:<pre class = "listing"><span class="Keyword">type</span> <span class="Identifier">comEventHandler</span> <span class="Operator">=</span> <span class="Keyword">proc</span><span class="Punctuation">(</span><span class="Identifier">self</span><span class="Punctuation">:</span> <span class="Identifier">com</span><span class="Punctuation">,</span> <span class="Identifier">name</span><span class="Punctuation">:</span> <span class="Identifier">string</span><span class="Punctuation">,</span> <span class="Identifier">params</span><span class="Punctuation">:</span> <span class="Identifier">varargs</span><span class="Punctuation">[</span><span class="Identifier">variant</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">variant</span></pre>
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L948"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L948" class="link-seesrc" target="_blank" >Edit</a>
+Connect a COM object to a comEventHandler. Return a cookie to disconnect (if needed). Handler is a user defined proc to receive the COM event. comEventHandler is defined as:<pre class="listing"><span class="Keyword">type</span> <span class="Identifier">comEventHandler</span> <span class="Operator">=</span> <span class="Keyword">proc</span><span class="Punctuation">(</span><span class="Identifier">self</span><span class="Punctuation">:</span> <span class="Identifier">com</span><span class="Punctuation">,</span> <span class="Identifier">name</span><span class="Punctuation">:</span> <span class="Identifier">string</span><span class="Punctuation">,</span> <span class="Identifier">params</span><span class="Punctuation">:</span> <span class="Identifier">varargs</span><span class="Punctuation">[</span><span class="Identifier">variant</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">variant</span></pre>
 
 </dd>
 <dt id="disconnect"><a name="disconnect,com,DWORD,REFIID"></a><pre><span class="Keyword">proc</span> <span class="Identifier">disconnect</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">;</span> <span class="Identifier">cookie</span><span class="Other">:</span> <span class="Identifier">DWORD</span><span class="Other">;</span> <span class="Identifier">riid</span><span class="Other">:</span> <span class="Identifier">REFIID</span> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Disconnect a COM object from a comEventHandler.
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L959"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L959" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id="."><a name=".,com,string,varargs[variant,toVariant]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">`.`</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma">
-    <span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">AssertionError</span><span class="Other">,</span> <span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span>
-                        <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L965"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L965" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id=".="><a name=".=,com,string,varargs[variant,toVariant]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">`.=`</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma">
-    <span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">AssertionError</span><span class="Other">,</span> <span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span>
-                        <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L968"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L968" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<dt id=".()"><a name=".(),com,string,varargs[variant,toVariant]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">`.()`</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma">
-    <span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">AssertionError</span><span class="Other">,</span> <span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span>
-                        <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L971"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L971" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
 </dl></div>
-<div class="section" id="14">
-<h1><a class="toc-backref" href="#14">Iterators</a></h1>
+<div class="section" id="15">
+<h1><a class="toc-backref" href="#15">Iterators</a></h1>
 <dl class="item">
 <dt id="items"><a name="items.i,com"></a><pre><span class="Keyword">iterator</span> <span class="Identifier">items</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
                               <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L706"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L706" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="items"><a name="items.i,variant"></a><pre><span class="Keyword">iterator</span> <span class="Identifier">items</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span>
     <span class="Identifier">COMError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L725"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L725" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
 </dl></div>
-<div class="section" id="15">
-<h1><a class="toc-backref" href="#15">Converters</a></h1>
+<div class="section" id="16">
+<h1><a class="toc-backref" href="#16">Converters</a></h1>
 <dl class="item">
 <dt id="variantConverter"><a name="variantConverter.c,variant"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L597"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L597" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_2"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cstring</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L598"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L598" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_3"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">mstring</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L599"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L599" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_4"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wstring</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L600"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L600" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_5"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">char</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L601"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L601" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_6"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L602"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L602" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_7"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">com</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L603"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L603" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_8"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">IDispatch</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L604"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L604" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_9"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">IUnknown</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L605"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L605" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_10"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">pointer</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L606"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L606" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_11"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L607"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L607" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_12"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L608"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L608" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_13"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int8</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L609"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L609" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_14"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L610"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L610" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_15"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int16</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L611"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L611" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_16"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint16</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L612"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L612" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_17"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int32</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L613"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L613" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_18"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint32</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L614"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L614" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_19"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int64</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L615"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L615" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_20"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint64</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L616"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L616" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_21"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float32</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L617"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L617" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_22"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float64</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L618"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L618" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_23"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">FILETIME</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L619"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L619" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_24"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">SYSTEMTIME</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L620"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L620" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <dt id="variantConverter"><a name="variantConverter.c,variant_25"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">VARIANT</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L621"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L621" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_26"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">comarray1d</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="variantConverter"><a name="variantConverter.c,variant_26"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">COMArray1D</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L622"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L622" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_27"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">comarray2d</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="variantConverter"><a name="variantConverter.c,variant_27"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">COMArray2D</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L623"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L623" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<dt id="variantConverter"><a name="variantConverter.c,variant_28"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">comarray3d</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="variantConverter"><a name="variantConverter.c,variant_28"></a><pre><span class="Keyword">converter</span> <span class="Identifier">variantConverter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">variant</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">COMArray3D</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L624"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L624" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
 </dl></div>
-<div class="section" id="16">
-<h1><a class="toc-backref" href="#16">Macros</a></h1>
+<div class="section" id="17">
+<h1><a class="toc-backref" href="#17">Macros</a></h1>
 <dl class="item">
 <dt id="comScript"><a name="comScript.m,untyped"></a><pre><span class="Keyword">macro</span> <span class="Identifier">comScript</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
-Nim's dot operators <cite>.=</cite> only allow &quot;a.b = c&quot;. With this macro, &quot;a.b(c, d) = e&quot; is allowed. Some assignment need this macro. For example:<pre class = "listing"><span class="Identifier">comScript</span><span class="Punctuation">:</span>
+Nim's dot operators <cite>.=</cite> only allow &quot;a.b = c&quot;. With this macro, &quot;a.b(c, d) = e&quot; is allowed. Some assignment need this macro. For example:<pre class="listing"><span class="Identifier">comScript</span><span class="Punctuation">:</span>
   <span class="Identifier">dict</span><span class="Operator">.</span><span class="Identifier">item</span><span class="Punctuation">(</span><span class="StringLit">&quot;c&quot;</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="StringLit">&quot;dog&quot;</span>
   <span class="Identifier">excel</span><span class="Operator">.</span><span class="Identifier">activeSheet</span><span class="Operator">.</span><span class="Identifier">cells</span><span class="Punctuation">(</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">1</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="StringLit">&quot;text&quot;</span></pre>
-&nbsp;&nbsp;<a
-href="/tree/master/com.nim#L998"
-class="link-seesrc" target="_blank">Source</a>
-<a href="/edit/devel/com.nim#L998" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+
+</dl></div>
+<div class="section" id="18">
+<h1><a class="toc-backref" href="#18">Templates</a></h1>
+<dl class="item">
+<dt id="."><a name="..t,com,untyped,varargs[variant,toVariant]"></a><pre><span class="Keyword">template</span> <span class="Identifier">`.`</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id=".="><a name=".=.t,com,untyped,varargs[variant,toVariant]"></a><pre><span class="Keyword">template</span> <span class="Identifier">`.=`</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id=".()"><a name=".().t,com,untyped,varargs[variant,toVariant]"></a><pre><span class="Keyword">template</span> <span class="Identifier">`.()`</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">com</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">variant</span><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">variant</span></pre></dt>
+<dd>
+
 
 </dd>
 
@@ -2300,7 +2006,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2017-01-16 22:38:07 UTC</small>
+        <small>Made with Nim. Generated: 2018-07-27 10:37:05 UTC</small>
       </div>
     </div>
   </div>

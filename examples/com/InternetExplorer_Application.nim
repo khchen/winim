@@ -28,7 +28,10 @@ proc handler(obj: com, name: string, params: varargs[variant]): variant =
   else: discard
 
 
-var obj = CreateObject("InternetExplorer.Application")
+# var obj = CreateObject("InternetExplorer.Application")
+# create InternetExplorerMedium instance to avoid it need admin
+var obj = CreateObject("{D5E8041D-920F-45e9-B8FB-B1DEB82C6E5E}")
+
 obj.visible = true
 obj.connect(handler, &DIID_DWebBrowserEvents2)
 obj.navigate("http://www.google.com")

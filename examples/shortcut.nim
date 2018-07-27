@@ -1,5 +1,4 @@
-import os
-import winim
+import os, winim.mean
 
 var
   pIL: ptr IShellLink
@@ -36,7 +35,7 @@ proc load() =
     var buffer = T(MAX_PATH)
     if pIL.GetPath(&buffer, MAX_PATH, nil, 0).FAILED: raise
 
-    echo "load path from shortcut: ", buffer
+    echo "load path from shortcut: ", buffer.null_terminated
 
   except:
     echo "something wrong !!"

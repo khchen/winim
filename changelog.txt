@@ -1,22 +1,45 @@
 ====================================================================
 
                Winim - Nim's Windows API Module
-                 (c) Copyright 2016-2017 Ward
+                 (c) Copyright 2016-2018 Ward
 
 ====================================================================
 
+Version 2.0
+-----------
+# Ready for Nim compiler version 0.18.0.
+# All windows API and constant definitions are translated from MinGW's
+  headers files now. Not depends on "D WinAPI programming" anymore.
+# API modules can import one by one if needed.
+  Ex: import winim.inc.winuser
+# Add lean module for import core Windows SDK only, mean module
+  for core + Shell + OLE API.
+  Use import winim.lean or -d:lean to switch.
+# Add -d:useWinAnsi to use the Ansi versions of the Windows API.
+# Add -d:mshtml or import winim.html or winim.inc.mshtml for MSHTML.
+  (file size is too big, add only if needed.)
+# Remove -d:winstyle (always enabled)
+# winstr: add toHex, nullTerminate, nullTerminated, `<<<`, `>>>`,
+  mlen, mIndex, etc. Also some fix some bug.
+# com: add multithreads support.
+
+Version 1.2.1
+--------------
+# winapi: add double quotes to resource file
+# winapi: fix bug about GetWindowLongPtr and NMHDR etc.
+
 Version 1.2
 -----------
-winapi: redefine const to int literals is possible
-winapi: convert enum to const definition
-winapi: add more definition in shobjidl.h, propsys.h, shtypes.h,
+# winapi: redefine const to int literals if possible
+# winapi: convert enum to const definition
+# winapi: add more definition in shobjidl.h, propsys.h, shtypes.h,
   and structuredquerycondition.h
-com: better error message on COMError exception
+# com: better error message on COMError exception
 
 Version 1.1
 -----------
-winapi: add -d:winstyle to enable windows visual styles
+# winapi: add -d:winstyle to enable windows visual styles
 
 Version 1.0
 -----------
-Initial release
+# Initial release

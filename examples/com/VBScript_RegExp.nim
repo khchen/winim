@@ -1,4 +1,4 @@
-import strutils
+import strformat
 import winim.com
 
 var obj = CreateObject("VBScript.RegExp")
@@ -8,4 +8,4 @@ obj.global = true
 
 for match in obj.execute("the quick brown fox jumps over the lazy dog"):
   echo match
-  echo "FirstIndex: $1, Length: $2, Value: $3" % [$match.firstIndex, $match.length, $match.value]
+  echo fmt"FirstIndex: {$match.firstIndex}, Length: {$match.length}, Value: {$match.value}"

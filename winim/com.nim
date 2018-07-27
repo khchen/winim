@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2017 Ward
+#                 (c) Copyright 2016-2018 Ward
 #
 #           Windows COM Object And COM Event Supports
 #
@@ -37,19 +37,25 @@
 ##      #   bool|enum|SomeInteger|SomeReal
 ##      #   com|variant|VARIANT|ptr IUnknown|ptr IDispatch|pointer
 ##      #   SYSTEMTIME|FILETIME
-##      #   1d~3d array|seq
+##      #   1D~3D array|seq
 ##
 
 {.experimental.} # for dot operators
 
-import strutils, macros, winim
-export winim
+import strutils, macros
+
+import utils, winstr, core, shell, ole
+export utils, winstr, core, shell, ole
+
 
 #todo: is it a good idea to do global initialize here?
 # however, it works fine.
-discard CoInitialize(nil)
+when compileOption("threads"):
+  discard CoInitializeEx(nil, COINIT_MULTITHREADED)
+else:
+  discard CoInitialize(nil)
 
-when defined(nontrace):
+when defined(notrace):
   const hasTraceTable = false
 else:
   const hasTraceTable = true
@@ -83,10 +89,10 @@ type
   variant* = ref object
     raw: VARIANT
 
-  comarray* = seq[variant]
-  comarray1d* = seq[variant]
-  comarray2d* = seq[seq[variant]]
-  comarray3d* = seq[seq[seq[variant]]]
+  COMArray* = seq[variant]
+  COMArray1D* = seq[variant]
+  COMArray2D* = seq[seq[variant]]
+  COMArray3D* = seq[seq[seq[variant]]]
 
 when hasTraceTable:
   import tables
@@ -94,9 +100,6 @@ when hasTraceTable:
   var
     comTrace {.threadvar.}: TableRef[pointer, bool]
     varTrace {.threadvar.}: TableRef[pointer, bool]
-
-  comTrace = newTable[pointer, bool]()
-  varTrace = newTable[pointer, bool]()
 
 var hresult {.threadvar.}: HRESULT
 
@@ -125,8 +128,8 @@ proc desc*(e: ref COMError): string =
 
   FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM or FORMAT_MESSAGE_IGNORE_INSERTS,
                nil,
-               e.hresult.DWORD,
-               MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+               DWORD e.hresult,
+               DWORD MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
                cast[wstring](buffer), 4096, nil)
   result = $cast[wstring](buffer)
 
@@ -149,6 +152,9 @@ template init(x): untyped =
   new(x, del)
 
   when hasTraceTable:
+    if comTrace.isNil: comTrace = newTable[pointer, bool]()
+    if varTrace.isNil: varTrace = newTable[pointer, bool]()
+
     when x.type is variant:
       varTrace[cast[pointer](x)] = true
 
@@ -165,7 +171,7 @@ when hasTraceTable:
     ## Some object will create a endless process in this situation. (for example: Excel.Application).
     ## So we need this function.
     ##
-    ## Use -d:nontrace to disable this function.
+    ## Use -d:notrace to disable this function.
 
     for k, v in varTrace: del cast[variant](k)
     for k, v in comTrace: del cast[com](k)
@@ -321,7 +327,7 @@ proc toVariant*(x: SomeInteger|enum): variant =
       result.raw.uiVal = x.uint16
     elif sizeof(x) == 4:
       result.raw.vt = VT_UI4.VARTYPE
-      result.raw.ulVal = x.uint32
+      result.raw.ulVal = x.int32 # ULONG is declared as int32 for compatible
     else:
       result.raw.vt = VT_UI8.VARTYPE
       result.raw.ullVal = x.uint64
@@ -364,17 +370,33 @@ proc toVariant*(x: ptr IUnknown): variant =
   result.raw.punkVal = x
 
 proc toVariant*(x: SYSTEMTIME): variant =
+  # SystemTimeToVariantTime and VariantTimeToSystemTime ignored milliseconds
+  # https://www.codeproject.com/Articles/17576/SystemTime-to-VariantTime-with-Milliseconds
+
+  const ONETHOUSANDMILLISECONDS = 0.0000115740740740'f64
+  var x = x
   result.init
   result.raw.vt = VT_DATE.VARTYPE
-  if SystemTimeToVariantTime(x.unsafeaddr, &result.raw.u1.s1.u1.date) == FALSE:
+
+  let wMilliSeconds = float x.wMilliseconds
+  x.wMilliseconds = 0
+
+  var date: float64
+  if SystemTimeToVariantTime(&x, &date) == FALSE:
     raise newException(VariantConversionError, vcErrorMsg("SYSTEMTIME", "VT_DATE"))
+
+  result.raw.date = date + ONETHOUSANDMILLISECONDS / 1000 * wMilliSeconds
 
 proc toVariant*(x: FILETIME): variant =
   result.init
-  var st: SYSTEMTIME
   result.raw.vt = VT_DATE.VARTYPE
-  if FileTimeToSystemTime(x.unsafeaddr, &st) == FALSE or SystemTimeToVariantTime(&st, &result.raw.u1.s1.u1.date) == FALSE:
+
+  var st: SYSTEMTIME
+  var date: float64
+  if FileTimeToSystemTime(x.unsafeaddr, &st) == FALSE or SystemTimeToVariantTime(&st, &date) == FALSE:
     raise newException(VariantConversionError, vcErrorMsg("FILETIME", "VT_DATE"))
+
+  result.raw.date = date
 
 proc toVariant*(x: ptr SomeInteger|ptr SomeReal|ptr char|ptr bool|ptr BSTR): variant =
   result = toVariant(x[])
@@ -409,9 +431,9 @@ template toVariant1D(x: typed, vt: VARENUM) =
     if vt == VT_VARIANT:
       discard SafeArrayPutElement(result.raw.parray, &indices, &(v.raw))
     elif vt == VT_DISPATCH or vt == VT_UNKNOWN or vt == VT_BSTR:
-      discard SafeArrayPutElement(result.raw.parray, &indices, (v.raw.u1.s1.u1.byref))
+      discard SafeArrayPutElement(result.raw.parray, &indices, (v.raw.union1.struct1.union1.byref))
     else:
-      discard SafeArrayPutElement(result.raw.parray, &indices, &(v.raw.u1.s1.u1.intVal))
+      discard SafeArrayPutElement(result.raw.parray, &indices, &(v.raw.union1.struct1.union1.intVal))
 
 template toVariant2D(x: typed, vt: VARENUM) =
   var sab: array[2, SAFEARRAYBOUND]
@@ -433,9 +455,9 @@ template toVariant2D(x: typed, vt: VARENUM) =
       if vt == VT_VARIANT:
         discard SafeArrayPutElement(result.raw.parray, &indices[0], &(v.raw))
       elif vt == VT_DISPATCH or vt == VT_UNKNOWN or vt == VT_BSTR:
-        discard SafeArrayPutElement(result.raw.parray, &indices[0], (v.raw.u1.s1.u1.byref))
+        discard SafeArrayPutElement(result.raw.parray, &indices[0], (v.raw.union1.struct1.union1.byref))
       else:
-        discard SafeArrayPutElement(result.raw.parray, &indices[0], &(v.raw.u1.s1.u1.intVal))
+        discard SafeArrayPutElement(result.raw.parray, &indices[0], &(v.raw.union1.struct1.union1.intVal))
 
 template toVariant3D(x: typed, vt: VARENUM) =
   var sab: array[3, SAFEARRAYBOUND]
@@ -460,9 +482,9 @@ template toVariant3D(x: typed, vt: VARENUM) =
         if vt == VT_VARIANT:
           discard SafeArrayPutElement(result.raw.parray, &indices[0], &(v.raw))
         elif vt == VT_DISPATCH or vt == VT_UNKNOWN or vt == VT_BSTR:
-          discard SafeArrayPutElement(result.raw.parray, &indices[0], (v.raw.u1.s1.u1.byref))
+          discard SafeArrayPutElement(result.raw.parray, &indices[0], (v.raw.union1.struct1.union1.byref))
         else:
-          discard SafeArrayPutElement(result.raw.parray, &indices[0], &(v.raw.u1.s1.u1.intVal))
+          discard SafeArrayPutElement(result.raw.parray, &indices[0], &(v.raw.union1.struct1.union1.intVal))
 
 proc toVariant*[T](x: openarray[T], vt: VARENUM = VT_VARIANT): variant =
   result.init
@@ -497,10 +519,10 @@ template fromVariant1D(x, dimensions: typed) =
         discard SafeArrayGetElement(x.raw.parray, &indices, &result[i].raw)
       else:
         result[i].raw.vt = vt
-        discard SafeArrayGetElement(x.raw.parray, &indices, &result[i].raw.u1.s1.u1.intVal)
+        discard SafeArrayGetElement(x.raw.parray, &indices, &result[i].raw.union1.struct1.union1.intVal)
 
   else:
-    raise newException(VariantConversionError, vcErrorMsg(x.raw.vt.typeDesc(dimensions), "comarray1d"))
+    raise newException(VariantConversionError, vcErrorMsg(x.raw.vt.typeDesc(dimensions), "COMArray1D"))
 
 template fromVariant2D(x, dimensions: typed) =
   var
@@ -528,10 +550,10 @@ template fromVariant2D(x, dimensions: typed) =
           discard SafeArrayGetElement(x.raw.parray, &indices[0], &result[i][j].raw)
         else:
           result[i][j].raw.vt = vt
-          discard SafeArrayGetElement(x.raw.parray, &indices[0], &result[i][j].raw.u1.s1.u1.intVal)
+          discard SafeArrayGetElement(x.raw.parray, &indices[0], &result[i][j].raw.union1.struct1.union1.intVal)
 
   else:
-    raise newException(VariantConversionError, vcErrorMsg(x.raw.vt.typeDesc(dimensions), "comarray2d"))
+    raise newException(VariantConversionError, vcErrorMsg(x.raw.vt.typeDesc(dimensions), "COMArray2D"))
 
 template fromVariant3D(x, dimensions: typed) =
   var
@@ -565,10 +587,10 @@ template fromVariant3D(x, dimensions: typed) =
             discard SafeArrayGetElement(x.raw.parray, &indices[0], &result[i][j][k].raw)
           else:
             result[i][j][k].raw.vt = vt
-            discard SafeArrayGetElement(x.raw.parray, &indices[0], &result[i][j][k].raw.u1.s1.u1.intVal)
+            discard SafeArrayGetElement(x.raw.parray, &indices[0], &result[i][j][k].raw.union1.struct1.union1.intVal)
 
   else:
-    raise newException(VariantConversionError, vcErrorMsg(x.raw.vt.typeDesc(dimensions), "comarray3d"))
+    raise newException(VariantConversionError, vcErrorMsg(x.raw.vt.typeDesc(dimensions), "COMArray3D"))
 
 proc fromVariant*[T](x: variant): T =
   if x.isNil: return
@@ -586,9 +608,9 @@ proc fromVariant*[T](x: variant): T =
     if (x.raw.vt and VT_ARRAY.VARTYPE) != 0:
       dimensions = SafeArrayGetDim(x.raw.parray)
 
-    when T is comarray1d: fromVariant1D(x, dimensions)
-    elif T is comarray2d: fromVariant2D(x, dimensions)
-    elif T is comarray3d: fromVariant3D(x, dimensions)
+    when T is COMArray1D: fromVariant1D(x, dimensions)
+    elif T is COMArray2D: fromVariant2D(x, dimensions)
+    elif T is COMArray3D: fromVariant3D(x, dimensions)
     elif T is ptr and not (T is ptr IDispatch) and not (T is ptr IUnknown):
       if (x.raw.vt and VT_BYREF.VARTYPE) != 0:
         result = cast[T](x.raw.byref)
@@ -649,8 +671,29 @@ proc fromVariant*[T](x: variant): T =
         result = +$ret.bstrVal
 
       elif T is SYSTEMTIME:
-        if VariantTimeToSystemTime(ret.date, &result) == FALSE:
+        # SystemTimeToVariantTime and VariantTimeToSystemTime ignored milliseconds
+        # https://www.codeproject.com/Articles/17576/SystemTime-to-VariantTime-with-Milliseconds
+
+        const ONETHOUSANDMILLISECONDS = 0.0000115740740740'F64
+        let halfSecond = ONETHOUSANDMILLISECONDS / 2.0
+        if VariantTimeToSystemTime(ret.date - halfSecond, &result) == FALSE:
           raise newException(VariantConversionError, vcErrorMsg(x.raw.vt.typeDesc(dimensions), targetName))
+
+        var
+          fraction = ret.date - ret.date.int.float64
+          hours = (fraction - fraction.int.float64) * 24
+          minutes = (hours - hours.int.float64) * 60
+          seconds = (minutes - minutes.int.float64) * 60
+          milliseconds = (seconds - seconds.int.float64) * 1000 + 0.5
+
+        if milliseconds < 1.0 or milliseconds > 999.0:
+          milliseconds = 0
+
+        if milliseconds != 0:
+          result.wMilliseconds = WORD milliseconds
+        else:
+          if VariantTimeToSystemTime(ret.date, &result) == FALSE:
+            raise newException(VariantConversionError, vcErrorMsg(x.raw.vt.typeDesc(dimensions), targetName))
 
       elif T is FILETIME:
         var st: SYSTEMTIME
@@ -702,9 +745,9 @@ converter variantConverter*(x: variant): float64 = fromVariant[float64](x)
 converter variantConverter*(x: variant): FILETIME = fromVariant[FILETIME](x)
 converter variantConverter*(x: variant): SYSTEMTIME = fromVariant[SYSTEMTIME](x)
 converter variantConverter*(x: variant): VARIANT = fromVariant[VARIANT](x)
-converter variantConverter*(x: variant): comarray1d = fromVariant[comarray1d](x)
-converter variantConverter*(x: variant): comarray2d = fromVariant[comarray2d](x)
-converter variantConverter*(x: variant): comarray3d = fromVariant[comarray3d](x)
+converter variantConverter*(x: variant): COMArray1D = fromVariant[COMArray1D](x)
+converter variantConverter*(x: variant): COMArray2D = fromVariant[COMArray2D](x)
+converter variantConverter*(x: variant): COMArray3D = fromVariant[COMArray3D](x)
 
 proc invokeRaw(self: com, name: string, invokeType: WORD, vargs: varargs[variant, toVariant]): variant =
   if vargs.len > 128:
@@ -743,7 +786,7 @@ proc invokeRaw(self: com, name: string, invokeType: WORD, vargs: varargs[variant
       dp.cNamedArgs = 1
 
   if self.disp.Invoke(dispid, &IID_NULL, LOCALE_USER_DEFAULT, invokeType, &dp, &ret, &excep, nil).ERR:
-    if excep.pfnDeferredFillIn.notNil:
+    if cast[pointer](excep.pfnDeferredFillIn).notNil:
       discard excep.pfnDeferredFillIn(&excep)
 
     if excep.bstrSource.notNil:
@@ -1046,15 +1089,27 @@ proc disconnect*(self: com, cookie: DWORD, riid: REFIID = nil): bool {.discardab
   if cookie != 0 and connectRaw(self, riid, cookie, nil) != 0:
     result = true
 
-proc `.`*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable.} =
-  result = invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
+when defined(nimNewDot): # for v0.18
+  proc discardable(v: variant): variant {.discardable, inline.} = v
 
-proc `.=`*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable.} =
-  result = invoke(self, name, DISPATCH_PROPERTYPUT, vargs)
+  template `.`*(self: com, name: untyped, vargs: varargs[variant, toVariant]): variant =
+    discardable invoke(self, astToStr(name), DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
 
-proc `.()`*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable.} =
-  result = invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
+  template `.=`*(self: com, name: untyped, vargs: varargs[variant, toVariant]): variant =
+    discardable invoke(self, astToStr(name), DISPATCH_PROPERTYPUT, vargs)
 
+  template `.()`*(self: com, name: untyped, vargs: varargs[variant, toVariant]): variant =
+    discardable invoke(self, astToStr(name), DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
+
+else:
+  proc `.`*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable, inline.} =
+    result = invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
+
+  proc `.=`*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable, inline.} =
+    result = invoke(self, name, DISPATCH_PROPERTYPUT, vargs)
+
+  proc `.()`*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable, inline.} =
+    result = invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
 
 proc comReformat(n: NimNode): NimNode =
   # reformat code: a.b.c(d, e) = f becomes a.b.c.set(d, e, f)
@@ -1092,6 +1147,7 @@ macro comScript*(x: untyped): untyped =
   result = comReformat(x)
 
 when isMainModule:
+
   comScript:
     var dict = CreateObject("Scripting.Dictionary")
 

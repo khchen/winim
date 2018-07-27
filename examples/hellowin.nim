@@ -1,4 +1,4 @@
-import winim
+import winim.lean
 
 proc WndProc(hwnd: HWND, message: UINT, wParam: WPARAM, lParam: LPARAM): LRESULT {.stdcall.} =
   var
