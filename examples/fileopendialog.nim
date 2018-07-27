@@ -1,6 +1,6 @@
 # source at: https://msdn.microsoft.com/en-us/library/windows/desktop/ff485843(v=vs.85).aspx
 
-import winim
+import winim.mean
 
 converter pointerConverter(x: ptr): ptr PVOID = cast[ptr PVOID](x)
 
@@ -23,7 +23,7 @@ try:
     if pItem.GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath).FAILED: raise
     defer: CoTaskMemFree(pszFilePath)
 
-    MessageBox(0, pszFilePath, T"File Path", MB_OK)
+    MessageBoxW(0, pszFilePath, L"File Path", MB_OK)
 
 except:
   echo "something wrong !"
