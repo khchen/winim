@@ -593,8 +593,8 @@ proc HandleMessage*(self: ptr IPrintDialogCallback, hDlg: HWND, uMsg: UINT, wPar
 proc GetCurrentDevMode*(self: ptr IPrintDialogServices, pDevMode: LPDEVMODE, pcbSize: ptr UINT): HRESULT {.winapi, inline.} = self.lpVtbl.GetCurrentDevMode(self, pDevMode, pcbSize)
 proc GetCurrentPrinterName*(self: ptr IPrintDialogServices, pPrinterName: LPTSTR, pcchSize: ptr UINT): HRESULT {.winapi, inline.} = self.lpVtbl.GetCurrentPrinterName(self, pPrinterName, pcchSize)
 proc GetCurrentPortName*(self: ptr IPrintDialogServices, pPortName: LPTSTR, pcchSize: ptr UINT): HRESULT {.winapi, inline.} = self.lpVtbl.GetCurrentPortName(self, pPortName, pcchSize)
-converter winimConverterIPrintDialogCallback*(x: ptr IPrintDialogCallback): ptr IUnknown = cast[ptr IUnknown](x)
-converter winimConverterIPrintDialogServices*(x: ptr IPrintDialogServices): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterIPrintDialogCallbackToIUnknown*(x: ptr IPrintDialogCallback): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterIPrintDialogServicesToIUnknown*(x: ptr IPrintDialogServices): ptr IUnknown = cast[ptr IUnknown](x)
 when winimUnicode:
   type
     OPENFILENAME_NT4* = OPENFILENAME_NT4W

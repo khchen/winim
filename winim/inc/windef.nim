@@ -9252,13 +9252,10 @@ when winimCpu32:
 proc RtlFirstEntrySList*(ListHead: ptr SLIST_HEADER): PSLIST_ENTRY {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc RtlInterlockedPopEntrySList*(ListHead: PSLIST_HEADER): PSLIST_ENTRY {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc RtlInterlockedPushEntrySList*(ListHead: PSLIST_HEADER, ListEntry: PSLIST_ENTRY): PSLIST_ENTRY {.winapi, stdcall, dynlib: "ntdll", importc.}
-proc RtlInterlockedPushListSListEx*(ListHead: PSLIST_HEADER, List: PSLIST_ENTRY, ListEnd: PSLIST_ENTRY, Count: DWORD): PSLIST_ENTRY {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc RtlInterlockedFlushSList*(ListHead: PSLIST_HEADER): PSLIST_ENTRY {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc RtlQueryDepthSList*(ListHead: PSLIST_HEADER): WORD {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc VerSetConditionMask*(ConditionMask: ULONGLONG, TypeMask: DWORD, Condition: BYTE): ULONGLONG {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc RtlGetProductInfo*(OSMajorVersion: DWORD, OSMinorVersion: DWORD, SpMajorVersion: DWORD, SpMinorVersion: DWORD, ReturnedProductType: PDWORD): BOOLEAN {.winapi, stdcall, dynlib: "ntdll", importc.}
-proc RtlCrc32*(Buffer: pointer, Size: int, InitialCrc: DWORD): DWORD {.winapi, stdcall, dynlib: "ntdll", importc.}
-proc RtlCrc64*(Buffer: pointer, Size: int, InitialCrc: ULONGLONG): ULONGLONG {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc RtlApplicationVerifierStop*(Code: ULONG_PTR, Message: PSTR, Param1: ULONG_PTR, Description1: PSTR, Param2: ULONG_PTR, Description2: PSTR, Param3: ULONG_PTR, Description3: PSTR, Param4: ULONG_PTR, Description4: PSTR): VOID {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc RtlSetHeapInformation*(HeapHandle: PVOID, HeapInformationClass: HEAP_INFORMATION_CLASS, HeapInformation: PVOID, HeapInformationLength: SIZE_T): DWORD {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc RtlQueryHeapInformation*(HeapHandle: PVOID, HeapInformationClass: HEAP_INFORMATION_CLASS, HeapInformation: PVOID, HeapInformationLength: SIZE_T, ReturnLength: PSIZE_T): DWORD {.winapi, stdcall, dynlib: "ntdll", importc.}
@@ -9659,9 +9656,6 @@ when winimCpu64:
   type
     PGET_RUNTIME_FUNCTION_CALLBACK* = proc (ControlPc: DWORD64, Context: PVOID): PRUNTIME_FUNCTION {.stdcall.}
     POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK* = proc (Process: HANDLE, TableAddress: PVOID, Entries: PDWORD, Functions: ptr PRUNTIME_FUNCTION): DWORD {.stdcall.}
-  proc RtlAddGrowableFunctionTable*(DynamicTable: ptr PVOID, FunctionTable: PRUNTIME_FUNCTION, EntryCount: DWORD, MaximumEntryCount: DWORD, RangeBase: ULONG_PTR, RangeEnd: ULONG_PTR): DWORD {.winapi, stdcall, dynlib: "ntdll", importc.}
-  proc RtlGrowFunctionTable*(DynamicTable: PVOID, NewEntryCount: DWORD): VOID {.winapi, stdcall, dynlib: "ntdll", importc.}
-  proc RtlDeleteGrowableFunctionTable*(DynamicTable: PVOID): VOID {.winapi, stdcall, dynlib: "ntdll", importc.}
   proc RtlAddFunctionTable*(FunctionTable: PRUNTIME_FUNCTION, EntryCount: DWORD, BaseAddress: DWORD64): BOOLEAN {.winapi, cdecl, dynlib: "ntdll", importc.}
   proc RtlDeleteFunctionTable*(FunctionTable: PRUNTIME_FUNCTION): BOOLEAN {.winapi, cdecl, dynlib: "ntdll", importc.}
   proc RtlInstallFunctionTableCallback*(TableIdentifier: DWORD64, BaseAddress: DWORD64, Length: DWORD, Callback: PGET_RUNTIME_FUNCTION_CALLBACK, Context: PVOID, OutOfProcessCallbackDll: PCWSTR): BOOLEAN {.winapi, cdecl, dynlib: "ntdll", importc.}

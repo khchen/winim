@@ -5,6 +5,12 @@
 
 ====================================================================
 
+Version 2.1
+-----------
+# Ready for Nim compiler version 0.18.1.
+# Remove some APIs that Windows 7 not supports to avoid
+  "could not import" error message.
+
 Version 2.0
 -----------
 # Ready for Nim compiler version 0.18.0.

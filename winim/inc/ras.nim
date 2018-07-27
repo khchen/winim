@@ -1224,8 +1224,8 @@ type
   PPPP_PROJECTION_INFO* = ptr PPP_PROJECTION_INFO
   IKEV2_PROJECTION_INFO* {.pure.} = object
     dwIPv4NegotiationError*: DWORD
-    wszAddress*: array[IPADDRESSLEN  + 1, WCHAR]
-    wszRemoteAddress*: array[IPADDRESSLEN  + 1, WCHAR]
+    wszAddress*: array[IPADDRESSLEN + 1, WCHAR]
+    wszRemoteAddress*: array[IPADDRESSLEN + 1, WCHAR]
     IPv4SubInterfaceIndex*: ULONG64
     dwIPv6NegotiationError*: DWORD
     bInterfaceIdentifier*: array[8, BYTE]

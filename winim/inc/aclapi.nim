@@ -812,18 +812,12 @@ proc AuthzCachedAccessCheck*(Flags: DWORD, hAccessCheckResults: AUTHZ_ACCESS_CHE
 proc AuthzOpenObjectAudit*(Flags: DWORD, hAuthzClientContext: AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest: PAUTHZ_ACCESS_REQUEST, hAuditEvent: AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor: PSECURITY_DESCRIPTOR, OptionalSecurityDescriptorArray: ptr PSECURITY_DESCRIPTOR, OptionalSecurityDescriptorCount: DWORD, pReply: PAUTHZ_ACCESS_REPLY): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
 proc AuthzFreeHandle*(hAccessCheckResults: AUTHZ_ACCESS_CHECK_RESULTS_HANDLE): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
 proc AuthzInitializeResourceManager*(Flags: DWORD, pfnDynamicAccessCheck: PFN_AUTHZ_DYNAMIC_ACCESS_CHECK, pfnComputeDynamicGroups: PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS, pfnFreeDynamicGroups: PFN_AUTHZ_FREE_DYNAMIC_GROUPS, szResourceManagerName: PCWSTR, phAuthzResourceManager: PAUTHZ_RESOURCE_MANAGER_HANDLE): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
-proc AuthzInitializeResourceManagerEx*(Flags: DWORD, pAuthzInitInfo: PAUTHZ_INIT_INFO, phAuthzResourceManager: PAUTHZ_RESOURCE_MANAGER_HANDLE): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
-proc AuthzInitializeRemoteResourceManager*(pRpcInitInfo: PAUTHZ_RPC_INIT_INFO_CLIENT, phAuthzResourceManager: PAUTHZ_RESOURCE_MANAGER_HANDLE): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
 proc AuthzFreeResourceManager*(hAuthzResourceManager: AUTHZ_RESOURCE_MANAGER_HANDLE): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
 proc AuthzInitializeContextFromToken*(Flags: DWORD, TokenHandle: HANDLE, hAuthzResourceManager: AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime: PLARGE_INTEGER, Identifier: LUID, DynamicGroupArgs: PVOID, phAuthzClientContext: PAUTHZ_CLIENT_CONTEXT_HANDLE): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
 proc AuthzInitializeContextFromSid*(Flags: DWORD, UserSid: PSID, hAuthzResourceManager: AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime: PLARGE_INTEGER, Identifier: LUID, DynamicGroupArgs: PVOID, phAuthzClientContext: PAUTHZ_CLIENT_CONTEXT_HANDLE): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
 proc AuthzInitializeContextFromAuthzContext*(Flags: DWORD, hAuthzClientContext: AUTHZ_CLIENT_CONTEXT_HANDLE, pExpirationTime: PLARGE_INTEGER, Identifier: LUID, DynamicGroupArgs: PVOID, phNewAuthzClientContext: PAUTHZ_CLIENT_CONTEXT_HANDLE): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
-proc AuthzInitializeCompoundContext*(UserContext: AUTHZ_CLIENT_CONTEXT_HANDLE, DeviceContext: AUTHZ_CLIENT_CONTEXT_HANDLE, phCompoundContext: PAUTHZ_CLIENT_CONTEXT_HANDLE): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
 proc AuthzAddSidsToContext*(hAuthzClientContext: AUTHZ_CLIENT_CONTEXT_HANDLE, Sids: PSID_AND_ATTRIBUTES, SidCount: DWORD, RestrictedSids: PSID_AND_ATTRIBUTES, RestrictedSidCount: DWORD, phNewAuthzClientContext: PAUTHZ_CLIENT_CONTEXT_HANDLE): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
 proc AuthzModifySecurityAttributes*(hAuthzClientContext: AUTHZ_CLIENT_CONTEXT_HANDLE, pOperations: PAUTHZ_SECURITY_ATTRIBUTE_OPERATION, pAttributes: PAUTHZ_SECURITY_ATTRIBUTES_INFORMATION): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
-proc AuthzModifyClaims*(hAuthzClientContext: AUTHZ_CLIENT_CONTEXT_HANDLE, ClaimClass: AUTHZ_CONTEXT_INFORMATION_CLASS, pClaimOperations: PAUTHZ_SECURITY_ATTRIBUTE_OPERATION, pClaims: PAUTHZ_SECURITY_ATTRIBUTES_INFORMATION): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
-proc AuthzModifySids*(hAuthzClientContext: AUTHZ_CLIENT_CONTEXT_HANDLE, SidClass: AUTHZ_CONTEXT_INFORMATION_CLASS, pSidOperations: PAUTHZ_SID_OPERATION, pSids: PTOKEN_GROUPS): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
-proc AuthzSetAppContainerInformation*(hAuthzClientContext: AUTHZ_CLIENT_CONTEXT_HANDLE, pAppContainerSid: PSID, CapabilityCount: DWORD, pCapabilitySids: PSID_AND_ATTRIBUTES): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
 proc AuthzGetInformationFromContext*(hAuthzClientContext: AUTHZ_CLIENT_CONTEXT_HANDLE, InfoClass: AUTHZ_CONTEXT_INFORMATION_CLASS, BufferSize: DWORD, pSizeRequired: PDWORD, Buffer: PVOID): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
 proc AuthzFreeContext*(hAuthzClientContext: AUTHZ_CLIENT_CONTEXT_HANDLE): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
 proc AuthzInitializeObjectAccessAuditEvent*(Flags: DWORD, hAuditEventType: AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType: PWSTR, szObjectType: PWSTR, szObjectName: PWSTR, szAdditionalInfo: PWSTR, phAuditEvent: PAUTHZ_AUDIT_EVENT_HANDLE, dwAdditionalParameterCount: DWORD): WINBOOL {.winapi, cdecl, varargs, dynlib: "authz", importc.}
@@ -837,9 +831,6 @@ proc AuthzRegisterSecurityEventSource*(dwFlags: DWORD, szEventSourceName: PCWSTR
 proc AuthzUnregisterSecurityEventSource*(dwFlags: DWORD, phEventProvider: PAUTHZ_SECURITY_EVENT_PROVIDER_HANDLE): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
 proc AuthzReportSecurityEvent*(dwFlags: DWORD, hEventProvider: AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId: DWORD, pUserSid: PSID, dwCount: DWORD): WINBOOL {.winapi, cdecl, varargs, dynlib: "authz", importc.}
 proc AuthzReportSecurityEventFromParams*(dwFlags: DWORD, hEventProvider: AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId: DWORD, pUserSid: PSID, pParams: PAUDIT_PARAMS): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
-proc AuthzRegisterCapChangeNotification*(phCapChangeSubscription: PAUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE, pfnCapChangeCallback: LPTHREAD_START_ROUTINE, pCallbackContext: PVOID): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
-proc AuthzUnregisterCapChangeNotification*(hCapChangeSubscription: AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
-proc AuthzFreeCentralAccessPolicyCache*(): WINBOOL {.winapi, stdcall, dynlib: "authz", importc.}
 proc CreateSecurityPage*(psi: LPSECURITYINFO): HPROPSHEETPAGE {.winapi, stdcall, dynlib: "aclui", importc.}
 proc EditSecurity*(hwndOwner: HWND, psi: LPSECURITYINFO): WINBOOL {.winapi, stdcall, dynlib: "aclui", importc.}
 proc EditSecurityAdvanced*(hwndOwner: HWND, psi: LPSECURITYINFO, uSIPage: SI_PAGE_TYPE): HRESULT {.winapi, stdcall, dynlib: "aclui", importc.}
@@ -886,13 +877,13 @@ proc GetFullResourceName*(self: ptr ISecurityInformation3, ppszResourceName: ptr
 proc OpenElevatedEditor*(self: ptr ISecurityInformation3, hWnd: HWND, uPage: SI_PAGE_TYPE): HRESULT {.winapi, inline.} = self.lpVtbl.OpenElevatedEditor(self, hWnd, uPage)
 proc GetSecondarySecurity*(self: ptr ISecurityInformation4, pSecurityObjects: ptr PSECURITY_OBJECT, pSecurityObjectCount: PULONG): HRESULT {.winapi, inline.} = self.lpVtbl.GetSecondarySecurity(self, pSecurityObjects, pSecurityObjectCount)
 proc ComputeEffectivePermissionWithSecondarySecurity*(self: ptr IEffectivePermission2, pSid: PSID, pDeviceSid: PSID, pszServerName: PCWSTR, pSecurityObjects: PSECURITY_OBJECT, dwSecurityObjectCount: DWORD, pUserGroups: PTOKEN_GROUPS, pAuthzUserGroupsOperations: PAUTHZ_SID_OPERATION, pDeviceGroups: PTOKEN_GROUPS, pAuthzDeviceGroupsOperations: PAUTHZ_SID_OPERATION, pAuthzUserClaims: PAUTHZ_SECURITY_ATTRIBUTES_INFORMATION, pAuthzUserClaimsOperations: PAUTHZ_SECURITY_ATTRIBUTE_OPERATION, pAuthzDeviceClaims: PAUTHZ_SECURITY_ATTRIBUTES_INFORMATION, pAuthzDeviceClaimsOperations: PAUTHZ_SECURITY_ATTRIBUTE_OPERATION, pEffpermResultLists: PEFFPERM_RESULT_LIST): HRESULT {.winapi, inline.} = self.lpVtbl.ComputeEffectivePermissionWithSecondarySecurity(self, pSid, pDeviceSid, pszServerName, pSecurityObjects, dwSecurityObjectCount, pUserGroups, pAuthzUserGroupsOperations, pDeviceGroups, pAuthzDeviceGroupsOperations, pAuthzUserClaims, pAuthzUserClaimsOperations, pAuthzDeviceClaims, pAuthzDeviceClaimsOperations, pEffpermResultLists)
-converter winimConverterISecurityInformation*(x: ptr ISecurityInformation): ptr IUnknown = cast[ptr IUnknown](x)
-converter winimConverterISecurityInformation2*(x: ptr ISecurityInformation2): ptr IUnknown = cast[ptr IUnknown](x)
-converter winimConverterIEffectivePermission*(x: ptr IEffectivePermission): ptr IUnknown = cast[ptr IUnknown](x)
-converter winimConverterISecurityObjectTypeInfo*(x: ptr ISecurityObjectTypeInfo): ptr IUnknown = cast[ptr IUnknown](x)
-converter winimConverterISecurityInformation3*(x: ptr ISecurityInformation3): ptr IUnknown = cast[ptr IUnknown](x)
-converter winimConverterISecurityInformation4*(x: ptr ISecurityInformation4): ptr IUnknown = cast[ptr IUnknown](x)
-converter winimConverterIEffectivePermission2*(x: ptr IEffectivePermission2): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterISecurityInformationToIUnknown*(x: ptr ISecurityInformation): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterISecurityInformation2ToIUnknown*(x: ptr ISecurityInformation2): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterIEffectivePermissionToIUnknown*(x: ptr IEffectivePermission): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterISecurityObjectTypeInfoToIUnknown*(x: ptr ISecurityObjectTypeInfo): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterISecurityInformation3ToIUnknown*(x: ptr ISecurityInformation3): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterISecurityInformation4ToIUnknown*(x: ptr ISecurityInformation4): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterIEffectivePermission2ToIUnknown*(x: ptr IEffectivePermission2): ptr IUnknown = cast[ptr IUnknown](x)
 when winimUnicode:
   type
     OBJECTS_AND_NAME* = OBJECTS_AND_NAME_W

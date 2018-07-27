@@ -1896,12 +1896,12 @@ proc GetFrame*(self: ptr IGetFrame, lPos: LONG): LPVOID {.winapi, inline.} = sel
 proc Begin*(self: ptr IGetFrame, lStart: LONG, lEnd: LONG, lRate: LONG): HRESULT {.winapi, inline.} = self.lpVtbl.Begin(self, lStart, lEnd, lRate)
 proc End*(self: ptr IGetFrame): HRESULT {.winapi, inline.} = self.lpVtbl.End(self)
 proc SetFormat*(self: ptr IGetFrame, lpbi: LPBITMAPINFOHEADER, lpBits: LPVOID, x: int32, y: int32, dx: int32, dy: int32): HRESULT {.winapi, inline.} = self.lpVtbl.SetFormat(self, lpbi, lpBits, x, y, dx, dy)
-converter winimConverterIAVIStream*(x: ptr IAVIStream): ptr IUnknown = cast[ptr IUnknown](x)
-converter winimConverterIAVIStreaming*(x: ptr IAVIStreaming): ptr IUnknown = cast[ptr IUnknown](x)
-converter winimConverterIAVIEditStream*(x: ptr IAVIEditStream): ptr IUnknown = cast[ptr IUnknown](x)
-converter winimConverterIAVIPersistFile*(x: ptr IAVIPersistFile): ptr IPersistFile = cast[ptr IPersistFile](x)
-converter winimConverterIAVIFile*(x: ptr IAVIFile): ptr IUnknown = cast[ptr IUnknown](x)
-converter winimConverterIGetFrame*(x: ptr IGetFrame): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterIAVIStreamToIUnknown*(x: ptr IAVIStream): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterIAVIStreamingToIUnknown*(x: ptr IAVIStreaming): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterIAVIEditStreamToIUnknown*(x: ptr IAVIEditStream): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterIAVIPersistFileToIPersistFile*(x: ptr IAVIPersistFile): ptr IPersistFile = cast[ptr IPersistFile](x)
+converter winimConverterIAVIFileToIUnknown*(x: ptr IAVIFile): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterIGetFrameToIUnknown*(x: ptr IGetFrame): ptr IUnknown = cast[ptr IUnknown](x)
 when winimUnicode:
   type
     ACMDRIVERDETAILS* = ACMDRIVERDETAILSW

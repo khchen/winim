@@ -1019,8 +1019,8 @@ proc ContextSensitiveHelp*(self: ptr IRichEditOleCallback, fEnterMode: WINBOOL):
 proc GetClipboardData*(self: ptr IRichEditOleCallback, lpchrg: ptr CHARRANGE, reco: DWORD, lplpdataobj: ptr LPDATAOBJECT): HRESULT {.winapi, inline.} = self.lpVtbl.GetClipboardData(self, lpchrg, reco, lplpdataobj)
 proc GetDragDropEffect*(self: ptr IRichEditOleCallback, fDrag: WINBOOL, grfKeyState: DWORD, pdwEffect: LPDWORD): HRESULT {.winapi, inline.} = self.lpVtbl.GetDragDropEffect(self, fDrag, grfKeyState, pdwEffect)
 proc GetContextMenu*(self: ptr IRichEditOleCallback, seltype: WORD, lpoleobj: LPOLEOBJECT, lpchrg: ptr CHARRANGE, lphmenu: ptr HMENU): HRESULT {.winapi, inline.} = self.lpVtbl.GetContextMenu(self, seltype, lpoleobj, lpchrg, lphmenu)
-converter winimConverterIRichEditOle*(x: ptr IRichEditOle): ptr IUnknown = cast[ptr IUnknown](x)
-converter winimConverterIRichEditOleCallback*(x: ptr IRichEditOleCallback): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterIRichEditOleToIUnknown*(x: ptr IRichEditOle): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterIRichEditOleCallbackToIUnknown*(x: ptr IRichEditOleCallback): ptr IUnknown = cast[ptr IUnknown](x)
 when winimUnicode:
   type
     CHARFORMAT* = CHARFORMATW

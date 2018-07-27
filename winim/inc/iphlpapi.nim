@@ -3566,7 +3566,6 @@ const
   nlpoWellKnown* = ipPrefixOriginWellKnown
   nlpoDhcp* = ipPrefixOriginDhcp
   nlpoRouterAdvertisement* = ipPrefixOriginRouterAdvertisement
-  NL_MAX_METRIC_COMPONENT* = (((ULONG) 1) shl 31)-1
   NET_IF_CURRENT_SESSION* = ULONG(-1)
   MIN_IF_TYPE* = 1
   IF_TYPE_OTHER* = 1
@@ -5730,6 +5729,7 @@ const
   IOCTL_NDIS_GET_VERSION* = 0x00170020
   NETWORK_ADDRESS_LENGTH_IP* = 16
   NETWORK_ADDRESS_LENGTH_IPX* = 12
+  NL_MAX_METRIC_COMPONENT* = ULONG(1.uint32 shl 31) - 1
 type
   PIPINTERFACE_CHANGE_CALLBACK* = proc (CallerContext: PVOID, Row: PMIB_IPINTERFACE_ROW, NotificationType: MIB_NOTIFICATION_TYPE): VOID {.stdcall.}
   PUNICAST_IPADDRESS_CHANGE_CALLBACK* = proc (CallerContext: PVOID, Row: PMIB_UNICASTIPADDRESS_ROW, NotificationType: MIB_NOTIFICATION_TYPE): VOID {.stdcall.}
@@ -5848,7 +5848,6 @@ proc GetIpInterfaceTable*(Family: ADDRESS_FAMILY, Table: ptr PMIB_IPINTERFACE_TA
 proc InitializeIpInterfaceEntry*(Row: PMIB_IPINTERFACE_ROW): VOID {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc NotifyIpInterfaceChange*(Family: ADDRESS_FAMILY, Callback: PIPINTERFACE_CHANGE_CALLBACK, CallerContext: PVOID, InitialNotification: BOOLEAN, NotificationHandle: ptr HANDLE): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc SetIpInterfaceEntry*(Row: PMIB_IPINTERFACE_ROW): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc GetIpNetworkConnectionBandwidthEstimates*(InterfaceIndex: NET_IFINDEX, AddressFamily: ADDRESS_FAMILY, BandwidthEstimates: PMIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc CreateUnicastIpAddressEntry*(Row: ptr MIB_UNICASTIPADDRESS_ROW): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc DeleteUnicastIpAddressEntry*(Row: ptr MIB_UNICASTIPADDRESS_ROW): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc GetUnicastIpAddressEntry*(Row: PMIB_UNICASTIPADDRESS_ROW): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
@@ -6021,7 +6020,7 @@ proc `IsUnreachable=`*(self: var MIB_IPNET_ROW2, x: BOOLEAN) {.inline.} = self.u
 proc IsUnreachable*(self: MIB_IPNET_ROW2): BOOLEAN {.inline.} = self.union1.struct1.IsUnreachable
 proc `Flags=`*(self: var MIB_IPNET_ROW2, x: UCHAR) {.inline.} = self.union1.Flags = x
 proc OnComplete*(self: ptr IConnectionRequestCallback, hrStatus: HRESULT): HRESULT {.winapi, inline.} = self.lpVtbl.OnComplete(self, hrStatus)
-converter winimConverterIConnectionRequestCallback*(x: ptr IConnectionRequestCallback): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterIConnectionRequestCallbackToIUnknown*(x: ptr IConnectionRequestCallback): ptr IUnknown = cast[ptr IUnknown](x)
 when winimCpu64:
   type
     IP_OPTION_INFORMATION32* {.pure.} = object

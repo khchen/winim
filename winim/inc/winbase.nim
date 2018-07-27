@@ -1789,7 +1789,6 @@ proc SetFilePointerEx*(hFile: HANDLE, liDistanceToMove: LARGE_INTEGER, lpNewFile
 proc UnlockFileEx*(hFile: HANDLE, dwReserved: DWORD, nNumberOfBytesToUnlockLow: DWORD, nNumberOfBytesToUnlockHigh: DWORD, lpOverlapped: LPOVERLAPPED): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc WriteFile*(hFile: HANDLE, lpBuffer: LPCVOID, nNumberOfBytesToWrite: DWORD, lpNumberOfBytesWritten: LPDWORD, lpOverlapped: LPOVERLAPPED): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc SetFileInformationByHandle*(hFile: HANDLE, FileInformationClass: FILE_INFO_BY_HANDLE_CLASS, lpFileInformation: LPVOID, dwBufferSize: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc CreateFile2*(lpFileName: LPCWSTR, dwDesiredAccess: DWORD, dwShareMode: DWORD, dwCreationDisposition: DWORD, pCreateExParams: LPCREATEFILE2_EXTENDED_PARAMETERS): HANDLE {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc CloseHandle*(hObject: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc DuplicateHandle*(hSourceProcessHandle: HANDLE, hSourceHandle: HANDLE, hTargetProcessHandle: HANDLE, lpTargetHandle: LPHANDLE, dwDesiredAccess: DWORD, bInheritHandle: WINBOOL, dwOptions: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetHandleInformation*(hObject: HANDLE, lpdwFlags: LPDWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
@@ -1819,13 +1818,11 @@ proc CancelIo*(hFile: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "kernel32", im
 proc GetQueuedCompletionStatusEx*(CompletionPort: HANDLE, lpCompletionPortEntries: LPOVERLAPPED_ENTRY, ulCount: ULONG, ulNumEntriesRemoved: PULONG, dwMilliseconds: DWORD, fAlertable: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc CancelIoEx*(hFile: HANDLE, lpOverlapped: LPOVERLAPPED): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc CancelSynchronousIo*(hThread: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetOverlappedResultEx*(hFile: HANDLE, lpOverlapped: LPOVERLAPPED, lpNumberOfBytesTransferred: LPDWORD, dwMilliseconds: DWORD, bAlertable: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc InitializeSListHead*(ListHead: PSLIST_HEADER): VOID {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc InterlockedPopEntrySList*(ListHead: PSLIST_HEADER): PSLIST_ENTRY {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc InterlockedPushEntrySList*(ListHead: PSLIST_HEADER, ListEntry: PSLIST_ENTRY): PSLIST_ENTRY {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc InterlockedFlushSList*(ListHead: PSLIST_HEADER): PSLIST_ENTRY {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc QueryDepthSList*(ListHead: PSLIST_HEADER): USHORT {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc InterlockedPushListSListEx*(ListHead: PSLIST_HEADER, List: PSLIST_ENTRY, ListEnd: PSLIST_ENTRY, Count: ULONG): PSLIST_ENTRY {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc IsProcessInJob*(ProcessHandle: HANDLE, JobHandle: HANDLE, Result: PBOOL): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc FindResourceExW*(hModule: HMODULE, lpType: LPCWSTR, lpName: LPCWSTR, wLanguage: WORD): HRSRC {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc FreeLibraryAndExitThread*(hLibModule: HMODULE, dwExitCode: DWORD): VOID {.winapi, stdcall, dynlib: "kernel32", importc.}
@@ -1861,8 +1858,6 @@ proc FindStringOrdinal*(dwFindStringOrdinalFlags: DWORD, lpStringSource: LPCWSTR
 proc VirtualQuery*(lpAddress: LPCVOID, lpBuffer: PMEMORY_BASIC_INFORMATION, dwLength: SIZE_T): SIZE_T {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc FlushViewOfFile*(lpBaseAddress: LPCVOID, dwNumberOfBytesToFlush: SIZE_T): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc UnmapViewOfFile*(lpBaseAddress: LPCVOID): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc CreateFileMappingFromApp*(hFile: HANDLE, SecurityAttributes: PSECURITY_ATTRIBUTES, PageProtection: ULONG, MaximumSize: ULONG64, Name: PCWSTR): HANDLE {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc MapViewOfFileFromApp*(hFileMappingObject: HANDLE, DesiredAccess: ULONG, FileOffset: ULONG64, NumberOfBytesToMap: SIZE_T): PVOID {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc VirtualAlloc*(lpAddress: LPVOID, dwSize: SIZE_T, flAllocationType: DWORD, flProtect: DWORD): LPVOID {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc VirtualFree*(lpAddress: LPVOID, dwSize: SIZE_T, dwFreeType: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc VirtualProtect*(lpAddress: LPVOID, dwSize: SIZE_T, flNewProtect: DWORD, lpflOldProtect: PDWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
@@ -1888,11 +1883,6 @@ proc QueryMemoryResourceNotification*(ResourceNotificationHandle: HANDLE, Resour
 proc GetSystemFileCacheSize*(lpMinimumFileCacheSize: PSIZE_T, lpMaximumFileCacheSize: PSIZE_T, lpFlags: PDWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc SetSystemFileCacheSize*(MinimumFileCacheSize: SIZE_T, MaximumFileCacheSize: SIZE_T, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc CreateFileMappingNumaW*(hFile: HANDLE, lpFileMappingAttributes: LPSECURITY_ATTRIBUTES, flProtect: DWORD, dwMaximumSizeHigh: DWORD, dwMaximumSizeLow: DWORD, lpName: LPCWSTR, nndPreferred: DWORD): HANDLE {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc PrefetchVirtualMemory*(hProcess: HANDLE, NumberOfEntries: ULONG_PTR, VirtualAddresses: PWIN32_MEMORY_RANGE_ENTRY, Flags: ULONG): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc UnmapViewOfFileEx*(BaseAddress: PVOID, UnmapFlags: ULONG): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc DiscardVirtualMemory*(VirtualAddress: PVOID, Size: SIZE_T): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc OfferVirtualMemory*(VirtualAddress: PVOID, Size: SIZE_T, Priority: OFFER_PRIORITY): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc ReclaimVirtualMemory*(VirtualAddress: PVOID, Size: SIZE_T): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc ImpersonateNamedPipeClient*(hNamedPipe: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc CreatePipe*(hReadPipe: PHANDLE, hWritePipe: PHANDLE, lpPipeAttributes: LPSECURITY_ATTRIBUTES, nSize: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc ConnectNamedPipe*(hNamedPipe: HANDLE, lpOverlapped: LPOVERLAPPED): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
@@ -1909,7 +1899,7 @@ proc ClosePrivateNamespace*(Handle: HANDLE, Flags: ULONG): BOOLEAN {.winapi, std
 proc CreateBoundaryDescriptorW*(Name: LPCWSTR, Flags: ULONG): HANDLE {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc AddSIDToBoundaryDescriptor*(BoundaryDescriptor: ptr HANDLE, RequiredSid: PSID): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc DeleteBoundaryDescriptor*(BoundaryDescriptor: HANDLE): VOID {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetEnvironmentStrings*(): LPCH {.winapi, stdcall, dynlib: "kernel32", importc.}
+proc GetEnvironmentStringsA*(): LPCH {.winapi, stdcall, dynlib: "kernel32", importc: "GetEnvironmentStrings".}
 proc GetEnvironmentStringsW*(): LPWCH {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc SetEnvironmentStringsW*(NewEnvironment: LPWCH): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc FreeEnvironmentStringsA*(penv: LPCH): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
@@ -1975,9 +1965,6 @@ proc QueryProcessAffinityUpdateMode*(hProcess: HANDLE, lpdwFlags: LPDWORD): WINB
 proc UpdateProcThreadAttribute*(lpAttributeList: LPPROC_THREAD_ATTRIBUTE_LIST, dwFlags: DWORD, Attribute: DWORD_PTR, lpValue: PVOID, cbSize: SIZE_T, lpPreviousValue: PVOID, lpReturnSize: PSIZE_T): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetThreadIdealProcessorEx*(hThread: HANDLE, lpIdealProcessor: PPROCESSOR_NUMBER): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetCurrentProcessorNumberEx*(ProcNumber: PPROCESSOR_NUMBER): VOID {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetCurrentThreadStackLimits*(LowLimit: PULONG_PTR, HighLimit: PULONG_PTR): VOID {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc SetProcessMitigationPolicy*(MitigationPolicy: PROCESS_MITIGATION_POLICY, lpBuffer: PVOID, dwLength: SIZE_T): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetProcessMitigationPolicy*(hProcess: HANDLE, MitigationPolicy: PROCESS_MITIGATION_POLICY, lpBuffer: PVOID, dwLength: SIZE_T): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetCurrentProcess*(): HANDLE {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetCurrentProcessId*(): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetCurrentThread*(): HANDLE {.winapi, stdcall, dynlib: "kernel32", importc.}
@@ -2006,7 +1993,6 @@ proc QueryProcessCycleTime*(ProcessHandle: HANDLE, CycleTime: PULONG64): WINBOOL
 proc QueryIdleProcessorCycleTime*(BufferLength: PULONG, ProcessorIdleCycleTime: PULONG64): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc QueryIdleProcessorCycleTimeEx*(Group: USHORT, BufferLength: PULONG, ProcessorIdleCycleTime: PULONG64): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc QueryUnbiasedInterruptTime*(UnbiasedTime: PULONGLONG): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetAppContainerNamedObjectPath*(Token: HANDLE, AppContainerSid: PSID, ObjectPathLength: ULONG, ObjectPath: LPWSTR, ReturnLength: PULONG): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc AccessCheck*(pSecurityDescriptor: PSECURITY_DESCRIPTOR, ClientToken: HANDLE, DesiredAccess: DWORD, GenericMapping: PGENERIC_MAPPING, PrivilegeSet: PPRIVILEGE_SET, PrivilegeSetLength: LPDWORD, GrantedAccess: LPDWORD, AccessStatus: LPBOOL): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc AccessCheckAndAuditAlarmW*(SubsystemName: LPCWSTR, HandleId: LPVOID, ObjectTypeName: LPWSTR, ObjectName: LPWSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, DesiredAccess: DWORD, GenericMapping: PGENERIC_MAPPING, ObjectCreation: WINBOOL, GrantedAccess: LPDWORD, AccessStatus: LPBOOL, pfGenerateOnClose: LPBOOL): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc AccessCheckByType*(pSecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, ClientToken: HANDLE, DesiredAccess: DWORD, ObjectTypeList: POBJECT_TYPE_LIST, ObjectTypeListLength: DWORD, GenericMapping: PGENERIC_MAPPING, PrivilegeSet: PPRIVILEGE_SET, PrivilegeSetLength: LPDWORD, GrantedAccess: LPDWORD, AccessStatus: LPBOOL): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
@@ -2025,8 +2011,6 @@ proc AddAuditAccessAce*(pAcl: PACL, dwAceRevision: DWORD, dwAccessMask: DWORD, p
 proc AddAuditAccessAceEx*(pAcl: PACL, dwAceRevision: DWORD, AceFlags: DWORD, dwAccessMask: DWORD, pSid: PSID, bAuditSuccess: WINBOOL, bAuditFailure: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc AddAuditAccessObjectAce*(pAcl: PACL, dwAceRevision: DWORD, AceFlags: DWORD, AccessMask: DWORD, ObjectTypeGuid: ptr GUID, InheritedObjectTypeGuid: ptr GUID, pSid: PSID, bAuditSuccess: WINBOOL, bAuditFailure: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc AddMandatoryAce*(pAcl: PACL, dwAceRevision: DWORD, AceFlags: DWORD, MandatoryPolicy: DWORD, pLabelSid: PSID): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc AddResourceAttributeAce*(pAcl: PACL, dwAceRevision: DWORD, AceFlags: DWORD, AccessMask: DWORD, pSid: PSID, pAttributeInfo: PCLAIM_SECURITY_ATTRIBUTES_INFORMATION, pReturnLength: PDWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc AddScopedPolicyIDAce*(pAcl: PACL, dwAceRevision: DWORD, AceFlags: DWORD, AccessMask: DWORD, pSid: PSID): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc AdjustTokenGroups*(TokenHandle: HANDLE, ResetToDefault: WINBOOL, NewState: PTOKEN_GROUPS, BufferLength: DWORD, PreviousState: PTOKEN_GROUPS, ReturnLength: PDWORD): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc AdjustTokenPrivileges*(TokenHandle: HANDLE, DisableAllPrivileges: WINBOOL, NewState: PTOKEN_PRIVILEGES, BufferLength: DWORD, PreviousState: PTOKEN_PRIVILEGES, ReturnLength: PDWORD): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc AllocateAndInitializeSid*(pIdentifierAuthority: PSID_IDENTIFIER_AUTHORITY, nSubAuthorityCount: BYTE, nSubAuthority0: DWORD, nSubAuthority1: DWORD, nSubAuthority2: DWORD, nSubAuthority3: DWORD, nSubAuthority4: DWORD, nSubAuthority5: DWORD, nSubAuthority6: DWORD, nSubAuthority7: DWORD, pSid: ptr PSID): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
@@ -2034,9 +2018,6 @@ proc AllocateLocallyUniqueId*(Luid: PLUID): WINBOOL {.winapi, stdcall, dynlib: "
 proc AreAllAccessesGranted*(GrantedAccess: DWORD, DesiredAccess: DWORD): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc AreAnyAccessesGranted*(GrantedAccess: DWORD, DesiredAccess: DWORD): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc CheckTokenMembership*(TokenHandle: HANDLE, SidToCheck: PSID, IsMember: PBOOL): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc CheckTokenCapability*(TokenHandle: HANDLE, CapabilitySidToCheck: PSID, HasCapability: PBOOL): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetAppContainerAce*(Acl: PACL, StartingAceIndex: DWORD, AppContainerAce: ptr PVOID, AppContainerAceIndex: ptr DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc CheckTokenMembershipEx*(TokenHandle: HANDLE, SidToCheck: PSID, Flags: DWORD, IsMember: PBOOL): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc ConvertToAutoInheritPrivateObjectSecurity*(ParentDescriptor: PSECURITY_DESCRIPTOR, CurrentSecurityDescriptor: PSECURITY_DESCRIPTOR, NewSecurityDescriptor: ptr PSECURITY_DESCRIPTOR, ObjectType: ptr GUID, IsDirectoryObject: BOOLEAN, GenericMapping: PGENERIC_MAPPING): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc CopySid*(nDestinationSidLength: DWORD, pDestinationSid: PSID, pSourceSid: PSID): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc CreatePrivateObjectSecurity*(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: ptr PSECURITY_DESCRIPTOR, IsDirectoryObject: WINBOOL, Token: HANDLE, GenericMapping: PGENERIC_MAPPING): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
@@ -2107,8 +2088,6 @@ proc SetSecurityDescriptorOwner*(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pOwn
 proc SetSecurityDescriptorRMControl*(SecurityDescriptor: PSECURITY_DESCRIPTOR, RMControl: PUCHAR): DWORD {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc SetSecurityDescriptorSacl*(pSecurityDescriptor: PSECURITY_DESCRIPTOR, bSaclPresent: WINBOOL, pSacl: PACL, bSaclDefaulted: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc SetTokenInformation*(TokenHandle: HANDLE, TokenInformationClass: TOKEN_INFORMATION_CLASS, TokenInformation: LPVOID, TokenInformationLength: DWORD): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc SetCachedSigningLevel*(SourceFiles: PHANDLE, SourceFileCount: ULONG, Flags: ULONG, TargetFile: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetCachedSigningLevel*(File: HANDLE, Flags: PULONG, SigningLevel: PULONG, Thumbprint: PUCHAR, ThumbprintSize: PULONG, ThumbprintAlgorithm: PULONG): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc EnterCriticalSection*(lpCriticalSection: LPCRITICAL_SECTION): VOID {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc LeaveCriticalSection*(lpCriticalSection: LPCRITICAL_SECTION): VOID {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc TryEnterCriticalSection*(lpCriticalSection: LPCRITICAL_SECTION): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
@@ -2157,9 +2136,6 @@ proc CreateEventW*(lpEventAttributes: LPSECURITY_ATTRIBUTES, bManualReset: WINBO
 proc SetWaitableTimer*(hTimer: HANDLE, lpDueTime: ptr LARGE_INTEGER, lPeriod: LONG, pfnCompletionRoutine: PTIMERAPCROUTINE, lpArgToCompletionRoutine: LPVOID, fResume: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc CancelWaitableTimer*(hTimer: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc OpenWaitableTimerW*(dwDesiredAccess: DWORD, bInheritHandle: WINBOOL, lpTimerName: LPCWSTR): HANDLE {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc EnterSynchronizationBarrier*(lpBarrier: LPSYNCHRONIZATION_BARRIER, dwFlags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc InitializeSynchronizationBarrier*(lpBarrier: LPSYNCHRONIZATION_BARRIER, lTotalThreads: LONG, lSpinCount: LONG): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc DeleteSynchronizationBarrier*(lpBarrier: LPSYNCHRONIZATION_BARRIER): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc Sleep*(dwMilliseconds: DWORD): VOID {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc SignalObjectAndWait*(hObjectToSignal: HANDLE, hObjectToWaitOn: HANDLE, dwMilliseconds: DWORD, bAlertable: WINBOOL): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc CreateWaitableTimerExW*(lpTimerAttributes: LPSECURITY_ATTRIBUTES, lpTimerName: LPCWSTR, dwFlags: DWORD, dwDesiredAccess: DWORD): HANDLE {.winapi, stdcall, dynlib: "kernel32", importc.}
@@ -2188,7 +2164,6 @@ proc SetSystemTime*(lpSystemTime: ptr SYSTEMTIME): WINBOOL {.winapi, stdcall, dy
 proc GetVersionExA*(lpVersionInformation: LPOSVERSIONINFOA): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetVersionExW*(lpVersionInformation: LPOSVERSIONINFOW): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetLogicalProcessorInformation*(Buffer: PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, ReturnedLength: PDWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetSystemTimePreciseAsFileTime*(lpSystemTimeAsFileTime: LPFILETIME): VOID {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc EnumSystemFirmwareTables*(FirmwareTableProviderSignature: DWORD, pFirmwareTableEnumBuffer: PVOID, BufferSize: DWORD): UINT {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetSystemFirmwareTable*(FirmwareTableProviderSignature: DWORD, FirmwareTableID: DWORD, pFirmwareTableBuffer: PVOID, BufferSize: DWORD): UINT {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetProductInfo*(dwOSMajorVersion: DWORD, dwOSMinorVersion: DWORD, dwSpMajorVersion: DWORD, dwSpMinorVersion: DWORD, pdwReturnedProductType: PDWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
@@ -2230,8 +2205,6 @@ proc StartThreadpoolIo*(pio: PTP_IO): VOID {.winapi, stdcall, dynlib: "kernel32"
 proc CancelThreadpoolIo*(pio: PTP_IO): VOID {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc WaitForThreadpoolIoCallbacks*(pio: PTP_IO, fCancelPendingCallbacks: WINBOOL): VOID {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc CloseThreadpoolIo*(pio: PTP_IO): VOID {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc SetThreadpoolTimerEx*(pti: PTP_TIMER, pftDueTime: PFILETIME, msPeriod: DWORD, msWindowLength: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc SetThreadpoolWaitEx*(pwa: PTP_WAIT, h: HANDLE, pftTimeout: PFILETIME, Reserved: PVOID): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc CreateTimerQueueTimer*(phNewTimer: PHANDLE, TimerQueue: HANDLE, Callback: WAITORTIMERCALLBACK, Parameter: PVOID, DueTime: DWORD, Period: DWORD, Flags: ULONG): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc DeleteTimerQueueTimer*(TimerQueue: HANDLE, Timer: HANDLE, CompletionEvent: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc QueueUserWorkItem*(Function: LPTHREAD_START_ROUTINE, Context: PVOID, Flags: ULONG): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
@@ -2296,10 +2269,6 @@ proc ConvertThreadToFiberEx*(lpParameter: LPVOID, dwFlags: DWORD): LPVOID {.wina
 proc ConvertFiberToThread*(): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc SwitchToFiber*(lpFiber: LPVOID): VOID {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc SetThreadAffinityMask*(hThread: HANDLE, dwThreadAffinityMask: DWORD_PTR): DWORD_PTR {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetThreadInformation*(hThread: HANDLE, ThreadInformationClass: THREAD_INFORMATION_CLASS, ThreadInformation: LPVOID, ThreadInformationSize: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc SetThreadInformation*(hThread: HANDLE, ThreadInformationClass: THREAD_INFORMATION_CLASS, ThreadInformation: LPVOID, ThreadInformationSize: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetProcessInformation*(hProcess: HANDLE, ProcessInformationClass: PROCESS_INFORMATION_CLASS, ProcessInformation: LPVOID, ProcessInformationSize: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc SetProcessInformation*(hProcess: HANDLE, ProcessInformationClass: PROCESS_INFORMATION_CLASS, ProcessInformation: LPVOID, ProcessInformationSize: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc SetProcessDEPPolicy*(dwFlags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetProcessDEPPolicy*(hProcess: HANDLE, lpFlags: LPDWORD, lpPermanent: PBOOL): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc SetProcessPriorityBoost*(hProcess: HANDLE, bDisablePriorityBoost: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
@@ -2426,7 +2395,6 @@ proc CreateFileMappingNumaA*(hFile: HANDLE, lpFileMappingAttributes: LPSECURITY_
 proc OpenFileMappingA*(dwDesiredAccess: DWORD, bInheritHandle: WINBOOL, lpName: LPCSTR): HANDLE {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetLogicalDriveStringsA*(nBufferLength: DWORD, lpBuffer: LPSTR): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc LoadLibraryA*(lpLibFileName: LPCSTR): HMODULE {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc LoadPackagedLibrary*(lpwLibFileName: LPCWSTR, Reserved: DWORD): HMODULE {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc QueryFullProcessImageNameA*(hProcess: HANDLE, dwFlags: DWORD, lpExeName: LPSTR, lpdwSize: PDWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc QueryFullProcessImageNameW*(hProcess: HANDLE, dwFlags: DWORD, lpExeName: LPWSTR, lpdwSize: PDWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetProcessShutdownParameters*(lpdwLevel: LPDWORD, lpdwFlags: LPDWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
@@ -2450,16 +2418,8 @@ proc UpdateResourceA*(hUpdate: HANDLE, lpType: LPCSTR, lpName: LPCSTR, wLanguage
 proc UpdateResourceW*(hUpdate: HANDLE, lpType: LPCWSTR, lpName: LPCWSTR, wLanguage: WORD, lpData: LPVOID, cb: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc EndUpdateResourceA*(hUpdate: HANDLE, fDiscard: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc EndUpdateResourceW*(hUpdate: HANDLE, fDiscard: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetFirmwareEnvironmentVariableExA*(lpName: LPCSTR, lpGuid: LPCSTR, pBuffer: PVOID, nSize: DWORD, pdwAttribubutes: PDWORD): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetFirmwareEnvironmentVariableExW*(lpName: LPCWSTR, lpGuid: LPCWSTR, pBuffer: PVOID, nSize: DWORD, pdwAttribubutes: PDWORD): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc SetFirmwareEnvironmentVariableExA*(lpName: LPCSTR, lpGuid: LPCSTR, pValue: PVOID, nSize: DWORD, dwAttributes: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc SetFirmwareEnvironmentVariableExW*(lpName: LPCWSTR, lpGuid: LPCWSTR, pValue: PVOID, nSize: DWORD, dwAttributes: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetFirmwareType*(FirmwareType: PFIRMWARE_TYPE): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc IsNativeVhdBoot*(NativeVhdBoot: PBOOL): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GlobalAddAtomA*(lpString: LPCSTR): ATOM {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GlobalAddAtomW*(lpString: LPCWSTR): ATOM {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GlobalAddAtomExA*(lpString: LPCSTR, Flags: DWORD): ATOM {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GlobalAddAtomExW*(lpString: LPCWSTR, Flags: DWORD): ATOM {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GlobalFindAtomA*(lpString: LPCSTR): ATOM {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GlobalFindAtomW*(lpString: LPCWSTR): ATOM {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GlobalGetAtomNameA*(nAtom: ATOM, lpBuffer: LPSTR, nSize: int32): UINT {.winapi, stdcall, dynlib: "kernel32", importc.}
@@ -2539,7 +2499,6 @@ proc FindFirstFileTransactedA*(lpFileName: LPCSTR, fInfoLevelId: FINDEX_INFO_LEV
 proc FindFirstFileTransactedW*(lpFileName: LPCWSTR, fInfoLevelId: FINDEX_INFO_LEVELS, lpFindFileData: LPVOID, fSearchOp: FINDEX_SEARCH_OPS, lpSearchFilter: LPVOID, dwAdditionalFlags: DWORD, hTransaction: HANDLE): HANDLE {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc CopyFileTransactedA*(lpExistingFileName: LPCSTR, lpNewFileName: LPCSTR, lpProgressRoutine: LPPROGRESS_ROUTINE, lpData: LPVOID, pbCancel: LPBOOL, dwCopyFlags: DWORD, hTransaction: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc CopyFileTransactedW*(lpExistingFileName: LPCWSTR, lpNewFileName: LPCWSTR, lpProgressRoutine: LPPROGRESS_ROUTINE, lpData: LPVOID, pbCancel: LPBOOL, dwCopyFlags: DWORD, hTransaction: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc CopyFile2*(pwszExistingFileName: PCWSTR, pwszNewFileName: PCWSTR, pExtendedParameters: ptr COPYFILE2_EXTENDED_PARAMETERS): HRESULT {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc MoveFileA*(lpExistingFileName: LPCSTR, lpNewFileName: LPCSTR): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc MoveFileW*(lpExistingFileName: LPCWSTR, lpNewFileName: LPCWSTR): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc MoveFileExA*(lpExistingFileName: LPCSTR, lpNewFileName: LPCSTR, dwFlags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
@@ -2600,8 +2559,6 @@ proc ReportEventA*(hEventLog: HANDLE, wType: WORD, wCategory: WORD, dwEventID: D
 proc ReportEventW*(hEventLog: HANDLE, wType: WORD, wCategory: WORD, dwEventID: DWORD, lpUserSid: PSID, wNumStrings: WORD, dwDataSize: DWORD, lpStrings: ptr LPCWSTR, lpRawData: LPVOID): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc GetNamedPipeClientComputerName*(Pipe: HANDLE, ClientComputerName: LPSTR, ClientComputerNameLength: ULONG): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "GetNamedPipeClientComputerNameA".}
 proc GetEventLogInformation*(hEventLog: HANDLE, dwInfoLevel: DWORD, lpBuffer: LPVOID, cbBufSize: DWORD, pcbBytesNeeded: LPDWORD): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc OperationStart*(OperationStartParams: ptr OPERATION_START_PARAMETERS): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc OperationEnd*(OperationEndParams: ptr OPERATION_END_PARAMETERS): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc AccessCheckAndAuditAlarmA*(SubsystemName: LPCSTR, HandleId: LPVOID, ObjectTypeName: LPSTR, ObjectName: LPSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, DesiredAccess: DWORD, GenericMapping: PGENERIC_MAPPING, ObjectCreation: WINBOOL, GrantedAccess: LPDWORD, AccessStatus: LPBOOL, pfGenerateOnClose: LPBOOL): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc AccessCheckByTypeAndAuditAlarmA*(SubsystemName: LPCSTR, HandleId: LPVOID, ObjectTypeName: LPCSTR, ObjectName: LPCSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: DWORD, AuditType: AUDIT_EVENT_TYPE, Flags: DWORD, ObjectTypeList: POBJECT_TYPE_LIST, ObjectTypeListLength: DWORD, GenericMapping: PGENERIC_MAPPING, ObjectCreation: WINBOOL, GrantedAccess: LPDWORD, AccessStatus: LPBOOL, pfGenerateOnClose: LPBOOL): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc AccessCheckByTypeResultListAndAuditAlarmA*(SubsystemName: LPCSTR, HandleId: LPVOID, ObjectTypeName: LPCSTR, ObjectName: LPCSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: DWORD, AuditType: AUDIT_EVENT_TYPE, Flags: DWORD, ObjectTypeList: POBJECT_TYPE_LIST, ObjectTypeListLength: DWORD, GenericMapping: PGENERIC_MAPPING, ObjectCreation: WINBOOL, GrantedAccess: LPDWORD, AccessStatusList: LPDWORD, pfGenerateOnClose: LPBOOL): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
@@ -2681,17 +2638,12 @@ proc SystemTimeToFileTime*(lpSystemTime: ptr SYSTEMTIME, lpFileTime: LPFILETIME)
 proc GetTimeZoneInformation*(lpTimeZoneInformation: LPTIME_ZONE_INFORMATION): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetDynamicTimeZoneInformation*(pTimeZoneInformation: PDYNAMIC_TIME_ZONE_INFORMATION): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetTimeZoneInformationForYear*(wYear: USHORT, pdtzi: PDYNAMIC_TIME_ZONE_INFORMATION, ptzi: LPTIME_ZONE_INFORMATION): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc EnumDynamicTimeZoneInformation*(dwIndex: DWORD, lpTimeZoneInformation: PDYNAMIC_TIME_ZONE_INFORMATION): DWORD {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc GetDynamicTimeZoneInformationEffectiveYears*(lpTimeZoneInformation: PDYNAMIC_TIME_ZONE_INFORMATION, FirstYear: LPDWORD, LastYear: LPDWORD): DWORD {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc SystemTimeToTzSpecificLocalTimeEx*(lpTimeZoneInformation: ptr DYNAMIC_TIME_ZONE_INFORMATION, lpUniversalTime: ptr SYSTEMTIME, lpLocalTime: LPSYSTEMTIME): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc TzSpecificLocalTimeToSystemTimeEx*(lpTimeZoneInformation: ptr DYNAMIC_TIME_ZONE_INFORMATION, lpLocalTime: ptr SYSTEMTIME, lpUniversalTime: LPSYSTEMTIME): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc SetTimeZoneInformation*(lpTimeZoneInformation: ptr TIME_ZONE_INFORMATION): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc SetDynamicTimeZoneInformation*(lpTimeZoneInformation: ptr DYNAMIC_TIME_ZONE_INFORMATION): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc GetSystemPowerStatus*(lpSystemPowerStatus: LPSYSTEM_POWER_STATUS): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc SetSystemPowerState*(fSuspend: WINBOOL, fForce: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc RegisterBadMemoryNotification*(Callback: PBAD_MEMORY_CALLBACK_ROUTINE): PVOID {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc UnregisterBadMemoryNotification*(RegistrationHandle: PVOID): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc GetMemoryErrorHandlingCapabilities*(Capabilities: PULONG): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc AllocateUserPhysicalPages*(hProcess: HANDLE, NumberOfPages: PULONG_PTR, PageArray: PULONG_PTR): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc FreeUserPhysicalPages*(hProcess: HANDLE, NumberOfPages: PULONG_PTR, PageArray: PULONG_PTR): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc MapUserPhysicalPages*(VirtualAddress: PVOID, NumberOfPages: ULONG_PTR, PageArray: PULONG_PTR): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
@@ -2772,7 +2724,6 @@ proc GetCurrentTime*(): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "G
 proc LockSegment*(hMem: HGLOBAL): VOID {.winapi, stdcall, dynlib: "kernel32", importc: "GlobalFix".}
 proc UnlockSegment*(hMem: HGLOBAL): VOID {.winapi, stdcall, dynlib: "kernel32", importc: "GlobalUnfix".}
 proc FreeModule*(hLibModule: HMODULE): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "FreeLibrary".}
-proc InterlockedPushListSList*(ListHead: PSLIST_HEADER, List: PSLIST_ENTRY, ListEnd: PSLIST_ENTRY, Count: ULONG): PSLIST_ENTRY {.winapi, stdcall, dynlib: "kernel32", importc: "InterlockedPushListSListEx".}
 template HasOverlappedIoCompleted*(lpOverlapped: LPOVERLAPPED): bool = lpOverlapped.Internal != STATUS_PENDING
 template RtlSecureZeroMemory*(Destination: PVOID, Length: SIZE_T) = zeroMem(Destination, Length)
 template SecureZeroMemory*(Destination: PVOID, Length: SIZE_T) = zeroMem(Destination, Length)
@@ -2958,7 +2909,6 @@ when winimUnicode:
   proc UpdateResource*(hUpdate: HANDLE, lpType: LPCWSTR, lpName: LPCWSTR, wLanguage: WORD, lpData: LPVOID, cb: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "UpdateResourceW".}
   proc EndUpdateResource*(hUpdate: HANDLE, fDiscard: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "EndUpdateResourceW".}
   proc GlobalAddAtom*(lpString: LPCWSTR): ATOM {.winapi, stdcall, dynlib: "kernel32", importc: "GlobalAddAtomW".}
-  proc GlobalAddAtomEx*(lpString: LPCWSTR, Flags: DWORD): ATOM {.winapi, stdcall, dynlib: "kernel32", importc: "GlobalAddAtomExW".}
   proc GlobalFindAtom*(lpString: LPCWSTR): ATOM {.winapi, stdcall, dynlib: "kernel32", importc: "GlobalFindAtomW".}
   proc GlobalGetAtomName*(nAtom: ATOM, lpBuffer: LPWSTR, nSize: int32): UINT {.winapi, stdcall, dynlib: "kernel32", importc: "GlobalGetAtomNameW".}
   proc AddAtom*(lpString: LPCWSTR): ATOM {.winapi, stdcall, dynlib: "kernel32", importc: "AddAtomW".}
@@ -2977,8 +2927,6 @@ when winimUnicode:
   proc GetPrivateProfileSectionNames*(lpszReturnBuffer: LPWSTR, nSize: DWORD, lpFileName: LPCWSTR): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "GetPrivateProfileSectionNamesW".}
   proc GetPrivateProfileStruct*(lpszSection: LPCWSTR, lpszKey: LPCWSTR, lpStruct: LPVOID, uSizeStruct: UINT, szFile: LPCWSTR): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "GetPrivateProfileStructW".}
   proc WritePrivateProfileStruct*(lpszSection: LPCWSTR, lpszKey: LPCWSTR, lpStruct: LPVOID, uSizeStruct: UINT, szFile: LPCWSTR): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "WritePrivateProfileStructW".}
-  proc GetFirmwareEnvironmentVariableEx*(lpName: LPCWSTR, lpGuid: LPCWSTR, pBuffer: PVOID, nSize: DWORD, pdwAttribubutes: PDWORD): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "GetFirmwareEnvironmentVariableExW".}
-  proc SetFirmwareEnvironmentVariableEx*(lpName: LPCWSTR, lpGuid: LPCWSTR, pValue: PVOID, nSize: DWORD, dwAttributes: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "SetFirmwareEnvironmentVariableExW".}
   proc GetSystemWow64Directory*(lpBuffer: LPWSTR, uSize: UINT): UINT {.winapi, stdcall, dynlib: "kernel32", importc: "GetSystemWow64DirectoryW".}
   proc SetDllDirectory*(lpPathName: LPCWSTR): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "SetDllDirectoryW".}
   proc GetDllDirectory*(nBufferLength: DWORD, lpBuffer: LPWSTR): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "GetDllDirectoryW".}
@@ -3065,7 +3013,7 @@ when winimAnsi:
     GET_SYSTEM_WOW64_DIRECTORY_NAME_T_A* = GET_SYSTEM_WOW64_DIRECTORY_NAME_A_A
     GET_SYSTEM_WOW64_DIRECTORY_NAME_T_W* = GET_SYSTEM_WOW64_DIRECTORY_NAME_A_W
     GET_SYSTEM_WOW64_DIRECTORY_NAME_T_T* = GET_SYSTEM_WOW64_DIRECTORY_NAME_A_T
-  proc GetEnvironmentStringsA*(): LPCH {.winapi, stdcall, dynlib: "kernel32", importc: "GetEnvironmentStrings".}
+  proc GetEnvironmentStrings*(): LPCH {.winapi, stdcall, dynlib: "kernel32", importc.}
   proc SetEnvironmentStrings*(NewEnvironment: LPCH): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "SetEnvironmentStringsA".}
   proc GetShortPathName*(lpszLongPath: LPCSTR, lpszShortPath: LPSTR, cchBuffer: DWORD): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "GetShortPathNameA".}
   proc OpenMutex*(dwDesiredAccess: DWORD, bInheritHandle: WINBOOL, lpName: LPCSTR): HANDLE {.winapi, stdcall, dynlib: "kernel32", importc: "OpenMutexA".}
@@ -3181,7 +3129,6 @@ when winimAnsi:
   proc UpdateResource*(hUpdate: HANDLE, lpType: LPCSTR, lpName: LPCSTR, wLanguage: WORD, lpData: LPVOID, cb: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "UpdateResourceA".}
   proc EndUpdateResource*(hUpdate: HANDLE, fDiscard: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "EndUpdateResourceA".}
   proc GlobalAddAtom*(lpString: LPCSTR): ATOM {.winapi, stdcall, dynlib: "kernel32", importc: "GlobalAddAtomA".}
-  proc GlobalAddAtomEx*(lpString: LPCSTR, Flags: DWORD): ATOM {.winapi, stdcall, dynlib: "kernel32", importc: "GlobalAddAtomExA".}
   proc GlobalFindAtom*(lpString: LPCSTR): ATOM {.winapi, stdcall, dynlib: "kernel32", importc: "GlobalFindAtomA".}
   proc GlobalGetAtomName*(nAtom: ATOM, lpBuffer: LPSTR, nSize: int32): UINT {.winapi, stdcall, dynlib: "kernel32", importc: "GlobalGetAtomNameA".}
   proc AddAtom*(lpString: LPCSTR): ATOM {.winapi, stdcall, dynlib: "kernel32", importc: "AddAtomA".}
@@ -3200,8 +3147,6 @@ when winimAnsi:
   proc GetPrivateProfileSectionNames*(lpszReturnBuffer: LPSTR, nSize: DWORD, lpFileName: LPCSTR): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "GetPrivateProfileSectionNamesA".}
   proc GetPrivateProfileStruct*(lpszSection: LPCSTR, lpszKey: LPCSTR, lpStruct: LPVOID, uSizeStruct: UINT, szFile: LPCSTR): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "GetPrivateProfileStructA".}
   proc WritePrivateProfileStruct*(lpszSection: LPCSTR, lpszKey: LPCSTR, lpStruct: LPVOID, uSizeStruct: UINT, szFile: LPCSTR): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "WritePrivateProfileStructA".}
-  proc GetFirmwareEnvironmentVariableEx*(lpName: LPCSTR, lpGuid: LPCSTR, pBuffer: PVOID, nSize: DWORD, pdwAttribubutes: PDWORD): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "GetFirmwareEnvironmentVariableExA".}
-  proc SetFirmwareEnvironmentVariableEx*(lpName: LPCSTR, lpGuid: LPCSTR, pValue: PVOID, nSize: DWORD, dwAttributes: DWORD): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "SetFirmwareEnvironmentVariableExA".}
   proc GetSystemWow64Directory*(lpBuffer: LPSTR, uSize: UINT): UINT {.winapi, stdcall, dynlib: "kernel32", importc: "GetSystemWow64DirectoryA".}
   proc SetDllDirectory*(lpPathName: LPCSTR): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc: "SetDllDirectoryA".}
   proc GetDllDirectory*(nBufferLength: DWORD, lpBuffer: LPSTR): DWORD {.winapi, stdcall, dynlib: "kernel32", importc: "GetDllDirectoryA".}

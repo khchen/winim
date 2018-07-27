@@ -4229,7 +4229,6 @@ proc SwapMouseButton*(fSwap: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "user3
 proc GetMessagePos*(): DWORD {.winapi, stdcall, dynlib: "user32", importc.}
 proc GetMessageTime*(): LONG {.winapi, stdcall, dynlib: "user32", importc.}
 proc GetMessageExtraInfo*(): LPARAM {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetUnpredictedMessagePos*(): DWORD {.winapi, stdcall, dynlib: "user32", importc.}
 proc IsWow64Message*(): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
 proc SetMessageExtraInfo*(lParam: LPARAM): LPARAM {.winapi, stdcall, dynlib: "user32", importc.}
 proc SendMessageA*(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM): LRESULT {.winapi, stdcall, dynlib: "user32", importc.}
@@ -4246,8 +4245,6 @@ proc BroadcastSystemMessageA*(flags: DWORD, lpInfo: LPDWORD, Msg: UINT, wParam: 
 proc BroadcastSystemMessageW*(flags: DWORD, lpInfo: LPDWORD, Msg: UINT, wParam: WPARAM, lParam: LPARAM): LONG32 {.winapi, stdcall, dynlib: "user32", importc.}
 proc RegisterPowerSettingNotification*(hRecipient: HANDLE, PowerSettingGuid: LPCGUID, Flags: DWORD): HPOWERNOTIFY {.winapi, stdcall, dynlib: "user32", importc.}
 proc UnregisterPowerSettingNotification*(Handle: HPOWERNOTIFY): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc RegisterSuspendResumeNotification*(hRecipient: HANDLE, Flags: DWORD): HPOWERNOTIFY {.winapi, stdcall, dynlib: "user32", importc.}
-proc UnregisterSuspendResumeNotification*(Handle: HPOWERNOTIFY): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
 proc PostMessageA*(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
 proc PostMessageW*(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
 proc PostThreadMessageA*(idThread: DWORD, Msg: UINT, wParam: WPARAM, lParam: LPARAM): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
@@ -4429,33 +4426,6 @@ proc CloseTouchInputHandle*(hTouchInput: HTOUCHINPUT): WINBOOL {.winapi, stdcall
 proc RegisterTouchWindow*(hwnd: HWND, ulFlags: ULONG): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
 proc UnregisterTouchWindow*(hwnd: HWND): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
 proc IsTouchWindow*(hwnd: HWND, pulFlags: PULONG): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc InitializeTouchInjection*(maxCount: UINT32, dwMode: DWORD): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc InjectTouchInput*(count: UINT32, contacts: ptr POINTER_TOUCH_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerType*(pointerId: UINT32, pointerType: ptr POINTER_INPUT_TYPE): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerCursorId*(pointerId: UINT32, cursorId: ptr UINT32): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerInfo*(pointerId: UINT32, pointerInfo: ptr POINTER_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerInfoHistory*(pointerId: UINT32, entriesCount: ptr UINT32, pointerInfo: ptr POINTER_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerFrameInfo*(pointerId: UINT32, pointerCount: ptr UINT32, pointerInfo: ptr POINTER_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerFrameInfoHistory*(pointerId: UINT32, entriesCount: ptr UINT32, pointerCount: ptr UINT32, pointerInfo: ptr POINTER_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerTouchInfo*(pointerId: UINT32, touchInfo: ptr POINTER_TOUCH_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerTouchInfoHistory*(pointerId: UINT32, entriesCount: ptr UINT32, touchInfo: ptr POINTER_TOUCH_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerFrameTouchInfo*(pointerId: UINT32, pointerCount: ptr UINT32, touchInfo: ptr POINTER_TOUCH_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerFrameTouchInfoHistory*(pointerId: UINT32, entriesCount: ptr UINT32, pointerCount: ptr UINT32, touchInfo: ptr POINTER_TOUCH_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerPenInfo*(pointerId: UINT32, penInfo: ptr POINTER_PEN_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerPenInfoHistory*(pointerId: UINT32, entriesCount: ptr UINT32, penInfo: ptr POINTER_PEN_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerFramePenInfo*(pointerId: UINT32, pointerCount: ptr UINT32, penInfo: ptr POINTER_PEN_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerFramePenInfoHistory*(pointerId: UINT32, entriesCount: ptr UINT32, pointerCount: ptr UINT32, penInfo: ptr POINTER_PEN_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc SkipPointerFrameMessages*(pointerId: UINT32): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc RegisterPointerInputTarget*(hwnd: HWND, pointerType: POINTER_INPUT_TYPE): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc UnregisterPointerInputTarget*(hwnd: HWND, pointerType: POINTER_INPUT_TYPE): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc EnableMouseInPointer*(fEnable: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc IsMouseInPointerEnabled*(): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc RegisterTouchHitTestingWindow*(hwnd: HWND, value: ULONG): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc EvaluateProximityToRect*(controlBoundingBox: ptr RECT, pHitTestingInput: ptr TOUCH_HIT_TESTING_INPUT, pProximityEval: ptr TOUCH_HIT_TESTING_PROXIMITY_EVALUATION): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc EvaluateProximityToPolygon*(numVertices: UINT32, controlPolygon: ptr POINT, pHitTestingInput: ptr TOUCH_HIT_TESTING_INPUT, pProximityEval: ptr TOUCH_HIT_TESTING_PROXIMITY_EVALUATION): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc PackTouchHitTestingProximityEvaluation*(pHitTestingInput: ptr TOUCH_HIT_TESTING_INPUT, pProximityEval: ptr TOUCH_HIT_TESTING_PROXIMITY_EVALUATION): LRESULT {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetWindowFeedbackSetting*(hwnd: HWND, feedback: FEEDBACK_TYPE, dwFlags: DWORD, pSize: ptr UINT32, config: pointer): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc SetWindowFeedbackSetting*(hwnd: HWND, feedback: FEEDBACK_TYPE, dwFlags: DWORD, size: UINT32, configuration: pointer): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
 proc GetLastInputInfo*(plii: PLASTINPUTINFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
 proc MapVirtualKeyA*(uCode: UINT, uMapType: UINT): UINT {.winapi, stdcall, dynlib: "user32", importc.}
 proc MapVirtualKeyW*(uCode: UINT, uMapType: UINT): UINT {.winapi, stdcall, dynlib: "user32", importc.}
@@ -4482,7 +4452,6 @@ proc CopyAcceleratorTableA*(hAccelSrc: HACCEL, lpAccelDst: LPACCEL, cAccelEntrie
 proc CopyAcceleratorTableW*(hAccelSrc: HACCEL, lpAccelDst: LPACCEL, cAccelEntries: int32): int32 {.winapi, stdcall, dynlib: "user32", importc.}
 proc TranslateAcceleratorA*(hWnd: HWND, hAccTable: HACCEL, lpMsg: LPMSG): int32 {.winapi, stdcall, dynlib: "user32", importc.}
 proc TranslateAcceleratorW*(hWnd: HWND, hAccTable: HACCEL, lpMsg: LPMSG): int32 {.winapi, stdcall, dynlib: "user32", importc.}
-proc SetCoalescableTimer*(hWnd: HWND, nIDEvent: UINT_PTR, uElapse: UINT, lpTimerFunc: TIMERPROC, uToleranceDelay: ULONG): UINT_PTR {.winapi, stdcall, dynlib: "user32", importc.}
 proc GetSystemMetrics*(nIndex: int32): int32 {.winapi, stdcall, dynlib: "user32", importc.}
 proc LoadMenuA*(hInstance: HINSTANCE, lpMenuName: LPCSTR): HMENU {.winapi, stdcall, dynlib: "user32", importc.}
 proc LoadMenuW*(hInstance: HINSTANCE, lpMenuName: LPCWSTR): HMENU {.winapi, stdcall, dynlib: "user32", importc.}
@@ -4816,13 +4785,6 @@ proc RegisterRawInputDevices*(pRawInputDevices: PCRAWINPUTDEVICE, uiNumDevices: 
 proc GetRegisteredRawInputDevices*(pRawInputDevices: PRAWINPUTDEVICE, puiNumDevices: PUINT, cbSize: UINT): UINT {.winapi, stdcall, dynlib: "user32", importc.}
 proc GetRawInputDeviceList*(pRawInputDeviceList: PRAWINPUTDEVICELIST, puiNumDevices: PUINT, cbSize: UINT): UINT {.winapi, stdcall, dynlib: "user32", importc.}
 proc DefRawInputProc*(paRawInput: ptr PRAWINPUT, nInput: INT, cbSizeHeader: UINT): LRESULT {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerDevices*(deviceCount: ptr UINT32, pointerDevices: ptr POINTER_DEVICE_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerDevice*(device: HANDLE, pointerDevice: ptr POINTER_DEVICE_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerDeviceProperties*(device: HANDLE, propertyCount: ptr UINT32, pointerProperties: ptr POINTER_DEVICE_PROPERTY): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc RegisterPointerDeviceNotifications*(window: HWND, notifyRange: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerDeviceRects*(device: HANDLE, pointerDeviceRect: ptr RECT, displayRect: ptr RECT): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerDeviceCursors*(device: HANDLE, cursorCount: ptr UINT32, deviceCursors: ptr POINTER_DEVICE_CURSOR_INFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetRawPointerDeviceData*(pointerId: UINT32, historyCount: UINT32, propertiesCount: UINT32, pProperties: ptr POINTER_DEVICE_PROPERTY, pValues: ptr LONG): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
 proc ChangeWindowMessageFilter*(message: UINT, dwFlag: DWORD): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
 proc ChangeWindowMessageFilterEx*(hwnd: HWND, message: UINT, action: DWORD, pChangeFilterStruct: PCHANGEFILTERSTRUCT): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
 proc GetGestureInfo*(hGestureInfo: HGESTUREINFO, pGestureInfo: PGESTUREINFO): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
@@ -4833,14 +4795,6 @@ proc GetGestureConfig*(hwnd: HWND, dwReserved: DWORD, dwFlags: DWORD, pcIDs: PUI
 proc ShutdownBlockReasonCreate*(hWnd: HWND, pwszReason: LPCWSTR): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
 proc ShutdownBlockReasonQuery*(hWnd: HWND, pwszBuff: LPWSTR, pcchBuff: ptr DWORD): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
 proc ShutdownBlockReasonDestroy*(hWnd: HWND): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetCurrentInputMessageSource*(inputMessageSource: ptr INPUT_MESSAGE_SOURCE): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetCIMSSM*(inputMessageSource: ptr INPUT_MESSAGE_SOURCE): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetAutoRotationState*(pState: PAR_STATE): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetDisplayAutoRotationPreferences*(pOrientation: ptr ORIENTATION_PREFERENCE): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc SetDisplayAutoRotationPreferences*(orientation: ORIENTATION_PREFERENCE): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc IsImmersiveProcess*(hProcess: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc SetProcessRestrictionExemption*(fEnableExemption: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
-proc GetPointerInputTransform*(pointerId: UINT32, historyCount: UINT32, inputTransform: ptr UINT32): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}
 proc PostAppMessageA*(idThread: DWORD, Msg: UINT, wParam: WPARAM, lParam: LPARAM): WINBOOL {.winapi, stdcall, dynlib: "user32", importc: "PostThreadMessageA".}
 proc PostAppMessageW*(idThread: DWORD, Msg: UINT, wParam: WPARAM, lParam: LPARAM): WINBOOL {.winapi, stdcall, dynlib: "user32", importc: "PostThreadMessageW".}
 proc GetNextWindow*(hWnd: HWND, uCmd: UINT): HWND {.winapi, stdcall, dynlib: "user32", importc: "GetWindow".}

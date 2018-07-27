@@ -804,7 +804,6 @@ proc EnumDateFormatsExEx*(lpDateFmtEnumProcExEx: DATEFMT_ENUMPROCEXEX, lpLocaleN
 proc EnumTimeFormatsEx*(lpTimeFmtEnumProcEx: TIMEFMT_ENUMPROCEX, lpLocaleName: LPCWSTR, dwFlags: DWORD, lParam: LPARAM): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc EnumSystemLocalesEx*(lpLocaleEnumProcEx: LOCALE_ENUMPROCEX, dwFlags: DWORD, lParam: LPARAM, lpReserved: LPVOID): WINBOOL {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc ResolveLocaleName*(lpNameToResolve: LPCWSTR, lpLocaleName: LPWSTR, cchLocaleName: int32): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc IsValidNLSVersion*(function: NLS_FUNCTION, lpLocaleName: LPCWSTR, lpVersionInformation: LPNLSVERSIONINFOEX): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
 template IS_HIGH_SURROGATE*(wch: untyped): bool = (wch >= HIGH_SURROGATE_START) and (wch <= HIGH_SURROGATE_END)
 template IS_LOW_SURROGATE*(wch: untyped): bool = (wch >= LOW_SURROGATE_START) and (wch <= LOW_SURROGATE_END)
 template IS_SURROGATE_PAIR*(hs: untyped, ls: untyped): bool = IS_HIGH_SURROGATE(hs) and IS_LOW_SURROGATE(ls)

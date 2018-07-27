@@ -1250,12 +1250,6 @@ proc NdrOleAllocate*(Size: int): pointer {.winapi, stdcall, dynlib: "rpcrt4", im
 proc NdrOleFree*(NodeToFree: pointer): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc NdrGetUserMarshalInfo*(pFlags: ptr int32, InformationLevel: int32, pMarshalInfo: ptr NDR_USER_MARSHAL_INFO): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc NdrCreateServerInterfaceFromStub*(pStub: ptr IRpcStubBuffer, pServerIf: ptr RPC_SERVER_INTERFACE): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-proc Ndr64AsyncServerCall64*(pRpcMsg: PRPC_MESSAGE): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-proc Ndr64AsyncServerCallAll*(pRpcMsg: PRPC_MESSAGE): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-proc Ndr64DcomAsyncStubCall*(pThis: ptr IRpcStubBuffer, pChannel: ptr IRpcChannelBuffer, pRpcMsg: PRPC_MESSAGE, pdwStubPhase: ptr int32): LONG32 {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-proc NdrStubCall3*(pThis: ptr IRpcStubBuffer, pChannel: ptr IRpcChannelBuffer, pRpcMsg: PRPC_MESSAGE, pdwStubPhase: ptr int32): LONG32 {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-proc NdrServerCallAll*(pRpcMsg: PRPC_MESSAGE): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
-proc NdrServerCallNdr64*(pRpcMsg: PRPC_MESSAGE): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc NdrPartialIgnoreClientMarshall*(pStubMsg: PMIDL_STUB_MESSAGE, pMemory: pointer): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc NdrPartialIgnoreServerUnmarshall*(pStubMsg: PMIDL_STUB_MESSAGE, ppMemory: ptr pointer): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc NdrPartialIgnoreClientBufferSize*(pStubMsg: PMIDL_STUB_MESSAGE, pMemory: pointer): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
@@ -1686,3 +1680,10 @@ when winimAnsi:
   proc RpcNsBindingUnexportPnP*(EntryNameSyntax: int32, EntryName: RPC_CSTR, IfSpec: RPC_IF_HANDLE, ObjectVector: ptr UUID_VECTOR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcns4", importc: "RpcNsBindingUnexportPnPA".}
   proc RpcServerInqCallAttributes*(ClientBinding: RPC_BINDING_HANDLE, RpcCallAttributes: pointer): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "RpcServerInqCallAttributesA".}
   proc RpcCertGeneratePrincipalName*(Context: PCCERT_CONTEXT, Flags: DWORD, pBuffer: ptr RPC_CSTR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc: "RpcCertGeneratePrincipalNameA".}
+when winimCpu64:
+  proc Ndr64AsyncServerCall64*(pRpcMsg: PRPC_MESSAGE): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
+  proc Ndr64AsyncServerCallAll*(pRpcMsg: PRPC_MESSAGE): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
+  proc Ndr64DcomAsyncStubCall*(pThis: ptr IRpcStubBuffer, pChannel: ptr IRpcChannelBuffer, pRpcMsg: PRPC_MESSAGE, pdwStubPhase: ptr int32): LONG32 {.winapi, stdcall, dynlib: "rpcrt4", importc.}
+  proc NdrStubCall3*(pThis: ptr IRpcStubBuffer, pChannel: ptr IRpcChannelBuffer, pRpcMsg: PRPC_MESSAGE, pdwStubPhase: ptr int32): LONG32 {.winapi, stdcall, dynlib: "rpcrt4", importc.}
+  proc NdrServerCallAll*(pRpcMsg: PRPC_MESSAGE): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
+  proc NdrServerCallNdr64*(pRpcMsg: PRPC_MESSAGE): void {.winapi, stdcall, dynlib: "rpcrt4", importc.}
