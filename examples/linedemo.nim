@@ -1,15 +1,31 @@
 import winim.lean
 
 proc WndProc(hwnd: HWND, message: UINT, wParam: WPARAM, lParam: LPARAM): LRESULT {.stdcall.} =
+  var
+    cxClient {.global.}: DWORD
+    cyClient {.global.}: DWORD
+
   case message
+  of WM_SIZE:
+    cxClient = DWORD LOWORD(lParam)
+    cyClient = DWORD HIWORD(lParam)
+    return 0
+
   of WM_PAINT:
     var ps: PAINTSTRUCT
     var hdc = BeginPaint(hwnd, ps)
     defer: EndPaint(hwnd, ps)
 
-    var rect: RECT
-    GetClientRect(hwnd, rect)
-    DrawText(hdc, "Hello, Windows!", -1, rect, DT_SINGLELINE or DT_CENTER or DT_VCENTER)
+    Rectangle(hdc, cxClient div 8, cyClient div 8, 7 * cxClient div 8, 7 * cyClient div 8)
+
+    MoveToEx(hdc, 0, 0, NULL)
+    LineTo(hdc, cxClient, cyClient)
+
+    MoveToEx(hdc, 0, cyClient, NULL)
+    LineTo(hdc, cxClient, 0)
+
+    Ellipse(hdc, cxClient div 8, cyClient div 8, 7 * cxClient div 8, 7 * cyClient div 8)
+    RoundRect(hdc, cxClient div 4, cyClient div 4, 3 * cxClient div 4, 3 * cyClient div 4, cxClient div 4, cyClient div 4)
     return 0
 
   of WM_DESTROY:
@@ -22,7 +38,7 @@ proc WndProc(hwnd: HWND, message: UINT, wParam: WPARAM, lParam: LPARAM): LRESULT
 proc main() =
   var
     hInstance = GetModuleHandle(nil)
-    appName = "HelloWin"
+    appName = "LineDemo"
     hwnd: HWND
     msg: MSG
     wndclass: WNDCLASS
@@ -42,7 +58,7 @@ proc main() =
     MessageBox(0, "This program requires Windows NT!", appName, MB_ICONERROR)
     return
 
-  hwnd = CreateWindow(appName, "The Hello Program", WS_OVERLAPPEDWINDOW,
+  hwnd = CreateWindow(appName, "Line Demonstration", WS_OVERLAPPEDWINDOW,
     CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
     0, 0, hInstance, nil)
 

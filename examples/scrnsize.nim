@@ -1,7 +1,6 @@
 import winim.lean
 import strformat
 
-
 var
   cxScreen = GetSystemMetrics(SM_CXSCREEN)
   cyScreen = GetSystemMetrics(SM_CYSCREEN)
