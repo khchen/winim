@@ -3649,60 +3649,88 @@ template GetBValue*(c: untyped): BYTE = BYTE((c shr 16) and 0xff)
 template PALETTEINDEX*(i: untyped): COLORREF = COLORREF(i and 0xff) or 0x01000000
 proc `dmOrientation=`*(self: var DEVMODEA, x: int16) {.inline.} = self.union1.struct1.dmOrientation = x
 proc dmOrientation*(self: DEVMODEA): int16 {.inline.} = self.union1.struct1.dmOrientation
+proc dmOrientation*(self: var DEVMODEA): var int16 {.inline.} = self.union1.struct1.dmOrientation
 proc `dmPaperSize=`*(self: var DEVMODEA, x: int16) {.inline.} = self.union1.struct1.dmPaperSize = x
 proc dmPaperSize*(self: DEVMODEA): int16 {.inline.} = self.union1.struct1.dmPaperSize
+proc dmPaperSize*(self: var DEVMODEA): var int16 {.inline.} = self.union1.struct1.dmPaperSize
 proc `dmPaperLength=`*(self: var DEVMODEA, x: int16) {.inline.} = self.union1.struct1.dmPaperLength = x
 proc dmPaperLength*(self: DEVMODEA): int16 {.inline.} = self.union1.struct1.dmPaperLength
+proc dmPaperLength*(self: var DEVMODEA): var int16 {.inline.} = self.union1.struct1.dmPaperLength
 proc `dmPaperWidth=`*(self: var DEVMODEA, x: int16) {.inline.} = self.union1.struct1.dmPaperWidth = x
 proc dmPaperWidth*(self: DEVMODEA): int16 {.inline.} = self.union1.struct1.dmPaperWidth
+proc dmPaperWidth*(self: var DEVMODEA): var int16 {.inline.} = self.union1.struct1.dmPaperWidth
 proc `dmScale=`*(self: var DEVMODEA, x: int16) {.inline.} = self.union1.struct1.dmScale = x
 proc dmScale*(self: DEVMODEA): int16 {.inline.} = self.union1.struct1.dmScale
+proc dmScale*(self: var DEVMODEA): var int16 {.inline.} = self.union1.struct1.dmScale
 proc `dmCopies=`*(self: var DEVMODEA, x: int16) {.inline.} = self.union1.struct1.dmCopies = x
 proc dmCopies*(self: DEVMODEA): int16 {.inline.} = self.union1.struct1.dmCopies
+proc dmCopies*(self: var DEVMODEA): var int16 {.inline.} = self.union1.struct1.dmCopies
 proc `dmDefaultSource=`*(self: var DEVMODEA, x: int16) {.inline.} = self.union1.struct1.dmDefaultSource = x
 proc dmDefaultSource*(self: DEVMODEA): int16 {.inline.} = self.union1.struct1.dmDefaultSource
+proc dmDefaultSource*(self: var DEVMODEA): var int16 {.inline.} = self.union1.struct1.dmDefaultSource
 proc `dmPrintQuality=`*(self: var DEVMODEA, x: int16) {.inline.} = self.union1.struct1.dmPrintQuality = x
 proc dmPrintQuality*(self: DEVMODEA): int16 {.inline.} = self.union1.struct1.dmPrintQuality
+proc dmPrintQuality*(self: var DEVMODEA): var int16 {.inline.} = self.union1.struct1.dmPrintQuality
 proc `dmPosition=`*(self: var DEVMODEA, x: POINTL) {.inline.} = self.union1.struct2.dmPosition = x
 proc dmPosition*(self: DEVMODEA): POINTL {.inline.} = self.union1.struct2.dmPosition
+proc dmPosition*(self: var DEVMODEA): var POINTL {.inline.} = self.union1.struct2.dmPosition
 proc `dmDisplayOrientation=`*(self: var DEVMODEA, x: DWORD) {.inline.} = self.union1.struct2.dmDisplayOrientation = x
 proc dmDisplayOrientation*(self: DEVMODEA): DWORD {.inline.} = self.union1.struct2.dmDisplayOrientation
+proc dmDisplayOrientation*(self: var DEVMODEA): var DWORD {.inline.} = self.union1.struct2.dmDisplayOrientation
 proc `dmDisplayFixedOutput=`*(self: var DEVMODEA, x: DWORD) {.inline.} = self.union1.struct2.dmDisplayFixedOutput = x
 proc dmDisplayFixedOutput*(self: DEVMODEA): DWORD {.inline.} = self.union1.struct2.dmDisplayFixedOutput
+proc dmDisplayFixedOutput*(self: var DEVMODEA): var DWORD {.inline.} = self.union1.struct2.dmDisplayFixedOutput
 proc `dmDisplayFlags=`*(self: var DEVMODEA, x: DWORD) {.inline.} = self.union2.dmDisplayFlags = x
 proc dmDisplayFlags*(self: DEVMODEA): DWORD {.inline.} = self.union2.dmDisplayFlags
+proc dmDisplayFlags*(self: var DEVMODEA): var DWORD {.inline.} = self.union2.dmDisplayFlags
 proc `dmNup=`*(self: var DEVMODEA, x: DWORD) {.inline.} = self.union2.dmNup = x
 proc dmNup*(self: DEVMODEA): DWORD {.inline.} = self.union2.dmNup
+proc dmNup*(self: var DEVMODEA): var DWORD {.inline.} = self.union2.dmNup
 proc `dmOrientation=`*(self: var DEVMODEW, x: int16) {.inline.} = self.union1.struct1.dmOrientation = x
 proc dmOrientation*(self: DEVMODEW): int16 {.inline.} = self.union1.struct1.dmOrientation
+proc dmOrientation*(self: var DEVMODEW): var int16 {.inline.} = self.union1.struct1.dmOrientation
 proc `dmPaperSize=`*(self: var DEVMODEW, x: int16) {.inline.} = self.union1.struct1.dmPaperSize = x
 proc dmPaperSize*(self: DEVMODEW): int16 {.inline.} = self.union1.struct1.dmPaperSize
+proc dmPaperSize*(self: var DEVMODEW): var int16 {.inline.} = self.union1.struct1.dmPaperSize
 proc `dmPaperLength=`*(self: var DEVMODEW, x: int16) {.inline.} = self.union1.struct1.dmPaperLength = x
 proc dmPaperLength*(self: DEVMODEW): int16 {.inline.} = self.union1.struct1.dmPaperLength
+proc dmPaperLength*(self: var DEVMODEW): var int16 {.inline.} = self.union1.struct1.dmPaperLength
 proc `dmPaperWidth=`*(self: var DEVMODEW, x: int16) {.inline.} = self.union1.struct1.dmPaperWidth = x
 proc dmPaperWidth*(self: DEVMODEW): int16 {.inline.} = self.union1.struct1.dmPaperWidth
+proc dmPaperWidth*(self: var DEVMODEW): var int16 {.inline.} = self.union1.struct1.dmPaperWidth
 proc `dmScale=`*(self: var DEVMODEW, x: int16) {.inline.} = self.union1.struct1.dmScale = x
 proc dmScale*(self: DEVMODEW): int16 {.inline.} = self.union1.struct1.dmScale
+proc dmScale*(self: var DEVMODEW): var int16 {.inline.} = self.union1.struct1.dmScale
 proc `dmCopies=`*(self: var DEVMODEW, x: int16) {.inline.} = self.union1.struct1.dmCopies = x
 proc dmCopies*(self: DEVMODEW): int16 {.inline.} = self.union1.struct1.dmCopies
+proc dmCopies*(self: var DEVMODEW): var int16 {.inline.} = self.union1.struct1.dmCopies
 proc `dmDefaultSource=`*(self: var DEVMODEW, x: int16) {.inline.} = self.union1.struct1.dmDefaultSource = x
 proc dmDefaultSource*(self: DEVMODEW): int16 {.inline.} = self.union1.struct1.dmDefaultSource
+proc dmDefaultSource*(self: var DEVMODEW): var int16 {.inline.} = self.union1.struct1.dmDefaultSource
 proc `dmPrintQuality=`*(self: var DEVMODEW, x: int16) {.inline.} = self.union1.struct1.dmPrintQuality = x
 proc dmPrintQuality*(self: DEVMODEW): int16 {.inline.} = self.union1.struct1.dmPrintQuality
+proc dmPrintQuality*(self: var DEVMODEW): var int16 {.inline.} = self.union1.struct1.dmPrintQuality
 proc `dmPosition=`*(self: var DEVMODEW, x: POINTL) {.inline.} = self.union1.struct2.dmPosition = x
 proc dmPosition*(self: DEVMODEW): POINTL {.inline.} = self.union1.struct2.dmPosition
+proc dmPosition*(self: var DEVMODEW): var POINTL {.inline.} = self.union1.struct2.dmPosition
 proc `dmDisplayOrientation=`*(self: var DEVMODEW, x: DWORD) {.inline.} = self.union1.struct2.dmDisplayOrientation = x
 proc dmDisplayOrientation*(self: DEVMODEW): DWORD {.inline.} = self.union1.struct2.dmDisplayOrientation
+proc dmDisplayOrientation*(self: var DEVMODEW): var DWORD {.inline.} = self.union1.struct2.dmDisplayOrientation
 proc `dmDisplayFixedOutput=`*(self: var DEVMODEW, x: DWORD) {.inline.} = self.union1.struct2.dmDisplayFixedOutput = x
 proc dmDisplayFixedOutput*(self: DEVMODEW): DWORD {.inline.} = self.union1.struct2.dmDisplayFixedOutput
+proc dmDisplayFixedOutput*(self: var DEVMODEW): var DWORD {.inline.} = self.union1.struct2.dmDisplayFixedOutput
 proc `dmDisplayFlags=`*(self: var DEVMODEW, x: DWORD) {.inline.} = self.union2.dmDisplayFlags = x
 proc dmDisplayFlags*(self: DEVMODEW): DWORD {.inline.} = self.union2.dmDisplayFlags
+proc dmDisplayFlags*(self: var DEVMODEW): var DWORD {.inline.} = self.union2.dmDisplayFlags
 proc `dmNup=`*(self: var DEVMODEW, x: DWORD) {.inline.} = self.union2.dmNup = x
 proc dmNup*(self: DEVMODEW): DWORD {.inline.} = self.union2.dmNup
+proc dmNup*(self: var DEVMODEW): var DWORD {.inline.} = self.union2.dmNup
 proc `targetMode=`*(self: var DISPLAYCONFIG_MODE_INFO, x: DISPLAYCONFIG_TARGET_MODE) {.inline.} = self.union1.targetMode = x
 proc targetMode*(self: DISPLAYCONFIG_MODE_INFO): DISPLAYCONFIG_TARGET_MODE {.inline.} = self.union1.targetMode
+proc targetMode*(self: var DISPLAYCONFIG_MODE_INFO): var DISPLAYCONFIG_TARGET_MODE {.inline.} = self.union1.targetMode
 proc `sourceMode=`*(self: var DISPLAYCONFIG_MODE_INFO, x: DISPLAYCONFIG_SOURCE_MODE) {.inline.} = self.union1.sourceMode = x
 proc sourceMode*(self: DISPLAYCONFIG_MODE_INFO): DISPLAYCONFIG_SOURCE_MODE {.inline.} = self.union1.sourceMode
+proc sourceMode*(self: var DISPLAYCONFIG_MODE_INFO): var DISPLAYCONFIG_SOURCE_MODE {.inline.} = self.union1.sourceMode
 proc `friendlyNameFromEdid=`*(self: var DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS, x: UINT32) {.inline.} = self.union1.struct1.friendlyNameFromEdid = x
 proc friendlyNameFromEdid*(self: DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS): UINT32 {.inline.} = self.union1.struct1.friendlyNameFromEdid
 proc `friendlyNameForced=`*(self: var DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS, x: UINT32) {.inline.} = self.union1.struct1.friendlyNameForced = x
@@ -3713,12 +3741,14 @@ proc `reserved=`*(self: var DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS, x: UINT32) {
 proc reserved*(self: DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS): UINT32 {.inline.} = self.union1.struct1.reserved
 proc `value=`*(self: var DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS, x: UINT32) {.inline.} = self.union1.value = x
 proc value*(self: DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS): UINT32 {.inline.} = self.union1.value
+proc value*(self: var DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS): var UINT32 {.inline.} = self.union1.value
 proc `bootPersistenceOn=`*(self: var DISPLAYCONFIG_SET_TARGET_PERSISTENCE, x: UINT32) {.inline.} = self.union1.struct1.bootPersistenceOn = x
 proc bootPersistenceOn*(self: DISPLAYCONFIG_SET_TARGET_PERSISTENCE): UINT32 {.inline.} = self.union1.struct1.bootPersistenceOn
 proc `reserved=`*(self: var DISPLAYCONFIG_SET_TARGET_PERSISTENCE, x: UINT32) {.inline.} = self.union1.struct1.reserved = x
 proc reserved*(self: DISPLAYCONFIG_SET_TARGET_PERSISTENCE): UINT32 {.inline.} = self.union1.struct1.reserved
 proc `value=`*(self: var DISPLAYCONFIG_SET_TARGET_PERSISTENCE, x: UINT32) {.inline.} = self.union1.value = x
 proc value*(self: DISPLAYCONFIG_SET_TARGET_PERSISTENCE): UINT32 {.inline.} = self.union1.value
+proc value*(self: var DISPLAYCONFIG_SET_TARGET_PERSISTENCE): var UINT32 {.inline.} = self.union1.value
 when winimUnicode:
   type
     LOGCOLORSPACE* = LOGCOLORSPACEW

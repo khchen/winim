@@ -2545,12 +2545,16 @@ proc RasSecurityDialogReceive*(hPort: HPORT, pBuffer: PBYTE, pBufferLength: PWOR
 proc RasSecurityDialogGetInfo*(hPort: HPORT, pBuffer: ptr RAS_SECURITY_INFO): DWORD {.winapi, stdcall, dynlib: "rasman", importc.}
 proc `ipv4=`*(self: var RASTUNNELENDPOINT, x: RASIPV4ADDR) {.inline.} = self.union1.ipv4 = x
 proc ipv4*(self: RASTUNNELENDPOINT): RASIPV4ADDR {.inline.} = self.union1.ipv4
+proc ipv4*(self: var RASTUNNELENDPOINT): var RASIPV4ADDR {.inline.} = self.union1.ipv4
 proc `ipv6=`*(self: var RASTUNNELENDPOINT, x: RASIPV6ADDR) {.inline.} = self.union1.ipv6 = x
 proc ipv6*(self: RASTUNNELENDPOINT): RASIPV6ADDR {.inline.} = self.union1.ipv6
+proc ipv6*(self: var RASTUNNELENDPOINT): var RASIPV6ADDR {.inline.} = self.union1.ipv6
 proc `Ikev2ProjectionInfo=`*(self: var PROJECTION_INFO, x: IKEV2_PROJECTION_INFO) {.inline.} = self.union1.Ikev2ProjectionInfo = x
 proc ikev2ProjectionInfo*(self: PROJECTION_INFO): IKEV2_PROJECTION_INFO {.inline.} = self.union1.Ikev2ProjectionInfo
+proc ikev2ProjectionInfo*(self: var PROJECTION_INFO): var IKEV2_PROJECTION_INFO {.inline.} = self.union1.Ikev2ProjectionInfo
 proc `PppProjectionInfo=`*(self: var PROJECTION_INFO, x: PPP_PROJECTION_INFO) {.inline.} = self.union1.PppProjectionInfo = x
 proc pppProjectionInfo*(self: PROJECTION_INFO): PPP_PROJECTION_INFO {.inline.} = self.union1.PppProjectionInfo
+proc pppProjectionInfo*(self: var PROJECTION_INFO): var PPP_PROJECTION_INFO {.inline.} = self.union1.PppProjectionInfo
 when winimUnicode:
   type
     RASADFUNC* = RASADFUNCW

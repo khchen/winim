@@ -1958,44 +1958,64 @@ type
     Checksum*: USHORT
 proc `Mbr=`*(self: var SET_PARTITION_INFORMATION_EX, x: SET_PARTITION_INFORMATION_MBR) {.inline.} = self.union1.Mbr = x
 proc Mbr*(self: SET_PARTITION_INFORMATION_EX): SET_PARTITION_INFORMATION_MBR {.inline.} = self.union1.Mbr
+proc Mbr*(self: var SET_PARTITION_INFORMATION_EX): var SET_PARTITION_INFORMATION_MBR {.inline.} = self.union1.Mbr
 proc `Gpt=`*(self: var SET_PARTITION_INFORMATION_EX, x: SET_PARTITION_INFORMATION_GPT) {.inline.} = self.union1.Gpt = x
 proc Gpt*(self: SET_PARTITION_INFORMATION_EX): SET_PARTITION_INFORMATION_GPT {.inline.} = self.union1.Gpt
+proc Gpt*(self: var SET_PARTITION_INFORMATION_EX): var SET_PARTITION_INFORMATION_GPT {.inline.} = self.union1.Gpt
 proc `Mbr=`*(self: var CREATE_DISK, x: CREATE_DISK_MBR) {.inline.} = self.union1.Mbr = x
 proc Mbr*(self: CREATE_DISK): CREATE_DISK_MBR {.inline.} = self.union1.Mbr
+proc Mbr*(self: var CREATE_DISK): var CREATE_DISK_MBR {.inline.} = self.union1.Mbr
 proc `Gpt=`*(self: var CREATE_DISK, x: CREATE_DISK_GPT) {.inline.} = self.union1.Gpt = x
 proc Gpt*(self: CREATE_DISK): CREATE_DISK_GPT {.inline.} = self.union1.Gpt
+proc Gpt*(self: var CREATE_DISK): var CREATE_DISK_GPT {.inline.} = self.union1.Gpt
 proc `Mbr=`*(self: var PARTITION_INFORMATION_EX, x: PARTITION_INFORMATION_MBR) {.inline.} = self.union1.Mbr = x
 proc Mbr*(self: PARTITION_INFORMATION_EX): PARTITION_INFORMATION_MBR {.inline.} = self.union1.Mbr
+proc Mbr*(self: var PARTITION_INFORMATION_EX): var PARTITION_INFORMATION_MBR {.inline.} = self.union1.Mbr
 proc `Gpt=`*(self: var PARTITION_INFORMATION_EX, x: PARTITION_INFORMATION_GPT) {.inline.} = self.union1.Gpt = x
 proc Gpt*(self: PARTITION_INFORMATION_EX): PARTITION_INFORMATION_GPT {.inline.} = self.union1.Gpt
+proc Gpt*(self: var PARTITION_INFORMATION_EX): var PARTITION_INFORMATION_GPT {.inline.} = self.union1.Gpt
 proc `Mbr=`*(self: var DRIVE_LAYOUT_INFORMATION_EX, x: DRIVE_LAYOUT_INFORMATION_MBR) {.inline.} = self.union1.Mbr = x
 proc Mbr*(self: DRIVE_LAYOUT_INFORMATION_EX): DRIVE_LAYOUT_INFORMATION_MBR {.inline.} = self.union1.Mbr
+proc Mbr*(self: var DRIVE_LAYOUT_INFORMATION_EX): var DRIVE_LAYOUT_INFORMATION_MBR {.inline.} = self.union1.Mbr
 proc `Gpt=`*(self: var DRIVE_LAYOUT_INFORMATION_EX, x: DRIVE_LAYOUT_INFORMATION_GPT) {.inline.} = self.union1.Gpt = x
 proc Gpt*(self: DRIVE_LAYOUT_INFORMATION_EX): DRIVE_LAYOUT_INFORMATION_GPT {.inline.} = self.union1.Gpt
+proc Gpt*(self: var DRIVE_LAYOUT_INFORMATION_EX): var DRIVE_LAYOUT_INFORMATION_GPT {.inline.} = self.union1.Gpt
 proc `Int13=`*(self: var DISK_DETECTION_INFO, x: DISK_INT13_INFO) {.inline.} = self.union1.struct1.Int13 = x
 proc Int13*(self: DISK_DETECTION_INFO): DISK_INT13_INFO {.inline.} = self.union1.struct1.Int13
+proc Int13*(self: var DISK_DETECTION_INFO): var DISK_INT13_INFO {.inline.} = self.union1.struct1.Int13
 proc `ExInt13=`*(self: var DISK_DETECTION_INFO, x: DISK_EX_INT13_INFO) {.inline.} = self.union1.struct1.ExInt13 = x
 proc ExInt13*(self: DISK_DETECTION_INFO): DISK_EX_INT13_INFO {.inline.} = self.union1.struct1.ExInt13
+proc ExInt13*(self: var DISK_DETECTION_INFO): var DISK_EX_INT13_INFO {.inline.} = self.union1.struct1.ExInt13
 proc `Mbr=`*(self: var DISK_PARTITION_INFO, x: DISK_PARTITION_INFO_UNION1_Mbr) {.inline.} = self.union1.Mbr = x
 proc Mbr*(self: DISK_PARTITION_INFO): DISK_PARTITION_INFO_UNION1_Mbr {.inline.} = self.union1.Mbr
+proc Mbr*(self: var DISK_PARTITION_INFO): var DISK_PARTITION_INFO_UNION1_Mbr {.inline.} = self.union1.Mbr
 proc `Gpt=`*(self: var DISK_PARTITION_INFO, x: DISK_PARTITION_INFO_UNION1_Gpt) {.inline.} = self.union1.Gpt = x
 proc Gpt*(self: DISK_PARTITION_INFO): DISK_PARTITION_INFO_UNION1_Gpt {.inline.} = self.union1.Gpt
+proc Gpt*(self: var DISK_PARTITION_INFO): var DISK_PARTITION_INFO_UNION1_Gpt {.inline.} = self.union1.Gpt
 proc `ScalarPrefetch=`*(self: var DISK_CACHE_INFORMATION, x: DISK_CACHE_INFORMATION_UNION1_ScalarPrefetch) {.inline.} = self.union1.ScalarPrefetch = x
 proc ScalarPrefetch*(self: DISK_CACHE_INFORMATION): DISK_CACHE_INFORMATION_UNION1_ScalarPrefetch {.inline.} = self.union1.ScalarPrefetch
+proc ScalarPrefetch*(self: var DISK_CACHE_INFORMATION): var DISK_CACHE_INFORMATION_UNION1_ScalarPrefetch {.inline.} = self.union1.ScalarPrefetch
 proc `BlockPrefetch=`*(self: var DISK_CACHE_INFORMATION, x: DISK_CACHE_INFORMATION_UNION1_BlockPrefetch) {.inline.} = self.union1.BlockPrefetch = x
 proc BlockPrefetch*(self: DISK_CACHE_INFORMATION): DISK_CACHE_INFORMATION_UNION1_BlockPrefetch {.inline.} = self.union1.BlockPrefetch
+proc BlockPrefetch*(self: var DISK_CACHE_INFORMATION): var DISK_CACHE_INFORMATION_UNION1_BlockPrefetch {.inline.} = self.union1.BlockPrefetch
 proc `BirthVolumeId=`*(self: var FILE_OBJECTID_BUFFER, x: array[16, BYTE]) {.inline.} = self.union1.struct1.BirthVolumeId = x
 proc BirthVolumeId*(self: FILE_OBJECTID_BUFFER): array[16, BYTE] {.inline.} = self.union1.struct1.BirthVolumeId
+proc BirthVolumeId*(self: var FILE_OBJECTID_BUFFER): var array[16, BYTE] {.inline.} = self.union1.struct1.BirthVolumeId
 proc `BirthObjectId=`*(self: var FILE_OBJECTID_BUFFER, x: array[16, BYTE]) {.inline.} = self.union1.struct1.BirthObjectId = x
 proc BirthObjectId*(self: FILE_OBJECTID_BUFFER): array[16, BYTE] {.inline.} = self.union1.struct1.BirthObjectId
+proc BirthObjectId*(self: var FILE_OBJECTID_BUFFER): var array[16, BYTE] {.inline.} = self.union1.struct1.BirthObjectId
 proc `DomainId=`*(self: var FILE_OBJECTID_BUFFER, x: array[16, BYTE]) {.inline.} = self.union1.struct1.DomainId = x
 proc DomainId*(self: FILE_OBJECTID_BUFFER): array[16, BYTE] {.inline.} = self.union1.struct1.DomainId
+proc DomainId*(self: var FILE_OBJECTID_BUFFER): var array[16, BYTE] {.inline.} = self.union1.struct1.DomainId
 proc `ExtendedInfo=`*(self: var FILE_OBJECTID_BUFFER, x: array[48, BYTE]) {.inline.} = self.union1.ExtendedInfo = x
 proc ExtendedInfo*(self: FILE_OBJECTID_BUFFER): array[48, BYTE] {.inline.} = self.union1.ExtendedInfo
+proc ExtendedInfo*(self: var FILE_OBJECTID_BUFFER): var array[48, BYTE] {.inline.} = self.union1.ExtendedInfo
 proc `BufferLength=`*(self: var TXFS_READ_BACKUP_INFORMATION_OUT, x: ULONG) {.inline.} = self.union1.BufferLength = x
 proc BufferLength*(self: TXFS_READ_BACKUP_INFORMATION_OUT): ULONG {.inline.} = self.union1.BufferLength
+proc BufferLength*(self: var TXFS_READ_BACKUP_INFORMATION_OUT): var ULONG {.inline.} = self.union1.BufferLength
 proc `Buffer=`*(self: var TXFS_READ_BACKUP_INFORMATION_OUT, x: UCHAR) {.inline.} = self.union1.Buffer = x
 proc Buffer*(self: TXFS_READ_BACKUP_INFORMATION_OUT): UCHAR {.inline.} = self.union1.Buffer
+proc Buffer*(self: var TXFS_READ_BACKUP_INFORMATION_OUT): var UCHAR {.inline.} = self.union1.Buffer
 when winimCpu64:
   type
     MOVE_FILE_DATA32* {.pure.} = object

@@ -4873,72 +4873,106 @@ when winimUnicode:
 proc DialogBoxIndirectW*(hInstance: HINSTANCE, lpTemplate: LPCDLGTEMPLATEW, hWndParent: HWND, lpDialogFunc: DLGPROC): INT_PTR {.winapi, inline.} = DialogBoxIndirectParamW(hInstance, lpTemplate, hWndParent, lpDialogFunc, 0)
 proc `mi=`*(self: var INPUT, x: MOUSEINPUT) {.inline.} = self.union1.mi = x
 proc mi*(self: INPUT): MOUSEINPUT {.inline.} = self.union1.mi
+proc mi*(self: var INPUT): var MOUSEINPUT {.inline.} = self.union1.mi
 proc `ki=`*(self: var INPUT, x: KEYBDINPUT) {.inline.} = self.union1.ki = x
 proc ki*(self: INPUT): KEYBDINPUT {.inline.} = self.union1.ki
+proc ki*(self: var INPUT): var KEYBDINPUT {.inline.} = self.union1.ki
 proc `hi=`*(self: var INPUT, x: HARDWAREINPUT) {.inline.} = self.union1.hi = x
 proc hi*(self: INPUT): HARDWAREINPUT {.inline.} = self.union1.hi
+proc hi*(self: var INPUT): var HARDWAREINPUT {.inline.} = self.union1.hi
 proc `cbSize=`*(self: var MONITORINFOEXA, x: DWORD) {.inline.} = self.struct1.cbSize = x
 proc cbSize*(self: MONITORINFOEXA): DWORD {.inline.} = self.struct1.cbSize
+proc cbSize*(self: var MONITORINFOEXA): var DWORD {.inline.} = self.struct1.cbSize
 proc `rcMonitor=`*(self: var MONITORINFOEXA, x: RECT) {.inline.} = self.struct1.rcMonitor = x
 proc rcMonitor*(self: MONITORINFOEXA): RECT {.inline.} = self.struct1.rcMonitor
+proc rcMonitor*(self: var MONITORINFOEXA): var RECT {.inline.} = self.struct1.rcMonitor
 proc `rcWork=`*(self: var MONITORINFOEXA, x: RECT) {.inline.} = self.struct1.rcWork = x
 proc rcWork*(self: MONITORINFOEXA): RECT {.inline.} = self.struct1.rcWork
+proc rcWork*(self: var MONITORINFOEXA): var RECT {.inline.} = self.struct1.rcWork
 proc `dwFlags=`*(self: var MONITORINFOEXA, x: DWORD) {.inline.} = self.struct1.dwFlags = x
 proc dwFlags*(self: MONITORINFOEXA): DWORD {.inline.} = self.struct1.dwFlags
+proc dwFlags*(self: var MONITORINFOEXA): var DWORD {.inline.} = self.struct1.dwFlags
 proc `cbSize=`*(self: var MONITORINFOEXW, x: DWORD) {.inline.} = self.struct1.cbSize = x
 proc cbSize*(self: MONITORINFOEXW): DWORD {.inline.} = self.struct1.cbSize
+proc cbSize*(self: var MONITORINFOEXW): var DWORD {.inline.} = self.struct1.cbSize
 proc `rcMonitor=`*(self: var MONITORINFOEXW, x: RECT) {.inline.} = self.struct1.rcMonitor = x
 proc rcMonitor*(self: MONITORINFOEXW): RECT {.inline.} = self.struct1.rcMonitor
+proc rcMonitor*(self: var MONITORINFOEXW): var RECT {.inline.} = self.struct1.rcMonitor
 proc `rcWork=`*(self: var MONITORINFOEXW, x: RECT) {.inline.} = self.struct1.rcWork = x
 proc rcWork*(self: MONITORINFOEXW): RECT {.inline.} = self.struct1.rcWork
+proc rcWork*(self: var MONITORINFOEXW): var RECT {.inline.} = self.struct1.rcWork
 proc `dwFlags=`*(self: var MONITORINFOEXW, x: DWORD) {.inline.} = self.struct1.dwFlags = x
 proc dwFlags*(self: MONITORINFOEXW): DWORD {.inline.} = self.struct1.dwFlags
+proc dwFlags*(self: var MONITORINFOEXW): var DWORD {.inline.} = self.struct1.dwFlags
 proc `ulButtons=`*(self: var RAWMOUSE, x: ULONG) {.inline.} = self.union1.ulButtons = x
 proc ulButtons*(self: RAWMOUSE): ULONG {.inline.} = self.union1.ulButtons
+proc ulButtons*(self: var RAWMOUSE): var ULONG {.inline.} = self.union1.ulButtons
 proc `usButtonFlags=`*(self: var RAWMOUSE, x: USHORT) {.inline.} = self.union1.struct1.usButtonFlags = x
 proc usButtonFlags*(self: RAWMOUSE): USHORT {.inline.} = self.union1.struct1.usButtonFlags
+proc usButtonFlags*(self: var RAWMOUSE): var USHORT {.inline.} = self.union1.struct1.usButtonFlags
 proc `usButtonData=`*(self: var RAWMOUSE, x: USHORT) {.inline.} = self.union1.struct1.usButtonData = x
 proc usButtonData*(self: RAWMOUSE): USHORT {.inline.} = self.union1.struct1.usButtonData
+proc usButtonData*(self: var RAWMOUSE): var USHORT {.inline.} = self.union1.struct1.usButtonData
 proc `mouse=`*(self: var RID_DEVICE_INFO, x: RID_DEVICE_INFO_MOUSE) {.inline.} = self.union1.mouse = x
 proc mouse*(self: RID_DEVICE_INFO): RID_DEVICE_INFO_MOUSE {.inline.} = self.union1.mouse
+proc mouse*(self: var RID_DEVICE_INFO): var RID_DEVICE_INFO_MOUSE {.inline.} = self.union1.mouse
 proc `keyboard=`*(self: var RID_DEVICE_INFO, x: RID_DEVICE_INFO_KEYBOARD) {.inline.} = self.union1.keyboard = x
 proc keyboard*(self: RID_DEVICE_INFO): RID_DEVICE_INFO_KEYBOARD {.inline.} = self.union1.keyboard
+proc keyboard*(self: var RID_DEVICE_INFO): var RID_DEVICE_INFO_KEYBOARD {.inline.} = self.union1.keyboard
 proc `hid=`*(self: var RID_DEVICE_INFO, x: RID_DEVICE_INFO_HID) {.inline.} = self.union1.hid = x
 proc hid*(self: RID_DEVICE_INFO): RID_DEVICE_INFO_HID {.inline.} = self.union1.hid
+proc hid*(self: var RID_DEVICE_INFO): var RID_DEVICE_INFO_HID {.inline.} = self.union1.hid
 proc `m11=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m11 = x
 proc m11*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m11
+proc m11*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m11
 proc `m12=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m12 = x
 proc m12*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m12
+proc m12*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m12
 proc `m13=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m13 = x
 proc m13*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m13
+proc m13*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m13
 proc `m14=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m14 = x
 proc m14*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m14
+proc m14*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m14
 proc `m21=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m21 = x
 proc m21*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m21
+proc m21*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m21
 proc `m22=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m22 = x
 proc m22*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m22
+proc m22*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m22
 proc `m23=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m23 = x
 proc m23*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m23
+proc m23*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m23
 proc `m24=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m24 = x
 proc m24*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m24
+proc m24*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m24
 proc `m31=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m31 = x
 proc m31*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m31
+proc m31*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m31
 proc `m32=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m32 = x
 proc m32*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m32
+proc m32*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m32
 proc `m33=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m33 = x
 proc m33*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m33
+proc m33*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m33
 proc `m34=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m34 = x
 proc m34*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m34
+proc m34*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m34
 proc `m41=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m41 = x
 proc m41*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m41
+proc m41*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m41
 proc `m42=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m42 = x
 proc m42*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m42
+proc m42*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m42
 proc `m43=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m43 = x
 proc m43*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m43
+proc m43*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m43
 proc `m44=`*(self: var INPUT_TRANSFORM, x: float32) {.inline.} = self.union1.struct1.m44 = x
 proc m44*(self: INPUT_TRANSFORM): float32 {.inline.} = self.union1.struct1.m44
+proc m44*(self: var INPUT_TRANSFORM): var float32 {.inline.} = self.union1.struct1.m44
 proc `m=`*(self: var INPUT_TRANSFORM, x: array[4, array[4, float32]]) {.inline.} = self.union1.m = x
 proc m*(self: INPUT_TRANSFORM): array[4, array[4, float32]] {.inline.} = self.union1.m
+proc m*(self: var INPUT_TRANSFORM): var array[4, array[4, float32]] {.inline.} = self.union1.m
 when winimUnicode:
   type
     MENUTEMPLATE* = MENUTEMPLATEW

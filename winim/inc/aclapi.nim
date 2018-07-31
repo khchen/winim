@@ -836,32 +836,46 @@ proc EditSecurity*(hwndOwner: HWND, psi: LPSECURITYINFO): WINBOOL {.winapi, stdc
 proc EditSecurityAdvanced*(hwndOwner: HWND, psi: LPSECURITYINFO, uSIPage: SI_PAGE_TYPE): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "aclui", importc.}
 proc `Provider=`*(self: var ACTRL_OVERLAPPED, x: PVOID) {.inline.} = self.union1.Provider = x
 proc Provider*(self: ACTRL_OVERLAPPED): PVOID {.inline.} = self.union1.Provider
+proc Provider*(self: var ACTRL_OVERLAPPED): var PVOID {.inline.} = self.union1.Provider
 proc `Reserved1=`*(self: var ACTRL_OVERLAPPED, x: ULONG) {.inline.} = self.union1.Reserved1 = x
 proc Reserved1*(self: ACTRL_OVERLAPPED): ULONG {.inline.} = self.union1.Reserved1
+proc Reserved1*(self: var ACTRL_OVERLAPPED): var ULONG {.inline.} = self.union1.Reserved1
 proc `Data0=`*(self: var AUDIT_PARAM, x: ULONG_PTR) {.inline.} = self.union1.Data0 = x
 proc Data0*(self: AUDIT_PARAM): ULONG_PTR {.inline.} = self.union1.Data0
+proc Data0*(self: var AUDIT_PARAM): var ULONG_PTR {.inline.} = self.union1.Data0
 proc `String=`*(self: var AUDIT_PARAM, x: PWSTR) {.inline.} = self.union1.String = x
 proc String*(self: AUDIT_PARAM): PWSTR {.inline.} = self.union1.String
+proc String*(self: var AUDIT_PARAM): var PWSTR {.inline.} = self.union1.String
 proc `u=`*(self: var AUDIT_PARAM, x: ULONG_PTR) {.inline.} = self.union1.u = x
 proc u*(self: AUDIT_PARAM): ULONG_PTR {.inline.} = self.union1.u
+proc u*(self: var AUDIT_PARAM): var ULONG_PTR {.inline.} = self.union1.u
 proc `psid=`*(self: var AUDIT_PARAM, x: ptr SID) {.inline.} = self.union1.psid = x
 proc psid*(self: AUDIT_PARAM): ptr SID {.inline.} = self.union1.psid
+proc psid*(self: var AUDIT_PARAM): var ptr SID {.inline.} = self.union1.psid
 proc `pguid=`*(self: var AUDIT_PARAM, x: ptr GUID) {.inline.} = self.union1.pguid = x
 proc pguid*(self: AUDIT_PARAM): ptr GUID {.inline.} = self.union1.pguid
+proc pguid*(self: var AUDIT_PARAM): var ptr GUID {.inline.} = self.union1.pguid
 proc `LogonId_LowPart=`*(self: var AUDIT_PARAM, x: ULONG) {.inline.} = self.union1.LogonId_LowPart = x
 proc LogonId_LowPart*(self: AUDIT_PARAM): ULONG {.inline.} = self.union1.LogonId_LowPart
+proc LogonId_LowPart*(self: var AUDIT_PARAM): var ULONG {.inline.} = self.union1.LogonId_LowPart
 proc `pObjectTypes=`*(self: var AUDIT_PARAM, x: ptr AUDIT_OBJECT_TYPES) {.inline.} = self.union1.pObjectTypes = x
 proc pObjectTypes*(self: AUDIT_PARAM): ptr AUDIT_OBJECT_TYPES {.inline.} = self.union1.pObjectTypes
+proc pObjectTypes*(self: var AUDIT_PARAM): var ptr AUDIT_OBJECT_TYPES {.inline.} = self.union1.pObjectTypes
 proc `pIpAddress=`*(self: var AUDIT_PARAM, x: ptr AUDIT_IP_ADDRESS) {.inline.} = self.union1.pIpAddress = x
 proc pIpAddress*(self: AUDIT_PARAM): ptr AUDIT_IP_ADDRESS {.inline.} = self.union1.pIpAddress
+proc pIpAddress*(self: var AUDIT_PARAM): var ptr AUDIT_IP_ADDRESS {.inline.} = self.union1.pIpAddress
 proc `Data1=`*(self: var AUDIT_PARAM, x: ULONG_PTR) {.inline.} = self.union2.Data1 = x
 proc Data1*(self: AUDIT_PARAM): ULONG_PTR {.inline.} = self.union2.Data1
+proc Data1*(self: var AUDIT_PARAM): var ULONG_PTR {.inline.} = self.union2.Data1
 proc `LogonId_HighPart=`*(self: var AUDIT_PARAM, x: LONG) {.inline.} = self.union2.LogonId_HighPart = x
 proc LogonId_HighPart*(self: AUDIT_PARAM): LONG {.inline.} = self.union2.LogonId_HighPart
+proc LogonId_HighPart*(self: var AUDIT_PARAM): var LONG {.inline.} = self.union2.LogonId_HighPart
 proc `pReserved=`*(self: var AUTHZ_SOURCE_SCHEMA_REGISTRATION, x: PVOID) {.inline.} = self.union1.pReserved = x
 proc pReserved*(self: AUTHZ_SOURCE_SCHEMA_REGISTRATION): PVOID {.inline.} = self.union1.pReserved
+proc pReserved*(self: var AUTHZ_SOURCE_SCHEMA_REGISTRATION): var PVOID {.inline.} = self.union1.pReserved
 proc `pProviderGuid=`*(self: var AUTHZ_SOURCE_SCHEMA_REGISTRATION, x: ptr GUID) {.inline.} = self.union1.pProviderGuid = x
 proc pProviderGuid*(self: AUTHZ_SOURCE_SCHEMA_REGISTRATION): ptr GUID {.inline.} = self.union1.pProviderGuid
+proc pProviderGuid*(self: var AUTHZ_SOURCE_SCHEMA_REGISTRATION): var ptr GUID {.inline.} = self.union1.pProviderGuid
 proc GetObjectInformation*(self: ptr ISecurityInformation, pObjectInfo: PSI_OBJECT_INFO): HRESULT {.winapi, inline.} = self.lpVtbl.GetObjectInformation(self, pObjectInfo)
 proc GetSecurity*(self: ptr ISecurityInformation, RequestedInformation: SECURITY_INFORMATION, ppSecurityDescriptor: ptr PSECURITY_DESCRIPTOR, fDefault: WINBOOL): HRESULT {.winapi, inline.} = self.lpVtbl.GetSecurity(self, RequestedInformation, ppSecurityDescriptor, fDefault)
 proc SetSecurity*(self: ptr ISecurityInformation, SecurityInformation: SECURITY_INFORMATION, pSecurityDescriptor: PSECURITY_DESCRIPTOR): HRESULT {.winapi, inline.} = self.lpVtbl.SetSecurity(self, SecurityInformation, pSecurityDescriptor)

@@ -1621,12 +1621,16 @@ proc OleUIUpdateLinksW*(lpOleUILinkCntr: LPOLEUILINKCONTAINERW, hwndParent: HWND
 proc OleUIUpdateLinksA*(lpOleUILinkCntr: LPOLEUILINKCONTAINERA, hwndParent: HWND, lpszTitle: LPSTR, cLinks: int32): WINBOOL {.winapi, stdcall, dynlib: "oledlg", importc.}
 proc `bmp=`*(self: var PICTDESC, x: PICTDESC_UNION1_bmp) {.inline.} = self.union1.bmp = x
 proc bmp*(self: PICTDESC): PICTDESC_UNION1_bmp {.inline.} = self.union1.bmp
+proc bmp*(self: var PICTDESC): var PICTDESC_UNION1_bmp {.inline.} = self.union1.bmp
 proc `wmf=`*(self: var PICTDESC, x: PICTDESC_UNION1_wmf) {.inline.} = self.union1.wmf = x
 proc wmf*(self: PICTDESC): PICTDESC_UNION1_wmf {.inline.} = self.union1.wmf
+proc wmf*(self: var PICTDESC): var PICTDESC_UNION1_wmf {.inline.} = self.union1.wmf
 proc `icon=`*(self: var PICTDESC, x: PICTDESC_UNION1_icon) {.inline.} = self.union1.icon = x
 proc icon*(self: PICTDESC): PICTDESC_UNION1_icon {.inline.} = self.union1.icon
+proc icon*(self: var PICTDESC): var PICTDESC_UNION1_icon {.inline.} = self.union1.icon
 proc `emf=`*(self: var PICTDESC, x: PICTDESC_UNION1_emf) {.inline.} = self.union1.emf = x
 proc emf*(self: PICTDESC): PICTDESC_UNION1_emf {.inline.} = self.union1.emf
+proc emf*(self: var PICTDESC): var PICTDESC_UNION1_emf {.inline.} = self.union1.emf
 proc get_accParent*(self: ptr IAccessible, ppdispParent: ptr ptr IDispatch): HRESULT {.winapi, inline.} = self.lpVtbl.get_accParent(self, ppdispParent)
 proc get_accChildCount*(self: ptr IAccessible, pcountChildren: ptr LONG): HRESULT {.winapi, inline.} = self.lpVtbl.get_accChildCount(self, pcountChildren)
 proc get_accChild*(self: ptr IAccessible, varChildID: VARIANT, ppdispChild: ptr ptr IDispatch): HRESULT {.winapi, inline.} = self.lpVtbl.get_accChild(self, varChildID, ppdispChild)

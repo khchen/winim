@@ -1848,8 +1848,10 @@ proc RtlEncryptMemory*(Memory: PVOID, MemorySize: ULONG, OptionFlags: ULONG): NT
 proc RtlDecryptMemory*(Memory: PVOID, MemorySize: ULONG, OptionFlags: ULONG): NTSTATUS {.winapi, stdcall, dynlib: "advapi32", importc: "SystemFunction041".}
 proc `ContextInformation=`*(self: var KERB_SMARTCARD_CSP_INFO, x: PVOID) {.inline.} = self.union1.ContextInformation = x
 proc ContextInformation*(self: KERB_SMARTCARD_CSP_INFO): PVOID {.inline.} = self.union1.ContextInformation
+proc ContextInformation*(self: var KERB_SMARTCARD_CSP_INFO): var PVOID {.inline.} = self.union1.ContextInformation
 proc `SpaceHolderForWow64=`*(self: var KERB_SMARTCARD_CSP_INFO, x: ULONG64) {.inline.} = self.union1.SpaceHolderForWow64 = x
 proc SpaceHolderForWow64*(self: KERB_SMARTCARD_CSP_INFO): ULONG64 {.inline.} = self.union1.SpaceHolderForWow64
+proc SpaceHolderForWow64*(self: var KERB_SMARTCARD_CSP_INFO): var ULONG64 {.inline.} = self.union1.SpaceHolderForWow64
 when winimUnicode:
   type
     SECURITY_PSTR* = ptr SEC_WCHAR

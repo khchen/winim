@@ -1448,8 +1448,8 @@ const
   PSCB_INITIALIZED* = 1
   PSCB_PRECREATE* = 2
   PSCB_BUTTONPRESSED* = 3
-  PSN_FIRST* = 0U-200U
-  PSN_LAST* = 0U-299U
+  PSN_FIRST* = 0-200
+  PSN_LAST* = 0-299
   PSN_SETACTIVE* = PSN_FIRST-0
   PSN_KILLACTIVE* = PSN_FIRST-1
   PSN_APPLY* = PSN_FIRST-2
@@ -1567,7 +1567,7 @@ const
   CCM_DPISCALE* = CCM_FIRST+0xc
   COMCTL32_VERSION* = 6
   INFOTIPSIZE* = 1024
-  NM_FIRST* = 0U-0U
+  NM_FIRST* = 0-0
   NM_OUTOFMEMORY* = NM_FIRST-1
   NM_CLICK* = NM_FIRST-2
   NM_DBLCLK* = NM_FIRST-3
@@ -1590,45 +1590,45 @@ const
   NM_FONTCHANGED* = NM_FIRST-23
   NM_CUSTOMTEXT* = NM_FIRST-24
   NM_TVSTATEIMAGECHANGING* = NM_FIRST-24
-  NM_LAST* = 0U-99U
-  LVN_FIRST* = 0U-100U
-  LVN_LAST* = 0U-199U
-  HDN_FIRST* = 0U-300U
-  HDN_LAST* = 0U-399U
-  TVN_FIRST* = 0U-400U
-  TVN_LAST* = 0U-499U
-  TTN_FIRST* = 0U-520U
-  TTN_LAST* = 0U-549U
-  TCN_FIRST* = 0U-550U
-  TCN_LAST* = 0U-580U
-  CDN_FIRST* = 0U-601U
-  CDN_LAST* = 0U-699U
-  TBN_FIRST* = 0U-700U
-  TBN_LAST* = 0U-720U
-  UDN_FIRST* = 0U-721
-  UDN_LAST* = 0U-729U
-  DTN_FIRST* = 0U-740U
-  DTN_LAST* = 0U-745U
-  MCN_FIRST* = 0U-746U
-  MCN_LAST* = 0U-752U
-  DTN_FIRST2* = 0U-753U
-  DTN_LAST2* = 0U-799U
-  CBEN_FIRST* = 0U-800U
-  CBEN_LAST* = 0U-830U
-  RBN_FIRST* = 0U-831U
-  RBN_LAST* = 0U-859U
-  IPN_FIRST* = 0U-860U
-  IPN_LAST* = 0U-879U
-  SBN_FIRST* = 0U-880U
-  SBN_LAST* = 0U-899U
-  PGN_FIRST* = 0U-900U
-  PGN_LAST* = 0U-950U
-  WMN_FIRST* = 0U-1000U
-  WMN_LAST* = 0U-1200U
-  BCN_FIRST* = 0U-1250U
-  BCN_LAST* = 0U-1350U
-  TRBN_FIRST* = 0U-1501U
-  TRBN_LAST* = 0U-1519U
+  NM_LAST* = 0-99
+  LVN_FIRST* = 0-100
+  LVN_LAST* = 0-199
+  HDN_FIRST* = 0-300
+  HDN_LAST* = 0-399
+  TVN_FIRST* = 0-400
+  TVN_LAST* = 0-499
+  TTN_FIRST* = 0-520
+  TTN_LAST* = 0-549
+  TCN_FIRST* = 0-550
+  TCN_LAST* = 0-580
+  CDN_FIRST* = 0-601
+  CDN_LAST* = 0-699
+  TBN_FIRST* = 0-700
+  TBN_LAST* = 0-720
+  UDN_FIRST* = 0-721
+  UDN_LAST* = 0-729
+  DTN_FIRST* = 0-740
+  DTN_LAST* = 0-745
+  MCN_FIRST* = 0-746
+  MCN_LAST* = 0-752
+  DTN_FIRST2* = 0-753
+  DTN_LAST2* = 0-799
+  CBEN_FIRST* = 0-800
+  CBEN_LAST* = 0-830
+  RBN_FIRST* = 0-831
+  RBN_LAST* = 0-859
+  IPN_FIRST* = 0-860
+  IPN_LAST* = 0-879
+  SBN_FIRST* = 0-880
+  SBN_LAST* = 0-899
+  PGN_FIRST* = 0-900
+  PGN_LAST* = 0-950
+  WMN_FIRST* = 0-1000
+  WMN_LAST* = 0-1200
+  BCN_FIRST* = 0-1250
+  BCN_LAST* = 0-1350
+  TRBN_FIRST* = 0-1501
+  TRBN_LAST* = 0-1519
   MSGF_COMMCTRL_BEGINDRAG* = 0x4200
   MSGF_COMMCTRL_SIZEHEADER* = 0x4201
   MSGF_COMMCTRL_DRAGSELECT* = 0x4202
@@ -3692,6 +3692,7 @@ const
   TVI_LAST* = HTREEITEM(-0xfffe)
   TVI_ROOT* = HTREEITEM(-0x10000)
   TVI_SORT* = HTREEITEM(-0xfffd)
+  LM_GETIDEALSIZE* = LM_GETIDEALHEIGHT
 type
   LPFNADDPROPSHEETPAGE* = proc (P1: HPROPSHEETPAGE, P2: LPARAM): WINBOOL {.stdcall.}
   LPFNADDPROPSHEETPAGES* = proc (P1: LPVOID, P2: LPFNADDPROPSHEETPAGE, P3: LPARAM): WINBOOL {.stdcall.}
@@ -4534,78 +4535,115 @@ template TreeView_SortChildren*(hwnd: HWND, hitem: HTREEITEM, recurse: BOOL): BO
 template TreeView_SortChildrenCB*(hwnd: HWND, psort: LPTVSORTCB, recurse: BOOL): BOOL = discardable BOOL SendMessage(hwnd, TVM_SORTCHILDRENCB, cast[WPARAM](recurse), cast[LPARAM](psort))
 proc `pszTemplate=`*(self: var PROPSHEETPAGEA, x: LPCSTR) {.inline.} = self.union1.pszTemplate = x
 proc pszTemplate*(self: PROPSHEETPAGEA): LPCSTR {.inline.} = self.union1.pszTemplate
+proc pszTemplate*(self: var PROPSHEETPAGEA): var LPCSTR {.inline.} = self.union1.pszTemplate
 proc `pResource=`*(self: var PROPSHEETPAGEA, x: LPCDLGTEMPLATE) {.inline.} = self.union1.pResource = x
 proc pResource*(self: PROPSHEETPAGEA): LPCDLGTEMPLATE {.inline.} = self.union1.pResource
+proc pResource*(self: var PROPSHEETPAGEA): var LPCDLGTEMPLATE {.inline.} = self.union1.pResource
 proc `hIcon=`*(self: var PROPSHEETPAGEA, x: HICON) {.inline.} = self.union2.hIcon = x
 proc hIcon*(self: PROPSHEETPAGEA): HICON {.inline.} = self.union2.hIcon
+proc hIcon*(self: var PROPSHEETPAGEA): var HICON {.inline.} = self.union2.hIcon
 proc `pszIcon=`*(self: var PROPSHEETPAGEA, x: LPCSTR) {.inline.} = self.union2.pszIcon = x
 proc pszIcon*(self: PROPSHEETPAGEA): LPCSTR {.inline.} = self.union2.pszIcon
+proc pszIcon*(self: var PROPSHEETPAGEA): var LPCSTR {.inline.} = self.union2.pszIcon
 proc `pszTemplate=`*(self: var PROPSHEETPAGEW, x: LPCWSTR) {.inline.} = self.union1.pszTemplate = x
 proc pszTemplate*(self: PROPSHEETPAGEW): LPCWSTR {.inline.} = self.union1.pszTemplate
+proc pszTemplate*(self: var PROPSHEETPAGEW): var LPCWSTR {.inline.} = self.union1.pszTemplate
 proc `pResource=`*(self: var PROPSHEETPAGEW, x: LPCDLGTEMPLATE) {.inline.} = self.union1.pResource = x
 proc pResource*(self: PROPSHEETPAGEW): LPCDLGTEMPLATE {.inline.} = self.union1.pResource
+proc pResource*(self: var PROPSHEETPAGEW): var LPCDLGTEMPLATE {.inline.} = self.union1.pResource
 proc `hIcon=`*(self: var PROPSHEETPAGEW, x: HICON) {.inline.} = self.union2.hIcon = x
 proc hIcon*(self: PROPSHEETPAGEW): HICON {.inline.} = self.union2.hIcon
+proc hIcon*(self: var PROPSHEETPAGEW): var HICON {.inline.} = self.union2.hIcon
 proc `pszIcon=`*(self: var PROPSHEETPAGEW, x: LPCWSTR) {.inline.} = self.union2.pszIcon = x
 proc pszIcon*(self: PROPSHEETPAGEW): LPCWSTR {.inline.} = self.union2.pszIcon
+proc pszIcon*(self: var PROPSHEETPAGEW): var LPCWSTR {.inline.} = self.union2.pszIcon
 proc `hIcon=`*(self: var PROPSHEETHEADERA, x: HICON) {.inline.} = self.union1.hIcon = x
 proc hIcon*(self: PROPSHEETHEADERA): HICON {.inline.} = self.union1.hIcon
+proc hIcon*(self: var PROPSHEETHEADERA): var HICON {.inline.} = self.union1.hIcon
 proc `pszIcon=`*(self: var PROPSHEETHEADERA, x: LPCSTR) {.inline.} = self.union1.pszIcon = x
 proc pszIcon*(self: PROPSHEETHEADERA): LPCSTR {.inline.} = self.union1.pszIcon
+proc pszIcon*(self: var PROPSHEETHEADERA): var LPCSTR {.inline.} = self.union1.pszIcon
 proc `nStartPage=`*(self: var PROPSHEETHEADERA, x: UINT) {.inline.} = self.union2.nStartPage = x
 proc nStartPage*(self: PROPSHEETHEADERA): UINT {.inline.} = self.union2.nStartPage
+proc nStartPage*(self: var PROPSHEETHEADERA): var UINT {.inline.} = self.union2.nStartPage
 proc `pStartPage=`*(self: var PROPSHEETHEADERA, x: LPCSTR) {.inline.} = self.union2.pStartPage = x
 proc pStartPage*(self: PROPSHEETHEADERA): LPCSTR {.inline.} = self.union2.pStartPage
+proc pStartPage*(self: var PROPSHEETHEADERA): var LPCSTR {.inline.} = self.union2.pStartPage
 proc `ppsp=`*(self: var PROPSHEETHEADERA, x: LPCPROPSHEETPAGEA) {.inline.} = self.union3.ppsp = x
 proc ppsp*(self: PROPSHEETHEADERA): LPCPROPSHEETPAGEA {.inline.} = self.union3.ppsp
+proc ppsp*(self: var PROPSHEETHEADERA): var LPCPROPSHEETPAGEA {.inline.} = self.union3.ppsp
 proc `phpage=`*(self: var PROPSHEETHEADERA, x: ptr HPROPSHEETPAGE) {.inline.} = self.union3.phpage = x
 proc phpage*(self: PROPSHEETHEADERA): ptr HPROPSHEETPAGE {.inline.} = self.union3.phpage
+proc phpage*(self: var PROPSHEETHEADERA): var ptr HPROPSHEETPAGE {.inline.} = self.union3.phpage
 proc `hbmWatermark=`*(self: var PROPSHEETHEADERA, x: HBITMAP) {.inline.} = self.union4.hbmWatermark = x
 proc hbmWatermark*(self: PROPSHEETHEADERA): HBITMAP {.inline.} = self.union4.hbmWatermark
+proc hbmWatermark*(self: var PROPSHEETHEADERA): var HBITMAP {.inline.} = self.union4.hbmWatermark
 proc `pszbmWatermark=`*(self: var PROPSHEETHEADERA, x: LPCSTR) {.inline.} = self.union4.pszbmWatermark = x
 proc pszbmWatermark*(self: PROPSHEETHEADERA): LPCSTR {.inline.} = self.union4.pszbmWatermark
+proc pszbmWatermark*(self: var PROPSHEETHEADERA): var LPCSTR {.inline.} = self.union4.pszbmWatermark
 proc `hbmHeader=`*(self: var PROPSHEETHEADERA, x: HBITMAP) {.inline.} = self.union5.hbmHeader = x
 proc hbmHeader*(self: PROPSHEETHEADERA): HBITMAP {.inline.} = self.union5.hbmHeader
+proc hbmHeader*(self: var PROPSHEETHEADERA): var HBITMAP {.inline.} = self.union5.hbmHeader
 proc `pszbmHeader=`*(self: var PROPSHEETHEADERA, x: LPCSTR) {.inline.} = self.union5.pszbmHeader = x
 proc pszbmHeader*(self: PROPSHEETHEADERA): LPCSTR {.inline.} = self.union5.pszbmHeader
+proc pszbmHeader*(self: var PROPSHEETHEADERA): var LPCSTR {.inline.} = self.union5.pszbmHeader
 proc `hIcon=`*(self: var PROPSHEETHEADERW, x: HICON) {.inline.} = self.union1.hIcon = x
 proc hIcon*(self: PROPSHEETHEADERW): HICON {.inline.} = self.union1.hIcon
+proc hIcon*(self: var PROPSHEETHEADERW): var HICON {.inline.} = self.union1.hIcon
 proc `pszIcon=`*(self: var PROPSHEETHEADERW, x: LPCWSTR) {.inline.} = self.union1.pszIcon = x
 proc pszIcon*(self: PROPSHEETHEADERW): LPCWSTR {.inline.} = self.union1.pszIcon
+proc pszIcon*(self: var PROPSHEETHEADERW): var LPCWSTR {.inline.} = self.union1.pszIcon
 proc `nStartPage=`*(self: var PROPSHEETHEADERW, x: UINT) {.inline.} = self.union2.nStartPage = x
 proc nStartPage*(self: PROPSHEETHEADERW): UINT {.inline.} = self.union2.nStartPage
+proc nStartPage*(self: var PROPSHEETHEADERW): var UINT {.inline.} = self.union2.nStartPage
 proc `pStartPage=`*(self: var PROPSHEETHEADERW, x: LPCWSTR) {.inline.} = self.union2.pStartPage = x
 proc pStartPage*(self: PROPSHEETHEADERW): LPCWSTR {.inline.} = self.union2.pStartPage
+proc pStartPage*(self: var PROPSHEETHEADERW): var LPCWSTR {.inline.} = self.union2.pStartPage
 proc `ppsp=`*(self: var PROPSHEETHEADERW, x: LPCPROPSHEETPAGEW) {.inline.} = self.union3.ppsp = x
 proc ppsp*(self: PROPSHEETHEADERW): LPCPROPSHEETPAGEW {.inline.} = self.union3.ppsp
+proc ppsp*(self: var PROPSHEETHEADERW): var LPCPROPSHEETPAGEW {.inline.} = self.union3.ppsp
 proc `phpage=`*(self: var PROPSHEETHEADERW, x: ptr HPROPSHEETPAGE) {.inline.} = self.union3.phpage = x
 proc phpage*(self: PROPSHEETHEADERW): ptr HPROPSHEETPAGE {.inline.} = self.union3.phpage
+proc phpage*(self: var PROPSHEETHEADERW): var ptr HPROPSHEETPAGE {.inline.} = self.union3.phpage
 proc `hbmWatermark=`*(self: var PROPSHEETHEADERW, x: HBITMAP) {.inline.} = self.union4.hbmWatermark = x
 proc hbmWatermark*(self: PROPSHEETHEADERW): HBITMAP {.inline.} = self.union4.hbmWatermark
+proc hbmWatermark*(self: var PROPSHEETHEADERW): var HBITMAP {.inline.} = self.union4.hbmWatermark
 proc `pszbmWatermark=`*(self: var PROPSHEETHEADERW, x: LPCWSTR) {.inline.} = self.union4.pszbmWatermark = x
 proc pszbmWatermark*(self: PROPSHEETHEADERW): LPCWSTR {.inline.} = self.union4.pszbmWatermark
+proc pszbmWatermark*(self: var PROPSHEETHEADERW): var LPCWSTR {.inline.} = self.union4.pszbmWatermark
 proc `hbmHeader=`*(self: var PROPSHEETHEADERW, x: HBITMAP) {.inline.} = self.union5.hbmHeader = x
 proc hbmHeader*(self: PROPSHEETHEADERW): HBITMAP {.inline.} = self.union5.hbmHeader
+proc hbmHeader*(self: var PROPSHEETHEADERW): var HBITMAP {.inline.} = self.union5.hbmHeader
 proc `pszbmHeader=`*(self: var PROPSHEETHEADERW, x: LPCWSTR) {.inline.} = self.union5.pszbmHeader = x
 proc pszbmHeader*(self: PROPSHEETHEADERW): LPCWSTR {.inline.} = self.union5.pszbmHeader
+proc pszbmHeader*(self: var PROPSHEETHEADERW): var LPCWSTR {.inline.} = self.union5.pszbmHeader
 proc `itemex=`*(self: var TVINSERTSTRUCTA, x: TVITEMEXA) {.inline.} = self.union1.itemex = x
 proc itemex*(self: TVINSERTSTRUCTA): TVITEMEXA {.inline.} = self.union1.itemex
+proc itemex*(self: var TVINSERTSTRUCTA): var TVITEMEXA {.inline.} = self.union1.itemex
 proc `item=`*(self: var TVINSERTSTRUCTA, x: TV_ITEMA) {.inline.} = self.union1.item = x
 proc item*(self: TVINSERTSTRUCTA): TV_ITEMA {.inline.} = self.union1.item
+proc item*(self: var TVINSERTSTRUCTA): var TV_ITEMA {.inline.} = self.union1.item
 proc `itemex=`*(self: var TVINSERTSTRUCTW, x: TVITEMEXW) {.inline.} = self.union1.itemex = x
 proc itemex*(self: TVINSERTSTRUCTW): TVITEMEXW {.inline.} = self.union1.itemex
+proc itemex*(self: var TVINSERTSTRUCTW): var TVITEMEXW {.inline.} = self.union1.itemex
 proc `item=`*(self: var TVINSERTSTRUCTW, x: TV_ITEMW) {.inline.} = self.union1.item = x
 proc item*(self: TVINSERTSTRUCTW): TV_ITEMW {.inline.} = self.union1.item
+proc item*(self: var TVINSERTSTRUCTW): var TV_ITEMW {.inline.} = self.union1.item
 proc `hMainIcon=`*(self: var TASKDIALOGCONFIG, x: HICON) {.inline.} = self.union1.hMainIcon = x
 proc hMainIcon*(self: TASKDIALOGCONFIG): HICON {.inline.} = self.union1.hMainIcon
+proc hMainIcon*(self: var TASKDIALOGCONFIG): var HICON {.inline.} = self.union1.hMainIcon
 proc `pszMainIcon=`*(self: var TASKDIALOGCONFIG, x: PCWSTR) {.inline.} = self.union1.pszMainIcon = x
 proc pszMainIcon*(self: TASKDIALOGCONFIG): PCWSTR {.inline.} = self.union1.pszMainIcon
+proc pszMainIcon*(self: var TASKDIALOGCONFIG): var PCWSTR {.inline.} = self.union1.pszMainIcon
 proc `hFooterIcon=`*(self: var TASKDIALOGCONFIG, x: HICON) {.inline.} = self.union2.hFooterIcon = x
 proc hFooterIcon*(self: TASKDIALOGCONFIG): HICON {.inline.} = self.union2.hFooterIcon
+proc hFooterIcon*(self: var TASKDIALOGCONFIG): var HICON {.inline.} = self.union2.hFooterIcon
 proc `pszFooterIcon=`*(self: var TASKDIALOGCONFIG, x: PCWSTR) {.inline.} = self.union2.pszFooterIcon = x
 proc pszFooterIcon*(self: TASKDIALOGCONFIG): PCWSTR {.inline.} = self.union2.pszFooterIcon
+proc pszFooterIcon*(self: var TASKDIALOGCONFIG): var PCWSTR {.inline.} = self.union2.pszFooterIcon
 when winimUnicode:
   type
+    LPNMLVDISPINFO* = LPNMLVDISPINFOW
     LPFNPSPCALLBACK* = LPFNPSPCALLBACKW
     PROPSHEETPAGE* = PROPSHEETPAGEW
     LPPROPSHEETPAGE* = LPPROPSHEETPAGEW
@@ -4775,6 +4813,7 @@ when winimUnicode:
   proc DrawStatusText*(hDC: HDC, lprc: LPCRECT, pszText: LPCWSTR, uFlags: UINT): void {.winapi, stdcall, dynlib: "comctl32", importc: "DrawStatusTextW".}
 when winimAnsi:
   type
+    LPNMLVDISPINFO* = LPNMLVDISPINFOA
     LPFNPSPCALLBACK* = LPFNPSPCALLBACKA
     PROPSHEETPAGE* = PROPSHEETPAGEA
     LPPROPSHEETPAGE* = LPPROPSHEETPAGEA

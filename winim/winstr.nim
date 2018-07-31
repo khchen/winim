@@ -157,7 +157,7 @@
 {.deadCodeElim: on.}
 
 import macros, strutils, inc.winimbase, core
-export strutils.toHex
+export strutils.toHex, winimbase
 
 # copy from widestrs.nim, these functions used both compile-time and run-time
 # use WCHAR instead of Utf16Char

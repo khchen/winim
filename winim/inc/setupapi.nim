@@ -1475,8 +1475,10 @@ proc SetupConfigureWmiFromInfSectionA*(InfHandle: HINF, SectionName: PCSTR, Flag
 proc SetupConfigureWmiFromInfSectionW*(InfHandle: HINF, SectionName: PCWSTR, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "setupapi", importc.}
 proc `Reserved=`*(self: var SP_ALTPLATFORM_INFO_V2, x: WORD) {.inline.} = self.union1.Reserved = x
 proc Reserved*(self: SP_ALTPLATFORM_INFO_V2): WORD {.inline.} = self.union1.Reserved
+proc Reserved*(self: var SP_ALTPLATFORM_INFO_V2): var WORD {.inline.} = self.union1.Reserved
 proc `Flags=`*(self: var SP_ALTPLATFORM_INFO_V2, x: WORD) {.inline.} = self.union1.Flags = x
 proc Flags*(self: SP_ALTPLATFORM_INFO_V2): WORD {.inline.} = self.union1.Flags
+proc Flags*(self: var SP_ALTPLATFORM_INFO_V2): var WORD {.inline.} = self.union1.Flags
 when winimUnicode:
   type
     SP_ORIGINAL_FILE_INFO* = SP_ORIGINAL_FILE_INFO_W

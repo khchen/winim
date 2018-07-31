@@ -979,20 +979,28 @@ type
     pfnHyphenate*: proc(P1: ptr WCHAR, P2: LANGID, P3: int32, P4: ptr HYPHRESULT): void {.stdcall.}
 proc `dwReserved=`*(self: var CHARFORMAT2W, x: DWORD) {.inline.} = self.union1.dwReserved = x
 proc dwReserved*(self: CHARFORMAT2W): DWORD {.inline.} = self.union1.dwReserved
+proc dwReserved*(self: var CHARFORMAT2W): var DWORD {.inline.} = self.union1.dwReserved
 proc `dwCookie=`*(self: var CHARFORMAT2W, x: DWORD) {.inline.} = self.union1.dwCookie = x
 proc dwCookie*(self: CHARFORMAT2W): DWORD {.inline.} = self.union1.dwCookie
+proc dwCookie*(self: var CHARFORMAT2W): var DWORD {.inline.} = self.union1.dwCookie
 proc `dwReserved=`*(self: var CHARFORMAT2A, x: DWORD) {.inline.} = self.union1.dwReserved = x
 proc dwReserved*(self: CHARFORMAT2A): DWORD {.inline.} = self.union1.dwReserved
+proc dwReserved*(self: var CHARFORMAT2A): var DWORD {.inline.} = self.union1.dwReserved
 proc `dwCookie=`*(self: var CHARFORMAT2A, x: DWORD) {.inline.} = self.union1.dwCookie = x
 proc dwCookie*(self: CHARFORMAT2A): DWORD {.inline.} = self.union1.dwCookie
+proc dwCookie*(self: var CHARFORMAT2A): var DWORD {.inline.} = self.union1.dwCookie
 proc `wReserved=`*(self: var PARAFORMAT, x: WORD) {.inline.} = self.union1.wReserved = x
 proc wReserved*(self: PARAFORMAT): WORD {.inline.} = self.union1.wReserved
+proc wReserved*(self: var PARAFORMAT): var WORD {.inline.} = self.union1.wReserved
 proc `wEffects=`*(self: var PARAFORMAT, x: WORD) {.inline.} = self.union1.wEffects = x
 proc wEffects*(self: PARAFORMAT): WORD {.inline.} = self.union1.wEffects
+proc wEffects*(self: var PARAFORMAT): var WORD {.inline.} = self.union1.wEffects
 proc `wReserved=`*(self: var PARAFORMAT2, x: WORD) {.inline.} = self.union1.wReserved = x
 proc wReserved*(self: PARAFORMAT2): WORD {.inline.} = self.union1.wReserved
+proc wReserved*(self: var PARAFORMAT2): var WORD {.inline.} = self.union1.wReserved
 proc `wEffects=`*(self: var PARAFORMAT2, x: WORD) {.inline.} = self.union1.wEffects = x
 proc wEffects*(self: PARAFORMAT2): WORD {.inline.} = self.union1.wEffects
+proc wEffects*(self: var PARAFORMAT2): var WORD {.inline.} = self.union1.wEffects
 proc GetClientSite*(self: ptr IRichEditOle, lplpolesite: ptr LPOLECLIENTSITE): HRESULT {.winapi, inline.} = self.lpVtbl.GetClientSite(self, lplpolesite)
 proc GetObjectCount*(self: ptr IRichEditOle): LONG {.winapi, inline.} = self.lpVtbl.GetObjectCount(self)
 proc GetLinkCount*(self: ptr IRichEditOle): LONG {.winapi, inline.} = self.lpVtbl.GetLinkCount(self)

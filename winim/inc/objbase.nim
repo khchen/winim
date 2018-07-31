@@ -7355,390 +7355,583 @@ proc VarUI8FromUI8*(ui64In: ULONG64, pi64Out: ptr ULONG64): HRESULT {.winapi, in
 proc VarI8FromI8*(i64In: LONG64, pi64Out: ptr LONG64): HRESULT {.winapi, inline.} = pi64Out[] = i64In
 proc `Lo=`*(self: var CY, x: int32) {.inline.} = self.struct1.Lo = x
 proc Lo*(self: CY): int32 {.inline.} = self.struct1.Lo
+proc Lo*(self: var CY): var int32 {.inline.} = self.struct1.Lo
 proc `Hi=`*(self: var CY, x: int32) {.inline.} = self.struct1.Hi = x
 proc Hi*(self: CY): int32 {.inline.} = self.struct1.Hi
+proc Hi*(self: var CY): var int32 {.inline.} = self.struct1.Hi
 proc `scale=`*(self: var DECIMAL, x: BYTE) {.inline.} = self.union1.struct1.scale = x
 proc scale*(self: DECIMAL): BYTE {.inline.} = self.union1.struct1.scale
+proc scale*(self: var DECIMAL): var BYTE {.inline.} = self.union1.struct1.scale
 proc `sign=`*(self: var DECIMAL, x: BYTE) {.inline.} = self.union1.struct1.sign = x
 proc sign*(self: DECIMAL): BYTE {.inline.} = self.union1.struct1.sign
+proc sign*(self: var DECIMAL): var BYTE {.inline.} = self.union1.struct1.sign
 proc `signscale=`*(self: var DECIMAL, x: USHORT) {.inline.} = self.union1.signscale = x
 proc signscale*(self: DECIMAL): USHORT {.inline.} = self.union1.signscale
+proc signscale*(self: var DECIMAL): var USHORT {.inline.} = self.union1.signscale
 proc `Lo32=`*(self: var DECIMAL, x: ULONG) {.inline.} = self.union2.struct1.Lo32 = x
 proc Lo32*(self: DECIMAL): ULONG {.inline.} = self.union2.struct1.Lo32
+proc Lo32*(self: var DECIMAL): var ULONG {.inline.} = self.union2.struct1.Lo32
 proc `Mid32=`*(self: var DECIMAL, x: ULONG) {.inline.} = self.union2.struct1.Mid32 = x
 proc Mid32*(self: DECIMAL): ULONG {.inline.} = self.union2.struct1.Mid32
+proc Mid32*(self: var DECIMAL): var ULONG {.inline.} = self.union2.struct1.Mid32
 proc `Lo64=`*(self: var DECIMAL, x: ULONGLONG) {.inline.} = self.union2.Lo64 = x
 proc Lo64*(self: DECIMAL): ULONGLONG {.inline.} = self.union2.Lo64
+proc Lo64*(self: var DECIMAL): var ULONGLONG {.inline.} = self.union2.Lo64
 proc `tymed=`*(self: var userSTGMEDIUM, x: DWORD) {.inline.} = self.struct1.tymed = x
 proc tymed*(self: userSTGMEDIUM): DWORD {.inline.} = self.struct1.tymed
+proc tymed*(self: var userSTGMEDIUM): var DWORD {.inline.} = self.struct1.tymed
 proc `u=`*(self: var userSTGMEDIUM, x: userSTGMEDIUM_STRUCT1_u) {.inline.} = self.struct1.u = x
 proc u*(self: userSTGMEDIUM): userSTGMEDIUM_STRUCT1_u {.inline.} = self.struct1.u
+proc u*(self: var userSTGMEDIUM): var userSTGMEDIUM_STRUCT1_u {.inline.} = self.struct1.u
 proc `vt=`*(self: var VARIANT, x: VARTYPE) {.inline.} = self.union1.struct1.vt = x
 proc vt*(self: VARIANT): VARTYPE {.inline.} = self.union1.struct1.vt
+proc vt*(self: var VARIANT): var VARTYPE {.inline.} = self.union1.struct1.vt
 proc `wReserved1=`*(self: var VARIANT, x: WORD) {.inline.} = self.union1.struct1.wReserved1 = x
 proc wReserved1*(self: VARIANT): WORD {.inline.} = self.union1.struct1.wReserved1
+proc wReserved1*(self: var VARIANT): var WORD {.inline.} = self.union1.struct1.wReserved1
 proc `wReserved2=`*(self: var VARIANT, x: WORD) {.inline.} = self.union1.struct1.wReserved2 = x
 proc wReserved2*(self: VARIANT): WORD {.inline.} = self.union1.struct1.wReserved2
+proc wReserved2*(self: var VARIANT): var WORD {.inline.} = self.union1.struct1.wReserved2
 proc `wReserved3=`*(self: var VARIANT, x: WORD) {.inline.} = self.union1.struct1.wReserved3 = x
 proc wReserved3*(self: VARIANT): WORD {.inline.} = self.union1.struct1.wReserved3
+proc wReserved3*(self: var VARIANT): var WORD {.inline.} = self.union1.struct1.wReserved3
 proc `llVal=`*(self: var VARIANT, x: LONGLONG) {.inline.} = self.union1.struct1.union1.llVal = x
 proc llVal*(self: VARIANT): LONGLONG {.inline.} = self.union1.struct1.union1.llVal
+proc llVal*(self: var VARIANT): var LONGLONG {.inline.} = self.union1.struct1.union1.llVal
 proc `lVal=`*(self: var VARIANT, x: LONG) {.inline.} = self.union1.struct1.union1.lVal = x
 proc lVal*(self: VARIANT): LONG {.inline.} = self.union1.struct1.union1.lVal
+proc lVal*(self: var VARIANT): var LONG {.inline.} = self.union1.struct1.union1.lVal
 proc `bVal=`*(self: var VARIANT, x: BYTE) {.inline.} = self.union1.struct1.union1.bVal = x
 proc bVal*(self: VARIANT): BYTE {.inline.} = self.union1.struct1.union1.bVal
+proc bVal*(self: var VARIANT): var BYTE {.inline.} = self.union1.struct1.union1.bVal
 proc `iVal=`*(self: var VARIANT, x: SHORT) {.inline.} = self.union1.struct1.union1.iVal = x
 proc iVal*(self: VARIANT): SHORT {.inline.} = self.union1.struct1.union1.iVal
+proc iVal*(self: var VARIANT): var SHORT {.inline.} = self.union1.struct1.union1.iVal
 proc `fltVal=`*(self: var VARIANT, x: FLOAT) {.inline.} = self.union1.struct1.union1.fltVal = x
 proc fltVal*(self: VARIANT): FLOAT {.inline.} = self.union1.struct1.union1.fltVal
+proc fltVal*(self: var VARIANT): var FLOAT {.inline.} = self.union1.struct1.union1.fltVal
 proc `dblVal=`*(self: var VARIANT, x: DOUBLE) {.inline.} = self.union1.struct1.union1.dblVal = x
 proc dblVal*(self: VARIANT): DOUBLE {.inline.} = self.union1.struct1.union1.dblVal
+proc dblVal*(self: var VARIANT): var DOUBLE {.inline.} = self.union1.struct1.union1.dblVal
 proc `boolVal=`*(self: var VARIANT, x: VARIANT_BOOL) {.inline.} = self.union1.struct1.union1.boolVal = x
 proc boolVal*(self: VARIANT): VARIANT_BOOL {.inline.} = self.union1.struct1.union1.boolVal
+proc boolVal*(self: var VARIANT): var VARIANT_BOOL {.inline.} = self.union1.struct1.union1.boolVal
 proc `scode=`*(self: var VARIANT, x: SCODE) {.inline.} = self.union1.struct1.union1.scode = x
 proc scode*(self: VARIANT): SCODE {.inline.} = self.union1.struct1.union1.scode
+proc scode*(self: var VARIANT): var SCODE {.inline.} = self.union1.struct1.union1.scode
 proc `cyVal=`*(self: var VARIANT, x: CY) {.inline.} = self.union1.struct1.union1.cyVal = x
 proc cyVal*(self: VARIANT): CY {.inline.} = self.union1.struct1.union1.cyVal
+proc cyVal*(self: var VARIANT): var CY {.inline.} = self.union1.struct1.union1.cyVal
 proc `date=`*(self: var VARIANT, x: DATE) {.inline.} = self.union1.struct1.union1.date = x
 proc date*(self: VARIANT): DATE {.inline.} = self.union1.struct1.union1.date
+proc date*(self: var VARIANT): var DATE {.inline.} = self.union1.struct1.union1.date
 proc `bstrVal=`*(self: var VARIANT, x: BSTR) {.inline.} = self.union1.struct1.union1.bstrVal = x
 proc bstrVal*(self: VARIANT): BSTR {.inline.} = self.union1.struct1.union1.bstrVal
+proc bstrVal*(self: var VARIANT): var BSTR {.inline.} = self.union1.struct1.union1.bstrVal
 proc `punkVal=`*(self: var VARIANT, x: ptr IUnknown) {.inline.} = self.union1.struct1.union1.punkVal = x
 proc punkVal*(self: VARIANT): ptr IUnknown {.inline.} = self.union1.struct1.union1.punkVal
+proc punkVal*(self: var VARIANT): var ptr IUnknown {.inline.} = self.union1.struct1.union1.punkVal
 proc `pdispVal=`*(self: var VARIANT, x: ptr IDispatch) {.inline.} = self.union1.struct1.union1.pdispVal = x
 proc pdispVal*(self: VARIANT): ptr IDispatch {.inline.} = self.union1.struct1.union1.pdispVal
+proc pdispVal*(self: var VARIANT): var ptr IDispatch {.inline.} = self.union1.struct1.union1.pdispVal
 proc `parray=`*(self: var VARIANT, x: ptr SAFEARRAY) {.inline.} = self.union1.struct1.union1.parray = x
 proc parray*(self: VARIANT): ptr SAFEARRAY {.inline.} = self.union1.struct1.union1.parray
+proc parray*(self: var VARIANT): var ptr SAFEARRAY {.inline.} = self.union1.struct1.union1.parray
 proc `pbVal=`*(self: var VARIANT, x: ptr BYTE) {.inline.} = self.union1.struct1.union1.pbVal = x
 proc pbVal*(self: VARIANT): ptr BYTE {.inline.} = self.union1.struct1.union1.pbVal
+proc pbVal*(self: var VARIANT): var ptr BYTE {.inline.} = self.union1.struct1.union1.pbVal
 proc `piVal=`*(self: var VARIANT, x: ptr SHORT) {.inline.} = self.union1.struct1.union1.piVal = x
 proc piVal*(self: VARIANT): ptr SHORT {.inline.} = self.union1.struct1.union1.piVal
+proc piVal*(self: var VARIANT): var ptr SHORT {.inline.} = self.union1.struct1.union1.piVal
 proc `plVal=`*(self: var VARIANT, x: ptr LONG) {.inline.} = self.union1.struct1.union1.plVal = x
 proc plVal*(self: VARIANT): ptr LONG {.inline.} = self.union1.struct1.union1.plVal
+proc plVal*(self: var VARIANT): var ptr LONG {.inline.} = self.union1.struct1.union1.plVal
 proc `pllVal=`*(self: var VARIANT, x: ptr LONGLONG) {.inline.} = self.union1.struct1.union1.pllVal = x
 proc pllVal*(self: VARIANT): ptr LONGLONG {.inline.} = self.union1.struct1.union1.pllVal
+proc pllVal*(self: var VARIANT): var ptr LONGLONG {.inline.} = self.union1.struct1.union1.pllVal
 proc `pfltVal=`*(self: var VARIANT, x: ptr FLOAT) {.inline.} = self.union1.struct1.union1.pfltVal = x
 proc pfltVal*(self: VARIANT): ptr FLOAT {.inline.} = self.union1.struct1.union1.pfltVal
+proc pfltVal*(self: var VARIANT): var ptr FLOAT {.inline.} = self.union1.struct1.union1.pfltVal
 proc `pdblVal=`*(self: var VARIANT, x: ptr DOUBLE) {.inline.} = self.union1.struct1.union1.pdblVal = x
 proc pdblVal*(self: VARIANT): ptr DOUBLE {.inline.} = self.union1.struct1.union1.pdblVal
+proc pdblVal*(self: var VARIANT): var ptr DOUBLE {.inline.} = self.union1.struct1.union1.pdblVal
 proc `pboolVal=`*(self: var VARIANT, x: ptr VARIANT_BOOL) {.inline.} = self.union1.struct1.union1.pboolVal = x
 proc pboolVal*(self: VARIANT): ptr VARIANT_BOOL {.inline.} = self.union1.struct1.union1.pboolVal
+proc pboolVal*(self: var VARIANT): var ptr VARIANT_BOOL {.inline.} = self.union1.struct1.union1.pboolVal
 proc `pscode=`*(self: var VARIANT, x: ptr SCODE) {.inline.} = self.union1.struct1.union1.pscode = x
 proc pscode*(self: VARIANT): ptr SCODE {.inline.} = self.union1.struct1.union1.pscode
+proc pscode*(self: var VARIANT): var ptr SCODE {.inline.} = self.union1.struct1.union1.pscode
 proc `pcyVal=`*(self: var VARIANT, x: ptr CY) {.inline.} = self.union1.struct1.union1.pcyVal = x
 proc pcyVal*(self: VARIANT): ptr CY {.inline.} = self.union1.struct1.union1.pcyVal
+proc pcyVal*(self: var VARIANT): var ptr CY {.inline.} = self.union1.struct1.union1.pcyVal
 proc `pdate=`*(self: var VARIANT, x: ptr DATE) {.inline.} = self.union1.struct1.union1.pdate = x
 proc pdate*(self: VARIANT): ptr DATE {.inline.} = self.union1.struct1.union1.pdate
+proc pdate*(self: var VARIANT): var ptr DATE {.inline.} = self.union1.struct1.union1.pdate
 proc `pbstrVal=`*(self: var VARIANT, x: ptr BSTR) {.inline.} = self.union1.struct1.union1.pbstrVal = x
 proc pbstrVal*(self: VARIANT): ptr BSTR {.inline.} = self.union1.struct1.union1.pbstrVal
+proc pbstrVal*(self: var VARIANT): var ptr BSTR {.inline.} = self.union1.struct1.union1.pbstrVal
 proc `ppunkVal=`*(self: var VARIANT, x: ptr ptr IUnknown) {.inline.} = self.union1.struct1.union1.ppunkVal = x
 proc ppunkVal*(self: VARIANT): ptr ptr IUnknown {.inline.} = self.union1.struct1.union1.ppunkVal
+proc ppunkVal*(self: var VARIANT): var ptr ptr IUnknown {.inline.} = self.union1.struct1.union1.ppunkVal
 proc `ppdispVal=`*(self: var VARIANT, x: ptr ptr IDispatch) {.inline.} = self.union1.struct1.union1.ppdispVal = x
 proc ppdispVal*(self: VARIANT): ptr ptr IDispatch {.inline.} = self.union1.struct1.union1.ppdispVal
+proc ppdispVal*(self: var VARIANT): var ptr ptr IDispatch {.inline.} = self.union1.struct1.union1.ppdispVal
 proc `pparray=`*(self: var VARIANT, x: ptr ptr SAFEARRAY) {.inline.} = self.union1.struct1.union1.pparray = x
 proc pparray*(self: VARIANT): ptr ptr SAFEARRAY {.inline.} = self.union1.struct1.union1.pparray
+proc pparray*(self: var VARIANT): var ptr ptr SAFEARRAY {.inline.} = self.union1.struct1.union1.pparray
 proc `pvarVal=`*(self: var VARIANT, x: ptr VARIANT) {.inline.} = self.union1.struct1.union1.pvarVal = x
 proc pvarVal*(self: VARIANT): ptr VARIANT {.inline.} = self.union1.struct1.union1.pvarVal
+proc pvarVal*(self: var VARIANT): var ptr VARIANT {.inline.} = self.union1.struct1.union1.pvarVal
 proc `byref=`*(self: var VARIANT, x: PVOID) {.inline.} = self.union1.struct1.union1.byref = x
 proc byref*(self: VARIANT): PVOID {.inline.} = self.union1.struct1.union1.byref
+proc byref*(self: var VARIANT): var PVOID {.inline.} = self.union1.struct1.union1.byref
 proc `cVal=`*(self: var VARIANT, x: CHAR) {.inline.} = self.union1.struct1.union1.cVal = x
 proc cVal*(self: VARIANT): CHAR {.inline.} = self.union1.struct1.union1.cVal
+proc cVal*(self: var VARIANT): var CHAR {.inline.} = self.union1.struct1.union1.cVal
 proc `uiVal=`*(self: var VARIANT, x: USHORT) {.inline.} = self.union1.struct1.union1.uiVal = x
 proc uiVal*(self: VARIANT): USHORT {.inline.} = self.union1.struct1.union1.uiVal
+proc uiVal*(self: var VARIANT): var USHORT {.inline.} = self.union1.struct1.union1.uiVal
 proc `ulVal=`*(self: var VARIANT, x: ULONG) {.inline.} = self.union1.struct1.union1.ulVal = x
 proc ulVal*(self: VARIANT): ULONG {.inline.} = self.union1.struct1.union1.ulVal
+proc ulVal*(self: var VARIANT): var ULONG {.inline.} = self.union1.struct1.union1.ulVal
 proc `ullVal=`*(self: var VARIANT, x: ULONGLONG) {.inline.} = self.union1.struct1.union1.ullVal = x
 proc ullVal*(self: VARIANT): ULONGLONG {.inline.} = self.union1.struct1.union1.ullVal
+proc ullVal*(self: var VARIANT): var ULONGLONG {.inline.} = self.union1.struct1.union1.ullVal
 proc `intVal=`*(self: var VARIANT, x: INT) {.inline.} = self.union1.struct1.union1.intVal = x
 proc intVal*(self: VARIANT): INT {.inline.} = self.union1.struct1.union1.intVal
+proc intVal*(self: var VARIANT): var INT {.inline.} = self.union1.struct1.union1.intVal
 proc `uintVal=`*(self: var VARIANT, x: UINT) {.inline.} = self.union1.struct1.union1.uintVal = x
 proc uintVal*(self: VARIANT): UINT {.inline.} = self.union1.struct1.union1.uintVal
+proc uintVal*(self: var VARIANT): var UINT {.inline.} = self.union1.struct1.union1.uintVal
 proc `pdecVal=`*(self: var VARIANT, x: ptr DECIMAL) {.inline.} = self.union1.struct1.union1.pdecVal = x
 proc pdecVal*(self: VARIANT): ptr DECIMAL {.inline.} = self.union1.struct1.union1.pdecVal
+proc pdecVal*(self: var VARIANT): var ptr DECIMAL {.inline.} = self.union1.struct1.union1.pdecVal
 proc `pcVal=`*(self: var VARIANT, x: cstring) {.inline.} = self.union1.struct1.union1.pcVal = x
 proc pcVal*(self: VARIANT): cstring {.inline.} = self.union1.struct1.union1.pcVal
+proc pcVal*(self: var VARIANT): var cstring {.inline.} = self.union1.struct1.union1.pcVal
 proc `puiVal=`*(self: var VARIANT, x: ptr USHORT) {.inline.} = self.union1.struct1.union1.puiVal = x
 proc puiVal*(self: VARIANT): ptr USHORT {.inline.} = self.union1.struct1.union1.puiVal
+proc puiVal*(self: var VARIANT): var ptr USHORT {.inline.} = self.union1.struct1.union1.puiVal
 proc `pulVal=`*(self: var VARIANT, x: ptr ULONG) {.inline.} = self.union1.struct1.union1.pulVal = x
 proc pulVal*(self: VARIANT): ptr ULONG {.inline.} = self.union1.struct1.union1.pulVal
+proc pulVal*(self: var VARIANT): var ptr ULONG {.inline.} = self.union1.struct1.union1.pulVal
 proc `pullVal=`*(self: var VARIANT, x: ptr ULONGLONG) {.inline.} = self.union1.struct1.union1.pullVal = x
 proc pullVal*(self: VARIANT): ptr ULONGLONG {.inline.} = self.union1.struct1.union1.pullVal
+proc pullVal*(self: var VARIANT): var ptr ULONGLONG {.inline.} = self.union1.struct1.union1.pullVal
 proc `pintVal=`*(self: var VARIANT, x: ptr INT) {.inline.} = self.union1.struct1.union1.pintVal = x
 proc pintVal*(self: VARIANT): ptr INT {.inline.} = self.union1.struct1.union1.pintVal
+proc pintVal*(self: var VARIANT): var ptr INT {.inline.} = self.union1.struct1.union1.pintVal
 proc `puintVal=`*(self: var VARIANT, x: ptr UINT) {.inline.} = self.union1.struct1.union1.puintVal = x
 proc puintVal*(self: VARIANT): ptr UINT {.inline.} = self.union1.struct1.union1.puintVal
+proc puintVal*(self: var VARIANT): var ptr UINT {.inline.} = self.union1.struct1.union1.puintVal
 proc `pvRecord=`*(self: var VARIANT, x: PVOID) {.inline.} = self.union1.struct1.union1.struct1.pvRecord = x
 proc pvRecord*(self: VARIANT): PVOID {.inline.} = self.union1.struct1.union1.struct1.pvRecord
+proc pvRecord*(self: var VARIANT): var PVOID {.inline.} = self.union1.struct1.union1.struct1.pvRecord
 proc `pRecInfo=`*(self: var VARIANT, x: ptr IRecordInfo) {.inline.} = self.union1.struct1.union1.struct1.pRecInfo = x
 proc pRecInfo*(self: VARIANT): ptr IRecordInfo {.inline.} = self.union1.struct1.union1.struct1.pRecInfo
+proc pRecInfo*(self: var VARIANT): var ptr IRecordInfo {.inline.} = self.union1.struct1.union1.struct1.pRecInfo
 proc `decVal=`*(self: var VARIANT, x: DECIMAL) {.inline.} = self.union1.decVal = x
 proc decVal*(self: VARIANT): DECIMAL {.inline.} = self.union1.decVal
+proc decVal*(self: var VARIANT): var DECIMAL {.inline.} = self.union1.decVal
 proc `llVal=`*(self: var wireVARIANT, x: LONGLONG) {.inline.} = self.union1.llVal = x
 proc llVal*(self: wireVARIANT): LONGLONG {.inline.} = self.union1.llVal
+proc llVal*(self: var wireVARIANT): var LONGLONG {.inline.} = self.union1.llVal
 proc `lVal=`*(self: var wireVARIANT, x: LONG) {.inline.} = self.union1.lVal = x
 proc lVal*(self: wireVARIANT): LONG {.inline.} = self.union1.lVal
+proc lVal*(self: var wireVARIANT): var LONG {.inline.} = self.union1.lVal
 proc `bVal=`*(self: var wireVARIANT, x: BYTE) {.inline.} = self.union1.bVal = x
 proc bVal*(self: wireVARIANT): BYTE {.inline.} = self.union1.bVal
+proc bVal*(self: var wireVARIANT): var BYTE {.inline.} = self.union1.bVal
 proc `iVal=`*(self: var wireVARIANT, x: SHORT) {.inline.} = self.union1.iVal = x
 proc iVal*(self: wireVARIANT): SHORT {.inline.} = self.union1.iVal
+proc iVal*(self: var wireVARIANT): var SHORT {.inline.} = self.union1.iVal
 proc `fltVal=`*(self: var wireVARIANT, x: FLOAT) {.inline.} = self.union1.fltVal = x
 proc fltVal*(self: wireVARIANT): FLOAT {.inline.} = self.union1.fltVal
+proc fltVal*(self: var wireVARIANT): var FLOAT {.inline.} = self.union1.fltVal
 proc `dblVal=`*(self: var wireVARIANT, x: DOUBLE) {.inline.} = self.union1.dblVal = x
 proc dblVal*(self: wireVARIANT): DOUBLE {.inline.} = self.union1.dblVal
+proc dblVal*(self: var wireVARIANT): var DOUBLE {.inline.} = self.union1.dblVal
 proc `boolVal=`*(self: var wireVARIANT, x: VARIANT_BOOL) {.inline.} = self.union1.boolVal = x
 proc boolVal*(self: wireVARIANT): VARIANT_BOOL {.inline.} = self.union1.boolVal
+proc boolVal*(self: var wireVARIANT): var VARIANT_BOOL {.inline.} = self.union1.boolVal
 proc `scode=`*(self: var wireVARIANT, x: SCODE) {.inline.} = self.union1.scode = x
 proc scode*(self: wireVARIANT): SCODE {.inline.} = self.union1.scode
+proc scode*(self: var wireVARIANT): var SCODE {.inline.} = self.union1.scode
 proc `cyVal=`*(self: var wireVARIANT, x: CY) {.inline.} = self.union1.cyVal = x
 proc cyVal*(self: wireVARIANT): CY {.inline.} = self.union1.cyVal
+proc cyVal*(self: var wireVARIANT): var CY {.inline.} = self.union1.cyVal
 proc `date=`*(self: var wireVARIANT, x: DATE) {.inline.} = self.union1.date = x
 proc date*(self: wireVARIANT): DATE {.inline.} = self.union1.date
+proc date*(self: var wireVARIANT): var DATE {.inline.} = self.union1.date
 proc `bstrVal=`*(self: var wireVARIANT, x: wireBSTR) {.inline.} = self.union1.bstrVal = x
 proc bstrVal*(self: wireVARIANT): wireBSTR {.inline.} = self.union1.bstrVal
+proc bstrVal*(self: var wireVARIANT): var wireBSTR {.inline.} = self.union1.bstrVal
 proc `punkVal=`*(self: var wireVARIANT, x: ptr IUnknown) {.inline.} = self.union1.punkVal = x
 proc punkVal*(self: wireVARIANT): ptr IUnknown {.inline.} = self.union1.punkVal
+proc punkVal*(self: var wireVARIANT): var ptr IUnknown {.inline.} = self.union1.punkVal
 proc `pdispVal=`*(self: var wireVARIANT, x: ptr IDispatch) {.inline.} = self.union1.pdispVal = x
 proc pdispVal*(self: wireVARIANT): ptr IDispatch {.inline.} = self.union1.pdispVal
+proc pdispVal*(self: var wireVARIANT): var ptr IDispatch {.inline.} = self.union1.pdispVal
 proc `parray=`*(self: var wireVARIANT, x: wirePSAFEARRAY) {.inline.} = self.union1.parray = x
 proc parray*(self: wireVARIANT): wirePSAFEARRAY {.inline.} = self.union1.parray
+proc parray*(self: var wireVARIANT): var wirePSAFEARRAY {.inline.} = self.union1.parray
 proc `brecVal=`*(self: var wireVARIANT, x: wireBRECORD) {.inline.} = self.union1.brecVal = x
 proc brecVal*(self: wireVARIANT): wireBRECORD {.inline.} = self.union1.brecVal
+proc brecVal*(self: var wireVARIANT): var wireBRECORD {.inline.} = self.union1.brecVal
 proc `pbVal=`*(self: var wireVARIANT, x: ptr BYTE) {.inline.} = self.union1.pbVal = x
 proc pbVal*(self: wireVARIANT): ptr BYTE {.inline.} = self.union1.pbVal
+proc pbVal*(self: var wireVARIANT): var ptr BYTE {.inline.} = self.union1.pbVal
 proc `piVal=`*(self: var wireVARIANT, x: ptr SHORT) {.inline.} = self.union1.piVal = x
 proc piVal*(self: wireVARIANT): ptr SHORT {.inline.} = self.union1.piVal
+proc piVal*(self: var wireVARIANT): var ptr SHORT {.inline.} = self.union1.piVal
 proc `plVal=`*(self: var wireVARIANT, x: ptr LONG) {.inline.} = self.union1.plVal = x
 proc plVal*(self: wireVARIANT): ptr LONG {.inline.} = self.union1.plVal
+proc plVal*(self: var wireVARIANT): var ptr LONG {.inline.} = self.union1.plVal
 proc `pllVal=`*(self: var wireVARIANT, x: ptr LONGLONG) {.inline.} = self.union1.pllVal = x
 proc pllVal*(self: wireVARIANT): ptr LONGLONG {.inline.} = self.union1.pllVal
+proc pllVal*(self: var wireVARIANT): var ptr LONGLONG {.inline.} = self.union1.pllVal
 proc `pfltVal=`*(self: var wireVARIANT, x: ptr FLOAT) {.inline.} = self.union1.pfltVal = x
 proc pfltVal*(self: wireVARIANT): ptr FLOAT {.inline.} = self.union1.pfltVal
+proc pfltVal*(self: var wireVARIANT): var ptr FLOAT {.inline.} = self.union1.pfltVal
 proc `pdblVal=`*(self: var wireVARIANT, x: ptr DOUBLE) {.inline.} = self.union1.pdblVal = x
 proc pdblVal*(self: wireVARIANT): ptr DOUBLE {.inline.} = self.union1.pdblVal
+proc pdblVal*(self: var wireVARIANT): var ptr DOUBLE {.inline.} = self.union1.pdblVal
 proc `pboolVal=`*(self: var wireVARIANT, x: ptr VARIANT_BOOL) {.inline.} = self.union1.pboolVal = x
 proc pboolVal*(self: wireVARIANT): ptr VARIANT_BOOL {.inline.} = self.union1.pboolVal
+proc pboolVal*(self: var wireVARIANT): var ptr VARIANT_BOOL {.inline.} = self.union1.pboolVal
 proc `pscode=`*(self: var wireVARIANT, x: ptr SCODE) {.inline.} = self.union1.pscode = x
 proc pscode*(self: wireVARIANT): ptr SCODE {.inline.} = self.union1.pscode
+proc pscode*(self: var wireVARIANT): var ptr SCODE {.inline.} = self.union1.pscode
 proc `pcyVal=`*(self: var wireVARIANT, x: ptr CY) {.inline.} = self.union1.pcyVal = x
 proc pcyVal*(self: wireVARIANT): ptr CY {.inline.} = self.union1.pcyVal
+proc pcyVal*(self: var wireVARIANT): var ptr CY {.inline.} = self.union1.pcyVal
 proc `pdate=`*(self: var wireVARIANT, x: ptr DATE) {.inline.} = self.union1.pdate = x
 proc pdate*(self: wireVARIANT): ptr DATE {.inline.} = self.union1.pdate
+proc pdate*(self: var wireVARIANT): var ptr DATE {.inline.} = self.union1.pdate
 proc `pbstrVal=`*(self: var wireVARIANT, x: ptr wireBSTR) {.inline.} = self.union1.pbstrVal = x
 proc pbstrVal*(self: wireVARIANT): ptr wireBSTR {.inline.} = self.union1.pbstrVal
+proc pbstrVal*(self: var wireVARIANT): var ptr wireBSTR {.inline.} = self.union1.pbstrVal
 proc `ppunkVal=`*(self: var wireVARIANT, x: ptr ptr IUnknown) {.inline.} = self.union1.ppunkVal = x
 proc ppunkVal*(self: wireVARIANT): ptr ptr IUnknown {.inline.} = self.union1.ppunkVal
+proc ppunkVal*(self: var wireVARIANT): var ptr ptr IUnknown {.inline.} = self.union1.ppunkVal
 proc `ppdispVal=`*(self: var wireVARIANT, x: ptr ptr IDispatch) {.inline.} = self.union1.ppdispVal = x
 proc ppdispVal*(self: wireVARIANT): ptr ptr IDispatch {.inline.} = self.union1.ppdispVal
+proc ppdispVal*(self: var wireVARIANT): var ptr ptr IDispatch {.inline.} = self.union1.ppdispVal
 proc `pparray=`*(self: var wireVARIANT, x: ptr wirePSAFEARRAY) {.inline.} = self.union1.pparray = x
 proc pparray*(self: wireVARIANT): ptr wirePSAFEARRAY {.inline.} = self.union1.pparray
+proc pparray*(self: var wireVARIANT): var ptr wirePSAFEARRAY {.inline.} = self.union1.pparray
 proc `pvarVal=`*(self: var wireVARIANT, x: ptr wireVARIANT) {.inline.} = self.union1.pvarVal = x
 proc pvarVal*(self: wireVARIANT): ptr wireVARIANT {.inline.} = self.union1.pvarVal
+proc pvarVal*(self: var wireVARIANT): var ptr wireVARIANT {.inline.} = self.union1.pvarVal
 proc `cVal=`*(self: var wireVARIANT, x: CHAR) {.inline.} = self.union1.cVal = x
 proc cVal*(self: wireVARIANT): CHAR {.inline.} = self.union1.cVal
+proc cVal*(self: var wireVARIANT): var CHAR {.inline.} = self.union1.cVal
 proc `uiVal=`*(self: var wireVARIANT, x: USHORT) {.inline.} = self.union1.uiVal = x
 proc uiVal*(self: wireVARIANT): USHORT {.inline.} = self.union1.uiVal
+proc uiVal*(self: var wireVARIANT): var USHORT {.inline.} = self.union1.uiVal
 proc `ulVal=`*(self: var wireVARIANT, x: ULONG) {.inline.} = self.union1.ulVal = x
 proc ulVal*(self: wireVARIANT): ULONG {.inline.} = self.union1.ulVal
+proc ulVal*(self: var wireVARIANT): var ULONG {.inline.} = self.union1.ulVal
 proc `ullVal=`*(self: var wireVARIANT, x: ULONGLONG) {.inline.} = self.union1.ullVal = x
 proc ullVal*(self: wireVARIANT): ULONGLONG {.inline.} = self.union1.ullVal
+proc ullVal*(self: var wireVARIANT): var ULONGLONG {.inline.} = self.union1.ullVal
 proc `intVal=`*(self: var wireVARIANT, x: INT) {.inline.} = self.union1.intVal = x
 proc intVal*(self: wireVARIANT): INT {.inline.} = self.union1.intVal
+proc intVal*(self: var wireVARIANT): var INT {.inline.} = self.union1.intVal
 proc `uintVal=`*(self: var wireVARIANT, x: UINT) {.inline.} = self.union1.uintVal = x
 proc uintVal*(self: wireVARIANT): UINT {.inline.} = self.union1.uintVal
+proc uintVal*(self: var wireVARIANT): var UINT {.inline.} = self.union1.uintVal
 proc `decVal=`*(self: var wireVARIANT, x: DECIMAL) {.inline.} = self.union1.decVal = x
 proc decVal*(self: wireVARIANT): DECIMAL {.inline.} = self.union1.decVal
+proc decVal*(self: var wireVARIANT): var DECIMAL {.inline.} = self.union1.decVal
 proc `pdecVal=`*(self: var wireVARIANT, x: ptr DECIMAL) {.inline.} = self.union1.pdecVal = x
 proc pdecVal*(self: wireVARIANT): ptr DECIMAL {.inline.} = self.union1.pdecVal
+proc pdecVal*(self: var wireVARIANT): var ptr DECIMAL {.inline.} = self.union1.pdecVal
 proc `pcVal=`*(self: var wireVARIANT, x: cstring) {.inline.} = self.union1.pcVal = x
 proc pcVal*(self: wireVARIANT): cstring {.inline.} = self.union1.pcVal
+proc pcVal*(self: var wireVARIANT): var cstring {.inline.} = self.union1.pcVal
 proc `puiVal=`*(self: var wireVARIANT, x: ptr USHORT) {.inline.} = self.union1.puiVal = x
 proc puiVal*(self: wireVARIANT): ptr USHORT {.inline.} = self.union1.puiVal
+proc puiVal*(self: var wireVARIANT): var ptr USHORT {.inline.} = self.union1.puiVal
 proc `pulVal=`*(self: var wireVARIANT, x: ptr ULONG) {.inline.} = self.union1.pulVal = x
 proc pulVal*(self: wireVARIANT): ptr ULONG {.inline.} = self.union1.pulVal
+proc pulVal*(self: var wireVARIANT): var ptr ULONG {.inline.} = self.union1.pulVal
 proc `pullVal=`*(self: var wireVARIANT, x: ptr ULONGLONG) {.inline.} = self.union1.pullVal = x
 proc pullVal*(self: wireVARIANT): ptr ULONGLONG {.inline.} = self.union1.pullVal
+proc pullVal*(self: var wireVARIANT): var ptr ULONGLONG {.inline.} = self.union1.pullVal
 proc `pintVal=`*(self: var wireVARIANT, x: ptr INT) {.inline.} = self.union1.pintVal = x
 proc pintVal*(self: wireVARIANT): ptr INT {.inline.} = self.union1.pintVal
+proc pintVal*(self: var wireVARIANT): var ptr INT {.inline.} = self.union1.pintVal
 proc `puintVal=`*(self: var wireVARIANT, x: ptr UINT) {.inline.} = self.union1.puintVal = x
 proc puintVal*(self: wireVARIANT): ptr UINT {.inline.} = self.union1.puintVal
+proc puintVal*(self: var wireVARIANT): var ptr UINT {.inline.} = self.union1.puintVal
 proc `lptdesc=`*(self: var TYPEDESC, x: ptr TYPEDESC) {.inline.} = self.union1.lptdesc = x
 proc lptdesc*(self: TYPEDESC): ptr TYPEDESC {.inline.} = self.union1.lptdesc
+proc lptdesc*(self: var TYPEDESC): var ptr TYPEDESC {.inline.} = self.union1.lptdesc
 proc `lpadesc=`*(self: var TYPEDESC, x: ptr ARRAYDESC) {.inline.} = self.union1.lpadesc = x
 proc lpadesc*(self: TYPEDESC): ptr ARRAYDESC {.inline.} = self.union1.lpadesc
+proc lpadesc*(self: var TYPEDESC): var ptr ARRAYDESC {.inline.} = self.union1.lpadesc
 proc `hreftype=`*(self: var TYPEDESC, x: HREFTYPE) {.inline.} = self.union1.hreftype = x
 proc hreftype*(self: TYPEDESC): HREFTYPE {.inline.} = self.union1.hreftype
+proc hreftype*(self: var TYPEDESC): var HREFTYPE {.inline.} = self.union1.hreftype
 proc `idldesc=`*(self: var ELEMDESC, x: IDLDESC) {.inline.} = self.union1.idldesc = x
 proc idldesc*(self: ELEMDESC): IDLDESC {.inline.} = self.union1.idldesc
+proc idldesc*(self: var ELEMDESC): var IDLDESC {.inline.} = self.union1.idldesc
 proc `paramdesc=`*(self: var ELEMDESC, x: PARAMDESC) {.inline.} = self.union1.paramdesc = x
 proc paramdesc*(self: ELEMDESC): PARAMDESC {.inline.} = self.union1.paramdesc
+proc paramdesc*(self: var ELEMDESC): var PARAMDESC {.inline.} = self.union1.paramdesc
 proc `oInst=`*(self: var VARDESC, x: ULONG) {.inline.} = self.union1.oInst = x
 proc oInst*(self: VARDESC): ULONG {.inline.} = self.union1.oInst
+proc oInst*(self: var VARDESC): var ULONG {.inline.} = self.union1.oInst
 proc `lpvarValue=`*(self: var VARDESC, x: ptr VARIANT) {.inline.} = self.union1.lpvarValue = x
 proc lpvarValue*(self: VARDESC): ptr VARIANT {.inline.} = self.union1.lpvarValue
+proc lpvarValue*(self: var VARDESC): var ptr VARIANT {.inline.} = self.union1.lpvarValue
 proc `vt=`*(self: var PROPVARIANT, x: VARTYPE) {.inline.} = self.union1.struct1.vt = x
 proc vt*(self: PROPVARIANT): VARTYPE {.inline.} = self.union1.struct1.vt
+proc vt*(self: var PROPVARIANT): var VARTYPE {.inline.} = self.union1.struct1.vt
 proc `wReserved1=`*(self: var PROPVARIANT, x: PROPVAR_PAD1) {.inline.} = self.union1.struct1.wReserved1 = x
 proc wReserved1*(self: PROPVARIANT): PROPVAR_PAD1 {.inline.} = self.union1.struct1.wReserved1
+proc wReserved1*(self: var PROPVARIANT): var PROPVAR_PAD1 {.inline.} = self.union1.struct1.wReserved1
 proc `wReserved2=`*(self: var PROPVARIANT, x: PROPVAR_PAD2) {.inline.} = self.union1.struct1.wReserved2 = x
 proc wReserved2*(self: PROPVARIANT): PROPVAR_PAD2 {.inline.} = self.union1.struct1.wReserved2
+proc wReserved2*(self: var PROPVARIANT): var PROPVAR_PAD2 {.inline.} = self.union1.struct1.wReserved2
 proc `wReserved3=`*(self: var PROPVARIANT, x: PROPVAR_PAD3) {.inline.} = self.union1.struct1.wReserved3 = x
 proc wReserved3*(self: PROPVARIANT): PROPVAR_PAD3 {.inline.} = self.union1.struct1.wReserved3
+proc wReserved3*(self: var PROPVARIANT): var PROPVAR_PAD3 {.inline.} = self.union1.struct1.wReserved3
 proc `cVal=`*(self: var PROPVARIANT, x: CHAR) {.inline.} = self.union1.struct1.union1.cVal = x
 proc cVal*(self: PROPVARIANT): CHAR {.inline.} = self.union1.struct1.union1.cVal
+proc cVal*(self: var PROPVARIANT): var CHAR {.inline.} = self.union1.struct1.union1.cVal
 proc `bVal=`*(self: var PROPVARIANT, x: UCHAR) {.inline.} = self.union1.struct1.union1.bVal = x
 proc bVal*(self: PROPVARIANT): UCHAR {.inline.} = self.union1.struct1.union1.bVal
+proc bVal*(self: var PROPVARIANT): var UCHAR {.inline.} = self.union1.struct1.union1.bVal
 proc `iVal=`*(self: var PROPVARIANT, x: SHORT) {.inline.} = self.union1.struct1.union1.iVal = x
 proc iVal*(self: PROPVARIANT): SHORT {.inline.} = self.union1.struct1.union1.iVal
+proc iVal*(self: var PROPVARIANT): var SHORT {.inline.} = self.union1.struct1.union1.iVal
 proc `uiVal=`*(self: var PROPVARIANT, x: USHORT) {.inline.} = self.union1.struct1.union1.uiVal = x
 proc uiVal*(self: PROPVARIANT): USHORT {.inline.} = self.union1.struct1.union1.uiVal
+proc uiVal*(self: var PROPVARIANT): var USHORT {.inline.} = self.union1.struct1.union1.uiVal
 proc `lVal=`*(self: var PROPVARIANT, x: LONG) {.inline.} = self.union1.struct1.union1.lVal = x
 proc lVal*(self: PROPVARIANT): LONG {.inline.} = self.union1.struct1.union1.lVal
+proc lVal*(self: var PROPVARIANT): var LONG {.inline.} = self.union1.struct1.union1.lVal
 proc `ulVal=`*(self: var PROPVARIANT, x: ULONG) {.inline.} = self.union1.struct1.union1.ulVal = x
 proc ulVal*(self: PROPVARIANT): ULONG {.inline.} = self.union1.struct1.union1.ulVal
+proc ulVal*(self: var PROPVARIANT): var ULONG {.inline.} = self.union1.struct1.union1.ulVal
 proc `intVal=`*(self: var PROPVARIANT, x: INT) {.inline.} = self.union1.struct1.union1.intVal = x
 proc intVal*(self: PROPVARIANT): INT {.inline.} = self.union1.struct1.union1.intVal
+proc intVal*(self: var PROPVARIANT): var INT {.inline.} = self.union1.struct1.union1.intVal
 proc `uintVal=`*(self: var PROPVARIANT, x: UINT) {.inline.} = self.union1.struct1.union1.uintVal = x
 proc uintVal*(self: PROPVARIANT): UINT {.inline.} = self.union1.struct1.union1.uintVal
+proc uintVal*(self: var PROPVARIANT): var UINT {.inline.} = self.union1.struct1.union1.uintVal
 proc `hVal=`*(self: var PROPVARIANT, x: LARGE_INTEGER) {.inline.} = self.union1.struct1.union1.hVal = x
 proc hVal*(self: PROPVARIANT): LARGE_INTEGER {.inline.} = self.union1.struct1.union1.hVal
+proc hVal*(self: var PROPVARIANT): var LARGE_INTEGER {.inline.} = self.union1.struct1.union1.hVal
 proc `uhVal=`*(self: var PROPVARIANT, x: ULARGE_INTEGER) {.inline.} = self.union1.struct1.union1.uhVal = x
 proc uhVal*(self: PROPVARIANT): ULARGE_INTEGER {.inline.} = self.union1.struct1.union1.uhVal
+proc uhVal*(self: var PROPVARIANT): var ULARGE_INTEGER {.inline.} = self.union1.struct1.union1.uhVal
 proc `fltVal=`*(self: var PROPVARIANT, x: FLOAT) {.inline.} = self.union1.struct1.union1.fltVal = x
 proc fltVal*(self: PROPVARIANT): FLOAT {.inline.} = self.union1.struct1.union1.fltVal
+proc fltVal*(self: var PROPVARIANT): var FLOAT {.inline.} = self.union1.struct1.union1.fltVal
 proc `dblVal=`*(self: var PROPVARIANT, x: DOUBLE) {.inline.} = self.union1.struct1.union1.dblVal = x
 proc dblVal*(self: PROPVARIANT): DOUBLE {.inline.} = self.union1.struct1.union1.dblVal
+proc dblVal*(self: var PROPVARIANT): var DOUBLE {.inline.} = self.union1.struct1.union1.dblVal
 proc `boolVal=`*(self: var PROPVARIANT, x: VARIANT_BOOL) {.inline.} = self.union1.struct1.union1.boolVal = x
 proc boolVal*(self: PROPVARIANT): VARIANT_BOOL {.inline.} = self.union1.struct1.union1.boolVal
+proc boolVal*(self: var PROPVARIANT): var VARIANT_BOOL {.inline.} = self.union1.struct1.union1.boolVal
 proc `scode=`*(self: var PROPVARIANT, x: SCODE) {.inline.} = self.union1.struct1.union1.scode = x
 proc scode*(self: PROPVARIANT): SCODE {.inline.} = self.union1.struct1.union1.scode
+proc scode*(self: var PROPVARIANT): var SCODE {.inline.} = self.union1.struct1.union1.scode
 proc `cyVal=`*(self: var PROPVARIANT, x: CY) {.inline.} = self.union1.struct1.union1.cyVal = x
 proc cyVal*(self: PROPVARIANT): CY {.inline.} = self.union1.struct1.union1.cyVal
+proc cyVal*(self: var PROPVARIANT): var CY {.inline.} = self.union1.struct1.union1.cyVal
 proc `date=`*(self: var PROPVARIANT, x: DATE) {.inline.} = self.union1.struct1.union1.date = x
 proc date*(self: PROPVARIANT): DATE {.inline.} = self.union1.struct1.union1.date
+proc date*(self: var PROPVARIANT): var DATE {.inline.} = self.union1.struct1.union1.date
 proc `filetime=`*(self: var PROPVARIANT, x: FILETIME) {.inline.} = self.union1.struct1.union1.filetime = x
 proc filetime*(self: PROPVARIANT): FILETIME {.inline.} = self.union1.struct1.union1.filetime
+proc filetime*(self: var PROPVARIANT): var FILETIME {.inline.} = self.union1.struct1.union1.filetime
 proc `puuid=`*(self: var PROPVARIANT, x: ptr CLSID) {.inline.} = self.union1.struct1.union1.puuid = x
 proc puuid*(self: PROPVARIANT): ptr CLSID {.inline.} = self.union1.struct1.union1.puuid
+proc puuid*(self: var PROPVARIANT): var ptr CLSID {.inline.} = self.union1.struct1.union1.puuid
 proc `pclipdata=`*(self: var PROPVARIANT, x: ptr CLIPDATA) {.inline.} = self.union1.struct1.union1.pclipdata = x
 proc pclipdata*(self: PROPVARIANT): ptr CLIPDATA {.inline.} = self.union1.struct1.union1.pclipdata
+proc pclipdata*(self: var PROPVARIANT): var ptr CLIPDATA {.inline.} = self.union1.struct1.union1.pclipdata
 proc `bstrVal=`*(self: var PROPVARIANT, x: BSTR) {.inline.} = self.union1.struct1.union1.bstrVal = x
 proc bstrVal*(self: PROPVARIANT): BSTR {.inline.} = self.union1.struct1.union1.bstrVal
+proc bstrVal*(self: var PROPVARIANT): var BSTR {.inline.} = self.union1.struct1.union1.bstrVal
 proc `bstrblobVal=`*(self: var PROPVARIANT, x: BSTRBLOB) {.inline.} = self.union1.struct1.union1.bstrblobVal = x
 proc bstrblobVal*(self: PROPVARIANT): BSTRBLOB {.inline.} = self.union1.struct1.union1.bstrblobVal
+proc bstrblobVal*(self: var PROPVARIANT): var BSTRBLOB {.inline.} = self.union1.struct1.union1.bstrblobVal
 proc `blob=`*(self: var PROPVARIANT, x: BLOB) {.inline.} = self.union1.struct1.union1.blob = x
 proc blob*(self: PROPVARIANT): BLOB {.inline.} = self.union1.struct1.union1.blob
+proc blob*(self: var PROPVARIANT): var BLOB {.inline.} = self.union1.struct1.union1.blob
 proc `pszVal=`*(self: var PROPVARIANT, x: LPSTR) {.inline.} = self.union1.struct1.union1.pszVal = x
 proc pszVal*(self: PROPVARIANT): LPSTR {.inline.} = self.union1.struct1.union1.pszVal
+proc pszVal*(self: var PROPVARIANT): var LPSTR {.inline.} = self.union1.struct1.union1.pszVal
 proc `pwszVal=`*(self: var PROPVARIANT, x: LPWSTR) {.inline.} = self.union1.struct1.union1.pwszVal = x
 proc pwszVal*(self: PROPVARIANT): LPWSTR {.inline.} = self.union1.struct1.union1.pwszVal
+proc pwszVal*(self: var PROPVARIANT): var LPWSTR {.inline.} = self.union1.struct1.union1.pwszVal
 proc `punkVal=`*(self: var PROPVARIANT, x: ptr IUnknown) {.inline.} = self.union1.struct1.union1.punkVal = x
 proc punkVal*(self: PROPVARIANT): ptr IUnknown {.inline.} = self.union1.struct1.union1.punkVal
+proc punkVal*(self: var PROPVARIANT): var ptr IUnknown {.inline.} = self.union1.struct1.union1.punkVal
 proc `pdispVal=`*(self: var PROPVARIANT, x: ptr IDispatch) {.inline.} = self.union1.struct1.union1.pdispVal = x
 proc pdispVal*(self: PROPVARIANT): ptr IDispatch {.inline.} = self.union1.struct1.union1.pdispVal
+proc pdispVal*(self: var PROPVARIANT): var ptr IDispatch {.inline.} = self.union1.struct1.union1.pdispVal
 proc `pStream=`*(self: var PROPVARIANT, x: ptr IStream) {.inline.} = self.union1.struct1.union1.pStream = x
 proc pStream*(self: PROPVARIANT): ptr IStream {.inline.} = self.union1.struct1.union1.pStream
+proc pStream*(self: var PROPVARIANT): var ptr IStream {.inline.} = self.union1.struct1.union1.pStream
 proc `pStorage=`*(self: var PROPVARIANT, x: ptr IStorage) {.inline.} = self.union1.struct1.union1.pStorage = x
 proc pStorage*(self: PROPVARIANT): ptr IStorage {.inline.} = self.union1.struct1.union1.pStorage
+proc pStorage*(self: var PROPVARIANT): var ptr IStorage {.inline.} = self.union1.struct1.union1.pStorage
 proc `pVersionedStream=`*(self: var PROPVARIANT, x: LPVERSIONEDSTREAM) {.inline.} = self.union1.struct1.union1.pVersionedStream = x
 proc pVersionedStream*(self: PROPVARIANT): LPVERSIONEDSTREAM {.inline.} = self.union1.struct1.union1.pVersionedStream
+proc pVersionedStream*(self: var PROPVARIANT): var LPVERSIONEDSTREAM {.inline.} = self.union1.struct1.union1.pVersionedStream
 proc `parray=`*(self: var PROPVARIANT, x: LPSAFEARRAY) {.inline.} = self.union1.struct1.union1.parray = x
 proc parray*(self: PROPVARIANT): LPSAFEARRAY {.inline.} = self.union1.struct1.union1.parray
+proc parray*(self: var PROPVARIANT): var LPSAFEARRAY {.inline.} = self.union1.struct1.union1.parray
 proc `cac=`*(self: var PROPVARIANT, x: CAC) {.inline.} = self.union1.struct1.union1.cac = x
 proc cac*(self: PROPVARIANT): CAC {.inline.} = self.union1.struct1.union1.cac
+proc cac*(self: var PROPVARIANT): var CAC {.inline.} = self.union1.struct1.union1.cac
 proc `caub=`*(self: var PROPVARIANT, x: CAUB) {.inline.} = self.union1.struct1.union1.caub = x
 proc caub*(self: PROPVARIANT): CAUB {.inline.} = self.union1.struct1.union1.caub
+proc caub*(self: var PROPVARIANT): var CAUB {.inline.} = self.union1.struct1.union1.caub
 proc `cai=`*(self: var PROPVARIANT, x: CAI) {.inline.} = self.union1.struct1.union1.cai = x
 proc cai*(self: PROPVARIANT): CAI {.inline.} = self.union1.struct1.union1.cai
+proc cai*(self: var PROPVARIANT): var CAI {.inline.} = self.union1.struct1.union1.cai
 proc `caui=`*(self: var PROPVARIANT, x: CAUI) {.inline.} = self.union1.struct1.union1.caui = x
 proc caui*(self: PROPVARIANT): CAUI {.inline.} = self.union1.struct1.union1.caui
+proc caui*(self: var PROPVARIANT): var CAUI {.inline.} = self.union1.struct1.union1.caui
 proc `cal=`*(self: var PROPVARIANT, x: CAL) {.inline.} = self.union1.struct1.union1.cal = x
 proc cal*(self: PROPVARIANT): CAL {.inline.} = self.union1.struct1.union1.cal
+proc cal*(self: var PROPVARIANT): var CAL {.inline.} = self.union1.struct1.union1.cal
 proc `caul=`*(self: var PROPVARIANT, x: CAUL) {.inline.} = self.union1.struct1.union1.caul = x
 proc caul*(self: PROPVARIANT): CAUL {.inline.} = self.union1.struct1.union1.caul
+proc caul*(self: var PROPVARIANT): var CAUL {.inline.} = self.union1.struct1.union1.caul
 proc `cah=`*(self: var PROPVARIANT, x: CAH) {.inline.} = self.union1.struct1.union1.cah = x
 proc cah*(self: PROPVARIANT): CAH {.inline.} = self.union1.struct1.union1.cah
+proc cah*(self: var PROPVARIANT): var CAH {.inline.} = self.union1.struct1.union1.cah
 proc `cauh=`*(self: var PROPVARIANT, x: CAUH) {.inline.} = self.union1.struct1.union1.cauh = x
 proc cauh*(self: PROPVARIANT): CAUH {.inline.} = self.union1.struct1.union1.cauh
+proc cauh*(self: var PROPVARIANT): var CAUH {.inline.} = self.union1.struct1.union1.cauh
 proc `caflt=`*(self: var PROPVARIANT, x: CAFLT) {.inline.} = self.union1.struct1.union1.caflt = x
 proc caflt*(self: PROPVARIANT): CAFLT {.inline.} = self.union1.struct1.union1.caflt
+proc caflt*(self: var PROPVARIANT): var CAFLT {.inline.} = self.union1.struct1.union1.caflt
 proc `cadbl=`*(self: var PROPVARIANT, x: CADBL) {.inline.} = self.union1.struct1.union1.cadbl = x
 proc cadbl*(self: PROPVARIANT): CADBL {.inline.} = self.union1.struct1.union1.cadbl
+proc cadbl*(self: var PROPVARIANT): var CADBL {.inline.} = self.union1.struct1.union1.cadbl
 proc `cabool=`*(self: var PROPVARIANT, x: CABOOL) {.inline.} = self.union1.struct1.union1.cabool = x
 proc cabool*(self: PROPVARIANT): CABOOL {.inline.} = self.union1.struct1.union1.cabool
+proc cabool*(self: var PROPVARIANT): var CABOOL {.inline.} = self.union1.struct1.union1.cabool
 proc `cascode=`*(self: var PROPVARIANT, x: CASCODE) {.inline.} = self.union1.struct1.union1.cascode = x
 proc cascode*(self: PROPVARIANT): CASCODE {.inline.} = self.union1.struct1.union1.cascode
+proc cascode*(self: var PROPVARIANT): var CASCODE {.inline.} = self.union1.struct1.union1.cascode
 proc `cacy=`*(self: var PROPVARIANT, x: CACY) {.inline.} = self.union1.struct1.union1.cacy = x
 proc cacy*(self: PROPVARIANT): CACY {.inline.} = self.union1.struct1.union1.cacy
+proc cacy*(self: var PROPVARIANT): var CACY {.inline.} = self.union1.struct1.union1.cacy
 proc `cadate=`*(self: var PROPVARIANT, x: CADATE) {.inline.} = self.union1.struct1.union1.cadate = x
 proc cadate*(self: PROPVARIANT): CADATE {.inline.} = self.union1.struct1.union1.cadate
+proc cadate*(self: var PROPVARIANT): var CADATE {.inline.} = self.union1.struct1.union1.cadate
 proc `cafiletime=`*(self: var PROPVARIANT, x: CAFILETIME) {.inline.} = self.union1.struct1.union1.cafiletime = x
 proc cafiletime*(self: PROPVARIANT): CAFILETIME {.inline.} = self.union1.struct1.union1.cafiletime
+proc cafiletime*(self: var PROPVARIANT): var CAFILETIME {.inline.} = self.union1.struct1.union1.cafiletime
 proc `cauuid=`*(self: var PROPVARIANT, x: CACLSID) {.inline.} = self.union1.struct1.union1.cauuid = x
 proc cauuid*(self: PROPVARIANT): CACLSID {.inline.} = self.union1.struct1.union1.cauuid
+proc cauuid*(self: var PROPVARIANT): var CACLSID {.inline.} = self.union1.struct1.union1.cauuid
 proc `caclipdata=`*(self: var PROPVARIANT, x: CACLIPDATA) {.inline.} = self.union1.struct1.union1.caclipdata = x
 proc caclipdata*(self: PROPVARIANT): CACLIPDATA {.inline.} = self.union1.struct1.union1.caclipdata
+proc caclipdata*(self: var PROPVARIANT): var CACLIPDATA {.inline.} = self.union1.struct1.union1.caclipdata
 proc `cabstr=`*(self: var PROPVARIANT, x: CABSTR) {.inline.} = self.union1.struct1.union1.cabstr = x
 proc cabstr*(self: PROPVARIANT): CABSTR {.inline.} = self.union1.struct1.union1.cabstr
+proc cabstr*(self: var PROPVARIANT): var CABSTR {.inline.} = self.union1.struct1.union1.cabstr
 proc `cabstrblob=`*(self: var PROPVARIANT, x: CABSTRBLOB) {.inline.} = self.union1.struct1.union1.cabstrblob = x
 proc cabstrblob*(self: PROPVARIANT): CABSTRBLOB {.inline.} = self.union1.struct1.union1.cabstrblob
+proc cabstrblob*(self: var PROPVARIANT): var CABSTRBLOB {.inline.} = self.union1.struct1.union1.cabstrblob
 proc `calpstr=`*(self: var PROPVARIANT, x: CALPSTR) {.inline.} = self.union1.struct1.union1.calpstr = x
 proc calpstr*(self: PROPVARIANT): CALPSTR {.inline.} = self.union1.struct1.union1.calpstr
+proc calpstr*(self: var PROPVARIANT): var CALPSTR {.inline.} = self.union1.struct1.union1.calpstr
 proc `calpwstr=`*(self: var PROPVARIANT, x: CALPWSTR) {.inline.} = self.union1.struct1.union1.calpwstr = x
 proc calpwstr*(self: PROPVARIANT): CALPWSTR {.inline.} = self.union1.struct1.union1.calpwstr
+proc calpwstr*(self: var PROPVARIANT): var CALPWSTR {.inline.} = self.union1.struct1.union1.calpwstr
 proc `capropvar=`*(self: var PROPVARIANT, x: CAPROPVARIANT) {.inline.} = self.union1.struct1.union1.capropvar = x
 proc capropvar*(self: PROPVARIANT): CAPROPVARIANT {.inline.} = self.union1.struct1.union1.capropvar
+proc capropvar*(self: var PROPVARIANT): var CAPROPVARIANT {.inline.} = self.union1.struct1.union1.capropvar
 proc `pcVal=`*(self: var PROPVARIANT, x: cstring) {.inline.} = self.union1.struct1.union1.pcVal = x
 proc pcVal*(self: PROPVARIANT): cstring {.inline.} = self.union1.struct1.union1.pcVal
+proc pcVal*(self: var PROPVARIANT): var cstring {.inline.} = self.union1.struct1.union1.pcVal
 proc `pbVal=`*(self: var PROPVARIANT, x: ptr UCHAR) {.inline.} = self.union1.struct1.union1.pbVal = x
 proc pbVal*(self: PROPVARIANT): ptr UCHAR {.inline.} = self.union1.struct1.union1.pbVal
+proc pbVal*(self: var PROPVARIANT): var ptr UCHAR {.inline.} = self.union1.struct1.union1.pbVal
 proc `piVal=`*(self: var PROPVARIANT, x: ptr SHORT) {.inline.} = self.union1.struct1.union1.piVal = x
 proc piVal*(self: PROPVARIANT): ptr SHORT {.inline.} = self.union1.struct1.union1.piVal
+proc piVal*(self: var PROPVARIANT): var ptr SHORT {.inline.} = self.union1.struct1.union1.piVal
 proc `puiVal=`*(self: var PROPVARIANT, x: ptr USHORT) {.inline.} = self.union1.struct1.union1.puiVal = x
 proc puiVal*(self: PROPVARIANT): ptr USHORT {.inline.} = self.union1.struct1.union1.puiVal
+proc puiVal*(self: var PROPVARIANT): var ptr USHORT {.inline.} = self.union1.struct1.union1.puiVal
 proc `plVal=`*(self: var PROPVARIANT, x: ptr LONG) {.inline.} = self.union1.struct1.union1.plVal = x
 proc plVal*(self: PROPVARIANT): ptr LONG {.inline.} = self.union1.struct1.union1.plVal
+proc plVal*(self: var PROPVARIANT): var ptr LONG {.inline.} = self.union1.struct1.union1.plVal
 proc `pulVal=`*(self: var PROPVARIANT, x: ptr ULONG) {.inline.} = self.union1.struct1.union1.pulVal = x
 proc pulVal*(self: PROPVARIANT): ptr ULONG {.inline.} = self.union1.struct1.union1.pulVal
+proc pulVal*(self: var PROPVARIANT): var ptr ULONG {.inline.} = self.union1.struct1.union1.pulVal
 proc `pintVal=`*(self: var PROPVARIANT, x: ptr INT) {.inline.} = self.union1.struct1.union1.pintVal = x
 proc pintVal*(self: PROPVARIANT): ptr INT {.inline.} = self.union1.struct1.union1.pintVal
+proc pintVal*(self: var PROPVARIANT): var ptr INT {.inline.} = self.union1.struct1.union1.pintVal
 proc `puintVal=`*(self: var PROPVARIANT, x: ptr UINT) {.inline.} = self.union1.struct1.union1.puintVal = x
 proc puintVal*(self: PROPVARIANT): ptr UINT {.inline.} = self.union1.struct1.union1.puintVal
+proc puintVal*(self: var PROPVARIANT): var ptr UINT {.inline.} = self.union1.struct1.union1.puintVal
 proc `pfltVal=`*(self: var PROPVARIANT, x: ptr FLOAT) {.inline.} = self.union1.struct1.union1.pfltVal = x
 proc pfltVal*(self: PROPVARIANT): ptr FLOAT {.inline.} = self.union1.struct1.union1.pfltVal
+proc pfltVal*(self: var PROPVARIANT): var ptr FLOAT {.inline.} = self.union1.struct1.union1.pfltVal
 proc `pdblVal=`*(self: var PROPVARIANT, x: ptr DOUBLE) {.inline.} = self.union1.struct1.union1.pdblVal = x
 proc pdblVal*(self: PROPVARIANT): ptr DOUBLE {.inline.} = self.union1.struct1.union1.pdblVal
+proc pdblVal*(self: var PROPVARIANT): var ptr DOUBLE {.inline.} = self.union1.struct1.union1.pdblVal
 proc `pboolVal=`*(self: var PROPVARIANT, x: ptr VARIANT_BOOL) {.inline.} = self.union1.struct1.union1.pboolVal = x
 proc pboolVal*(self: PROPVARIANT): ptr VARIANT_BOOL {.inline.} = self.union1.struct1.union1.pboolVal
+proc pboolVal*(self: var PROPVARIANT): var ptr VARIANT_BOOL {.inline.} = self.union1.struct1.union1.pboolVal
 proc `pdecVal=`*(self: var PROPVARIANT, x: ptr DECIMAL) {.inline.} = self.union1.struct1.union1.pdecVal = x
 proc pdecVal*(self: PROPVARIANT): ptr DECIMAL {.inline.} = self.union1.struct1.union1.pdecVal
+proc pdecVal*(self: var PROPVARIANT): var ptr DECIMAL {.inline.} = self.union1.struct1.union1.pdecVal
 proc `pscode=`*(self: var PROPVARIANT, x: ptr SCODE) {.inline.} = self.union1.struct1.union1.pscode = x
 proc pscode*(self: PROPVARIANT): ptr SCODE {.inline.} = self.union1.struct1.union1.pscode
+proc pscode*(self: var PROPVARIANT): var ptr SCODE {.inline.} = self.union1.struct1.union1.pscode
 proc `pcyVal=`*(self: var PROPVARIANT, x: ptr CY) {.inline.} = self.union1.struct1.union1.pcyVal = x
 proc pcyVal*(self: PROPVARIANT): ptr CY {.inline.} = self.union1.struct1.union1.pcyVal
+proc pcyVal*(self: var PROPVARIANT): var ptr CY {.inline.} = self.union1.struct1.union1.pcyVal
 proc `pdate=`*(self: var PROPVARIANT, x: ptr DATE) {.inline.} = self.union1.struct1.union1.pdate = x
 proc pdate*(self: PROPVARIANT): ptr DATE {.inline.} = self.union1.struct1.union1.pdate
+proc pdate*(self: var PROPVARIANT): var ptr DATE {.inline.} = self.union1.struct1.union1.pdate
 proc `pbstrVal=`*(self: var PROPVARIANT, x: ptr BSTR) {.inline.} = self.union1.struct1.union1.pbstrVal = x
 proc pbstrVal*(self: PROPVARIANT): ptr BSTR {.inline.} = self.union1.struct1.union1.pbstrVal
+proc pbstrVal*(self: var PROPVARIANT): var ptr BSTR {.inline.} = self.union1.struct1.union1.pbstrVal
 proc `ppunkVal=`*(self: var PROPVARIANT, x: ptr ptr IUnknown) {.inline.} = self.union1.struct1.union1.ppunkVal = x
 proc ppunkVal*(self: PROPVARIANT): ptr ptr IUnknown {.inline.} = self.union1.struct1.union1.ppunkVal
+proc ppunkVal*(self: var PROPVARIANT): var ptr ptr IUnknown {.inline.} = self.union1.struct1.union1.ppunkVal
 proc `ppdispVal=`*(self: var PROPVARIANT, x: ptr ptr IDispatch) {.inline.} = self.union1.struct1.union1.ppdispVal = x
 proc ppdispVal*(self: PROPVARIANT): ptr ptr IDispatch {.inline.} = self.union1.struct1.union1.ppdispVal
+proc ppdispVal*(self: var PROPVARIANT): var ptr ptr IDispatch {.inline.} = self.union1.struct1.union1.ppdispVal
 proc `pparray=`*(self: var PROPVARIANT, x: ptr LPSAFEARRAY) {.inline.} = self.union1.struct1.union1.pparray = x
 proc pparray*(self: PROPVARIANT): ptr LPSAFEARRAY {.inline.} = self.union1.struct1.union1.pparray
+proc pparray*(self: var PROPVARIANT): var ptr LPSAFEARRAY {.inline.} = self.union1.struct1.union1.pparray
 proc `pvarVal=`*(self: var PROPVARIANT, x: ptr PROPVARIANT) {.inline.} = self.union1.struct1.union1.pvarVal = x
 proc pvarVal*(self: PROPVARIANT): ptr PROPVARIANT {.inline.} = self.union1.struct1.union1.pvarVal
+proc pvarVal*(self: var PROPVARIANT): var ptr PROPVARIANT {.inline.} = self.union1.struct1.union1.pvarVal
 proc `decVal=`*(self: var PROPVARIANT, x: DECIMAL) {.inline.} = self.union1.decVal = x
 proc decVal*(self: PROPVARIANT): DECIMAL {.inline.} = self.union1.decVal
+proc decVal*(self: var PROPVARIANT): var DECIMAL {.inline.} = self.union1.decVal
 proc `propid=`*(self: var PROPSPEC, x: PROPID) {.inline.} = self.union1.propid = x
 proc propid*(self: PROPSPEC): PROPID {.inline.} = self.union1.propid
+proc propid*(self: var PROPSPEC): var PROPID {.inline.} = self.union1.propid
 proc `lpwstr=`*(self: var PROPSPEC, x: LPOLESTR) {.inline.} = self.union1.lpwstr = x
 proc lpwstr*(self: PROPSPEC): LPOLESTR {.inline.} = self.union1.lpwstr
+proc lpwstr*(self: var PROPSPEC): var LPOLESTR {.inline.} = self.union1.lpwstr
 proc `pOleStr=`*(self: var STRRET, x: LPWSTR) {.inline.} = self.union1.pOleStr = x
 proc pOleStr*(self: STRRET): LPWSTR {.inline.} = self.union1.pOleStr
+proc pOleStr*(self: var STRRET): var LPWSTR {.inline.} = self.union1.pOleStr
 proc `uOffset=`*(self: var STRRET, x: UINT) {.inline.} = self.union1.uOffset = x
 proc uOffset*(self: STRRET): UINT {.inline.} = self.union1.uOffset
+proc uOffset*(self: var STRRET): var UINT {.inline.} = self.union1.uOffset
 proc `cStr=`*(self: var STRRET, x: array[260, char]) {.inline.} = self.union1.cStr = x
 proc cStr*(self: STRRET): array[260, char] {.inline.} = self.union1.cStr
+proc cStr*(self: var STRRET): var array[260, char] {.inline.} = self.union1.cStr
 proc QueryInterface*(self: ptr IUnknown, riid: REFIID, ppvObject: ptr pointer): HRESULT {.winapi, inline.} = self.lpVtbl.QueryInterface(self, riid, ppvObject)
 proc AddRef*(self: ptr IUnknown): ULONG {.winapi, inline.} = self.lpVtbl.AddRef(self)
 proc Release*(self: ptr IUnknown): ULONG {.winapi, inline.} = self.lpVtbl.Release(self)

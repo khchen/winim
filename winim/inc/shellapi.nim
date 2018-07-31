@@ -7232,20 +7232,28 @@ proc StgMakeUniqueName*(pstgParent: ptr IStorage, pszFileSpec: PCWSTR, grfMode: 
 proc ImportPrivacySettings*(pszFilename: PCWSTR, pfParsePrivacyPreferences: ptr WINBOOL, pfParsePerSiteRules: ptr WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "shdocvw", importc.}
 proc `hIcon=`*(self: var SHELLEXECUTEINFOA, x: HANDLE) {.inline.} = self.union1.hIcon = x
 proc hIcon*(self: SHELLEXECUTEINFOA): HANDLE {.inline.} = self.union1.hIcon
+proc hIcon*(self: var SHELLEXECUTEINFOA): var HANDLE {.inline.} = self.union1.hIcon
 proc `hMonitor=`*(self: var SHELLEXECUTEINFOA, x: HANDLE) {.inline.} = self.union1.hMonitor = x
 proc hMonitor*(self: SHELLEXECUTEINFOA): HANDLE {.inline.} = self.union1.hMonitor
+proc hMonitor*(self: var SHELLEXECUTEINFOA): var HANDLE {.inline.} = self.union1.hMonitor
 proc `hIcon=`*(self: var SHELLEXECUTEINFOW, x: HANDLE) {.inline.} = self.union1.hIcon = x
 proc hIcon*(self: SHELLEXECUTEINFOW): HANDLE {.inline.} = self.union1.hIcon
+proc hIcon*(self: var SHELLEXECUTEINFOW): var HANDLE {.inline.} = self.union1.hIcon
 proc `hMonitor=`*(self: var SHELLEXECUTEINFOW, x: HANDLE) {.inline.} = self.union1.hMonitor = x
 proc hMonitor*(self: SHELLEXECUTEINFOW): HANDLE {.inline.} = self.union1.hMonitor
+proc hMonitor*(self: var SHELLEXECUTEINFOW): var HANDLE {.inline.} = self.union1.hMonitor
 proc `uTimeout=`*(self: var NOTIFYICONDATAA, x: UINT) {.inline.} = self.union1.uTimeout = x
 proc uTimeout*(self: NOTIFYICONDATAA): UINT {.inline.} = self.union1.uTimeout
+proc uTimeout*(self: var NOTIFYICONDATAA): var UINT {.inline.} = self.union1.uTimeout
 proc `uVersion=`*(self: var NOTIFYICONDATAA, x: UINT) {.inline.} = self.union1.uVersion = x
 proc uVersion*(self: NOTIFYICONDATAA): UINT {.inline.} = self.union1.uVersion
+proc uVersion*(self: var NOTIFYICONDATAA): var UINT {.inline.} = self.union1.uVersion
 proc `uTimeout=`*(self: var NOTIFYICONDATAW, x: UINT) {.inline.} = self.union1.uTimeout = x
 proc uTimeout*(self: NOTIFYICONDATAW): UINT {.inline.} = self.union1.uTimeout
+proc uTimeout*(self: var NOTIFYICONDATAW): var UINT {.inline.} = self.union1.uTimeout
 proc `uVersion=`*(self: var NOTIFYICONDATAW, x: UINT) {.inline.} = self.union1.uVersion = x
 proc uVersion*(self: NOTIFYICONDATAW): UINT {.inline.} = self.union1.uVersion
+proc uVersion*(self: var NOTIFYICONDATAW): var UINT {.inline.} = self.union1.uVersion
 proc Init*(self: ptr IQueryAssociations, flags: ASSOCF, pszAssoc: LPCWSTR, hkProgid: HKEY, hwnd: HWND): HRESULT {.winapi, inline.} = self.lpVtbl.Init(self, flags, pszAssoc, hkProgid, hwnd)
 proc GetString*(self: ptr IQueryAssociations, flags: ASSOCF, str: ASSOCSTR, pszExtra: LPCWSTR, pszOut: LPWSTR, pcchOut: ptr DWORD): HRESULT {.winapi, inline.} = self.lpVtbl.GetString(self, flags, str, pszExtra, pszOut, pcchOut)
 proc GetKey*(self: ptr IQueryAssociations, flags: ASSOCF, key: ASSOCKEY, pszExtra: LPCWSTR, phkeyOut: ptr HKEY): HRESULT {.winapi, inline.} = self.lpVtbl.GetKey(self, flags, key, pszExtra, phkeyOut)

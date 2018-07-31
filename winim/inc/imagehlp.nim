@@ -1188,48 +1188,70 @@ proc SymSrvDeltaNameA*(hProcess: HANDLE, SymPath: PCSTR, Type: PCSTR, File1: PCS
 proc SymSrvDeltaNameW*(hProcess: HANDLE, SymPath: PCWSTR, Type: PCWSTR, File1: PCWSTR, File2: PCWSTR): PCWSTR {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc.}
 proc `Reserved=`*(self: var MINIDUMP_HEADER, x: ULONG32) {.inline.} = self.union1.Reserved = x
 proc Reserved*(self: MINIDUMP_HEADER): ULONG32 {.inline.} = self.union1.Reserved
+proc Reserved*(self: var MINIDUMP_HEADER): var ULONG32 {.inline.} = self.union1.Reserved
 proc `TimeDateStamp=`*(self: var MINIDUMP_HEADER, x: ULONG32) {.inline.} = self.union1.TimeDateStamp = x
 proc TimeDateStamp*(self: MINIDUMP_HEADER): ULONG32 {.inline.} = self.union1.TimeDateStamp
+proc TimeDateStamp*(self: var MINIDUMP_HEADER): var ULONG32 {.inline.} = self.union1.TimeDateStamp
 proc `Reserved0=`*(self: var MINIDUMP_SYSTEM_INFO, x: USHORT) {.inline.} = self.union1.Reserved0 = x
 proc Reserved0*(self: MINIDUMP_SYSTEM_INFO): USHORT {.inline.} = self.union1.Reserved0
+proc Reserved0*(self: var MINIDUMP_SYSTEM_INFO): var USHORT {.inline.} = self.union1.Reserved0
 proc `NumberOfProcessors=`*(self: var MINIDUMP_SYSTEM_INFO, x: UCHAR) {.inline.} = self.union1.struct1.NumberOfProcessors = x
 proc NumberOfProcessors*(self: MINIDUMP_SYSTEM_INFO): UCHAR {.inline.} = self.union1.struct1.NumberOfProcessors
+proc NumberOfProcessors*(self: var MINIDUMP_SYSTEM_INFO): var UCHAR {.inline.} = self.union1.struct1.NumberOfProcessors
 proc `ProductType=`*(self: var MINIDUMP_SYSTEM_INFO, x: UCHAR) {.inline.} = self.union1.struct1.ProductType = x
 proc ProductType*(self: MINIDUMP_SYSTEM_INFO): UCHAR {.inline.} = self.union1.struct1.ProductType
+proc ProductType*(self: var MINIDUMP_SYSTEM_INFO): var UCHAR {.inline.} = self.union1.struct1.ProductType
 proc `Reserved1=`*(self: var MINIDUMP_SYSTEM_INFO, x: ULONG32) {.inline.} = self.union2.Reserved1 = x
 proc Reserved1*(self: MINIDUMP_SYSTEM_INFO): ULONG32 {.inline.} = self.union2.Reserved1
+proc Reserved1*(self: var MINIDUMP_SYSTEM_INFO): var ULONG32 {.inline.} = self.union2.Reserved1
 proc `SuiteMask=`*(self: var MINIDUMP_SYSTEM_INFO, x: USHORT) {.inline.} = self.union2.struct1.SuiteMask = x
 proc SuiteMask*(self: MINIDUMP_SYSTEM_INFO): USHORT {.inline.} = self.union2.struct1.SuiteMask
+proc SuiteMask*(self: var MINIDUMP_SYSTEM_INFO): var USHORT {.inline.} = self.union2.struct1.SuiteMask
 proc `Reserved2=`*(self: var MINIDUMP_SYSTEM_INFO, x: USHORT) {.inline.} = self.union2.struct1.Reserved2 = x
 proc Reserved2*(self: MINIDUMP_SYSTEM_INFO): USHORT {.inline.} = self.union2.struct1.Reserved2
+proc Reserved2*(self: var MINIDUMP_SYSTEM_INFO): var USHORT {.inline.} = self.union2.struct1.Reserved2
 proc `Thread=`*(self: var MINIDUMP_CALLBACK_INPUT, x: MINIDUMP_THREAD_CALLBACK) {.inline.} = self.union1.Thread = x
 proc Thread*(self: MINIDUMP_CALLBACK_INPUT): MINIDUMP_THREAD_CALLBACK {.inline.} = self.union1.Thread
+proc Thread*(self: var MINIDUMP_CALLBACK_INPUT): var MINIDUMP_THREAD_CALLBACK {.inline.} = self.union1.Thread
 proc `ThreadEx=`*(self: var MINIDUMP_CALLBACK_INPUT, x: MINIDUMP_THREAD_EX_CALLBACK) {.inline.} = self.union1.ThreadEx = x
 proc ThreadEx*(self: MINIDUMP_CALLBACK_INPUT): MINIDUMP_THREAD_EX_CALLBACK {.inline.} = self.union1.ThreadEx
+proc ThreadEx*(self: var MINIDUMP_CALLBACK_INPUT): var MINIDUMP_THREAD_EX_CALLBACK {.inline.} = self.union1.ThreadEx
 proc `Module=`*(self: var MINIDUMP_CALLBACK_INPUT, x: MINIDUMP_MODULE_CALLBACK) {.inline.} = self.union1.Module = x
 proc Module*(self: MINIDUMP_CALLBACK_INPUT): MINIDUMP_MODULE_CALLBACK {.inline.} = self.union1.Module
+proc Module*(self: var MINIDUMP_CALLBACK_INPUT): var MINIDUMP_MODULE_CALLBACK {.inline.} = self.union1.Module
 proc `IncludeThread=`*(self: var MINIDUMP_CALLBACK_INPUT, x: MINIDUMP_INCLUDE_THREAD_CALLBACK) {.inline.} = self.union1.IncludeThread = x
 proc IncludeThread*(self: MINIDUMP_CALLBACK_INPUT): MINIDUMP_INCLUDE_THREAD_CALLBACK {.inline.} = self.union1.IncludeThread
+proc IncludeThread*(self: var MINIDUMP_CALLBACK_INPUT): var MINIDUMP_INCLUDE_THREAD_CALLBACK {.inline.} = self.union1.IncludeThread
 proc `IncludeModule=`*(self: var MINIDUMP_CALLBACK_INPUT, x: MINIDUMP_INCLUDE_MODULE_CALLBACK) {.inline.} = self.union1.IncludeModule = x
 proc IncludeModule*(self: MINIDUMP_CALLBACK_INPUT): MINIDUMP_INCLUDE_MODULE_CALLBACK {.inline.} = self.union1.IncludeModule
+proc IncludeModule*(self: var MINIDUMP_CALLBACK_INPUT): var MINIDUMP_INCLUDE_MODULE_CALLBACK {.inline.} = self.union1.IncludeModule
 proc `ModuleWriteFlags=`*(self: var MINIDUMP_CALLBACK_OUTPUT, x: ULONG) {.inline.} = self.union1.ModuleWriteFlags = x
 proc ModuleWriteFlags*(self: MINIDUMP_CALLBACK_OUTPUT): ULONG {.inline.} = self.union1.ModuleWriteFlags
+proc ModuleWriteFlags*(self: var MINIDUMP_CALLBACK_OUTPUT): var ULONG {.inline.} = self.union1.ModuleWriteFlags
 proc `ThreadWriteFlags=`*(self: var MINIDUMP_CALLBACK_OUTPUT, x: ULONG) {.inline.} = self.union1.ThreadWriteFlags = x
 proc ThreadWriteFlags*(self: MINIDUMP_CALLBACK_OUTPUT): ULONG {.inline.} = self.union1.ThreadWriteFlags
+proc ThreadWriteFlags*(self: var MINIDUMP_CALLBACK_OUTPUT): var ULONG {.inline.} = self.union1.ThreadWriteFlags
 proc `SecondaryFlags=`*(self: var MINIDUMP_CALLBACK_OUTPUT, x: ULONG) {.inline.} = self.union1.SecondaryFlags = x
 proc SecondaryFlags*(self: MINIDUMP_CALLBACK_OUTPUT): ULONG {.inline.} = self.union1.SecondaryFlags
+proc SecondaryFlags*(self: var MINIDUMP_CALLBACK_OUTPUT): var ULONG {.inline.} = self.union1.SecondaryFlags
 proc `MemoryBase=`*(self: var MINIDUMP_CALLBACK_OUTPUT, x: ULONG64) {.inline.} = self.union1.struct1.MemoryBase = x
 proc MemoryBase*(self: MINIDUMP_CALLBACK_OUTPUT): ULONG64 {.inline.} = self.union1.struct1.MemoryBase
+proc MemoryBase*(self: var MINIDUMP_CALLBACK_OUTPUT): var ULONG64 {.inline.} = self.union1.struct1.MemoryBase
 proc `MemorySize=`*(self: var MINIDUMP_CALLBACK_OUTPUT, x: ULONG) {.inline.} = self.union1.struct1.MemorySize = x
 proc MemorySize*(self: MINIDUMP_CALLBACK_OUTPUT): ULONG {.inline.} = self.union1.struct1.MemorySize
+proc MemorySize*(self: var MINIDUMP_CALLBACK_OUTPUT): var ULONG {.inline.} = self.union1.struct1.MemorySize
 proc `CheckCancel=`*(self: var MINIDUMP_CALLBACK_OUTPUT, x: WINBOOL) {.inline.} = self.union1.struct2.CheckCancel = x
 proc CheckCancel*(self: MINIDUMP_CALLBACK_OUTPUT): WINBOOL {.inline.} = self.union1.struct2.CheckCancel
+proc CheckCancel*(self: var MINIDUMP_CALLBACK_OUTPUT): var WINBOOL {.inline.} = self.union1.struct2.CheckCancel
 proc `Cancel=`*(self: var MINIDUMP_CALLBACK_OUTPUT, x: WINBOOL) {.inline.} = self.union1.struct2.Cancel = x
 proc Cancel*(self: MINIDUMP_CALLBACK_OUTPUT): WINBOOL {.inline.} = self.union1.struct2.Cancel
+proc Cancel*(self: var MINIDUMP_CALLBACK_OUTPUT): var WINBOOL {.inline.} = self.union1.struct2.Cancel
 proc `VmRegion=`*(self: var MINIDUMP_CALLBACK_OUTPUT, x: MINIDUMP_MEMORY_INFO) {.inline.} = self.struct1.VmRegion = x
 proc VmRegion*(self: MINIDUMP_CALLBACK_OUTPUT): MINIDUMP_MEMORY_INFO {.inline.} = self.struct1.VmRegion
+proc VmRegion*(self: var MINIDUMP_CALLBACK_OUTPUT): var MINIDUMP_MEMORY_INFO {.inline.} = self.struct1.VmRegion
 proc `Continue=`*(self: var MINIDUMP_CALLBACK_OUTPUT, x: WINBOOL) {.inline.} = self.struct1.Continue = x
 proc Continue*(self: MINIDUMP_CALLBACK_OUTPUT): WINBOOL {.inline.} = self.struct1.Continue
+proc Continue*(self: var MINIDUMP_CALLBACK_OUTPUT): var WINBOOL {.inline.} = self.struct1.Continue
 when winimUnicode:
   proc UnDecorateSymbolName*(DecoratedName: PCSTR, UnDecoratedName: PSTR, UndecoratedLength: DWORD, Flags: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "UnDecorateSymbolNameW".}
   proc EnumerateLoadedModules64*(hProcess: HANDLE, EnumLoadedModulesCallback: PENUMLOADED_MODULES_CALLBACK64, UserContext: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "dbghelp", importc: "EnumerateLoadedModulesW64".}

@@ -417,8 +417,10 @@ proc SCardWriteCacheA*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, Freshne
 proc SCardWriteCacheW*(hContext: SCARDCONTEXT, CardIdentifier: ptr UUID, FreshnessCounter: DWORD, LookupName: LPWSTR, Data: PBYTE, DataLen: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "winscard", importc.}
 proc `CmdBytes=`*(self: var SCARD_T0_REQUEST, x: SCARD_T0_COMMAND) {.inline.} = self.union1.CmdBytes = x
 proc CmdBytes*(self: SCARD_T0_REQUEST): SCARD_T0_COMMAND {.inline.} = self.union1.CmdBytes
+proc CmdBytes*(self: var SCARD_T0_REQUEST): var SCARD_T0_COMMAND {.inline.} = self.union1.CmdBytes
 proc `rgbHeader=`*(self: var SCARD_T0_REQUEST, x: array[5, BYTE]) {.inline.} = self.union1.rgbHeader = x
 proc rgbHeader*(self: SCARD_T0_REQUEST): array[5, BYTE] {.inline.} = self.union1.rgbHeader
+proc rgbHeader*(self: var SCARD_T0_REQUEST): var array[5, BYTE] {.inline.} = self.union1.rgbHeader
 when winimUnicode:
   type
     SCARD_READERSTATE* = SCARD_READERSTATEW

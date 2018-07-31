@@ -665,25 +665,37 @@ proc CryptCATClose*(P1: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "wintrust", 
 proc CryptCATOpen*(P1: LPWSTR, P2: DWORD, P3: HCRYPTPROV, P4: DWORD, P5: DWORD): HANDLE {.winapi, stdcall, dynlib: "wintrust", importc.}
 proc `pFile=`*(self: var WINTRUST_DATA, x: ptr WINTRUST_FILE_INFO) {.inline.} = self.union1.pFile = x
 proc pFile*(self: WINTRUST_DATA): ptr WINTRUST_FILE_INFO {.inline.} = self.union1.pFile
+proc pFile*(self: var WINTRUST_DATA): var ptr WINTRUST_FILE_INFO {.inline.} = self.union1.pFile
 proc `pCatalog=`*(self: var WINTRUST_DATA, x: ptr WINTRUST_CATALOG_INFO) {.inline.} = self.union1.pCatalog = x
 proc pCatalog*(self: WINTRUST_DATA): ptr WINTRUST_CATALOG_INFO {.inline.} = self.union1.pCatalog
+proc pCatalog*(self: var WINTRUST_DATA): var ptr WINTRUST_CATALOG_INFO {.inline.} = self.union1.pCatalog
 proc `pBlob=`*(self: var WINTRUST_DATA, x: ptr WINTRUST_BLOB_INFO) {.inline.} = self.union1.pBlob = x
 proc pBlob*(self: WINTRUST_DATA): ptr WINTRUST_BLOB_INFO {.inline.} = self.union1.pBlob
+proc pBlob*(self: var WINTRUST_DATA): var ptr WINTRUST_BLOB_INFO {.inline.} = self.union1.pBlob
 proc `pSgnr=`*(self: var WINTRUST_DATA, x: ptr WINTRUST_SGNR_INFO) {.inline.} = self.union1.pSgnr = x
 proc pSgnr*(self: WINTRUST_DATA): ptr WINTRUST_SGNR_INFO {.inline.} = self.union1.pSgnr
+proc pSgnr*(self: var WINTRUST_DATA): var ptr WINTRUST_SGNR_INFO {.inline.} = self.union1.pSgnr
 proc `pCert=`*(self: var WINTRUST_DATA, x: ptr WINTRUST_CERT_INFO) {.inline.} = self.union1.pCert = x
 proc pCert*(self: WINTRUST_DATA): ptr WINTRUST_CERT_INFO {.inline.} = self.union1.pCert
+proc pCert*(self: var WINTRUST_DATA): var ptr WINTRUST_CERT_INFO {.inline.} = self.union1.pCert
 proc `pPDSip=`*(self: var CRYPT_PROVIDER_DATA, x: ptr PROVDATA_SIP) {.inline.} = self.union1.pPDSip = x
 proc pPDSip*(self: CRYPT_PROVIDER_DATA): ptr PROVDATA_SIP {.inline.} = self.union1.pPDSip
+proc pPDSip*(self: var CRYPT_PROVIDER_DATA): var ptr PROVDATA_SIP {.inline.} = self.union1.pPDSip
 proc `pwszUrl=`*(self: var SPC_LINK, x: LPWSTR) {.inline.} = self.union1.pwszUrl = x
 proc pwszUrl*(self: SPC_LINK): LPWSTR {.inline.} = self.union1.pwszUrl
+proc pwszUrl*(self: var SPC_LINK): var LPWSTR {.inline.} = self.union1.pwszUrl
 proc `Moniker=`*(self: var SPC_LINK, x: SPC_SERIALIZED_OBJECT) {.inline.} = self.union1.Moniker = x
 proc Moniker*(self: SPC_LINK): SPC_SERIALIZED_OBJECT {.inline.} = self.union1.Moniker
+proc Moniker*(self: var SPC_LINK): var SPC_SERIALIZED_OBJECT {.inline.} = self.union1.Moniker
 proc `pwszFile=`*(self: var SPC_LINK, x: LPWSTR) {.inline.} = self.union1.pwszFile = x
 proc pwszFile*(self: SPC_LINK): LPWSTR {.inline.} = self.union1.pwszFile
+proc pwszFile*(self: var SPC_LINK): var LPWSTR {.inline.} = self.union1.pwszFile
 proc `psFlat=`*(self: var SIP_SUBJECTINFO, x: ptr MS_ADDINFO_FLAT) {.inline.} = self.union1.psFlat = x
 proc psFlat*(self: SIP_SUBJECTINFO): ptr MS_ADDINFO_FLAT {.inline.} = self.union1.psFlat
+proc psFlat*(self: var SIP_SUBJECTINFO): var ptr MS_ADDINFO_FLAT {.inline.} = self.union1.psFlat
 proc `psCatMember=`*(self: var SIP_SUBJECTINFO, x: ptr MS_ADDINFO_CATALOGMEMBER) {.inline.} = self.union1.psCatMember = x
 proc psCatMember*(self: SIP_SUBJECTINFO): ptr MS_ADDINFO_CATALOGMEMBER {.inline.} = self.union1.psCatMember
+proc psCatMember*(self: var SIP_SUBJECTINFO): var ptr MS_ADDINFO_CATALOGMEMBER {.inline.} = self.union1.psCatMember
 proc `psBlob=`*(self: var SIP_SUBJECTINFO, x: ptr MS_ADDINFO_BLOB) {.inline.} = self.union1.psBlob = x
 proc psBlob*(self: SIP_SUBJECTINFO): ptr MS_ADDINFO_BLOB {.inline.} = self.union1.psBlob
+proc psBlob*(self: var SIP_SUBJECTINFO): var ptr MS_ADDINFO_BLOB {.inline.} = self.union1.psBlob

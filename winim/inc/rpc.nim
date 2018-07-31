@@ -1536,6 +1536,7 @@ proc RpcCertGeneratePrincipalNameW*(Context: PCCERT_CONTEXT, Flags: DWORD, pBuff
 proc RpcCertGeneratePrincipalNameA*(Context: PCCERT_CONTEXT, Flags: DWORD, pBuffer: ptr RPC_CSTR): RPC_STATUS {.winapi, stdcall, dynlib: "rpcrt4", importc.}
 proc `Level1=`*(self: var NDR_USER_MARSHAL_INFO, x: NDR_USER_MARSHAL_INFO_LEVEL1) {.inline.} = self.union1.Level1 = x
 proc Level1*(self: NDR_USER_MARSHAL_INFO): NDR_USER_MARSHAL_INFO_LEVEL1 {.inline.} = self.union1.Level1
+proc Level1*(self: var NDR_USER_MARSHAL_INFO): var NDR_USER_MARSHAL_INFO_LEVEL1 {.inline.} = self.union1.Level1
 when winimUnicode:
   type
     RPC_PROTSEQ_VECTOR* = RPC_PROTSEQ_VECTORW

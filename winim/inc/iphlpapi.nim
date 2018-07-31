@@ -5151,13 +5151,21 @@ const
   NDIS_OFFLOAD_PARAMETERS_REVISION_3* = 3
   NDIS_OFFLOAD_PARAMETERS_SKIP_REGISTRY_UPDATE* = 0x00000001
 proc Flags*(self: IP_ADAPTER_UNICAST_ADDRESS_XP): DWORD {.inline.} = self.union1.struct1.Flags
+proc Flags*(self: var IP_ADAPTER_UNICAST_ADDRESS_XP): var DWORD {.inline.} = self.union1.struct1.Flags
 proc Flags*(self: IP_ADAPTER_UNICAST_ADDRESS_LH): DWORD {.inline.} = self.union1.struct1.Flags
+proc Flags*(self: var IP_ADAPTER_UNICAST_ADDRESS_LH): var DWORD {.inline.} = self.union1.struct1.Flags
 proc Flags*(self: IP_ADAPTER_ANYCAST_ADDRESS_XP): DWORD {.inline.} = self.union1.struct1.Flags
+proc Flags*(self: var IP_ADAPTER_ANYCAST_ADDRESS_XP): var DWORD {.inline.} = self.union1.struct1.Flags
 proc Flags*(self: IP_ADAPTER_MULTICAST_ADDRESS_XP): DWORD {.inline.} = self.union1.struct1.Flags
+proc Flags*(self: var IP_ADAPTER_MULTICAST_ADDRESS_XP): var DWORD {.inline.} = self.union1.struct1.Flags
 proc Flags*(self: IP_ADAPTER_PREFIX_XP): DWORD {.inline.} = self.union1.struct1.Flags
+proc Flags*(self: var IP_ADAPTER_PREFIX_XP): var DWORD {.inline.} = self.union1.struct1.Flags
 proc Flags*(self: IP_ADAPTER_ADDRESSES_LH): ULONG {.inline.} = self.union2.Flags
+proc Flags*(self: var IP_ADAPTER_ADDRESSES_LH): var ULONG {.inline.} = self.union2.Flags
 proc Flags*(self: MIB_IPNET_ROW2): UCHAR {.inline.} = self.union1.Flags
+proc Flags*(self: var MIB_IPNET_ROW2): var UCHAR {.inline.} = self.union1.Flags
 proc EncapsulationTypes*(self: NDIS_OFFLOAD_PARAMETERS): UCHAR {.inline.} = self.struct2.EncapsulationTypes
+proc EncapsulationTypes*(self: var NDIS_OFFLOAD_PARAMETERS): var UCHAR {.inline.} = self.struct2.EncapsulationTypes
 const
   NDIS_OFFLOAD_NOT_SUPPORTED* = 0
   NDIS_OFFLOAD_SUPPORTED* = 1
@@ -5641,19 +5649,33 @@ type
     Flags*: ULONG
     CounterSet*: NDIS_NDK_PERFORMANCE_COUNTERS
 proc Length*(self: IP_ADAPTER_UNICAST_ADDRESS_XP): ULONG {.inline.} = self.union1.struct1.Length
+proc Length*(self: var IP_ADAPTER_UNICAST_ADDRESS_XP): var ULONG {.inline.} = self.union1.struct1.Length
 proc Length*(self: IP_ADAPTER_UNICAST_ADDRESS_LH): ULONG {.inline.} = self.union1.struct1.Length
+proc Length*(self: var IP_ADAPTER_UNICAST_ADDRESS_LH): var ULONG {.inline.} = self.union1.struct1.Length
 proc Length*(self: IP_ADAPTER_ANYCAST_ADDRESS_XP): ULONG {.inline.} = self.union1.struct1.Length
+proc Length*(self: var IP_ADAPTER_ANYCAST_ADDRESS_XP): var ULONG {.inline.} = self.union1.struct1.Length
 proc Length*(self: IP_ADAPTER_MULTICAST_ADDRESS_XP): ULONG {.inline.} = self.union1.struct1.Length
+proc Length*(self: var IP_ADAPTER_MULTICAST_ADDRESS_XP): var ULONG {.inline.} = self.union1.struct1.Length
 proc Length*(self: IP_ADAPTER_DNS_SERVER_ADDRESS_XP): ULONG {.inline.} = self.union1.struct1.Length
+proc Length*(self: var IP_ADAPTER_DNS_SERVER_ADDRESS_XP): var ULONG {.inline.} = self.union1.struct1.Length
 proc Length*(self: IP_ADAPTER_PREFIX_XP): ULONG {.inline.} = self.union1.struct1.Length
+proc Length*(self: var IP_ADAPTER_PREFIX_XP): var ULONG {.inline.} = self.union1.struct1.Length
 proc Length*(self: IP_ADAPTER_WINS_SERVER_ADDRESS_LH): ULONG {.inline.} = self.union1.struct1.Length
+proc Length*(self: var IP_ADAPTER_WINS_SERVER_ADDRESS_LH): var ULONG {.inline.} = self.union1.struct1.Length
 proc Length*(self: IP_ADAPTER_GATEWAY_ADDRESS_LH): ULONG {.inline.} = self.union1.struct1.Length
+proc Length*(self: var IP_ADAPTER_GATEWAY_ADDRESS_LH): var ULONG {.inline.} = self.union1.struct1.Length
 proc Length*(self: IP_ADAPTER_ADDRESSES_LH): ULONG {.inline.} = self.union1.struct1.Length
+proc Length*(self: var IP_ADAPTER_ADDRESSES_LH): var ULONG {.inline.} = self.union1.struct1.Length
 proc Length*(self: IP_ADAPTER_ADDRESSES_XP): ULONG {.inline.} = self.union1.struct1.Length
+proc Length*(self: var IP_ADAPTER_ADDRESSES_XP): var ULONG {.inline.} = self.union1.struct1.Length
 proc VlanProperties*(self: NDIS_SWITCH_PORT_PROPERTY_VLAN): NDIS_SWITCH_PORT_PROPERTY_VLAN_UNION1_VlanProperties {.inline.} = self.union1.VlanProperties
+proc VlanProperties*(self: var NDIS_SWITCH_PORT_PROPERTY_VLAN): var NDIS_SWITCH_PORT_PROPERTY_VLAN_UNION1_VlanProperties {.inline.} = self.union1.VlanProperties
 proc Reserved*(self: IP_ADAPTER_DNS_SERVER_ADDRESS_XP): DWORD {.inline.} = self.union1.struct1.Reserved
+proc Reserved*(self: var IP_ADAPTER_DNS_SERVER_ADDRESS_XP): var DWORD {.inline.} = self.union1.struct1.Reserved
 proc Reserved*(self: IP_ADAPTER_WINS_SERVER_ADDRESS_LH): DWORD {.inline.} = self.union1.struct1.Reserved
+proc Reserved*(self: var IP_ADAPTER_WINS_SERVER_ADDRESS_LH): var DWORD {.inline.} = self.union1.struct1.Reserved
 proc Reserved*(self: IP_ADAPTER_GATEWAY_ADDRESS_LH): DWORD {.inline.} = self.union1.struct1.Reserved
+proc Reserved*(self: var IP_ADAPTER_GATEWAY_ADDRESS_LH): var DWORD {.inline.} = self.union1.struct1.Reserved
 const
   NDK_ADAPTER_FLAG_IN_ORDER_DMA_SUPPORTED* = 0x1
   NDK_ADAPTER_FLAG_RDMA_READ_SINK_NOT_REQUIRED* = 0x2
@@ -5909,51 +5931,65 @@ proc `SpecificPortBind=`*(self: var MIB_UDPROW_OWNER_MODULE, x: DWORD) {.inline.
 proc SpecificPortBind*(self: MIB_UDPROW_OWNER_MODULE): DWORD {.inline.} = self.union1.struct1.SpecificPortBind
 proc `dwFlags=`*(self: var MIB_UDPROW_OWNER_MODULE, x: DWORD) {.inline.} = self.union1.dwFlags = x
 proc dwFlags*(self: MIB_UDPROW_OWNER_MODULE): DWORD {.inline.} = self.union1.dwFlags
+proc dwFlags*(self: var MIB_UDPROW_OWNER_MODULE): var DWORD {.inline.} = self.union1.dwFlags
 proc `SpecificPortBind=`*(self: var MIB_UDP6ROW_OWNER_MODULE, x: DWORD) {.inline.} = self.union1.struct1.SpecificPortBind = x
 proc SpecificPortBind*(self: MIB_UDP6ROW_OWNER_MODULE): DWORD {.inline.} = self.union1.struct1.SpecificPortBind
 proc `dwFlags=`*(self: var MIB_UDP6ROW_OWNER_MODULE, x: DWORD) {.inline.} = self.union1.dwFlags = x
 proc dwFlags*(self: MIB_UDP6ROW_OWNER_MODULE): DWORD {.inline.} = self.union1.dwFlags
+proc dwFlags*(self: var MIB_UDP6ROW_OWNER_MODULE): var DWORD {.inline.} = self.union1.dwFlags
 proc `ullAlign=`*(self: var MIB_OPAQUE_INFO, x: ULONGLONG) {.inline.} = self.union1.ullAlign = x
 proc ullAlign*(self: MIB_OPAQUE_INFO): ULONGLONG {.inline.} = self.union1.ullAlign
+proc ullAlign*(self: var MIB_OPAQUE_INFO): var ULONGLONG {.inline.} = self.union1.ullAlign
 proc `rgbyData=`*(self: var MIB_OPAQUE_INFO, x: array[1, BYTE]) {.inline.} = self.union1.rgbyData = x
 proc rgbyData*(self: MIB_OPAQUE_INFO): array[1, BYTE] {.inline.} = self.union1.rgbyData
+proc rgbyData*(self: var MIB_OPAQUE_INFO): var array[1, BYTE] {.inline.} = self.union1.rgbyData
 proc `Alignment=`*(self: var IP_ADAPTER_UNICAST_ADDRESS_XP, x: ULONGLONG) {.inline.} = self.union1.Alignment = x
 proc Alignment*(self: IP_ADAPTER_UNICAST_ADDRESS_XP): ULONGLONG {.inline.} = self.union1.Alignment
+proc Alignment*(self: var IP_ADAPTER_UNICAST_ADDRESS_XP): var ULONGLONG {.inline.} = self.union1.Alignment
 proc `Length=`*(self: var IP_ADAPTER_UNICAST_ADDRESS_XP, x: ULONG) {.inline.} = self.union1.struct1.Length = x
 proc `Flags=`*(self: var IP_ADAPTER_UNICAST_ADDRESS_XP, x: DWORD) {.inline.} = self.union1.struct1.Flags = x
 proc `Alignment=`*(self: var IP_ADAPTER_UNICAST_ADDRESS_LH, x: ULONGLONG) {.inline.} = self.union1.Alignment = x
 proc Alignment*(self: IP_ADAPTER_UNICAST_ADDRESS_LH): ULONGLONG {.inline.} = self.union1.Alignment
+proc Alignment*(self: var IP_ADAPTER_UNICAST_ADDRESS_LH): var ULONGLONG {.inline.} = self.union1.Alignment
 proc `Length=`*(self: var IP_ADAPTER_UNICAST_ADDRESS_LH, x: ULONG) {.inline.} = self.union1.struct1.Length = x
 proc `Flags=`*(self: var IP_ADAPTER_UNICAST_ADDRESS_LH, x: DWORD) {.inline.} = self.union1.struct1.Flags = x
 proc `Alignment=`*(self: var IP_ADAPTER_ANYCAST_ADDRESS_XP, x: ULONGLONG) {.inline.} = self.union1.Alignment = x
 proc Alignment*(self: IP_ADAPTER_ANYCAST_ADDRESS_XP): ULONGLONG {.inline.} = self.union1.Alignment
+proc Alignment*(self: var IP_ADAPTER_ANYCAST_ADDRESS_XP): var ULONGLONG {.inline.} = self.union1.Alignment
 proc `Length=`*(self: var IP_ADAPTER_ANYCAST_ADDRESS_XP, x: ULONG) {.inline.} = self.union1.struct1.Length = x
 proc `Flags=`*(self: var IP_ADAPTER_ANYCAST_ADDRESS_XP, x: DWORD) {.inline.} = self.union1.struct1.Flags = x
 proc `Alignment=`*(self: var IP_ADAPTER_MULTICAST_ADDRESS_XP, x: ULONGLONG) {.inline.} = self.union1.Alignment = x
 proc Alignment*(self: IP_ADAPTER_MULTICAST_ADDRESS_XP): ULONGLONG {.inline.} = self.union1.Alignment
+proc Alignment*(self: var IP_ADAPTER_MULTICAST_ADDRESS_XP): var ULONGLONG {.inline.} = self.union1.Alignment
 proc `Length=`*(self: var IP_ADAPTER_MULTICAST_ADDRESS_XP, x: ULONG) {.inline.} = self.union1.struct1.Length = x
 proc `Flags=`*(self: var IP_ADAPTER_MULTICAST_ADDRESS_XP, x: DWORD) {.inline.} = self.union1.struct1.Flags = x
 proc `Alignment=`*(self: var IP_ADAPTER_DNS_SERVER_ADDRESS_XP, x: ULONGLONG) {.inline.} = self.union1.Alignment = x
 proc Alignment*(self: IP_ADAPTER_DNS_SERVER_ADDRESS_XP): ULONGLONG {.inline.} = self.union1.Alignment
+proc Alignment*(self: var IP_ADAPTER_DNS_SERVER_ADDRESS_XP): var ULONGLONG {.inline.} = self.union1.Alignment
 proc `Length=`*(self: var IP_ADAPTER_DNS_SERVER_ADDRESS_XP, x: ULONG) {.inline.} = self.union1.struct1.Length = x
 proc `Reserved=`*(self: var IP_ADAPTER_DNS_SERVER_ADDRESS_XP, x: DWORD) {.inline.} = self.union1.struct1.Reserved = x
 proc `Alignment=`*(self: var IP_ADAPTER_PREFIX_XP, x: ULONGLONG) {.inline.} = self.union1.Alignment = x
 proc Alignment*(self: IP_ADAPTER_PREFIX_XP): ULONGLONG {.inline.} = self.union1.Alignment
+proc Alignment*(self: var IP_ADAPTER_PREFIX_XP): var ULONGLONG {.inline.} = self.union1.Alignment
 proc `Length=`*(self: var IP_ADAPTER_PREFIX_XP, x: ULONG) {.inline.} = self.union1.struct1.Length = x
 proc `Flags=`*(self: var IP_ADAPTER_PREFIX_XP, x: DWORD) {.inline.} = self.union1.struct1.Flags = x
 proc `Alignment=`*(self: var IP_ADAPTER_WINS_SERVER_ADDRESS_LH, x: ULONGLONG) {.inline.} = self.union1.Alignment = x
 proc Alignment*(self: IP_ADAPTER_WINS_SERVER_ADDRESS_LH): ULONGLONG {.inline.} = self.union1.Alignment
+proc Alignment*(self: var IP_ADAPTER_WINS_SERVER_ADDRESS_LH): var ULONGLONG {.inline.} = self.union1.Alignment
 proc `Length=`*(self: var IP_ADAPTER_WINS_SERVER_ADDRESS_LH, x: ULONG) {.inline.} = self.union1.struct1.Length = x
 proc `Reserved=`*(self: var IP_ADAPTER_WINS_SERVER_ADDRESS_LH, x: DWORD) {.inline.} = self.union1.struct1.Reserved = x
 proc `Alignment=`*(self: var IP_ADAPTER_GATEWAY_ADDRESS_LH, x: ULONGLONG) {.inline.} = self.union1.Alignment = x
 proc Alignment*(self: IP_ADAPTER_GATEWAY_ADDRESS_LH): ULONGLONG {.inline.} = self.union1.Alignment
+proc Alignment*(self: var IP_ADAPTER_GATEWAY_ADDRESS_LH): var ULONGLONG {.inline.} = self.union1.Alignment
 proc `Length=`*(self: var IP_ADAPTER_GATEWAY_ADDRESS_LH, x: ULONG) {.inline.} = self.union1.struct1.Length = x
 proc `Reserved=`*(self: var IP_ADAPTER_GATEWAY_ADDRESS_LH, x: DWORD) {.inline.} = self.union1.struct1.Reserved = x
 proc `Alignment=`*(self: var IP_ADAPTER_ADDRESSES_LH, x: ULONGLONG) {.inline.} = self.union1.Alignment = x
 proc Alignment*(self: IP_ADAPTER_ADDRESSES_LH): ULONGLONG {.inline.} = self.union1.Alignment
+proc Alignment*(self: var IP_ADAPTER_ADDRESSES_LH): var ULONGLONG {.inline.} = self.union1.Alignment
 proc `Length=`*(self: var IP_ADAPTER_ADDRESSES_LH, x: ULONG) {.inline.} = self.union1.struct1.Length = x
 proc `IfIndex=`*(self: var IP_ADAPTER_ADDRESSES_LH, x: IF_INDEX) {.inline.} = self.union1.struct1.IfIndex = x
 proc ifIndex*(self: IP_ADAPTER_ADDRESSES_LH): IF_INDEX {.inline.} = self.union1.struct1.IfIndex
+proc ifIndex*(self: var IP_ADAPTER_ADDRESSES_LH): var IF_INDEX {.inline.} = self.union1.struct1.IfIndex
 proc `Flags=`*(self: var IP_ADAPTER_ADDRESSES_LH, x: ULONG) {.inline.} = self.union2.Flags = x
 proc `DdnsEnabled=`*(self: var IP_ADAPTER_ADDRESSES_LH, x: ULONG) {.inline.} = self.union2.struct1.DdnsEnabled = x
 proc DdnsEnabled*(self: IP_ADAPTER_ADDRESSES_LH): ULONG {.inline.} = self.union2.struct1.DdnsEnabled
@@ -5977,43 +6013,61 @@ proc `Ipv6ManagedAddressConfigurationSupported=`*(self: var IP_ADAPTER_ADDRESSES
 proc Ipv6ManagedAddressConfigurationSupported*(self: IP_ADAPTER_ADDRESSES_LH): ULONG {.inline.} = self.union2.struct1.Ipv6ManagedAddressConfigurationSupported
 proc `Alignment=`*(self: var IP_ADAPTER_ADDRESSES_XP, x: ULONGLONG) {.inline.} = self.union1.Alignment = x
 proc Alignment*(self: IP_ADAPTER_ADDRESSES_XP): ULONGLONG {.inline.} = self.union1.Alignment
+proc Alignment*(self: var IP_ADAPTER_ADDRESSES_XP): var ULONGLONG {.inline.} = self.union1.Alignment
 proc `Length=`*(self: var IP_ADAPTER_ADDRESSES_XP, x: ULONG) {.inline.} = self.union1.struct1.Length = x
 proc `IfIndex=`*(self: var IP_ADAPTER_ADDRESSES_XP, x: DWORD) {.inline.} = self.union1.struct1.IfIndex = x
 proc ifIndex*(self: IP_ADAPTER_ADDRESSES_XP): DWORD {.inline.} = self.union1.struct1.IfIndex
+proc ifIndex*(self: var IP_ADAPTER_ADDRESSES_XP): var DWORD {.inline.} = self.union1.struct1.IfIndex
 proc `NamedAddress=`*(self: var NET_ADDRESS_INFO, x: NET_ADDRESS_INFO_UNION1_NamedAddress) {.inline.} = self.union1.NamedAddress = x
 proc NamedAddress*(self: NET_ADDRESS_INFO): NET_ADDRESS_INFO_UNION1_NamedAddress {.inline.} = self.union1.NamedAddress
+proc NamedAddress*(self: var NET_ADDRESS_INFO): var NET_ADDRESS_INFO_UNION1_NamedAddress {.inline.} = self.union1.NamedAddress
 proc `Ipv4Address=`*(self: var NET_ADDRESS_INFO, x: SOCKADDR_IN) {.inline.} = self.union1.Ipv4Address = x
 proc ipv4Address*(self: NET_ADDRESS_INFO): SOCKADDR_IN {.inline.} = self.union1.Ipv4Address
+proc ipv4Address*(self: var NET_ADDRESS_INFO): var SOCKADDR_IN {.inline.} = self.union1.Ipv4Address
 proc `Ipv6Address=`*(self: var NET_ADDRESS_INFO, x: SOCKADDR_IN6) {.inline.} = self.union1.Ipv6Address = x
 proc ipv6Address*(self: NET_ADDRESS_INFO): SOCKADDR_IN6 {.inline.} = self.union1.Ipv6Address
+proc ipv6Address*(self: var NET_ADDRESS_INFO): var SOCKADDR_IN6 {.inline.} = self.union1.Ipv6Address
 proc `IpAddress=`*(self: var NET_ADDRESS_INFO, x: SOCKADDR) {.inline.} = self.union1.IpAddress = x
 proc ipAddress*(self: NET_ADDRESS_INFO): SOCKADDR {.inline.} = self.union1.IpAddress
+proc ipAddress*(self: var NET_ADDRESS_INFO): var SOCKADDR {.inline.} = self.union1.IpAddress
 proc `AuthenticationEvent=`*(self: var NDIS_802_11_TEST, x: NDIS_802_11_AUTHENTICATION_EVENT) {.inline.} = self.union1.AuthenticationEvent = x
 proc AuthenticationEvent*(self: NDIS_802_11_TEST): NDIS_802_11_AUTHENTICATION_EVENT {.inline.} = self.union1.AuthenticationEvent
+proc AuthenticationEvent*(self: var NDIS_802_11_TEST): var NDIS_802_11_AUTHENTICATION_EVENT {.inline.} = self.union1.AuthenticationEvent
 proc `RssiTrigger=`*(self: var NDIS_802_11_TEST, x: NDIS_802_11_RSSI) {.inline.} = self.union1.RssiTrigger = x
 proc RssiTrigger*(self: NDIS_802_11_TEST): NDIS_802_11_RSSI {.inline.} = self.union1.RssiTrigger
+proc RssiTrigger*(self: var NDIS_802_11_TEST): var NDIS_802_11_RSSI {.inline.} = self.union1.RssiTrigger
 proc `Oid=`*(self: var NDIS_GUID, x: NDIS_OID) {.inline.} = self.union1.Oid = x
 proc Oid*(self: NDIS_GUID): NDIS_OID {.inline.} = self.union1.Oid
+proc Oid*(self: var NDIS_GUID): var NDIS_OID {.inline.} = self.union1.Oid
 proc `Status=`*(self: var NDIS_GUID, x: NDIS_STATUS) {.inline.} = self.union1.Status = x
 proc Status*(self: NDIS_GUID): NDIS_STATUS {.inline.} = self.union1.Status
+proc Status*(self: var NDIS_GUID): var NDIS_STATUS {.inline.} = self.union1.Status
 proc `RscIPv4=`*(self: var NDIS_OFFLOAD_PARAMETERS, x: UCHAR) {.inline.} = self.struct1.RscIPv4 = x
 proc RscIPv4*(self: NDIS_OFFLOAD_PARAMETERS): UCHAR {.inline.} = self.struct1.RscIPv4
+proc RscIPv4*(self: var NDIS_OFFLOAD_PARAMETERS): var UCHAR {.inline.} = self.struct1.RscIPv4
 proc `RscIPv6=`*(self: var NDIS_OFFLOAD_PARAMETERS, x: UCHAR) {.inline.} = self.struct1.RscIPv6 = x
 proc RscIPv6*(self: NDIS_OFFLOAD_PARAMETERS): UCHAR {.inline.} = self.struct1.RscIPv6
+proc RscIPv6*(self: var NDIS_OFFLOAD_PARAMETERS): var UCHAR {.inline.} = self.struct1.RscIPv6
 proc `EncapsulatedPacketTaskOffload=`*(self: var NDIS_OFFLOAD_PARAMETERS, x: UCHAR) {.inline.} = self.struct2.EncapsulatedPacketTaskOffload = x
 proc EncapsulatedPacketTaskOffload*(self: NDIS_OFFLOAD_PARAMETERS): UCHAR {.inline.} = self.struct2.EncapsulatedPacketTaskOffload
+proc EncapsulatedPacketTaskOffload*(self: var NDIS_OFFLOAD_PARAMETERS): var UCHAR {.inline.} = self.struct2.EncapsulatedPacketTaskOffload
 proc `EncapsulationTypes=`*(self: var NDIS_OFFLOAD_PARAMETERS, x: UCHAR) {.inline.} = self.struct2.EncapsulationTypes = x
 proc `VlanProperties=`*(self: var NDIS_SWITCH_PORT_PROPERTY_VLAN, x: NDIS_SWITCH_PORT_PROPERTY_VLAN_UNION1_VlanProperties) {.inline.} = self.union1.VlanProperties = x
 proc `SecondaryVlanId=`*(self: var NDIS_SWITCH_PORT_PROPERTY_VLAN, x: UINT16) {.inline.} = self.union1.PvlanProperties.union1.SecondaryVlanId = x
 proc SecondaryVlanId*(self: NDIS_SWITCH_PORT_PROPERTY_VLAN): UINT16 {.inline.} = self.union1.PvlanProperties.union1.SecondaryVlanId
+proc SecondaryVlanId*(self: var NDIS_SWITCH_PORT_PROPERTY_VLAN): var UINT16 {.inline.} = self.union1.PvlanProperties.union1.SecondaryVlanId
 proc `SecondaryVlanIdArray=`*(self: var NDIS_SWITCH_PORT_PROPERTY_VLAN, x: array[64, UINT64]) {.inline.} = self.union1.PvlanProperties.union1.SecondaryVlanIdArray = x
 proc SecondaryVlanIdArray*(self: NDIS_SWITCH_PORT_PROPERTY_VLAN): array[64, UINT64] {.inline.} = self.union1.PvlanProperties.union1.SecondaryVlanIdArray
+proc SecondaryVlanIdArray*(self: var NDIS_SWITCH_PORT_PROPERTY_VLAN): var array[64, UINT64] {.inline.} = self.union1.PvlanProperties.union1.SecondaryVlanIdArray
 proc `PvlanProperties=`*(self: var NDIS_SWITCH_PORT_PROPERTY_VLAN, x: NDIS_SWITCH_PORT_PROPERTY_VLAN_UNION1_PvlanProperties) {.inline.} = self.union1.PvlanProperties = x
 proc PvlanProperties*(self: NDIS_SWITCH_PORT_PROPERTY_VLAN): NDIS_SWITCH_PORT_PROPERTY_VLAN_UNION1_PvlanProperties {.inline.} = self.union1.PvlanProperties
+proc PvlanProperties*(self: var NDIS_SWITCH_PORT_PROPERTY_VLAN): var NDIS_SWITCH_PORT_PROPERTY_VLAN_UNION1_PvlanProperties {.inline.} = self.union1.PvlanProperties
 proc `LastReachable=`*(self: var MIB_IPPATH_ROW, x: ULONG) {.inline.} = self.union1.LastReachable = x
 proc LastReachable*(self: MIB_IPPATH_ROW): ULONG {.inline.} = self.union1.LastReachable
+proc LastReachable*(self: var MIB_IPPATH_ROW): var ULONG {.inline.} = self.union1.LastReachable
 proc `LastUnreachable=`*(self: var MIB_IPPATH_ROW, x: ULONG) {.inline.} = self.union1.LastUnreachable = x
 proc LastUnreachable*(self: MIB_IPPATH_ROW): ULONG {.inline.} = self.union1.LastUnreachable
+proc LastUnreachable*(self: var MIB_IPPATH_ROW): var ULONG {.inline.} = self.union1.LastUnreachable
 proc `IsRouter=`*(self: var MIB_IPNET_ROW2, x: BOOLEAN) {.inline.} = self.union1.struct1.IsRouter = x
 proc IsRouter*(self: MIB_IPNET_ROW2): BOOLEAN {.inline.} = self.union1.struct1.IsRouter
 proc `IsUnreachable=`*(self: var MIB_IPNET_ROW2, x: BOOLEAN) {.inline.} = self.union1.struct1.IsUnreachable = x

@@ -651,59 +651,88 @@ proc HttpShutdownRequestQueue*(ReqQueueHandle: HANDLE): ULONG {.winapi, xpincomp
 proc HttpWaitForDemandStart*(ReqQueueHandle: HANDLE, pOverlapped: LPOVERLAPPED): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
 proc `FromMemory=`*(self: var HTTP_DATA_CHUNK, x: HTTP_DATA_CHUNK_UNION1_FromMemory) {.inline.} = self.union1.FromMemory = x
 proc FromMemory*(self: HTTP_DATA_CHUNK): HTTP_DATA_CHUNK_UNION1_FromMemory {.inline.} = self.union1.FromMemory
+proc FromMemory*(self: var HTTP_DATA_CHUNK): var HTTP_DATA_CHUNK_UNION1_FromMemory {.inline.} = self.union1.FromMemory
 proc `FromFileHandle=`*(self: var HTTP_DATA_CHUNK, x: HTTP_DATA_CHUNK_UNION1_FromFileHandle) {.inline.} = self.union1.FromFileHandle = x
 proc FromFileHandle*(self: HTTP_DATA_CHUNK): HTTP_DATA_CHUNK_UNION1_FromFileHandle {.inline.} = self.union1.FromFileHandle
+proc FromFileHandle*(self: var HTTP_DATA_CHUNK): var HTTP_DATA_CHUNK_UNION1_FromFileHandle {.inline.} = self.union1.FromFileHandle
 proc `FromFragmentCache=`*(self: var HTTP_DATA_CHUNK, x: HTTP_DATA_CHUNK_UNION1_FromFragmentCache) {.inline.} = self.union1.FromFragmentCache = x
 proc FromFragmentCache*(self: HTTP_DATA_CHUNK): HTTP_DATA_CHUNK_UNION1_FromFragmentCache {.inline.} = self.union1.FromFragmentCache
+proc FromFragmentCache*(self: var HTTP_DATA_CHUNK): var HTTP_DATA_CHUNK_UNION1_FromFragmentCache {.inline.} = self.union1.FromFragmentCache
 proc `Flags=`*(self: var HTTP_REQUEST_V2, x: ULONG) {.inline.} = self.struct1.Flags = x
 proc Flags*(self: HTTP_REQUEST_V2): ULONG {.inline.} = self.struct1.Flags
+proc Flags*(self: var HTTP_REQUEST_V2): var ULONG {.inline.} = self.struct1.Flags
 proc `ConnectionId=`*(self: var HTTP_REQUEST_V2, x: HTTP_CONNECTION_ID) {.inline.} = self.struct1.ConnectionId = x
 proc ConnectionId*(self: HTTP_REQUEST_V2): HTTP_CONNECTION_ID {.inline.} = self.struct1.ConnectionId
+proc ConnectionId*(self: var HTTP_REQUEST_V2): var HTTP_CONNECTION_ID {.inline.} = self.struct1.ConnectionId
 proc `RequestId=`*(self: var HTTP_REQUEST_V2, x: HTTP_REQUEST_ID) {.inline.} = self.struct1.RequestId = x
 proc RequestId*(self: HTTP_REQUEST_V2): HTTP_REQUEST_ID {.inline.} = self.struct1.RequestId
+proc RequestId*(self: var HTTP_REQUEST_V2): var HTTP_REQUEST_ID {.inline.} = self.struct1.RequestId
 proc `UrlContext=`*(self: var HTTP_REQUEST_V2, x: HTTP_URL_CONTEXT) {.inline.} = self.struct1.UrlContext = x
 proc UrlContext*(self: HTTP_REQUEST_V2): HTTP_URL_CONTEXT {.inline.} = self.struct1.UrlContext
+proc UrlContext*(self: var HTTP_REQUEST_V2): var HTTP_URL_CONTEXT {.inline.} = self.struct1.UrlContext
 proc `Version=`*(self: var HTTP_REQUEST_V2, x: HTTP_VERSION) {.inline.} = self.struct1.Version = x
 proc Version*(self: HTTP_REQUEST_V2): HTTP_VERSION {.inline.} = self.struct1.Version
+proc Version*(self: var HTTP_REQUEST_V2): var HTTP_VERSION {.inline.} = self.struct1.Version
 proc `Verb=`*(self: var HTTP_REQUEST_V2, x: HTTP_VERB) {.inline.} = self.struct1.Verb = x
 proc Verb*(self: HTTP_REQUEST_V2): HTTP_VERB {.inline.} = self.struct1.Verb
+proc Verb*(self: var HTTP_REQUEST_V2): var HTTP_VERB {.inline.} = self.struct1.Verb
 proc `UnknownVerbLength=`*(self: var HTTP_REQUEST_V2, x: USHORT) {.inline.} = self.struct1.UnknownVerbLength = x
 proc UnknownVerbLength*(self: HTTP_REQUEST_V2): USHORT {.inline.} = self.struct1.UnknownVerbLength
+proc UnknownVerbLength*(self: var HTTP_REQUEST_V2): var USHORT {.inline.} = self.struct1.UnknownVerbLength
 proc `RawUrlLength=`*(self: var HTTP_REQUEST_V2, x: USHORT) {.inline.} = self.struct1.RawUrlLength = x
 proc RawUrlLength*(self: HTTP_REQUEST_V2): USHORT {.inline.} = self.struct1.RawUrlLength
+proc RawUrlLength*(self: var HTTP_REQUEST_V2): var USHORT {.inline.} = self.struct1.RawUrlLength
 proc `pUnknownVerb=`*(self: var HTTP_REQUEST_V2, x: PCSTR) {.inline.} = self.struct1.pUnknownVerb = x
 proc pUnknownVerb*(self: HTTP_REQUEST_V2): PCSTR {.inline.} = self.struct1.pUnknownVerb
+proc pUnknownVerb*(self: var HTTP_REQUEST_V2): var PCSTR {.inline.} = self.struct1.pUnknownVerb
 proc `pRawUrl=`*(self: var HTTP_REQUEST_V2, x: PCSTR) {.inline.} = self.struct1.pRawUrl = x
 proc pRawUrl*(self: HTTP_REQUEST_V2): PCSTR {.inline.} = self.struct1.pRawUrl
+proc pRawUrl*(self: var HTTP_REQUEST_V2): var PCSTR {.inline.} = self.struct1.pRawUrl
 proc `CookedUrl=`*(self: var HTTP_REQUEST_V2, x: HTTP_COOKED_URL) {.inline.} = self.struct1.CookedUrl = x
 proc CookedUrl*(self: HTTP_REQUEST_V2): HTTP_COOKED_URL {.inline.} = self.struct1.CookedUrl
+proc CookedUrl*(self: var HTTP_REQUEST_V2): var HTTP_COOKED_URL {.inline.} = self.struct1.CookedUrl
 proc `Address=`*(self: var HTTP_REQUEST_V2, x: HTTP_TRANSPORT_ADDRESS) {.inline.} = self.struct1.Address = x
 proc Address*(self: HTTP_REQUEST_V2): HTTP_TRANSPORT_ADDRESS {.inline.} = self.struct1.Address
+proc Address*(self: var HTTP_REQUEST_V2): var HTTP_TRANSPORT_ADDRESS {.inline.} = self.struct1.Address
 proc `Headers=`*(self: var HTTP_REQUEST_V2, x: HTTP_REQUEST_HEADERS) {.inline.} = self.struct1.Headers = x
 proc Headers*(self: HTTP_REQUEST_V2): HTTP_REQUEST_HEADERS {.inline.} = self.struct1.Headers
+proc Headers*(self: var HTTP_REQUEST_V2): var HTTP_REQUEST_HEADERS {.inline.} = self.struct1.Headers
 proc `BytesReceived=`*(self: var HTTP_REQUEST_V2, x: ULONGLONG) {.inline.} = self.struct1.BytesReceived = x
 proc BytesReceived*(self: HTTP_REQUEST_V2): ULONGLONG {.inline.} = self.struct1.BytesReceived
+proc BytesReceived*(self: var HTTP_REQUEST_V2): var ULONGLONG {.inline.} = self.struct1.BytesReceived
 proc `EntityChunkCount=`*(self: var HTTP_REQUEST_V2, x: USHORT) {.inline.} = self.struct1.EntityChunkCount = x
 proc EntityChunkCount*(self: HTTP_REQUEST_V2): USHORT {.inline.} = self.struct1.EntityChunkCount
+proc EntityChunkCount*(self: var HTTP_REQUEST_V2): var USHORT {.inline.} = self.struct1.EntityChunkCount
 proc `pEntityChunks=`*(self: var HTTP_REQUEST_V2, x: PHTTP_DATA_CHUNK) {.inline.} = self.struct1.pEntityChunks = x
 proc pEntityChunks*(self: HTTP_REQUEST_V2): PHTTP_DATA_CHUNK {.inline.} = self.struct1.pEntityChunks
+proc pEntityChunks*(self: var HTTP_REQUEST_V2): var PHTTP_DATA_CHUNK {.inline.} = self.struct1.pEntityChunks
 proc `RawConnectionId=`*(self: var HTTP_REQUEST_V2, x: HTTP_RAW_CONNECTION_ID) {.inline.} = self.struct1.RawConnectionId = x
 proc RawConnectionId*(self: HTTP_REQUEST_V2): HTTP_RAW_CONNECTION_ID {.inline.} = self.struct1.RawConnectionId
+proc RawConnectionId*(self: var HTTP_REQUEST_V2): var HTTP_RAW_CONNECTION_ID {.inline.} = self.struct1.RawConnectionId
 proc `pSslInfo=`*(self: var HTTP_REQUEST_V2, x: PHTTP_SSL_INFO) {.inline.} = self.struct1.pSslInfo = x
 proc pSslInfo*(self: HTTP_REQUEST_V2): PHTTP_SSL_INFO {.inline.} = self.struct1.pSslInfo
+proc pSslInfo*(self: var HTTP_REQUEST_V2): var PHTTP_SSL_INFO {.inline.} = self.struct1.pSslInfo
 proc `Flags=`*(self: var HTTP_RESPONSE_V2, x: ULONG) {.inline.} = self.struct1.Flags = x
 proc Flags*(self: HTTP_RESPONSE_V2): ULONG {.inline.} = self.struct1.Flags
+proc Flags*(self: var HTTP_RESPONSE_V2): var ULONG {.inline.} = self.struct1.Flags
 proc `Version=`*(self: var HTTP_RESPONSE_V2, x: HTTP_VERSION) {.inline.} = self.struct1.Version = x
 proc Version*(self: HTTP_RESPONSE_V2): HTTP_VERSION {.inline.} = self.struct1.Version
+proc Version*(self: var HTTP_RESPONSE_V2): var HTTP_VERSION {.inline.} = self.struct1.Version
 proc `StatusCode=`*(self: var HTTP_RESPONSE_V2, x: USHORT) {.inline.} = self.struct1.StatusCode = x
 proc StatusCode*(self: HTTP_RESPONSE_V2): USHORT {.inline.} = self.struct1.StatusCode
+proc StatusCode*(self: var HTTP_RESPONSE_V2): var USHORT {.inline.} = self.struct1.StatusCode
 proc `ReasonLength=`*(self: var HTTP_RESPONSE_V2, x: USHORT) {.inline.} = self.struct1.ReasonLength = x
 proc ReasonLength*(self: HTTP_RESPONSE_V2): USHORT {.inline.} = self.struct1.ReasonLength
+proc ReasonLength*(self: var HTTP_RESPONSE_V2): var USHORT {.inline.} = self.struct1.ReasonLength
 proc `pReason=`*(self: var HTTP_RESPONSE_V2, x: PCSTR) {.inline.} = self.struct1.pReason = x
 proc pReason*(self: HTTP_RESPONSE_V2): PCSTR {.inline.} = self.struct1.pReason
+proc pReason*(self: var HTTP_RESPONSE_V2): var PCSTR {.inline.} = self.struct1.pReason
 proc `Headers=`*(self: var HTTP_RESPONSE_V2, x: HTTP_RESPONSE_HEADERS) {.inline.} = self.struct1.Headers = x
 proc Headers*(self: HTTP_RESPONSE_V2): HTTP_RESPONSE_HEADERS {.inline.} = self.struct1.Headers
+proc Headers*(self: var HTTP_RESPONSE_V2): var HTTP_RESPONSE_HEADERS {.inline.} = self.struct1.Headers
 proc `EntityChunkCount=`*(self: var HTTP_RESPONSE_V2, x: USHORT) {.inline.} = self.struct1.EntityChunkCount = x
 proc EntityChunkCount*(self: HTTP_RESPONSE_V2): USHORT {.inline.} = self.struct1.EntityChunkCount
+proc EntityChunkCount*(self: var HTTP_RESPONSE_V2): var USHORT {.inline.} = self.struct1.EntityChunkCount
 proc `pEntityChunks=`*(self: var HTTP_RESPONSE_V2, x: PHTTP_DATA_CHUNK) {.inline.} = self.struct1.pEntityChunks = x
 proc pEntityChunks*(self: HTTP_RESPONSE_V2): PHTTP_DATA_CHUNK {.inline.} = self.struct1.pEntityChunks
+proc pEntityChunks*(self: var HTTP_RESPONSE_V2): var PHTTP_DATA_CHUNK {.inline.} = self.struct1.pEntityChunks

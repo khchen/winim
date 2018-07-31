@@ -1870,5 +1870,7 @@ proc GdipGetTextureImage*(brush: ptr GpTexture, image: ptr ptr GpImage): GpStatu
 proc GdipTestControl*(control: GpTestControlEnum, param: pointer): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc `WmfHeader=`*(self: var MetafileHeader, x: METAHEADER) {.inline.} = self.union1.WmfHeader = x
 proc WmfHeader*(self: MetafileHeader): METAHEADER {.inline.} = self.union1.WmfHeader
+proc WmfHeader*(self: var MetafileHeader): var METAHEADER {.inline.} = self.union1.WmfHeader
 proc `EmfHeader=`*(self: var MetafileHeader, x: ENHMETAHEADER3) {.inline.} = self.union1.EmfHeader = x
 proc EmfHeader*(self: MetafileHeader): ENHMETAHEADER3 {.inline.} = self.union1.EmfHeader
+proc EmfHeader*(self: var MetafileHeader): var ENHMETAHEADER3 {.inline.} = self.union1.EmfHeader

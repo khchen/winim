@@ -2747,26 +2747,37 @@ when winimUnicode:
 proc LookupAccountSidLocalW*(Sid: PSID, Name: LPWSTR, cchName: LPDWORD, ReferencedDomainName: LPWSTR, cchReferencedDomainName: LPDWORD, peUse: PSID_NAME_USE): WINBOOL {.winapi, inline.} = LookupAccountSidW(nil, Sid, Name, cchName, ReferencedDomainName, cchReferencedDomainName, peUse)
 proc `Offset=`*(self: var OVERLAPPED, x: DWORD) {.inline.} = self.union1.struct1.Offset = x
 proc Offset*(self: OVERLAPPED): DWORD {.inline.} = self.union1.struct1.Offset
+proc Offset*(self: var OVERLAPPED): var DWORD {.inline.} = self.union1.struct1.Offset
 proc `OffsetHigh=`*(self: var OVERLAPPED, x: DWORD) {.inline.} = self.union1.struct1.OffsetHigh = x
 proc OffsetHigh*(self: OVERLAPPED): DWORD {.inline.} = self.union1.struct1.OffsetHigh
+proc OffsetHigh*(self: var OVERLAPPED): var DWORD {.inline.} = self.union1.struct1.OffsetHigh
 proc `Pointer=`*(self: var OVERLAPPED, x: PVOID) {.inline.} = self.union1.Pointer = x
 proc Pointer*(self: OVERLAPPED): PVOID {.inline.} = self.union1.Pointer
+proc Pointer*(self: var OVERLAPPED): var PVOID {.inline.} = self.union1.Pointer
 proc `Block=`*(self: var PROCESS_HEAP_ENTRY, x: PROCESS_HEAP_ENTRY_UNION1_Block) {.inline.} = self.union1.Block = x
 proc Block*(self: PROCESS_HEAP_ENTRY): PROCESS_HEAP_ENTRY_UNION1_Block {.inline.} = self.union1.Block
+proc Block*(self: var PROCESS_HEAP_ENTRY): var PROCESS_HEAP_ENTRY_UNION1_Block {.inline.} = self.union1.Block
 proc `Region=`*(self: var PROCESS_HEAP_ENTRY, x: PROCESS_HEAP_ENTRY_UNION1_Region) {.inline.} = self.union1.Region = x
 proc Region*(self: PROCESS_HEAP_ENTRY): PROCESS_HEAP_ENTRY_UNION1_Region {.inline.} = self.union1.Region
+proc Region*(self: var PROCESS_HEAP_ENTRY): var PROCESS_HEAP_ENTRY_UNION1_Region {.inline.} = self.union1.Region
 proc `dwOemId=`*(self: var SYSTEM_INFO, x: DWORD) {.inline.} = self.union1.dwOemId = x
 proc dwOemId*(self: SYSTEM_INFO): DWORD {.inline.} = self.union1.dwOemId
+proc dwOemId*(self: var SYSTEM_INFO): var DWORD {.inline.} = self.union1.dwOemId
 proc `wProcessorArchitecture=`*(self: var SYSTEM_INFO, x: WORD) {.inline.} = self.union1.struct1.wProcessorArchitecture = x
 proc wProcessorArchitecture*(self: SYSTEM_INFO): WORD {.inline.} = self.union1.struct1.wProcessorArchitecture
+proc wProcessorArchitecture*(self: var SYSTEM_INFO): var WORD {.inline.} = self.union1.struct1.wProcessorArchitecture
 proc `wReserved=`*(self: var SYSTEM_INFO, x: WORD) {.inline.} = self.union1.struct1.wReserved = x
 proc wReserved*(self: SYSTEM_INFO): WORD {.inline.} = self.union1.struct1.wReserved
+proc wReserved*(self: var SYSTEM_INFO): var WORD {.inline.} = self.union1.struct1.wReserved
 proc `FileId=`*(self: var FILE_ID_DESCRIPTOR, x: LARGE_INTEGER) {.inline.} = self.union1.FileId = x
 proc FileId*(self: FILE_ID_DESCRIPTOR): LARGE_INTEGER {.inline.} = self.union1.FileId
+proc FileId*(self: var FILE_ID_DESCRIPTOR): var LARGE_INTEGER {.inline.} = self.union1.FileId
 proc `ObjectId=`*(self: var FILE_ID_DESCRIPTOR, x: GUID) {.inline.} = self.union1.ObjectId = x
 proc objectId*(self: FILE_ID_DESCRIPTOR): GUID {.inline.} = self.union1.ObjectId
+proc objectId*(self: var FILE_ID_DESCRIPTOR): var GUID {.inline.} = self.union1.ObjectId
 proc `ExtendedFileId=`*(self: var FILE_ID_DESCRIPTOR, x: FILE_ID_128) {.inline.} = self.union1.ExtendedFileId = x
 proc ExtendedFileId*(self: FILE_ID_DESCRIPTOR): FILE_ID_128 {.inline.} = self.union1.ExtendedFileId
+proc ExtendedFileId*(self: var FILE_ID_DESCRIPTOR): var FILE_ID_128 {.inline.} = self.union1.ExtendedFileId
 when winimUnicode:
   type
     WIN32_FIND_DATA* = WIN32_FIND_DATAW

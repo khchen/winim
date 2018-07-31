@@ -1746,12 +1746,16 @@ proc SQLInstallTranslatorExW*(lpszTranslator: LPCWSTR, lpszPathIn: LPCWSTR, lpsz
 proc SQLAllocHandle*(fHandleType: TSQLSMALLINT, hInput: TSQLHANDLE, phOutput: ptr TSQLHANDLE): TSQLRETURN {.winapi, stdcall, dynlib: "odbc32", importc: "SQLAllocHandleStd".}
 proc `wszArg=`*(self: var ODBC_VS_ARGS, x: ptr WCHAR) {.inline.} = self.union1.wszArg = x
 proc wszArg*(self: ODBC_VS_ARGS): ptr WCHAR {.inline.} = self.union1.wszArg
+proc wszArg*(self: var ODBC_VS_ARGS): var ptr WCHAR {.inline.} = self.union1.wszArg
 proc `szArg=`*(self: var ODBC_VS_ARGS, x: cstring) {.inline.} = self.union1.szArg = x
 proc szArg*(self: ODBC_VS_ARGS): cstring {.inline.} = self.union1.szArg
+proc szArg*(self: var ODBC_VS_ARGS): var cstring {.inline.} = self.union1.szArg
 proc `wszCorrelation=`*(self: var ODBC_VS_ARGS, x: ptr WCHAR) {.inline.} = self.union2.wszCorrelation = x
 proc wszCorrelation*(self: ODBC_VS_ARGS): ptr WCHAR {.inline.} = self.union2.wszCorrelation
+proc wszCorrelation*(self: var ODBC_VS_ARGS): var ptr WCHAR {.inline.} = self.union2.wszCorrelation
 proc `szCorrelation=`*(self: var ODBC_VS_ARGS, x: cstring) {.inline.} = self.union2.szCorrelation = x
 proc szCorrelation*(self: ODBC_VS_ARGS): cstring {.inline.} = self.union2.szCorrelation
+proc szCorrelation*(self: var ODBC_VS_ARGS): var cstring {.inline.} = self.union2.szCorrelation
 when winimUnicode:
   type
     TSQLTCHAR* = TSQLWCHAR

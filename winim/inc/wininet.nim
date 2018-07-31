@@ -1254,12 +1254,16 @@ proc PrivacySetZonePreferenceW*(dwZone: DWORD, dwType: DWORD, dwTemplate: DWORD,
 proc PrivacyGetZonePreferenceW*(dwZone: DWORD, dwType: DWORD, pdwTemplate: LPDWORD, pszBuffer: LPWSTR, pdwBufferLength: LPDWORD): DWORD {.winapi, stdcall, dynlib: "wininet", importc.}
 proc `dwReserved=`*(self: var INTERNET_CACHE_ENTRY_INFOA, x: DWORD) {.inline.} = self.union1.dwReserved = x
 proc dwReserved*(self: INTERNET_CACHE_ENTRY_INFOA): DWORD {.inline.} = self.union1.dwReserved
+proc dwReserved*(self: var INTERNET_CACHE_ENTRY_INFOA): var DWORD {.inline.} = self.union1.dwReserved
 proc `dwExemptDelta=`*(self: var INTERNET_CACHE_ENTRY_INFOA, x: DWORD) {.inline.} = self.union1.dwExemptDelta = x
 proc dwExemptDelta*(self: INTERNET_CACHE_ENTRY_INFOA): DWORD {.inline.} = self.union1.dwExemptDelta
+proc dwExemptDelta*(self: var INTERNET_CACHE_ENTRY_INFOA): var DWORD {.inline.} = self.union1.dwExemptDelta
 proc `dwReserved=`*(self: var INTERNET_CACHE_ENTRY_INFOW, x: DWORD) {.inline.} = self.union1.dwReserved = x
 proc dwReserved*(self: INTERNET_CACHE_ENTRY_INFOW): DWORD {.inline.} = self.union1.dwReserved
+proc dwReserved*(self: var INTERNET_CACHE_ENTRY_INFOW): var DWORD {.inline.} = self.union1.dwReserved
 proc `dwExemptDelta=`*(self: var INTERNET_CACHE_ENTRY_INFOW, x: DWORD) {.inline.} = self.union1.dwExemptDelta = x
 proc dwExemptDelta*(self: INTERNET_CACHE_ENTRY_INFOW): DWORD {.inline.} = self.union1.dwExemptDelta
+proc dwExemptDelta*(self: var INTERNET_CACHE_ENTRY_INFOW): var DWORD {.inline.} = self.union1.dwExemptDelta
 when winimUnicode:
   type
     INTERNET_PER_CONN_OPTION* = INTERNET_PER_CONN_OPTIONW

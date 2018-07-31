@@ -1632,16 +1632,22 @@ proc `Level=`*(self: var SCOPE_ID, x: ULONG) {.inline.} = self.union1.struct1.Le
 proc Level*(self: SCOPE_ID): ULONG {.inline.} = self.union1.struct1.Level
 proc `Value=`*(self: var SCOPE_ID, x: ULONG) {.inline.} = self.union1.Value = x
 proc Value*(self: SCOPE_ID): ULONG {.inline.} = self.union1.Value
+proc Value*(self: var SCOPE_ID): var ULONG {.inline.} = self.union1.Value
 proc `sin6_scope_id=`*(self: var sockaddr_in6, x: int32) {.inline.} = self.union1.sin6_scope_id = x
 proc sin6_scope_id*(self: sockaddr_in6): int32 {.inline.} = self.union1.sin6_scope_id
+proc sin6_scope_id*(self: var sockaddr_in6): var int32 {.inline.} = self.union1.sin6_scope_id
 proc `sin6_scope_struct=`*(self: var sockaddr_in6, x: SCOPE_ID) {.inline.} = self.union1.sin6_scope_struct = x
 proc sin6_scope_struct*(self: sockaddr_in6): SCOPE_ID {.inline.} = self.union1.sin6_scope_struct
+proc sin6_scope_struct*(self: var sockaddr_in6): var SCOPE_ID {.inline.} = self.union1.sin6_scope_struct
 proc `nFileOffset=`*(self: var TRANSMIT_PACKETS_ELEMENT, x: LARGE_INTEGER) {.inline.} = self.union1.struct1.nFileOffset = x
 proc nFileOffset*(self: TRANSMIT_PACKETS_ELEMENT): LARGE_INTEGER {.inline.} = self.union1.struct1.nFileOffset
+proc nFileOffset*(self: var TRANSMIT_PACKETS_ELEMENT): var LARGE_INTEGER {.inline.} = self.union1.struct1.nFileOffset
 proc `hFile=`*(self: var TRANSMIT_PACKETS_ELEMENT, x: HANDLE) {.inline.} = self.union1.struct1.hFile = x
 proc hFile*(self: TRANSMIT_PACKETS_ELEMENT): HANDLE {.inline.} = self.union1.struct1.hFile
+proc hFile*(self: var TRANSMIT_PACKETS_ELEMENT): var HANDLE {.inline.} = self.union1.struct1.hFile
 proc `pBuffer=`*(self: var TRANSMIT_PACKETS_ELEMENT, x: PVOID) {.inline.} = self.union1.pBuffer = x
 proc pBuffer*(self: TRANSMIT_PACKETS_ELEMENT): PVOID {.inline.} = self.union1.pBuffer
+proc pBuffer*(self: var TRANSMIT_PACKETS_ELEMENT): var PVOID {.inline.} = self.union1.pBuffer
 when winimUnicode:
   type
     WSAPROTOCOL_INFO* = WSAPROTOCOL_INFOW

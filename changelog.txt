@@ -5,6 +5,14 @@
 
 ====================================================================
 
+Version 2.3
+-----------
+# Add var version access proc for nested struct/union.
+  It will be used in this situation:
+    var insert: TVINSERTSTRUCT
+    insert.item.mask = TVIF_TEXT or TVIF_PARAM
+# Fix some literal constant with 'U' suffix.
+
 Version 2.2
 -----------
 # Fix converter ambiguous problems.

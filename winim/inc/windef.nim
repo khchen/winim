@@ -9354,40 +9354,56 @@ proc RtlSecureZeroMemory*(Destination: pointer, Length: Natural) {.importc: "Rtl
 proc RtlFillMemory*(Destination: pointer, Length: Natural, Fill: byte): void {.importc: "RtlFillMemory", header: "<windows.h>".}
 proc `UseThisFieldToCopy=`*(self: var QUAD, x: int64) {.inline.} = self.union1.UseThisFieldToCopy = x
 proc UseThisFieldToCopy*(self: QUAD): int64 {.inline.} = self.union1.UseThisFieldToCopy
+proc UseThisFieldToCopy*(self: var QUAD): var int64 {.inline.} = self.union1.UseThisFieldToCopy
 proc `DoNotUseThisField=`*(self: var QUAD, x: float64) {.inline.} = self.union1.DoNotUseThisField = x
 proc DoNotUseThisField*(self: QUAD): float64 {.inline.} = self.union1.DoNotUseThisField
+proc DoNotUseThisField*(self: var QUAD): var float64 {.inline.} = self.union1.DoNotUseThisField
 proc `LowPart=`*(self: var LARGE_INTEGER, x: ULONG) {.inline.} = self.struct1.LowPart = x
 proc LowPart*(self: LARGE_INTEGER): ULONG {.inline.} = self.struct1.LowPart
+proc LowPart*(self: var LARGE_INTEGER): var ULONG {.inline.} = self.struct1.LowPart
 proc `HighPart=`*(self: var LARGE_INTEGER, x: LONG) {.inline.} = self.struct1.HighPart = x
 proc HighPart*(self: LARGE_INTEGER): LONG {.inline.} = self.struct1.HighPart
+proc HighPart*(self: var LARGE_INTEGER): var LONG {.inline.} = self.struct1.HighPart
 proc `LowPart=`*(self: var ULARGE_INTEGER, x: ULONG) {.inline.} = self.struct1.LowPart = x
 proc LowPart*(self: ULARGE_INTEGER): ULONG {.inline.} = self.struct1.LowPart
+proc LowPart*(self: var ULARGE_INTEGER): var ULONG {.inline.} = self.struct1.LowPart
 proc `HighPart=`*(self: var ULARGE_INTEGER, x: ULONG) {.inline.} = self.struct1.HighPart = x
 proc HighPart*(self: ULARGE_INTEGER): ULONG {.inline.} = self.struct1.HighPart
+proc HighPart*(self: var ULARGE_INTEGER): var ULONG {.inline.} = self.struct1.HighPart
 proc `SymbolicLinkReparseBuffer=`*(self: var REPARSE_DATA_BUFFER, x: REPARSE_DATA_BUFFER_UNION1_SymbolicLinkReparseBuffer) {.inline.} = self.union1.SymbolicLinkReparseBuffer = x
 proc SymbolicLinkReparseBuffer*(self: REPARSE_DATA_BUFFER): REPARSE_DATA_BUFFER_UNION1_SymbolicLinkReparseBuffer {.inline.} = self.union1.SymbolicLinkReparseBuffer
+proc SymbolicLinkReparseBuffer*(self: var REPARSE_DATA_BUFFER): var REPARSE_DATA_BUFFER_UNION1_SymbolicLinkReparseBuffer {.inline.} = self.union1.SymbolicLinkReparseBuffer
 proc `MountPointReparseBuffer=`*(self: var REPARSE_DATA_BUFFER, x: REPARSE_DATA_BUFFER_UNION1_MountPointReparseBuffer) {.inline.} = self.union1.MountPointReparseBuffer = x
 proc MountPointReparseBuffer*(self: REPARSE_DATA_BUFFER): REPARSE_DATA_BUFFER_UNION1_MountPointReparseBuffer {.inline.} = self.union1.MountPointReparseBuffer
+proc MountPointReparseBuffer*(self: var REPARSE_DATA_BUFFER): var REPARSE_DATA_BUFFER_UNION1_MountPointReparseBuffer {.inline.} = self.union1.MountPointReparseBuffer
 proc `GenericReparseBuffer=`*(self: var REPARSE_DATA_BUFFER, x: REPARSE_DATA_BUFFER_UNION1_GenericReparseBuffer) {.inline.} = self.union1.GenericReparseBuffer = x
 proc GenericReparseBuffer*(self: REPARSE_DATA_BUFFER): REPARSE_DATA_BUFFER_UNION1_GenericReparseBuffer {.inline.} = self.union1.GenericReparseBuffer
+proc GenericReparseBuffer*(self: var REPARSE_DATA_BUFFER): var REPARSE_DATA_BUFFER_UNION1_GenericReparseBuffer {.inline.} = self.union1.GenericReparseBuffer
 proc `FiberData=`*(self: var NT_TIB, x: PVOID) {.inline.} = self.union1.FiberData = x
 proc FiberData*(self: NT_TIB): PVOID {.inline.} = self.union1.FiberData
+proc FiberData*(self: var NT_TIB): var PVOID {.inline.} = self.union1.FiberData
 proc `Version=`*(self: var NT_TIB, x: DWORD) {.inline.} = self.union1.Version = x
 proc Version*(self: NT_TIB): DWORD {.inline.} = self.union1.Version
+proc Version*(self: var NT_TIB): var DWORD {.inline.} = self.union1.Version
 proc `FiberData=`*(self: var NT_TIB32, x: DWORD) {.inline.} = self.union1.FiberData = x
 proc FiberData*(self: NT_TIB32): DWORD {.inline.} = self.union1.FiberData
+proc FiberData*(self: var NT_TIB32): var DWORD {.inline.} = self.union1.FiberData
 proc `Version=`*(self: var NT_TIB32, x: DWORD) {.inline.} = self.union1.Version = x
 proc Version*(self: NT_TIB32): DWORD {.inline.} = self.union1.Version
+proc Version*(self: var NT_TIB32): var DWORD {.inline.} = self.union1.Version
 proc `FiberData=`*(self: var NT_TIB64, x: DWORD64) {.inline.} = self.union1.FiberData = x
 proc FiberData*(self: NT_TIB64): DWORD64 {.inline.} = self.union1.FiberData
+proc FiberData*(self: var NT_TIB64): var DWORD64 {.inline.} = self.union1.FiberData
 proc `Version=`*(self: var NT_TIB64, x: DWORD) {.inline.} = self.union1.Version = x
 proc Version*(self: NT_TIB64): DWORD {.inline.} = self.union1.Version
+proc Version*(self: var NT_TIB64): var DWORD {.inline.} = self.union1.Version
 proc `RatePercent=`*(self: var RATE_QUOTA_LIMIT, x: DWORD) {.inline.} = self.struct1.RatePercent = x
 proc RatePercent*(self: RATE_QUOTA_LIMIT): DWORD {.inline.} = self.struct1.RatePercent
 proc `Reserved0=`*(self: var RATE_QUOTA_LIMIT, x: DWORD) {.inline.} = self.struct1.Reserved0 = x
 proc Reserved0*(self: RATE_QUOTA_LIMIT): DWORD {.inline.} = self.struct1.Reserved0
 proc `Flags=`*(self: var PROCESS_MITIGATION_ASLR_POLICY, x: DWORD) {.inline.} = self.union1.Flags = x
 proc Flags*(self: PROCESS_MITIGATION_ASLR_POLICY): DWORD {.inline.} = self.union1.Flags
+proc Flags*(self: var PROCESS_MITIGATION_ASLR_POLICY): var DWORD {.inline.} = self.union1.Flags
 proc `EnableBottomUpRandomization=`*(self: var PROCESS_MITIGATION_ASLR_POLICY, x: DWORD) {.inline.} = self.union1.struct1.EnableBottomUpRandomization = x
 proc EnableBottomUpRandomization*(self: PROCESS_MITIGATION_ASLR_POLICY): DWORD {.inline.} = self.union1.struct1.EnableBottomUpRandomization
 proc `EnableForceRelocateImages=`*(self: var PROCESS_MITIGATION_ASLR_POLICY, x: DWORD) {.inline.} = self.union1.struct1.EnableForceRelocateImages = x
@@ -9400,6 +9416,7 @@ proc `ReservedFlags=`*(self: var PROCESS_MITIGATION_ASLR_POLICY, x: DWORD) {.inl
 proc ReservedFlags*(self: PROCESS_MITIGATION_ASLR_POLICY): DWORD {.inline.} = self.union1.struct1.ReservedFlags
 proc `Flags=`*(self: var PROCESS_MITIGATION_DEP_POLICY, x: DWORD) {.inline.} = self.union1.Flags = x
 proc Flags*(self: PROCESS_MITIGATION_DEP_POLICY): DWORD {.inline.} = self.union1.Flags
+proc Flags*(self: var PROCESS_MITIGATION_DEP_POLICY): var DWORD {.inline.} = self.union1.Flags
 proc `Enable=`*(self: var PROCESS_MITIGATION_DEP_POLICY, x: DWORD) {.inline.} = self.union1.struct1.Enable = x
 proc Enable*(self: PROCESS_MITIGATION_DEP_POLICY): DWORD {.inline.} = self.union1.struct1.Enable
 proc `DisableAtlThunkEmulation=`*(self: var PROCESS_MITIGATION_DEP_POLICY, x: DWORD) {.inline.} = self.union1.struct1.DisableAtlThunkEmulation = x
@@ -9408,6 +9425,7 @@ proc `ReservedFlags=`*(self: var PROCESS_MITIGATION_DEP_POLICY, x: DWORD) {.inli
 proc ReservedFlags*(self: PROCESS_MITIGATION_DEP_POLICY): DWORD {.inline.} = self.union1.struct1.ReservedFlags
 proc `Flags=`*(self: var PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY, x: DWORD) {.inline.} = self.union1.Flags = x
 proc Flags*(self: PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY): DWORD {.inline.} = self.union1.Flags
+proc Flags*(self: var PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY): var DWORD {.inline.} = self.union1.Flags
 proc `RaiseExceptionOnInvalidHandleReference=`*(self: var PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY, x: DWORD) {.inline.} = self.union1.struct1.RaiseExceptionOnInvalidHandleReference = x
 proc RaiseExceptionOnInvalidHandleReference*(self: PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY): DWORD {.inline.} = self.union1.struct1.RaiseExceptionOnInvalidHandleReference
 proc `HandleExceptionsPermanentlyEnabled=`*(self: var PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY, x: DWORD) {.inline.} = self.union1.struct1.HandleExceptionsPermanentlyEnabled = x
@@ -9416,34 +9434,45 @@ proc `ReservedFlags=`*(self: var PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY, 
 proc ReservedFlags*(self: PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY): DWORD {.inline.} = self.union1.struct1.ReservedFlags
 proc `Flags=`*(self: var PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY, x: DWORD) {.inline.} = self.union1.Flags = x
 proc Flags*(self: PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY): DWORD {.inline.} = self.union1.Flags
+proc Flags*(self: var PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY): var DWORD {.inline.} = self.union1.Flags
 proc `DisallowWin32kSystemCalls=`*(self: var PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY, x: DWORD) {.inline.} = self.union1.struct1.DisallowWin32kSystemCalls = x
 proc DisallowWin32kSystemCalls*(self: PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY): DWORD {.inline.} = self.union1.struct1.DisallowWin32kSystemCalls
 proc `ReservedFlags=`*(self: var PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY, x: DWORD) {.inline.} = self.union1.struct1.ReservedFlags = x
 proc ReservedFlags*(self: PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY): DWORD {.inline.} = self.union1.struct1.ReservedFlags
 proc `Flags=`*(self: var PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY, x: DWORD) {.inline.} = self.union1.Flags = x
 proc Flags*(self: PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY): DWORD {.inline.} = self.union1.Flags
+proc Flags*(self: var PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY): var DWORD {.inline.} = self.union1.Flags
 proc `DisableExtensionPoints=`*(self: var PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY, x: DWORD) {.inline.} = self.union1.struct1.DisableExtensionPoints = x
 proc DisableExtensionPoints*(self: PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY): DWORD {.inline.} = self.union1.struct1.DisableExtensionPoints
 proc `ReservedFlags=`*(self: var PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY, x: DWORD) {.inline.} = self.union1.struct1.ReservedFlags = x
 proc ReservedFlags*(self: PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY): DWORD {.inline.} = self.union1.struct1.ReservedFlags
 proc `CpuRate=`*(self: var JOBOBJECT_CPU_RATE_CONTROL_INFORMATION, x: DWORD) {.inline.} = self.union1.CpuRate = x
 proc CpuRate*(self: JOBOBJECT_CPU_RATE_CONTROL_INFORMATION): DWORD {.inline.} = self.union1.CpuRate
+proc CpuRate*(self: var JOBOBJECT_CPU_RATE_CONTROL_INFORMATION): var DWORD {.inline.} = self.union1.CpuRate
 proc `Weight=`*(self: var JOBOBJECT_CPU_RATE_CONTROL_INFORMATION, x: DWORD) {.inline.} = self.union1.Weight = x
 proc Weight*(self: JOBOBJECT_CPU_RATE_CONTROL_INFORMATION): DWORD {.inline.} = self.union1.Weight
+proc Weight*(self: var JOBOBJECT_CPU_RATE_CONTROL_INFORMATION): var DWORD {.inline.} = self.union1.Weight
 proc `ProcessorCore=`*(self: var SYSTEM_LOGICAL_PROCESSOR_INFORMATION, x: SYSTEM_LOGICAL_PROCESSOR_INFORMATION_UNION1_ProcessorCore) {.inline.} = self.union1.ProcessorCore = x
 proc ProcessorCore*(self: SYSTEM_LOGICAL_PROCESSOR_INFORMATION): SYSTEM_LOGICAL_PROCESSOR_INFORMATION_UNION1_ProcessorCore {.inline.} = self.union1.ProcessorCore
+proc ProcessorCore*(self: var SYSTEM_LOGICAL_PROCESSOR_INFORMATION): var SYSTEM_LOGICAL_PROCESSOR_INFORMATION_UNION1_ProcessorCore {.inline.} = self.union1.ProcessorCore
 proc `NumaNode=`*(self: var SYSTEM_LOGICAL_PROCESSOR_INFORMATION, x: SYSTEM_LOGICAL_PROCESSOR_INFORMATION_UNION1_NumaNode) {.inline.} = self.union1.NumaNode = x
 proc NumaNode*(self: SYSTEM_LOGICAL_PROCESSOR_INFORMATION): SYSTEM_LOGICAL_PROCESSOR_INFORMATION_UNION1_NumaNode {.inline.} = self.union1.NumaNode
+proc NumaNode*(self: var SYSTEM_LOGICAL_PROCESSOR_INFORMATION): var SYSTEM_LOGICAL_PROCESSOR_INFORMATION_UNION1_NumaNode {.inline.} = self.union1.NumaNode
 proc `Cache=`*(self: var SYSTEM_LOGICAL_PROCESSOR_INFORMATION, x: CACHE_DESCRIPTOR) {.inline.} = self.union1.Cache = x
 proc Cache*(self: SYSTEM_LOGICAL_PROCESSOR_INFORMATION): CACHE_DESCRIPTOR {.inline.} = self.union1.Cache
+proc Cache*(self: var SYSTEM_LOGICAL_PROCESSOR_INFORMATION): var CACHE_DESCRIPTOR {.inline.} = self.union1.Cache
 proc `Reserved=`*(self: var SYSTEM_LOGICAL_PROCESSOR_INFORMATION, x: array[2, ULONGLONG]) {.inline.} = self.union1.Reserved = x
 proc Reserved*(self: SYSTEM_LOGICAL_PROCESSOR_INFORMATION): array[2, ULONGLONG] {.inline.} = self.union1.Reserved
+proc Reserved*(self: var SYSTEM_LOGICAL_PROCESSOR_INFORMATION): var array[2, ULONGLONG] {.inline.} = self.union1.Reserved
 proc `Processor=`*(self: var SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX, x: PROCESSOR_RELATIONSHIP) {.inline.} = self.union1.Processor = x
 proc Processor*(self: SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX): PROCESSOR_RELATIONSHIP {.inline.} = self.union1.Processor
+proc Processor*(self: var SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX): var PROCESSOR_RELATIONSHIP {.inline.} = self.union1.Processor
 proc `NumaNode=`*(self: var SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX, x: NUMA_NODE_RELATIONSHIP) {.inline.} = self.union1.NumaNode = x
 proc NumaNode*(self: SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX): NUMA_NODE_RELATIONSHIP {.inline.} = self.union1.NumaNode
+proc NumaNode*(self: var SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX): var NUMA_NODE_RELATIONSHIP {.inline.} = self.union1.NumaNode
 proc `Cache=`*(self: var SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX, x: CACHE_RELATIONSHIP) {.inline.} = self.union1.Cache = x
 proc Cache*(self: SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX): CACHE_RELATIONSHIP {.inline.} = self.union1.Cache
+proc Cache*(self: var SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX): var CACHE_RELATIONSHIP {.inline.} = self.union1.Cache
 proc `AllowScaling=`*(self: var PROCESSOR_IDLESTATE_POLICY, x: WORD) {.inline.} = self.Flags.struct1.AllowScaling = x
 proc AllowScaling*(self: PROCESSOR_IDLESTATE_POLICY): WORD {.inline.} = self.Flags.struct1.AllowScaling
 proc `Disabled=`*(self: var PROCESSOR_IDLESTATE_POLICY, x: WORD) {.inline.} = self.Flags.struct1.Disabled = x
@@ -9452,6 +9481,7 @@ proc `Reserved=`*(self: var PROCESSOR_IDLESTATE_POLICY, x: WORD) {.inline.} = se
 proc Reserved*(self: PROCESSOR_IDLESTATE_POLICY): WORD {.inline.} = self.Flags.struct1.Reserved
 proc `Spare=`*(self: var PROCESSOR_PERFSTATE_POLICY, x: BYTE) {.inline.} = self.union1.Spare = x
 proc Spare*(self: PROCESSOR_PERFSTATE_POLICY): BYTE {.inline.} = self.union1.Spare
+proc Spare*(self: var PROCESSOR_PERFSTATE_POLICY): var BYTE {.inline.} = self.union1.Spare
 proc `NoDomainAccounting=`*(self: var PROCESSOR_PERFSTATE_POLICY, x: BYTE) {.inline.} = self.union1.Flags.struct1.NoDomainAccounting = x
 proc NoDomainAccounting*(self: PROCESSOR_PERFSTATE_POLICY): BYTE {.inline.} = self.union1.Flags.struct1.NoDomainAccounting
 proc `IncreasePolicy=`*(self: var PROCESSOR_PERFSTATE_POLICY, x: BYTE) {.inline.} = self.union1.Flags.struct1.IncreasePolicy = x
@@ -9462,18 +9492,25 @@ proc `Reserved=`*(self: var PROCESSOR_PERFSTATE_POLICY, x: BYTE) {.inline.} = se
 proc Reserved*(self: PROCESSOR_PERFSTATE_POLICY): BYTE {.inline.} = self.union1.Flags.struct1.Reserved
 proc `Flags=`*(self: var PROCESSOR_PERFSTATE_POLICY, x: PROCESSOR_PERFSTATE_POLICY_UNION1_Flags) {.inline.} = self.union1.Flags = x
 proc Flags*(self: PROCESSOR_PERFSTATE_POLICY): PROCESSOR_PERFSTATE_POLICY_UNION1_Flags {.inline.} = self.union1.Flags
+proc Flags*(self: var PROCESSOR_PERFSTATE_POLICY): var PROCESSOR_PERFSTATE_POLICY_UNION1_Flags {.inline.} = self.union1.Flags
 proc `TokenDef=`*(self: var IMAGE_AUX_SYMBOL_EX, x: IMAGE_AUX_SYMBOL_TOKEN_DEF) {.inline.} = self.struct4.TokenDef = x
 proc TokenDef*(self: IMAGE_AUX_SYMBOL_EX): IMAGE_AUX_SYMBOL_TOKEN_DEF {.inline.} = self.struct4.TokenDef
+proc TokenDef*(self: var IMAGE_AUX_SYMBOL_EX): var IMAGE_AUX_SYMBOL_TOKEN_DEF {.inline.} = self.struct4.TokenDef
 proc `rgbReserved=`*(self: var IMAGE_AUX_SYMBOL_EX, x: array[2, BYTE]) {.inline.} = self.struct4.rgbReserved = x
 proc rgbReserved*(self: IMAGE_AUX_SYMBOL_EX): array[2, BYTE] {.inline.} = self.struct4.rgbReserved
+proc rgbReserved*(self: var IMAGE_AUX_SYMBOL_EX): var array[2, BYTE] {.inline.} = self.struct4.rgbReserved
 proc `VirtualAddress=`*(self: var IMAGE_RELOCATION, x: DWORD) {.inline.} = self.union1.VirtualAddress = x
 proc VirtualAddress*(self: IMAGE_RELOCATION): DWORD {.inline.} = self.union1.VirtualAddress
+proc VirtualAddress*(self: var IMAGE_RELOCATION): var DWORD {.inline.} = self.union1.VirtualAddress
 proc `RelocCount=`*(self: var IMAGE_RELOCATION, x: DWORD) {.inline.} = self.union1.RelocCount = x
 proc RelocCount*(self: IMAGE_RELOCATION): DWORD {.inline.} = self.union1.RelocCount
+proc RelocCount*(self: var IMAGE_RELOCATION): var DWORD {.inline.} = self.union1.RelocCount
 proc `Characteristics=`*(self: var IMAGE_IMPORT_DESCRIPTOR, x: DWORD) {.inline.} = self.union1.Characteristics = x
 proc Characteristics*(self: IMAGE_IMPORT_DESCRIPTOR): DWORD {.inline.} = self.union1.Characteristics
+proc Characteristics*(self: var IMAGE_IMPORT_DESCRIPTOR): var DWORD {.inline.} = self.union1.Characteristics
 proc `OriginalFirstThunk=`*(self: var IMAGE_IMPORT_DESCRIPTOR, x: DWORD) {.inline.} = self.union1.OriginalFirstThunk = x
 proc OriginalFirstThunk*(self: IMAGE_IMPORT_DESCRIPTOR): DWORD {.inline.} = self.union1.OriginalFirstThunk
+proc OriginalFirstThunk*(self: var IMAGE_IMPORT_DESCRIPTOR): var DWORD {.inline.} = self.union1.OriginalFirstThunk
 proc `RvaBased=`*(self: var IMAGE_DELAYLOAD_DESCRIPTOR, x: DWORD) {.inline.} = self.Attributes.struct1.RvaBased = x
 proc RvaBased*(self: IMAGE_DELAYLOAD_DESCRIPTOR): DWORD {.inline.} = self.Attributes.struct1.RvaBased
 proc `ReservedAttributes=`*(self: var IMAGE_DELAYLOAD_DESCRIPTOR, x: DWORD) {.inline.} = self.Attributes.struct1.ReservedAttributes = x
@@ -9484,34 +9521,47 @@ proc `NameIsString=`*(self: var IMAGE_RESOURCE_DIRECTORY_ENTRY, x: DWORD) {.inli
 proc NameIsString*(self: IMAGE_RESOURCE_DIRECTORY_ENTRY): DWORD {.inline.} = self.union1.struct1.NameIsString
 proc `Name=`*(self: var IMAGE_RESOURCE_DIRECTORY_ENTRY, x: DWORD) {.inline.} = self.union1.Name = x
 proc Name*(self: IMAGE_RESOURCE_DIRECTORY_ENTRY): DWORD {.inline.} = self.union1.Name
+proc Name*(self: var IMAGE_RESOURCE_DIRECTORY_ENTRY): var DWORD {.inline.} = self.union1.Name
 proc `Id=`*(self: var IMAGE_RESOURCE_DIRECTORY_ENTRY, x: WORD) {.inline.} = self.union1.Id = x
 proc Id*(self: IMAGE_RESOURCE_DIRECTORY_ENTRY): WORD {.inline.} = self.union1.Id
+proc Id*(self: var IMAGE_RESOURCE_DIRECTORY_ENTRY): var WORD {.inline.} = self.union1.Id
 proc `OffsetToData=`*(self: var IMAGE_RESOURCE_DIRECTORY_ENTRY, x: DWORD) {.inline.} = self.union2.OffsetToData = x
 proc OffsetToData*(self: IMAGE_RESOURCE_DIRECTORY_ENTRY): DWORD {.inline.} = self.union2.OffsetToData
+proc OffsetToData*(self: var IMAGE_RESOURCE_DIRECTORY_ENTRY): var DWORD {.inline.} = self.union2.OffsetToData
 proc `OffsetToDirectory=`*(self: var IMAGE_RESOURCE_DIRECTORY_ENTRY, x: DWORD) {.inline.} = self.union2.struct1.OffsetToDirectory = x
 proc OffsetToDirectory*(self: IMAGE_RESOURCE_DIRECTORY_ENTRY): DWORD {.inline.} = self.union2.struct1.OffsetToDirectory
 proc `DataIsDirectory=`*(self: var IMAGE_RESOURCE_DIRECTORY_ENTRY, x: DWORD) {.inline.} = self.union2.struct1.DataIsDirectory = x
 proc DataIsDirectory*(self: IMAGE_RESOURCE_DIRECTORY_ENTRY): DWORD {.inline.} = self.union2.struct1.DataIsDirectory
 proc `EndOfPrologue=`*(self: var IMAGE_FUNCTION_ENTRY64, x: ULONGLONG) {.inline.} = self.union1.EndOfPrologue = x
 proc EndOfPrologue*(self: IMAGE_FUNCTION_ENTRY64): ULONGLONG {.inline.} = self.union1.EndOfPrologue
+proc EndOfPrologue*(self: var IMAGE_FUNCTION_ENTRY64): var ULONGLONG {.inline.} = self.union1.EndOfPrologue
 proc `UnwindInfoAddress=`*(self: var IMAGE_FUNCTION_ENTRY64, x: ULONGLONG) {.inline.} = self.union1.UnwindInfoAddress = x
 proc UnwindInfoAddress*(self: IMAGE_FUNCTION_ENTRY64): ULONGLONG {.inline.} = self.union1.UnwindInfoAddress
+proc UnwindInfoAddress*(self: var IMAGE_FUNCTION_ENTRY64): var ULONGLONG {.inline.} = self.union1.UnwindInfoAddress
 proc `Ordinal=`*(self: var IMPORT_OBJECT_HEADER, x: WORD) {.inline.} = self.union1.Ordinal = x
 proc Ordinal*(self: IMPORT_OBJECT_HEADER): WORD {.inline.} = self.union1.Ordinal
+proc Ordinal*(self: var IMPORT_OBJECT_HEADER): var WORD {.inline.} = self.union1.Ordinal
 proc `Hint=`*(self: var IMPORT_OBJECT_HEADER, x: WORD) {.inline.} = self.union1.Hint = x
 proc Hint*(self: IMPORT_OBJECT_HEADER): WORD {.inline.} = self.union1.Hint
+proc Hint*(self: var IMPORT_OBJECT_HEADER): var WORD {.inline.} = self.union1.Hint
 proc `EntryPointToken=`*(self: var IMAGE_COR20_HEADER, x: DWORD) {.inline.} = self.union1.EntryPointToken = x
 proc EntryPointToken*(self: IMAGE_COR20_HEADER): DWORD {.inline.} = self.union1.EntryPointToken
+proc EntryPointToken*(self: var IMAGE_COR20_HEADER): var DWORD {.inline.} = self.union1.EntryPointToken
 proc `EntryPointRVA=`*(self: var IMAGE_COR20_HEADER, x: DWORD) {.inline.} = self.union1.EntryPointRVA = x
 proc EntryPointRVA*(self: IMAGE_COR20_HEADER): DWORD {.inline.} = self.union1.EntryPointRVA
+proc EntryPointRVA*(self: var IMAGE_COR20_HEADER): var DWORD {.inline.} = self.union1.EntryPointRVA
 proc `CheckSum=`*(self: var LDR_DATA_TABLE_ENTRY, x: ULONG) {.inline.} = self.union1.CheckSum = x
 proc CheckSum*(self: LDR_DATA_TABLE_ENTRY): ULONG {.inline.} = self.union1.CheckSum
+proc CheckSum*(self: var LDR_DATA_TABLE_ENTRY): var ULONG {.inline.} = self.union1.CheckSum
 proc `Reserved6=`*(self: var LDR_DATA_TABLE_ENTRY, x: PVOID) {.inline.} = self.union1.Reserved6 = x
 proc Reserved6*(self: LDR_DATA_TABLE_ENTRY): PVOID {.inline.} = self.union1.Reserved6
+proc Reserved6*(self: var LDR_DATA_TABLE_ENTRY): var PVOID {.inline.} = self.union1.Reserved6
 proc `Status=`*(self: var IO_STATUS_BLOCK, x: NTSTATUS) {.inline.} = self.union1.Status = x
 proc Status*(self: IO_STATUS_BLOCK): NTSTATUS {.inline.} = self.union1.Status
+proc Status*(self: var IO_STATUS_BLOCK): var NTSTATUS {.inline.} = self.union1.Status
 proc `Pointer=`*(self: var IO_STATUS_BLOCK, x: PVOID) {.inline.} = self.union1.Pointer = x
 proc Pointer*(self: IO_STATUS_BLOCK): PVOID {.inline.} = self.union1.Pointer
+proc Pointer*(self: var IO_STATUS_BLOCK): var PVOID {.inline.} = self.union1.Pointer
 when winimUnicode:
   type
     PCZZTSTR* = PCZZWSTR
@@ -9667,48 +9717,70 @@ when winimCpu64:
   template IMAGE_SNAP_BY_ORDINAL*(Ordinal: untyped): bool = (Ordinal and IMAGE_ORDINAL_FLAG64) != 0
   proc `FltSave=`*(self: var CONTEXT, x: XMM_SAVE_AREA32) {.inline.} = self.union1.FltSave = x
   proc FltSave*(self: CONTEXT): XMM_SAVE_AREA32 {.inline.} = self.union1.FltSave
+  proc FltSave*(self: var CONTEXT): var XMM_SAVE_AREA32 {.inline.} = self.union1.FltSave
   proc `FloatSave=`*(self: var CONTEXT, x: XMM_SAVE_AREA32) {.inline.} = self.union1.FloatSave = x
   proc FloatSave*(self: CONTEXT): XMM_SAVE_AREA32 {.inline.} = self.union1.FloatSave
+  proc FloatSave*(self: var CONTEXT): var XMM_SAVE_AREA32 {.inline.} = self.union1.FloatSave
   proc `Header=`*(self: var CONTEXT, x: array[2, M128A]) {.inline.} = self.union1.struct1.Header = x
   proc Header*(self: CONTEXT): array[2, M128A] {.inline.} = self.union1.struct1.Header
+  proc Header*(self: var CONTEXT): var array[2, M128A] {.inline.} = self.union1.struct1.Header
   proc `Legacy=`*(self: var CONTEXT, x: array[8, M128A]) {.inline.} = self.union1.struct1.Legacy = x
   proc Legacy*(self: CONTEXT): array[8, M128A] {.inline.} = self.union1.struct1.Legacy
+  proc Legacy*(self: var CONTEXT): var array[8, M128A] {.inline.} = self.union1.struct1.Legacy
   proc `Xmm0=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm0 = x
   proc Xmm0*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm0
+  proc Xmm0*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm0
   proc `Xmm1=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm1 = x
   proc Xmm1*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm1
+  proc Xmm1*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm1
   proc `Xmm2=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm2 = x
   proc Xmm2*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm2
+  proc Xmm2*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm2
   proc `Xmm3=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm3 = x
   proc Xmm3*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm3
+  proc Xmm3*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm3
   proc `Xmm4=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm4 = x
   proc Xmm4*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm4
+  proc Xmm4*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm4
   proc `Xmm5=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm5 = x
   proc Xmm5*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm5
+  proc Xmm5*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm5
   proc `Xmm6=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm6 = x
   proc Xmm6*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm6
+  proc Xmm6*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm6
   proc `Xmm7=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm7 = x
   proc Xmm7*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm7
+  proc Xmm7*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm7
   proc `Xmm8=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm8 = x
   proc Xmm8*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm8
+  proc Xmm8*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm8
   proc `Xmm9=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm9 = x
   proc Xmm9*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm9
+  proc Xmm9*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm9
   proc `Xmm10=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm10 = x
   proc Xmm10*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm10
+  proc Xmm10*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm10
   proc `Xmm11=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm11 = x
   proc Xmm11*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm11
+  proc Xmm11*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm11
   proc `Xmm12=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm12 = x
   proc Xmm12*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm12
+  proc Xmm12*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm12
   proc `Xmm13=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm13 = x
   proc Xmm13*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm13
+  proc Xmm13*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm13
   proc `Xmm14=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm14 = x
   proc Xmm14*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm14
+  proc Xmm14*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm14
   proc `Xmm15=`*(self: var CONTEXT, x: M128A) {.inline.} = self.union1.struct1.Xmm15 = x
   proc Xmm15*(self: CONTEXT): M128A {.inline.} = self.union1.struct1.Xmm15
+  proc Xmm15*(self: var CONTEXT): var M128A {.inline.} = self.union1.struct1.Xmm15
   proc `Alignment=`*(self: var SLIST_HEADER, x: ULONGLONG) {.inline.} = self.struct1.Alignment = x
   proc Alignment*(self: SLIST_HEADER): ULONGLONG {.inline.} = self.struct1.Alignment
+  proc Alignment*(self: var SLIST_HEADER): var ULONGLONG {.inline.} = self.struct1.Alignment
   proc `Region=`*(self: var SLIST_HEADER, x: ULONGLONG) {.inline.} = self.struct1.Region = x
   proc Region*(self: SLIST_HEADER): ULONGLONG {.inline.} = self.struct1.Region
+  proc Region*(self: var SLIST_HEADER): var ULONGLONG {.inline.} = self.struct1.Region
 when winimCpu32:
   type
     HALF_PTR* = int16
@@ -9742,7 +9814,10 @@ when winimCpu32:
   template IMAGE_SNAP_BY_ORDINAL*(Ordinal: untyped): bool = (Ordinal and IMAGE_ORDINAL_FLAG32) != 0
   proc `Next=`*(self: var SLIST_HEADER, x: SLIST_ENTRY) {.inline.} = self.struct1.Next = x
   proc Next*(self: SLIST_HEADER): SLIST_ENTRY {.inline.} = self.struct1.Next
+  proc Next*(self: var SLIST_HEADER): var SLIST_ENTRY {.inline.} = self.struct1.Next
   proc `Depth=`*(self: var SLIST_HEADER, x: WORD) {.inline.} = self.struct1.Depth = x
   proc Depth*(self: SLIST_HEADER): WORD {.inline.} = self.struct1.Depth
+  proc Depth*(self: var SLIST_HEADER): var WORD {.inline.} = self.struct1.Depth
   proc `Sequence=`*(self: var SLIST_HEADER, x: WORD) {.inline.} = self.struct1.Sequence = x
   proc Sequence*(self: SLIST_HEADER): WORD {.inline.} = self.struct1.Sequence
+  proc Sequence*(self: var SLIST_HEADER): var WORD {.inline.} = self.struct1.Sequence

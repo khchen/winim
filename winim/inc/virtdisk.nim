@@ -225,31 +225,46 @@ proc OpenVirtualDisk*(VirtualStorageType: PVIRTUAL_STORAGE_TYPE, Path: PCWSTR, V
 proc SetVirtualDiskInformation*(VirtualDiskHandle: HANDLE, VirtualDiskInfo: PSET_VIRTUAL_DISK_INFO): DWORD {.winapi, xpincompatible, stdcall, dynlib: "virtdisk", importc.}
 proc `Version1=`*(self: var ATTACH_VIRTUAL_DISK_PARAMETERS, x: ATTACH_VIRTUAL_DISK_PARAMETERS_UNION1_Version1) {.inline.} = self.union1.Version1 = x
 proc Version1*(self: ATTACH_VIRTUAL_DISK_PARAMETERS): ATTACH_VIRTUAL_DISK_PARAMETERS_UNION1_Version1 {.inline.} = self.union1.Version1
+proc Version1*(self: var ATTACH_VIRTUAL_DISK_PARAMETERS): var ATTACH_VIRTUAL_DISK_PARAMETERS_UNION1_Version1 {.inline.} = self.union1.Version1
 proc `Version1=`*(self: var COMPACT_VIRTUAL_DISK_PARAMETERS, x: COMPACT_VIRTUAL_DISK_PARAMETERS_UNION1_Version1) {.inline.} = self.union1.Version1 = x
 proc Version1*(self: COMPACT_VIRTUAL_DISK_PARAMETERS): COMPACT_VIRTUAL_DISK_PARAMETERS_UNION1_Version1 {.inline.} = self.union1.Version1
+proc Version1*(self: var COMPACT_VIRTUAL_DISK_PARAMETERS): var COMPACT_VIRTUAL_DISK_PARAMETERS_UNION1_Version1 {.inline.} = self.union1.Version1
 proc `Version1=`*(self: var CREATE_VIRTUAL_DISK_PARAMETERS, x: CREATE_VIRTUAL_DISK_PARAMETERS_UNION1_Version1) {.inline.} = self.union1.Version1 = x
 proc Version1*(self: CREATE_VIRTUAL_DISK_PARAMETERS): CREATE_VIRTUAL_DISK_PARAMETERS_UNION1_Version1 {.inline.} = self.union1.Version1
+proc Version1*(self: var CREATE_VIRTUAL_DISK_PARAMETERS): var CREATE_VIRTUAL_DISK_PARAMETERS_UNION1_Version1 {.inline.} = self.union1.Version1
 proc `Version1=`*(self: var EXPAND_VIRTUAL_DISK_PARAMETERS, x: EXPAND_VIRTUAL_DISK_PARAMETERS_UNION1_Version1) {.inline.} = self.union1.Version1 = x
 proc Version1*(self: EXPAND_VIRTUAL_DISK_PARAMETERS): EXPAND_VIRTUAL_DISK_PARAMETERS_UNION1_Version1 {.inline.} = self.union1.Version1
+proc Version1*(self: var EXPAND_VIRTUAL_DISK_PARAMETERS): var EXPAND_VIRTUAL_DISK_PARAMETERS_UNION1_Version1 {.inline.} = self.union1.Version1
 proc `Identifier=`*(self: var GET_VIRTUAL_DISK_INFO, x: GUID) {.inline.} = self.union1.Identifier = x
 proc Identifier*(self: GET_VIRTUAL_DISK_INFO): GUID {.inline.} = self.union1.Identifier
+proc Identifier*(self: var GET_VIRTUAL_DISK_INFO): var GUID {.inline.} = self.union1.Identifier
 proc `ParentLocation=`*(self: var GET_VIRTUAL_DISK_INFO, x: GET_VIRTUAL_DISK_INFO_UNION1_ParentLocation) {.inline.} = self.union1.ParentLocation = x
 proc ParentLocation*(self: GET_VIRTUAL_DISK_INFO): GET_VIRTUAL_DISK_INFO_UNION1_ParentLocation {.inline.} = self.union1.ParentLocation
+proc ParentLocation*(self: var GET_VIRTUAL_DISK_INFO): var GET_VIRTUAL_DISK_INFO_UNION1_ParentLocation {.inline.} = self.union1.ParentLocation
 proc `ParentIdentifier=`*(self: var GET_VIRTUAL_DISK_INFO, x: GUID) {.inline.} = self.union1.ParentIdentifier = x
 proc ParentIdentifier*(self: GET_VIRTUAL_DISK_INFO): GUID {.inline.} = self.union1.ParentIdentifier
+proc ParentIdentifier*(self: var GET_VIRTUAL_DISK_INFO): var GUID {.inline.} = self.union1.ParentIdentifier
 proc `ParentTimestamp=`*(self: var GET_VIRTUAL_DISK_INFO, x: ULONG) {.inline.} = self.union1.ParentTimestamp = x
 proc ParentTimestamp*(self: GET_VIRTUAL_DISK_INFO): ULONG {.inline.} = self.union1.ParentTimestamp
+proc ParentTimestamp*(self: var GET_VIRTUAL_DISK_INFO): var ULONG {.inline.} = self.union1.ParentTimestamp
 proc `ProviderSubtype=`*(self: var GET_VIRTUAL_DISK_INFO, x: ULONG) {.inline.} = self.union1.ProviderSubtype = x
 proc ProviderSubtype*(self: GET_VIRTUAL_DISK_INFO): ULONG {.inline.} = self.union1.ProviderSubtype
+proc ProviderSubtype*(self: var GET_VIRTUAL_DISK_INFO): var ULONG {.inline.} = self.union1.ProviderSubtype
 proc `Version1=`*(self: var MERGE_VIRTUAL_DISK_PARAMETERS, x: MERGE_VIRTUAL_DISK_PARAMETERS_UNION1_Version1) {.inline.} = self.union1.Version1 = x
 proc Version1*(self: MERGE_VIRTUAL_DISK_PARAMETERS): MERGE_VIRTUAL_DISK_PARAMETERS_UNION1_Version1 {.inline.} = self.union1.Version1
+proc Version1*(self: var MERGE_VIRTUAL_DISK_PARAMETERS): var MERGE_VIRTUAL_DISK_PARAMETERS_UNION1_Version1 {.inline.} = self.union1.Version1
 proc `Version1=`*(self: var OPEN_VIRTUAL_DISK_PARAMETERS, x: OPEN_VIRTUAL_DISK_PARAMETERS_UNION1_Version1) {.inline.} = self.union1.Version1 = x
 proc Version1*(self: OPEN_VIRTUAL_DISK_PARAMETERS): OPEN_VIRTUAL_DISK_PARAMETERS_UNION1_Version1 {.inline.} = self.union1.Version1
+proc Version1*(self: var OPEN_VIRTUAL_DISK_PARAMETERS): var OPEN_VIRTUAL_DISK_PARAMETERS_UNION1_Version1 {.inline.} = self.union1.Version1
 proc `ParentFilePath=`*(self: var SET_VIRTUAL_DISK_INFO, x: PCWSTR) {.inline.} = self.union1.ParentFilePath = x
 proc ParentFilePath*(self: SET_VIRTUAL_DISK_INFO): PCWSTR {.inline.} = self.union1.ParentFilePath
+proc ParentFilePath*(self: var SET_VIRTUAL_DISK_INFO): var PCWSTR {.inline.} = self.union1.ParentFilePath
 proc `UniqueIdentifier=`*(self: var SET_VIRTUAL_DISK_INFO, x: GUID) {.inline.} = self.union1.UniqueIdentifier = x
 proc UniqueIdentifier*(self: SET_VIRTUAL_DISK_INFO): GUID {.inline.} = self.union1.UniqueIdentifier
+proc UniqueIdentifier*(self: var SET_VIRTUAL_DISK_INFO): var GUID {.inline.} = self.union1.UniqueIdentifier
 proc `Version1Entries=`*(self: var STORAGE_DEPENDENCY_INFO, x: array[1, STORAGE_DEPENDENCY_INFO_TYPE_1]) {.inline.} = self.union1.Version1Entries = x
 proc Version1Entries*(self: STORAGE_DEPENDENCY_INFO): array[1, STORAGE_DEPENDENCY_INFO_TYPE_1] {.inline.} = self.union1.Version1Entries
+proc Version1Entries*(self: var STORAGE_DEPENDENCY_INFO): var array[1, STORAGE_DEPENDENCY_INFO_TYPE_1] {.inline.} = self.union1.Version1Entries
 proc `Version2Entries=`*(self: var STORAGE_DEPENDENCY_INFO, x: array[1, STORAGE_DEPENDENCY_INFO_TYPE_2]) {.inline.} = self.union1.Version2Entries = x
 proc Version2Entries*(self: STORAGE_DEPENDENCY_INFO): array[1, STORAGE_DEPENDENCY_INFO_TYPE_2] {.inline.} = self.union1.Version2Entries
+proc Version2Entries*(self: var STORAGE_DEPENDENCY_INFO): var array[1, STORAGE_DEPENDENCY_INFO_TYPE_2] {.inline.} = self.union1.Version2Entries

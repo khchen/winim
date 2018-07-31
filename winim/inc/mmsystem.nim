@@ -4439,32 +4439,46 @@ proc mciGetCreatorTask*(mciId: MCIDEVICEID): HTASK {.winapi, stdcall, dynlib: "w
 proc mciGetYieldProc*(mciId: MCIDEVICEID, pdwYieldData: LPDWORD): YIELDPROC {.winapi, stdcall, dynlib: "winmm", importc.}
 proc `lMinimum=`*(self: var MIXERCONTROLA, x: LONG) {.inline.} = self.Bounds.struct1.lMinimum = x
 proc lMinimum*(self: MIXERCONTROLA): LONG {.inline.} = self.Bounds.struct1.lMinimum
+proc lMinimum*(self: var MIXERCONTROLA): var LONG {.inline.} = self.Bounds.struct1.lMinimum
 proc `lMaximum=`*(self: var MIXERCONTROLA, x: LONG) {.inline.} = self.Bounds.struct1.lMaximum = x
 proc lMaximum*(self: MIXERCONTROLA): LONG {.inline.} = self.Bounds.struct1.lMaximum
+proc lMaximum*(self: var MIXERCONTROLA): var LONG {.inline.} = self.Bounds.struct1.lMaximum
 proc `dwMinimum=`*(self: var MIXERCONTROLA, x: DWORD) {.inline.} = self.Bounds.struct2.dwMinimum = x
 proc dwMinimum*(self: MIXERCONTROLA): DWORD {.inline.} = self.Bounds.struct2.dwMinimum
+proc dwMinimum*(self: var MIXERCONTROLA): var DWORD {.inline.} = self.Bounds.struct2.dwMinimum
 proc `dwMaximum=`*(self: var MIXERCONTROLA, x: DWORD) {.inline.} = self.Bounds.struct2.dwMaximum = x
 proc dwMaximum*(self: MIXERCONTROLA): DWORD {.inline.} = self.Bounds.struct2.dwMaximum
+proc dwMaximum*(self: var MIXERCONTROLA): var DWORD {.inline.} = self.Bounds.struct2.dwMaximum
 proc `lMinimum=`*(self: var MIXERCONTROLW, x: LONG) {.inline.} = self.Bounds.struct1.lMinimum = x
 proc lMinimum*(self: MIXERCONTROLW): LONG {.inline.} = self.Bounds.struct1.lMinimum
+proc lMinimum*(self: var MIXERCONTROLW): var LONG {.inline.} = self.Bounds.struct1.lMinimum
 proc `lMaximum=`*(self: var MIXERCONTROLW, x: LONG) {.inline.} = self.Bounds.struct1.lMaximum = x
 proc lMaximum*(self: MIXERCONTROLW): LONG {.inline.} = self.Bounds.struct1.lMaximum
+proc lMaximum*(self: var MIXERCONTROLW): var LONG {.inline.} = self.Bounds.struct1.lMaximum
 proc `dwMinimum=`*(self: var MIXERCONTROLW, x: DWORD) {.inline.} = self.Bounds.struct2.dwMinimum = x
 proc dwMinimum*(self: MIXERCONTROLW): DWORD {.inline.} = self.Bounds.struct2.dwMinimum
+proc dwMinimum*(self: var MIXERCONTROLW): var DWORD {.inline.} = self.Bounds.struct2.dwMinimum
 proc `dwMaximum=`*(self: var MIXERCONTROLW, x: DWORD) {.inline.} = self.Bounds.struct2.dwMaximum = x
 proc dwMaximum*(self: MIXERCONTROLW): DWORD {.inline.} = self.Bounds.struct2.dwMaximum
+proc dwMaximum*(self: var MIXERCONTROLW): var DWORD {.inline.} = self.Bounds.struct2.dwMaximum
 proc `dwControlID=`*(self: var MIXERLINECONTROLSA, x: DWORD) {.inline.} = self.union1.dwControlID = x
 proc dwControlID*(self: MIXERLINECONTROLSA): DWORD {.inline.} = self.union1.dwControlID
+proc dwControlID*(self: var MIXERLINECONTROLSA): var DWORD {.inline.} = self.union1.dwControlID
 proc `dwControlType=`*(self: var MIXERLINECONTROLSA, x: DWORD) {.inline.} = self.union1.dwControlType = x
 proc dwControlType*(self: MIXERLINECONTROLSA): DWORD {.inline.} = self.union1.dwControlType
+proc dwControlType*(self: var MIXERLINECONTROLSA): var DWORD {.inline.} = self.union1.dwControlType
 proc `dwControlID=`*(self: var MIXERLINECONTROLSW, x: DWORD) {.inline.} = self.union1.dwControlID = x
 proc dwControlID*(self: MIXERLINECONTROLSW): DWORD {.inline.} = self.union1.dwControlID
+proc dwControlID*(self: var MIXERLINECONTROLSW): var DWORD {.inline.} = self.union1.dwControlID
 proc `dwControlType=`*(self: var MIXERLINECONTROLSW, x: DWORD) {.inline.} = self.union1.dwControlType = x
 proc dwControlType*(self: MIXERLINECONTROLSW): DWORD {.inline.} = self.union1.dwControlType
+proc dwControlType*(self: var MIXERLINECONTROLSW): var DWORD {.inline.} = self.union1.dwControlType
 proc `hwndOwner=`*(self: var MIXERCONTROLDETAILS, x: HWND) {.inline.} = self.union1.hwndOwner = x
 proc hwndOwner*(self: MIXERCONTROLDETAILS): HWND {.inline.} = self.union1.hwndOwner
+proc hwndOwner*(self: var MIXERCONTROLDETAILS): var HWND {.inline.} = self.union1.hwndOwner
 proc `cMultipleItems=`*(self: var MIXERCONTROLDETAILS, x: DWORD) {.inline.} = self.union1.cMultipleItems = x
 proc cMultipleItems*(self: MIXERCONTROLDETAILS): DWORD {.inline.} = self.union1.cMultipleItems
+proc cMultipleItems*(self: var MIXERCONTROLDETAILS): var DWORD {.inline.} = self.union1.cMultipleItems
 when winimUnicode:
   type
     WAVEOUTCAPS* = WAVEOUTCAPSW

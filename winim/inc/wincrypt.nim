@@ -5124,136 +5124,202 @@ proc CryptUnprotectMemory*(pDataIn: LPVOID, cbDataIn: DWORD, dwFlags: DWORD): WI
 proc CryptUpdateProtectedState*(pOldSid: PSID, pwszOldPassword: LPCWSTR, dwFlags: DWORD, pdwSuccessCount: ptr DWORD, pdwFailureCount: ptr DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "crypt32", importc.}
 proc `pOtherName=`*(self: var CERT_ALT_NAME_ENTRY, x: PCERT_OTHER_NAME) {.inline.} = self.union1.pOtherName = x
 proc pOtherName*(self: CERT_ALT_NAME_ENTRY): PCERT_OTHER_NAME {.inline.} = self.union1.pOtherName
+proc pOtherName*(self: var CERT_ALT_NAME_ENTRY): var PCERT_OTHER_NAME {.inline.} = self.union1.pOtherName
 proc `pwszRfc822Name=`*(self: var CERT_ALT_NAME_ENTRY, x: LPWSTR) {.inline.} = self.union1.pwszRfc822Name = x
 proc pwszRfc822Name*(self: CERT_ALT_NAME_ENTRY): LPWSTR {.inline.} = self.union1.pwszRfc822Name
+proc pwszRfc822Name*(self: var CERT_ALT_NAME_ENTRY): var LPWSTR {.inline.} = self.union1.pwszRfc822Name
 proc `pwszDNSName=`*(self: var CERT_ALT_NAME_ENTRY, x: LPWSTR) {.inline.} = self.union1.pwszDNSName = x
 proc pwszDNSName*(self: CERT_ALT_NAME_ENTRY): LPWSTR {.inline.} = self.union1.pwszDNSName
+proc pwszDNSName*(self: var CERT_ALT_NAME_ENTRY): var LPWSTR {.inline.} = self.union1.pwszDNSName
 proc `DirectoryName=`*(self: var CERT_ALT_NAME_ENTRY, x: CERT_NAME_BLOB) {.inline.} = self.union1.DirectoryName = x
 proc DirectoryName*(self: CERT_ALT_NAME_ENTRY): CERT_NAME_BLOB {.inline.} = self.union1.DirectoryName
+proc DirectoryName*(self: var CERT_ALT_NAME_ENTRY): var CERT_NAME_BLOB {.inline.} = self.union1.DirectoryName
 proc `pwszURL=`*(self: var CERT_ALT_NAME_ENTRY, x: LPWSTR) {.inline.} = self.union1.pwszURL = x
 proc pwszURL*(self: CERT_ALT_NAME_ENTRY): LPWSTR {.inline.} = self.union1.pwszURL
+proc pwszURL*(self: var CERT_ALT_NAME_ENTRY): var LPWSTR {.inline.} = self.union1.pwszURL
 proc `IPAddress=`*(self: var CERT_ALT_NAME_ENTRY, x: CRYPT_DATA_BLOB) {.inline.} = self.union1.IPAddress = x
 proc IPAddress*(self: CERT_ALT_NAME_ENTRY): CRYPT_DATA_BLOB {.inline.} = self.union1.IPAddress
+proc IPAddress*(self: var CERT_ALT_NAME_ENTRY): var CRYPT_DATA_BLOB {.inline.} = self.union1.IPAddress
 proc `pszRegisteredID=`*(self: var CERT_ALT_NAME_ENTRY, x: LPSTR) {.inline.} = self.union1.pszRegisteredID = x
 proc pszRegisteredID*(self: CERT_ALT_NAME_ENTRY): LPSTR {.inline.} = self.union1.pszRegisteredID
+proc pszRegisteredID*(self: var CERT_ALT_NAME_ENTRY): var LPSTR {.inline.} = self.union1.pszRegisteredID
 proc `FullName=`*(self: var CRL_DIST_POINT_NAME, x: CERT_ALT_NAME_INFO) {.inline.} = self.union1.FullName = x
 proc FullName*(self: CRL_DIST_POINT_NAME): CERT_ALT_NAME_INFO {.inline.} = self.union1.FullName
+proc FullName*(self: var CRL_DIST_POINT_NAME): var CERT_ALT_NAME_INFO {.inline.} = self.union1.FullName
 proc `pTaggedCertRequest=`*(self: var CMC_TAGGED_REQUEST, x: PCMC_TAGGED_CERT_REQUEST) {.inline.} = self.union1.pTaggedCertRequest = x
 proc pTaggedCertRequest*(self: CMC_TAGGED_REQUEST): PCMC_TAGGED_CERT_REQUEST {.inline.} = self.union1.pTaggedCertRequest
+proc pTaggedCertRequest*(self: var CMC_TAGGED_REQUEST): var PCMC_TAGGED_CERT_REQUEST {.inline.} = self.union1.pTaggedCertRequest
 proc `dwFailInfo=`*(self: var CMC_STATUS_INFO, x: DWORD) {.inline.} = self.union1.dwFailInfo = x
 proc dwFailInfo*(self: CMC_STATUS_INFO): DWORD {.inline.} = self.union1.dwFailInfo
+proc dwFailInfo*(self: var CMC_STATUS_INFO): var DWORD {.inline.} = self.union1.dwFailInfo
 proc `pPendInfo=`*(self: var CMC_STATUS_INFO, x: PCMC_PEND_INFO) {.inline.} = self.union1.pPendInfo = x
 proc pPendInfo*(self: CMC_STATUS_INFO): PCMC_PEND_INFO {.inline.} = self.union1.pPendInfo
+proc pPendInfo*(self: var CMC_STATUS_INFO): var PCMC_PEND_INFO {.inline.} = self.union1.pPendInfo
 proc `dwNumBits=`*(self: var CERT_LOGOTYPE_IMAGE_INFO, x: DWORD) {.inline.} = self.union1.dwNumBits = x
 proc dwNumBits*(self: CERT_LOGOTYPE_IMAGE_INFO): DWORD {.inline.} = self.union1.dwNumBits
+proc dwNumBits*(self: var CERT_LOGOTYPE_IMAGE_INFO): var DWORD {.inline.} = self.union1.dwNumBits
 proc `dwTableSize=`*(self: var CERT_LOGOTYPE_IMAGE_INFO, x: DWORD) {.inline.} = self.union1.dwTableSize = x
 proc dwTableSize*(self: CERT_LOGOTYPE_IMAGE_INFO): DWORD {.inline.} = self.union1.dwTableSize
+proc dwTableSize*(self: var CERT_LOGOTYPE_IMAGE_INFO): var DWORD {.inline.} = self.union1.dwTableSize
 proc `pLogotypeDirectInfo=`*(self: var CERT_LOGOTYPE_INFO, x: PCERT_LOGOTYPE_DATA) {.inline.} = self.union1.pLogotypeDirectInfo = x
 proc pLogotypeDirectInfo*(self: CERT_LOGOTYPE_INFO): PCERT_LOGOTYPE_DATA {.inline.} = self.union1.pLogotypeDirectInfo
+proc pLogotypeDirectInfo*(self: var CERT_LOGOTYPE_INFO): var PCERT_LOGOTYPE_DATA {.inline.} = self.union1.pLogotypeDirectInfo
 proc `pLogotypeIndirectInfo=`*(self: var CERT_LOGOTYPE_INFO, x: PCERT_LOGOTYPE_REFERENCE) {.inline.} = self.union1.pLogotypeIndirectInfo = x
 proc pLogotypeIndirectInfo*(self: CERT_LOGOTYPE_INFO): PCERT_LOGOTYPE_REFERENCE {.inline.} = self.union1.pLogotypeIndirectInfo
+proc pLogotypeIndirectInfo*(self: var CERT_LOGOTYPE_INFO): var PCERT_LOGOTYPE_REFERENCE {.inline.} = self.union1.pLogotypeIndirectInfo
 proc `dwPredefined=`*(self: var CERT_BIOMETRIC_DATA, x: DWORD) {.inline.} = self.union1.dwPredefined = x
 proc dwPredefined*(self: CERT_BIOMETRIC_DATA): DWORD {.inline.} = self.union1.dwPredefined
+proc dwPredefined*(self: var CERT_BIOMETRIC_DATA): var DWORD {.inline.} = self.union1.dwPredefined
 proc `pszObjId=`*(self: var CERT_BIOMETRIC_DATA, x: LPSTR) {.inline.} = self.union1.pszObjId = x
 proc pszObjId*(self: CERT_BIOMETRIC_DATA): LPSTR {.inline.} = self.union1.pszObjId
+proc pszObjId*(self: var CERT_BIOMETRIC_DATA): var LPSTR {.inline.} = self.union1.pszObjId
 proc `pRevokedInfo=`*(self: var OCSP_BASIC_RESPONSE_ENTRY, x: POCSP_BASIC_REVOKED_INFO) {.inline.} = self.union1.pRevokedInfo = x
 proc pRevokedInfo*(self: OCSP_BASIC_RESPONSE_ENTRY): POCSP_BASIC_REVOKED_INFO {.inline.} = self.union1.pRevokedInfo
+proc pRevokedInfo*(self: var OCSP_BASIC_RESPONSE_ENTRY): var POCSP_BASIC_REVOKED_INFO {.inline.} = self.union1.pRevokedInfo
 proc `ByNameResponderId=`*(self: var OCSP_BASIC_RESPONSE_INFO, x: CERT_NAME_BLOB) {.inline.} = self.union1.ByNameResponderId = x
 proc ByNameResponderId*(self: OCSP_BASIC_RESPONSE_INFO): CERT_NAME_BLOB {.inline.} = self.union1.ByNameResponderId
+proc ByNameResponderId*(self: var OCSP_BASIC_RESPONSE_INFO): var CERT_NAME_BLOB {.inline.} = self.union1.ByNameResponderId
 proc `ByKeyResponderId=`*(self: var OCSP_BASIC_RESPONSE_INFO, x: CRYPT_HASH_BLOB) {.inline.} = self.union1.ByKeyResponderId = x
 proc ByKeyResponderId*(self: OCSP_BASIC_RESPONSE_INFO): CRYPT_HASH_BLOB {.inline.} = self.union1.ByKeyResponderId
+proc ByKeyResponderId*(self: var OCSP_BASIC_RESPONSE_INFO): var CRYPT_HASH_BLOB {.inline.} = self.union1.ByKeyResponderId
 proc `dwValue=`*(self: var CRYPT_OID_INFO, x: DWORD) {.inline.} = self.union1.dwValue = x
 proc dwValue*(self: CRYPT_OID_INFO): DWORD {.inline.} = self.union1.dwValue
+proc dwValue*(self: var CRYPT_OID_INFO): var DWORD {.inline.} = self.union1.dwValue
 proc `Algid=`*(self: var CRYPT_OID_INFO, x: ALG_ID) {.inline.} = self.union1.Algid = x
 proc algid*(self: CRYPT_OID_INFO): ALG_ID {.inline.} = self.union1.Algid
+proc algid*(self: var CRYPT_OID_INFO): var ALG_ID {.inline.} = self.union1.Algid
 proc `dwLength=`*(self: var CRYPT_OID_INFO, x: DWORD) {.inline.} = self.union1.dwLength = x
 proc dwLength*(self: CRYPT_OID_INFO): DWORD {.inline.} = self.union1.dwLength
+proc dwLength*(self: var CRYPT_OID_INFO): var DWORD {.inline.} = self.union1.dwLength
 proc `pvInfo=`*(self: var CERT_STRONG_SIGN_PARA, x: pointer) {.inline.} = self.union1.pvInfo = x
 proc pvInfo*(self: CERT_STRONG_SIGN_PARA): pointer {.inline.} = self.union1.pvInfo
+proc pvInfo*(self: var CERT_STRONG_SIGN_PARA): var pointer {.inline.} = self.union1.pvInfo
 proc `pSerializedInfo=`*(self: var CERT_STRONG_SIGN_PARA, x: PCERT_STRONG_SIGN_SERIALIZED_INFO) {.inline.} = self.union1.pSerializedInfo = x
 proc pSerializedInfo*(self: CERT_STRONG_SIGN_PARA): PCERT_STRONG_SIGN_SERIALIZED_INFO {.inline.} = self.union1.pSerializedInfo
+proc pSerializedInfo*(self: var CERT_STRONG_SIGN_PARA): var PCERT_STRONG_SIGN_SERIALIZED_INFO {.inline.} = self.union1.pSerializedInfo
 proc `pszOID=`*(self: var CERT_STRONG_SIGN_PARA, x: LPSTR) {.inline.} = self.union1.pszOID = x
 proc pszOID*(self: CERT_STRONG_SIGN_PARA): LPSTR {.inline.} = self.union1.pszOID
+proc pszOID*(self: var CERT_STRONG_SIGN_PARA): var LPSTR {.inline.} = self.union1.pszOID
 proc `IssuerSerialNumber=`*(self: var CERT_ID, x: CERT_ISSUER_SERIAL_NUMBER) {.inline.} = self.union1.IssuerSerialNumber = x
 proc IssuerSerialNumber*(self: CERT_ID): CERT_ISSUER_SERIAL_NUMBER {.inline.} = self.union1.IssuerSerialNumber
+proc IssuerSerialNumber*(self: var CERT_ID): var CERT_ISSUER_SERIAL_NUMBER {.inline.} = self.union1.IssuerSerialNumber
 proc `KeyId=`*(self: var CERT_ID, x: CRYPT_HASH_BLOB) {.inline.} = self.union1.KeyId = x
 proc KeyId*(self: CERT_ID): CRYPT_HASH_BLOB {.inline.} = self.union1.KeyId
+proc KeyId*(self: var CERT_ID): var CRYPT_HASH_BLOB {.inline.} = self.union1.KeyId
 proc `HashId=`*(self: var CERT_ID, x: CRYPT_HASH_BLOB) {.inline.} = self.union1.HashId = x
 proc HashId*(self: CERT_ID): CRYPT_HASH_BLOB {.inline.} = self.union1.HashId
+proc HashId*(self: var CERT_ID): var CRYPT_HASH_BLOB {.inline.} = self.union1.HashId
 proc `hCryptProv=`*(self: var CMSG_SIGNER_ENCODE_INFO, x: HCRYPTPROV) {.inline.} = self.union1.hCryptProv = x
 proc hCryptProv*(self: CMSG_SIGNER_ENCODE_INFO): HCRYPTPROV {.inline.} = self.union1.hCryptProv
+proc hCryptProv*(self: var CMSG_SIGNER_ENCODE_INFO): var HCRYPTPROV {.inline.} = self.union1.hCryptProv
 proc `hNCryptKey=`*(self: var CMSG_SIGNER_ENCODE_INFO, x: NCRYPT_KEY_HANDLE) {.inline.} = self.union1.hNCryptKey = x
 proc hNCryptKey*(self: CMSG_SIGNER_ENCODE_INFO): NCRYPT_KEY_HANDLE {.inline.} = self.union1.hNCryptKey
+proc hNCryptKey*(self: var CMSG_SIGNER_ENCODE_INFO): var NCRYPT_KEY_HANDLE {.inline.} = self.union1.hNCryptKey
 proc `pEphemeralAlgorithm=`*(self: var CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO, x: PCRYPT_ALGORITHM_IDENTIFIER) {.inline.} = self.union1.pEphemeralAlgorithm = x
 proc pEphemeralAlgorithm*(self: CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO): PCRYPT_ALGORITHM_IDENTIFIER {.inline.} = self.union1.pEphemeralAlgorithm
+proc pEphemeralAlgorithm*(self: var CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO): var PCRYPT_ALGORITHM_IDENTIFIER {.inline.} = self.union1.pEphemeralAlgorithm
 proc `pSenderId=`*(self: var CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO, x: PCERT_ID) {.inline.} = self.union1.pSenderId = x
 proc pSenderId*(self: CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO): PCERT_ID {.inline.} = self.union1.pSenderId
+proc pSenderId*(self: var CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO): var PCERT_ID {.inline.} = self.union1.pSenderId
 proc `hKeyEncryptionKey=`*(self: var CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO, x: HCRYPTKEY) {.inline.} = self.union1.hKeyEncryptionKey = x
 proc hKeyEncryptionKey*(self: CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO): HCRYPTKEY {.inline.} = self.union1.hKeyEncryptionKey
+proc hKeyEncryptionKey*(self: var CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO): var HCRYPTKEY {.inline.} = self.union1.hKeyEncryptionKey
 proc `pvKeyEncryptionKey=`*(self: var CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO, x: pointer) {.inline.} = self.union1.pvKeyEncryptionKey = x
 proc pvKeyEncryptionKey*(self: CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO): pointer {.inline.} = self.union1.pvKeyEncryptionKey
+proc pvKeyEncryptionKey*(self: var CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO): var pointer {.inline.} = self.union1.pvKeyEncryptionKey
 proc `pKeyTrans=`*(self: var CMSG_RECIPIENT_ENCODE_INFO, x: PCMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO) {.inline.} = self.union1.pKeyTrans = x
 proc pKeyTrans*(self: CMSG_RECIPIENT_ENCODE_INFO): PCMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO {.inline.} = self.union1.pKeyTrans
+proc pKeyTrans*(self: var CMSG_RECIPIENT_ENCODE_INFO): var PCMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO {.inline.} = self.union1.pKeyTrans
 proc `pKeyAgree=`*(self: var CMSG_RECIPIENT_ENCODE_INFO, x: PCMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO) {.inline.} = self.union1.pKeyAgree = x
 proc pKeyAgree*(self: CMSG_RECIPIENT_ENCODE_INFO): PCMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO {.inline.} = self.union1.pKeyAgree
+proc pKeyAgree*(self: var CMSG_RECIPIENT_ENCODE_INFO): var PCMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO {.inline.} = self.union1.pKeyAgree
 proc `pMailList=`*(self: var CMSG_RECIPIENT_ENCODE_INFO, x: PCMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO) {.inline.} = self.union1.pMailList = x
 proc pMailList*(self: CMSG_RECIPIENT_ENCODE_INFO): PCMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO {.inline.} = self.union1.pMailList
+proc pMailList*(self: var CMSG_RECIPIENT_ENCODE_INFO): var PCMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO {.inline.} = self.union1.pMailList
 proc `OriginatorCertId=`*(self: var CMSG_KEY_AGREE_RECIPIENT_INFO, x: CERT_ID) {.inline.} = self.union1.OriginatorCertId = x
 proc OriginatorCertId*(self: CMSG_KEY_AGREE_RECIPIENT_INFO): CERT_ID {.inline.} = self.union1.OriginatorCertId
+proc OriginatorCertId*(self: var CMSG_KEY_AGREE_RECIPIENT_INFO): var CERT_ID {.inline.} = self.union1.OriginatorCertId
 proc `OriginatorPublicKeyInfo=`*(self: var CMSG_KEY_AGREE_RECIPIENT_INFO, x: CERT_PUBLIC_KEY_INFO) {.inline.} = self.union1.OriginatorPublicKeyInfo = x
 proc OriginatorPublicKeyInfo*(self: CMSG_KEY_AGREE_RECIPIENT_INFO): CERT_PUBLIC_KEY_INFO {.inline.} = self.union1.OriginatorPublicKeyInfo
+proc OriginatorPublicKeyInfo*(self: var CMSG_KEY_AGREE_RECIPIENT_INFO): var CERT_PUBLIC_KEY_INFO {.inline.} = self.union1.OriginatorPublicKeyInfo
 proc `pKeyTrans=`*(self: var CMSG_CMS_RECIPIENT_INFO, x: PCMSG_KEY_TRANS_RECIPIENT_INFO) {.inline.} = self.union1.pKeyTrans = x
 proc pKeyTrans*(self: CMSG_CMS_RECIPIENT_INFO): PCMSG_KEY_TRANS_RECIPIENT_INFO {.inline.} = self.union1.pKeyTrans
+proc pKeyTrans*(self: var CMSG_CMS_RECIPIENT_INFO): var PCMSG_KEY_TRANS_RECIPIENT_INFO {.inline.} = self.union1.pKeyTrans
 proc `pKeyAgree=`*(self: var CMSG_CMS_RECIPIENT_INFO, x: PCMSG_KEY_AGREE_RECIPIENT_INFO) {.inline.} = self.union1.pKeyAgree = x
 proc pKeyAgree*(self: CMSG_CMS_RECIPIENT_INFO): PCMSG_KEY_AGREE_RECIPIENT_INFO {.inline.} = self.union1.pKeyAgree
+proc pKeyAgree*(self: var CMSG_CMS_RECIPIENT_INFO): var PCMSG_KEY_AGREE_RECIPIENT_INFO {.inline.} = self.union1.pKeyAgree
 proc `pMailList=`*(self: var CMSG_CMS_RECIPIENT_INFO, x: PCMSG_MAIL_LIST_RECIPIENT_INFO) {.inline.} = self.union1.pMailList = x
 proc pMailList*(self: CMSG_CMS_RECIPIENT_INFO): PCMSG_MAIL_LIST_RECIPIENT_INFO {.inline.} = self.union1.pMailList
+proc pMailList*(self: var CMSG_CMS_RECIPIENT_INFO): var PCMSG_MAIL_LIST_RECIPIENT_INFO {.inline.} = self.union1.pMailList
 proc `hCryptProv=`*(self: var CMSG_CTRL_DECRYPT_PARA, x: HCRYPTPROV) {.inline.} = self.union1.hCryptProv = x
 proc hCryptProv*(self: CMSG_CTRL_DECRYPT_PARA): HCRYPTPROV {.inline.} = self.union1.hCryptProv
+proc hCryptProv*(self: var CMSG_CTRL_DECRYPT_PARA): var HCRYPTPROV {.inline.} = self.union1.hCryptProv
 proc `hNCryptKey=`*(self: var CMSG_CTRL_DECRYPT_PARA, x: NCRYPT_KEY_HANDLE) {.inline.} = self.union1.hNCryptKey = x
 proc hNCryptKey*(self: CMSG_CTRL_DECRYPT_PARA): NCRYPT_KEY_HANDLE {.inline.} = self.union1.hNCryptKey
+proc hNCryptKey*(self: var CMSG_CTRL_DECRYPT_PARA): var NCRYPT_KEY_HANDLE {.inline.} = self.union1.hNCryptKey
 proc `hCryptProv=`*(self: var CMSG_CTRL_KEY_TRANS_DECRYPT_PARA, x: HCRYPTPROV) {.inline.} = self.union1.hCryptProv = x
 proc hCryptProv*(self: CMSG_CTRL_KEY_TRANS_DECRYPT_PARA): HCRYPTPROV {.inline.} = self.union1.hCryptProv
+proc hCryptProv*(self: var CMSG_CTRL_KEY_TRANS_DECRYPT_PARA): var HCRYPTPROV {.inline.} = self.union1.hCryptProv
 proc `hNCryptKey=`*(self: var CMSG_CTRL_KEY_TRANS_DECRYPT_PARA, x: NCRYPT_KEY_HANDLE) {.inline.} = self.union1.hNCryptKey = x
 proc hNCryptKey*(self: CMSG_CTRL_KEY_TRANS_DECRYPT_PARA): NCRYPT_KEY_HANDLE {.inline.} = self.union1.hNCryptKey
+proc hNCryptKey*(self: var CMSG_CTRL_KEY_TRANS_DECRYPT_PARA): var NCRYPT_KEY_HANDLE {.inline.} = self.union1.hNCryptKey
 proc `hCryptProv=`*(self: var CMSG_CTRL_KEY_AGREE_DECRYPT_PARA, x: HCRYPTPROV) {.inline.} = self.union1.hCryptProv = x
 proc hCryptProv*(self: CMSG_CTRL_KEY_AGREE_DECRYPT_PARA): HCRYPTPROV {.inline.} = self.union1.hCryptProv
+proc hCryptProv*(self: var CMSG_CTRL_KEY_AGREE_DECRYPT_PARA): var HCRYPTPROV {.inline.} = self.union1.hCryptProv
 proc `hNCryptKey=`*(self: var CMSG_CTRL_KEY_AGREE_DECRYPT_PARA, x: NCRYPT_KEY_HANDLE) {.inline.} = self.union1.hNCryptKey = x
 proc hNCryptKey*(self: CMSG_CTRL_KEY_AGREE_DECRYPT_PARA): NCRYPT_KEY_HANDLE {.inline.} = self.union1.hNCryptKey
+proc hNCryptKey*(self: var CMSG_CTRL_KEY_AGREE_DECRYPT_PARA): var NCRYPT_KEY_HANDLE {.inline.} = self.union1.hNCryptKey
 proc `hKeyEncryptionKey=`*(self: var CMSG_CTRL_MAIL_LIST_DECRYPT_PARA, x: HCRYPTKEY) {.inline.} = self.union1.hKeyEncryptionKey = x
 proc hKeyEncryptionKey*(self: CMSG_CTRL_MAIL_LIST_DECRYPT_PARA): HCRYPTKEY {.inline.} = self.union1.hKeyEncryptionKey
+proc hKeyEncryptionKey*(self: var CMSG_CTRL_MAIL_LIST_DECRYPT_PARA): var HCRYPTKEY {.inline.} = self.union1.hKeyEncryptionKey
 proc `pvKeyEncryptionKey=`*(self: var CMSG_CTRL_MAIL_LIST_DECRYPT_PARA, x: pointer) {.inline.} = self.union1.pvKeyEncryptionKey = x
 proc pvKeyEncryptionKey*(self: CMSG_CTRL_MAIL_LIST_DECRYPT_PARA): pointer {.inline.} = self.union1.pvKeyEncryptionKey
+proc pvKeyEncryptionKey*(self: var CMSG_CTRL_MAIL_LIST_DECRYPT_PARA): var pointer {.inline.} = self.union1.pvKeyEncryptionKey
 proc `hContentEncryptKey=`*(self: var CMSG_CONTENT_ENCRYPT_INFO, x: HCRYPTKEY) {.inline.} = self.union1.hContentEncryptKey = x
 proc hContentEncryptKey*(self: CMSG_CONTENT_ENCRYPT_INFO): HCRYPTKEY {.inline.} = self.union1.hContentEncryptKey
+proc hContentEncryptKey*(self: var CMSG_CONTENT_ENCRYPT_INFO): var HCRYPTKEY {.inline.} = self.union1.hContentEncryptKey
 proc `hCNGContentEncryptKey=`*(self: var CMSG_CONTENT_ENCRYPT_INFO, x: BCRYPT_KEY_HANDLE) {.inline.} = self.union1.hCNGContentEncryptKey = x
 proc hCNGContentEncryptKey*(self: CMSG_CONTENT_ENCRYPT_INFO): BCRYPT_KEY_HANDLE {.inline.} = self.union1.hCNGContentEncryptKey
+proc hCNGContentEncryptKey*(self: var CMSG_CONTENT_ENCRYPT_INFO): var BCRYPT_KEY_HANDLE {.inline.} = self.union1.hCNGContentEncryptKey
 proc `OriginatorCertId=`*(self: var CMSG_KEY_AGREE_ENCRYPT_INFO, x: CERT_ID) {.inline.} = self.union1.OriginatorCertId = x
 proc OriginatorCertId*(self: CMSG_KEY_AGREE_ENCRYPT_INFO): CERT_ID {.inline.} = self.union1.OriginatorCertId
+proc OriginatorCertId*(self: var CMSG_KEY_AGREE_ENCRYPT_INFO): var CERT_ID {.inline.} = self.union1.OriginatorCertId
 proc `OriginatorPublicKeyInfo=`*(self: var CMSG_KEY_AGREE_ENCRYPT_INFO, x: CERT_PUBLIC_KEY_INFO) {.inline.} = self.union1.OriginatorPublicKeyInfo = x
 proc OriginatorPublicKeyInfo*(self: CMSG_KEY_AGREE_ENCRYPT_INFO): CERT_PUBLIC_KEY_INFO {.inline.} = self.union1.OriginatorPublicKeyInfo
+proc OriginatorPublicKeyInfo*(self: var CMSG_KEY_AGREE_ENCRYPT_INFO): var CERT_PUBLIC_KEY_INFO {.inline.} = self.union1.OriginatorPublicKeyInfo
 proc `hCryptProv=`*(self: var CERT_KEY_CONTEXT, x: HCRYPTPROV) {.inline.} = self.union1.hCryptProv = x
 proc hCryptProv*(self: CERT_KEY_CONTEXT): HCRYPTPROV {.inline.} = self.union1.hCryptProv
+proc hCryptProv*(self: var CERT_KEY_CONTEXT): var HCRYPTPROV {.inline.} = self.union1.hCryptProv
 proc `hNCryptKey=`*(self: var CERT_KEY_CONTEXT, x: NCRYPT_KEY_HANDLE) {.inline.} = self.union1.hNCryptKey = x
 proc hNCryptKey*(self: CERT_KEY_CONTEXT): NCRYPT_KEY_HANDLE {.inline.} = self.union1.hNCryptKey
+proc hNCryptKey*(self: var CERT_KEY_CONTEXT): var NCRYPT_KEY_HANDLE {.inline.} = self.union1.hNCryptKey
 proc `hKeyBase=`*(self: var CERT_SYSTEM_STORE_RELOCATE_PARA, x: HKEY) {.inline.} = self.union1.hKeyBase = x
 proc hKeyBase*(self: CERT_SYSTEM_STORE_RELOCATE_PARA): HKEY {.inline.} = self.union1.hKeyBase
+proc hKeyBase*(self: var CERT_SYSTEM_STORE_RELOCATE_PARA): var HKEY {.inline.} = self.union1.hKeyBase
 proc `pvBase=`*(self: var CERT_SYSTEM_STORE_RELOCATE_PARA, x: pointer) {.inline.} = self.union1.pvBase = x
 proc pvBase*(self: CERT_SYSTEM_STORE_RELOCATE_PARA): pointer {.inline.} = self.union1.pvBase
+proc pvBase*(self: var CERT_SYSTEM_STORE_RELOCATE_PARA): var pointer {.inline.} = self.union1.pvBase
 proc `pvSystemStore=`*(self: var CERT_SYSTEM_STORE_RELOCATE_PARA, x: pointer) {.inline.} = self.union2.pvSystemStore = x
 proc pvSystemStore*(self: CERT_SYSTEM_STORE_RELOCATE_PARA): pointer {.inline.} = self.union2.pvSystemStore
+proc pvSystemStore*(self: var CERT_SYSTEM_STORE_RELOCATE_PARA): var pointer {.inline.} = self.union2.pvSystemStore
 proc `pszSystemStore=`*(self: var CERT_SYSTEM_STORE_RELOCATE_PARA, x: LPCSTR) {.inline.} = self.union2.pszSystemStore = x
 proc pszSystemStore*(self: CERT_SYSTEM_STORE_RELOCATE_PARA): LPCSTR {.inline.} = self.union2.pszSystemStore
+proc pszSystemStore*(self: var CERT_SYSTEM_STORE_RELOCATE_PARA): var LPCSTR {.inline.} = self.union2.pszSystemStore
 proc `pwszSystemStore=`*(self: var CERT_SYSTEM_STORE_RELOCATE_PARA, x: LPCWSTR) {.inline.} = self.union2.pwszSystemStore = x
 proc pwszSystemStore*(self: CERT_SYSTEM_STORE_RELOCATE_PARA): LPCWSTR {.inline.} = self.union2.pwszSystemStore
+proc pwszSystemStore*(self: var CERT_SYSTEM_STORE_RELOCATE_PARA): var LPCWSTR {.inline.} = self.union2.pwszSystemStore
 proc `hCryptProv=`*(self: var CRYPT_KEY_SIGN_MESSAGE_PARA, x: HCRYPTPROV) {.inline.} = self.union1.hCryptProv = x
 proc hCryptProv*(self: CRYPT_KEY_SIGN_MESSAGE_PARA): HCRYPTPROV {.inline.} = self.union1.hCryptProv
+proc hCryptProv*(self: var CRYPT_KEY_SIGN_MESSAGE_PARA): var HCRYPTPROV {.inline.} = self.union1.hCryptProv
 proc `hNCryptKey=`*(self: var CRYPT_KEY_SIGN_MESSAGE_PARA, x: NCRYPT_KEY_HANDLE) {.inline.} = self.union1.hNCryptKey = x
 proc hNCryptKey*(self: CRYPT_KEY_SIGN_MESSAGE_PARA): NCRYPT_KEY_HANDLE {.inline.} = self.union1.hNCryptKey
+proc hNCryptKey*(self: var CRYPT_KEY_SIGN_MESSAGE_PARA): var NCRYPT_KEY_HANDLE {.inline.} = self.union1.hNCryptKey
 proc `cbStruct=`*(self: var HTTPSPolicyCallbackData, x: DWORD) {.inline.} = self.union1.cbStruct = x
 proc cbStruct*(self: HTTPSPolicyCallbackData): DWORD {.inline.} = self.union1.cbStruct
+proc cbStruct*(self: var HTTPSPolicyCallbackData): var DWORD {.inline.} = self.union1.cbStruct
 proc `cbSize=`*(self: var HTTPSPolicyCallbackData, x: DWORD) {.inline.} = self.union1.cbSize = x
 proc cbSize*(self: HTTPSPolicyCallbackData): DWORD {.inline.} = self.union1.cbSize
+proc cbSize*(self: var HTTPSPolicyCallbackData): var DWORD {.inline.} = self.union1.cbSize
 when winimUnicode:
   type
     CRYPT_PASSWORD_CREDENTIALS* = CRYPT_PASSWORD_CREDENTIALSW
