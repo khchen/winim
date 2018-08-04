@@ -53,68 +53,67 @@ suite "Winim Winstr Module Test Suites":
       resetFF(a.unsafeaddr, sizeof(a))
 
   test "String Address":
-    check(cast[ptr char](&str)[] == 'E')
-    check(cast[ptr byte](&str)[] == byte 'E')
-    check(cast[ptr WCHAR](&wstr)[] == WCHAR ord 'E')
-    check(cast[ptr char](&cstr)[] == 'E')
+    check:
+      cast[ptr char](&str)[] == 'E'
+      cast[ptr byte](&str)[] == byte 'E'
+      cast[ptr WCHAR](&wstr)[] == WCHAR ord 'E'
+      cast[ptr char](&cstr)[] == 'E'
 
-    check(&nilstr == nil)
-    check(&nilmstr == nil)
-    check(&nilwstr == nil)
-    check(&nilcstr == nil)
+      &nilstr == nil
+      &nilmstr == nil
+      &nilwstr == nil
+      &nilcstr == nil
 
   test "String Conversion":
-    # original
-    check(toHex(str) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
-    check(toHex(mstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
-    check(toHex(wstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
-    check(toHex(cstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
-    check(toHex(astr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
+    check:
+      # original
+      toHex(str) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
+      toHex(mstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
+      toHex(wstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A"
+      toHex(cstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
+      toHex(astr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
 
-    # convert to string (to utf8)
-    check(toHex($str) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
-    check(toHex($mstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
-    check(toHex($wstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
-    check(toHex($cstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
-    check(toHex($$astr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
+      # convert to string (to utf8)
+      toHex($str) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
+      toHex($mstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
+      toHex($wstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
+      toHex($cstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
+      toHex($$astr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
 
-    # convert to mstring (to ansi)
-    check(toHex(-$str) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
-    check(toHex(-$mstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
-    check(toHex(-$wstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
-    check(toHex(-$cstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
-    check(toHex(-$$astr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
+      # convert to mstring (to ansi)
+      toHex(-$str) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
+      toHex(-$mstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
+      toHex(-$wstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
+      toHex(-$cstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
+      toHex(-$$astr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
 
-    # convert to wstring (to unicode)
-    check(toHex(+$str) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
-    check(toHex(+$mstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
-    check(toHex(+$wstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
-    check(toHex(+$cstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
-    check(toHex(+$$astr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
+      # convert to wstring (to unicode)
+      toHex(+$str) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A"
+      toHex(+$mstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A"
+      toHex(+$wstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A"
+      toHex(+$cstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A"
+      toHex(+$$astr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A"
 
-    # convert from windows' string buffer to nim's string
-    check(toHex($$lpstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
-    check(toHex(-$$lpstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
-    check(toHex(+$$lpstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
-    check(toHex($lpwstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
-    check(toHex(-$lpwstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
-    check(toHex(+$lpwstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
-    check(toHex($bstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6")
-    check(toHex(-$bstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5")
-    check(toHex(+$bstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A")
+      # convert from windows' string buffer to nim's string
+      toHex($$lpstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
+      toHex(-$$lpstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
+      toHex(+$$lpstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A"
+      toHex($lpwstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
+      toHex(-$lpwstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
+      toHex(+$lpwstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A"
+      toHex($bstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
+      toHex(-$bstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
+      toHex(+$bstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A"
 
-    # char conversion
-
-    check($'A' == "A")
-    check(+$'A' == +$"A")
-    check(-$'A' == -$"A")
-
-    check($$(WCHAR 20013) == "中")
-    check(+$(WCHAR 20013) == +$"中")
-    check(-$(WCHAR 20013) == -$"中")
+      # char conversion
+      $'A' == "A"
+      +$'A' == +$"A"
+      -$'A' == -$"A"
+      $$(WCHAR 20013) == "中"
+      +$(WCHAR 20013) == +$"中"
+      -$(WCHAR 20013) == -$"中"
 
     # fill nim's string to windows' string buffer
-
     var
       buffer = newString(40)
       pstr = cast[PSTR](&buffer)
@@ -137,29 +136,30 @@ suite "Winim Winstr Module Test Suites":
     check(toHex(buffer) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A0000FFFFFFFF")
 
   test "String Manipulation":
-    check(str[11] == 't')
-    check(mstr[11] == 't')
-    check(wstr[11] == WCHAR ord 't')
+    check:
+      str[11] == 't'
+      mstr[11] == 't'
+      wstr[11] == WCHAR ord 't'
 
-    check(str[13..15] == "中")
-    check(mstr[13..14] == -$"中")
-    check(wstr[13..13] == +$"中")
+      str[13..15] == "中"
+      mstr[13..14] == -$"中"
+      wstr[13..13] == +$"中"
 
-    check(str[^17..^14] == "Test")
-    check(mstr[^13..^10] == -$"Test")
-    check(wstr[^9..^6] == +$"Test")
+      str[^17..^14] == "Test"
+      mstr[^13..^10] == -$"Test"
+      wstr[^9..^6] == +$"Test"
 
-    check(str.substr(10) == "st 中文測試")
-    check(str.substr(10, 18) == "st 中文")
-    check(str.substr(10, 9) == "")
+      str.substr(10) == "st 中文測試"
+      str.substr(10, 18) == "st 中文"
+      str.substr(10, 9) == ""
 
-    check(mstr.substr(10) == -$"st 中文測試")
-    check(mstr.substr(10, 16) == -$"st 中文")
-    check(mstr.substr(10, 9) == -$"")
+      mstr.substr(10) == -$"st 中文測試"
+      mstr.substr(10, 16) == -$"st 中文"
+      mstr.substr(10, 9) == -$""
 
-    check(wstr.substr(10) == +$"st 中文測試")
-    check(wstr.substr(10, 14) == +$"st 中文")
-    check(wstr.substr(10, 9) == +$"")
+      wstr.substr(10) == +$"st 中文測試"
+      wstr.substr(10, 14) == +$"st 中文"
+      wstr.substr(10, 9) == +$""
 
     str[10..18] = "0123456789"
     check(str == "English Te0123456789測試")
@@ -188,9 +188,10 @@ suite "Winim Winstr Module Test Suites":
     for i in wstr:
       s3.add int i
 
-    check(s1 == @[69, 110, 103, 108, 105, 115, 104, 32, 84, 101, 115, 116, 32, 20013, 25991, 28204, 35430])
-    check(s2 == @[69, 110, 103, 108, 105, 115, 104, 32, 84, 101, 115, 116, 32, 0xA4A4, 0xE5A4, 0xFAB4, 0xD5B8])
-    check(s3 == @[69, 110, 103, 108, 105, 115, 104, 32, 84, 101, 115, 116, 32, 20013, 25991, 28204, 35430])
+    check:
+      s1 == @[69, 110, 103, 108, 105, 115, 104, 32, 84, 101, 115, 116, 32, 20013, 25991, 28204, 35430]
+      s2 == @[69, 110, 103, 108, 105, 115, 104, 32, 84, 101, 115, 116, 32, 0xA4A4, 0xE5A4, 0xFAB4, 0xD5B8]
+      s3 == @[69, 110, 103, 108, 105, 115, 104, 32, 84, 101, 115, 116, 32, 20013, 25991, 28204, 35430]
 
   test "Null Terminated String":
     str[12] = '\0'
@@ -216,9 +217,10 @@ suite "Winim Winstr Module Test Suites":
     var c = L("123\x00456\x00中文\x00測試")
     var w = +$s
     var m = -$s
-    check(c == w)
-    check(c.len == 13)
-    check(m.mlen == 13)
+    check:
+      c == w
+      c.len == 13
+      m.mlen == 13
 
   test "String Bound Check":
     var s = "12345"
@@ -238,17 +240,20 @@ suite "Winim Winstr Module Test Suites":
     expect IndexError: discard m[0..m.len+1]
     expect IndexError: discard w[0..w.len]
 
-    check(s.substr(-1, 10) == s)
-    check(m.substr(-1, 10) == m)
-    check(w.substr(-1, 10) == w)
+    check:
+      s.substr(-1, 10) == s
+      m.substr(-1, 10) == m
+      w.substr(-1, 10) == w
 
   test "Assignment Behavior":
     var newstr = str
     var newmstr = mstr
     var newwstr = wstr
-    check(&newstr != &str) # by value
-    check(&newmstr != &mstr) # by value
-    check(&newwstr == &wstr) # by ref
+
+    check:
+      &newstr != &str # by value
+      &newmstr != &mstr # by value
+      &newwstr == &wstr # by ref
 
   test "Low Level Buffer Fill":
     var byteBuffer: array[10, byte]

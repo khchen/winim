@@ -9,42 +9,10 @@
 
 {.deadCodeElim: on.}
 
-import inc.psapi
-import inc.tlhelp32
-import inc.wintrust
-import inc.imagehlp
-import inc.odbc
-import inc.dde
-import inc.lzexpand
-import inc.nb30
-import inc.winperf
-import inc.mmsystem
-import inc.winefs
-import inc.winioctl
-import inc.winscard
-import inc.winspool
-import inc.mcx
-import inc.powrprof
-import inc.vfw
-import inc.vssym32
-import inc.gdiplus
+import inc/[psapi, tlhelp32, wintrust, imagehlp, odbc, dde, lzexpand,
+  nb30, winperf, mmsystem, winefs, winioctl, winscard, winspool, mcx,
+  powrprof, vfw, vssym32, gdiplus]
 
-export psapi
-export tlhelp32
-export wintrust
-export imagehlp
-export odbc
-export dde
-export lzexpand
-export nb30
-export winperf
-export mmsystem
-export winefs
-export winioctl
-export winscard
-export winspool
-export mcx
-export powrprof
-export vfw
-export vssym32
-export gdiplus
+export psapi, tlhelp32, wintrust, imagehlp, odbc, dde, lzexpand,
+  nb30, winperf, mmsystem, winefs, winioctl, winscard, winspool, mcx,
+  powrprof, vfw, vssym32, gdiplus

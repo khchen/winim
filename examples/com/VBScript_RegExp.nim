@@ -1,5 +1,5 @@
 import strformat
-import winim.com
+import winim/com
 
 var obj = CreateObject("VBScript.RegExp")
 obj.pattern = r"\wo\w"

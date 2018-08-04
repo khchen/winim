@@ -24,42 +24,42 @@ import winim # import all modules, except COM support and MSHTML.
 ```
 or
 ```nimrod
-import winim.lean # for core SDK only, this speed up compiling time.
+import winim/lean # for core SDK only, this speed up compiling time.
 ```
 or
 ```nimrod
-import winim.mean # for core SDK + Shell + OLE API.
+import winim/mean # for core SDK + Shell + OLE API.
 ```
 or
 ```nimrod
-import winim.com # winim.mean + Windows COM support.
+import winim/com # winim.mean + Windows COM support.
 ```
 
 API modules can import one by one if needed, for example:
 ```nimrod
-import winim.inc.windef
-import winim.inc.winbase
-import winim.inc.winuser
+import winim/inc/windef
+import winim/inc/winbase
+import winim/inc/winuser
 ```
 or
 ```nimrod
-import winim.inc/[windef, winbase, winuser]
+import winim/inc/[windef, winbase, winuser]
 ```
 
 MSHTML module is too big. So it is not imported by default.
 Add this module only if needed:
 ```nimrod
-import winim.html
+import winim/html
 ```
 
 ## Compile
     nim c source.nim
       add -d:winansi or -d:useWinAnsi for Ansi version (Unicode by default)
       add -d:win_no_discardable if not like discardable windows API
-      add -d:lean same as import winim.lean
-      add -d:mean same as import winim.mean
-      add -d:win32_lean_and_mean same as import winim.mean
-      add -d:mshtml same as import winim.html
+      add -d:lean same as import winim/lean
+      add -d:mean same as import winim/mean
+      add -d:win32_lean_and_mean same as import winim/mean
+      add -d:mshtml same as import winim/html
       add -d:notrace disable COM objects trace. See com.nim for details.
       add -d:useWinXP for Windows XP compatibility.
 
@@ -67,20 +67,20 @@ import winim.html
 
 An hello world program:
 ```nimrod
-import winim.lean
+import winim/lean
 MessageBox(0, "Hello, world !", "Nim is Powerful", 0)
 ```
 
 Write codes work under both unicode and ansi mode:
 ```nimrod
-import winim.lean
+import winim/lean
 # T macro generate unicode string or ansi string depend on conditional symbol: useWinAnsi.
 MessageBox(0, T"Hello, world !", T"Nim is Powerful 中文測試", 0)
 ```
 
 Example to use the IShellLink interface:
 ```nimrod
-import os, winim.mean
+import os, winim/mean
 
 var
   pIL: ptr IShellLink
@@ -103,7 +103,7 @@ except:
 
 Use COM objects like a script langauge:
 ```nimrod
-import winim.com
+import winim/com
 
 comScript:
   var dict = CreateObject("Scripting.Dictionary")

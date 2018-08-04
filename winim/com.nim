@@ -40,8 +40,7 @@
 ##      #   1D~3D array|seq
 ##
 
-{.deadCodeElim:on}
-{.experimental.} # for dot operators
+{.experimental, deadCodeElim: on.} # experimental for dot operators
 
 import strutils, macros
 

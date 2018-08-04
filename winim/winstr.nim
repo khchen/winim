@@ -156,7 +156,7 @@
 
 {.deadCodeElim: on.}
 
-import macros, strutils, inc.winimbase, core
+import macros, strutils, inc/winimbase, core
 export strutils.toHex, winimbase
 
 # copy from widestrs.nim, these functions used both compile-time and run-time
@@ -1098,33 +1098,33 @@ converter winstringConverterWStringToWideCString*(x: wstring): WideCString =
   unsafeNew(result, x.length * 2 + 2)
   copyMem(result[0].unsafeaddr, &x, x.length * 2)
 
-macro L*(x: string): untyped =
-  ## Generate unicode string at compile-time if possible.
+macro L*(x: static[string]): untyped =
+  ## Generate static wstring at compile-time for static string.
 
-  if x.kind in {nnkStrLit, nnkRStrLit, nnkTripleStrLit}:
-    var str = x.strVal
-    if str.len == 0:
-      result = prefix(newStrLitNode(""), "+$")
-    else:
-      var node = newNimNode(nnkBracket)
-      for u in WCHARs(str, str.len):
-        node.add(newDotExpr(newIntLitNode(u.int), newIdentNode("WCHAR")))
+  # Use static here can force some string generated at compiling time.
+  # for example:
+  #  const s = "abc"
+  #  echo L(s.replace("a", ""))
 
-      result = prefix(node, "+$")
-
+  if x.len == 0:
+    result = prefix(newStrLitNode(""), "+$")
   else:
-    result = prefix(x, "+$")
+    var node = newNimNode(nnkBracket)
+    for u in WCHARs(x, x.len):
+      node.add(newDotExpr(newIntLitNode(u.int), newIdentNode("WCHAR")))
 
-macro T*(x: string): untyped =
+    result = prefix(node, "+$")
+
+template L*(x: string): untyped = +$x
+  ## Same as +$ for dynamic string.
+
+template T*(x: string): untyped =
   ## Generate wstring or mstring depend on conditional symbol: useWinAnsi.
-
+  # must export winimbase to use winimAnsi here.
   when winimAnsi:
-    result = prefix(x, "-$")
+    -$x
   else:
-    if x.kind in {nnkStrLit, nnkRStrLit, nnkTripleStrLit}:
-      result = prefix(x, "L")
-    else:
-      result = prefix(x, "+$")
+    L(x)
 
 template T*(x: Natural): untyped =
   ## Generate wstring or mstring buffer depend on conditional symbol: useWinAnsi.
@@ -1134,6 +1134,15 @@ template T*(x: Natural): untyped =
     newMString(x)
   else:
     newWString(x)
+
+when winimAnsi:
+  type
+    TString* = mstring
+    TChar* = char
+else:
+  type
+    TString* = wstring
+    TChar* = WCHAR
 
 when isMainModule:
 

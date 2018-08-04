@@ -1,6 +1,6 @@
 # source at: https://msdn.microsoft.com/en-us/library/windows/desktop/ff485843(v=vs.85).aspx
 
-import winim.mean
+import winim/mean
 
 converter pointerConverter(x: ptr): ptr PVOID = cast[ptr PVOID](x)
 

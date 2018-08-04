@@ -7,16 +7,7 @@
 #
 #====================================================================
 
-import inc.commctrl
-import inc.commdlg
-import inc.richedit
-import inc.imm
-import inc.shellapi
-import inc.setupapi
+{.deadCodeElim: on.}
 
-export commctrl
-export commdlg
-export richedit
-export imm
-export shellapi
-export setupapi
+import inc/[commctrl, commdlg, richedit, imm, shellapi, setupapi]
+export commctrl, commdlg, richedit, imm, shellapi, setupapi

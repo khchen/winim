@@ -1,4 +1,4 @@
-import winim.com
+import winim/com
 
 var obj: com
 obj = CreateObject("WScript.Network")

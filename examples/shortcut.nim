@@ -1,4 +1,4 @@
-import os, winim.mean
+import os, winim/mean
 
 var
   pIL: ptr IShellLink

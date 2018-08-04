@@ -1,4 +1,4 @@
-import winim.com
+import winim/com
 import threadpool
 
 proc getGit(): ptr IGlobalInterfaceTable =

@@ -9,8 +9,5 @@
 
 {.deadCodeElim: on.}
 
-import inc.objbase
-import inc.objext
-
-export objbase
-export objext
+import inc/[objbase, objext]
+export objbase, objext

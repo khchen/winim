@@ -5,6 +5,11 @@
 
 ====================================================================
 
+Version 2.4
+-----------
+# Using '/' instead of '.' to import paths.
+# winstr: Add TString and TChar.
+
 Version 2.3
 -----------
 # Add var version access proc for nested struct/union.

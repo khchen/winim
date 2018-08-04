@@ -14,20 +14,20 @@
 ##  Usage:
 ##    .. code-block:: Nim
 ##       import winim # impore all modules, except COM support and MSHTML
-##       # or import winim.lean for core SDK only
-##       # or import winim.mean for core SDK + Shell + OLE
-##       # or import winim.com for core SDK + Shell + OLE + COM support
-##       # add import winim.html for MSHTML
+##       # or import winim/lean for core SDK only
+##       # or import winim/mean for core SDK + Shell + OLE
+##       # or import winim/com for core SDK + Shell + OLE + COM support
+##       # add import winim/html for MSHTML
 ##
 ##  To compile:
 ##    .. code-block:: Nim
 ##       nim c source.nim
 ##         add -d:winansi or -d:useWinAnsi for Ansi version (Unicode by default)
 ##         add -d:win_no_discardable if not like discardable windows API
-##         add -d:lean same as import winim.lean
-##         add -d:mean same as import winim.mean
-##         add -d:win32_lean_and_mean same as import winim.mean
-##         add -d:mshtml same as import winim.html
+##         add -d:lean same as import winim/lean
+##         add -d:mean same as import winim/mean
+##         add -d:win32_lean_and_mean same as import winim/mean
+##         add -d:mshtml same as import winim/html
 ##         add -d:notrace disable COM objects trace. See com.nim for details.
 ##         add -d:useWinXP for Windows XP compatibility.
 
@@ -44,7 +44,7 @@ else:
   export core, shell, net, ole, extra
 
 when defined(mshtml):
-  import winim.html
+  import winim/html
   export html
 
 import winim/[utils, winstr]

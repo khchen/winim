@@ -1,4 +1,4 @@
-import winim.lean
+import winim/lean
 import strformat
 
 var

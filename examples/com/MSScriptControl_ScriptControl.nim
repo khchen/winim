@@ -1,5 +1,5 @@
 import strformat
-import winim.com
+import winim/com
 
 when defined(cpu64):
   {.fatal: "ScriptControl only support windows i386 version.".}

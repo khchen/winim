@@ -9,32 +9,8 @@
 
 {.deadCodeElim: on.}
 
-import inc.windef
-import inc.winerror
-import inc.winbase
-import inc.wingdi
-import inc.winuser
-import inc.wincon
-import inc.winnls
-import inc.winver
-import inc.winreg
-import inc.winnetwk
-import inc.winsvc
-import inc.virtdisk
-import inc.winsock
-import inc.wincrypt
+import inc/[windef, winerror, winbase, wingdi, winuser, wincon, winnls,
+  winver, winreg, winnetwk, winsvc, virtdisk, winsock, wincrypt]
 
-export windef
-export winerror
-export winbase
-export wingdi
-export winuser
-export wincon
-export winnls
-export winver
-export winreg
-export winnetwk
-export winsvc
-export virtdisk
-export winsock
-export wincrypt
+export windef, winerror, winbase, wingdi, winuser, wincon, winnls,
+  winver, winreg, winnetwk, winsvc, virtdisk, winsock, wincrypt

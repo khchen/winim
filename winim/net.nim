@@ -9,18 +9,5 @@
 
 {.deadCodeElim: on.}
 
-import inc.wininet
-import inc.windns
-import inc.winldap
-import inc.lm
-import inc.ras
-import inc.rpc
-import inc.iphlpapi
-
-export wininet
-export windns
-export winldap
-export lm
-export ras
-export rpc
-export iphlpapi
+import inc/[wininet, windns, winldap, lm, ras, rpc, iphlpapi]
+export wininet, windns, winldap, lm, ras, rpc, iphlpapi

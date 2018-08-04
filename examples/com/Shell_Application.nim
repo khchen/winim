@@ -1,4 +1,4 @@
-import winim.com
+import winim/com
 
 var obj = CreateObject("Shell.Application")
 obj.MinimizeAll

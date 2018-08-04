@@ -8,7 +8,7 @@
 
 {.deadCodeElim: on.}
 
-import inc.windef
+import inc/windef
 
 # todo: need more converter?
 

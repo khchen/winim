@@ -1,5 +1,5 @@
 import strutils
-import winim.com
+import winim/com
 
 var isQuit = false
 

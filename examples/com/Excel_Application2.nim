@@ -1,5 +1,5 @@
 import strutils
-import winim.com
+import winim/com
 
 comScript:
   var obj = CreateObject("Excel.Application")
