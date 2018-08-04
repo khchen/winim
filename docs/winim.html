@@ -1248,19 +1248,19 @@ function main() {
 <p>The module also include some windows string type utilities and COM support. See utils.nim, winstr.nim, and com.nim for details.</p>
 <dl class="docutils"><dt>Usage:</dt>
 <dd><pre class="listing"><span class="Keyword">import</span> <span class="Identifier">winim</span> <span class="Comment"># impore all modules, except COM support and MSHTML</span>
-<span class="Comment"># or import winim.lean for core SDK only</span>
-<span class="Comment"># or import winim.mean for core SDK + Shell + OLE</span>
-<span class="Comment"># or import winim.com for core SDK + Shell + OLE + COM support</span>
-<span class="Comment"># add import winim.html for MSHTML</span></pre></dd>
+<span class="Comment"># or import winim/lean for core SDK only</span>
+<span class="Comment"># or import winim/mean for core SDK + Shell + OLE</span>
+<span class="Comment"># or import winim/com for core SDK + Shell + OLE + COM support</span>
+<span class="Comment"># add import winim/html for MSHTML</span></pre></dd>
 </dl>
 <dl class="docutils"><dt>To compile:</dt>
 <dd><pre class="listing"><span class="Identifier">nim</span> <span class="Identifier">c</span> <span class="Identifier">source</span><span class="Operator">.</span><span class="Identifier">nim</span>
   <span class="Identifier">add</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">winansi</span> <span class="Keyword">or</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">useWinAnsi</span> <span class="Keyword">for</span> <span class="Identifier">Ansi</span> <span class="Identifier">version</span> <span class="Punctuation">(</span><span class="Identifier">Unicode</span> <span class="Identifier">by</span> <span class="Identifier">default</span><span class="Punctuation">)</span>
   <span class="Identifier">add</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">win_no_discardable</span> <span class="Keyword">if</span> <span class="Keyword">not</span> <span class="Identifier">like</span> <span class="Identifier">discardable</span> <span class="Identifier">windows</span> <span class="Identifier">API</span>
-  <span class="Identifier">add</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">lean</span> <span class="Identifier">same</span> <span class="Keyword">as</span> <span class="Keyword">import</span> <span class="Identifier">winim</span><span class="Operator">.</span><span class="Identifier">lean</span>
-  <span class="Identifier">add</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">mean</span> <span class="Identifier">same</span> <span class="Keyword">as</span> <span class="Keyword">import</span> <span class="Identifier">winim</span><span class="Operator">.</span><span class="Identifier">mean</span>
-  <span class="Identifier">add</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">win32_lean_and_mean</span> <span class="Identifier">same</span> <span class="Keyword">as</span> <span class="Keyword">import</span> <span class="Identifier">winim</span><span class="Operator">.</span><span class="Identifier">mean</span>
-  <span class="Identifier">add</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">mshtml</span> <span class="Identifier">same</span> <span class="Keyword">as</span> <span class="Keyword">import</span> <span class="Identifier">winim</span><span class="Operator">.</span><span class="Identifier">html</span>
+  <span class="Identifier">add</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">lean</span> <span class="Identifier">same</span> <span class="Keyword">as</span> <span class="Keyword">import</span> <span class="Identifier">winim</span><span class="Operator">/</span><span class="Identifier">lean</span>
+  <span class="Identifier">add</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">mean</span> <span class="Identifier">same</span> <span class="Keyword">as</span> <span class="Keyword">import</span> <span class="Identifier">winim</span><span class="Operator">/</span><span class="Identifier">mean</span>
+  <span class="Identifier">add</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">win32_lean_and_mean</span> <span class="Identifier">same</span> <span class="Keyword">as</span> <span class="Keyword">import</span> <span class="Identifier">winim</span><span class="Operator">/</span><span class="Identifier">mean</span>
+  <span class="Identifier">add</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">mshtml</span> <span class="Identifier">same</span> <span class="Keyword">as</span> <span class="Keyword">import</span> <span class="Identifier">winim</span><span class="Operator">/</span><span class="Identifier">html</span>
   <span class="Identifier">add</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">notrace</span> <span class="Identifier">disable</span> <span class="Identifier">COM</span> <span class="Identifier">objects</span> <span class="Identifier">trace</span><span class="Operator">.</span> <span class="Identifier">See</span> <span class="Identifier">com</span><span class="Operator">.</span><span class="Identifier">nim</span> <span class="Keyword">for</span> <span class="Identifier">details</span><span class="Operator">.</span>
   <span class="Identifier">add</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">useWinXP</span> <span class="Keyword">for</span> <span class="Identifier">Windows</span> <span class="Identifier">XP</span> <span class="Identifier">compatibility</span><span class="Operator">.</span></pre></dd>
 </dl>
@@ -1278,7 +1278,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-07-28 03:32:20 UTC</small>
+        <small>Made with Nim. Generated: 2018-08-04 13:22:25 UTC</small>
       </div>
     </div>
   </div>

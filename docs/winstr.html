@@ -1260,6 +1260,10 @@ function main() {
   data: UncheckedArray[char]"><wbr />pmstring<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#pstring"
     title="pstring = pmstring"><wbr />pstring<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#TString"
+    title="TString = wstring"><wbr />TString<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#TChar"
+    title="TChar = WCHAR"><wbr />TChar<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1480,10 +1484,8 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#17" id="67">Macros</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#L.m,string"
-    title="L(x: string): untyped"><wbr />L<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#T.m,string"
-    title="T(x: string): untyped"><wbr />T<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#L.m,"
+    title="L(x: static[string]): untyped"><wbr />L<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1514,6 +1516,10 @@ function main() {
     title="`&gt;&gt;`(a: typed; b: typed)"><wbr />`&gt;&gt;`<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#>>>.t,typed,typed"
     title="`&gt;&gt;&gt;`(a: typed; b: typed)"><wbr />`&gt;&gt;&gt;`<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#L.t,string"
+    title="L(x: string): untyped"><wbr />L<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#T.t,string"
+    title="T(x: string): untyped"><wbr />T<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#T.t,Natural"
     title="T(x: Natural): untyped"><wbr />T<span class="attachedType" style="visibility:hidden"></span></a></li>
 
@@ -1694,6 +1700,16 @@ Use mIndex in [] or []= for mstring means index by MBCS characters, not by bytes
 
 </dd>
 <dt id="pstring"><a name="pstring"></a><pre><span class="Identifier">pstring</span> <span class="Other">=</span> <span class="Identifier">pmstring</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="TString"><a name="TString"></a><pre><span class="Identifier">TString</span> <span class="Other">=</span> <span class="Identifier">wstring</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="TChar"><a name="TChar"></a><pre><span class="Identifier">TChar</span> <span class="Other">=</span> <span class="Identifier">WCHAR</span></pre></dt>
 <dd>
 
 
@@ -2233,14 +2249,9 @@ Assume a string is null terminated and return the length-corrected string
 <div class="section" id="17">
 <h1><a class="toc-backref" href="#17">Macros</a></h1>
 <dl class="item">
-<dt id="L"><a name="L.m,string"></a><pre><span class="Keyword">macro</span> <span class="Identifier">L</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<dt id="L"><a name="L.m,"></a><pre><span class="Keyword">macro</span> <span class="Identifier">L</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
-Generate unicode string at compile-time if possible.
-
-</dd>
-<dt id="T"><a name="T.m,string"></a><pre><span class="Keyword">macro</span> <span class="Identifier">T</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
-<dd>
-Generate wstring or mstring depend on conditional symbol: useWinAnsi.
+Generate static wstring at compile-time for static string.
 
 </dd>
 
@@ -2308,6 +2319,16 @@ Fill string by buffer.
 
 
 </dd>
+<dt id="L"><a name="L.t,string"></a><pre><span class="Keyword">template</span> <span class="Identifier">L</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<dd>
+Same as +$ for dynamic string.
+
+</dd>
+<dt id="T"><a name="T.t,string"></a><pre><span class="Keyword">template</span> <span class="Identifier">T</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<dd>
+Generate wstring or mstring depend on conditional symbol: useWinAnsi.
+
+</dd>
 <dt id="T"><a name="T.t,Natural"></a><pre><span class="Keyword">template</span> <span class="Identifier">T</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">Natural</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
 Generate wstring or mstring buffer depend on conditional symbol: useWinAnsi. Use <cite>&amp;</cite> to get the buffer address and then pass to Windows API.
@@ -2323,7 +2344,7 @@ Generate wstring or mstring buffer depend on conditional symbol: useWinAnsi. Use
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-07-28 03:32:42 UTC</small>
+        <small>Made with Nim. Generated: 2018-08-04 13:22:49 UTC</small>
       </div>
     </div>
   </div>

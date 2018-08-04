@@ -12,17 +12,17 @@ import inc/windef
 
 # todo: need more converter?
 
-converter winim_converter*(x: bool): BOOL =
+converter winimConverterBooleanToBOOL*(x: bool): BOOL =
   ## Converter between Windows' BOOL/WINBOOL and Nim's boolean type
 
   result = if x: TRUE else: FALSE
 
-converter winim_converter*(x: BOOL): bool =
+converter winimConverterBOOLToBoolean*(x: BOOL): bool =
   ## Converter between Windows' BOOL/WINBOOL and Nim's boolean type
 
   result = if x == FALSE: false else: true
 
-converter winim_converter*[T: object](x: var T): ptr T =
+converter winimConverterVarObjectToPtrObject*[T: object](x: var T): ptr T =
   ## Pass an object by address if target is "ptr object". For example:
   ##
   ## .. code-block:: Nim
