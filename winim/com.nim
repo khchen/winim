@@ -44,8 +44,8 @@
 
 import strutils, macros
 
-import utils, winstr, core, shell, ole
-export utils, winstr, core, shell, ole
+import inc/winimbase, utils, winstr, core, shell, ole
+export winimbase, utils, winstr, core, shell, ole
 
 
 #todo: is it a good idea to do global initialize here?
@@ -82,6 +82,7 @@ discard &IID_NULL
 discard &IID_IEnumVARIANT
 discard &IID_IClassFactory
 discard &IID_IDispatch
+discard &IID_ITypeInfo
 
 type
   com* = ref object
@@ -120,7 +121,7 @@ proc newCOMException(msg: string, hr: HRESULT = hresult): ref COMException =
   result = newException(COMException, msg)
   result.hresult = hr
 
-proc getCurrentCOMError*(): ref COMError =
+proc getCurrentCOMError*(): ref COMError {.inline.} =
   result = (ref COMError)(getCurrentException())
 
 proc desc*(e: ref COMError): string =
@@ -246,7 +247,7 @@ proc typeDesc(vt: VARTYPE, d: UINT = 0): string =
 proc vcErrorMsg(f: string, t: string = nil): string =
   "convert from " & f & " to " & (if t.isNil: f else: t)
 
-proc rawType*(x: variant): VARTYPE =
+proc rawType*(x: variant): VARTYPE {.inline.} =
   result = x.raw.vt
 
 proc rawTypeDesc*(x: variant): string =
@@ -261,14 +262,14 @@ proc newCom*(x: ptr IDispatch): com =
   x.AddRef()
   result.disp = x
 
-proc copy*(x: com): com =
+proc copy*(x: com): com {.inline.} =
   if x.notNil:
     result = newCom(x.disp)
 
-proc warp*(x: ptr IDispatch): com =
+proc wrap*(x: ptr IDispatch): com {.inline.} =
   result = newCom(x)
 
-proc unwarp*(x: com): ptr IDispatch =
+proc unwrap*(x: com): ptr IDispatch {.inline.} =
   result = x.disp
 
 proc newVariant*(x: VARIANT): variant =
@@ -720,7 +721,7 @@ proc fromVariant*[T](x: variant): T =
       elif T is char:         result = char(ret.bVal)
       elif T is bool:         result = if ret.boolVal != 0: true else: false
 
-proc `$`*(x: variant): string = fromVariant[string](x)
+proc `$`*(x: variant): string {.inline.} = fromVariant[string](x)
 converter variantConverterToString*(x: variant): string = fromVariant[string](x)
 converter variantConverterToCString*(x: variant): cstring = fromVariant[cstring](x)
 converter variantConverterToMString*(x: variant): mstring = fromVariant[mstring](x)
@@ -750,6 +751,69 @@ converter variantConverterToCOMArray1D*(x: variant): COMArray1D = fromVariant[CO
 converter variantConverterToCOMArray2D*(x: variant): COMArray2D = fromVariant[COMArray2D](x)
 converter variantConverterToCOMArray3D*(x: variant): COMArray3D = fromVariant[COMArray3D](x)
 
+proc getEnumeration(self: com, name: string): variant =
+  var
+    tinfo: ptr ITypeInfo
+    tlib: ptr ITypeLib
+    index: UINT
+    kind: TYPEKIND
+    bname: BSTR
+
+  if self.disp.GetTypeInfo(0, 0, &tinfo).ERR: return
+  defer: tinfo.Release()
+
+  if tinfo.GetContainingTypeLib(&tlib, &index).ERR: return
+  defer: tlib.Release()
+
+  for i in 0..<tlib.GetTypeInfoCount():
+    if tlib.GetTypeInfoType(UINT i, &kind).ERR: continue
+    if kind != TKIND_ENUM: continue
+    if tlib.GetDocumentation(UINT i, &bname, nil, nil, nil).ERR: continue
+    defer: SysFreeString(bname)
+
+    if name.cmpIgnoreCase($bname) == 0:
+      var tinfoEnum: ptr ITypeInfo
+      if tlib.GetTypeInfo(UINT i, &tinfoEnum).OK:
+        defer: tinfoEnum.Release()
+
+        # save ITypeInfo into variant as IUnknown
+        return toVariant((ptr IUnknown)(tinfoEnum))
+
+proc getVariantTypeInfo(x: variant): ptr ITypeInfo =
+  if x.raw.vt == VT_UNKNOWN and x.raw.punkVal.QueryInterface(&IID_ITypeInfo, &result).OK:
+    return result
+  else:
+    return nil
+
+iterator items(tinfo: ptr ITypeInfo, keyOnly=true): tuple[key: string, value: variant] =
+  var
+    attr: ptr TYPEATTR
+    desc: ptr VARDESC
+    name: BSTR
+    nameCount: UINT
+
+  if tinfo.GetTypeAttr(&attr).OK:
+    defer: tinfo.ReleaseTypeAttr(attr)
+
+    for i in 0..<int attr.cVars:
+      if tinfo.GetVarDesc(UINT i, &desc).OK:
+        defer: tinfo.ReleaseVarDesc(desc)
+
+        if desc.varkind == VAR_CONST:
+          if tinfo.GetNames(desc.memid, &name, 1, &nameCount).OK:
+            defer: SysFreeString(name)
+            if keyOnly:
+              yield ($name, nil)
+            else:
+              yield ($name, toVariant(desc[].lpvarValue[]))
+
+proc getValue(tinfo: ptr ITypeInfo, name: string): variant =
+  for tup in tinfo.items(keyOnly=false):
+    if tup.key == name:
+      return tup.value
+
+  raise newCOMError("constant not found: " & name)
+
 proc invokeRaw(self: com, name: string, invokeType: WORD, vargs: varargs[variant, toVariant]): variant =
   if vargs.len > 128:
     raise newCOMError("too mary parameters", DISP_E_BADPARAMCOUNT)
@@ -776,6 +840,10 @@ proc invokeRaw(self: com, name: string, invokeType: WORD, vargs: varargs[variant
   defer: free(wstr)
 
   if self.disp.GetIDsOfNames(&IID_NULL, cast[ptr LPOLESTR](&pwstr), 1, LOCALE_USER_DEFAULT, &dispid).ERR:
+    # if the method name is not recognized, maybe it is an enum name
+    result = getEnumeration(self, name)
+    if result != nil: return
+
     raise newCOMError("unsupported method: " & name)
 
   if vargs.len != 0:
@@ -815,19 +883,19 @@ proc invoke(self: com, name: string, invokeType: WORD, vargs: varargs[variant, t
 
   result = obj.invokeRaw(list[list.high], invokeType, vargs)
 
-proc call*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable.} =
+proc call*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable, inline.} =
   result = invoke(self, name, DISPATCH_METHOD, vargs)
 
-proc set*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable.} =
+proc set*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable, inline.} =
   result = invoke(self, name, DISPATCH_PROPERTYPUT, vargs)
 
-proc setRef*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable.} =
+proc setRef*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable, inline.} =
   result = invoke(self, name, DISPATCH_PROPERTYPUTREF, vargs)
 
-proc get*(self: com, name: string, vargs: varargs[variant, toVariant]): variant =
+proc get*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.inline.} =
   result = invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
 
-proc getT*[T](self: com, name: string, vargs: varargs[variant, toVariant]): T =
+proc getT*[T](self: com, name: string, vargs: varargs[variant, toVariant]): T {.inline.} =
   result = fromVariant[T](invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs))
 
 iterator items*(x: com): variant =
@@ -850,9 +918,16 @@ iterator items*(x: com): variant =
   ret.punkVal.Release()
 
 iterator items*(x: variant): variant =
-  var obj = x.com
-  for v in obj:
-    yield v
+  var tinfo = x.getVariantTypeInfo()
+  if tinfo.notNil:
+    defer: tinfo.Release()
+    for tup in tinfo.items(keyOnly=true):
+      yield toVariant(tup.key)
+
+  else:
+    var obj = x.com
+    for v in obj:
+      yield v
 
 proc GetCLSID(progId: string, clsid: var GUID): HRESULT =
   if progId[0] == '{':
@@ -911,10 +986,10 @@ proc GetObject*(file: string, progId: string = nil): com =
 
   raise newCOMError("unable to get object")
 
-proc newCom*(progId: string): com =
+proc newCom*(progId: string): com {.inline.} =
   result = CreateObject(progId)
 
-proc newCom*(file, progId: string): com =
+proc newCom*(file, progId: string): com {.inline.} =
   result = GetObject(file, progId)
 
 type
@@ -974,7 +1049,7 @@ proc Sink_Invoke(self: ptr IDispatch, dispid: DISPID, riid: REFIID, lcid: LCID, 
     nameCount: UINT
     vret: variant
     name: string
-    args = cast[ref array[100_000, VARIANT]](params.rgvarg)
+    args = cast[ptr UncheckedArray[VARIANT]](params.rgvarg)
     sargs = newSeq[variant]()
     total = params.cArgs + params.cNamedArgs
 
@@ -1018,7 +1093,6 @@ proc newSink(parent: com, iid: GUID, typeInfo: ptr ITypeInfo, handler: comEventH
   result.typeInfo = typeInfo
   typeInfo.AddRef()
   result.handler = handler
-
 
 proc connectRaw(self: com, riid: REFIID = nil, cookie: DWORD, handler: comEventHandler = nil): DWORD =
   var
@@ -1088,27 +1162,32 @@ proc disconnect*(self: com, cookie: DWORD, riid: REFIID = nil): bool {.discardab
   if cookie != 0 and connectRaw(self, riid, cookie, nil) != 0:
     result = true
 
-when defined(nimNewDot): # for v0.18
-  proc discardable(v: variant): variant {.discardable, inline.} = v
+template `.`*(self: com, name: untyped, vargs: varargs[variant, toVariant]): variant =
+  discardable invoke(self, astToStr(name), DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
 
-  template `.`*(self: com, name: untyped, vargs: varargs[variant, toVariant]): variant =
-    discardable invoke(self, astToStr(name), DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
+template `.=`*(self: com, name: untyped, vargs: varargs[variant, toVariant]): variant =
+  discardable invoke(self, astToStr(name), DISPATCH_PROPERTYPUT, vargs)
 
-  template `.=`*(self: com, name: untyped, vargs: varargs[variant, toVariant]): variant =
-    discardable invoke(self, astToStr(name), DISPATCH_PROPERTYPUT, vargs)
+template `.()`*(self: com, name: untyped, vargs: varargs[variant, toVariant]): variant =
+  discardable invoke(self, astToStr(name), DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
 
-  template `.()`*(self: com, name: untyped, vargs: varargs[variant, toVariant]): variant =
-    discardable invoke(self, astToStr(name), DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
+proc `[]`*(self: variant, name: string): variant =
+  var tinfo = self.getVariantTypeInfo()
+  if tinfo.notNil:
+    defer: tinfo.Release()
+    return tinfo.getValue(name)
 
-else:
-  proc `.`*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable, inline.} =
-    result = invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
+  else:
+    return `.`(fromVariant[com](self), name)
 
-  proc `.=`*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable, inline.} =
-    result = invoke(self, name, DISPATCH_PROPERTYPUT, vargs)
+template `[]`*(self: com, name: string): variant =
+  discardable invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET)
 
-  proc `.()`*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable, inline.} =
-    result = invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
+template `[]=`*(self: com, name: string, v: untyped) =
+  discardable invoke(self, name, DISPATCH_PROPERTYPUT, toVariant(v))
+
+template `.`*(self: variant, name: untyped): variant =
+  discardable `[]`(self, astToStr(name))
 
 proc comReformat(n: NimNode): NimNode =
   # reformat code: a.b.c(d, e) = f becomes a.b.c.set(d, e, f)

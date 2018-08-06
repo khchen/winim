@@ -8,6 +8,8 @@
 Version 2.4
 -----------
 # Using '/' instead of '.' to import paths.
+# com: Add `[]` and `[]=` to access com object.
+# com: Add ability to access COM object constants.
 # winstr: Add TString and TChar.
 
 Version 2.3
