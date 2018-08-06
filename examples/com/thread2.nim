@@ -16,13 +16,13 @@ proc thread(cookie: DWORD) =
   var git = getGit()
   var disp: ptr IDispatch
   if SUCCEEDED git.GetInterfaceFromGlobal(cookie, &IID_IDispatch, cast[ptr pointer](&disp)):
-    var dict = warp(disp)
+    var dict = wrap(disp)
     dict.add("child", "thread")
     disp.Release()
 
 var git = getGit()
 var cookie: DWORD
-if SUCCEEDED git.RegisterInterfaceInGlobal(unwarp(dict), &IID_IDispatch, &cookie):
+if SUCCEEDED git.RegisterInterfaceInGlobal(unwrap(dict), &IID_IDispatch, &cookie):
   spawn thread(cookie)
   sync()
 

@@ -1249,12 +1249,12 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#16" id="66">Converters</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#winim_converter.c,bool"
-    title="winim_converter(x: bool): BOOL"><wbr />winim_<wbr />converter<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#winim_converter.c,BOOL_2"
-    title="winim_converter(x: BOOL): bool"><wbr />winim_<wbr />converter<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#winim_converter.c,T"
-    title="winim_converter[T: object](x: var T): ptr T"><wbr />winim_<wbr />converter<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#winimConverterBooleanToBOOL.c,bool"
+    title="winimConverterBooleanToBOOL(x: bool): BOOL"><wbr />winim<wbr />Converter<wbr />Boolean<wbr />To<wbr />BOOL<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#winimConverterBOOLToBoolean.c,BOOL"
+    title="winimConverterBOOLToBoolean(x: BOOL): bool"><wbr />winim<wbr />Converter<wbr />BOOLTo<wbr />Boolean<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#winimConverterVarObjectToPtrObject.c,T"
+    title="winimConverterVarObjectToPtrObject[T: object](x: var T): ptr T"><wbr />winim<wbr />Converter<wbr />Var<wbr />Object<wbr />To<wbr />Ptr<wbr />Object<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1291,17 +1291,17 @@ Use <cite>&amp;</cite> like it in C/C++ to get address for anything.
 <div class="section" id="16">
 <h1><a class="toc-backref" href="#16">Converters</a></h1>
 <dl class="item">
-<dt id="winim_converter"><a name="winim_converter.c,bool"></a><pre><span class="Keyword">converter</span> <span class="Identifier">winim_converter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">BOOL</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="winimConverterBooleanToBOOL"><a name="winimConverterBooleanToBOOL.c,bool"></a><pre><span class="Keyword">converter</span> <span class="Identifier">winimConverterBooleanToBOOL</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">BOOL</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Converter between Windows' BOOL/WINBOOL and Nim's boolean type
 
 </dd>
-<dt id="winim_converter"><a name="winim_converter.c,BOOL_2"></a><pre><span class="Keyword">converter</span> <span class="Identifier">winim_converter</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">BOOL</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="winimConverterBOOLToBoolean"><a name="winimConverterBOOLToBoolean.c,BOOL"></a><pre><span class="Keyword">converter</span> <span class="Identifier">winimConverterBOOLToBoolean</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">BOOL</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Converter between Windows' BOOL/WINBOOL and Nim's boolean type
 
 </dd>
-<dt id="winim_converter"><a name="winim_converter.c,T"></a><pre><span class="Keyword">converter</span> <span class="Identifier">winim_converter</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">:</span> <span class="Keyword">object</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">T</span></pre></dt>
+<dt id="winimConverterVarObjectToPtrObject"><a name="winimConverterVarObjectToPtrObject.c,T"></a><pre><span class="Keyword">converter</span> <span class="Identifier">winimConverterVarObjectToPtrObject</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">:</span> <span class="Keyword">object</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">T</span></pre></dt>
 <dd>
 Pass an object by address if target is &quot;ptr object&quot;. For example:<pre class="listing"><span class="Keyword">var</span> <span class="Identifier">msg</span><span class="Punctuation">:</span> <span class="Identifier">MSG</span>
 <span class="Keyword">while</span> <span class="Identifier">GetMessage</span><span class="Punctuation">(</span><span class="Identifier">msg</span><span class="Punctuation">,</span> <span class="DecNumber">0</span><span class="Punctuation">,</span> <span class="DecNumber">0</span><span class="Punctuation">,</span> <span class="DecNumber">0</span><span class="Punctuation">)</span> <span class="Operator">!=</span> <span class="DecNumber">0</span><span class="Punctuation">:</span>
@@ -1331,7 +1331,7 @@ Template to get pointer for const object. For example:<pre class="listing"><span
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-08-04 13:22:55 UTC</small>
+        <small>Made with Nim. Generated: 2018-08-06 20:12:32 UTC</small>
       </div>
     </div>
   </div>

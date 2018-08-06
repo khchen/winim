@@ -7,12 +7,12 @@ dict.add("main", "thread")
 proc thread(stream: ptr IStream) =
   var disp: ptr IDispatch
   if SUCCEEDED CoGetInterfaceAndReleaseStream(stream, &IID_IDispatch, cast[ptr pointer](&disp)):
-    var dict = warp(disp)
+    var dict = wrap(disp)
     dict.add("child", "thread")
     disp.Release()
 
 var stream: ptr IStream
-if SUCCEEDED CoMarshalInterThreadInterfaceInStream(&IID_IDispatch, unwarp(dict), &stream):
+if SUCCEEDED CoMarshalInterThreadInterfaceInStream(&IID_IDispatch, unwrap(dict), &stream):
   spawn thread(stream)
   sync()
 
