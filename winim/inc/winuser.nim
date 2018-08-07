@@ -5351,24 +5351,24 @@ when winimCpu64:
   const
     CONSOLE_APPLICATION_16BIT* = 0x0000
     GUI_16BITTASK* = 0x00000000
-  proc GetWindowLongPtrA*(hWnd: HWND, nIndex: int32): LONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc.}
-  proc GetWindowLongPtrW*(hWnd: HWND, nIndex: int32): LONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc.}
-  proc SetWindowLongPtrA*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): LONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc.}
-  proc SetWindowLongPtrW*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): LONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc.}
-  proc GetClassLongPtrA*(hWnd: HWND, nIndex: int32): ULONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc.}
-  proc GetClassLongPtrW*(hWnd: HWND, nIndex: int32): ULONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc.}
-  proc SetClassLongPtrA*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): ULONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc.}
-  proc SetClassLongPtrW*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): ULONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc.}
+  proc GetWindowLongPtrA*(hWnd: HWND, nIndex: int32): LONG_PTR {.winapi, stdcall, dynlib: "user32", importc.}
+  proc GetWindowLongPtrW*(hWnd: HWND, nIndex: int32): LONG_PTR {.winapi, stdcall, dynlib: "user32", importc.}
+  proc SetWindowLongPtrA*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): LONG_PTR {.winapi, stdcall, dynlib: "user32", importc.}
+  proc SetWindowLongPtrW*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): LONG_PTR {.winapi, stdcall, dynlib: "user32", importc.}
+  proc GetClassLongPtrA*(hWnd: HWND, nIndex: int32): ULONG_PTR {.winapi, stdcall, dynlib: "user32", importc.}
+  proc GetClassLongPtrW*(hWnd: HWND, nIndex: int32): ULONG_PTR {.winapi, stdcall, dynlib: "user32", importc.}
+  proc SetClassLongPtrA*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): ULONG_PTR {.winapi, stdcall, dynlib: "user32", importc.}
+  proc SetClassLongPtrW*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): ULONG_PTR {.winapi, stdcall, dynlib: "user32", importc.}
 when winimUnicode and winimCpu64:
-  proc GetWindowLongPtr*(hWnd: HWND, nIndex: int32): LONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc: "GetWindowLongPtrW".}
-  proc SetWindowLongPtr*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): LONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc: "SetWindowLongPtrW".}
-  proc GetClassLongPtr*(hWnd: HWND, nIndex: int32): ULONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc: "GetClassLongPtrW".}
-  proc SetClassLongPtr*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): ULONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc: "SetClassLongPtrW".}
+  proc GetWindowLongPtr*(hWnd: HWND, nIndex: int32): LONG_PTR {.winapi, stdcall, dynlib: "user32", importc: "GetWindowLongPtrW".}
+  proc SetWindowLongPtr*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): LONG_PTR {.winapi, stdcall, dynlib: "user32", importc: "SetWindowLongPtrW".}
+  proc GetClassLongPtr*(hWnd: HWND, nIndex: int32): ULONG_PTR {.winapi, stdcall, dynlib: "user32", importc: "GetClassLongPtrW".}
+  proc SetClassLongPtr*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): ULONG_PTR {.winapi, stdcall, dynlib: "user32", importc: "SetClassLongPtrW".}
 when winimAnsi and winimCpu64:
-  proc GetWindowLongPtr*(hWnd: HWND, nIndex: int32): LONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc: "GetWindowLongPtrA".}
-  proc SetWindowLongPtr*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): LONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc: "SetWindowLongPtrA".}
-  proc GetClassLongPtr*(hWnd: HWND, nIndex: int32): ULONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc: "GetClassLongPtrA".}
-  proc SetClassLongPtr*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): ULONG_PTR {.winapi, xpincompatible, stdcall, dynlib: "user32", importc: "SetClassLongPtrA".}
+  proc GetWindowLongPtr*(hWnd: HWND, nIndex: int32): LONG_PTR {.winapi, stdcall, dynlib: "user32", importc: "GetWindowLongPtrA".}
+  proc SetWindowLongPtr*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): LONG_PTR {.winapi, stdcall, dynlib: "user32", importc: "SetWindowLongPtrA".}
+  proc GetClassLongPtr*(hWnd: HWND, nIndex: int32): ULONG_PTR {.winapi, stdcall, dynlib: "user32", importc: "GetClassLongPtrA".}
+  proc SetClassLongPtr*(hWnd: HWND, nIndex: int32, dwNewLong: LONG_PTR): ULONG_PTR {.winapi, stdcall, dynlib: "user32", importc: "SetClassLongPtrA".}
 when winimCpu32:
   const
     CONSOLE_APPLICATION_16BIT* = 0x0001
