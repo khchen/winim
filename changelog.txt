@@ -5,6 +5,10 @@
 
 ====================================================================
 
+Version 2.4.1
+-------------
+# com: A critical bug about dot operator fixed.
+
 Version 2.4
 -----------
 # Using '/' instead of '.' to import paths.

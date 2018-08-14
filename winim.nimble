@@ -1,6 +1,6 @@
 # Package
 
-version       = "2.4"
+version       = "2.4.1"
 author        = "Ward"
 description   = "Winim - Nim\'s Windows API and COM Library"
 license       = "MIT"

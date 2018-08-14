@@ -1178,7 +1178,7 @@ proc `[]`*(self: variant, name: string): variant =
     return tinfo.getValue(name)
 
   else:
-    return `.`(fromVariant[com](self), name)
+    return invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET)
 
 template `[]`*(self: com, name: string): variant =
   discardable invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET)
