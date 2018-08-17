@@ -5,6 +5,10 @@
 
 ====================================================================
 
+Version 2.4.2
+-------------
+# winuser: fix bugs about MAKEINTRESOURCE template.
+
 Version 2.4.1
 -------------
 # com: A critical bug about dot operator fixed.
