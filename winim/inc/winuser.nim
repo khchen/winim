@@ -1113,7 +1113,7 @@ type
     dwWant*: DWORD
     dwBlock*: DWORD
   PGESTURECONFIG* = ptr GESTURECONFIG
-template MAKEINTRESOURCE*(i: untyped): untyped = cast[LPTSTR](i)
+template MAKEINTRESOURCE*(i: untyped): untyped = cast[LPTSTR](cast[WORD](i))
 const
   RT_CURSOR* = MAKEINTRESOURCE(1)
   RT_BITMAP* = MAKEINTRESOURCE(2)
@@ -4799,8 +4799,8 @@ proc PostAppMessageA*(idThread: DWORD, Msg: UINT, wParam: WPARAM, lParam: LPARAM
 proc PostAppMessageW*(idThread: DWORD, Msg: UINT, wParam: WPARAM, lParam: LPARAM): WINBOOL {.winapi, stdcall, dynlib: "user32", importc: "PostThreadMessageW".}
 proc GetNextWindow*(hWnd: HWND, uCmd: UINT): HWND {.winapi, stdcall, dynlib: "user32", importc: "GetWindow".}
 proc CopyCursor*(hIcon: HICON): HICON {.winapi, stdcall, dynlib: "user32", importc: "CopyIcon".}
-template MAKEINTRESOURCEA*(i: untyped): untyped = cast[LPSTR](i)
-template MAKEINTRESOURCEW*(i: untyped): untyped = cast[LPWSTR](i)
+template MAKEINTRESOURCEA*(i: untyped): untyped = cast[LPSTR](cast[WORD](i))
+template MAKEINTRESOURCEW*(i: untyped): untyped = cast[LPWSTR](cast[WORD](i))
 template IS_INTRESOURCE*(r: untyped): bool = cast[int](r) shr 16 == 0
 template GET_APPCOMMAND_LPARAM*(lParam: untyped): SHORT = cast[SHORT](HIWORD(lParam) and (not WORD FAPPCOMMAND_MASK))
 template GET_DEVICE_LPARAM*(lParam: untyped): WORD = HIWORD(lParam) and WORD FAPPCOMMAND_MASK
