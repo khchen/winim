@@ -2730,7 +2730,7 @@ template RtlZeroMemory*(Destination: PVOID, Length: SIZE_T) = zeroMem(Destinatio
 template ZeroMemory*(Destination: PVOID, Length: SIZE_T) = zeroMem(Destination, Length)
 template RtlCopyMemory*(Destination: PVOID, Source: PVOID, Length: SIZE_T) = copyMem(Destination, Source, Length)
 template CopyMemory*(Destination: PVOID, Source: PVOID, Length: SIZE_T) = copyMem(Destination, Source, Length)
-template MAKEINTATOM*(i: untyped): untyped = cast[LPTSTR](cast[WORD](i))
+template MAKEINTATOM*(i: untyped): untyped = cast[LPTSTR](i and 0xffff)
 proc LocalDiscard*(h: HLOCAL): HLOCAL {.winapi, inline.} = LocalReAlloc(h, 0, LMEM_MOVEABLE)
 proc GlobalDiscard*(h: HGLOBAL): HGLOBAL {.winapi, inline.} = GlobalReAlloc(h, 0, GMEM_MOVEABLE)
 when winimAnsi:
