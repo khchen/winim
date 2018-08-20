@@ -9313,11 +9313,13 @@ template LANGIDFROMLCID*(lcid: untyped): WORD = WORD(lcid and 0xffff)
 template SORTIDFROMLCID*(lcid: untyped): WORD = WORD((lcid shr 16) and 0xf)
 template SORTVERSIONFROMLCID*(lcid: untyped): WORD = WORD((lcid shr 20) and 0xf)
 template MAKEWORD*(a: untyped, b: untyped): WORD = WORD((b and 0xff) shl 8) or WORD(a and 0xff)
-template MAKELONG*(a: untyped, b: untyped): DWORD = DWORD((b and 0xffff) shl 16) or DWORD(a and 0xffff)
+template MAKELONG*(a: untyped, b: untyped): DWORD = cast[DWORD](b shl 16) or DWORD(a and 0xffff)
 template LOWORD*(l: untyped): WORD = WORD(l and 0xffff)
 template HIWORD*(l: untyped): WORD = WORD((l shr 16) and 0xffff)
 template LOBYTE*(w: untyped): BYTE = BYTE(w and 0xff)
 template HIBYTE*(w: untyped): BYTE = BYTE((w shr 8) and 0xff)
+template GET_X_LPARAM*(x: untyped): int = int cast[int16](LOWORD(x))
+template GET_Y_LPARAM*(x: untyped): int = int cast[int16](HIWORD(x))
 template IS_UNWINDING*(f: untyped): bool = (f and EXCEPTION_UNWIND) != 0
 template IS_DISPATCHING*(f: untyped): bool = (f and EXCEPTION_UNWIND) == 0
 template IS_TARGET_UNWIND*(f: untyped): bool = (f and EXCEPTION_TARGET_UNWIND) != 0
