@@ -27,8 +27,8 @@ type
   PUINT8* = ptr uint8
   UINT16* = uint16
   PUINT16* = ptr uint16
-  UINT32* = int32
-  PUINT32* = ptr int32
+  UINT32* = uint32
+  PUINT32* = ptr uint32
   UINT64* = uint64
   PUINT64* = ptr uint64
   LONG32* = int32
@@ -88,8 +88,8 @@ type
   LPLONG* = ptr int32
   LPVOID* = pointer
   LPCVOID* = pointer
-  UINT* = int32
-  PUINT* = ptr int32
+  UINT* = uint32
+  PUINT* = ptr uint32
   UCSCHAR* = int32
   PZZSTR* = cstring
   PCZZSTR* = cstring
@@ -217,8 +217,8 @@ when winimCpu32:
   type
     INT_PTR* = int32
     PINT_PTR* = ptr int32
-    UINT_PTR* = int32
-    PUINT_PTR* = ptr int32
+    UINT_PTR* = uint32
+    PUINT_PTR* = ptr uint32
     LONG_PTR* = int32
     PLONG_PTR* = ptr int32
     ULONG_PTR* = int32
