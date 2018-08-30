@@ -8,6 +8,7 @@
 Version 2.4.2
 -------------
 # winuser: fix bugs about MAKEINTRESOURCE template.
+# commctrl: fix bugs about templates use NULL for handle (should be 0).
 
 Version 2.4.1
 -------------
