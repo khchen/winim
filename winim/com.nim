@@ -47,14 +47,6 @@ import strutils, macros
 import inc/winimbase, utils, winstr, core, shell, ole
 export winimbase, utils, winstr, core, shell, ole
 
-
-#todo: is it a good idea to do global initialize here?
-# however, it works fine.
-when compileOption("threads"):
-  discard CoInitializeEx(nil, COINIT_MULTITHREADED)
-else:
-  discard CoInitialize(nil)
-
 when defined(notrace):
   const hasTraceTable = false
 else:
@@ -104,14 +96,15 @@ when hasTraceTable:
     varTrace {.threadvar.}: TableRef[pointer, bool]
 
 var hresult {.threadvar.}: HRESULT
+var isInitialized {.threadvar.}: bool
 
 template ERR(x: HRESULT): bool =
   hresult = x
-  hresult.FAILED()
+  hresult != S_OK
 
 template OK(x: HRESULT): bool =
   hresult = x
-  hresult.SUCCEEDED()
+  hresult == S_OK
 
 proc newCOMError(msg: string, hr: HRESULT = hresult): ref COMError =
   result = newException(COMError, msg)
@@ -151,6 +144,11 @@ proc del*(x: variant) =
     discard VariantClear(&x.raw)
 
 template init(x): untyped =
+  # lazy initialize, in case of the it need different apartment or OleInitialize
+  if not isInitialized:
+    CoInitialize(nil)
+    isInitialized = true
+
   new(x, del)
 
   when hasTraceTable:
@@ -271,6 +269,9 @@ proc wrap*(x: ptr IDispatch): com {.inline.} =
 
 proc unwrap*(x: com): ptr IDispatch {.inline.} =
   result = x.disp
+
+proc unwrap*(x: variant): VARIANT {.inline.} =
+  result = x.raw
 
 proc newVariant*(x: VARIANT): variant =
   result.init
@@ -508,9 +509,9 @@ template fromVariant1D(x, dimensions: typed) =
     vt: VARTYPE
     xUbound, xLbound: LONG
 
-  if SafeArrayGetVartype(x.raw.parray, &vt).SUCCEEDED and dimensions == 1 and
-    SafeArrayGetLBound(x.raw.parray, 1, &xLbound).SUCCEEDED and
-    SafeArrayGetUBound(x.raw.parray, 1, &xUbound).SUCCEEDED:
+  if SafeArrayGetVartype(x.raw.parray, &vt) == S_OK and dimensions == 1 and
+    SafeArrayGetLBound(x.raw.parray, 1, &xLbound) == S_OK and
+    SafeArrayGetUBound(x.raw.parray, 1, &xUbound) == S_OK:
 
     var xLen = xUbound - xLbound + 1
     newSeq(result, xLen)
@@ -532,11 +533,11 @@ template fromVariant2D(x, dimensions: typed) =
     xUbound, xLbound: LONG
     yUbound, yLbound: LONG
 
-  if SafeArrayGetVartype(x.raw.parray, &vt).SUCCEEDED and dimensions == 2 and
-    SafeArrayGetLBound(x.raw.parray, 1, &xLbound).SUCCEEDED and
-    SafeArrayGetUBound(x.raw.parray, 1, &xUbound).SUCCEEDED and
-    SafeArrayGetLBound(x.raw.parray, 2, &yLbound).SUCCEEDED and
-    SafeArrayGetUBound(x.raw.parray, 2, &yUbound).SUCCEEDED:
+  if SafeArrayGetVartype(x.raw.parray, &vt) == S_OK and dimensions == 2 and
+    SafeArrayGetLBound(x.raw.parray, 1, &xLbound) == S_OK and
+    SafeArrayGetUBound(x.raw.parray, 1, &xUbound) == S_OK and
+    SafeArrayGetLBound(x.raw.parray, 2, &yLbound) == S_OK and
+    SafeArrayGetUBound(x.raw.parray, 2, &yUbound) == S_OK:
 
     var
       xLen = xUbound - xLbound + 1
@@ -564,13 +565,13 @@ template fromVariant3D(x, dimensions: typed) =
     yUbound, yLbound: LONG
     zUbound, zLbound: LONG
 
-  if SafeArrayGetVartype(x.raw.parray, &vt).SUCCEEDED and dimensions == 3 and
-    SafeArrayGetLBound(x.raw.parray, 1, &xLbound).SUCCEEDED and
-    SafeArrayGetUBound(x.raw.parray, 1, &xUbound).SUCCEEDED and
-    SafeArrayGetLBound(x.raw.parray, 2, &yLbound).SUCCEEDED and
-    SafeArrayGetUBound(x.raw.parray, 2, &yUbound).SUCCEEDED and
-    SafeArrayGetLBound(x.raw.parray, 3, &zLbound).SUCCEEDED and
-    SafeArrayGetUBound(x.raw.parray, 3, &zUbound).SUCCEEDED:
+  if SafeArrayGetVartype(x.raw.parray, &vt) == S_OK and dimensions == 3 and
+    SafeArrayGetLBound(x.raw.parray, 1, &xLbound) == S_OK and
+    SafeArrayGetUBound(x.raw.parray, 1, &xUbound) == S_OK and
+    SafeArrayGetLBound(x.raw.parray, 2, &yLbound) == S_OK and
+    SafeArrayGetUBound(x.raw.parray, 2, &yUbound) == S_OK and
+    SafeArrayGetLBound(x.raw.parray, 3, &zLbound) == S_OK and
+    SafeArrayGetUBound(x.raw.parray, 3, &zUbound) == S_OK:
 
     var
       xLen = xUbound - xLbound + 1
@@ -1054,7 +1055,7 @@ proc Sink_Invoke(self: ptr IDispatch, dispid: DISPID, riid: REFIID, lcid: LCID, 
     total = params.cArgs + params.cNamedArgs
 
   result = this.typeInfo.GetNames(dispid, &bname, 1, &nameCount)
-  if result.SUCCEEDED:
+  if result == S_OK:
     name = $bname
     SysFreeString(bname)
 

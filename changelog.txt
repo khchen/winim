@@ -5,6 +5,15 @@
 
 ====================================================================
 
+Version 2.4.3
+-------------
+# com: call CoInitialize() only when needed. This allow the user to
+  selects different apartment or OleInitialize().
+# winbase: add InterlockedXXX functions.
+# example: add nimDispatch example. It create a IDispatch object on
+  local "running object table (ROT)". So that RPC via COM object is
+  achieved.
+
 Version 2.4.2
 -------------
 # winuser: fix bugs about MAKEINTRESOURCE template.

@@ -1,30 +1,31 @@
 import winim/com
 import threadpool
 
-proc getGit(): ptr IGlobalInterfaceTable =
-  const CLSID_StdGlobalInterfaceTable = DEFINE_GUID(0x00000323'i32, 0x0000, 0x0000,
-    [0xC0'u8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46])
+proc thread(stream: ptr IStream): bool =
+  CoInitialize(nil)
 
-  if FAILED CoCreateInstance(&CLSID_StdGlobalInterfaceTable, nil, CLSCTX_INPROC_SERVER,
-    &IID_IGlobalInterfaceTable, cast[ptr pointer](&result)):
-    raise
-
-var dict = CreateObject("Scripting.Dictionary")
-dict.add("main", "thread")
-
-proc thread(cookie: DWORD) =
-  var git = getGit()
   var disp: ptr IDispatch
-  if SUCCEEDED git.GetInterfaceFromGlobal(cookie, &IID_IDispatch, cast[ptr pointer](&disp)):
+  if SUCCEEDED CoGetInterfaceAndReleaseStream(stream, &IID_IDispatch, cast[ptr pointer](&disp)):
     var dict = wrap(disp)
     dict.add("child", "thread")
     disp.Release()
 
-var git = getGit()
-var cookie: DWORD
-if SUCCEEDED git.RegisterInterfaceInGlobal(unwrap(dict), &IID_IDispatch, &cookie):
-  spawn thread(cookie)
-  sync()
+  COM_FullRelease()
+  CoUninitialize()
 
-for key in dict:
-  echo key, " => ", dict.item(key)
+proc main() =
+  var dict = CreateObject("Scripting.Dictionary")
+  dict.add("main", "thread")
+
+  var stream: ptr IStream
+  if SUCCEEDED CoMarshalInterThreadInterfaceInStream(&IID_IDispatch, unwrap(dict), &stream):
+    var fv = spawn thread(stream)
+    var msg: MSG
+    while not fv.isReady():
+      if PeekMessage(&msg, 0, 0, 0, PM_REMOVE) != 0:
+        DispatchMessage(&msg)
+
+  for key in dict:
+    echo key, " => ", dict.item(key)
+
+main()

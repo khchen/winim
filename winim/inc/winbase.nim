@@ -2745,6 +2745,31 @@ proc LookupAccountSidLocalA*(Sid: PSID, Name: LPSTR, cchName: LPDWORD, Reference
 when winimUnicode:
   proc LookupAccountSid*(lpSystemName: LPCWSTR, Sid: PSID, Name: LPWSTR, cchName: LPDWORD, ReferencedDomainName: LPWSTR, cchReferencedDomainName: LPDWORD, peUse: PSID_NAME_USE): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc: "LookupAccountSidW".}
 proc LookupAccountSidLocalW*(Sid: PSID, Name: LPWSTR, cchName: LPDWORD, ReferencedDomainName: LPWSTR, cchReferencedDomainName: LPDWORD, peUse: PSID_NAME_USE): WINBOOL {.winapi, inline.} = LookupAccountSidW(nil, Sid, Name, cchName, ReferencedDomainName, cchReferencedDomainName, peUse)
+proc InterlockedOr*(Destination: ptr LONG, Value: LONG): LONG {.importc: "InterlockedOr", header: "<windows.h>".}
+proc InterlockedOr8*(Destination: ptr byte, Value: byte): byte {.importc: "InterlockedOr8", header: "<windows.h>".}
+proc InterlockedOr16*(Destination: ptr SHORT, Value: SHORT): SHORT {.importc: "InterlockedOr16", header: "<windows.h>".}
+proc InterlockedOr64*(Destination: ptr LONGLONG, Value: LONGLONG): LONGLONG {.importc: "InterlockedOr64", header: "<windows.h>".}
+proc InterlockedXor*(Destination: ptr LONG, Value: LONG): LONG {.importc: "InterlockedXor", header: "<windows.h>".}
+proc InterlockedXor8*(Destination: ptr byte, Value: byte): byte {.importc: "InterlockedXor8", header: "<windows.h>".}
+proc InterlockedXor16*(Destination: ptr SHORT, Value: SHORT): SHORT {.importc: "InterlockedXor16", header: "<windows.h>".}
+proc InterlockedXor64*(Destination: ptr LONGLONG, Value: LONGLONG): LONGLONG {.importc: "InterlockedXor64", header: "<windows.h>".}
+proc InterlockedAnd*(Destination: ptr LONG, Value: LONG): LONG {.importc: "InterlockedAnd", header: "<windows.h>".}
+proc InterlockedAnd8*(Destination: ptr byte, Value: byte): byte {.importc: "InterlockedAnd8", header: "<windows.h>".}
+proc InterlockedAnd16*(Destination: ptr SHORT, Value: SHORT): SHORT {.importc: "InterlockedAnd16", header: "<windows.h>".}
+proc InterlockedAnd64*(Destination: ptr LONGLONG, Value: LONGLONG): LONGLONG {.importc: "InterlockedAnd64", header: "<windows.h>".}
+proc InterlockedIncrement64*(Addend: ptr LONGLONG): LONGLONG {.importc: "InterlockedIncrement64", header: "<windows.h>".}
+proc InterlockedDecrement64*(Addend: ptr LONGLONG): LONGLONG {.importc: "InterlockedDecrement64", header: "<windows.h>".}
+proc InterlockedExchange64*(Target: ptr LONGLONG, Value: LONGLONG): LONGLONG {.importc: "InterlockedExchange64", header: "<windows.h>".}
+proc InterlockedExchangeAdd64*(Addend: ptr LONGLONG, Value: LONGLONG): LONGLONG {.importc: "InterlockedExchangeAdd64", header: "<windows.h>".}
+proc InterlockedCompareExchange64*(Destination: ptr LONGLONG, ExChange: LONGLONG, Comperand: LONGLONG): LONGLONG {.importc: "InterlockedCompareExchange64", header: "<windows.h>".}
+proc InterlockedCompare64Exchange128*(Destination: ptr LONG64, ExchangeHigh: LONG64, ExchangeLow: LONG64, Comperand: LONG64): LONG64 {.importc: "InterlockedCompare64Exchange128", header: "<windows.h>".}
+proc InterlockedIncrement*(Addend: ptr LONG): LONG {.importc: "InterlockedIncrement", header: "<windows.h>".}
+proc InterlockedDecrement*(Addend: ptr LONG): LONG {.importc: "InterlockedDecrement", header: "<windows.h>".}
+proc InterlockedExchange*(Target: ptr LONG, Value: LONG): LONG {.importc: "InterlockedExchange", header: "<windows.h>".}
+proc InterlockedExchangeAdd*(Addend: ptr LONG, Value: LONG): LONG {.importc: "InterlockedExchangeAdd", header: "<windows.h>".}
+proc InterlockedCompareExchange*(Destination: ptr LONG, ExChange: LONG, Comperand: LONG): LONG {.importc: "InterlockedCompareExchange", header: "<windows.h>".}
+proc InterlockedExchangePointer*(Target: ptr PVOID, Value: PVOID): PVOID {.importc: "InterlockedExchangePointer", header: "<windows.h>".}
+proc InterlockedCompareExchangePointer*(Destination: ptr PVOID, ExChange: PVOID, Comperand: PVOID): PVOID {.importc: "InterlockedCompareExchangePointer", header: "<windows.h>".}
 proc `Offset=`*(self: var OVERLAPPED, x: DWORD) {.inline.} = self.union1.struct1.Offset = x
 proc Offset*(self: OVERLAPPED): DWORD {.inline.} = self.union1.struct1.Offset
 proc Offset*(self: var OVERLAPPED): var DWORD {.inline.} = self.union1.struct1.Offset

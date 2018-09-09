@@ -1,10 +1,10 @@
 # Package
 
-version       = "2.4.2"
+version       = "2.4.3"
 author        = "Ward"
 description   = "Winim - Nim\'s Windows API and COM Library"
 license       = "MIT"
-skipDirs      = @["examples", "tests"]
+skipDirs      = @["examples", "tests", "docs"]
 
 # Dependencies
 

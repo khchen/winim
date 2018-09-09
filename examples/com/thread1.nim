@@ -1,20 +1,17 @@
 import winim/com
 import threadpool
 
-var dict = CreateObject("Scripting.Dictionary")
-dict.add("main", "thread")
+proc thread(dict: com) =
+  dict.add("child", "thread")
 
-proc thread(stream: ptr IStream) =
-  var disp: ptr IDispatch
-  if SUCCEEDED CoGetInterfaceAndReleaseStream(stream, &IID_IDispatch, cast[ptr pointer](&disp)):
-    var dict = wrap(disp)
-    dict.add("child", "thread")
-    disp.Release()
+proc main() =
+  var dict = CreateObject("Scripting.Dictionary")
+  dict.add("main", "thread")
 
-var stream: ptr IStream
-if SUCCEEDED CoMarshalInterThreadInterfaceInStream(&IID_IDispatch, unwrap(dict), &stream):
-  spawn thread(stream)
+  spawn thread(dict)
   sync()
 
-for key in dict:
-  echo key, " => ", dict.item(key)
+  for key in dict:
+    echo key, " => ", dict.item(key)
+
+main()
