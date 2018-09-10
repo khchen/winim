@@ -5,6 +5,10 @@
 
 ====================================================================
 
+Version 2.4.4
+-------------
+# Fix bug about using sizeof() incorrectly.
+
 Version 2.4.3
 -------------
 # com: call CoInitialize() only when needed. This allow the user to

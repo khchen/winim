@@ -2285,7 +2285,6 @@ const
   QNLEN* = NNLEN
   LM20_QNLEN* = LM20_NNLEN
   ALERTSZ* = 128
-  MAXDEVENTRIES* = sizeof(int)
   NETBIOS_NAME_LEN* = 16
   MAX_PREFERRED_LENGTH* = DWORD(-1)
   CRYPT_KEY_LEN* = 7
@@ -3846,6 +3845,7 @@ const
   DFS_MOVE_FLAG_REPLACE_IF_EXISTS* = 0x00000001
   PARM_ERROR_UNKNOWN* = DWORD(-1)
   USE_WILDCARD* = DWORD(-1)
+  MAXDEVENTRIES* = sizeof(int32)*8
 proc NetUserAdd*(servername: LPCWSTR, level: DWORD, buf: LPBYTE, parm_err: LPDWORD): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
 proc NetUserEnum*(servername: LPCWSTR, level: DWORD, filter: DWORD, bufptr: ptr LPBYTE, prefmaxlen: DWORD, entriesread: LPDWORD, totalentries: LPDWORD, resume_handle: LPDWORD): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}
 proc NetUserGetInfo*(servername: LPCWSTR, username: LPCWSTR, level: DWORD, bufptr: ptr LPBYTE): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc.}

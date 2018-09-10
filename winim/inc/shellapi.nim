@@ -17,6 +17,7 @@ import wininet
 import objbase
 import iphlpapi
 import commctrl
+import regstr
 #include <shellapi.h>
 #include <shlwapi.h>
 #include <shlobj.h>
@@ -3774,7 +3775,10 @@ const
   GPFIDL_UNCPRINTER* = 0x2
   OFASI_EDIT* = 0x0001
   OFASI_OPENDESKTOP* = 0x0002
-  REGSTR_PATH_SPECIAL_FOLDERS* = "\\Shell Folders"
+type
+  Shell* {.pure.} = object
+const
+  REGSTR_PATH_SPECIAL_FOLDERS* = REGSTR_PATH_EXPLORER & "\\Shell Folders"
   CSIDL_DESKTOP* = 0x0000
   CSIDL_INTERNET* = 0x0001
   CSIDL_PROGRAMS* = 0x0002
@@ -4583,7 +4587,6 @@ type
   ShellFolderItem* {.pure.} = object
   ShellLinkObject* {.pure.} = object
   ShellFolderView* {.pure.} = object
-  Shell* {.pure.} = object
   ShellDispatchInproc* {.pure.} = object
   FileSearchBand* {.pure.} = object
   DesktopWallpaper* {.pure.} = object
