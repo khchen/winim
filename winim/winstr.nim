@@ -278,7 +278,7 @@ proc `&`*(s: string): ptr char {.inline.} =
   ## Get address of the first char of a string.
   ## For string, it has the same meaning as cstring(string), but it checks the nil well.
 
-  if s.isNil:
+  if s.len == 0:
     result = nil
   else:
     result = cast[ptr char](cstring s)
@@ -459,7 +459,7 @@ proc `[]=`*(s: wstring, i: int, u: WCHAR|char) {.inline.} =
 proc `[]=`*(s: wstring, i: int, u: string) =
   if i >= s.length:
     raise newException(IndexError, "index out of bounds")
-  elif u.isNil or u.len == 0:
+  elif u.len == 0:
     s[i] = 0
   else:
     for ch in runes(u, u.len):
@@ -569,7 +569,6 @@ proc `<=` *(x: mstring, y: string): bool {.borrow.}
 proc `<` *(x, y: mstring): bool {.borrow.}
 proc substr*(s: mstring, first = 0): mstring {.borrow.}
 proc substr*(s: mstring, first, last: int): mstring {.borrow.}
-proc isNil(x: mstring): bool {.borrow.}
 
 proc setLen*(s: var mstring, newLen: Natural) {.inline.} =
   var pstr = cast[ptr string](s.unsafeaddr)
@@ -618,7 +617,7 @@ iterator pairs*(s: mstring): tuple[key: int, val: mstring] =
 
 proc repr*(s: mstring): string =
   result = $cast[int](s).tohex & "(mstring)\""
-  if not s.isNil:
+  if s.len > 0:
     for sub in s:
       if sub[0] == '\0':
         result &= "\\0"
