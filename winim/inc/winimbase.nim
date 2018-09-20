@@ -11,11 +11,11 @@ static:
   const winimPrivateDir = parentDir(currentSourcePath()) & r"\..\lib\"
 
   when defined(cpu64):
-    const resourceFile = "\"" & winimPrivateDir & "winim64.res\""
+    const resourceFile = winimPrivateDir & "winim64.res"
   else:
-    const resourceFile = "\"" & winimPrivateDir & "winim32.res\""
+    const resourceFile = winimPrivateDir & "winim32.res"
 
-  {.passL: resourceFile.}
+  {.link: resourceFile.}
 
 macro winapi*(x: untyped): untyped =
   when not defined(win_no_discardable):

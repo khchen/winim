@@ -5,6 +5,13 @@
 
 ====================================================================
 
+Version 2.5
+-----------
+# winstr: Fix nil issue for string in devel compiler. Now it won't
+  allow nil for string anymore. This change maybe break the code
+  if it has different behavior between nil and empty string.
+# Add support to Tiny C Compiler. See readme in tcclib.
+
 Version 2.4.4
 -------------
 # Fix bug about using sizeof() incorrectly.
