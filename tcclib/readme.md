@@ -30,7 +30,7 @@ or
     nim c --cc:tcc --cpu:amd64 example.nim
 
 **If you enconter an error message about "ftelli64", replace the file
-*libtcc1-64.a* and the try again.**
+*libtcc1-64.a* and then try again.**
 
 ## How to Add the Resource Files
 
