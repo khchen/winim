@@ -1,6 +1,6 @@
-## How to Compiler by TCC (Tiny C Compiler)
+## How to Compile winim by Tiny C Compiler
 
-To compiler winim by TCC, of course you need to download the TCC compiler.
+To compile winim by TCC, of course you need to download the TCC.
 
 * http://download.savannah.gnu.org/releases/tinycc/
 
@@ -11,7 +11,7 @@ You will need the following files:
     winapi-full-for-0.9.XX.zip
 
 I suggest put these files into nim\dist, and then modify the
-nim.cfg. Here is the example:
+*nim.cfg*. Here is the example:
 
     @if i386:
       gcc.path = r"$nim\dist\mingw32\bin"
@@ -21,7 +21,7 @@ nim.cfg. Here is the example:
       tcc.path = r"$nim\dist\tcc64"
     @end
 
-And the, you can compile winim program by TCC:
+Now, you can try to compile winim program by TCC:
 
     nim c --cc:tcc --cpu:i386 example.nim
 
