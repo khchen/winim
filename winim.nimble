@@ -4,7 +4,7 @@ version       = "2.5"
 author        = "Ward"
 description   = "Winim - Nim\'s Windows API and COM Library"
 license       = "MIT"
-skipDirs      = @["examples", "tests", "docs"]
+skipDirs      = @["examples", "tests", "docs", "tcclib"]
 
 # Dependencies
 
