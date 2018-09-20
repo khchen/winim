@@ -59,8 +59,8 @@ suite "Winim Winstr Module Test Suites":
       cast[ptr WCHAR](&wstr)[] == WCHAR ord 'E'
       cast[ptr char](&cstr)[] == 'E'
 
-      &nilstr == nil
-      &nilmstr == nil
+      &nilstr == &""
+      &nilmstr == &""
       &nilwstr == nil
       &nilcstr == nil
 
