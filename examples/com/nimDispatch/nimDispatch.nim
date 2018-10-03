@@ -3,10 +3,11 @@ import winim/com
 
 type
   NimMethod* = proc (vargs: varargs[variant]): variant
+  NimMethodTuple = tuple[name: string, callback: NimMethod]
   INimDispatch* {.pure.} = object
     lpVtbl: ptr IDispatchVtbl
     vtbl: IDispatchVtbl
-    methods: seq[tuple[name: string, callback: NimMethod]]
+    methods: seq[NimMethodTuple]
     ref_count: int
     cookie: DWORD
 
@@ -15,7 +16,7 @@ converter converterINimDispatchToIDispatch*(x: ptr INimDispatch): ptr IDispatch 
 
 proc init(nimDisp: ptr INimDispatch) =
   nimDisp.lpVtbl = &nimDisp.vtbl
-  nimDisp.methods = @[]
+  nimDisp.methods = newSeq[NimMethodTuple]()
   GC_ref(nimDisp.methods)
 
   nimDisp.vtbl.AddRef = proc(self: ptr IUnknown): ULONG {.stdcall.} =
@@ -72,7 +73,7 @@ proc init(nimDisp: ptr INimDispatch) =
         args[i] = toVariant(rgvarg[pDispParams.cArgs - 1 - i])
 
       var ret = nimDisp.methods[index].callback(args)
-      if ret != nil:
+      if not ret.isNil:
         var raw = ret.unwrap
         VariantCopy(pVarResult, &raw)
 

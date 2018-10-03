@@ -241,9 +241,8 @@ proc typeDesc(vt: VARTYPE, d: UINT = 0): string =
 
     result &= typeStr(vt and 0xfff)
 
-
-proc vcErrorMsg(f: string, t: string = nil): string =
-  "convert from " & f & " to " & (if t.isNil: f else: t)
+proc vcErrorMsg(f: string, t: string = ""): string =
+  "convert from " & f & " to " & (if t.len == 0: f else: t)
 
 proc rawType*(x: variant): VARTYPE {.inline.} =
   result = x.raw.vt
@@ -256,9 +255,10 @@ proc rawTypeDesc*(x: variant): string =
   result = x.raw.vt.typeDesc(dimensions)
 
 proc newCom*(x: ptr IDispatch): com =
-  result.init
-  x.AddRef()
-  result.disp = x
+  if x.notNil:
+    result.init
+    x.AddRef()
+    result.disp = x
 
 proc copy*(x: com): com {.inline.} =
   if x.notNil:
@@ -843,7 +843,7 @@ proc invokeRaw(self: com, name: string, invokeType: WORD, vargs: varargs[variant
   if self.disp.GetIDsOfNames(&IID_NULL, cast[ptr LPOLESTR](&pwstr), 1, LOCALE_USER_DEFAULT, &dispid).ERR:
     # if the method name is not recognized, maybe it is an enum name
     result = getEnumeration(self, name)
-    if result != nil: return
+    if not result.isNil: return
 
     raise newCOMError("unsupported method: " & name)
 
@@ -919,16 +919,17 @@ iterator items*(x: com): variant =
   ret.punkVal.Release()
 
 iterator items*(x: variant): variant =
-  var tinfo = x.getVariantTypeInfo()
-  if tinfo.notNil:
-    defer: tinfo.Release()
-    for tup in tinfo.items(keyOnly=true):
-      yield toVariant(tup.key)
+  if not x.isNil:
+    var tinfo = x.getVariantTypeInfo()
+    if tinfo.notNil:
+      defer: tinfo.Release()
+      for tup in tinfo.items(keyOnly=true):
+        yield toVariant(tup.key)
 
-  else:
-    var obj = x.com
-    for v in obj:
-      yield v
+    else:
+      var obj = x.com
+      for v in obj:
+        yield v
 
 proc GetCLSID(progId: string, clsid: var GUID): HRESULT =
   if progId[0] == '{':
@@ -957,7 +958,7 @@ proc CreateObject*(progId: string): com =
   raise newCOMError("unable to create object from " & progId)
 
 
-proc GetObject*(file: string, progId: string = nil): com =
+proc GetObject*(file: string, progId: string = ""): com =
   ## Retrieves a reference to a COM object from an existing process or filename.
 
   result.init
