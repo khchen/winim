@@ -6,6 +6,8 @@ The definitions are translated from MinGW's Windows headers.
 The module also include some Windows string type utilities and Windows COM support.
 See winstr.nim and com.nim for details.
 
+If your are looking for Windows GUI framework, try [wNim](https://github.com/khchen/wNim).
+
 ## Install
 With git on windows:
 
