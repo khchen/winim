@@ -1,3 +1,7 @@
+Version 2.5.2
+-------------
+* commctrl: add "commoncontrols.h".
+
 Version 2.5.1
 -------------
 * Update for Nim Compiler 0.19.

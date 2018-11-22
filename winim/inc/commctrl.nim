@@ -13,6 +13,7 @@ import winnls
 import objbase
 #include <commctrl.h>
 #include <prsht.h>
+#include <commoncontrols.h>
 type
   TVITEMPART* = int32
   TASKDIALOG_FLAGS* = int32
@@ -3685,6 +3686,31 @@ const
   FSB_REGULAR_MODE* = 0
   LIM_SMALL* = 0
   LIM_LARGE* = 1
+  ILIF_ALPHA* = 0x1
+  ILIF_LOWQUALITY* = 0x2
+  ILDRF_IMAGELOWQUALITY* = 0x1
+  ILDRF_OVERLAYLOWQUALITY* = 0x10
+  ILR_DEFAULT* = 0x0
+  ILR_HORIZONTAL_LEFT* = 0x0
+  ILR_HORIZONTAL_CENTER* = 0x1
+  ILR_HORIZONTAL_RIGHT* = 0x2
+  ILR_VERTICAL_TOP* = 0x0
+  ILR_VERTICAL_CENTER* = 0x10
+  ILR_VERTICAL_BOTTOM* = 0x20
+  ILR_SCALE_CLIP* = 0x0
+  ILR_SCALE_ASPECTRATIO* = 0x100
+  ILGOS_ALWAYS* = 0x0
+  ILGOS_FROMSTANDBY* = 0x1
+  ILFIP_ALWAYS* = 0x0
+  ILFIP_FROMSTANDBY* = 0x1
+  ILDI_PURGE* = 0x1
+  ILDI_STANDBY* = 0x2
+  ILDI_RESETACCESS* = 0x4
+  ILDI_QUERYACCESS* = 0x8
+  IID_IImageList* = DEFINE_GUID(0x46eb5926'i32, 0x582e, 0x4017, [0x9f'u8, 0xdf, 0xe8, 0x99, 0x8d, 0xaa, 0x09, 0x50])
+  IID_IImageList2* = DEFINE_GUID(0x192b9d83'i32, 0x50fc, 0x457b, [0x90'u8, 0xa0, 0x2b, 0x82, 0xa8, 0xb5, 0xda, 0xe1])
+  LIBID_CommonControlObjects* = DEFINE_GUID(0xbcada15b'i32, 0xb428, 0x420c, [0x8d'u8, 0x28, 0x02, 0x35, 0x90, 0x92, 0x4c, 0x9f])
+  CLSID_ImageList* = DEFINE_GUID(0x7c476ba2'i32, 0x02b1, 0x48f4, [0x80'u8, 0x48, 0xb2, 0x46, 0x19, 0xdd, 0xc0, 0x58])
   BCCL_NOGLYPH* = HIMAGELIST(-1)
   LPSTR_TEXTCALLBACKA* = cast[LPSTR](-1)
   LPSTR_TEXTCALLBACKW* = cast[LPWSTR](-1)
@@ -3766,6 +3792,58 @@ type
     pfCallback*: PFTASKDIALOGCALLBACK
     lpCallbackData*: LONG_PTR
     cxWidth*: UINT
+  IMAGELISTSTATS* {.pure.} = object
+    cbSize*: DWORD
+    cAlloc*: int32
+    cUsed*: int32
+    cStandby*: int32
+  IImageList* {.pure.} = object
+    lpVtbl*: ptr IImageListVtbl
+  IImageListVtbl* {.pure, inheritable.} = object of IUnknownVtbl
+    Add*: proc(self: ptr IImageList, hbmImage: HBITMAP, hbmMask: HBITMAP, pi: ptr int32): HRESULT {.stdcall.}
+    ReplaceIcon*: proc(self: ptr IImageList, i: int32, hicon: HICON, pi: ptr int32): HRESULT {.stdcall.}
+    SetOverlayImage*: proc(self: ptr IImageList, iImage: int32, iOverlay: int32): HRESULT {.stdcall.}
+    Replace*: proc(self: ptr IImageList, i: int32, hbmImage: HBITMAP, hbmMask: HBITMAP): HRESULT {.stdcall.}
+    AddMasked*: proc(self: ptr IImageList, hbmImage: HBITMAP, crMask: COLORREF, pi: ptr int32): HRESULT {.stdcall.}
+    Draw*: proc(self: ptr IImageList, pimldp: ptr IMAGELISTDRAWPARAMS): HRESULT {.stdcall.}
+    Remove*: proc(self: ptr IImageList, i: int32): HRESULT {.stdcall.}
+    GetIcon*: proc(self: ptr IImageList, i: int32, flags: UINT, picon: ptr HICON): HRESULT {.stdcall.}
+    GetImageInfo*: proc(self: ptr IImageList, i: int32, pImageInfo: ptr IMAGEINFO): HRESULT {.stdcall.}
+    Copy*: proc(self: ptr IImageList, iDst: int32, punkSrc: ptr IUnknown, iSrc: int32, uFlags: UINT): HRESULT {.stdcall.}
+    Merge*: proc(self: ptr IImageList, i1: int32, punk2: ptr IUnknown, i2: int32, dx: int32, dy: int32, riid: REFIID, ppv: ptr pointer): HRESULT {.stdcall.}
+    Clone*: proc(self: ptr IImageList, riid: REFIID, ppv: ptr pointer): HRESULT {.stdcall.}
+    GetImageRect*: proc(self: ptr IImageList, i: int32, prc: ptr RECT): HRESULT {.stdcall.}
+    GetIconSize*: proc(self: ptr IImageList, cx: ptr int32, cy: ptr int32): HRESULT {.stdcall.}
+    SetIconSize*: proc(self: ptr IImageList, cx: int32, cy: int32): HRESULT {.stdcall.}
+    GetImageCount*: proc(self: ptr IImageList, pi: ptr int32): HRESULT {.stdcall.}
+    SetImageCount*: proc(self: ptr IImageList, uNewCount: UINT): HRESULT {.stdcall.}
+    SetBkColor*: proc(self: ptr IImageList, clrBk: COLORREF, pclr: ptr COLORREF): HRESULT {.stdcall.}
+    GetBkColor*: proc(self: ptr IImageList, pclr: ptr COLORREF): HRESULT {.stdcall.}
+    BeginDrag*: proc(self: ptr IImageList, iTrack: int32, dxHotspot: int32, dyHotspot: int32): HRESULT {.stdcall.}
+    EndDrag*: proc(self: ptr IImageList): HRESULT {.stdcall.}
+    DragEnter*: proc(self: ptr IImageList, hwndLock: HWND, x: int32, y: int32): HRESULT {.stdcall.}
+    DragLeave*: proc(self: ptr IImageList, hwndLock: HWND): HRESULT {.stdcall.}
+    DragMove*: proc(self: ptr IImageList, x: int32, y: int32): HRESULT {.stdcall.}
+    SetDragCursorImage*: proc(self: ptr IImageList, punk: ptr IUnknown, iDrag: int32, dxHotspot: int32, dyHotspot: int32): HRESULT {.stdcall.}
+    DragShowNolock*: proc(self: ptr IImageList, fShow: WINBOOL): HRESULT {.stdcall.}
+    GetDragImage*: proc(self: ptr IImageList, ppt: ptr POINT, pptHotspot: ptr POINT, riid: REFIID, ppv: ptr pointer): HRESULT {.stdcall.}
+    GetItemFlags*: proc(self: ptr IImageList, i: int32, dwFlags: ptr DWORD): HRESULT {.stdcall.}
+    GetOverlayImage*: proc(self: ptr IImageList, iOverlay: int32, piIndex: ptr int32): HRESULT {.stdcall.}
+  IImageList2* {.pure.} = object
+    lpVtbl*: ptr IImageList2Vtbl
+  IImageList2Vtbl* {.pure, inheritable.} = object of IImageListVtbl
+    Resize*: proc(self: ptr IImageList2, cxNewIconSize: int32, cyNewIconSize: int32): HRESULT {.stdcall.}
+    GetOriginalSize*: proc(self: ptr IImageList2, iImage: int32, dwFlags: DWORD, pcx: ptr int32, pcy: ptr int32): HRESULT {.stdcall.}
+    SetOriginalSize*: proc(self: ptr IImageList2, iImage: int32, cx: int32, cy: int32): HRESULT {.stdcall.}
+    SetCallback*: proc(self: ptr IImageList2, punk: ptr IUnknown): HRESULT {.stdcall.}
+    GetCallback*: proc(self: ptr IImageList2, riid: REFIID, ppv: ptr pointer): HRESULT {.stdcall.}
+    ForceImagePresent*: proc(self: ptr IImageList2, iImage: int32, dwFlags: DWORD): HRESULT {.stdcall.}
+    DiscardImages*: proc(self: ptr IImageList2, iFirstImage: int32, iLastImage: int32, dwFlags: DWORD): HRESULT {.stdcall.}
+    PreloadImages*: proc(self: ptr IImageList2, pimldp: ptr IMAGELISTDRAWPARAMS): HRESULT {.stdcall.}
+    GetStatistics*: proc(self: ptr IImageList2, pils: ptr IMAGELISTSTATS): HRESULT {.stdcall.}
+    Initialize*: proc(self: ptr IImageList2, cx: int32, cy: int32, flags: UINT, cInitial: int32, cGrow: int32): HRESULT {.stdcall.}
+    Replace2*: proc(self: ptr IImageList2, i: int32, hbmImage: HBITMAP, hbmMask: HBITMAP, punk: ptr IUnknown, dwFlags: DWORD): HRESULT {.stdcall.}
+    ReplaceFromImageList*: proc(self: ptr IImageList2, i: int32, pil: ptr IImageList, iSrc: int32, punk: ptr IUnknown, dwFlags: DWORD): HRESULT {.stdcall.}
 proc CreatePropertySheetPageA*(PropSheetPagePointer: LPCPROPSHEETPAGEA): HPROPSHEETPAGE {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc CreatePropertySheetPageW*(PropSheetPagePointer: LPCPROPSHEETPAGEW): HPROPSHEETPAGE {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc DestroyPropertySheetPage*(P1: HPROPSHEETPAGE): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
@@ -3881,6 +3959,7 @@ proc DefSubclassProc*(hWnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM): L
 proc DrawShadowText*(hdc: HDC, pszText: LPCWSTR, cch: UINT, prc: ptr RECT, dwFlags: DWORD, crText: COLORREF, crShadow: COLORREF, ixOffset: int32, iyOffset: int32): int32 {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc LoadIconMetric*(hinst: HINSTANCE, pszName: PCWSTR, lims: int32, phico: ptr HICON): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
 proc LoadIconWithScaleDown*(hinst: HINSTANCE, pszName: PCWSTR, cx: int32, cy: int32, phico: ptr HICON): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "comctl32", importc.}
+proc ImageList_CoCreateInstance*(rclsid: REFCLSID, punkOuter: ptr IUnknown, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "comctl32", importc.}
 template HANDLE_WM_NOTIFY*(hwnd: HWND, wParam: WPARAM, lParam: LPARAM, fn: proc(hwnd: HWND, wParam: WPARAM, nmhdr: ptr NMHDR)) = fn(hwnd, wParam, cast[ptr NMHDR](lParam))
 template FORWARD_WM_NOTIFY*(hwnd: HWND, idFrom: int32, pnmhdr: ptr NMHDR, fn: SendMessage.type|PostMessage.type): untyped = fn(hwnd, WM_NOTIFY, WPARAM idFrom, cast[LPARAM](pnmhdr))
 template INDEXTOOVERLAYMASK*(i: untyped): untyped = i shl 8
@@ -4641,6 +4720,50 @@ proc hFooterIcon*(self: var TASKDIALOGCONFIG): var HICON {.inline.} = self.union
 proc `pszFooterIcon=`*(self: var TASKDIALOGCONFIG, x: PCWSTR) {.inline.} = self.union2.pszFooterIcon = x
 proc pszFooterIcon*(self: TASKDIALOGCONFIG): PCWSTR {.inline.} = self.union2.pszFooterIcon
 proc pszFooterIcon*(self: var TASKDIALOGCONFIG): var PCWSTR {.inline.} = self.union2.pszFooterIcon
+proc Add*(self: ptr IImageList, hbmImage: HBITMAP, hbmMask: HBITMAP, pi: ptr int32): HRESULT {.winapi, inline.} = self.lpVtbl.Add(self, hbmImage, hbmMask, pi)
+proc ReplaceIcon*(self: ptr IImageList, i: int32, hicon: HICON, pi: ptr int32): HRESULT {.winapi, inline.} = self.lpVtbl.ReplaceIcon(self, i, hicon, pi)
+proc SetOverlayImage*(self: ptr IImageList, iImage: int32, iOverlay: int32): HRESULT {.winapi, inline.} = self.lpVtbl.SetOverlayImage(self, iImage, iOverlay)
+proc Replace*(self: ptr IImageList, i: int32, hbmImage: HBITMAP, hbmMask: HBITMAP): HRESULT {.winapi, inline.} = self.lpVtbl.Replace(self, i, hbmImage, hbmMask)
+proc AddMasked*(self: ptr IImageList, hbmImage: HBITMAP, crMask: COLORREF, pi: ptr int32): HRESULT {.winapi, inline.} = self.lpVtbl.AddMasked(self, hbmImage, crMask, pi)
+proc Draw*(self: ptr IImageList, pimldp: ptr IMAGELISTDRAWPARAMS): HRESULT {.winapi, inline.} = self.lpVtbl.Draw(self, pimldp)
+proc Remove*(self: ptr IImageList, i: int32): HRESULT {.winapi, inline.} = self.lpVtbl.Remove(self, i)
+proc GetIcon*(self: ptr IImageList, i: int32, flags: UINT, picon: ptr HICON): HRESULT {.winapi, inline.} = self.lpVtbl.GetIcon(self, i, flags, picon)
+proc GetImageInfo*(self: ptr IImageList, i: int32, pImageInfo: ptr IMAGEINFO): HRESULT {.winapi, inline.} = self.lpVtbl.GetImageInfo(self, i, pImageInfo)
+proc Copy*(self: ptr IImageList, iDst: int32, punkSrc: ptr IUnknown, iSrc: int32, uFlags: UINT): HRESULT {.winapi, inline.} = self.lpVtbl.Copy(self, iDst, punkSrc, iSrc, uFlags)
+proc Merge*(self: ptr IImageList, i1: int32, punk2: ptr IUnknown, i2: int32, dx: int32, dy: int32, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, inline.} = self.lpVtbl.Merge(self, i1, punk2, i2, dx, dy, riid, ppv)
+proc Clone*(self: ptr IImageList, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, inline.} = self.lpVtbl.Clone(self, riid, ppv)
+proc GetImageRect*(self: ptr IImageList, i: int32, prc: ptr RECT): HRESULT {.winapi, inline.} = self.lpVtbl.GetImageRect(self, i, prc)
+proc GetIconSize*(self: ptr IImageList, cx: ptr int32, cy: ptr int32): HRESULT {.winapi, inline.} = self.lpVtbl.GetIconSize(self, cx, cy)
+proc SetIconSize*(self: ptr IImageList, cx: int32, cy: int32): HRESULT {.winapi, inline.} = self.lpVtbl.SetIconSize(self, cx, cy)
+proc GetImageCount*(self: ptr IImageList, pi: ptr int32): HRESULT {.winapi, inline.} = self.lpVtbl.GetImageCount(self, pi)
+proc SetImageCount*(self: ptr IImageList, uNewCount: UINT): HRESULT {.winapi, inline.} = self.lpVtbl.SetImageCount(self, uNewCount)
+proc SetBkColor*(self: ptr IImageList, clrBk: COLORREF, pclr: ptr COLORREF): HRESULT {.winapi, inline.} = self.lpVtbl.SetBkColor(self, clrBk, pclr)
+proc GetBkColor*(self: ptr IImageList, pclr: ptr COLORREF): HRESULT {.winapi, inline.} = self.lpVtbl.GetBkColor(self, pclr)
+proc BeginDrag*(self: ptr IImageList, iTrack: int32, dxHotspot: int32, dyHotspot: int32): HRESULT {.winapi, inline.} = self.lpVtbl.BeginDrag(self, iTrack, dxHotspot, dyHotspot)
+proc EndDrag*(self: ptr IImageList): HRESULT {.winapi, inline.} = self.lpVtbl.EndDrag(self)
+proc DragEnter*(self: ptr IImageList, hwndLock: HWND, x: int32, y: int32): HRESULT {.winapi, inline.} = self.lpVtbl.DragEnter(self, hwndLock, x, y)
+proc DragLeave*(self: ptr IImageList, hwndLock: HWND): HRESULT {.winapi, inline.} = self.lpVtbl.DragLeave(self, hwndLock)
+proc DragMove*(self: ptr IImageList, x: int32, y: int32): HRESULT {.winapi, inline.} = self.lpVtbl.DragMove(self, x, y)
+proc SetDragCursorImage*(self: ptr IImageList, punk: ptr IUnknown, iDrag: int32, dxHotspot: int32, dyHotspot: int32): HRESULT {.winapi, inline.} = self.lpVtbl.SetDragCursorImage(self, punk, iDrag, dxHotspot, dyHotspot)
+proc DragShowNolock*(self: ptr IImageList, fShow: WINBOOL): HRESULT {.winapi, inline.} = self.lpVtbl.DragShowNolock(self, fShow)
+proc GetDragImage*(self: ptr IImageList, ppt: ptr POINT, pptHotspot: ptr POINT, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, inline.} = self.lpVtbl.GetDragImage(self, ppt, pptHotspot, riid, ppv)
+proc GetItemFlags*(self: ptr IImageList, i: int32, dwFlags: ptr DWORD): HRESULT {.winapi, inline.} = self.lpVtbl.GetItemFlags(self, i, dwFlags)
+proc GetOverlayImage*(self: ptr IImageList, iOverlay: int32, piIndex: ptr int32): HRESULT {.winapi, inline.} = self.lpVtbl.GetOverlayImage(self, iOverlay, piIndex)
+proc Resize*(self: ptr IImageList2, cxNewIconSize: int32, cyNewIconSize: int32): HRESULT {.winapi, inline.} = self.lpVtbl.Resize(self, cxNewIconSize, cyNewIconSize)
+proc GetOriginalSize*(self: ptr IImageList2, iImage: int32, dwFlags: DWORD, pcx: ptr int32, pcy: ptr int32): HRESULT {.winapi, inline.} = self.lpVtbl.GetOriginalSize(self, iImage, dwFlags, pcx, pcy)
+proc SetOriginalSize*(self: ptr IImageList2, iImage: int32, cx: int32, cy: int32): HRESULT {.winapi, inline.} = self.lpVtbl.SetOriginalSize(self, iImage, cx, cy)
+proc SetCallback*(self: ptr IImageList2, punk: ptr IUnknown): HRESULT {.winapi, inline.} = self.lpVtbl.SetCallback(self, punk)
+proc GetCallback*(self: ptr IImageList2, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, inline.} = self.lpVtbl.GetCallback(self, riid, ppv)
+proc ForceImagePresent*(self: ptr IImageList2, iImage: int32, dwFlags: DWORD): HRESULT {.winapi, inline.} = self.lpVtbl.ForceImagePresent(self, iImage, dwFlags)
+proc DiscardImages*(self: ptr IImageList2, iFirstImage: int32, iLastImage: int32, dwFlags: DWORD): HRESULT {.winapi, inline.} = self.lpVtbl.DiscardImages(self, iFirstImage, iLastImage, dwFlags)
+proc PreloadImages*(self: ptr IImageList2, pimldp: ptr IMAGELISTDRAWPARAMS): HRESULT {.winapi, inline.} = self.lpVtbl.PreloadImages(self, pimldp)
+proc GetStatistics*(self: ptr IImageList2, pils: ptr IMAGELISTSTATS): HRESULT {.winapi, inline.} = self.lpVtbl.GetStatistics(self, pils)
+proc Initialize*(self: ptr IImageList2, cx: int32, cy: int32, flags: UINT, cInitial: int32, cGrow: int32): HRESULT {.winapi, inline.} = self.lpVtbl.Initialize(self, cx, cy, flags, cInitial, cGrow)
+proc Replace2*(self: ptr IImageList2, i: int32, hbmImage: HBITMAP, hbmMask: HBITMAP, punk: ptr IUnknown, dwFlags: DWORD): HRESULT {.winapi, inline.} = self.lpVtbl.Replace2(self, i, hbmImage, hbmMask, punk, dwFlags)
+proc ReplaceFromImageList*(self: ptr IImageList2, i: int32, pil: ptr IImageList, iSrc: int32, punk: ptr IUnknown, dwFlags: DWORD): HRESULT {.winapi, inline.} = self.lpVtbl.ReplaceFromImageList(self, i, pil, iSrc, punk, dwFlags)
+converter winimConverterIImageListToIUnknown*(x: ptr IImageList): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterIImageList2ToIImageList*(x: ptr IImageList2): ptr IImageList = cast[ptr IImageList](x)
+converter winimConverterIImageList2ToIUnknown*(x: ptr IImageList2): ptr IUnknown = cast[ptr IUnknown](x)
 when winimUnicode:
   type
     LPNMLVDISPINFO* = LPNMLVDISPINFOW
