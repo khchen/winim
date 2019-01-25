@@ -5,7 +5,7 @@
 #
 #====================================================================
 
-import macros, ospaths
+import macros, os
 
 static:
   const winimPrivateDir = parentDir(currentSourcePath()) & r"\..\lib\"
