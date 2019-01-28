@@ -1,3 +1,8 @@
+Version 2.6
+-----------
+* Update for Nim Compiler 0.19.9
+* Add wincodec module.
+
 Version 2.5.2
 -------------
 * commctrl: add "commoncontrols.h".

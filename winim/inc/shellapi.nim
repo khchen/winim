@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2018 Ward
+#                 (c) Copyright 2016-2019 Ward
 #
 #====================================================================
 
@@ -357,6 +357,7 @@ type
     PrefixLength*: BYTE
   PNC_ADDRESS* = ptr NC_ADDRESS
   PHUSKEY* = ptr HUSKEY
+  IDefViewID* = IUnknown
   FolderItemVerb* {.pure.} = object
     lpVtbl*: ptr FolderItemVerbVtbl
   FolderItemVerbVtbl* {.pure, inheritable.} = object of IDispatchVtbl
@@ -1700,7 +1701,6 @@ const
   STR_MYDOCS_CLSID* = "{450D8FBA-AD25-11D0-98A8-0800361B1103}"
   PSGUID_INTERNETSHORTCUT* = DEFINE_GUID(0x000214a0'i32, 0, 0, [0xc0'u8, 0, 0, 0, 0, 0, 0, 0x46])
   PSGUID_INTERNETSITE* = DEFINE_GUID(0x000214a1'i32, 0, 0, [0xc0'u8, 0, 0, 0, 0, 0, 0, 0x46])
-  iDefViewID* = IUnknown
   IID_ICopyHookA* = DEFINE_GUID(0x000214ef'i32, 0, 0, [0xc0'u8, 0, 0, 0, 0, 0, 0, 0x46])
   IID_IShellCopyHookA* = IID_ICopyHookA
   IID_ICopyHookW* = DEFINE_GUID(0x000214fc'i32, 0, 0, [0xc0'u8, 0, 0, 0, 0, 0, 0, 0x46])

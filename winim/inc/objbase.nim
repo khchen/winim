@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2018 Ward
+#                 (c) Copyright 2016-2019 Ward
 #
 #====================================================================
 
@@ -1949,6 +1949,7 @@ type
   LPOINETSESSION* = LPIINTERNETSESSION
   LPOINETTHREADSWITCH* = LPIINTERNETTHREADSWITCH
   LPOINETPRIORITY* = LPIINTERNETPRIORITY
+  LPOINETPROTOCOLSINKSTACKABLE* = LPIINTERNETPROTOCOLSINKSTACKABLE
   ZONEATTRIBUTES* {.pure.} = object
     cbSize*: ULONG
     szDisplayName*: array[260, WCHAR]
@@ -2671,7 +2672,10 @@ type
     Skip*: proc(self: ptr IEnumGUID, celt: ULONG): HRESULT {.stdcall.}
     Reset*: proc(self: ptr IEnumGUID): HRESULT {.stdcall.}
     Clone*: proc(self: ptr IEnumGUID, ppenum: ptr ptr IEnumGUID): HRESULT {.stdcall.}
+  IEnumCLSID* = IEnumGUID
   LPENUMGUID* = ptr IEnumGUID
+  LPENUMCLSID* = LPENUMGUID
+  IEnumCATID* = IEnumGUID
   CATEGORYINFO* {.pure.} = object
     catid*: CATID
     lcid*: LCID
@@ -4164,7 +4168,6 @@ const
   IID_IInternetProtocolInfo* = DEFINE_GUID(0x79eac9ec'i32, 0xbaf9, 0x11ce, [0x8c'u8, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b])
   PARSE_ENCODE* = PARSE_ENCODE_IS_UNESCAPE
   PARSE_DECODE* = PARSE_DECODE_IS_ESCAPE
-  LPOINETPROTOCOLSINKSTACKABLE* = LPIINTERNETPROTOCOLSINKSTACKABLE
   IID_IOInet* = IID_IInternet
   IID_IOInetBindInfo* = IID_IInternetBindInfo
   IID_IOInetBindInfoEx* = IID_IInternetBindInfoEx
@@ -4683,11 +4686,8 @@ const
   IID_IQuickActivate* = DEFINE_GUID(0xcf51ed10'i32, 0x62fe, 0x11cf, [0xbf'u8, 0x86, 0x00, 0xa0, 0xc9, 0x03, 0x48, 0x36])
   IID_IEnumGUID* = DEFINE_GUID(0x0002e000'i32, 0x0000, 0x0000, [0xc0'u8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46])
   IID_IEnumCLSID* = IID_IEnumGUID
-  iEnumCLSID* = IEnumGUID
-  LPENUMCLSID* = LPENUMGUID
   CATID_NULL* = GUID_NULL
   IID_IEnumCATID* = IID_IEnumGUID
-  iEnumCATID* = IEnumGUID
   IID_IEnumCATEGORYINFO* = DEFINE_GUID(0x0002e011'i32, 0x0000, 0x0000, [0xc0'u8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46])
   IID_ICatRegister* = DEFINE_GUID(0x0002e012'i32, 0x0000, 0x0000, [0xc0'u8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46])
   IID_ICatInformation* = DEFINE_GUID(0x0002e013'i32, 0x0000, 0x0000, [0xc0'u8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46])

@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2018 Ward
+#                 (c) Copyright 2016-2019 Ward
 #
 #====================================================================
 
@@ -159,6 +159,8 @@ type
   SCOPE_ID* {.pure.} = object
     union1*: SCOPE_ID_UNION1
   PSCOPE_ID* = ptr SCOPE_ID
+  LPWSAEVENT* = LPHANDLE
+  WSAOVERLAPPED* = OVERLAPPED
   LPWSAOVERLAPPED* = ptr OVERLAPPED
   WSABUF* {.pure.} = object
     len*: int32
@@ -879,8 +881,6 @@ const
   FD_ADDRESS_LIST_CHANGE_BIT* = 9
   FD_ADDRESS_LIST_CHANGE* = 1 shl FD_ADDRESS_LIST_CHANGE_BIT
   FD_ALL_EVENTS* = (1 shl FD_MAX_EVENTS)-1
-  LPWSAEVENT* = LPHANDLE
-  WSAOVERLAPPED* = OVERLAPPED
   WSA_IO_PENDING* = ERROR_IO_PENDING
   WSA_IO_INCOMPLETE* = ERROR_IO_INCOMPLETE
   WSA_INVALID_HANDLE* = ERROR_INVALID_HANDLE

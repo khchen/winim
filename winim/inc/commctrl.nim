@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2018 Ward
+#                 (c) Copyright 2016-2019 Ward
 #
 #====================================================================
 
@@ -288,12 +288,22 @@ type
     iItem*: int32
     iButton*: int32
     pitem*: ptr HDITEMA
-  LPNMHEADERA* = ptr NMHEADERA
+  HD_NOTIFYA* = NMHEADERA
   NMHEADERW* {.pure.} = object
     hdr*: NMHDR
     iItem*: int32
     iButton*: int32
     pitem*: ptr HDITEMW
+  HD_NOTIFYW* = NMHEADERW
+when winimUnicode:
+  type
+    NMHEADER* = NMHEADERW
+when winimAnsi:
+  type
+    NMHEADER* = NMHEADERA
+type
+  HD_NOTIFY* = NMHEADER
+  LPNMHEADERA* = ptr NMHEADERA
   LPNMHEADERW* = ptr NMHEADERW
   NMHDDISPINFOW* {.pure.} = object
     hdr*: NMHDR
@@ -483,7 +493,7 @@ type
     cchText*: int32
     pszText*: LPSTR
     rcButton*: RECT
-  LPNMTOOLBARA* = ptr NMTOOLBARA
+  TBNOTIFYA* = NMTOOLBARA
   NMTOOLBARW* {.pure.} = object
     hdr*: NMHDR
     iItem*: int32
@@ -491,7 +501,27 @@ type
     cchText*: int32
     pszText*: LPWSTR
     rcButton*: RECT
+  TBNOTIFYW* = NMTOOLBARW
+  LPNMTOOLBARA* = ptr NMTOOLBARA
+  LPTBNOTIFYA* = LPNMTOOLBARA
   LPNMTOOLBARW* = ptr NMTOOLBARW
+  LPTBNOTIFYW* = LPNMTOOLBARW
+when winimUnicode:
+  type
+    NMTOOLBAR* = NMTOOLBARW
+when winimAnsi:
+  type
+    NMTOOLBAR* = NMTOOLBARA
+type
+  TBNOTIFY* = NMTOOLBAR
+when winimUnicode:
+  type
+    LPNMTOOLBAR* = LPNMTOOLBARW
+when winimAnsi:
+  type
+    LPNMTOOLBAR* = LPNMTOOLBARA
+type
+  LPTBNOTIFY* = LPNMTOOLBAR
   REBARINFO* {.pure.} = object
     cbSize*: UINT
     fMask*: UINT
@@ -604,8 +634,8 @@ type
     lpszText*: LPSTR
     lParam*: LPARAM
     lpReserved*: pointer
-  PTOOLINFOA* = ptr TTTOOLINFOA
   LPTTTOOLINFOA* = ptr TTTOOLINFOA
+  LPTOOLINFOA* = LPTTTOOLINFOA
   TTTOOLINFOW* {.pure.} = object
     cbSize*: UINT
     uFlags*: UINT
@@ -616,32 +646,46 @@ type
     lpszText*: LPWSTR
     lParam*: LPARAM
     lpReserved*: pointer
-  PTOOLINFOW* = ptr TTTOOLINFOW
   LPTTTOOLINFOW* = ptr TTTOOLINFOW
+  LPTOOLINFOW* = LPTTTOOLINFOW
+  TOOLINFOA* = TTTOOLINFOA
+  TOOLINFOW* = TTTOOLINFOW
+when winimUnicode:
+  type
+    LPTTTOOLINFO* = LPTTTOOLINFOW
+when winimAnsi:
+  type
+    LPTTTOOLINFO* = LPTTTOOLINFOA
+type
+  LPTOOLINFO* = LPTTTOOLINFO
+  PTOOLINFOA* = ptr TTTOOLINFOA
+  PTOOLINFOW* = ptr TTTOOLINFOW
   TTGETTITLE* {.pure.} = object
     dwSize*: DWORD
     uTitleBitmap*: UINT
     cch*: UINT
     pszTitle*: ptr WCHAR
   PTTGETTITLE* = ptr TTGETTITLE
-  TTHITTESTINFOA* {.pure.} = object
-    hwnd*: HWND
-    pt*: POINT
-    ti*: TTTOOLINFOA
-  LPTTHITTESTINFOA* = ptr TTHITTESTINFOA
   TTHITTESTINFOW* {.pure.} = object
     hwnd*: HWND
     pt*: POINT
     ti*: TTTOOLINFOW
   LPTTHITTESTINFOW* = ptr TTHITTESTINFOW
-  NMTTDISPINFOA* {.pure.} = object
-    hdr*: NMHDR
-    lpszText*: LPSTR
-    szText*: array[80, char]
-    hinst*: HINSTANCE
-    uFlags*: UINT
-    lParam*: LPARAM
-  LPNMTTDISPINFOA* = ptr NMTTDISPINFOA
+  LPHITTESTINFOW* = LPTTHITTESTINFOW
+  TTHITTESTINFOA* {.pure.} = object
+    hwnd*: HWND
+    pt*: POINT
+    ti*: TTTOOLINFOA
+  LPTTHITTESTINFOA* = ptr TTHITTESTINFOA
+  LPHITTESTINFOA* = LPTTHITTESTINFOA
+when winimUnicode:
+  type
+    LPTTHITTESTINFO* = LPTTHITTESTINFOW
+when winimAnsi:
+  type
+    LPTTHITTESTINFO* = LPTTHITTESTINFOA
+type
+  LPHITTESTINFO* = LPTTHITTESTINFO
   NMTTDISPINFOW* {.pure.} = object
     hdr*: NMHDR
     lpszText*: LPWSTR
@@ -649,7 +693,35 @@ type
     hinst*: HINSTANCE
     uFlags*: UINT
     lParam*: LPARAM
+  TOOLTIPTEXTW* = NMTTDISPINFOW
+  NMTTDISPINFOA* {.pure.} = object
+    hdr*: NMHDR
+    lpszText*: LPSTR
+    szText*: array[80, char]
+    hinst*: HINSTANCE
+    uFlags*: UINT
+    lParam*: LPARAM
+  TOOLTIPTEXTA* = NMTTDISPINFOA
+  LPNMTTDISPINFOA* = ptr NMTTDISPINFOA
+  LPTOOLTIPTEXTA* = LPNMTTDISPINFOA
   LPNMTTDISPINFOW* = ptr NMTTDISPINFOW
+  LPTOOLTIPTEXTW* = LPNMTTDISPINFOW
+when winimUnicode:
+  type
+    NMTTDISPINFO* = NMTTDISPINFOW
+when winimAnsi:
+  type
+    NMTTDISPINFO* = NMTTDISPINFOA
+type
+  TOOLTIPTEXT* = NMTTDISPINFO
+when winimUnicode:
+  type
+    LPNMTTDISPINFO* = LPNMTTDISPINFOW
+when winimAnsi:
+  type
+    LPNMTTDISPINFO* = LPNMTTDISPINFOA
+type
+  LPTOOLTIPTEXT* = LPNMTTDISPINFO
   DRAGLISTINFO* {.pure.} = object
     uNotification*: UINT
     hWnd*: HWND
@@ -949,15 +1021,26 @@ type
   NMLVDISPINFOA* {.pure.} = object
     hdr*: NMHDR
     item*: LVITEMA
-  LPNMLVDISPINFOA* = ptr NMLVDISPINFOA
+  LV_DISPINFOA* = NMLVDISPINFOA
   NMLVDISPINFOW* {.pure.} = object
     hdr*: NMHDR
     item*: LVITEMW
+  LV_DISPINFOW* = NMLVDISPINFOW
+when winimUnicode:
+  type
+    NMLVDISPINFO* = NMLVDISPINFOW
+when winimAnsi:
+  type
+    NMLVDISPINFO* = NMLVDISPINFOA
+type
+  LV_DISPINFO* = NMLVDISPINFO
+  LPNMLVDISPINFOA* = ptr NMLVDISPINFOA
   LPNMLVDISPINFOW* = ptr NMLVDISPINFOW
   NMLVKEYDOWN* {.pure.} = object
     hdr*: NMHDR
     wVKey*: WORD
     flags*: UINT
+  LV_KEYDOWN* = NMLVKEYDOWN
   LPNMLVKEYDOWN* = ptr NMLVKEYDOWN
   NMLVLINK* {.pure.} = object
     hdr*: NMHDR
@@ -1094,10 +1177,20 @@ type
   NMTVDISPINFOA* {.pure.} = object
     hdr*: NMHDR
     item*: TVITEMA
-  LPNMTVDISPINFOA* = ptr NMTVDISPINFOA
+  TV_DISPINFOA* = NMTVDISPINFOA
   NMTVDISPINFOW* {.pure.} = object
     hdr*: NMHDR
     item*: TVITEMW
+  TV_DISPINFOW* = NMTVDISPINFOW
+when winimUnicode:
+  type
+    NMTVDISPINFO* = NMTVDISPINFOW
+when winimAnsi:
+  type
+    NMTVDISPINFO* = NMTVDISPINFOA
+type
+  TV_DISPINFO* = NMTVDISPINFO
+  LPNMTVDISPINFOA* = ptr NMTVDISPINFOA
   LPNMTVDISPINFOW* = ptr NMTVDISPINFOW
   NMTVDISPINFOEXA* {.pure.} = object
     hdr*: NMHDR
@@ -1109,10 +1202,19 @@ type
   LPNMTVDISPINFOEXW* = ptr NMTVDISPINFOEXW
   TV_DISPINFOEXA* = NMTVDISPINFOEXA
   TV_DISPINFOEXW* = NMTVDISPINFOEXW
+when winimUnicode:
+  type
+    NMTVDISPINFOEX* = NMTVDISPINFOEXW
+when winimAnsi:
+  type
+    NMTVDISPINFOEX* = NMTVDISPINFOEXA
+type
+  TV_DISPINFOEX* = NMTVDISPINFOEX
   NMTVKEYDOWN* {.pure.} = object
     hdr*: NMHDR
     wVKey*: WORD
     flags*: UINT
+  TV_KEYDOWN* = NMTVKEYDOWN
   LPNMTVKEYDOWN* = ptr NMTVKEYDOWN
   NMTVCUSTOMDRAW* {.pure.} = object
     nmcd*: TNMCUSTOMDRAW
@@ -1235,6 +1337,11 @@ type
     pt*: POINT
     flags*: UINT
   LPTCHITTESTINFO* = ptr TCHITTESTINFO
+  NMTCKEYDOWN* {.pure.} = object
+    hdr*: NMHDR
+    wVKey*: WORD
+    flags*: UINT
+  TC_KEYDOWN* = NMTCKEYDOWN
   MCHITTESTINFO* {.pure.} = object
     cbSize*: UINT
     pt*: POINT
@@ -1835,16 +1942,6 @@ const
   HDN_ITEMKEYDOWN* = HDN_FIRST-17
   HDN_DROPDOWN* = HDN_FIRST-18
   HDN_OVERFLOWCLICK* = HDN_FIRST-19
-  HD_NOTIFYA* = NMHEADERA
-  HD_NOTIFYW* = NMHEADERW
-when winimUnicode:
-  type
-    NMHEADER* = NMHEADERW
-when winimAnsi:
-  type
-    NMHEADER* = NMHEADERA
-const
-  HD_NOTIFY* = NMHEADER
   TOOLBARCLASSNAMEW* = "ToolbarWindow32"
   TOOLBARCLASSNAMEA* = "ToolbarWindow32"
   CMB_MASKED* = 0x2
@@ -2102,26 +2199,6 @@ const
   TBDDRET_DEFAULT* = 0
   TBDDRET_NODEFAULT* = 1
   TBDDRET_TREATPRESSED* = 2
-  TBNOTIFYA* = NMTOOLBARA
-  TBNOTIFYW* = NMTOOLBARW
-  LPTBNOTIFYA* = LPNMTOOLBARA
-  LPTBNOTIFYW* = LPNMTOOLBARW
-when winimUnicode:
-  type
-    NMTOOLBAR* = NMTOOLBARW
-when winimAnsi:
-  type
-    NMTOOLBAR* = NMTOOLBARA
-const
-  TBNOTIFY* = NMTOOLBAR
-when winimUnicode:
-  type
-    LPNMTOOLBAR* = LPNMTOOLBARW
-when winimAnsi:
-  type
-    LPNMTOOLBAR* = LPNMTOOLBARA
-const
-  LPTBNOTIFY* = LPNMTOOLBAR
   REBARCLASSNAMEW* = "ReBarWindow32"
   REBARCLASSNAMEA* = "ReBarWindow32"
   RBIM_IMAGELIST* = 0x1
@@ -2231,18 +2308,6 @@ const
   RBHT_SPLITTER* = 0x10
   TOOLTIPS_CLASSW* = "tooltips_class32"
   TOOLTIPS_CLASSA* = "tooltips_class32"
-  LPTOOLINFOA* = LPTTTOOLINFOA
-  LPTOOLINFOW* = LPTTTOOLINFOW
-  TOOLINFOA* = TTTOOLINFOA
-  TOOLINFOW* = TTTOOLINFOW
-when winimUnicode:
-  type
-    LPTTTOOLINFO* = LPTTTOOLINFOW
-when winimAnsi:
-  type
-    LPTTTOOLINFO* = LPTTTOOLINFOA
-const
-  LPTOOLINFO* = LPTTTOOLINFO
   TTS_ALWAYSTIP* = 0x1
   TTS_NOPREFIX* = 0x2
   TTS_NOANIMATE* = 0x10
@@ -2315,16 +2380,6 @@ const
   TTM_POPUP* = WM_USER+34
   TTM_GETTITLE* = WM_USER+35
   TTM_SETWINDOWTHEME* = CCM_SETWINDOWTHEME
-  LPHITTESTINFOW* = LPTTHITTESTINFOW
-  LPHITTESTINFOA* = LPTTHITTESTINFOA
-when winimUnicode:
-  type
-    LPTTHITTESTINFO* = LPTTHITTESTINFOW
-when winimAnsi:
-  type
-    LPTTHITTESTINFO* = LPTTHITTESTINFOA
-const
-  LPHITTESTINFO* = LPTTHITTESTINFO
   TTN_GETDISPINFOA* = TTN_FIRST-0
   TTN_GETDISPINFOW* = TTN_FIRST-10
   TTN_SHOW* = TTN_FIRST-1
@@ -2340,26 +2395,6 @@ const
   TTN_NEEDTEXT* = TTN_GETDISPINFO
   TTN_NEEDTEXTA* = TTN_GETDISPINFOA
   TTN_NEEDTEXTW* = TTN_GETDISPINFOW
-  TOOLTIPTEXTW* = NMTTDISPINFOW
-  TOOLTIPTEXTA* = NMTTDISPINFOA
-  LPTOOLTIPTEXTA* = LPNMTTDISPINFOA
-  LPTOOLTIPTEXTW* = LPNMTTDISPINFOW
-when winimUnicode:
-  type
-    NMTTDISPINFO* = NMTTDISPINFOW
-when winimAnsi:
-  type
-    NMTTDISPINFO* = NMTTDISPINFOA
-const
-  TOOLTIPTEXT* = NMTTDISPINFO
-when winimUnicode:
-  type
-    LPNMTTDISPINFO* = LPNMTTDISPINFOW
-when winimAnsi:
-  type
-    LPNMTTDISPINFO* = LPNMTTDISPINFOA
-const
-  LPTOOLTIPTEXT* = LPNMTTDISPINFO
   SBARS_SIZEGRIP* = 0x100
   SBARS_TOOLTIPS* = 0x800
   SBT_TOOLTIPS* = 0x800
@@ -2955,18 +2990,7 @@ const
   LVN_SETDISPINFOA* = LVN_FIRST-51
   LVN_SETDISPINFOW* = LVN_FIRST-78
   LVIF_DI_SETITEM* = 0x1000
-  LV_DISPINFOA* = NMLVDISPINFOA
-  LV_DISPINFOW* = NMLVDISPINFOW
-when winimUnicode:
-  type
-    NMLVDISPINFO* = NMLVDISPINFOW
-when winimAnsi:
-  type
-    NMLVDISPINFO* = NMLVDISPINFOA
-const
-  LV_DISPINFO* = NMLVDISPINFO
   LVN_KEYDOWN* = LVN_FIRST-55
-  LV_KEYDOWN* = NMLVKEYDOWN
   LVN_MARQUEEBEGIN* = LVN_FIRST-56
   LVGIT_UNFOLDED* = 0x1
   LVN_GETINFOTIPA* = LVN_FIRST-57
@@ -3140,24 +3164,6 @@ const
   TVN_SETDISPINFOA* = TVN_FIRST-4
   TVN_SETDISPINFOW* = TVN_FIRST-53
   TVIF_DI_SETITEM* = 0x1000
-  TV_DISPINFOA* = NMTVDISPINFOA
-  TV_DISPINFOW* = NMTVDISPINFOW
-when winimUnicode:
-  type
-    NMTVDISPINFO* = NMTVDISPINFOW
-when winimAnsi:
-  type
-    NMTVDISPINFO* = NMTVDISPINFOA
-const
-  TV_DISPINFO* = NMTVDISPINFO
-when winimUnicode:
-  type
-    NMTVDISPINFOEX* = NMTVDISPINFOEXW
-when winimAnsi:
-  type
-    NMTVDISPINFOEX* = NMTVDISPINFOEXA
-const
-  TV_DISPINFOEX* = NMTVDISPINFOEX
   TVN_ITEMEXPANDINGA* = TVN_FIRST-5
   TVN_ITEMEXPANDINGW* = TVN_FIRST-54
   TVN_ITEMEXPANDEDA* = TVN_FIRST-6
@@ -3184,7 +3190,6 @@ const
   TVN_ITEMCHANGEDA* = TVN_FIRST-18
   TVN_ITEMCHANGEDW* = TVN_FIRST-19
   TVN_ASYNCDRAW* = TVN_FIRST-20
-  TV_KEYDOWN* = NMTVKEYDOWN
   TVCDRF_NOIMAGES* = 0x10000
   WC_COMBOBOXEXW* = "ComboBoxEx32"
   WC_COMBOBOXEXA* = "ComboBoxEx32"
@@ -3301,13 +3306,6 @@ const
   TCM_SETUNICODEFORMAT* = CCM_SETUNICODEFORMAT
   TCM_GETUNICODEFORMAT* = CCM_GETUNICODEFORMAT
   TCN_KEYDOWN* = TCN_FIRST-0
-type
-  NMTCKEYDOWN* {.pure.} = object
-    hdr*: NMHDR
-    wVKey*: WORD
-    flags*: UINT
-const
-  TC_KEYDOWN* = NMTCKEYDOWN
   TCN_SELCHANGE* = TCN_FIRST-1
   TCN_SELCHANGING* = TCN_FIRST-2
   TCN_GETOBJECT* = TCN_FIRST-3

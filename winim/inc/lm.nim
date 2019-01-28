@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2018 Ward
+#                 (c) Copyright 2016-2019 Ward
 #
 #====================================================================
 
@@ -4025,12 +4025,12 @@ proc NetAccessSetInfo*(servername: LPCWSTR, resource: LPCWSTR, level: DWORD, buf
 proc NetAccessDel*(servername: LPCWSTR, resource: LPCWSTR): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc: "RxNetAccessDel".}
 proc NetAccessGetUserPerms*(servername: LPCWSTR, UGname: LPCWSTR, resource: LPCWSTR, Perms: LPDWORD): NET_API_STATUS {.winapi, stdcall, dynlib: "netapi32", importc: "RxNetAccessGetUserPerms".}
 when winimUnicode:
-  const
+  type
     PORT_INFO_FF* = PORT_INFO_FFW
     PPORT_INFO_FF* = PPORT_INFO_FFW
     LPPORT_INFO_FF* = LPPORT_INFO_FFW
 when winimAnsi:
-  const
+  type
     PORT_INFO_FF* = PORT_INFO_FFA
     PPORT_INFO_FF* = PPORT_INFO_FFA
     LPPORT_INFO_FF* = LPPORT_INFO_FFA

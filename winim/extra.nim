@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2018 Ward
+#                 (c) Copyright 2016-2019 Ward
 #
 #                   Windows Extra Headers
 #
@@ -11,8 +11,8 @@
 
 import inc/[psapi, tlhelp32, wintrust, imagehlp, odbc, dde, lzexpand,
   nb30, winperf, mmsystem, winefs, winioctl, winscard, winspool, mcx,
-  powrprof, vfw, vssym32, gdiplus]
+  powrprof, vfw, vssym32, wincodec, gdiplus]
 
 export psapi, tlhelp32, wintrust, imagehlp, odbc, dde, lzexpand,
   nb30, winperf, mmsystem, winefs, winioctl, winscard, winspool, mcx,
-  powrprof, vfw, vssym32, gdiplus
+  powrprof, vfw, vssym32, wincodec, gdiplus
