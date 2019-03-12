@@ -7,6 +7,7 @@
 
 import winimbase
 import windef
+import wincrypt
 #include <security.h>
 #include <sspi.h>
 #include <ntsecapi.h>
@@ -44,7 +45,6 @@ type
   PKERB_PROFILE_BUFFER_TYPE* = ptr int32
   KERB_PROTOCOL_MESSAGE_TYPE* = int32
   PKERB_PROTOCOL_MESSAGE_TYPE* = ptr int32
-  QWORD* = uint64
   SecDelegationType* = int32
   PSecDelegationType* = ptr int32
   SASL_AUTHZID_STATE* = int32
@@ -60,7 +60,6 @@ type
   PLSA_ENUMERATION_HANDLE* = ptr ULONG
   SEC_WCHAR* = WCHAR
   SEC_CHAR* = CHAR
-  SECURITY_STATUS* = LONG
   SE_ADT_OBJECT_TYPE* {.pure.} = object
     ObjectType*: GUID
     Flags*: USHORT

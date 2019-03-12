@@ -191,6 +191,8 @@ type
   NEARPROC* = pointer
   PROC* = pointer
   EXCEPTION_DISPOSITION* = int
+  QWORD* = uint64
+  PQWORD* = ptr uint64
 when winimAnsi:
   type
     TCHAR* = char

@@ -10,8 +10,6 @@ import windef
 import winsock
 #include <windns.h>
 type
-  QWORD* = uint64
-  PQWORD* = ptr uint64
   DNS_CONFIG_TYPE* = int32
   DNS_SECTION* = int32
   DNS_CHARSET* = int32

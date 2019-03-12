@@ -1,6 +1,12 @@
+Version 2.6.1
+-------------
+* Update for Nim Compiler 0.19.9 again.
+* Remove -d:mshtml (not so useful)
+* Small change for new winimx tool.
+
 Version 2.6
 -----------
-* Update for Nim Compiler 0.19.9
+* Update for Nim Compiler 0.19.9.
 * Add wincodec module.
 
 Version 2.5.2

@@ -204,7 +204,7 @@ type
   PAUDIT_IP_ADDRESS* = ptr AUDIT_IP_ADDRESS
   AUDIT_PARAM_UNION1* {.pure, union.} = object
     Data0*: ULONG_PTR
-    String*: PWSTR
+    Str*: PWSTR
     u*: ULONG_PTR
     psid*: ptr SID
     pguid*: ptr GUID
@@ -843,9 +843,9 @@ proc Reserved1*(self: var ACTRL_OVERLAPPED): var ULONG {.inline.} = self.union1.
 proc `Data0=`*(self: var AUDIT_PARAM, x: ULONG_PTR) {.inline.} = self.union1.Data0 = x
 proc Data0*(self: AUDIT_PARAM): ULONG_PTR {.inline.} = self.union1.Data0
 proc Data0*(self: var AUDIT_PARAM): var ULONG_PTR {.inline.} = self.union1.Data0
-proc `String=`*(self: var AUDIT_PARAM, x: PWSTR) {.inline.} = self.union1.String = x
-proc String*(self: AUDIT_PARAM): PWSTR {.inline.} = self.union1.String
-proc String*(self: var AUDIT_PARAM): var PWSTR {.inline.} = self.union1.String
+proc `Str=`*(self: var AUDIT_PARAM, x: PWSTR) {.inline.} = self.union1.Str = x
+proc Str*(self: AUDIT_PARAM): PWSTR {.inline.} = self.union1.Str
+proc Str*(self: var AUDIT_PARAM): var PWSTR {.inline.} = self.union1.Str
 proc `u=`*(self: var AUDIT_PARAM, x: ULONG_PTR) {.inline.} = self.union1.u = x
 proc u*(self: AUDIT_PARAM): ULONG_PTR {.inline.} = self.union1.u
 proc u*(self: var AUDIT_PARAM): var ULONG_PTR {.inline.} = self.union1.u

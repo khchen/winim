@@ -22,7 +22,7 @@ Without git:
 
 ## Usage
 ```nimrod
-import winim # import all modules, except COM support and MSHTML.
+import winim # import all modules, except COM support.
 ```
 or
 ```nimrod
@@ -39,19 +39,32 @@ import winim/com # winim.mean + Windows COM support.
 
 API modules can import one by one if needed, for example:
 ```nimrod
+import winim/utils
+import winim/winstr
 import winim/inc/windef
 import winim/inc/winbase
 import winim/inc/winuser
 ```
 or
 ```nimrod
+import winim/[utils, winstr]
 import winim/inc/[windef, winbase, winuser]
+```
+
+WinHTTP and WinINet module are incompatible with each other.
+So they are not imported by default. Add one of them if needed:
+```nimrod
+import winim/inc/winhttp
+```
+or
+```nimrod
+import winim/inc/wininet
 ```
 
 MSHTML module is too big. So it is not imported by default.
 Add this module only if needed:
 ```nimrod
-import winim/html
+import winim/inc/mshtml
 ```
 
 ## Compile
@@ -61,7 +74,6 @@ import winim/html
       add -d:lean same as import winim/lean
       add -d:mean same as import winim/mean
       add -d:win32_lean_and_mean same as import winim/mean
-      add -d:mshtml same as import winim/html
       add -d:notrace disable COM objects trace. See com.nim for details.
       add -d:useWinXP for Windows XP compatibility.
 
@@ -127,4 +139,4 @@ comScript:
 ## License
 Read license.txt for more details.
 
-Copyright (c) 2016-2018 Kai-Hung Chen, Ward. All rights reserved.
+Copyright (c) 2016-2019 Kai-Hung Chen, Ward. All rights reserved.

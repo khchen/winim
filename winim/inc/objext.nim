@@ -25,7 +25,7 @@ type
   OLE_YSIZE_PIXELS* = int32
   OLE_TRISTATE* = int32
   SCRIPTLANGUAGEVERSION* = int32
-  SCRIPTSTATE* = int32
+  TSCRIPTSTATE* = int32
   SCRIPTTRACEINFO* = int32
   SCRIPTTHREADSTATE* = int32
   SCRIPTGCTYPE* = int32
@@ -1482,7 +1482,7 @@ type
     GetItemInfo*: proc(self: ptr IActiveScriptSite, pstrName: LPCOLESTR, dwReturnMask: DWORD, ppiunkItem: ptr ptr IUnknown, ppti: ptr ptr ITypeInfo): HRESULT {.stdcall.}
     GetDocVersionString*: proc(self: ptr IActiveScriptSite, pbstrVersion: ptr BSTR): HRESULT {.stdcall.}
     OnScriptTerminate*: proc(self: ptr IActiveScriptSite, pvarResult: ptr VARIANT, pexcepinfo: ptr EXCEPINFO): HRESULT {.stdcall.}
-    OnStateChange*: proc(self: ptr IActiveScriptSite, ssScriptState: SCRIPTSTATE): HRESULT {.stdcall.}
+    OnStateChange*: proc(self: ptr IActiveScriptSite, ssScriptState: TSCRIPTSTATE): HRESULT {.stdcall.}
     OnScriptError*: proc(self: ptr IActiveScriptSite, pscripterror: ptr IActiveScriptError): HRESULT {.stdcall.}
     OnEnterScript*: proc(self: ptr IActiveScriptSite): HRESULT {.stdcall.}
     OnLeaveScript*: proc(self: ptr IActiveScriptSite): HRESULT {.stdcall.}
@@ -1508,8 +1508,8 @@ type
   IActiveScriptVtbl* {.pure, inheritable.} = object of IUnknownVtbl
     SetScriptSite*: proc(self: ptr IActiveScript, pass: ptr IActiveScriptSite): HRESULT {.stdcall.}
     GetScriptSite*: proc(self: ptr IActiveScript, riid: REFIID, ppvObject: ptr pointer): HRESULT {.stdcall.}
-    SetScriptState*: proc(self: ptr IActiveScript, ss: SCRIPTSTATE): HRESULT {.stdcall.}
-    GetScriptState*: proc(self: ptr IActiveScript, pssState: ptr SCRIPTSTATE): HRESULT {.stdcall.}
+    SetScriptState*: proc(self: ptr IActiveScript, ss: TSCRIPTSTATE): HRESULT {.stdcall.}
+    GetScriptState*: proc(self: ptr IActiveScript, pssState: ptr TSCRIPTSTATE): HRESULT {.stdcall.}
     Close*: proc(self: ptr IActiveScript): HRESULT {.stdcall.}
     AddNamedItem*: proc(self: ptr IActiveScript, pstrName: LPCOLESTR, dwFlags: DWORD): HRESULT {.stdcall.}
     AddTypeLib*: proc(self: ptr IActiveScript, rguidTypeLib: REFGUID, dwMajor: DWORD, dwMinor: DWORD, dwFlags: DWORD): HRESULT {.stdcall.}
@@ -1676,7 +1676,7 @@ proc GetLCID*(self: ptr IActiveScriptSite, plcid: ptr LCID): HRESULT {.winapi, i
 proc GetItemInfo*(self: ptr IActiveScriptSite, pstrName: LPCOLESTR, dwReturnMask: DWORD, ppiunkItem: ptr ptr IUnknown, ppti: ptr ptr ITypeInfo): HRESULT {.winapi, inline.} = self.lpVtbl.GetItemInfo(self, pstrName, dwReturnMask, ppiunkItem, ppti)
 proc GetDocVersionString*(self: ptr IActiveScriptSite, pbstrVersion: ptr BSTR): HRESULT {.winapi, inline.} = self.lpVtbl.GetDocVersionString(self, pbstrVersion)
 proc OnScriptTerminate*(self: ptr IActiveScriptSite, pvarResult: ptr VARIANT, pexcepinfo: ptr EXCEPINFO): HRESULT {.winapi, inline.} = self.lpVtbl.OnScriptTerminate(self, pvarResult, pexcepinfo)
-proc OnStateChange*(self: ptr IActiveScriptSite, ssScriptState: SCRIPTSTATE): HRESULT {.winapi, inline.} = self.lpVtbl.OnStateChange(self, ssScriptState)
+proc OnStateChange*(self: ptr IActiveScriptSite, ssScriptState: TSCRIPTSTATE): HRESULT {.winapi, inline.} = self.lpVtbl.OnStateChange(self, ssScriptState)
 proc OnScriptError*(self: ptr IActiveScriptSite, pscripterror: ptr IActiveScriptError): HRESULT {.winapi, inline.} = self.lpVtbl.OnScriptError(self, pscripterror)
 proc OnEnterScript*(self: ptr IActiveScriptSite): HRESULT {.winapi, inline.} = self.lpVtbl.OnEnterScript(self)
 proc OnLeaveScript*(self: ptr IActiveScriptSite): HRESULT {.winapi, inline.} = self.lpVtbl.OnLeaveScript(self)
@@ -1690,8 +1690,8 @@ proc GetUIBehavior*(self: ptr IActiveScriptSiteUIControl, UicItem: SCRIPTUICITEM
 proc QueryContinue*(self: ptr IActiveScriptSiteInterruptPoll): HRESULT {.winapi, inline.} = self.lpVtbl.QueryContinue(self)
 proc SetScriptSite*(self: ptr IActiveScript, pass: ptr IActiveScriptSite): HRESULT {.winapi, inline.} = self.lpVtbl.SetScriptSite(self, pass)
 proc GetScriptSite*(self: ptr IActiveScript, riid: REFIID, ppvObject: ptr pointer): HRESULT {.winapi, inline.} = self.lpVtbl.GetScriptSite(self, riid, ppvObject)
-proc SetScriptState*(self: ptr IActiveScript, ss: SCRIPTSTATE): HRESULT {.winapi, inline.} = self.lpVtbl.SetScriptState(self, ss)
-proc GetScriptState*(self: ptr IActiveScript, pssState: ptr SCRIPTSTATE): HRESULT {.winapi, inline.} = self.lpVtbl.GetScriptState(self, pssState)
+proc SetScriptState*(self: ptr IActiveScript, ss: TSCRIPTSTATE): HRESULT {.winapi, inline.} = self.lpVtbl.SetScriptState(self, ss)
+proc GetScriptState*(self: ptr IActiveScript, pssState: ptr TSCRIPTSTATE): HRESULT {.winapi, inline.} = self.lpVtbl.GetScriptState(self, pssState)
 proc Close*(self: ptr IActiveScript): HRESULT {.winapi, inline.} = self.lpVtbl.Close(self)
 proc AddNamedItem*(self: ptr IActiveScript, pstrName: LPCOLESTR, dwFlags: DWORD): HRESULT {.winapi, inline.} = self.lpVtbl.AddNamedItem(self, pstrName, dwFlags)
 proc AddTypeLib*(self: ptr IActiveScript, rguidTypeLib: REFGUID, dwMajor: DWORD, dwMinor: DWORD, dwFlags: DWORD): HRESULT {.winapi, inline.} = self.lpVtbl.AddTypeLib(self, rguidTypeLib, dwMajor, dwMinor, dwFlags)

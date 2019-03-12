@@ -58,11 +58,11 @@ type
     dtImage*: DWORD
     cImage*: DWORD
   PMODLOAD_CVMISC* = ptr MODLOAD_CVMISC
-  ADDRESS64* {.pure.} = object
+  TADDRESS64* {.pure.} = object
     Offset*: DWORD64
     Segment*: WORD
     Mode*: ADDRESS_MODE
-  LPADDRESS64* = ptr ADDRESS64
+  LPADDRESS64* = ptr TADDRESS64
   KDHELP64* {.pure.} = object
     Thread*: DWORD64
     ThCallbackStack*: DWORD
@@ -78,11 +78,11 @@ type
     Reserved*: array[5, DWORD64]
   PKDHELP64* = ptr KDHELP64
   STACKFRAME64* {.pure.} = object
-    AddrPC*: ADDRESS64
-    AddrReturn*: ADDRESS64
-    AddrFrame*: ADDRESS64
-    AddrStack*: ADDRESS64
-    AddrBStore*: ADDRESS64
+    AddrPC*: TADDRESS64
+    AddrReturn*: TADDRESS64
+    AddrFrame*: TADDRESS64
+    AddrStack*: TADDRESS64
+    AddrBStore*: TADDRESS64
     FuncTableEntry*: PVOID
     Params*: array[4, DWORD64]
     Far*: WINBOOL
@@ -1278,7 +1278,7 @@ when winimAnsi:
   proc MapFileAndCheckSum*(Filename: PCSTR, HeaderSum: PDWORD, CheckSum: PDWORD): DWORD {.winapi, stdcall, dynlib: "imagehlp", importc: "MapFileAndCheckSumA".}
 when winimCpu64:
   type
-    ADDRESS* = ADDRESS64
+    TADDRESS* = TADDRESS64
     LPADDRESS* = LPADDRESS64
     KDHELP* = KDHELP64
     PKDHELP* = PKDHELP64
@@ -1365,11 +1365,11 @@ when winimCpu32:
       ReservedOriginalFunctionTableBaseAddress*: DWORD
       Reserved*: array[2, DWORD]
     PIMAGE_DEBUG_INFORMATION* = ptr IMAGE_DEBUG_INFORMATION
-    ADDRESS* {.pure.} = object
+    TADDRESS* {.pure.} = object
       Offset*: DWORD
       Segment*: WORD
       Mode*: ADDRESS_MODE
-    LPADDRESS* = ptr ADDRESS
+    LPADDRESS* = ptr TADDRESS
     KDHELP* {.pure.} = object
       Thread*: DWORD
       ThCallbackStack*: DWORD
@@ -1385,17 +1385,17 @@ when winimCpu32:
       Reserved*: array[5, DWORD]
     PKDHELP* = ptr KDHELP
     STACKFRAME* {.pure.} = object
-      AddrPC*: ADDRESS
-      AddrReturn*: ADDRESS
-      AddrFrame*: ADDRESS
-      AddrStack*: ADDRESS
+      AddrPC*: TADDRESS
+      AddrReturn*: TADDRESS
+      AddrFrame*: TADDRESS
+      AddrStack*: TADDRESS
       FuncTableEntry*: PVOID
       Params*: array[4, DWORD]
       Far*: WINBOOL
       Virtual*: WINBOOL
       Reserved*: array[3, DWORD]
       KdHelp*: KDHELP
-      AddrBStore*: ADDRESS
+      AddrBStore*: TADDRESS
     LPSTACKFRAME* = ptr STACKFRAME
     IMAGEHLP_SYMBOL* {.pure.} = object
       SizeOfStruct*: DWORD

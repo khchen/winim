@@ -9,6 +9,7 @@ import winimbase
 import windef
 import winbase
 import winsock
+import wincrypt
 import security
 #include <http.h>
 type

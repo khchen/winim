@@ -10,6 +10,7 @@ import windef
 import winerror
 import winbase
 import wincrypt
+import security
 import objbase
 #include <rpcndr.h>
 #include <rpcnsip.h>
@@ -343,24 +344,6 @@ type
     IdentityTracking*: int32
     ImpersonationType*: int32
   PRPC_SECURITY_QOS* = ptr RPC_SECURITY_QOS
-  SEC_WINNT_AUTH_IDENTITY_W* {.pure.} = object
-    User*: ptr uint16
-    UserLength*: int32
-    Domain*: ptr uint16
-    DomainLength*: int32
-    Password*: ptr uint16
-    PasswordLength*: int32
-    Flags*: int32
-  PSEC_WINNT_AUTH_IDENTITY_W* = ptr SEC_WINNT_AUTH_IDENTITY_W
-  SEC_WINNT_AUTH_IDENTITY_A* {.pure.} = object
-    User*: ptr uint8
-    UserLength*: int32
-    Domain*: ptr uint8
-    DomainLength*: int32
-    Password*: ptr uint8
-    PasswordLength*: int32
-    Flags*: int32
-  PSEC_WINNT_AUTH_IDENTITY_A* = ptr SEC_WINNT_AUTH_IDENTITY_A
   RPC_HTTP_TRANSPORT_CREDENTIALS_W* {.pure.} = object
     TransportCredentials*: ptr SEC_WINNT_AUTH_IDENTITY_W
     Flags*: int32
@@ -432,13 +415,6 @@ type
     ComTimeout*: int32
     CallTimeout*: int32
   RPC_BINDING_HANDLE_OPTIONS* = RPC_BINDING_HANDLE_OPTIONS_V1
-when winimUnicode:
-  type
-    SEC_WINNT_AUTH_IDENTITY* = SEC_WINNT_AUTH_IDENTITY_W
-when winimAnsi:
-  type
-    SEC_WINNT_AUTH_IDENTITY* = SEC_WINNT_AUTH_IDENTITY_A
-type
   RPC_BINDING_HANDLE_SECURITY_V1* {.pure.} = object
     Version*: int32
     ServerPrincName*: ptr uint16
@@ -778,8 +754,6 @@ const
   RPC_C_AUTHN_DEFAULT* = 0xFFFFFFFF'i32
   RPC_C_SECURITY_QOS_VERSION* = 1
   RPC_C_SECURITY_QOS_VERSION_1* = 1
-  SEC_WINNT_AUTH_IDENTITY_ANSI* = 0x1
-  SEC_WINNT_AUTH_IDENTITY_UNICODE* = 0x2
   RPC_C_SECURITY_QOS_VERSION_2* = 2
   RPC_C_AUTHN_INFO_TYPE_HTTP* = 1
   RPC_C_HTTP_AUTHN_TARGET_SERVER* = 1
@@ -1540,7 +1514,6 @@ proc Level1*(self: var NDR_USER_MARSHAL_INFO): var NDR_USER_MARSHAL_INFO_LEVEL1 
 when winimUnicode:
   type
     RPC_PROTSEQ_VECTOR* = RPC_PROTSEQ_VECTORW
-    PSEC_WINNT_AUTH_IDENTITY* = PSEC_WINNT_AUTH_IDENTITY_W
     RPC_SECURITY_QOS_V2* = RPC_SECURITY_QOS_V2_W
     PRPC_SECURITY_QOS_V2* = PRPC_SECURITY_QOS_V2_W
     RPC_HTTP_TRANSPORT_CREDENTIALS* = RPC_HTTP_TRANSPORT_CREDENTIALS_W
@@ -1612,7 +1585,6 @@ when winimUnicode:
 when winimAnsi:
   type
     RPC_PROTSEQ_VECTOR* = RPC_PROTSEQ_VECTORA
-    PSEC_WINNT_AUTH_IDENTITY* = PSEC_WINNT_AUTH_IDENTITY_A
     RPC_SECURITY_QOS_V2* = RPC_SECURITY_QOS_V2_A
     PRPC_SECURITY_QOS_V2* = PRPC_SECURITY_QOS_V2_A
     RPC_HTTP_TRANSPORT_CREDENTIALS* = RPC_HTTP_TRANSPORT_CREDENTIALS_A

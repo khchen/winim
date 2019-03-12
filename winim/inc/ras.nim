@@ -54,7 +54,6 @@ type
   StringCorrelationId* = CountedString
   SystemHealthEntityCount* = UINT16
   EnforcementEntityCount* = UINT16
-  ConnectionId* = GUID
   Percentage* = UINT8
   SoHAttribute* {.pure.} = object
     `type`*: UINT16

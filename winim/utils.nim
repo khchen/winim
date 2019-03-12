@@ -4,7 +4,7 @@
 #                 (c) Copyright 2016-2019 Ward
 #====================================================================
 
-##  This module contains utilities for happily coding.
+##  This module contains utilities for happily coding in winim.
 
 {.deadCodeElim: on.}
 
