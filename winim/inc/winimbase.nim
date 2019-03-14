@@ -8,7 +8,7 @@
 import macros, os
 
 static:
-  const winimPrivateDir = parentDir(currentSourcePath()) & r"\..\lib\"
+  const winimPrivateDir = parentDir(currentSourcePath()) & "/../lib/"
 
   when defined(cpu64):
     const resourceFile = winimPrivateDir & "winim64.res"
