@@ -1,3 +1,10 @@
-import winim/lean
+#====================================================================
+#
+#               Winim - Nim's Windows API Module
+#                 (c) Copyright 2016-2019 Ward
+#====================================================================
 
-MessageBox(0, "Hello, Windows!", "Your Application", 0)
+import winim
+
+InitCommonControls() # Windows XP needs this
+MessageBox(0, T"Hello, world !", T"Nim is Powerful", 0)

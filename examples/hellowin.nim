@@ -1,6 +1,12 @@
+#====================================================================
+#
+#               Winim - Nim's Windows API Module
+#                 (c) Copyright 2016-2019 Ward
+#====================================================================
+
 import winim/lean
 
-proc WndProc(hwnd: HWND, message: UINT, wParam: WPARAM, lParam: LPARAM): LRESULT {.stdcall.} =
+proc WindowProc(hwnd: HWND, message: UINT, wParam: WPARAM, lParam: LPARAM): LRESULT {.stdcall.} =
   case message
   of WM_PAINT:
     var ps: PAINTSTRUCT
@@ -28,7 +34,7 @@ proc main() =
     wndclass: WNDCLASS
 
   wndclass.style = CS_HREDRAW or CS_VREDRAW
-  wndclass.lpfnWndProc = WndProc
+  wndclass.lpfnWndProc = WindowProc
   wndclass.cbClsExtra = 0
   wndclass.cbWndExtra = 0
   wndclass.hInstance = hInstance

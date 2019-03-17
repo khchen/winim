@@ -1286,12 +1286,12 @@ proc GdipBitmapUnlockBits*(bitmap: ptr GpBitmap, lockedBitmapData: ptr BitmapDat
 proc GdipBitmapGetPixel*(bitmap: ptr GpBitmap, x: INT, y: INT, color: ptr ARGB): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipBitmapSetPixel*(bitmap: ptr GpBitmap, x: INT, y: INT, color: ARGB): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipBitmapSetResolution*(bitmap: ptr GpBitmap, xdpi: REAL, ydpi: REAL): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
-proc GdipBitmapConvertFormat*(pInputBitmap: ptr GpBitmap, format: PixelFormat, dithertype: DitherType, palettetype: PaletteType, palette: ptr ColorPalette, alphaThresholdPercent: REAL): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
-proc GdipInitializePalette*(palette: ptr ColorPalette, palettetype: PaletteType, optimalColors: INT, useTransparentColor: BOOL, bitmap: ptr GpBitmap): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
-proc GdipBitmapApplyEffect*(bitmap: ptr GpBitmap, effect: ptr CGpEffect, roi: ptr RECT, useAuxData: BOOL, auxData: ptr pointer, auxDataSize: ptr INT): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
-proc GdipBitmapCreateApplyEffect*(inputBitmaps: ptr ptr GpBitmap, numInputs: INT, effect: ptr CGpEffect, roi: ptr RECT, outputRect: ptr RECT, outputBitmap: ptr ptr GpBitmap, useAuxData: BOOL, auxData: ptr pointer, auxDataSize: ptr INT): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
-proc GdipBitmapGetHistogram*(bitmap: ptr GpBitmap, format: HistogramFormat, NumberOfEntries: UINT, channel0: ptr UINT, channel1: ptr UINT, channel2: ptr UINT, channel3: ptr UINT): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
-proc GdipBitmapGetHistogramSize*(format: HistogramFormat, NumberOfEntries: ptr UINT): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
+proc GdipBitmapConvertFormat*(pInputBitmap: ptr GpBitmap, format: PixelFormat, dithertype: DitherType, palettetype: PaletteType, palette: ptr ColorPalette, alphaThresholdPercent: REAL): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
+proc GdipInitializePalette*(palette: ptr ColorPalette, palettetype: PaletteType, optimalColors: INT, useTransparentColor: BOOL, bitmap: ptr GpBitmap): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
+proc GdipBitmapApplyEffect*(bitmap: ptr GpBitmap, effect: ptr CGpEffect, roi: ptr RECT, useAuxData: BOOL, auxData: ptr pointer, auxDataSize: ptr INT): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
+proc GdipBitmapCreateApplyEffect*(inputBitmaps: ptr ptr GpBitmap, numInputs: INT, effect: ptr CGpEffect, roi: ptr RECT, outputRect: ptr RECT, outputBitmap: ptr ptr GpBitmap, useAuxData: BOOL, auxData: ptr pointer, auxDataSize: ptr INT): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
+proc GdipBitmapGetHistogram*(bitmap: ptr GpBitmap, format: HistogramFormat, NumberOfEntries: UINT, channel0: ptr UINT, channel1: ptr UINT, channel2: ptr UINT, channel3: ptr UINT): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
+proc GdipBitmapGetHistogramSize*(format: HistogramFormat, NumberOfEntries: ptr UINT): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipCloneBrush*(brush: ptr GpBrush, cloneBrush: ptr ptr GpBrush): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipDeleteBrush*(brush: ptr GpBrush): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipGetBrushType*(brush: ptr GpBrush, Type: ptr GpBrushType): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
@@ -1312,11 +1312,11 @@ proc GdipSetCustomLineCapBaseInset*(customCap: ptr GpCustomLineCap, inset: REAL)
 proc GdipGetCustomLineCapBaseInset*(customCap: ptr GpCustomLineCap, inset: ptr REAL): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipSetCustomLineCapWidthScale*(customCap: ptr GpCustomLineCap, widthScale: REAL): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipGetCustomLineCapWidthScale*(customCap: ptr GpCustomLineCap, widthScale: ptr REAL): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
-proc GdipCreateEffect*(guid: GUID, effect: ptr ptr CGpEffect): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
-proc GdipDeleteEffect*(effect: ptr CGpEffect): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
-proc GdipGetEffectParameterSize*(effect: ptr CGpEffect, size: ptr UINT): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
-proc GdipSetEffectParameters*(effect: ptr CGpEffect, params: pointer, size: UINT): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
-proc GdipGetEffectParameters*(effect: ptr CGpEffect, size: ptr UINT, params: pointer): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
+proc GdipCreateEffect*(guid: GUID, effect: ptr ptr CGpEffect): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
+proc GdipDeleteEffect*(effect: ptr CGpEffect): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
+proc GdipGetEffectParameterSize*(effect: ptr CGpEffect, size: ptr UINT): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
+proc GdipSetEffectParameters*(effect: ptr CGpEffect, params: pointer, size: UINT): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
+proc GdipGetEffectParameters*(effect: ptr CGpEffect, size: ptr UINT, params: pointer): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipCreateFontFromDC*(hdc: HDC, font: ptr ptr GpFont): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipCreateFontFromLogfontA*(hdc: HDC, logfont: ptr LOGFONTA, font: ptr ptr GpFont): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipCreateFontFromLogfontW*(hdc: HDC, logfont: ptr LOGFONTW, font: ptr ptr GpFont): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
@@ -1373,7 +1373,7 @@ proc GdipGetTextRenderingHint*(graphics: ptr GpGraphics, mode: ptr TextRendering
 proc GdipSetTextContrast*(graphics: ptr GpGraphics, contrast: UINT): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipGetTextContrast*(graphics: ptr GpGraphics, contrast: ptr UINT): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipSetInterpolationMode*(graphics: ptr GpGraphics, interpolationMode: InterpolationMode): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
-proc GdipGraphicsSetAbort*(pGraphics: ptr GpGraphics, pIAbort: ptr GdiplusAbort): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
+proc GdipGraphicsSetAbort*(pGraphics: ptr GpGraphics, pIAbort: ptr GdiplusAbort): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipGetInterpolationMode*(graphics: ptr GpGraphics, interpolationMode: ptr InterpolationMode): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipSetWorldTransform*(graphics: ptr GpGraphics, matrix: ptr GpMatrix): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipResetWorldTransform*(graphics: ptr GpGraphics): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
@@ -1455,7 +1455,7 @@ proc GdipDrawImageRectRect*(graphics: ptr GpGraphics, image: ptr GpImage, dstx: 
 proc GdipDrawImageRectRectI*(graphics: ptr GpGraphics, image: ptr GpImage, dstx: INT, dsty: INT, dstwidth: INT, dstheight: INT, srcx: INT, srcy: INT, srcwidth: INT, srcheight: INT, srcUnit: GpUnit, imageAttributes: ptr GpImageAttributes, callback: DrawImageAbort, callbackData: pointer): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipDrawImagePointsRect*(graphics: ptr GpGraphics, image: ptr GpImage, points: ptr GpPointF, count: INT, srcx: REAL, srcy: REAL, srcwidth: REAL, srcheight: REAL, srcUnit: GpUnit, imageAttributes: ptr GpImageAttributes, callback: DrawImageAbort, callbackData: pointer): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipDrawImagePointsRectI*(graphics: ptr GpGraphics, image: ptr GpImage, points: ptr GpPoint, count: INT, srcx: INT, srcy: INT, srcwidth: INT, srcheight: INT, srcUnit: GpUnit, imageAttributes: ptr GpImageAttributes, callback: DrawImageAbort, callbackData: pointer): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
-proc GdipDrawImageFX*(graphics: ptr GpGraphics, image: ptr GpImage, source: ptr GpRectF, xForm: ptr GpMatrix, effect: ptr CGpEffect, imageAttributes: ptr GpImageAttributes, srcUnit: GpUnit): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
+proc GdipDrawImageFX*(graphics: ptr GpGraphics, image: ptr GpImage, source: ptr GpRectF, xForm: ptr GpMatrix, effect: ptr CGpEffect, imageAttributes: ptr GpImageAttributes, srcUnit: GpUnit): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipEnumerateMetafileDestPoints*(graphics: ptr GpGraphics, metafile: ptr GpMetafile, destPoints: ptr GpPointF, count: INT, callback: EnumerateMetafileProc, callbackData: pointer, imageAttributes: ptr GpImageAttributes): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipEnumerateMetafileDestPointsI*(graphics: ptr GpGraphics, metafile: ptr GpMetafile, destGpPoints: ptr GpPoint, count: INT, callback: EnumerateMetafileProc, callbackData: pointer, imageAttributes: ptr GpImageAttributes): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipSetClipGraphics*(graphics: ptr GpGraphics, srcgraphics: ptr GpGraphics, combineMode: CombineMode): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
@@ -1593,10 +1593,10 @@ proc GdipGetPropertySize*(image: ptr GpImage, totalBufferSize: ptr UINT, numProp
 proc GdipGetAllPropertyItems*(image: ptr GpImage, totalBufferSize: UINT, numProperties: UINT, allItems: ptr PropertyItem): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipRemovePropertyItem*(image: ptr GpImage, propId: PROPID): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipSetPropertyItem*(image: ptr GpImage, item: ptr PropertyItem): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
-proc GdipFindFirstImageItem*(image: ptr GpImage, item: ptr ImageItemData): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
-proc GdipFindNextImageItem*(image: ptr GpImage, item: ptr ImageItemData): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
-proc GdipGetImageItemData*(image: ptr GpImage, item: ptr ImageItemData): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
-proc GdipImageSetAbort*(pImage: ptr GpImage, pIAbort: ptr GdiplusAbort): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
+proc GdipFindFirstImageItem*(image: ptr GpImage, item: ptr ImageItemData): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
+proc GdipFindNextImageItem*(image: ptr GpImage, item: ptr ImageItemData): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
+proc GdipGetImageItemData*(image: ptr GpImage, item: ptr ImageItemData): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
+proc GdipImageSetAbort*(pImage: ptr GpImage, pIAbort: ptr GdiplusAbort): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipImageForceValidation*(image: ptr GpImage): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipGetImageDecodersSize*(numDecoders: ptr UINT, size: ptr UINT): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipGetImageDecoders*(numDecoders: UINT, size: UINT, decoders: ptr ImageCodecInfo): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
@@ -1688,9 +1688,9 @@ proc GdipRecordMetafileStreamI*(stream: ptr IStream, referenceHdc: HDC, Type: Em
 proc GdipPlayMetafileRecord*(metafile: ptr GpMetafile, recordType: EmfPlusRecordType, flags: UINT, dataSize: UINT, data: ptr BYTE): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipSetMetafileDownLevelRasterizationLimit*(metafile: ptr GpMetafile, metafileRasterizationLimitDpi: UINT): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipGetMetafileDownLevelRasterizationLimit*(metafile: ptr GpMetafile, metafileRasterizationLimitDpi: ptr UINT): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
-proc GdipConvertToEmfPlus*(refGraphics: ptr GpGraphics, metafile: ptr GpMetafile, conversionSuccess: ptr BOOL, emfType: EmfType, description: ptr WCHAR, out_metafile: ptr ptr GpMetafile): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
-proc GdipConvertToEmfPlusToFile*(refGraphics: ptr GpGraphics, metafile: ptr GpMetafile, conversionSuccess: ptr BOOL, filename: ptr WCHAR, emfType: EmfType, description: ptr WCHAR, out_metafile: ptr ptr GpMetafile): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
-proc GdipConvertToEmfPlusToStream*(refGraphics: ptr GpGraphics, metafile: ptr GpMetafile, conversionSuccess: ptr BOOL, stream: ptr IStream, emfType: EmfType, description: ptr WCHAR, out_metafile: ptr ptr GpMetafile): GpStatus {.winapi, xpincompatible, stdcall, dynlib: "gdiplus", importc.}
+proc GdipConvertToEmfPlus*(refGraphics: ptr GpGraphics, metafile: ptr GpMetafile, conversionSuccess: ptr BOOL, emfType: EmfType, description: ptr WCHAR, out_metafile: ptr ptr GpMetafile): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
+proc GdipConvertToEmfPlusToFile*(refGraphics: ptr GpGraphics, metafile: ptr GpMetafile, conversionSuccess: ptr BOOL, filename: ptr WCHAR, emfType: EmfType, description: ptr WCHAR, out_metafile: ptr ptr GpMetafile): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
+proc GdipConvertToEmfPlusToStream*(refGraphics: ptr GpGraphics, metafile: ptr GpMetafile, conversionSuccess: ptr BOOL, stream: ptr IStream, emfType: EmfType, description: ptr WCHAR, out_metafile: ptr ptr GpMetafile): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipEmfToWmfBits*(hemf: HENHMETAFILE, cbData16: UINT, pData16: LPBYTE, iMapMode: INT, eFlags: INT): UINT {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipCreatePathGradient*(points: ptr GpPointF, count: INT, wrapMode: GpWrapMode, polyGradient: ptr ptr GpPathGradient): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}
 proc GdipCreatePathGradientI*(points: ptr GpPoint, count: INT, wrapMode: GpWrapMode, polyGradient: ptr ptr GpPathGradient): GpStatus {.winapi, stdcall, dynlib: "gdiplus", importc.}

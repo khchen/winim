@@ -1,10 +1,8 @@
 # Winim
 
-Winim contains Windows API, struct, and constant definitions for Nim.
-The definitions are translated from MinGW's Windows headers.
+Winim contains Windows API, struct, and constant definitions for Nim. The definitions are translated from MinGW's Windows headers.
 
-The module also include some Windows string type utilities and Windows COM support.
-See winstr.nim and com.nim for details.
+The module also include some Windows string type utilities and Windows COM support. See winstr.nim and com.nim for details.
 
 If you are looking for Windows GUI framework, try [wNim](https://github.com/khchen/wNim).
 
@@ -51,8 +49,7 @@ import winim/[utils, winstr]
 import winim/inc/[windef, winbase, winuser]
 ```
 
-WinHTTP and WinINet module are incompatible with each other.
-So they are not imported by default. Add one of them if needed:
+WinHTTP and WinINet module are incompatible with each other. So they are not imported by default. Add one of them if needed:
 ```nimrod
 import winim/inc/winhttp
 ```
@@ -70,12 +67,11 @@ import winim/inc/mshtml
 ## Compile
     nim c source.nim
       add -d:winansi or -d:useWinAnsi for Ansi version (Unicode by default)
-      add -d:win_no_discardable if not like discardable windows API
+      add -d:noDiscardableApi if not like discardable windows API
+      add -d:noRes to disable the visual styles (not to link winim32.res or winim64.res).
       add -d:lean same as import winim/lean
-      add -d:mean same as import winim/mean
-      add -d:win32_lean_and_mean same as import winim/mean
+      add -d:mean or -d:win32_lean_and_mean same as import winim/mean
       add -d:notrace disable COM objects trace. See com.nim for details.
-      add -d:useWinXP for Windows XP compatibility.
 
 ## Examples
 
@@ -130,8 +126,34 @@ comScript:
     echo key, " => ", dict.item(key)
 ```
 
+## Winimx
+
+Winimx is a standalone tool to generate the minfied Winim module. It also can be used to generate the necessary definitions at compile time. For more information, see the [document](https://khchen.github.io/winim/winimx.html).
+
+## Cross Compile
+
+Windows programs using Winim module should be compiled successfully by gcc, tcc, vcc on Windows, and mingw32 on Linux. The target file can be PE (32 bits) or PE+ (64 bits).
+
+The suggested Nim compiler is amd64 version. You can download both mingw32 and mingw64 from the Nim's website and put them into nim\dist\mingw32 and nim\dist\mingw64. Modify the *nim.cfg*:
+
+    @if windows:
+      @if i386:
+        gcc.path = r"$nim\dist\mingw32\bin"
+      @else:
+        gcc.path = r"$nim\dist\mingw64\bin"
+      @end
+    @end
+
+Now, you can add --cpu:i386 for 32 bits target, and --cpu:amd64 for 64 bits target. To use tcc (Tiny C Compiler), [here](https://github.com/khchen/winim/tree/master/tcclib) are some more information.
+
+To cross compile under Linux, try following command:
+
+    sudo apt install gcc-mingw-w64-x86-64
+    nim c --os:windows --gcc.exe:x86_64-w64-mingw32-gcc --gcc.linkerexe:x86_64-w64-mingw32-gcc test.nim
+
 ## Docs
 * https://khchen.github.io/winim/winim.html
+* https://khchen.github.io/winim/winimx.html
 * https://khchen.github.io/winim/utils.html
 * https://khchen.github.io/winim/winstr.html
 * https://khchen.github.io/winim/com.html

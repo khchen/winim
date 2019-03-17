@@ -137,7 +137,7 @@ proc GetModuleFileNameExW*(hProcess: HANDLE, hModule: HMODULE, lpFilename: LPWST
 proc GetModuleInformation*(hProcess: HANDLE, hModule: HMODULE, lpmodinfo: LPMODULEINFO, cb: DWORD): WINBOOL {.winapi, stdcall, dynlib: "psapi", importc.}
 proc EmptyWorkingSet*(hProcess: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "psapi", importc.}
 proc QueryWorkingSet*(hProcess: HANDLE, pv: PVOID, cb: DWORD): WINBOOL {.winapi, stdcall, dynlib: "psapi", importc.}
-proc QueryWorkingSetEx*(hProcess: HANDLE, pv: PVOID, cb: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "psapi", importc.}
+proc QueryWorkingSetEx*(hProcess: HANDLE, pv: PVOID, cb: DWORD): WINBOOL {.winapi, stdcall, dynlib: "psapi", importc.}
 proc InitializeProcessForWsWatch*(hProcess: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "psapi", importc.}
 proc GetWsChanges*(hProcess: HANDLE, lpWatchInfo: PPSAPI_WS_WATCH_INFORMATION, cb: DWORD): WINBOOL {.winapi, stdcall, dynlib: "psapi", importc.}
 proc GetMappedFileNameW*(hProcess: HANDLE, lpv: LPVOID, lpFilename: LPWSTR, nSize: DWORD): DWORD {.winapi, stdcall, dynlib: "psapi", importc.}
@@ -153,8 +153,8 @@ proc EnumPageFilesW*(pCallBackRoutine: PENUM_PAGE_FILE_CALLBACKW, pContext: LPVO
 proc EnumPageFilesA*(pCallBackRoutine: PENUM_PAGE_FILE_CALLBACKA, pContext: LPVOID): WINBOOL {.winapi, stdcall, dynlib: "psapi", importc.}
 proc GetProcessImageFileNameA*(hProcess: HANDLE, lpImageFileName: LPSTR, nSize: DWORD): DWORD {.winapi, stdcall, dynlib: "psapi", importc.}
 proc GetProcessImageFileNameW*(hProcess: HANDLE, lpImageFileName: LPWSTR, nSize: DWORD): DWORD {.winapi, stdcall, dynlib: "psapi", importc.}
-proc GetWsChangesEx*(hProcess: HANDLE, lpWatchInfoEx: PPSAPI_WS_WATCH_INFORMATION_EX, cb: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "psapi", importc.}
-proc EnumProcessModulesEx*(hProcess: HANDLE, lphModule: ptr HMODULE, cb: DWORD, lpcbNeeded: LPDWORD, dwFilterFlag: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "psapi", importc.}
+proc GetWsChangesEx*(hProcess: HANDLE, lpWatchInfoEx: PPSAPI_WS_WATCH_INFORMATION_EX, cb: DWORD): WINBOOL {.winapi, stdcall, dynlib: "psapi", importc.}
+proc EnumProcessModulesEx*(hProcess: HANDLE, lphModule: ptr HMODULE, cb: DWORD, lpcbNeeded: LPDWORD, dwFilterFlag: DWORD): WINBOOL {.winapi, stdcall, dynlib: "psapi", importc.}
 proc `Valid=`*(self: var PSAPI_WORKING_SET_EX_BLOCK, x: ULONG_PTR) {.inline.} = self.struct1.Valid = x
 proc Valid*(self: PSAPI_WORKING_SET_EX_BLOCK): ULONG_PTR {.inline.} = self.struct1.Valid
 proc `ShareCount=`*(self: var PSAPI_WORKING_SET_EX_BLOCK, x: ULONG_PTR) {.inline.} = self.struct1.ShareCount = x

@@ -1,3 +1,10 @@
+Version 3.0
+-----------
+* Add winimx tool to generate the minified winim module.
+* Add -d:noRes to disable the visual styles.
+* Don't maintain compatibility with Nim Compiler 0.18 anymore.
+* Remove -d:useWinXP (useless under Nim Compiler >= 0.19).
+
 Version 2.6.1
 -------------
 * Update for Nim Compiler 0.19.9 again.

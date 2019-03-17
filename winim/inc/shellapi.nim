@@ -6705,20 +6705,20 @@ proc SHFreeNameMappings*(hNameMappings: HANDLE): void {.winapi, stdcall, dynlib:
 proc ShellExecuteExA*(pExecInfo: ptr SHELLEXECUTEINFOA): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc ShellExecuteExW*(pExecInfo: ptr SHELLEXECUTEINFOW): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHCreateProcessAsUserW*(pscpi: PSHCREATEPROCESSINFOW): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
-proc SHEvaluateSystemCommandTemplate*(pszCmdTemplate: PCWSTR, ppszApplication: ptr PWSTR, ppszCommandLine: ptr PWSTR, ppszParameters: ptr PWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc AssocCreateForClasses*(rgClasses: ptr ASSOCIATIONELEMENT, cClasses: ULONG, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc SHEvaluateSystemCommandTemplate*(pszCmdTemplate: PCWSTR, ppszApplication: ptr PWSTR, ppszCommandLine: ptr PWSTR, ppszParameters: ptr PWSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc AssocCreateForClasses*(rgClasses: ptr ASSOCIATIONELEMENT, cClasses: ULONG, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHQueryRecycleBinA*(pszRootPath: LPCSTR, pSHQueryRBInfo: LPSHQUERYRBINFO): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHQueryRecycleBinW*(pszRootPath: LPCWSTR, pSHQueryRBInfo: LPSHQUERYRBINFO): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHEmptyRecycleBinA*(hwnd: HWND, pszRootPath: LPCSTR, dwFlags: DWORD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHEmptyRecycleBinW*(hwnd: HWND, pszRootPath: LPCWSTR, dwFlags: DWORD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
-proc SHQueryUserNotificationState*(pquns: ptr QUERY_USER_NOTIFICATION_STATE): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHGetPropertyStoreForWindow*(hwnd: HWND, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc SHQueryUserNotificationState*(pquns: ptr QUERY_USER_NOTIFICATION_STATE): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHGetPropertyStoreForWindow*(hwnd: HWND, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc Shell_NotifyIconA*(dwMessage: DWORD, lpData: PNOTIFYICONDATAA): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc Shell_NotifyIconW*(dwMessage: DWORD, lpData: PNOTIFYICONDATAW): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
-proc Shell_NotifyIconGetRect*(identifier: ptr NOTIFYICONIDENTIFIER, iconLocation: ptr RECT): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc Shell_NotifyIconGetRect*(identifier: ptr NOTIFYICONIDENTIFIER, iconLocation: ptr RECT): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHGetFileInfoA*(pszPath: LPCSTR, dwFileAttributes: DWORD, psfi: ptr SHFILEINFOA, cbFileInfo: UINT, uFlags: UINT): DWORD_PTR {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHGetFileInfoW*(pszPath: LPCWSTR, dwFileAttributes: DWORD, psfi: ptr SHFILEINFOW, cbFileInfo: UINT, uFlags: UINT): DWORD_PTR {.winapi, stdcall, dynlib: "shell32", importc.}
-proc SHGetStockIconInfo*(siid: SHSTOCKICONID, uFlags: UINT, psii: ptr SHSTOCKICONINFO): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc SHGetStockIconInfo*(siid: SHSTOCKICONID, uFlags: UINT, psii: ptr SHSTOCKICONINFO): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHGetDiskFreeSpaceExA*(pszDirectoryName: LPCSTR, pulFreeBytesAvailableToCaller: ptr ULARGE_INTEGER, pulTotalNumberOfBytes: ptr ULARGE_INTEGER, pulTotalNumberOfFreeBytes: ptr ULARGE_INTEGER): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHGetDiskFreeSpaceExW*(pszDirectoryName: LPCWSTR, pulFreeBytesAvailableToCaller: ptr ULARGE_INTEGER, pulTotalNumberOfBytes: ptr ULARGE_INTEGER, pulTotalNumberOfFreeBytes: ptr ULARGE_INTEGER): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHGetNewLinkInfoA*(pszLinkTo: LPCSTR, pszDir: LPCSTR, pszName: LPSTR, pfMustCopy: ptr WINBOOL, uFlags: UINT): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
@@ -6728,10 +6728,10 @@ proc SHInvokePrinterCommandW*(hwnd: HWND, uAction: UINT, lpBuf1: LPCWSTR, lpBuf2
 proc SHLoadNonloadedIconOverlayIdentifiers*(): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHIsFileAvailableOffline*(pwszPath: PCWSTR, pdwStatus: ptr DWORD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHSetLocalizedName*(pszPath: PCWSTR, pszResModule: PCWSTR, idsRes: int32): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
-proc SHRemoveLocalizedName*(pszPath: PCWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHGetLocalizedName*(pszPath: PCWSTR, pszResModule: PWSTR, cch: UINT, pidsRes: ptr int32): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc ShellMessageBoxA*(hAppInst: HINSTANCE, hWnd: HWND, lpcText: LPCSTR, lpcTitle: LPCSTR, fuStyle: UINT): int32 {.winapi, xpincompatible, cdecl, varargs, dynlib: "shlwapi", importc.}
-proc ShellMessageBoxW*(hAppInst: HINSTANCE, hWnd: HWND, lpcText: LPCWSTR, lpcTitle: LPCWSTR, fuStyle: UINT): int32 {.winapi, xpincompatible, cdecl, varargs, dynlib: "shlwapi", importc.}
+proc SHRemoveLocalizedName*(pszPath: PCWSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHGetLocalizedName*(pszPath: PCWSTR, pszResModule: PWSTR, cch: UINT, pidsRes: ptr int32): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc ShellMessageBoxA*(hAppInst: HINSTANCE, hWnd: HWND, lpcText: LPCSTR, lpcTitle: LPCSTR, fuStyle: UINT): int32 {.winapi, cdecl, varargs, dynlib: "shlwapi", importc.}
+proc ShellMessageBoxW*(hAppInst: HINSTANCE, hWnd: HWND, lpcText: LPCWSTR, lpcTitle: LPCWSTR, fuStyle: UINT): int32 {.winapi, cdecl, varargs, dynlib: "shlwapi", importc.}
 proc IsLFNDriveA*(pszPath: LPCSTR): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc IsLFNDriveW*(pszPath: LPCWSTR): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHEnumerateUnreadMailAccountsW*(hKeyUser: HKEY, dwIndex: DWORD, pszMailAddress: LPWSTR, cchMailAddress: int32): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
@@ -6739,8 +6739,8 @@ proc SHGetUnreadMailCountW*(hKeyUser: HKEY, pszMailAddress: LPCWSTR, pdwCount: p
 proc SHSetUnreadMailCountW*(pszMailAddress: LPCWSTR, dwCount: DWORD, pszShellExecuteCommand: LPCWSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHTestTokenMembership*(hToken: HANDLE, ulRID: ULONG): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHGetImageList*(iImageList: int32, riid: REFIID, ppvObj: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
-proc InitNetworkAddressControl*(): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHGetDriveMedia*(pszDrive: PCWSTR, pdwMediaContent: ptr DWORD): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc InitNetworkAddressControl*(): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHGetDriveMedia*(pszDrive: PCWSTR, pdwMediaContent: ptr DWORD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc StrChrA*(lpStart: LPCSTR, wMatch: WORD): LPSTR {.winapi, stdcall, dynlib: "shlwapi", importc.}
 proc StrChrW*(lpStart: LPCWSTR, wMatch: WCHAR): LPWSTR {.winapi, stdcall, dynlib: "shlwapi", importc.}
 proc StrChrIA*(lpStart: LPCSTR, wMatch: WORD): LPSTR {.winapi, stdcall, dynlib: "shlwapi", importc.}
@@ -7006,7 +7006,7 @@ proc SHRegGetUSValueA*(pszSubKey: LPCSTR, pszValue: LPCSTR, pdwType: LPDWORD, pv
 proc SHRegGetUSValueW*(pwzSubKey: LPCWSTR, pwzValue: LPCWSTR, pdwType: LPDWORD, pvData: pointer, pcbData: LPDWORD, fIgnoreHKCU: WINBOOL, pvDefaultData: pointer, dwDefaultDataSize: DWORD): LONG {.winapi, stdcall, dynlib: "shlwapi", importc.}
 proc SHRegSetUSValueA*(pszSubKey: LPCSTR, pszValue: LPCSTR, dwType: DWORD, pvData: pointer, cbData: DWORD, dwFlags: DWORD): LONG {.winapi, stdcall, dynlib: "shlwapi", importc.}
 proc SHRegSetUSValueW*(pwzSubKey: LPCWSTR, pwzValue: LPCWSTR, dwType: DWORD, pvData: pointer, cbData: DWORD, dwFlags: DWORD): LONG {.winapi, stdcall, dynlib: "shlwapi", importc.}
-proc SHRegGetIntW*(hk: HKEY, pwzKey: LPCWSTR, iDefault: int32): int32 {.winapi, xpincompatible, stdcall, dynlib: "shlwapi", importc.}
+proc SHRegGetIntW*(hk: HKEY, pwzKey: LPCWSTR, iDefault: int32): int32 {.winapi, stdcall, dynlib: "shlwapi", importc.}
 proc SHRegGetBoolUSValueA*(pszSubKey: LPCSTR, pszValue: LPCSTR, fIgnoreHKCU: WINBOOL, fDefault: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "shlwapi", importc.}
 proc SHRegGetBoolUSValueW*(pszSubKey: LPCWSTR, pszValue: LPCWSTR, fIgnoreHKCU: WINBOOL, fDefault: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "shlwapi", importc.}
 proc AssocCreate*(clsid: CLSID, riid: REFIID, ppv: ptr LPVOID): HRESULT {.winapi, stdcall, dynlib: "shlwapi", importc.}
@@ -7044,37 +7044,37 @@ proc ColorRGBToHLS*(clrRGB: COLORREF, pwHue: ptr WORD, pwLuminance: ptr WORD, pw
 proc ColorHLSToRGB*(wHue: WORD, wLuminance: WORD, wSaturation: WORD): COLORREF {.winapi, stdcall, dynlib: "shlwapi", importc.}
 proc ColorAdjustLuma*(clrRGB: COLORREF, n: int32, fScale: WINBOOL): COLORREF {.winapi, stdcall, dynlib: "shlwapi", importc.}
 proc DllInstall*(bInstall: WINBOOL, pszCmdLine: LPCWSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
-proc IsInternetESCEnabled*(): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "shlwapi", importc.}
+proc IsInternetESCEnabled*(): WINBOOL {.winapi, stdcall, dynlib: "shlwapi", importc.}
 proc SHGetFolderPathW*(hwnd: HWND, csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszPath: LPWSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHSimpleIDListFromPath*(pszPath: PCWSTR): PIDLIST_ABSOLUTE {.winapi, stdcall, dynlib: "shell32", importc.}
-proc SHCreateItemFromIDList*(pidl: PCIDLIST_ABSOLUTE, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHCreateItemFromParsingName*(pszPath: PCWSTR, pbc: ptr IBindCtx, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHCreateItemWithParent*(pidlParent: PCIDLIST_ABSOLUTE, psfParent: ptr IShellFolder, pidl: PCUITEMID_CHILD, riid: REFIID, ppvItem: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHCreateItemFromRelativeName*(psiParent: ptr IShellItem, pszName: PCWSTR, pbc: ptr IBindCtx, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHCreateItemInKnownFolder*(kfid: REFKNOWNFOLDERID, dwKFFlags: DWORD, pszItem: PCWSTR, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHGetIDListFromObject*(punk: ptr IUnknown, ppidl: ptr PIDLIST_ABSOLUTE): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHGetItemFromObject*(punk: ptr IUnknown, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHGetPropertyStoreFromIDList*(pidl: PCIDLIST_ABSOLUTE, flags: GETPROPERTYSTOREFLAGS, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHGetPropertyStoreFromParsingName*(pszPath: PCWSTR, pbc: ptr IBindCtx, flags: GETPROPERTYSTOREFLAGS, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHGetNameFromIDList*(pidl: PCIDLIST_ABSOLUTE, sigdnName: SIGDN, ppszName: ptr PWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHGetItemFromDataObject*(pdtobj: ptr IDataObject, dwFlags: DATAOBJ_GET_ITEM_FLAGS, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHCreateShellItemArray*(pidlParent: PCIDLIST_ABSOLUTE, psf: ptr IShellFolder, cidl: UINT, ppidl: PCUITEMID_CHILD_ARRAY, ppsiItemArray: ptr ptr IShellItemArray): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHCreateShellItemArrayFromDataObject*(pdo: ptr IDataObject, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHCreateShellItemArrayFromIDLists*(cidl: UINT, rgpidl: PCIDLIST_ABSOLUTE_ARRAY, ppsiItemArray: ptr ptr IShellItemArray): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHCreateShellItemArrayFromShellItem*(psi: ptr IShellItem, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHAddDefaultPropertiesByExt*(pszExt: PCWSTR, pPropStore: ptr IPropertyStore): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHCreateDefaultPropertiesOp*(psi: ptr IShellItem, ppFileOp: ptr ptr IFileOperation): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHSetDefaultProperties*(hwnd: HWND, psi: ptr IShellItem, dwFileOpFlags: DWORD, pfops: ptr IFileOperationProgressSink): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHCreateAssociationRegistration*(riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHCreateDefaultExtractIcon*(riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SetCurrentProcessExplicitAppUserModelID*(AppID: PCWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc GetCurrentProcessExplicitAppUserModelID*(AppID: ptr PWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHGetTemporaryPropertyForItem*(psi: ptr IShellItem, propkey: REFPROPERTYKEY, ppropvar: ptr PROPVARIANT): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHSetTemporaryPropertyForItem*(psi: ptr IShellItem, propkey: REFPROPERTYKEY, propvar: REFPROPVARIANT): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHShowManageLibraryUI*(psiLibrary: ptr IShellItem, hwndOwner: HWND, pszTitle: LPCWSTR, pszInstruction: LPCWSTR, lmdOptions: LIBRARYMANAGEDIALOGOPTIONS): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHResolveLibrary*(psiLibrary: ptr IShellItem): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHAssocEnumHandlers*(pszExtra: PCWSTR, afFilter: ASSOC_FILTER, ppEnumHandler: ptr ptr IEnumAssocHandlers): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHAssocEnumHandlersForProtocolByApplication*(protocol: PCWSTR, riid: REFIID, enumHandlers: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc SHCreateItemFromIDList*(pidl: PCIDLIST_ABSOLUTE, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHCreateItemFromParsingName*(pszPath: PCWSTR, pbc: ptr IBindCtx, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHCreateItemWithParent*(pidlParent: PCIDLIST_ABSOLUTE, psfParent: ptr IShellFolder, pidl: PCUITEMID_CHILD, riid: REFIID, ppvItem: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHCreateItemFromRelativeName*(psiParent: ptr IShellItem, pszName: PCWSTR, pbc: ptr IBindCtx, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHCreateItemInKnownFolder*(kfid: REFKNOWNFOLDERID, dwKFFlags: DWORD, pszItem: PCWSTR, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHGetIDListFromObject*(punk: ptr IUnknown, ppidl: ptr PIDLIST_ABSOLUTE): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHGetItemFromObject*(punk: ptr IUnknown, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHGetPropertyStoreFromIDList*(pidl: PCIDLIST_ABSOLUTE, flags: GETPROPERTYSTOREFLAGS, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHGetPropertyStoreFromParsingName*(pszPath: PCWSTR, pbc: ptr IBindCtx, flags: GETPROPERTYSTOREFLAGS, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHGetNameFromIDList*(pidl: PCIDLIST_ABSOLUTE, sigdnName: SIGDN, ppszName: ptr PWSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHGetItemFromDataObject*(pdtobj: ptr IDataObject, dwFlags: DATAOBJ_GET_ITEM_FLAGS, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHCreateShellItemArray*(pidlParent: PCIDLIST_ABSOLUTE, psf: ptr IShellFolder, cidl: UINT, ppidl: PCUITEMID_CHILD_ARRAY, ppsiItemArray: ptr ptr IShellItemArray): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHCreateShellItemArrayFromDataObject*(pdo: ptr IDataObject, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHCreateShellItemArrayFromIDLists*(cidl: UINT, rgpidl: PCIDLIST_ABSOLUTE_ARRAY, ppsiItemArray: ptr ptr IShellItemArray): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHCreateShellItemArrayFromShellItem*(psi: ptr IShellItem, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHAddDefaultPropertiesByExt*(pszExt: PCWSTR, pPropStore: ptr IPropertyStore): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHCreateDefaultPropertiesOp*(psi: ptr IShellItem, ppFileOp: ptr ptr IFileOperation): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHSetDefaultProperties*(hwnd: HWND, psi: ptr IShellItem, dwFileOpFlags: DWORD, pfops: ptr IFileOperationProgressSink): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHCreateAssociationRegistration*(riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHCreateDefaultExtractIcon*(riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SetCurrentProcessExplicitAppUserModelID*(AppID: PCWSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc GetCurrentProcessExplicitAppUserModelID*(AppID: ptr PWSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHGetTemporaryPropertyForItem*(psi: ptr IShellItem, propkey: REFPROPERTYKEY, ppropvar: ptr PROPVARIANT): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHSetTemporaryPropertyForItem*(psi: ptr IShellItem, propkey: REFPROPERTYKEY, propvar: REFPROPVARIANT): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHShowManageLibraryUI*(psiLibrary: ptr IShellItem, hwndOwner: HWND, pszTitle: LPCWSTR, pszInstruction: LPCWSTR, lmdOptions: LIBRARYMANAGEDIALOGOPTIONS): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHResolveLibrary*(psiLibrary: ptr IShellItem): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHAssocEnumHandlers*(pszExtra: PCWSTR, afFilter: ASSOC_FILTER, ppEnumHandler: ptr ptr IEnumAssocHandlers): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHAssocEnumHandlersForProtocolByApplication*(protocol: PCWSTR, riid: REFIID, enumHandlers: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHGetMalloc*(ppMalloc: ptr ptr IMalloc): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHAlloc*(cb: SIZE_T): pointer {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHFree*(pv: pointer): void {.winapi, stdcall, dynlib: "shell32", importc.}
@@ -7092,12 +7092,12 @@ proc ILRemoveLastID*(pidl: PUIDLIST_RELATIVE): WINBOOL {.winapi, stdcall, dynlib
 proc ILIsEqual*(pidl1: PCIDLIST_ABSOLUTE, pidl2: PCIDLIST_ABSOLUTE): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc ILIsParent*(pidl1: PCIDLIST_ABSOLUTE, pidl2: PCIDLIST_ABSOLUTE, fImmediate: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc ILSaveToStream*(pstm: ptr IStream, pidl: PCUIDLIST_RELATIVE): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
-proc ILLoadFromStreamEx*(pstm: ptr IStream, pidl: ptr PIDLIST_RELATIVE): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc ILLoadFromStreamEx*(pstm: ptr IStream, pidl: ptr PIDLIST_RELATIVE): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc ILCreateFromPathA*(pszPath: PCSTR): PIDLIST_ABSOLUTE {.winapi, stdcall, dynlib: "shell32", importc.}
 proc ILCreateFromPathW*(pszPath: PCWSTR): PIDLIST_ABSOLUTE {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHILCreateFromPath*(pszPath: PCWSTR, ppidl: ptr PIDLIST_ABSOLUTE, rgfInOut: ptr DWORD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc ILAppendID*(pidl: PIDLIST_RELATIVE, pmkid: LPCSHITEMID, fAppend: WINBOOL): PIDLIST_RELATIVE {.winapi, stdcall, dynlib: "shell32", importc.}
-proc SHGetPathFromIDListEx*(pidl: PCIDLIST_ABSOLUTE, pszPath: PWSTR, cchPath: DWORD, uOpts: GPFIDL_FLAGS): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc SHGetPathFromIDListEx*(pidl: PCIDLIST_ABSOLUTE, pszPath: PWSTR, cchPath: DWORD, uOpts: GPFIDL_FLAGS): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHGetPathFromIDListA*(pidl: PCIDLIST_ABSOLUTE, pszPath: LPSTR): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHGetPathFromIDListW*(pidl: PCIDLIST_ABSOLUTE, pszPath: LPWSTR): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHCreateDirectory*(hwnd: HWND, pszPath: PCWSTR): int32 {.winapi, stdcall, dynlib: "shell32", importc.}
@@ -7112,15 +7112,15 @@ proc SHGetSpecialFolderPathW*(hwnd: HWND, pszPath: LPWSTR, csidl: int32, fCreate
 proc SHFlushSFCache*(): void {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHGetFolderPathA*(hwnd: HWND, csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszPath: LPSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHGetFolderLocation*(hwnd: HWND, csidl: int32, hToken: HANDLE, dwFlags: DWORD, ppidl: ptr PIDLIST_ABSOLUTE): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
-proc SHSetFolderPathA*(csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszPath: LPCSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHSetFolderPathW*(csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszPath: LPCWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc SHSetFolderPathA*(csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszPath: LPCSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHSetFolderPathW*(csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszPath: LPCWSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHGetFolderPathAndSubDirA*(hwnd: HWND, csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszSubDir: LPCSTR, pszPath: LPSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHGetFolderPathAndSubDirW*(hwnd: HWND, csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszSubDir: LPCWSTR, pszPath: LPWSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
-proc SHGetKnownFolderIDList*(rfid: REFKNOWNFOLDERID, dwFlags: DWORD, hToken: HANDLE, ppidl: ptr PIDLIST_ABSOLUTE): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHSetKnownFolderPath*(rfid: REFKNOWNFOLDERID, dwFlags: DWORD, hToken: HANDLE, pszPath: PCWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHGetKnownFolderPath*(rfid: REFKNOWNFOLDERID, dwFlags: DWORD, hToken: HANDLE, ppszPath: ptr PWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHGetKnownFolderItem*(rfid: REFKNOWNFOLDERID, flags: KNOWN_FOLDER_FLAG, hToken: HANDLE, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHGetSetFolderCustomSettings*(pfcs: LPSHFOLDERCUSTOMSETTINGS, pszPath: PCWSTR, dwReadWrite: DWORD): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc SHGetKnownFolderIDList*(rfid: REFKNOWNFOLDERID, dwFlags: DWORD, hToken: HANDLE, ppidl: ptr PIDLIST_ABSOLUTE): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHSetKnownFolderPath*(rfid: REFKNOWNFOLDERID, dwFlags: DWORD, hToken: HANDLE, pszPath: PCWSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHGetKnownFolderPath*(rfid: REFKNOWNFOLDERID, dwFlags: DWORD, hToken: HANDLE, ppszPath: ptr PWSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHGetKnownFolderItem*(rfid: REFKNOWNFOLDERID, flags: KNOWN_FOLDER_FLAG, hToken: HANDLE, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHGetSetFolderCustomSettings*(pfcs: LPSHFOLDERCUSTOMSETTINGS, pszPath: PCWSTR, dwReadWrite: DWORD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHBrowseForFolderA*(lpbi: LPBROWSEINFOA): PIDLIST_ABSOLUTE {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHBrowseForFolderW*(lpbi: LPBROWSEINFOW): PIDLIST_ABSOLUTE {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHLoadInProc*(rclsid: REFCLSID): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
@@ -7132,7 +7132,7 @@ proc SHUpdateImageA*(pszHashItem: LPCSTR, iIndex: int32, uFlags: UINT, iImageInd
 proc SHUpdateImageW*(pszHashItem: LPCWSTR, iIndex: int32, uFlags: UINT, iImageIndex: int32): void {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHChangeNotifyRegister*(hwnd: HWND, fSources: int32, fEvents: LONG, wMsg: UINT, cEntries: int32, pshcne: ptr SHChangeNotifyEntry): ULONG {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHChangeNotifyDeregister*(ulID: ULONG): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
-proc SHChangeNotifyRegisterThread*(status: SCNRT_STATUS): void {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc SHChangeNotifyRegisterThread*(status: SCNRT_STATUS): void {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHChangeNotification_Lock*(hChange: HANDLE, dwProcId: DWORD, pppidl: ptr ptr PIDLIST_ABSOLUTE, plEvent: ptr LONG): HANDLE {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHChangeNotification_Unlock*(hLock: HANDLE): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHGetRealIDL*(psf: ptr IShellFolder, pidlSimple: PCUITEMID_CHILD, ppidlReal: ptr PITEMID_CHILD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
@@ -7142,8 +7142,8 @@ proc SHGetDataFromIDListW*(psf: ptr IShellFolder, pidl: PCUITEMID_CHILD, nFormat
 proc RestartDialog*(hwnd: HWND, pszPrompt: PCWSTR, dwReturn: DWORD): int32 {.winapi, stdcall, dynlib: "shell32", importc.}
 proc RestartDialogEx*(hwnd: HWND, pszPrompt: PCWSTR, dwReturn: DWORD, dwReasonCode: DWORD): int32 {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHCoCreateInstance*(pszCLSID: PCWSTR, pclsid: ptr CLSID, pUnkOuter: ptr IUnknown, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
-proc SHCreateDataObject*(pidlFolder: PCIDLIST_ABSOLUTE, cidl: UINT, apidl: PCUITEMID_CHILD_ARRAY, pdtInner: ptr IDataObject, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc CIDLData_CreateFromIDArray*(pidlFolder: PCIDLIST_ABSOLUTE, cidl: UINT, apidl: PCUIDLIST_RELATIVE_ARRAY, ppdtobj: ptr ptr IDataObject): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc SHCreateDataObject*(pidlFolder: PCIDLIST_ABSOLUTE, cidl: UINT, apidl: PCUITEMID_CHILD_ARRAY, pdtInner: ptr IDataObject, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc CIDLData_CreateFromIDArray*(pidlFolder: PCIDLIST_ABSOLUTE, cidl: UINT, apidl: PCUIDLIST_RELATIVE_ARRAY, ppdtobj: ptr ptr IDataObject): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHCreateStdEnumFmtEtc*(cfmt: UINT, afmt: ptr FORMATETC, ppenumFormatEtc: ptr ptr IEnumFORMATETC): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHDoDragDrop*(hwnd: HWND, pdata: ptr IDataObject, pdsrc: ptr IDropSource, dwEffect: DWORD, pdwEffect: ptr DWORD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc DAD_SetDragImage*(him: HIMAGELIST, pptOffset: ptr POINT): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
@@ -7180,15 +7180,15 @@ proc PathYetAnotherMakeUniqueName*(pszUniqueName: PWSTR, pszPath: PCWSTR, pszSho
 proc Win32DeleteFile*(pszPath: PCWSTR): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHRestricted*(rest: RESTRICTIONS): DWORD {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SignalFileOpen*(pidl: PCIDLIST_ABSOLUTE): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
-proc AssocGetDetailsOfPropKey*(psf: ptr IShellFolder, pidl: PCUITEMID_CHILD, pkey: ptr PROPERTYKEY, pv: ptr VARIANT, pfFoundPropKey: ptr WINBOOL): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc AssocGetDetailsOfPropKey*(psf: ptr IShellFolder, pidl: PCUITEMID_CHILD, pkey: ptr PROPERTYKEY, pv: ptr VARIANT, pfFoundPropKey: ptr WINBOOL): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHStartNetConnectionDialogW*(hwnd: HWND, pszRemoteName: LPCWSTR, dwType: DWORD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHDefExtractIconA*(pszIconFile: LPCSTR, iIndex: int32, uFlags: UINT, phiconLarge: ptr HICON, phiconSmall: ptr HICON, nIconSize: UINT): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHDefExtractIconW*(pszIconFile: LPCWSTR, iIndex: int32, uFlags: UINT, phiconLarge: ptr HICON, phiconSmall: ptr HICON, nIconSize: UINT): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
-proc SHOpenWithDialog*(hwndParent: HWND, poainfo: ptr OPENASINFO): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc SHOpenWithDialog*(hwndParent: HWND, poainfo: ptr OPENASINFO): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc Shell_GetImageLists*(phiml: ptr HIMAGELIST, phimlSmall: ptr HIMAGELIST): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc Shell_GetCachedImageIndex*(pwszIconPath: PCWSTR, iIconIndex: int32, uIconFlags: UINT): int32 {.winapi, stdcall, dynlib: "shell32", importc.}
-proc Shell_GetCachedImageIndexA*(pszIconPath: LPCSTR, iIconIndex: int32, uIconFlags: UINT): int32 {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc Shell_GetCachedImageIndexW*(pszIconPath: LPCWSTR, iIconIndex: int32, uIconFlags: UINT): int32 {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc Shell_GetCachedImageIndexA*(pszIconPath: LPCSTR, iIconIndex: int32, uIconFlags: UINT): int32 {.winapi, stdcall, dynlib: "shell32", importc.}
+proc Shell_GetCachedImageIndexW*(pszIconPath: LPCWSTR, iIconIndex: int32, uIconFlags: UINT): int32 {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHValidateUNC*(hwndOwner: HWND, pszFile: PWSTR, fConnect: UINT): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc PifMgr_OpenProperties*(pszApp: PCWSTR, pszPIF: PCWSTR, hInf: UINT, flOpt: UINT): HANDLE {.winapi, stdcall, dynlib: "shell32", importc.}
 proc PifMgr_GetProperties*(hProps: HANDLE, pszGroup: PCSTR, lpProps: pointer, cbProps: int32, flOpt: UINT): int32 {.winapi, stdcall, dynlib: "shell32", importc.}
@@ -7199,7 +7199,7 @@ proc IsUserAnAdmin*(): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHShellFolderView_Message*(hwndMain: HWND, uMsg: UINT, lParam: LPARAM): LRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHCreateShellFolderView*(pcsfv: ptr SFV_CREATE, ppsv: ptr ptr IShellView): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc CDefFolderMenu_Create2*(pidlFolder: PCIDLIST_ABSOLUTE, hwnd: HWND, cidl: UINT, apidl: PCUITEMID_CHILD_ARRAY, psf: ptr IShellFolder, pfn: LPFNDFMCALLBACK, nKeys: UINT, ahkeys: ptr HKEY, ppcm: ptr ptr IContextMenu): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
-proc SHCreateDefaultContextMenu*(pdcm: ptr DEFCONTEXTMENU, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc SHCreateDefaultContextMenu*(pdcm: ptr DEFCONTEXTMENU, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHOpenPropSheetW*(pszCaption: LPCWSTR, ahkeys: ptr HKEY, ckeys: UINT, pclsidDefault: ptr CLSID, pdtobj: ptr IDataObject, psb: ptr IShellBrowser, pStartPage: LPCWSTR): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHFind_InitMenuPopup*(hmenu: HMENU, hwndOwner: HWND, idCmdFirst: UINT, idCmdLast: UINT): ptr IContextMenu {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHCreateShellFolderViewEx*(pcsfv: ptr CSFV, ppsv: ptr ptr IShellView): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
@@ -7212,9 +7212,9 @@ when winimAnsi:
 proc SHGetSetSettings*(lpss: LPSHELLSTATE, dwMask: DWORD, bSet: WINBOOL): void {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHGetSettings*(psfs: ptr SHELLFLAGSTATE, dwMask: DWORD): void {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHBindToParent*(pidl: PCIDLIST_ABSOLUTE, riid: REFIID, ppv: ptr pointer, ppidlLast: ptr PCUITEMID_CHILD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
-proc SHBindToFolderIDListParent*(psfRoot: ptr IShellFolder, pidl: PCUIDLIST_RELATIVE, riid: REFIID, ppv: ptr pointer, ppidlLast: ptr PCUITEMID_CHILD): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHBindToFolderIDListParentEx*(psfRoot: ptr IShellFolder, pidl: PCUIDLIST_RELATIVE, ppbc: ptr IBindCtx, riid: REFIID, ppv: ptr pointer, ppidlLast: ptr PCUITEMID_CHILD): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
-proc SHBindToObject*(psf: ptr IShellFolder, pidl: PCUIDLIST_RELATIVE, pbc: ptr IBindCtx, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc SHBindToFolderIDListParent*(psfRoot: ptr IShellFolder, pidl: PCUIDLIST_RELATIVE, riid: REFIID, ppv: ptr pointer, ppidlLast: ptr PCUITEMID_CHILD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHBindToFolderIDListParentEx*(psfRoot: ptr IShellFolder, pidl: PCUIDLIST_RELATIVE, ppbc: ptr IBindCtx, riid: REFIID, ppv: ptr pointer, ppidlLast: ptr PCUITEMID_CHILD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
+proc SHBindToObject*(psf: ptr IShellFolder, pidl: PCUIDLIST_RELATIVE, pbc: ptr IBindCtx, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHParseDisplayName*(pszName: PCWSTR, pbc: ptr IBindCtx, ppidl: ptr PIDLIST_ABSOLUTE, sfgaoIn: SFGAOF, psfgaoOut: ptr SFGAOF): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHPathPrepareForWriteA*(hwnd: HWND, punkEnableModless: ptr IUnknown, pszPath: LPCSTR, dwFlags: DWORD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc SHPathPrepareForWriteW*(hwnd: HWND, punkEnableModless: ptr IUnknown, pszPath: LPCWSTR, dwFlags: DWORD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
@@ -7231,7 +7231,7 @@ proc SHCLSIDFromString*(psz: PCWSTR, pclsid: ptr CLSID): HRESULT {.winapi, stdca
 proc SHCreateQueryCancelAutoPlayMoniker*(ppmoniker: ptr ptr IMoniker): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc PerUserInit*(): void {.winapi, stdcall, dynlib: "mydocs", importc.}
 proc PickIconDlg*(hwnd: HWND, pszIconPath: PWSTR, cchIconPath: UINT, piIconIndex: ptr int32): int32 {.winapi, stdcall, dynlib: "shell32", importc.}
-proc StgMakeUniqueName*(pstgParent: ptr IStorage, pszFileSpec: PCWSTR, grfMode: DWORD, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc.}
+proc StgMakeUniqueName*(pstgParent: ptr IStorage, pszFileSpec: PCWSTR, grfMode: DWORD, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc.}
 proc ImportPrivacySettings*(pszFilename: PCWSTR, pfParsePrivacyPreferences: ptr WINBOOL, pfParsePerSiteRules: ptr WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "shdocvw", importc.}
 proc `hIcon=`*(self: var SHELLEXECUTEINFOA, x: HANDLE) {.inline.} = self.union1.hIcon = x
 proc hIcon*(self: SHELLEXECUTEINFOA): HANDLE {.inline.} = self.union1.hIcon
@@ -8968,7 +8968,7 @@ when winimUnicode:
   proc SHGetDiskFreeSpaceEx*(pszDirectoryName: LPCWSTR, pulFreeBytesAvailableToCaller: ptr ULARGE_INTEGER, pulTotalNumberOfBytes: ptr ULARGE_INTEGER, pulTotalNumberOfFreeBytes: ptr ULARGE_INTEGER): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc: "SHGetDiskFreeSpaceExW".}
   proc SHGetNewLinkInfo*(pszLinkTo: LPCWSTR, pszDir: LPCWSTR, pszName: LPWSTR, pfMustCopy: ptr WINBOOL, uFlags: UINT): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc: "SHGetNewLinkInfoW".}
   proc SHInvokePrinterCommand*(hwnd: HWND, uAction: UINT, lpBuf1: LPCWSTR, lpBuf2: LPCWSTR, fModal: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc: "SHInvokePrinterCommandW".}
-  proc ShellMessageBox*(hAppInst: HINSTANCE, hWnd: HWND, lpcText: LPCWSTR, lpcTitle: LPCWSTR, fuStyle: UINT): int32 {.winapi, xpincompatible, stdcall, dynlib: "shlwapi", importc: "ShellMessageBoxW".}
+  proc ShellMessageBox*(hAppInst: HINSTANCE, hWnd: HWND, lpcText: LPCWSTR, lpcTitle: LPCWSTR, fuStyle: UINT): int32 {.winapi, stdcall, dynlib: "shlwapi", importc: "ShellMessageBoxW".}
   proc IsLFNDrive*(pszPath: LPCWSTR): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc: "IsLFNDriveW".}
   proc SHEnumerateUnreadMailAccounts*(hKeyUser: HKEY, dwIndex: DWORD, pszMailAddress: LPWSTR, cchMailAddress: int32): HRESULT {.winapi, stdcall, dynlib: "shell32", importc: "SHEnumerateUnreadMailAccountsW".}
   proc SHGetUnreadMailCount*(hKeyUser: HKEY, pszMailAddress: LPCWSTR, pdwCount: ptr DWORD, pFileTime: ptr FILETIME, pszShellExecuteCommand: LPWSTR, cchShellExecuteCommand: int32): HRESULT {.winapi, stdcall, dynlib: "shell32", importc: "SHGetUnreadMailCountW".}
@@ -9102,7 +9102,7 @@ when winimUnicode:
   proc SHRegQueryInfoUSKey*(hUSKey: HUSKEY, pcSubKeys: LPDWORD, pcchMaxSubKeyLen: LPDWORD, pcValues: LPDWORD, pcchMaxValueNameLen: LPDWORD, enumRegFlags: SHREGENUM_FLAGS): LONG {.winapi, stdcall, dynlib: "shlwapi", importc: "SHRegQueryInfoUSKeyW".}
   proc SHRegGetUSValue*(pwzSubKey: LPCWSTR, pwzValue: LPCWSTR, pdwType: LPDWORD, pvData: pointer, pcbData: LPDWORD, fIgnoreHKCU: WINBOOL, pvDefaultData: pointer, dwDefaultDataSize: DWORD): LONG {.winapi, stdcall, dynlib: "shlwapi", importc: "SHRegGetUSValueW".}
   proc SHRegSetUSValue*(pwzSubKey: LPCWSTR, pwzValue: LPCWSTR, dwType: DWORD, pvData: pointer, cbData: DWORD, dwFlags: DWORD): LONG {.winapi, stdcall, dynlib: "shlwapi", importc: "SHRegSetUSValueW".}
-  proc SHRegGetInt*(hk: HKEY, pwzKey: LPCWSTR, iDefault: int32): int32 {.winapi, xpincompatible, stdcall, dynlib: "shlwapi", importc: "SHRegGetIntW".}
+  proc SHRegGetInt*(hk: HKEY, pwzKey: LPCWSTR, iDefault: int32): int32 {.winapi, stdcall, dynlib: "shlwapi", importc: "SHRegGetIntW".}
   proc SHRegGetBoolUSValue*(pszSubKey: LPCWSTR, pszValue: LPCWSTR, fIgnoreHKCU: WINBOOL, fDefault: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "shlwapi", importc: "SHRegGetBoolUSValueW".}
   proc AssocQueryString*(flags: ASSOCF, str: ASSOCSTR, pszAssoc: LPCWSTR, pszExtra: LPCWSTR, pszOut: LPWSTR, pcchOut: ptr DWORD): HRESULT {.winapi, stdcall, dynlib: "shlwapi", importc: "AssocQueryStringW".}
   proc AssocQueryStringByKey*(flags: ASSOCF, str: ASSOCSTR, hkAssoc: HKEY, pszExtra: LPCWSTR, pszOut: LPWSTR, pcchOut: ptr DWORD): HRESULT {.winapi, stdcall, dynlib: "shlwapi", importc: "AssocQueryStringByKeyW".}
@@ -9117,7 +9117,7 @@ when winimUnicode:
   proc SHCreateDirectoryEx*(hwnd: HWND, pszPath: LPCWSTR, psa: ptr SECURITY_ATTRIBUTES): int32 {.winapi, stdcall, dynlib: "shell32", importc: "SHCreateDirectoryExW".}
   proc SHGetSpecialFolderPath*(hwnd: HWND, pszPath: LPWSTR, csidl: int32, fCreate: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc: "SHGetSpecialFolderPathW".}
   proc SHGetFolderPath*(hwnd: HWND, csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszPath: LPWSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc: "SHGetFolderPathW".}
-  proc SHSetFolderPath*(csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszPath: LPCWSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc: "SHSetFolderPathW".}
+  proc SHSetFolderPath*(csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszPath: LPCWSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc: "SHSetFolderPathW".}
   proc SHGetFolderPathAndSubDir*(hwnd: HWND, csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszSubDir: LPCWSTR, pszPath: LPWSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc: "SHGetFolderPathAndSubDirW".}
   proc SHBrowseForFolder*(lpbi: LPBROWSEINFOW): PIDLIST_ABSOLUTE {.winapi, stdcall, dynlib: "shell32", importc: "SHBrowseForFolderW".}
   proc SHUpdateImage*(pszHashItem: LPCWSTR, iIndex: int32, uFlags: UINT, iImageIndex: int32): void {.winapi, stdcall, dynlib: "shell32", importc: "SHUpdateImageW".}
@@ -9125,7 +9125,7 @@ when winimUnicode:
   proc PathIsSlow*(pszFile: LPCWSTR, dwAttr: DWORD): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc: "PathIsSlowW".}
   proc SHStartNetConnectionDialog*(hwnd: HWND, pszRemoteName: LPCWSTR, dwType: DWORD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc: "SHStartNetConnectionDialogW".}
   proc SHDefExtractIcon*(pszIconFile: LPCWSTR, iIndex: int32, uFlags: UINT, phiconLarge: ptr HICON, phiconSmall: ptr HICON, nIconSize: UINT): HRESULT {.winapi, stdcall, dynlib: "shell32", importc: "SHDefExtractIconW".}
-  proc Shell_GetCachedImageIndex*(pszIconPath: LPCWSTR, iIconIndex: int32, uIconFlags: UINT): int32 {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc: "Shell_GetCachedImageIndexW".}
+  proc Shell_GetCachedImageIndex*(pszIconPath: LPCWSTR, iIconIndex: int32, uIconFlags: UINT): int32 {.winapi, stdcall, dynlib: "shell32", importc: "Shell_GetCachedImageIndexW".}
   proc SHOpenPropSheet*(pszCaption: LPCWSTR, ahkeys: ptr HKEY, ckeys: UINT, pclsidDefault: ptr CLSID, pdtobj: ptr IDataObject, psb: ptr IShellBrowser, pStartPage: LPCWSTR): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc: "SHOpenPropSheetW".}
   proc SHPathPrepareForWrite*(hwnd: HWND, punkEnableModless: ptr IUnknown, pszPath: LPCWSTR, dwFlags: DWORD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc: "SHPathPrepareForWriteW".}
   proc SHCreateFileExtractIcon*(pszFile: LPCWSTR, dwFileAttributes: DWORD, riid: REFIID, ppv: ptr pointer): HRESULT {.winapi, stdcall, dynlib: "shell32", importc: "SHCreateFileExtractIconW".}
@@ -9205,7 +9205,7 @@ when winimAnsi:
   proc SHGetDiskFreeSpaceEx*(pszDirectoryName: LPCSTR, pulFreeBytesAvailableToCaller: ptr ULARGE_INTEGER, pulTotalNumberOfBytes: ptr ULARGE_INTEGER, pulTotalNumberOfFreeBytes: ptr ULARGE_INTEGER): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc: "SHGetDiskFreeSpaceExA".}
   proc SHGetNewLinkInfo*(pszLinkTo: LPCSTR, pszDir: LPCSTR, pszName: LPSTR, pfMustCopy: ptr WINBOOL, uFlags: UINT): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc: "SHGetNewLinkInfoA".}
   proc SHInvokePrinterCommand*(hwnd: HWND, uAction: UINT, lpBuf1: LPCSTR, lpBuf2: LPCSTR, fModal: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc: "SHInvokePrinterCommandA".}
-  proc ShellMessageBox*(hAppInst: HINSTANCE, hWnd: HWND, lpcText: LPCSTR, lpcTitle: LPCSTR, fuStyle: UINT): int32 {.winapi, xpincompatible, stdcall, dynlib: "shlwapi", importc: "ShellMessageBoxA".}
+  proc ShellMessageBox*(hAppInst: HINSTANCE, hWnd: HWND, lpcText: LPCSTR, lpcTitle: LPCSTR, fuStyle: UINT): int32 {.winapi, stdcall, dynlib: "shlwapi", importc: "ShellMessageBoxA".}
   proc IsLFNDrive*(pszPath: LPCSTR): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc: "IsLFNDriveA".}
   proc StrRetToStr*(pstr: ptr STRRET, pidl: LPCITEMIDLIST, ppsz: ptr LPSTR): HRESULT {.winapi, stdcall, dynlib: "shlwapi", importc: "StrRetToStrA".}
   proc StrRetToBuf*(pstr: ptr STRRET, pidl: LPCITEMIDLIST, pszBuf: LPSTR, cchBuf: UINT): HRESULT {.winapi, stdcall, dynlib: "shlwapi", importc: "StrRetToBufA".}
@@ -9349,12 +9349,12 @@ when winimAnsi:
   proc SHCreateDirectoryEx*(hwnd: HWND, pszPath: LPCSTR, psa: ptr SECURITY_ATTRIBUTES): int32 {.winapi, stdcall, dynlib: "shell32", importc: "SHCreateDirectoryExA".}
   proc SHGetSpecialFolderPath*(hwnd: HWND, pszPath: LPSTR, csidl: int32, fCreate: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc: "SHGetSpecialFolderPathA".}
   proc SHGetFolderPath*(hwnd: HWND, csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszPath: LPSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc: "SHGetFolderPathA".}
-  proc SHSetFolderPath*(csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszPath: LPCSTR): HRESULT {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc: "SHSetFolderPathA".}
+  proc SHSetFolderPath*(csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszPath: LPCSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc: "SHSetFolderPathA".}
   proc SHGetFolderPathAndSubDir*(hwnd: HWND, csidl: int32, hToken: HANDLE, dwFlags: DWORD, pszSubDir: LPCSTR, pszPath: LPSTR): HRESULT {.winapi, stdcall, dynlib: "shell32", importc: "SHGetFolderPathAndSubDirA".}
   proc SHBrowseForFolder*(lpbi: LPBROWSEINFOA): PIDLIST_ABSOLUTE {.winapi, stdcall, dynlib: "shell32", importc: "SHBrowseForFolderA".}
   proc SHUpdateImage*(pszHashItem: LPCSTR, iIndex: int32, uFlags: UINT, iImageIndex: int32): void {.winapi, stdcall, dynlib: "shell32", importc: "SHUpdateImageA".}
   proc SHGetDataFromIDList*(psf: ptr IShellFolder, pidl: PCUITEMID_CHILD, nFormat: int32, pv: pointer, cb: int32): HRESULT {.winapi, stdcall, dynlib: "shell32", importc: "SHGetDataFromIDListA".}
   proc PathIsSlow*(pszFile: LPCSTR, dwAttr: DWORD): WINBOOL {.winapi, stdcall, dynlib: "shell32", importc: "PathIsSlowA".}
   proc SHDefExtractIcon*(pszIconFile: LPCSTR, iIndex: int32, uFlags: UINT, phiconLarge: ptr HICON, phiconSmall: ptr HICON, nIconSize: UINT): HRESULT {.winapi, stdcall, dynlib: "shell32", importc: "SHDefExtractIconA".}
-  proc Shell_GetCachedImageIndex*(pszIconPath: LPCSTR, iIconIndex: int32, uIconFlags: UINT): int32 {.winapi, xpincompatible, stdcall, dynlib: "shell32", importc: "Shell_GetCachedImageIndexA".}
+  proc Shell_GetCachedImageIndex*(pszIconPath: LPCSTR, iIconIndex: int32, uIconFlags: UINT): int32 {.winapi, stdcall, dynlib: "shell32", importc: "Shell_GetCachedImageIndexA".}
   proc SHPathPrepareForWrite*(hwnd: HWND, punkEnableModless: ptr IUnknown, pszPath: LPCSTR, dwFlags: DWORD): HRESULT {.winapi, stdcall, dynlib: "shell32", importc: "SHPathPrepareForWriteA".}

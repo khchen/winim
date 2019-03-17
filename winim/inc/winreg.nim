@@ -168,19 +168,19 @@ proc RegOpenCurrentUser*(samDesired: REGSAM, phkResult: PHKEY): LONG {.winapi, s
 proc RegDisablePredefinedCache*(): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegConnectRegistryA*(lpMachineName: LPCSTR, hKey: HKEY, phkResult: PHKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegConnectRegistryW*(lpMachineName: LPCWSTR, hKey: HKEY, phkResult: PHKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc RegConnectRegistryExA*(lpMachineName: LPCSTR, hKey: HKEY, Flags: ULONG, phkResult: PHKEY): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegConnectRegistryExW*(lpMachineName: LPCWSTR, hKey: HKEY, Flags: ULONG, phkResult: PHKEY): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc RegConnectRegistryExA*(lpMachineName: LPCSTR, hKey: HKEY, Flags: ULONG, phkResult: PHKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegConnectRegistryExW*(lpMachineName: LPCWSTR, hKey: HKEY, Flags: ULONG, phkResult: PHKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegCreateKeyA*(hKey: HKEY, lpSubKey: LPCSTR, phkResult: PHKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegCreateKeyW*(hKey: HKEY, lpSubKey: LPCWSTR, phkResult: PHKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegCreateKeyExA*(hKey: HKEY, lpSubKey: LPCSTR, Reserved: DWORD, lpClass: LPSTR, dwOptions: DWORD, samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY, lpdwDisposition: LPDWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegCreateKeyExW*(hKey: HKEY, lpSubKey: LPCWSTR, Reserved: DWORD, lpClass: LPWSTR, dwOptions: DWORD, samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY, lpdwDisposition: LPDWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegDeleteKeyA*(hKey: HKEY, lpSubKey: LPCSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegDeleteKeyW*(hKey: HKEY, lpSubKey: LPCWSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc RegDeleteKeyExA*(hKey: HKEY, lpSubKey: LPCSTR, samDesired: REGSAM, Reserved: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegDeleteKeyExW*(hKey: HKEY, lpSubKey: LPCWSTR, samDesired: REGSAM, Reserved: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegDisableReflectionKey*(hBase: HKEY): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegEnableReflectionKey*(hBase: HKEY): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegQueryReflectionKey*(hBase: HKEY, bIsReflectionDisabled: ptr WINBOOL): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc RegDeleteKeyExA*(hKey: HKEY, lpSubKey: LPCSTR, samDesired: REGSAM, Reserved: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegDeleteKeyExW*(hKey: HKEY, lpSubKey: LPCWSTR, samDesired: REGSAM, Reserved: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegDisableReflectionKey*(hBase: HKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegEnableReflectionKey*(hBase: HKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegQueryReflectionKey*(hBase: HKEY, bIsReflectionDisabled: ptr WINBOOL): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegDeleteValueA*(hKey: HKEY, lpValueName: LPCSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegDeleteValueW*(hKey: HKEY, lpValueName: LPCWSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegEnumKeyA*(hKey: HKEY, dwIndex: DWORD, lpName: LPSTR, cchName: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
@@ -219,8 +219,8 @@ proc RegSetValueExA*(hKey: HKEY, lpValueName: LPCSTR, Reserved: DWORD, dwType: D
 proc RegSetValueExW*(hKey: HKEY, lpValueName: LPCWSTR, Reserved: DWORD, dwType: DWORD, lpData: ptr BYTE, cbData: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegUnLoadKeyA*(hKey: HKEY, lpSubKey: LPCSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegUnLoadKeyW*(hKey: HKEY, lpSubKey: LPCWSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc RegGetValueA*(hkey: HKEY, lpSubKey: LPCSTR, lpValue: LPCSTR, dwFlags: DWORD, pdwType: LPDWORD, pvData: PVOID, pcbData: LPDWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegGetValueW*(hkey: HKEY, lpSubKey: LPCWSTR, lpValue: LPCWSTR, dwFlags: DWORD, pdwType: LPDWORD, pvData: PVOID, pcbData: LPDWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc RegGetValueA*(hkey: HKEY, lpSubKey: LPCSTR, lpValue: LPCSTR, dwFlags: DWORD, pdwType: LPDWORD, pvData: PVOID, pcbData: LPDWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegGetValueW*(hkey: HKEY, lpSubKey: LPCWSTR, lpValue: LPCWSTR, dwFlags: DWORD, pdwType: LPDWORD, pvData: PVOID, pcbData: LPDWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc InitiateSystemShutdownA*(lpMachineName: LPSTR, lpMessage: LPSTR, dwTimeout: DWORD, bForceAppsClosed: WINBOOL, bRebootAfterShutdown: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc InitiateSystemShutdownW*(lpMachineName: LPWSTR, lpMessage: LPWSTR, dwTimeout: DWORD, bForceAppsClosed: WINBOOL, bRebootAfterShutdown: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc AbortSystemShutdownA*(lpMachineName: LPSTR): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
@@ -229,27 +229,27 @@ proc InitiateSystemShutdownExA*(lpMachineName: LPSTR, lpMessage: LPSTR, dwTimeou
 proc InitiateSystemShutdownExW*(lpMachineName: LPWSTR, lpMessage: LPWSTR, dwTimeout: DWORD, bForceAppsClosed: WINBOOL, bRebootAfterShutdown: WINBOOL, dwReason: DWORD): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegSaveKeyExA*(hKey: HKEY, lpFile: LPCSTR, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, Flags: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegSaveKeyExW*(hKey: HKEY, lpFile: LPCWSTR, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, Flags: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc RegCopyTreeA*(hKeySrc: HKEY, lpSubKey: LPCSTR, hKeyDest: HKEY): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegCopyTreeW*(hKeySrc: HKEY, lpSubKey: LPCWSTR, hKeyDest: HKEY): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegCreateKeyTransactedA*(hKey: HKEY, lpSubKey: LPCSTR, Reserved: DWORD, lpClass: LPSTR, dwOptions: DWORD, samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY, lpdwDisposition: LPDWORD, hTransaction: HANDLE, pExtendedParemeter: PVOID): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegCreateKeyTransactedW*(hKey: HKEY, lpSubKey: LPCWSTR, Reserved: DWORD, lpClass: LPWSTR, dwOptions: DWORD, samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY, lpdwDisposition: LPDWORD, hTransaction: HANDLE, pExtendedParemeter: PVOID): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegDeleteKeyTransactedA*(hKey: HKEY, lpSubKey: LPCSTR, samDesired: REGSAM, Reserved: DWORD, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegDeleteKeyTransactedW*(hKey: HKEY, lpSubKey: LPCWSTR, samDesired: REGSAM, Reserved: DWORD, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegDeleteKeyValueA*(hKey: HKEY, lpSubKey: LPCSTR, lpValueName: LPCSTR): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegDeleteKeyValueW*(hKey: HKEY, lpSubKey: LPCWSTR, lpValueName: LPCWSTR): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegDeleteTreeA*(hKey: HKEY, lpSubKey: LPCSTR): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegDeleteTreeW*(hKey: HKEY, lpSubKey: LPCWSTR): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc RegCopyTreeA*(hKeySrc: HKEY, lpSubKey: LPCSTR, hKeyDest: HKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegCopyTreeW*(hKeySrc: HKEY, lpSubKey: LPCWSTR, hKeyDest: HKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegCreateKeyTransactedA*(hKey: HKEY, lpSubKey: LPCSTR, Reserved: DWORD, lpClass: LPSTR, dwOptions: DWORD, samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY, lpdwDisposition: LPDWORD, hTransaction: HANDLE, pExtendedParemeter: PVOID): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegCreateKeyTransactedW*(hKey: HKEY, lpSubKey: LPCWSTR, Reserved: DWORD, lpClass: LPWSTR, dwOptions: DWORD, samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY, lpdwDisposition: LPDWORD, hTransaction: HANDLE, pExtendedParemeter: PVOID): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegDeleteKeyTransactedA*(hKey: HKEY, lpSubKey: LPCSTR, samDesired: REGSAM, Reserved: DWORD, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegDeleteKeyTransactedW*(hKey: HKEY, lpSubKey: LPCWSTR, samDesired: REGSAM, Reserved: DWORD, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegDeleteKeyValueA*(hKey: HKEY, lpSubKey: LPCSTR, lpValueName: LPCSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegDeleteKeyValueW*(hKey: HKEY, lpSubKey: LPCWSTR, lpValueName: LPCWSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegDeleteTreeA*(hKey: HKEY, lpSubKey: LPCSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegDeleteTreeW*(hKey: HKEY, lpSubKey: LPCWSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
 proc RegDisablePredefinedCacheEx*(): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
-proc RegLoadAppKeyA*(lpFile: LPCSTR, phkResult: PHKEY, samDesired: REGSAM, dwOptions: DWORD, Reserved: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegLoadAppKeyW*(lpFile: LPCWSTR, phkResult: PHKEY, samDesired: REGSAM, dwOptions: DWORD, Reserved: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegLoadMUIStringA*(hKey: HKEY, pszValue: LPCSTR, pszOutBuf: LPSTR, cbOutBuf: DWORD, pcbData: LPDWORD, Flags: DWORD, pszDirectory: LPCSTR): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegLoadMUIStringW*(hKey: HKEY, pszValue: LPCWSTR, pszOutBuf: LPWSTR, cbOutBuf: DWORD, pcbData: LPDWORD, Flags: DWORD, pszDirectory: LPCWSTR): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegOpenKeyTransactedA*(hKey: HKEY, lpSubKey: LPCSTR, ulOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegOpenKeyTransactedW*(hKey: HKEY, lpSubKey: LPCWSTR, ulOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegSetKeyValueA*(hKey: HKEY, lpSubKey: LPCSTR, lpValueName: LPCSTR, dwType: DWORD, lpData: LPCVOID, cbData: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc RegSetKeyValueW*(hKey: HKEY, lpSubKey: LPCSTR, lpValueName: LPCSTR, dwType: DWORD, lpData: LPCVOID, cbData: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc InitiateShutdownA*(lpMachineName: LPSTR, lpMessage: LPSTR, dwGracePeriod: DWORD, dwShutdownFlags: DWORD, dwReason: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
-proc InitiateShutdownW*(lpMachineName: LPWSTR, lpMessage: LPWSTR, dwGracePeriod: DWORD, dwShutdownFlags: DWORD, dwReason: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc.}
+proc RegLoadAppKeyA*(lpFile: LPCSTR, phkResult: PHKEY, samDesired: REGSAM, dwOptions: DWORD, Reserved: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegLoadAppKeyW*(lpFile: LPCWSTR, phkResult: PHKEY, samDesired: REGSAM, dwOptions: DWORD, Reserved: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegLoadMUIStringA*(hKey: HKEY, pszValue: LPCSTR, pszOutBuf: LPSTR, cbOutBuf: DWORD, pcbData: LPDWORD, Flags: DWORD, pszDirectory: LPCSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegLoadMUIStringW*(hKey: HKEY, pszValue: LPCWSTR, pszOutBuf: LPWSTR, cbOutBuf: DWORD, pcbData: LPDWORD, Flags: DWORD, pszDirectory: LPCWSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegOpenKeyTransactedA*(hKey: HKEY, lpSubKey: LPCSTR, ulOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegOpenKeyTransactedW*(hKey: HKEY, lpSubKey: LPCWSTR, ulOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegSetKeyValueA*(hKey: HKEY, lpSubKey: LPCSTR, lpValueName: LPCSTR, dwType: DWORD, lpData: LPCVOID, cbData: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc RegSetKeyValueW*(hKey: HKEY, lpSubKey: LPCSTR, lpValueName: LPCSTR, dwType: DWORD, lpData: LPCVOID, cbData: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc InitiateShutdownA*(lpMachineName: LPSTR, lpMessage: LPSTR, dwGracePeriod: DWORD, dwShutdownFlags: DWORD, dwReason: DWORD): DWORD {.winapi, stdcall, dynlib: "advapi32", importc.}
+proc InitiateShutdownW*(lpMachineName: LPWSTR, lpMessage: LPWSTR, dwGracePeriod: DWORD, dwShutdownFlags: DWORD, dwReason: DWORD): DWORD {.winapi, stdcall, dynlib: "advapi32", importc.}
 when winimUnicode:
   type
     PVALUE* = PVALUEW
@@ -257,11 +257,11 @@ when winimUnicode:
     VALENT* = VALENTW
     PVALENT* = PVALENTW
   proc RegConnectRegistry*(lpMachineName: LPCWSTR, hKey: HKEY, phkResult: PHKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegConnectRegistryW".}
-  proc RegConnectRegistryEx*(lpMachineName: LPCWSTR, hKey: HKEY, Flags: ULONG, phkResult: PHKEY): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegConnectRegistryExW".}
+  proc RegConnectRegistryEx*(lpMachineName: LPCWSTR, hKey: HKEY, Flags: ULONG, phkResult: PHKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegConnectRegistryExW".}
   proc RegCreateKey*(hKey: HKEY, lpSubKey: LPCWSTR, phkResult: PHKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegCreateKeyW".}
   proc RegCreateKeyEx*(hKey: HKEY, lpSubKey: LPCWSTR, Reserved: DWORD, lpClass: LPWSTR, dwOptions: DWORD, samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY, lpdwDisposition: LPDWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegCreateKeyExW".}
   proc RegDeleteKey*(hKey: HKEY, lpSubKey: LPCWSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegDeleteKeyW".}
-  proc RegDeleteKeyEx*(hKey: HKEY, lpSubKey: LPCWSTR, samDesired: REGSAM, Reserved: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegDeleteKeyExW".}
+  proc RegDeleteKeyEx*(hKey: HKEY, lpSubKey: LPCWSTR, samDesired: REGSAM, Reserved: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegDeleteKeyExW".}
   proc RegDeleteValue*(hKey: HKEY, lpValueName: LPCWSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegDeleteValueW".}
   proc RegEnumKey*(hKey: HKEY, dwIndex: DWORD, lpName: LPWSTR, cchName: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegEnumKeyW".}
   proc RegEnumKeyEx*(hKey: HKEY, dwIndex: DWORD, lpName: LPWSTR, lpcchName: LPDWORD, lpReserved: LPDWORD, lpClass: LPWSTR, lpcchClass: LPDWORD, lpftLastWriteTime: PFILETIME): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegEnumKeyExW".}
@@ -279,21 +279,21 @@ when winimUnicode:
   proc RegSetValue*(hKey: HKEY, lpSubKey: LPCWSTR, dwType: DWORD, lpData: LPCWSTR, cbData: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegSetValueW".}
   proc RegSetValueEx*(hKey: HKEY, lpValueName: LPCWSTR, Reserved: DWORD, dwType: DWORD, lpData: ptr BYTE, cbData: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegSetValueExW".}
   proc RegUnLoadKey*(hKey: HKEY, lpSubKey: LPCWSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegUnLoadKeyW".}
-  proc RegGetValue*(hkey: HKEY, lpSubKey: LPCWSTR, lpValue: LPCWSTR, dwFlags: DWORD, pdwType: LPDWORD, pvData: PVOID, pcbData: LPDWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegGetValueW".}
+  proc RegGetValue*(hkey: HKEY, lpSubKey: LPCWSTR, lpValue: LPCWSTR, dwFlags: DWORD, pdwType: LPDWORD, pvData: PVOID, pcbData: LPDWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegGetValueW".}
   proc InitiateSystemShutdown*(lpMachineName: LPWSTR, lpMessage: LPWSTR, dwTimeout: DWORD, bForceAppsClosed: WINBOOL, bRebootAfterShutdown: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc: "InitiateSystemShutdownW".}
   proc AbortSystemShutdown*(lpMachineName: LPWSTR): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc: "AbortSystemShutdownW".}
   proc InitiateSystemShutdownEx*(lpMachineName: LPWSTR, lpMessage: LPWSTR, dwTimeout: DWORD, bForceAppsClosed: WINBOOL, bRebootAfterShutdown: WINBOOL, dwReason: DWORD): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc: "InitiateSystemShutdownExW".}
   proc RegSaveKeyEx*(hKey: HKEY, lpFile: LPCWSTR, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, Flags: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegSaveKeyExW".}
-  proc RegCopyTree*(hKeySrc: HKEY, lpSubKey: LPCWSTR, hKeyDest: HKEY): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegCopyTreeW".}
-  proc RegCreateKeyTransacted*(hKey: HKEY, lpSubKey: LPCWSTR, Reserved: DWORD, lpClass: LPWSTR, dwOptions: DWORD, samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY, lpdwDisposition: LPDWORD, hTransaction: HANDLE, pExtendedParemeter: PVOID): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegCreateKeyTransactedW".}
-  proc RegDeleteKeyTransacted*(hKey: HKEY, lpSubKey: LPCWSTR, samDesired: REGSAM, Reserved: DWORD, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegDeleteKeyTransactedW".}
-  proc RegDeleteKeyValue*(hKey: HKEY, lpSubKey: LPCWSTR, lpValueName: LPCWSTR): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegDeleteKeyValueW".}
-  proc RegDeleteTree*(hKey: HKEY, lpSubKey: LPCWSTR): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegDeleteTreeW".}
-  proc RegLoadAppKey*(lpFile: LPCWSTR, phkResult: PHKEY, samDesired: REGSAM, dwOptions: DWORD, Reserved: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegLoadAppKeyW".}
-  proc RegLoadMUIString*(hKey: HKEY, pszValue: LPCWSTR, pszOutBuf: LPWSTR, cbOutBuf: DWORD, pcbData: LPDWORD, Flags: DWORD, pszDirectory: LPCWSTR): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegLoadMUIStringW".}
-  proc RegOpenKeyTransacted*(hKey: HKEY, lpSubKey: LPCWSTR, ulOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegOpenKeyTransactedW".}
-  proc RegSetKeyValue*(hKey: HKEY, lpSubKey: LPCSTR, lpValueName: LPCSTR, dwType: DWORD, lpData: LPCVOID, cbData: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegSetKeyValueW".}
-  proc InitiateShutdown*(lpMachineName: LPWSTR, lpMessage: LPWSTR, dwGracePeriod: DWORD, dwShutdownFlags: DWORD, dwReason: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "InitiateShutdownW".}
+  proc RegCopyTree*(hKeySrc: HKEY, lpSubKey: LPCWSTR, hKeyDest: HKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegCopyTreeW".}
+  proc RegCreateKeyTransacted*(hKey: HKEY, lpSubKey: LPCWSTR, Reserved: DWORD, lpClass: LPWSTR, dwOptions: DWORD, samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY, lpdwDisposition: LPDWORD, hTransaction: HANDLE, pExtendedParemeter: PVOID): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegCreateKeyTransactedW".}
+  proc RegDeleteKeyTransacted*(hKey: HKEY, lpSubKey: LPCWSTR, samDesired: REGSAM, Reserved: DWORD, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegDeleteKeyTransactedW".}
+  proc RegDeleteKeyValue*(hKey: HKEY, lpSubKey: LPCWSTR, lpValueName: LPCWSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegDeleteKeyValueW".}
+  proc RegDeleteTree*(hKey: HKEY, lpSubKey: LPCWSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegDeleteTreeW".}
+  proc RegLoadAppKey*(lpFile: LPCWSTR, phkResult: PHKEY, samDesired: REGSAM, dwOptions: DWORD, Reserved: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegLoadAppKeyW".}
+  proc RegLoadMUIString*(hKey: HKEY, pszValue: LPCWSTR, pszOutBuf: LPWSTR, cbOutBuf: DWORD, pcbData: LPDWORD, Flags: DWORD, pszDirectory: LPCWSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegLoadMUIStringW".}
+  proc RegOpenKeyTransacted*(hKey: HKEY, lpSubKey: LPCWSTR, ulOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegOpenKeyTransactedW".}
+  proc RegSetKeyValue*(hKey: HKEY, lpSubKey: LPCSTR, lpValueName: LPCSTR, dwType: DWORD, lpData: LPCVOID, cbData: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegSetKeyValueW".}
+  proc InitiateShutdown*(lpMachineName: LPWSTR, lpMessage: LPWSTR, dwGracePeriod: DWORD, dwShutdownFlags: DWORD, dwReason: DWORD): DWORD {.winapi, stdcall, dynlib: "advapi32", importc: "InitiateShutdownW".}
 when winimAnsi:
   type
     PVALUE* = PVALUEA
@@ -301,11 +301,11 @@ when winimAnsi:
     VALENT* = VALENTA
     PVALENT* = PVALENTA
   proc RegConnectRegistry*(lpMachineName: LPCSTR, hKey: HKEY, phkResult: PHKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegConnectRegistryA".}
-  proc RegConnectRegistryEx*(lpMachineName: LPCSTR, hKey: HKEY, Flags: ULONG, phkResult: PHKEY): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegConnectRegistryExA".}
+  proc RegConnectRegistryEx*(lpMachineName: LPCSTR, hKey: HKEY, Flags: ULONG, phkResult: PHKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegConnectRegistryExA".}
   proc RegCreateKey*(hKey: HKEY, lpSubKey: LPCSTR, phkResult: PHKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegCreateKeyA".}
   proc RegCreateKeyEx*(hKey: HKEY, lpSubKey: LPCSTR, Reserved: DWORD, lpClass: LPSTR, dwOptions: DWORD, samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY, lpdwDisposition: LPDWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegCreateKeyExA".}
   proc RegDeleteKey*(hKey: HKEY, lpSubKey: LPCSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegDeleteKeyA".}
-  proc RegDeleteKeyEx*(hKey: HKEY, lpSubKey: LPCSTR, samDesired: REGSAM, Reserved: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegDeleteKeyExA".}
+  proc RegDeleteKeyEx*(hKey: HKEY, lpSubKey: LPCSTR, samDesired: REGSAM, Reserved: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegDeleteKeyExA".}
   proc RegDeleteValue*(hKey: HKEY, lpValueName: LPCSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegDeleteValueA".}
   proc RegEnumKey*(hKey: HKEY, dwIndex: DWORD, lpName: LPSTR, cchName: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegEnumKeyA".}
   proc RegEnumKeyEx*(hKey: HKEY, dwIndex: DWORD, lpName: LPSTR, lpcchName: LPDWORD, lpReserved: LPDWORD, lpClass: LPSTR, lpcchClass: LPDWORD, lpftLastWriteTime: PFILETIME): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegEnumKeyExA".}
@@ -323,18 +323,18 @@ when winimAnsi:
   proc RegSetValue*(hKey: HKEY, lpSubKey: LPCSTR, dwType: DWORD, lpData: LPCSTR, cbData: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegSetValueA".}
   proc RegSetValueEx*(hKey: HKEY, lpValueName: LPCSTR, Reserved: DWORD, dwType: DWORD, lpData: ptr BYTE, cbData: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegSetValueExA".}
   proc RegUnLoadKey*(hKey: HKEY, lpSubKey: LPCSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegUnLoadKeyA".}
-  proc RegGetValue*(hkey: HKEY, lpSubKey: LPCSTR, lpValue: LPCSTR, dwFlags: DWORD, pdwType: LPDWORD, pvData: PVOID, pcbData: LPDWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegGetValueA".}
+  proc RegGetValue*(hkey: HKEY, lpSubKey: LPCSTR, lpValue: LPCSTR, dwFlags: DWORD, pdwType: LPDWORD, pvData: PVOID, pcbData: LPDWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegGetValueA".}
   proc InitiateSystemShutdown*(lpMachineName: LPSTR, lpMessage: LPSTR, dwTimeout: DWORD, bForceAppsClosed: WINBOOL, bRebootAfterShutdown: WINBOOL): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc: "InitiateSystemShutdownA".}
   proc AbortSystemShutdown*(lpMachineName: LPSTR): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc: "AbortSystemShutdownA".}
   proc InitiateSystemShutdownEx*(lpMachineName: LPSTR, lpMessage: LPSTR, dwTimeout: DWORD, bForceAppsClosed: WINBOOL, bRebootAfterShutdown: WINBOOL, dwReason: DWORD): WINBOOL {.winapi, stdcall, dynlib: "advapi32", importc: "InitiateSystemShutdownExA".}
   proc RegSaveKeyEx*(hKey: HKEY, lpFile: LPCSTR, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, Flags: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegSaveKeyExA".}
-  proc RegCopyTree*(hKeySrc: HKEY, lpSubKey: LPCSTR, hKeyDest: HKEY): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegCopyTreeA".}
-  proc RegCreateKeyTransacted*(hKey: HKEY, lpSubKey: LPCSTR, Reserved: DWORD, lpClass: LPSTR, dwOptions: DWORD, samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY, lpdwDisposition: LPDWORD, hTransaction: HANDLE, pExtendedParemeter: PVOID): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegCreateKeyTransactedA".}
-  proc RegDeleteKeyTransacted*(hKey: HKEY, lpSubKey: LPCSTR, samDesired: REGSAM, Reserved: DWORD, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegDeleteKeyTransactedA".}
-  proc RegDeleteKeyValue*(hKey: HKEY, lpSubKey: LPCSTR, lpValueName: LPCSTR): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegDeleteKeyValueA".}
-  proc RegDeleteTree*(hKey: HKEY, lpSubKey: LPCSTR): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegDeleteTreeA".}
-  proc RegLoadAppKey*(lpFile: LPCSTR, phkResult: PHKEY, samDesired: REGSAM, dwOptions: DWORD, Reserved: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegLoadAppKeyA".}
-  proc RegLoadMUIString*(hKey: HKEY, pszValue: LPCSTR, pszOutBuf: LPSTR, cbOutBuf: DWORD, pcbData: LPDWORD, Flags: DWORD, pszDirectory: LPCSTR): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegLoadMUIStringA".}
-  proc RegOpenKeyTransacted*(hKey: HKEY, lpSubKey: LPCSTR, ulOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegOpenKeyTransactedA".}
-  proc RegSetKeyValue*(hKey: HKEY, lpSubKey: LPCSTR, lpValueName: LPCSTR, dwType: DWORD, lpData: LPCVOID, cbData: DWORD): LONG {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "RegSetKeyValueA".}
-  proc InitiateShutdown*(lpMachineName: LPSTR, lpMessage: LPSTR, dwGracePeriod: DWORD, dwShutdownFlags: DWORD, dwReason: DWORD): DWORD {.winapi, xpincompatible, stdcall, dynlib: "advapi32", importc: "InitiateShutdownA".}
+  proc RegCopyTree*(hKeySrc: HKEY, lpSubKey: LPCSTR, hKeyDest: HKEY): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegCopyTreeA".}
+  proc RegCreateKeyTransacted*(hKey: HKEY, lpSubKey: LPCSTR, Reserved: DWORD, lpClass: LPSTR, dwOptions: DWORD, samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY, lpdwDisposition: LPDWORD, hTransaction: HANDLE, pExtendedParemeter: PVOID): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegCreateKeyTransactedA".}
+  proc RegDeleteKeyTransacted*(hKey: HKEY, lpSubKey: LPCSTR, samDesired: REGSAM, Reserved: DWORD, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegDeleteKeyTransactedA".}
+  proc RegDeleteKeyValue*(hKey: HKEY, lpSubKey: LPCSTR, lpValueName: LPCSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegDeleteKeyValueA".}
+  proc RegDeleteTree*(hKey: HKEY, lpSubKey: LPCSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegDeleteTreeA".}
+  proc RegLoadAppKey*(lpFile: LPCSTR, phkResult: PHKEY, samDesired: REGSAM, dwOptions: DWORD, Reserved: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegLoadAppKeyA".}
+  proc RegLoadMUIString*(hKey: HKEY, pszValue: LPCSTR, pszOutBuf: LPSTR, cbOutBuf: DWORD, pcbData: LPDWORD, Flags: DWORD, pszDirectory: LPCSTR): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegLoadMUIStringA".}
+  proc RegOpenKeyTransacted*(hKey: HKEY, lpSubKey: LPCSTR, ulOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY, hTransaction: HANDLE, pExtendedParameter: PVOID): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegOpenKeyTransactedA".}
+  proc RegSetKeyValue*(hKey: HKEY, lpSubKey: LPCSTR, lpValueName: LPCSTR, dwType: DWORD, lpData: LPCVOID, cbData: DWORD): LONG {.winapi, stdcall, dynlib: "advapi32", importc: "RegSetKeyValueA".}
+  proc InitiateShutdown*(lpMachineName: LPSTR, lpMessage: LPSTR, dwGracePeriod: DWORD, dwShutdownFlags: DWORD, dwReason: DWORD): DWORD {.winapi, stdcall, dynlib: "advapi32", importc: "InitiateShutdownA".}

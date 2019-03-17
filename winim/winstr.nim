@@ -156,8 +156,20 @@
 
 {.deadCodeElim: on.}
 
-import macros, strutils, inc/winimbase, core
+import macros, strutils, inc/[winimbase, windef]
 export strutils.toHex, winimbase
+
+# generate from winimx (avoid importing objbase everytime)
+const
+  CP_ACP* = 0
+  CP_UTF8* = 65001
+
+proc lstrcmpW*(lpString1: LPCWSTR, lpString2: LPCWSTR): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
+proc lstrlenA*(lpString: LPCSTR): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
+proc lstrlenW*(lpString: LPCWSTR): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
+proc MultiByteToWideChar*(CodePage: UINT, dwFlags: DWORD, lpMultiByteStr: LPCCH, cbMultiByte: int32, lpWideCharStr: LPWSTR, cchWideChar: int32): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
+proc WideCharToMultiByte*(CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWCH, cchWideChar: int32, lpMultiByteStr: LPSTR, cbMultiByte: int32, lpDefaultChar: LPCCH, lpUsedDefaultChar: LPBOOL): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
+proc SysStringLen*(P1: BSTR): UINT {.winapi, stdcall, dynlib: "oleaut32", importc.}
 
 # copy from widestrs.nim, these functions used both compile-time and run-time
 # use WCHAR instead of Utf16Char

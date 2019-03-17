@@ -21,13 +21,12 @@
 ##  To compile:
 ##    .. code-block:: Nim
 ##       nim c source.nim
-##         add -d:winansi or -d:useWinAnsi for Ansi version (Unicode by default)
-##         add -d:win_no_discardable if not like discardable windows API
-##         add -d:lean same as import winim/lean
-##         add -d:mean same as import winim/mean
-##         add -d:win32_lean_and_mean same as import winim/mean
+##         add -d:winansi or -d:useWinAnsi for Ansi version (Unicode by default).
+##         add -d:noDiscardableApi if not like discardable windows API.
+##         add -d:noRes to disable the visual styles (not to link winim32.res or winim64.res).
+##         add -d:lean same as import winim/lean.
+##         add -d:mean or -d:win32_lean_and_mean same as import winim/mean.
 ##         add -d:notrace disable COM objects trace. See com.nim for details.
-##         add -d:useWinXP for Windows XP compatibility.
 
 {.deadCodeElim: on.}
 
@@ -43,6 +42,3 @@ else:
 
 import winim/[utils, winstr]
 export utils, winstr
-
-when isMainModule:
-  discard MessageBox(0, T"Hello, world !", T"Nim is Powerful", 0)

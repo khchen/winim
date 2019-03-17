@@ -1,3 +1,9 @@
+#====================================================================
+#
+#               Winim - Nim's Windows API Module
+#                 (c) Copyright 2016-2019 Ward
+#====================================================================
+
 # source at: https://msdn.microsoft.com/en-us/library/windows/desktop/ff485843(v=vs.85).aspx
 
 import winim/mean

@@ -1,6 +1,6 @@
-## How to Compile winim by Tiny C Compiler
+## How to Compile Winim by Tiny C Compiler
 
-To compile winim by TCC, of course you need to download the TCC.
+To compile Winim by TCC, of course you need to download the TCC.
 
 * http://download.savannah.gnu.org/releases/tinycc/
 
@@ -13,15 +13,17 @@ You will need the following files:
 I suggest put these files into nim\dist, and then modify the
 *nim.cfg*. Here is the example:
 
-    @if i386:
-      gcc.path = r"$nim\dist\mingw32\bin"
-      tcc.path = r"$nim\dist\tcc32"
-    @else:
-      gcc.path = r"$nim\dist\mingw64\bin"
-      tcc.path = r"$nim\dist\tcc64"
+    @if windows:
+      @if i386:
+        gcc.path = r"$nim\dist\mingw32\bin"
+        tcc.path = r"$nim\dist\tcc32"
+      @else:
+        gcc.path = r"$nim\dist\mingw64\bin"
+        tcc.path = r"$nim\dist\tcc64"
+      @end
     @end
 
-Now, you can try to compile winim program by TCC:
+Now, you can try to compile Winim program by TCC:
 
     nim c --cc:tcc --cpu:i386 example.nim
 
@@ -34,8 +36,9 @@ or
 
 ## How to Add the Resource Files
 
-*winim* program links winim32.res or winim64.res by default to force Windows
-system using ComCtl32.dll version 6 (aka enabling the Visual Styles).
+Winim module links winim32.res or winim64.res by default to force Windows
+system using ComCtl32.dll version 6, aka enabling the Visual Styles
+(Since Winim 3.0, you can add -d:noRes to disable it).
 
 Tiny C Compiler supports COFF format res file. However, the problem is
 it supports only one res file. So, if you add another resource file

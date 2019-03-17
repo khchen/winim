@@ -1388,7 +1388,7 @@ proc SetupDiInstallDriverFiles*(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEV
 proc SetupDiRegisterCoDeviceInstallers*(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
 proc SetupDiRemoveDevice*(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
 proc SetupDiUnremoveDevice*(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
-proc SetupDiRestartDevices*(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "setupapi", importc.}
+proc SetupDiRestartDevices*(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
 proc SetupDiChangeState*(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
 proc SetupDiInstallClassA*(hwndParent: HWND, InfFileName: PCSTR, Flags: DWORD, FileQueue: HSPFILEQ): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
 proc SetupDiInstallClassW*(hwndParent: HWND, InfFileName: PCWSTR, Flags: DWORD, FileQueue: HSPFILEQ): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
@@ -1459,8 +1459,8 @@ proc SetupDiGetHwProfileFriendlyNameExW*(HwProfile: DWORD, FriendlyName: PWSTR, 
 proc SetupDiGetWizardPage*(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA, InstallWizardData: PSP_INSTALLWIZARD_DATA, PageType: DWORD, Flags: DWORD): HPROPSHEETPAGE {.winapi, stdcall, dynlib: "setupapi", importc.}
 proc SetupDiGetSelectedDevice*(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
 proc SetupDiSetSelectedDevice*(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
-proc SetupDiGetActualModelsSectionA*(Context: PINFCONTEXT, AlternatePlatformInfo: PSP_ALTPLATFORM_INFO, InfSectionWithExt: PSTR, InfSectionWithExtSize: DWORD, RequiredSize: PDWORD, Reserved: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "setupapi", importc.}
-proc SetupDiGetActualModelsSectionW*(Context: PINFCONTEXT, AlternatePlatformInfo: PSP_ALTPLATFORM_INFO, InfSectionWithExt: PWSTR, InfSectionWithExtSize: DWORD, RequiredSize: PDWORD, Reserved: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "setupapi", importc.}
+proc SetupDiGetActualModelsSectionA*(Context: PINFCONTEXT, AlternatePlatformInfo: PSP_ALTPLATFORM_INFO, InfSectionWithExt: PSTR, InfSectionWithExtSize: DWORD, RequiredSize: PDWORD, Reserved: PVOID): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
+proc SetupDiGetActualModelsSectionW*(Context: PINFCONTEXT, AlternatePlatformInfo: PSP_ALTPLATFORM_INFO, InfSectionWithExt: PWSTR, InfSectionWithExtSize: DWORD, RequiredSize: PDWORD, Reserved: PVOID): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
 proc SetupDiGetActualSectionToInstallA*(InfHandle: HINF, InfSectionName: PCSTR, InfSectionWithExt: PSTR, InfSectionWithExtSize: DWORD, RequiredSize: PDWORD, Extension: ptr PSTR): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
 proc SetupDiGetActualSectionToInstallW*(InfHandle: HINF, InfSectionName: PCWSTR, InfSectionWithExt: PWSTR, InfSectionWithExtSize: DWORD, RequiredSize: PDWORD, Extension: ptr PWSTR): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
 proc SetupDiGetActualSectionToInstallExA*(InfHandle: HINF, InfSectionName: PCSTR, AlternatePlatformInfo: PSP_ALTPLATFORM_INFO, InfSectionWithExt: PSTR, InfSectionWithExtSize: DWORD, RequiredSize: PDWORD, Extension: ptr PSTR, Reserved: PVOID): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
@@ -1471,8 +1471,8 @@ proc SetupVerifyInfFileA*(InfName: PCSTR, AltPlatformInfo: PSP_ALTPLATFORM_INFO,
 proc SetupVerifyInfFileW*(InfName: PCWSTR, AltPlatformInfo: PSP_ALTPLATFORM_INFO, InfSignerInfo: PSP_INF_SIGNER_INFO_W): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
 proc SetupDiGetCustomDevicePropertyA*(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA, CustomPropertyName: PCSTR, Flags: DWORD, PropertyRegDataType: PDWORD, PropertyBuffer: PBYTE, PropertyBufferSize: DWORD, RequiredSize: PDWORD): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
 proc SetupDiGetCustomDevicePropertyW*(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA, CustomPropertyName: PCWSTR, Flags: DWORD, PropertyRegDataType: PDWORD, PropertyBuffer: PBYTE, PropertyBufferSize: DWORD, RequiredSize: PDWORD): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
-proc SetupConfigureWmiFromInfSectionA*(InfHandle: HINF, SectionName: PCSTR, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "setupapi", importc.}
-proc SetupConfigureWmiFromInfSectionW*(InfHandle: HINF, SectionName: PCWSTR, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "setupapi", importc.}
+proc SetupConfigureWmiFromInfSectionA*(InfHandle: HINF, SectionName: PCSTR, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
+proc SetupConfigureWmiFromInfSectionW*(InfHandle: HINF, SectionName: PCWSTR, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc.}
 proc `Reserved=`*(self: var SP_ALTPLATFORM_INFO_V2, x: WORD) {.inline.} = self.union1.Reserved = x
 proc Reserved*(self: SP_ALTPLATFORM_INFO_V2): WORD {.inline.} = self.union1.Reserved
 proc Reserved*(self: var SP_ALTPLATFORM_INFO_V2): var WORD {.inline.} = self.union1.Reserved
@@ -1639,13 +1639,13 @@ when winimUnicode:
   proc SetupDiClassGuidsFromNameEx*(ClassName: PCWSTR, ClassGuidList: LPGUID, ClassGuidListSize: DWORD, RequiredSize: PDWORD, MachineName: PCWSTR, Reserved: PVOID): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupDiClassGuidsFromNameExW".}
   proc SetupDiGetHwProfileFriendlyName*(HwProfile: DWORD, FriendlyName: PWSTR, FriendlyNameSize: DWORD, RequiredSize: PDWORD): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupDiGetHwProfileFriendlyNameW".}
   proc SetupDiGetHwProfileFriendlyNameEx*(HwProfile: DWORD, FriendlyName: PWSTR, FriendlyNameSize: DWORD, RequiredSize: PDWORD, MachineName: PCWSTR, Reserved: PVOID): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupDiGetHwProfileFriendlyNameExW".}
-  proc SetupDiGetActualModelsSection*(Context: PINFCONTEXT, AlternatePlatformInfo: PSP_ALTPLATFORM_INFO, InfSectionWithExt: PWSTR, InfSectionWithExtSize: DWORD, RequiredSize: PDWORD, Reserved: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "setupapi", importc: "SetupDiGetActualModelsSectionW".}
+  proc SetupDiGetActualModelsSection*(Context: PINFCONTEXT, AlternatePlatformInfo: PSP_ALTPLATFORM_INFO, InfSectionWithExt: PWSTR, InfSectionWithExtSize: DWORD, RequiredSize: PDWORD, Reserved: PVOID): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupDiGetActualModelsSectionW".}
   proc SetupDiGetActualSectionToInstall*(InfHandle: HINF, InfSectionName: PCWSTR, InfSectionWithExt: PWSTR, InfSectionWithExtSize: DWORD, RequiredSize: PDWORD, Extension: ptr PWSTR): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupDiGetActualSectionToInstallW".}
   proc SetupDiGetActualSectionToInstallEx*(InfHandle: HINF, InfSectionName: PCWSTR, AlternatePlatformInfo: PSP_ALTPLATFORM_INFO, InfSectionWithExt: PWSTR, InfSectionWithExtSize: DWORD, RequiredSize: PDWORD, Extension: ptr PWSTR, Reserved: PVOID): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupDiGetActualSectionToInstallExW".}
   proc SetupEnumInfSections*(InfHandle: HINF, Index: UINT, Buffer: PWSTR, Size: UINT, SizeNeeded: ptr UINT): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupEnumInfSectionsW".}
   proc SetupVerifyInfFile*(InfName: PCWSTR, AltPlatformInfo: PSP_ALTPLATFORM_INFO, InfSignerInfo: PSP_INF_SIGNER_INFO_W): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupVerifyInfFileW".}
   proc SetupDiGetCustomDeviceProperty*(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA, CustomPropertyName: PCWSTR, Flags: DWORD, PropertyRegDataType: PDWORD, PropertyBuffer: PBYTE, PropertyBufferSize: DWORD, RequiredSize: PDWORD): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupDiGetCustomDevicePropertyW".}
-  proc SetupConfigureWmiFromInfSection*(InfHandle: HINF, SectionName: PCWSTR, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "setupapi", importc: "SetupConfigureWmiFromInfSectionW".}
+  proc SetupConfigureWmiFromInfSection*(InfHandle: HINF, SectionName: PCWSTR, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupConfigureWmiFromInfSectionW".}
 when winimAnsi:
   type
     SP_ORIGINAL_FILE_INFO* = SP_ORIGINAL_FILE_INFO_A
@@ -1806,10 +1806,10 @@ when winimAnsi:
   proc SetupDiClassGuidsFromNameEx*(ClassName: PCSTR, ClassGuidList: LPGUID, ClassGuidListSize: DWORD, RequiredSize: PDWORD, MachineName: PCSTR, Reserved: PVOID): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupDiClassGuidsFromNameExA".}
   proc SetupDiGetHwProfileFriendlyName*(HwProfile: DWORD, FriendlyName: PSTR, FriendlyNameSize: DWORD, RequiredSize: PDWORD): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupDiGetHwProfileFriendlyNameA".}
   proc SetupDiGetHwProfileFriendlyNameEx*(HwProfile: DWORD, FriendlyName: PSTR, FriendlyNameSize: DWORD, RequiredSize: PDWORD, MachineName: PCSTR, Reserved: PVOID): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupDiGetHwProfileFriendlyNameExA".}
-  proc SetupDiGetActualModelsSection*(Context: PINFCONTEXT, AlternatePlatformInfo: PSP_ALTPLATFORM_INFO, InfSectionWithExt: PSTR, InfSectionWithExtSize: DWORD, RequiredSize: PDWORD, Reserved: PVOID): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "setupapi", importc: "SetupDiGetActualModelsSectionA".}
+  proc SetupDiGetActualModelsSection*(Context: PINFCONTEXT, AlternatePlatformInfo: PSP_ALTPLATFORM_INFO, InfSectionWithExt: PSTR, InfSectionWithExtSize: DWORD, RequiredSize: PDWORD, Reserved: PVOID): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupDiGetActualModelsSectionA".}
   proc SetupDiGetActualSectionToInstall*(InfHandle: HINF, InfSectionName: PCSTR, InfSectionWithExt: PSTR, InfSectionWithExtSize: DWORD, RequiredSize: PDWORD, Extension: ptr PSTR): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupDiGetActualSectionToInstallA".}
   proc SetupDiGetActualSectionToInstallEx*(InfHandle: HINF, InfSectionName: PCSTR, AlternatePlatformInfo: PSP_ALTPLATFORM_INFO, InfSectionWithExt: PSTR, InfSectionWithExtSize: DWORD, RequiredSize: PDWORD, Extension: ptr PSTR, Reserved: PVOID): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupDiGetActualSectionToInstallExA".}
   proc SetupEnumInfSections*(InfHandle: HINF, Index: UINT, Buffer: PSTR, Size: UINT, SizeNeeded: ptr UINT): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupEnumInfSectionsA".}
   proc SetupVerifyInfFile*(InfName: PCSTR, AltPlatformInfo: PSP_ALTPLATFORM_INFO, InfSignerInfo: PSP_INF_SIGNER_INFO_A): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupVerifyInfFileA".}
   proc SetupDiGetCustomDeviceProperty*(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA, CustomPropertyName: PCSTR, Flags: DWORD, PropertyRegDataType: PDWORD, PropertyBuffer: PBYTE, PropertyBufferSize: DWORD, RequiredSize: PDWORD): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupDiGetCustomDevicePropertyA".}
-  proc SetupConfigureWmiFromInfSection*(InfHandle: HINF, SectionName: PCSTR, Flags: DWORD): WINBOOL {.winapi, xpincompatible, stdcall, dynlib: "setupapi", importc: "SetupConfigureWmiFromInfSectionA".}
+  proc SetupConfigureWmiFromInfSection*(InfHandle: HINF, SectionName: PCSTR, Flags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "setupapi", importc: "SetupConfigureWmiFromInfSectionA".}
