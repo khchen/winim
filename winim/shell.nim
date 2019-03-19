@@ -9,5 +9,8 @@
 
 {.deadCodeElim: on.}
 
-import inc/[commctrl, commdlg, richedit, imm, shellapi, setupapi]
-export commctrl, commdlg, richedit, imm, shellapi, setupapi
+import inc/[commctrl, commdlg, richedit, imm, shellapi, setupapi, vssym32,
+  uxtheme]
+
+export commctrl, commdlg, richedit, imm, shellapi, setupapi, vssym32,
+  uxtheme

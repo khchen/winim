@@ -713,8 +713,6 @@ const
   GOPHER_ATTRIBUTE_ID_UNKNOWN* = GOPHER_ATTRIBUTE_ID_BASE+25
   HTTP_MAJOR_VERSION* = 1
   HTTP_MINOR_VERSION* = 0
-  HTTP_VERSIONA* = "HTTP/1.0"
-  HTTP_VERSIONW* = "HTTP/1.0"
   HTTP_QUERY_MIME_VERSION* = 0
   HTTP_QUERY_CONTENT_TYPE* = 1
   HTTP_QUERY_CONTENT_TRANSFER_ENCODING* = 2
@@ -1280,8 +1278,6 @@ when winimUnicode:
     LPINTERNET_CACHE_ENTRY_INFO* = LPINTERNET_CACHE_ENTRY_INFOW
     INTERNET_CACHE_GROUP_INFO* = INTERNET_CACHE_GROUP_INFOW
     LPINTERNET_CACHE_GROUP_INFO* = LPINTERNET_CACHE_GROUP_INFOW
-  const
-    HTTP_VERSION* = HTTP_VERSIONW
   proc InternetCrackUrl*(lpszUrl: LPCWSTR, dwUrlLength: DWORD, dwFlags: DWORD, lpUrlComponents: LPURL_COMPONENTSW): WINBOOL {.winapi, stdcall, dynlib: "wininet", importc: "InternetCrackUrlW".}
   proc InternetCreateUrl*(lpUrlComponents: LPURL_COMPONENTSW, dwFlags: DWORD, lpszUrl: LPWSTR, lpdwUrlLength: LPDWORD): WINBOOL {.winapi, stdcall, dynlib: "wininet", importc: "InternetCreateUrlW".}
   proc InternetCanonicalizeUrl*(lpszUrl: LPCWSTR, lpszBuffer: LPWSTR, lpdwBufferLength: LPDWORD, dwFlags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "wininet", importc: "InternetCanonicalizeUrlW".}
@@ -1365,8 +1361,6 @@ when winimAnsi:
     LPINTERNET_CACHE_ENTRY_INFO* = LPINTERNET_CACHE_ENTRY_INFOA
     INTERNET_CACHE_GROUP_INFO* = INTERNET_CACHE_GROUP_INFOA
     LPINTERNET_CACHE_GROUP_INFO* = LPINTERNET_CACHE_GROUP_INFOA
-  const
-    HTTP_VERSION* = HTTP_VERSIONA
   proc InternetCrackUrl*(lpszUrl: LPCSTR, dwUrlLength: DWORD, dwFlags: DWORD, lpUrlComponents: LPURL_COMPONENTSA): WINBOOL {.winapi, stdcall, dynlib: "wininet", importc: "InternetCrackUrlA".}
   proc InternetCreateUrl*(lpUrlComponents: LPURL_COMPONENTSA, dwFlags: DWORD, lpszUrl: LPSTR, lpdwUrlLength: LPDWORD): WINBOOL {.winapi, stdcall, dynlib: "wininet", importc: "InternetCreateUrlA".}
   proc InternetCanonicalizeUrl*(lpszUrl: LPCSTR, lpszBuffer: LPSTR, lpdwBufferLength: LPDWORD, dwFlags: DWORD): WINBOOL {.winapi, stdcall, dynlib: "wininet", importc: "InternetCanonicalizeUrlA".}
