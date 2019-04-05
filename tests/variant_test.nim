@@ -4,7 +4,7 @@
 #                 (c) Copyright 2016-2018 Ward
 #====================================================================
 
-import ../winim/com except FAILED # conflict with TestStatus.FAILED
+import winim/com except FAILED # conflict with TestStatus.FAILED
 import unittest
 
 suite "Winim COM Module Varient Test Suites":

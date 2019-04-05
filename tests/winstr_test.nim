@@ -4,9 +4,9 @@
 #                 (c) Copyright 2016-2019 Ward
 #====================================================================
 
-import ../winim/core except FAILED # conflict with TestStatus.FAILED
-import ../winim/inc/objbase # for SysAllocString
-import ../winim/[winstr, utils]
+import winim/core except FAILED # conflict with TestStatus.FAILED
+import winim/inc/objbase # for SysAllocString
+import winim/[winstr, utils]
 import unittest, strutils, unicode
 
 suite "Winim Winstr Module Test Suites":

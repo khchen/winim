@@ -1,3 +1,7 @@
+Version 3.1
+-----------
+* Add wincred module.
+
 Version 3.0
 -----------
 * Add winimx tool to generate the minified winim module.

@@ -9,5 +9,5 @@
 
 {.deadCodeElim: on.}
 
-import inc/[security, windns, winldap, lm, ras, rpc, iphlpapi, http]
-export security, windns, winldap, lm, ras, rpc, iphlpapi, http
+import inc/[security, windns, winldap, lm, ras, rpc, iphlpapi, http, wincred]
+export security, windns, winldap, lm, ras, rpc, iphlpapi, http, wincred
