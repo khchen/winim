@@ -8,7 +8,8 @@ import winim/com
 import threadpool
 
 proc thread(dict: com) =
-  dict.add("child", "thread")
+  {.gcsafe.}:
+    discard dict.add("child", "thread")
 
 proc main() =
   var dict = CreateObject("Scripting.Dictionary")

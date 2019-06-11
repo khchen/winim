@@ -127,20 +127,26 @@ proc desc*(e: ref COMError): string =
                cast[wstring](buffer), 4096, nil)
   result = $cast[wstring](buffer)
 
+proc release(x: com) =
+  if x.notNil and x.disp.notNil:
+    x.disp.Release()
+    x.disp = nil
+
+proc release(x: variant) =
+  if x.notNil:
+    discard VariantClear(&x.raw)
+
 proc del*(x: com) =
   when hasTraceTable:
     comTrace.del(cast[pointer](x))
 
-  if x.notNil and x.disp.notNil:
-    x.disp.Release()
-    x.disp = nil
+  x.release()
 
 proc del*(x: variant) =
   when hasTraceTable:
     varTrace.del(cast[pointer](x))
 
-  if x.notNil:
-    discard VariantClear(&x.raw)
+  x.release()
 
 template init(x): untyped =
   # lazy initialize, in case of the it need different apartment or OleInitialize
@@ -172,8 +178,8 @@ when hasTraceTable:
     ##
     ## Use -d:notrace to disable this function.
 
-    for k, v in varTrace: del cast[variant](k)
-    for k, v in comTrace: del cast[com](k)
+    for k, v in varTrace: release cast[variant](k)
+    for k, v in comTrace: release cast[com](k)
     varTrace.clear
     comTrace.clear
 

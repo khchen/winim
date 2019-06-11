@@ -10,8 +10,9 @@ import threadpool
 const monikerName = "winimcomtest"
 
 proc thread(): bool =
-  var dict = GetObject(monikerName)
-  dict.add("child", "thread")
+  {.gcsafe.}:
+    var dict = GetObject(monikerName)
+    dict.add("child", "thread")
 
 proc main() =
   var dict = CreateObject("Scripting.Dictionary")
