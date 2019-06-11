@@ -227,9 +227,8 @@ suite "Winim Winstr Module Test Suites":
     var m = -$"12345"
     var w = +$"12345"
 
-    # It shoud be 5 to raise the error, this is bug in Nim,
-    expect IndexError: discard s[6]
-    expect IndexError: discard m[6]
+    expect IndexError: discard s[5]
+    expect IndexError: discard m[5]
     expect IndexError: discard w[5]
 
     expect IndexError: discard s[-1..0]

@@ -161,21 +161,21 @@ export strutils.toHex, winimbase
 
 # generate from winimx (avoid importing objbase everytime)
 const
-  CP_ACP* = 0
-  CP_UTF8* = 65001
+  CP_ACP = 0
+  CP_UTF8 = 65001
 
-proc lstrcmpW*(lpString1: LPCWSTR, lpString2: LPCWSTR): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc lstrlenA*(lpString: LPCSTR): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc lstrlenW*(lpString: LPCWSTR): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc MultiByteToWideChar*(CodePage: UINT, dwFlags: DWORD, lpMultiByteStr: LPCCH, cbMultiByte: int32, lpWideCharStr: LPWSTR, cchWideChar: int32): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc WideCharToMultiByte*(CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWCH, cchWideChar: int32, lpMultiByteStr: LPSTR, cbMultiByte: int32, lpDefaultChar: LPCCH, lpUsedDefaultChar: LPBOOL): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
-proc SysStringLen*(P1: BSTR): UINT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc lstrcmpW(lpString1: LPCWSTR, lpString2: LPCWSTR): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
+proc lstrlenA(lpString: LPCSTR): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
+proc lstrlenW(lpString: LPCWSTR): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
+proc MultiByteToWideChar(CodePage: UINT, dwFlags: DWORD, lpMultiByteStr: LPCCH, cbMultiByte: int32, lpWideCharStr: LPWSTR, cchWideChar: int32): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
+proc WideCharToMultiByte(CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWCH, cchWideChar: int32, lpMultiByteStr: LPSTR, cbMultiByte: int32, lpDefaultChar: LPCCH, lpUsedDefaultChar: LPBOOL): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
+proc SysStringLen(P1: BSTR): UINT {.winapi, stdcall, dynlib: "oleaut32", importc.}
 
 # copy from widestrs.nim, these functions used both compile-time and run-time
 # use WCHAR instead of Utf16Char
 
 const
-  UNI_REPLACEMENT_CHAR = WCHAR(0xFFFD'i16)
+  UNI_REPLACEMENT_CHAR = WCHAR(0xFFFD'u16)
   UNI_MAX_BMP = 0x0000FFFF
   UNI_MAX_UTF16 = 0x0010FFFF
 
@@ -253,7 +253,6 @@ proc free(x: pointer) {.inline.} =
 proc toHex*(s: cstring): string {.inline.} =
   ## Converts a cstring to its hexadecimal representation.
   ## No prefix like ``0x`` is generated.
-
   result = toHex($s)
 
 type
@@ -289,7 +288,6 @@ proc `length=`(x: wstring|pwstring, L: Natural) {.inline.} =
 proc `&`*(s: string): ptr char {.inline.} =
   ## Get address of the first char of a string.
   ## For string, it has the same meaning as cstring(string), but it checks the nil well.
-
   if s.len == 0:
     result = cast[ptr char](cstring "")
   else:
@@ -298,13 +296,11 @@ proc `&`*(s: string): ptr char {.inline.} =
 proc `&`*(s: cstring): ptr char {.inline.} =
   ## Get address of the first char of a string.
   ## For string, it has the same meaning as cstring(string), but it checks the nil well.
-
   result = cast[ptr char](s)
 
 proc `&`*(s: wstring): ptr WCHAR {.inline.} =
   ## Get address of the first char of a wstring.
   ## For string, it has the same meaning as cstring(string), but it checks the nil well.
-
   var dummy: wstring
   assert(cast[uint](dummy.data.addr) == 4)
 
@@ -313,7 +309,6 @@ proc `&`*(s: wstring): ptr WCHAR {.inline.} =
 proc `&`*(s: mstring): ptr char {.inline.} =
   ## Get address of the first char of a string.
   ## For string, it has the same meaning as cstring(string), but it checks the nil well.
-
   result = &cast[string](s)
 
 proc stringBuffer(L: Natural, alloc: bool): pointer =
@@ -525,7 +520,6 @@ proc add*(x: var wstring, y: wstring) {.inline.} =
 proc toHex*(s: wstring): string {.inline.} =
   ## Converts a wstring to its hexadecimal representation.
   ## No prefix like ``0x`` is generated.
-
   result = toHex(&s, s.len * 2)
 
 iterator items*(a: wstring): WCHAR =
@@ -600,7 +594,6 @@ proc len*(s: mstring): int {.inline.} =
 proc toHex*(s: mstring): string {.inline.} =
   ## Converts a mstring to its hexadecimal representation.
   ## No prefix like ``0x`` is generated.
-
   result = toHex(&s, s.len)
 
 iterator items*(s: mstring): mstring =
@@ -704,66 +697,66 @@ proc `[]=`*[T, U](s: var mstring, x: HSlice[T, U], b: mstring) =
   else:
     `[]=`(cast[var string](s.unsafeaddr), x, cast[string](b))
 
-
-proc newWString*(s: cstring|string|int): wstring =
+proc newWString*(s: cstring|string): wstring =
   ## Return a new wstring.
+  result = cast[wstring](`UTF8->wstring`(&s, s.len, alloc=false))
 
-  when s is cstring|string:
-    result = cast[wstring](`UTF8->wstring`(&s, s.len, alloc=false))
-  elif s is int:
-    result = cast[wstring](wstringBuffer(s, alloc=false))
+proc newWString*(L: Natural): wstring =
+  ## Return a new wstring buffer.
+  result = cast[wstring](wstringBuffer(L, alloc=false))
 
-
-proc newMString*(s: string|cstring|int): mstring =
+proc newMString*(s: string|cstring): mstring =
   ## Return a new mstring.
+  result = cast[mstring](`UTF8->mstring`(&s, s.len, alloc=false))
 
-  when s is cstring|string:
-    result = cast[mstring](`UTF8->mstring`(&s, s.len, alloc=false))
-  elif s is int:
-    result = cast[mstring](mstringBuffer(s, alloc=false))
+proc newMString*(L: Natural): mstring =
+  ## Return a new mstring buffer.
+  result = cast[mstring](mstringBuffer(L, alloc=false))
 
-
-proc allocString*(s: string|cstring|wstring|mstring|int): pstring =
+proc allocString*(s: string|cstring|wstring|mstring): pstring =
   ## Create a string buffer, need to be dealloc.
   ## Exists only for optimization purposes.
-
   when s is cstring|string:
     result = cast[pstring](`UTF8->string`(&s, s.len, alloc=true))
   elif s is wstring:
     result = cast[pstring](`UNICODE->string`(&s, s.len, alloc=true))
   elif s is mstring:
     result = cast[pstring](`ANSI->string`(&s, s.len, alloc=true))
-  elif s is int:
-    result = cast[pstring](stringBuffer(s, alloc=true))
 
+proc allocString*(L: Natural): pstring =
+  ## Create a string buffer, need to be dealloc.
+  ## Exists only for optimization purposes.
+  result = cast[pstring](stringBuffer(L, alloc=true))
 
-proc allocWString*(s: cstring|string|wstring|mstring|int): pwstring =
+proc allocWString*(s: cstring|string|wstring|mstring): pwstring =
   ## Create a wstring buffer, need to be dealloc.
   ## Exists only for optimization purposes.
-
   when s is cstring|string:
     result = cast[pwstring](`UTF8->wstring`(&s, s.len, alloc=true))
   elif s is wstring:
     result = cast[pwstring](`UNICODE->wstring`(&s, s.len, alloc=true))
   elif s is mstring:
     result = cast[pwstring](`ANSI->wstring`(&s, s.len, alloc=true))
-  elif s is int:
-    result = cast[pwstring](wstringBuffer(s, alloc=true))
 
+proc allocWString*(L: Natural): pwstring =
+  ## Create a wstring buffer, need to be dealloc.
+  ## Exists only for optimization purposes.
+  result = cast[pwstring](wstringBuffer(L, alloc=true))
 
-proc allocMString*(s: string|cstring|wstring|mstring|int): pmstring =
+proc allocMString*(s: string|cstring|wstring|mstring): pmstring =
   ## Create a mstring buffer, need to be dealloc.
   ## Exists only for optimization purposes.
-
   when s is cstring|string:
     result = cast[pmstring](`UTF8->mstring`(&s, s.len, alloc=true))
   elif s is wstring:
     result = cast[pmstring](`UNICODE->mstring`(&s, s.len, alloc=true))
   elif s is mstring:
     result = cast[pmstring](`ANSI->mstring`(&s, s.len, alloc=true))
-  elif s is int:
-    result = cast[pmstring](mstringBuffer(s, alloc=true))
 
+proc allocMString*(L: Natural): pmstring =
+  ## Create a mstring buffer, need to be dealloc.
+  ## Exists only for optimization purposes.
+  result = cast[pmstring](mstringBuffer(L, alloc=true))
 
 proc `&`[I, T](a: array[I, T]|var array[I, T]): ptr array[I, T] {.inline.} =
   result = a.unsafeaddr
@@ -772,7 +765,6 @@ proc `&`[I, T](a: array[I, T]|var array[I, T]): ptr array[I, T] {.inline.} =
 proc `$`*(s: wstring|mstring|LPWSTR|BSTR): string {.inline.} =
   ## Convert any stringable type to string.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is utf8 encoding.
-
   when s is wstring:
     cast[string](`UNICODE->string`(&s, s.len, alloc=false))
   elif s is mstring:
@@ -785,7 +777,6 @@ proc `$`*(s: wstring|mstring|LPWSTR|BSTR): string {.inline.} =
 proc `$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): string {.inline.} =
   ## Convert any stringable type to string.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is utf8 encoding.
-
   when a is array[I, char]:
     cast[string](`UTF8->string`(&a, a.len, alloc=false))
   elif a is array[I, WCHAR]:
@@ -798,7 +789,6 @@ proc `$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, W
 proc `+$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): wstring {.inline.} =
   ## Convert any stringable type to wstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is utf8 encoding.
-
   when s is string:
     cast[wstring](`UTF8->wstring`(&s, s.len, alloc=false))
   elif s is cstring|ptr char:
@@ -818,7 +808,6 @@ proc `+$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): w
 proc `+$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): wstring {.inline.} =
   ## Convert any stringable type to wstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is utf8 encoding.
-
   when a is array[I, char]:
     cast[wstring](`UTF8->wstring`(&a, a.len, alloc=false))
   elif a is array[I, WCHAR]:
@@ -831,7 +820,6 @@ proc `+$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, 
 proc `-$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): mstring {.inline.} =
   ## Convert any stringable type to mstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is utf8 encoding.
-
   when s is string:
     cast[mstring](`UTF8->mstring`(&s, s.len, alloc=false))
   elif s is cstring|ptr char:
@@ -851,11 +839,9 @@ proc `-$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): m
     var c = s
     cast[mstring](`UNICODE->mstring`(c.addr, 1, alloc=false))
 
-
 proc `-$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): mstring {.inline.} =
   ## Convert any stringable type to mstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is utf8 encoding.
-
   when a is array[I, char]:
     cast[mstring](`UTF8->mstring`(&a, a.len, alloc=false))
   elif a is array[I, WCHAR]:
@@ -865,11 +851,9 @@ proc `-$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, 
   elif a is ptr array[I, WCHAR]:
     cast[mstring](`UNICODE->mstring`(cast[ptr WCHAR](a), a[].len, alloc=false))
 
-
 proc `$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): string {.inline.} =
   ## Convert any stringable type to string.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is ansi encoding.
-
   when s is string:
     cast[string](`ANSI->string`(&s, s.len, alloc=false))
   elif s is cstring|ptr char:
@@ -880,11 +864,9 @@ proc `$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): s
   else:
     $s
 
-
 proc `$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): string {.inline.} =
   ## Convert any stringable type to string.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is ansi encoding.
-
   when a is array[I, char]:
     cast[string](`ANSI->string`(&a, a.len, alloc=false))
   elif a is ptr array[I, char]:
@@ -892,11 +874,9 @@ proc `$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, 
   else:
     $a
 
-
 proc `+$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): wstring {.inline.} =
   ## Convert any stringable type to wstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is ansi encoding.
-
   when s is string:
     cast[wstring](`ANSI->wstring`(&s, s.len, alloc=false))
   elif s is cstring|ptr char:
@@ -904,11 +884,9 @@ proc `+$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): 
   else:
     +$s
 
-
 proc `+$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): wstring {.inline.} =
   ## Convert any stringable type to wstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is ansi encoding.
-
   when a is array[I, char]:
     cast[wstring](`ANSI->wstring`(&a, a.len, alloc=false))
   elif a is ptr array[I, char]:
@@ -916,11 +894,9 @@ proc `+$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I,
   else:
     +$a
 
-
 proc `-$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): mstring {.inline.} =
   ## Convert any stringable type to mstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is ansi encoding.
-
   when s is string:
     cast[mstring](`ANSI->mstring`(&s, s.len, alloc=false))
   elif s is cstring|ptr char:
@@ -928,11 +904,9 @@ proc `-$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): 
   else:
     -$s
 
-
 proc `-$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, WCHAR]): mstring {.inline.} =
   ## Convert any stringable type to mstring.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is ansi encoding.
-
   when a is array[I, char]:
     cast[mstring](`ANSI->mstring`(&a, a.len, alloc=false))
   elif a is ptr array[I, char]:
@@ -942,7 +916,6 @@ proc `-$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I,
 
 proc nullTerminate*(s: var string) {.inline.} =
   ## Assume a string is null terminated and set the correct length
-
   let L = lstrlenA(cast[LPCSTR](&s))
   if L < s.len:
     s.setLen(L)
@@ -956,14 +929,12 @@ proc nullTerminate*(s: var mstring) {.inline.} =
 
 proc nullTerminate*(s: var wstring) {.inline.} =
   ## Assume a string is null terminated and set the correct length
-
   let L = lstrlenW(cast[LPWSTR](&s))
   if L < s.len:
     s.setLen(L)
 
 proc nullTerminated*[T: string|mstring|wstring](s: T): T {.inline.} =
   ## Assume a string is null terminated and return the length-corrected string
-
   when s is wstring:
     result = +$(&s)
   elif s is mstring:
@@ -1024,54 +995,43 @@ proc fillStr[I, T: char|byte|WCHAR](s: var mstring|var string|var wstring, a: pt
 
 template `<<`*[I, T: char|byte](a: ptr array[I, T]|var array[I, T], s: mstring|string) =
   ## Fill buffer by string.
-
   fillArray(a, s, inclNull=false)
 
 template `<<<`*[I, T: char|byte](a: ptr array[I, T]|var array[I, T], s: mstring|string) =
   ## Fill buffer by string, include a null
-
   fillArray(a, s, inclNull=true)
 
 template `<<`*[I, T: WCHAR](a: ptr array[I, T]|var array[I, T], s: wstring) =
   ## Fill buffer by string.
-
   fillArray(a, s, inclNull=false)
 
 template `<<<`*[I, T: WCHAR](a: ptr array[I, T]|var array[I, T], s: wstring) =
   ## Fill buffer by string, include a null
-
   fillArray(a, s, inclNull=true)
 
 template `<<`*(p: ptr char|ptr byte|cstring, s: mstring|string) =
   ## Fill buffer by string.
-
   fillPtr(cast[ptr char](p), s, inclNull=false)
 
 template `<<<`*(p: ptr char|byte|cstring, s: mstring|string) =
   ## Fill buffer by string, include a null
-
   fillPtr(cast[ptr char](p), s, inclNull=true)
 
 template `<<`*(p: ptr WCHAR, s: wstring) =
   ## Fill buffer by string.
-
   fillPtr(p, s, inclNull=false)
 
 template `<<<`*(p: ptr WCHAR, s: wstring) =
   ## Fill buffer by string, include a null
-
   fillPtr(p, s, inclNull=true)
 
 template `<<`*[I, T: char|byte](s: var mstring|var string, a: ptr array[I, T]|array[I, T]) =
   ## Fill string by buffer.
-
   fillStr(s, a)
 
 template `<<`*[I, T: WCHAR](s: var wstring, a: ptr array[I, T]|var array[I, T]) =
   ## Fill string by buffer.
-
   fillStr(s, a)
-
 
 template `>>`*(a: typed, b: typed) =
   b << a
@@ -1140,7 +1100,6 @@ template T*(x: string): untyped =
 template T*(x: Natural): untyped =
   ## Generate wstring or mstring buffer depend on conditional symbol: useWinAnsi.
   ## Use `&` to get the buffer address and then pass to Windows API.
-
   when winimAnsi:
     newMString(x)
   else:

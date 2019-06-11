@@ -1,9 +1,14 @@
-Version 3.1
------------
+Version 3.1.1
+-------------
+* Update for Nim Compiler 0.20.0.
+* winstr: Remove unnecessary asterisk.
+
+Version 3.1.0
+-------------
 * Add wincred module.
 
-Version 3.0
------------
+Version 3.0.0
+-------------
 * Add winimx tool to generate the minified winim module.
 * Add -d:noRes to disable the visual styles.
 * Don't maintain compatibility with Nim Compiler 0.18 anymore.
@@ -15,8 +20,8 @@ Version 2.6.1
 * Remove -d:mshtml (not so useful)
 * Small change for new winimx tool.
 
-Version 2.6
------------
+Version 2.6.0
+-------------
 * Update for Nim Compiler 0.19.9.
 * Add wincodec module.
 
@@ -28,8 +33,8 @@ Version 2.5.1
 -------------
 * Update for Nim Compiler 0.19.
 
-Version 2.5
------------
+Version 2.5.0
+-------------
 * winstr: Fix nil issue for string in devel compiler. Now it won't
   allow nil for string anymore. This change maybe break the code
   if it has different behavior between nil and empty string.
@@ -57,15 +62,15 @@ Version 2.4.1
 -------------
 * com: A critical bug about dot operator fixed.
 
-Version 2.4
------------
+Version 2.4.0
+-------------
 * Using '/' instead of '.' to import paths.
 * com: Add `[]` and `[]=` to access com object.
 * com: Add ability to access COM object constants.
 * winstr: Add TString and TChar.
 
-Version 2.3
------------
+Version 2.3.0
+-------------
 * Add var version access proc for nested struct/union.
   It will be used in this situation:
     ```nimrod
@@ -74,19 +79,19 @@ Version 2.3
     ```
 * Fix some literal constant with 'U' suffix.
 
-Version 2.2
------------
+Version 2.2.0
+-------------
 * Fix converter ambiguous problems.
 * Add -d:useWinXP for Windows XP compatibility.
 
-Version 2.1
------------
+Version 2.1.0
+-------------
 * Ready for Nim compiler version 0.18.1.
 * Remove some APIs that Windows 7 not supports to avoid
   "could not import" error message.
 
-Version 2.0
------------
+Version 2.0.0
+-------------
 * Ready for Nim compiler version 0.18.0.
 * All windows API and constant definitions are translated from MinGW's
   headers files now. Not depends on "D WinAPI programming" anymore.
@@ -108,18 +113,18 @@ Version 1.2.1
 * winapi: add double quotes to resource file
 * winapi: fix bug about GetWindowLongPtr and NMHDR etc.
 
-Version 1.2
------------
+Version 1.2.0
+-------------
 * winapi: redefine const to int literals if possible
 * winapi: convert enum to const definition
 * winapi: add more definition in shobjidl.h, propsys.h, shtypes.h,
   and structuredquerycondition.h
 * com: better error message on COMError exception
 
-Version 1.1
------------
+Version 1.1.0
+-------------
 * winapi: add -d:winstyle to enable windows visual styles
 
-Version 1.0
------------
+Version 1.0.0
+-------------
 * Initial release
