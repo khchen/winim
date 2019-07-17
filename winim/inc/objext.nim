@@ -1757,6 +1757,7 @@ proc SetViewInfo*(self: ptr IOleUIObjInfoA, dwObject: DWORD, hMetaPict: HGLOBAL,
 proc GetLastUpdate*(self: ptr IOleUILinkInfoW, dwLink: DWORD, lpLastUpdate: ptr FILETIME): HRESULT {.winapi, inline.} = self.lpVtbl.GetLastUpdate(self, dwLink, lpLastUpdate)
 proc GetLastUpdate*(self: ptr IOleUILinkInfoA, dwLink: DWORD, lpLastUpdate: ptr FILETIME): HRESULT {.winapi, inline.} = self.lpVtbl.GetLastUpdate(self, dwLink, lpLastUpdate)
 converter winimConverterIAccessibleToIDispatch*(x: ptr IAccessible): ptr IDispatch = cast[ptr IDispatch](x)
+converter winimConverterIAccessibleToIUnknown*(x: ptr IAccessible): ptr IUnknown = cast[ptr IUnknown](x)
 converter winimConverterIAccessibleHandlerToIUnknown*(x: ptr IAccessibleHandler): ptr IUnknown = cast[ptr IUnknown](x)
 converter winimConverterIAccIdentityToIUnknown*(x: ptr IAccIdentity): ptr IUnknown = cast[ptr IUnknown](x)
 converter winimConverterIAccPropServerToIUnknown*(x: ptr IAccPropServer): ptr IUnknown = cast[ptr IUnknown](x)

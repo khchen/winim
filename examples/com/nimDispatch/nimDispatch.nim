@@ -47,7 +47,7 @@ proc init(nimDisp: ptr INimDispatch) =
       return S_OK
     else:
       ppvObject[] = nil
-      return E_NOINTERFACE;
+      return E_NOINTERFACE
 
   nimDisp.vtbl.GetTypeInfoCount = proc(self: ptr IDispatch, pctinfo: ptr UINT): HRESULT {.stdcall.} =
     pctinfo[] = 0

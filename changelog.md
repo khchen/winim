@@ -1,3 +1,9 @@
+Version 3.2.0
+-------------
+* objbase: add "exdispid.h".
+* mshtml: add "mshtmhst.h".
+* Add some missing converter for interface.
+
 Version 3.1.1
 -------------
 * Update for Nim Compiler 0.20.0.

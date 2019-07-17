@@ -639,6 +639,8 @@ converter winimConverterIWICFormatConverterToIUnknown*(x: ptr IWICFormatConverte
 converter winimConverterIWICFormatConverterInfoToIWICComponentInfo*(x: ptr IWICFormatConverterInfo): ptr IWICComponentInfo = cast[ptr IWICComponentInfo](x)
 converter winimConverterIWICFormatConverterInfoToIUnknown*(x: ptr IWICFormatConverterInfo): ptr IUnknown = cast[ptr IUnknown](x)
 converter winimConverterIWICStreamToIStream*(x: ptr IWICStream): ptr IStream = cast[ptr IStream](x)
+converter winimConverterIWICStreamToISequentialStream*(x: ptr IWICStream): ptr ISequentialStream = cast[ptr ISequentialStream](x)
+converter winimConverterIWICStreamToIUnknown*(x: ptr IWICStream): ptr IUnknown = cast[ptr IUnknown](x)
 converter winimConverterIWICBitmapScalerToIWICBitmapSource*(x: ptr IWICBitmapScaler): ptr IWICBitmapSource = cast[ptr IWICBitmapSource](x)
 converter winimConverterIWICBitmapScalerToIUnknown*(x: ptr IWICBitmapScaler): ptr IUnknown = cast[ptr IUnknown](x)
 converter winimConverterIWICBitmapClipperToIWICBitmapSource*(x: ptr IWICBitmapClipper): ptr IWICBitmapSource = cast[ptr IWICBitmapSource](x)

@@ -1900,6 +1900,8 @@ converter winimConverterIAVIStreamToIUnknown*(x: ptr IAVIStream): ptr IUnknown =
 converter winimConverterIAVIStreamingToIUnknown*(x: ptr IAVIStreaming): ptr IUnknown = cast[ptr IUnknown](x)
 converter winimConverterIAVIEditStreamToIUnknown*(x: ptr IAVIEditStream): ptr IUnknown = cast[ptr IUnknown](x)
 converter winimConverterIAVIPersistFileToIPersistFile*(x: ptr IAVIPersistFile): ptr IPersistFile = cast[ptr IPersistFile](x)
+converter winimConverterIAVIPersistFileToIPersist*(x: ptr IAVIPersistFile): ptr IPersist = cast[ptr IPersist](x)
+converter winimConverterIAVIPersistFileToIUnknown*(x: ptr IAVIPersistFile): ptr IUnknown = cast[ptr IUnknown](x)
 converter winimConverterIAVIFileToIUnknown*(x: ptr IAVIFile): ptr IUnknown = cast[ptr IUnknown](x)
 converter winimConverterIGetFrameToIUnknown*(x: ptr IGetFrame): ptr IUnknown = cast[ptr IUnknown](x)
 when winimUnicode:
