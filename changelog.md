@@ -1,3 +1,9 @@
+Version 3.2.1
+-------------
+* winstr: remove TChar (already defined in windef).
+* winimx: fix support for visual c compiler and i386 (x86) mode.
+* Remove miniz dependency.
+
 Version 3.2.0
 -------------
 * objbase: add "exdispid.h".

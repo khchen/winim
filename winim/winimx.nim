@@ -41,10 +41,23 @@ when defined(Nimdoc):
 
 when isMainModule:
   import
-    marshal, strformat, strutils, parseutils, sets, tables, sequtils, os,
-    parseopt, miniz
+    marshal, strutils, parseutils, sets, tables, sequtils, os,
+    parseopt, lean, lib/miniz
 
-  const winimDb = staticRead("lib/winim.db")
+  import strformat except `&`
+
+  # use RCDATA resource instead of staticRead for vcc compatibility
+
+  when defined(cpu64):
+    {.link: "lib/winimx64.res".}
+  else:
+    {.link: "lib/winimx32.res".}
+
+  let
+    resource = FindResource(0, "winimx.db", RT_RCDATA)
+    handle = LoadResource(0, resource)
+    db = cast[cstring](LockResource(handle))
+    dbLen = SizeofResource(0, resource)
 
   type
     CodeClass = enum ccNone, ccType, ccConst
@@ -357,7 +370,7 @@ when isMainModule:
 
     result.table = initTable[string, seq[int]]()
     result.skipModules = initTable[string, bool]()
-    result.nodes = to[seq[CodeNode]](miniz.uncompress(winimDb))
+    result.nodes = to[seq[CodeNode]](miniz.uncompress(db, dbLen))
     init(result.table, result.nodes)
 
   proc incl(minifier: var Minifier, name: string) =

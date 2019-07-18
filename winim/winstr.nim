@@ -1108,11 +1108,9 @@ template T*(x: Natural): untyped =
 when winimAnsi:
   type
     TString* = mstring
-    TChar* = char
 else:
   type
     TString* = wstring
-    TChar* = WCHAR
 
 when isMainModule:
 
