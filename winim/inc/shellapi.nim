@@ -896,8 +896,8 @@ type
     fNoScroll*: WINBOOL
     cpPos*: COMPPOS
     wszFriendlyName*: array[MAX_PATH, WCHAR]
-    wszSource*: array[2048, WCHAR]
-    wszSubscribedURL*: array[2048, WCHAR]
+    wszSource*: array[2084, WCHAR]
+    wszSubscribedURL*: array[2084, WCHAR]
   LPIE4COMPONENT* = ptr IE4COMPONENT
   LPCIE4COMPONENT* = ptr IE4COMPONENT
   COMPONENT* {.pure.} = object
@@ -909,8 +909,8 @@ type
     fNoScroll*: WINBOOL
     cpPos*: COMPPOS
     wszFriendlyName*: array[MAX_PATH, WCHAR]
-    wszSource*: array[2048, WCHAR]
-    wszSubscribedURL*: array[2048, WCHAR]
+    wszSource*: array[2084, WCHAR]
+    wszSubscribedURL*: array[2084, WCHAR]
     dwCurItemState*: DWORD
     csiOriginal*: COMPSTATEINFO
     csiRestored*: COMPSTATEINFO

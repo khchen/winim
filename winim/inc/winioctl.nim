@@ -603,11 +603,13 @@ type
   STARTING_VCN_INPUT_BUFFER* {.pure.} = object
     StartingVcn*: LARGE_INTEGER
   PSTARTING_VCN_INPUT_BUFFER* = ptr STARTING_VCN_INPUT_BUFFER
+  RETRIEVAL_POINTERS_BUFFER_Extents* {.pure.} = object
+    NextVcn*: LARGE_INTEGER
+    Lcn*: LARGE_INTEGER
   RETRIEVAL_POINTERS_BUFFER* {.pure.} = object
     ExtentCount*: DWORD
     StartingVcn*: LARGE_INTEGER
-    NextVcn*: LARGE_INTEGER
-    Lcn*: LARGE_INTEGER
+    Extents*: array[1, RETRIEVAL_POINTERS_BUFFER_Extents]
   PRETRIEVAL_POINTERS_BUFFER* = ptr RETRIEVAL_POINTERS_BUFFER
   NTFS_FILE_RECORD_INPUT_BUFFER* {.pure.} = object
     FileReferenceNumber*: LARGE_INTEGER
@@ -1118,9 +1120,11 @@ type
     AccessMode*: ACCESS_MASK
     ShareMode*: WORD
   PREQUEST_OPLOCK_OUTPUT_BUFFER* = ptr REQUEST_OPLOCK_OUTPUT_BUFFER
+  BOOT_AREA_INFO_BootSectors* {.pure.} = object
+    Offset*: LARGE_INTEGER
   BOOT_AREA_INFO* {.pure.} = object
     BootSectorCount*: ULONG
-    Offset*: LARGE_INTEGER
+    BootSectors*: array[2, BOOT_AREA_INFO_BootSectors]
   PBOOT_AREA_INFO* = ptr BOOT_AREA_INFO
   RETRIEVAL_POINTER_BASE* {.pure.} = object
     FileAreaOffset*: LARGE_INTEGER

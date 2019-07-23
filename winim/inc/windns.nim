@@ -276,8 +276,65 @@ type
     S*: DNS_RECORD_FLAGS
   DNS_RECORDW_Data* {.pure, union.} = object
     A*: DNS_A_DATA
+    SOA*: DNS_SOA_DATAW
+    soa*: DNS_SOA_DATAW
+    PTR*: DNS_PTR_DATAW
+    `ptr`*: DNS_PTR_DATAW
+    NS*: DNS_PTR_DATAW
+    ns*: DNS_PTR_DATAW
+    CNAME*: DNS_PTR_DATAW
+    cname*: DNS_PTR_DATAW
+    MB*: DNS_PTR_DATAW
+    mb*: DNS_PTR_DATAW
+    MD*: DNS_PTR_DATAW
+    md*: DNS_PTR_DATAW
+    MF*: DNS_PTR_DATAW
+    mf*: DNS_PTR_DATAW
+    MG*: DNS_PTR_DATAW
+    mg*: DNS_PTR_DATAW
+    MR*: DNS_PTR_DATAW
+    mr*: DNS_PTR_DATAW
+    MINFO*: DNS_MINFO_DATAW
+    minfo*: DNS_MINFO_DATAW
+    RP*: DNS_MINFO_DATAW
+    rp*: DNS_MINFO_DATAW
+    MX*: DNS_MX_DATAW
+    mx*: DNS_MX_DATAW
+    AFSDB*: DNS_MX_DATAW
+    afsdb*: DNS_MX_DATAW
+    RT*: DNS_MX_DATAW
+    rt*: DNS_MX_DATAW
+    HINFO*: DNS_TXT_DATAW
+    hinfo*: DNS_TXT_DATAW
+    ISDN*: DNS_TXT_DATAW
+    isdn*: DNS_TXT_DATAW
+    TXT*: DNS_TXT_DATAW
+    txt*: DNS_TXT_DATAW
+    X25*: DNS_TXT_DATAW
     Null*: DNS_NULL_DATA
+    WKS*: DNS_WKS_DATA
+    wks*: DNS_WKS_DATA
     AAAA*: DNS_AAAA_DATA
+    KEY*: DNS_KEY_DATA
+    key*: DNS_KEY_DATA
+    SIG*: DNS_SIG_DATAW
+    sig*: DNS_SIG_DATAW
+    ATMA*: DNS_ATMA_DATA
+    atma*: DNS_ATMA_DATA
+    NXT*: DNS_NXT_DATAW
+    nxt*: DNS_NXT_DATAW
+    SRV*: DNS_SRV_DATAW
+    srv*: DNS_SRV_DATAW
+    TKEY*: DNS_TKEY_DATAW
+    tkey*: DNS_TKEY_DATAW
+    TSIG*: DNS_TSIG_DATAW
+    tsig*: DNS_TSIG_DATAW
+    WINS*: DNS_WINS_DATA
+    wins*: DNS_WINS_DATA
+    WINSR*: DNS_WINSR_DATAW
+    winsr*: DNS_WINSR_DATAW
+    NBSTAT*: DNS_WINSR_DATAW
+    nbstat*: DNS_WINSR_DATAW
   DNS_RECORDW* {.pure.} = object
     pNext*: ptr DnsRecordW
     pName*: PWSTR
@@ -293,8 +350,65 @@ type
     S*: DNS_RECORD_FLAGS
   DNS_RECORDA_Data* {.pure, union.} = object
     A*: DNS_A_DATA
+    SOA*: DNS_SOA_DATAA
+    soa*: DNS_SOA_DATAA
+    PTR*: DNS_PTR_DATAA
+    `ptr`*: DNS_PTR_DATAA
+    NS*: DNS_PTR_DATAA
+    ns*: DNS_PTR_DATAA
+    CNAME*: DNS_PTR_DATAA
+    cname*: DNS_PTR_DATAA
+    MB*: DNS_PTR_DATAA
+    mb*: DNS_PTR_DATAA
+    MD*: DNS_PTR_DATAA
+    md*: DNS_PTR_DATAA
+    MF*: DNS_PTR_DATAA
+    mf*: DNS_PTR_DATAA
+    MG*: DNS_PTR_DATAA
+    mg*: DNS_PTR_DATAA
+    MR*: DNS_PTR_DATAA
+    mr*: DNS_PTR_DATAA
+    MINFO*: DNS_MINFO_DATAA
+    minfo*: DNS_MINFO_DATAA
+    RP*: DNS_MINFO_DATAA
+    rp*: DNS_MINFO_DATAA
+    MX*: DNS_MX_DATAA
+    mx*: DNS_MX_DATAA
+    AFSDB*: DNS_MX_DATAA
+    afsdb*: DNS_MX_DATAA
+    RT*: DNS_MX_DATAA
+    rt*: DNS_MX_DATAA
+    HINFO*: DNS_TXT_DATAA
+    hinfo*: DNS_TXT_DATAA
+    ISDN*: DNS_TXT_DATAA
+    isdn*: DNS_TXT_DATAA
+    TXT*: DNS_TXT_DATAA
+    txt*: DNS_TXT_DATAA
+    X25*: DNS_TXT_DATAA
     Null*: DNS_NULL_DATA
+    WKS*: DNS_WKS_DATA
+    wks*: DNS_WKS_DATA
     AAAA*: DNS_AAAA_DATA
+    KEY*: DNS_KEY_DATA
+    key*: DNS_KEY_DATA
+    SIG*: DNS_SIG_DATAA
+    sig*: DNS_SIG_DATAA
+    ATMA*: DNS_ATMA_DATA
+    atma*: DNS_ATMA_DATA
+    NXT*: DNS_NXT_DATAA
+    nxt*: DNS_NXT_DATAA
+    SRV*: DNS_SRV_DATAA
+    srv*: DNS_SRV_DATAA
+    TKEY*: DNS_TKEY_DATAA
+    tkey*: DNS_TKEY_DATAA
+    TSIG*: DNS_TSIG_DATAA
+    tsig*: DNS_TSIG_DATAA
+    WINS*: DNS_WINS_DATA
+    wins*: DNS_WINS_DATA
+    WINSR*: DNS_WINSR_DATAA
+    winsr*: DNS_WINSR_DATAA
+    NBSTAT*: DNS_WINSR_DATAA
+    nbstat*: DNS_WINSR_DATAA
   DNS_RECORDA* {.pure.} = object
     pNext*: ptr DnsRecordA
     pName*: PSTR

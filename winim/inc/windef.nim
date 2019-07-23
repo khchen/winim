@@ -792,12 +792,14 @@ type
     LegacyState*: XSAVE_FORMAT
     Header*: XSAVE_AREA_HEADER
   PXSAVE_AREA* = ptr XSAVE_AREA
-  SCOPE_TABLE_AMD64* {.pure.} = object
-    Count*: DWORD
+  SCOPE_TABLE_AMD64_ScopeRecord* {.pure.} = object
     BeginAddress*: DWORD
     EndAddress*: DWORD
     HandlerAddress*: DWORD
     JumpTarget*: DWORD
+  SCOPE_TABLE_AMD64* {.pure.} = object
+    Count*: DWORD
+    ScopeRecord*: array[1, SCOPE_TABLE_AMD64_ScopeRecord]
   PSCOPE_TABLE_AMD64* = ptr SCOPE_TABLE_AMD64
   LDT_ENTRY_HighWord_Bytes* {.pure.} = object
     BaseMid*: BYTE

@@ -317,17 +317,41 @@ const
 type
   PFNCALLBACK* = proc (wType: UINT, wFmt: UINT, hConv: HCONV, hsz1: HSZ, hsz2: HSZ, hData: HDDEDATA, dwData1: ULONG_PTR, dwData2: ULONG_PTR): HDDEDATA {.stdcall.}
   DDEACK* {.pure.} = object
+    bAppReturnCode* {.bitsize:8.}: uint16
+    reserved* {.bitsize:6.}: uint16
+    fBusy* {.bitsize:1.}: uint16
+    fAck* {.bitsize:1.}: uint16
   DDEADVISE* {.pure.} = object
+    reserved* {.bitsize:14.}: uint16
+    fDeferUpd* {.bitsize:1.}: uint16
+    fAckReq* {.bitsize:1.}: uint16
     cfFormat*: int16
   DDEDATA* {.pure.} = object
+    unused* {.bitsize:12.}: uint16
+    fResponse* {.bitsize:1.}: uint16
+    fRelease* {.bitsize:1.}: uint16
+    reserved* {.bitsize:1.}: uint16
+    fAckReq* {.bitsize:1.}: uint16
     cfFormat*: int16
     Value*: array[1, BYTE]
   DDEPOKE* {.pure.} = object
+    unused* {.bitsize:13.}: uint16
+    fRelease* {.bitsize:1.}: uint16
+    fReserved* {.bitsize:2.}: uint16
     cfFormat*: int16
     Value*: array[1, BYTE]
   DDELN* {.pure.} = object
+    unused* {.bitsize:13.}: uint16
+    fRelease* {.bitsize:1.}: uint16
+    fDeferUpd* {.bitsize:1.}: uint16
+    fAckReq* {.bitsize:1.}: uint16
     cfFormat*: int16
   DDEUP* {.pure.} = object
+    unused* {.bitsize:12.}: uint16
+    fAck* {.bitsize:1.}: uint16
+    fRelease* {.bitsize:1.}: uint16
+    fReserved* {.bitsize:1.}: uint16
+    fAckReq* {.bitsize:1.}: uint16
     cfFormat*: int16
     rgb*: array[1, BYTE]
 proc DdeSetQualityOfService*(hwndClient: HWND, pqosNew: ptr SECURITY_QUALITY_OF_SERVICE, pqosPrev: PSECURITY_QUALITY_OF_SERVICE): WINBOOL {.winapi, stdcall, dynlib: "user32", importc.}

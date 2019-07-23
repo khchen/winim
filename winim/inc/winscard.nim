@@ -24,12 +24,19 @@ type
   LPSCARD_IO_REQUEST* = ptr SCARD_IO_REQUEST
   LPCSCARD_IO_REQUEST* = ptr SCARD_IO_REQUEST
   SCARD_T0_COMMAND* {.pure.} = object
+    bCla*: BYTE
+    bIns*: BYTE
+    bP1*: BYTE
+    bP2*: BYTE
+    bP3*: BYTE
   LPSCARD_T0_COMMAND* = ptr SCARD_T0_COMMAND
   SCARD_T0_REQUEST_UNION1* {.pure, union.} = object
     CmdBytes*: SCARD_T0_COMMAND
     rgbHeader*: array[5, BYTE]
   SCARD_T0_REQUEST* {.pure.} = object
     ioRequest*: SCARD_IO_REQUEST
+    bSw1*: BYTE
+    bSw2*: BYTE
     union1*: SCARD_T0_REQUEST_UNION1
   PSCARD_T0_REQUEST* = ptr SCARD_T0_REQUEST
   LPSCARD_T0_REQUEST* = ptr SCARD_T0_REQUEST
