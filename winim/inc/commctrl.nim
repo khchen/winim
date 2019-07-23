@@ -1036,7 +1036,7 @@ type
   LV_DISPINFO* = NMLVDISPINFO
   LPNMLVDISPINFOA* = ptr NMLVDISPINFOA
   LPNMLVDISPINFOW* = ptr NMLVDISPINFOW
-  NMLVKEYDOWN* {.pure.} = object
+  NMLVKEYDOWN* {.pure, packed.} = object
     hdr*: NMHDR
     wVKey*: WORD
     flags*: UINT
@@ -1210,7 +1210,7 @@ when winimAnsi:
     NMTVDISPINFOEX* = NMTVDISPINFOEXA
 type
   TV_DISPINFOEX* = NMTVDISPINFOEX
-  NMTVKEYDOWN* {.pure.} = object
+  NMTVKEYDOWN* {.pure, packed.} = object
     hdr*: NMHDR
     wVKey*: WORD
     flags*: UINT
@@ -1337,7 +1337,7 @@ type
     pt*: POINT
     flags*: UINT
   LPTCHITTESTINFO* = ptr TCHITTESTINFO
-  NMTCKEYDOWN* {.pure.} = object
+  NMTCKEYDOWN* {.pure, packed.} = object
     hdr*: NMHDR
     wVKey*: WORD
     flags*: UINT
@@ -1452,7 +1452,7 @@ type
     iField*: int32
     iValue*: int32
   LPNMIPADDRESS* = ptr NMIPADDRESS
-  NMPGSCROLL* {.pure.} = object
+  NMPGSCROLL* {.pure, packed.} = object
     hdr*: NMHDR
     fwKeys*: WORD
     rcParent*: RECT
@@ -3756,7 +3756,7 @@ type
     lParam*: LPARAM
     dwRetFlags*: DWORD
     iRetImageIndex*: int32
-  TASKDIALOG_BUTTON* {.pure.} = object
+  TASKDIALOG_BUTTON* {.pure, packed.} = object
     nButtonID*: int32
     pszButtonText*: PCWSTR
   TASKDIALOGCONFIG_UNION1* {.pure, union.} = object
@@ -3765,7 +3765,7 @@ type
   TASKDIALOGCONFIG_UNION2* {.pure, union.} = object
     hFooterIcon*: HICON
     pszFooterIcon*: PCWSTR
-  TASKDIALOGCONFIG* {.pure.} = object
+  TASKDIALOGCONFIG* {.pure, packed.} = object
     cbSize*: UINT
     hwndParent*: HWND
     hInstance*: HINSTANCE

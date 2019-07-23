@@ -24,10 +24,19 @@ type
     Section*: UINT
     Line*: UINT
   PINFCONTEXT* = ptr INFCONTEXT
-  SP_INF_INFORMATION* {.pure.} = object
-    InfStyle*: DWORD
-    InfCount*: DWORD
-    VersionData*: array[ANYSIZE_ARRAY, BYTE]
+when winimCpu64:
+  type
+    SP_INF_INFORMATION* {.pure.} = object
+      InfStyle*: DWORD
+      InfCount*: DWORD
+      VersionData*: array[ANYSIZE_ARRAY, BYTE]
+when winimCpu32:
+  type
+    SP_INF_INFORMATION* {.pure, packed.} = object
+      InfStyle*: DWORD
+      InfCount*: DWORD
+      VersionData*: array[ANYSIZE_ARRAY, BYTE]
+type
   PSP_INF_INFORMATION* = ptr SP_INF_INFORMATION
   SP_ALTPLATFORM_INFO_V2_UNION1* {.pure, union.} = object
     Reserved*: WORD
@@ -122,23 +131,49 @@ type
     SetId*: USHORT
     CabinetNumber*: USHORT
   PCABINET_INFO_W* = ptr CABINET_INFO_W
-  FILE_IN_CABINET_INFO_A* {.pure.} = object
-    NameInCabinet*: PCSTR
-    FileSize*: DWORD
-    Win32Error*: DWORD
-    DosDate*: WORD
-    DosTime*: WORD
-    DosAttribs*: WORD
-    FullTargetName*: array[MAX_PATH, CHAR]
+when winimCpu64:
+  type
+    FILE_IN_CABINET_INFO_A* {.pure.} = object
+      NameInCabinet*: PCSTR
+      FileSize*: DWORD
+      Win32Error*: DWORD
+      DosDate*: WORD
+      DosTime*: WORD
+      DosAttribs*: WORD
+      FullTargetName*: array[MAX_PATH, CHAR]
+when winimCpu32:
+  type
+    FILE_IN_CABINET_INFO_A* {.pure, packed.} = object
+      NameInCabinet*: PCSTR
+      FileSize*: DWORD
+      Win32Error*: DWORD
+      DosDate*: WORD
+      DosTime*: WORD
+      DosAttribs*: WORD
+      FullTargetName*: array[MAX_PATH, CHAR]
+type
   PFILE_IN_CABINET_INFO_A* = ptr FILE_IN_CABINET_INFO_A
-  FILE_IN_CABINET_INFO_W* {.pure.} = object
-    NameInCabinet*: PCWSTR
-    FileSize*: DWORD
-    Win32Error*: DWORD
-    DosDate*: WORD
-    DosTime*: WORD
-    DosAttribs*: WORD
-    FullTargetName*: array[MAX_PATH, WCHAR]
+when winimCpu64:
+  type
+    FILE_IN_CABINET_INFO_W* {.pure.} = object
+      NameInCabinet*: PCWSTR
+      FileSize*: DWORD
+      Win32Error*: DWORD
+      DosDate*: WORD
+      DosTime*: WORD
+      DosAttribs*: WORD
+      FullTargetName*: array[MAX_PATH, WCHAR]
+when winimCpu32:
+  type
+    FILE_IN_CABINET_INFO_W* {.pure, packed.} = object
+      NameInCabinet*: PCWSTR
+      FileSize*: DWORD
+      Win32Error*: DWORD
+      DosDate*: WORD
+      DosTime*: WORD
+      DosAttribs*: WORD
+      FullTargetName*: array[MAX_PATH, WCHAR]
+type
   PFILE_IN_CABINET_INFO_W* = ptr FILE_IN_CABINET_INFO_W
   SP_REGISTER_CONTROL_STATUSA* {.pure.} = object
     cbSize*: DWORD
@@ -194,13 +229,29 @@ type
   PSP_DEVICE_INTERFACE_DATA* = ptr SP_DEVICE_INTERFACE_DATA
   SP_INTERFACE_DEVICE_DATA* = SP_DEVICE_INTERFACE_DATA
   PSP_INTERFACE_DEVICE_DATA* = PSP_DEVICE_INTERFACE_DATA
-  SP_DEVICE_INTERFACE_DETAIL_DATA_A* {.pure.} = object
-    cbSize*: DWORD
-    DevicePath*: array[ANYSIZE_ARRAY, CHAR]
+when winimCpu64:
+  type
+    SP_DEVICE_INTERFACE_DETAIL_DATA_A* {.pure.} = object
+      cbSize*: DWORD
+      DevicePath*: array[ANYSIZE_ARRAY, CHAR]
+when winimCpu32:
+  type
+    SP_DEVICE_INTERFACE_DETAIL_DATA_A* {.pure, packed.} = object
+      cbSize*: DWORD
+      DevicePath*: array[ANYSIZE_ARRAY, CHAR]
+type
   PSP_DEVICE_INTERFACE_DETAIL_DATA_A* = ptr SP_DEVICE_INTERFACE_DETAIL_DATA_A
-  SP_DEVICE_INTERFACE_DETAIL_DATA_W* {.pure.} = object
-    cbSize*: DWORD
-    DevicePath*: array[ANYSIZE_ARRAY, WCHAR]
+when winimCpu64:
+  type
+    SP_DEVICE_INTERFACE_DETAIL_DATA_W* {.pure.} = object
+      cbSize*: DWORD
+      DevicePath*: array[ANYSIZE_ARRAY, WCHAR]
+when winimCpu32:
+  type
+    SP_DEVICE_INTERFACE_DETAIL_DATA_W* {.pure, packed.} = object
+      cbSize*: DWORD
+      DevicePath*: array[ANYSIZE_ARRAY, WCHAR]
+type
   PSP_DEVICE_INTERFACE_DETAIL_DATA_W* = ptr SP_DEVICE_INTERFACE_DETAIL_DATA_W
   SP_INTERFACE_DEVICE_DETAIL_DATA_W* = SP_DEVICE_INTERFACE_DETAIL_DATA_W
   PSP_INTERFACE_DEVICE_DETAIL_DATA_W* = PSP_DEVICE_INTERFACE_DETAIL_DATA_W
@@ -208,18 +259,37 @@ type
   PSP_INTERFACE_DEVICE_DETAIL_DATA_A* = PSP_DEVICE_INTERFACE_DETAIL_DATA_A
 const
   SP_MAX_MACHINENAME_LENGTH* = MAX_PATH+3
+when winimCpu64:
+  type
+    SP_DEVINFO_LIST_DETAIL_DATA_A* {.pure.} = object
+      cbSize*: DWORD
+      ClassGuid*: GUID
+      RemoteMachineHandle*: HANDLE
+      RemoteMachineName*: array[SP_MAX_MACHINENAME_LENGTH, CHAR]
+when winimCpu32:
+  type
+    SP_DEVINFO_LIST_DETAIL_DATA_A* {.pure, packed.} = object
+      cbSize*: DWORD
+      ClassGuid*: GUID
+      RemoteMachineHandle*: HANDLE
+      RemoteMachineName*: array[SP_MAX_MACHINENAME_LENGTH, CHAR]
 type
-  SP_DEVINFO_LIST_DETAIL_DATA_A* {.pure.} = object
-    cbSize*: DWORD
-    ClassGuid*: GUID
-    RemoteMachineHandle*: HANDLE
-    RemoteMachineName*: array[SP_MAX_MACHINENAME_LENGTH, CHAR]
   PSP_DEVINFO_LIST_DETAIL_DATA_A* = ptr SP_DEVINFO_LIST_DETAIL_DATA_A
-  SP_DEVINFO_LIST_DETAIL_DATA_W* {.pure.} = object
-    cbSize*: DWORD
-    ClassGuid*: GUID
-    RemoteMachineHandle*: HANDLE
-    RemoteMachineName*: array[SP_MAX_MACHINENAME_LENGTH, WCHAR]
+when winimCpu64:
+  type
+    SP_DEVINFO_LIST_DETAIL_DATA_W* {.pure.} = object
+      cbSize*: DWORD
+      ClassGuid*: GUID
+      RemoteMachineHandle*: HANDLE
+      RemoteMachineName*: array[SP_MAX_MACHINENAME_LENGTH, WCHAR]
+when winimCpu32:
+  type
+    SP_DEVINFO_LIST_DETAIL_DATA_W* {.pure, packed.} = object
+      cbSize*: DWORD
+      ClassGuid*: GUID
+      RemoteMachineHandle*: HANDLE
+      RemoteMachineName*: array[SP_MAX_MACHINENAME_LENGTH, WCHAR]
+type
   PSP_DEVINFO_LIST_DETAIL_DATA_W* = ptr SP_DEVINFO_LIST_DETAIL_DATA_W
   DI_FUNCTION* = UINT
   PSP_FILE_CALLBACK_W* = proc (Context: PVOID, Notification: UINT, Param1: UINT_PTR, Param2: UINT_PTR): UINT {.stdcall.}
@@ -407,27 +477,57 @@ when winimAnsi:
     PSP_DRVINFO_DATA_V2* = PSP_DRVINFO_DATA_V2_A
 type
   PSP_DRVINFO_DATA* = PSP_DRVINFO_DATA_V2
-  SP_DRVINFO_DETAIL_DATA_A* {.pure.} = object
-    cbSize*: DWORD
-    InfDate*: FILETIME
-    CompatIDsOffset*: DWORD
-    CompatIDsLength*: DWORD
-    Reserved*: ULONG_PTR
-    SectionName*: array[LINE_LEN, CHAR]
-    InfFileName*: array[MAX_PATH, CHAR]
-    DrvDescription*: array[LINE_LEN, CHAR]
-    HardwareID*: array[ANYSIZE_ARRAY, CHAR]
+when winimCpu64:
+  type
+    SP_DRVINFO_DETAIL_DATA_A* {.pure.} = object
+      cbSize*: DWORD
+      InfDate*: FILETIME
+      CompatIDsOffset*: DWORD
+      CompatIDsLength*: DWORD
+      Reserved*: ULONG_PTR
+      SectionName*: array[LINE_LEN, CHAR]
+      InfFileName*: array[MAX_PATH, CHAR]
+      DrvDescription*: array[LINE_LEN, CHAR]
+      HardwareID*: array[ANYSIZE_ARRAY, CHAR]
+when winimCpu32:
+  type
+    SP_DRVINFO_DETAIL_DATA_A* {.pure, packed.} = object
+      cbSize*: DWORD
+      InfDate*: FILETIME
+      CompatIDsOffset*: DWORD
+      CompatIDsLength*: DWORD
+      Reserved*: ULONG_PTR
+      SectionName*: array[LINE_LEN, CHAR]
+      InfFileName*: array[MAX_PATH, CHAR]
+      DrvDescription*: array[LINE_LEN, CHAR]
+      HardwareID*: array[ANYSIZE_ARRAY, CHAR]
+type
   PSP_DRVINFO_DETAIL_DATA_A* = ptr SP_DRVINFO_DETAIL_DATA_A
-  SP_DRVINFO_DETAIL_DATA_W* {.pure.} = object
-    cbSize*: DWORD
-    InfDate*: FILETIME
-    CompatIDsOffset*: DWORD
-    CompatIDsLength*: DWORD
-    Reserved*: ULONG_PTR
-    SectionName*: array[LINE_LEN, WCHAR]
-    InfFileName*: array[MAX_PATH, WCHAR]
-    DrvDescription*: array[LINE_LEN, WCHAR]
-    HardwareID*: array[ANYSIZE_ARRAY, WCHAR]
+when winimCpu64:
+  type
+    SP_DRVINFO_DETAIL_DATA_W* {.pure.} = object
+      cbSize*: DWORD
+      InfDate*: FILETIME
+      CompatIDsOffset*: DWORD
+      CompatIDsLength*: DWORD
+      Reserved*: ULONG_PTR
+      SectionName*: array[LINE_LEN, WCHAR]
+      InfFileName*: array[MAX_PATH, WCHAR]
+      DrvDescription*: array[LINE_LEN, WCHAR]
+      HardwareID*: array[ANYSIZE_ARRAY, WCHAR]
+when winimCpu32:
+  type
+    SP_DRVINFO_DETAIL_DATA_W* {.pure, packed.} = object
+      cbSize*: DWORD
+      InfDate*: FILETIME
+      CompatIDsOffset*: DWORD
+      CompatIDsLength*: DWORD
+      Reserved*: ULONG_PTR
+      SectionName*: array[LINE_LEN, WCHAR]
+      InfFileName*: array[MAX_PATH, WCHAR]
+      DrvDescription*: array[LINE_LEN, WCHAR]
+      HardwareID*: array[ANYSIZE_ARRAY, WCHAR]
+type
   PSP_DRVINFO_DETAIL_DATA_W* = ptr SP_DRVINFO_DETAIL_DATA_W
   SP_DRVINSTALL_PARAMS* {.pure.} = object
     cbSize*: DWORD

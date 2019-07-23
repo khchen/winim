@@ -1019,6 +1019,7 @@ type
     BVal*: BinaryParam
   RPC_EE_INFO_PARAM* {.pure.} = object
     ParameterType*: ExtendedErrorParamTypes
+    padding*: int32
     u*: RPC_EE_INFO_PARAM_u
   RPC_EXTENDED_ERROR_INFO_u* {.pure, union.} = object
     SystemTime*: SYSTEMTIME
@@ -1033,6 +1034,7 @@ type
     DetectionLocation*: USHORT
     Flags*: USHORT
     NumberOfParameters*: int32
+    padding*: int32
     Parameters*: array[maxNumberOfEEInfoParams, RPC_EE_INFO_PARAM]
   RPC_ERROR_ENUM_HANDLE* {.pure.} = object
     Signature*: ULONG

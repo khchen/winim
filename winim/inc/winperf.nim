@@ -20,39 +20,76 @@ type
     NumObjectTypes*: DWORD
     DefaultObject*: LONG
     SystemTime*: SYSTEMTIME
+    padding*: int32
     PerfTime*: LARGE_INTEGER
     PerfFreq*: LARGE_INTEGER
     PerfTime100nSec*: LARGE_INTEGER
     SystemNameLength*: DWORD
     SystemNameOffset*: DWORD
   PPERF_DATA_BLOCK* = ptr PERF_DATA_BLOCK
-  PERF_OBJECT_TYPE* {.pure.} = object
-    TotalByteLength*: DWORD
-    DefinitionLength*: DWORD
-    HeaderLength*: DWORD
-    ObjectNameTitleIndex*: DWORD
-    ObjectNameTitle*: LPWSTR
-    ObjectHelpTitleIndex*: DWORD
-    ObjectHelpTitle*: LPWSTR
-    DetailLevel*: DWORD
-    NumCounters*: DWORD
-    DefaultCounter*: LONG
-    NumInstances*: LONG
-    CodePage*: DWORD
-    PerfTime*: LARGE_INTEGER
-    PerfFreq*: LARGE_INTEGER
+when winimCpu64:
+  type
+    PERF_OBJECT_TYPE* {.pure.} = object
+      TotalByteLength*: DWORD
+      DefinitionLength*: DWORD
+      HeaderLength*: DWORD
+      ObjectNameTitleIndex*: DWORD
+      ObjectNameTitle*: DWORD
+      ObjectHelpTitleIndex*: DWORD
+      ObjectHelpTitle*: DWORD
+      DetailLevel*: DWORD
+      NumCounters*: DWORD
+      DefaultCounter*: LONG
+      NumInstances*: LONG
+      CodePage*: DWORD
+      PerfTime*: LARGE_INTEGER
+      PerfFreq*: LARGE_INTEGER
+when winimCpu32:
+  type
+    PERF_OBJECT_TYPE* {.pure.} = object
+      TotalByteLength*: DWORD
+      DefinitionLength*: DWORD
+      HeaderLength*: DWORD
+      ObjectNameTitleIndex*: DWORD
+      ObjectNameTitle*: LPWSTR
+      ObjectHelpTitleIndex*: DWORD
+      ObjectHelpTitle*: LPWSTR
+      DetailLevel*: DWORD
+      NumCounters*: DWORD
+      DefaultCounter*: LONG
+      NumInstances*: LONG
+      CodePage*: DWORD
+      PerfTime*: LARGE_INTEGER
+      PerfFreq*: LARGE_INTEGER
+type
   PPERF_OBJECT_TYPE* = ptr PERF_OBJECT_TYPE
-  PERF_COUNTER_DEFINITION* {.pure.} = object
-    ByteLength*: DWORD
-    CounterNameTitleIndex*: DWORD
-    CounterNameTitle*: LPWSTR
-    CounterHelpTitleIndex*: DWORD
-    CounterHelpTitle*: LPWSTR
-    DefaultScale*: LONG
-    DetailLevel*: DWORD
-    CounterType*: DWORD
-    CounterSize*: DWORD
-    CounterOffset*: DWORD
+when winimCpu64:
+  type
+    PERF_COUNTER_DEFINITION* {.pure.} = object
+      ByteLength*: DWORD
+      CounterNameTitleIndex*: DWORD
+      CounterNameTitle*: DWORD
+      CounterHelpTitleIndex*: DWORD
+      CounterHelpTitle*: DWORD
+      DefaultScale*: LONG
+      DetailLevel*: DWORD
+      CounterType*: DWORD
+      CounterSize*: DWORD
+      CounterOffset*: DWORD
+when winimCpu32:
+  type
+    PERF_COUNTER_DEFINITION* {.pure.} = object
+      ByteLength*: DWORD
+      CounterNameTitleIndex*: DWORD
+      CounterNameTitle*: LPWSTR
+      CounterHelpTitleIndex*: DWORD
+      CounterHelpTitle*: LPWSTR
+      DefaultScale*: LONG
+      DetailLevel*: DWORD
+      CounterType*: DWORD
+      CounterSize*: DWORD
+      CounterOffset*: DWORD
+type
   PPERF_COUNTER_DEFINITION* = ptr PERF_COUNTER_DEFINITION
   PERF_INSTANCE_DEFINITION* {.pure.} = object
     ByteLength*: DWORD

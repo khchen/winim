@@ -88,6 +88,7 @@ when isMainModule:
         items: seq[CodeNode]
         isUnion: bool
         isRef: bool
+        isPacked: bool
       of ckType:
         bitsize: string
       of ckConverter:
@@ -154,10 +155,10 @@ when isMainModule:
 
     of ckObject:
       var typ = if node.isRef: "ref object" else: "object"
-      if node.isUnion:
-        yield fmt"{node.name}* {{.pure, union.}} = {typ}"
-      else:
-        yield fmt"{node.name}* {{.pure.}} = {typ}"
+      var pragma = "pure"
+      if node.isUnion: pragma.add ", union"
+      if node.isPacked: pragma.add ", packed"
+      yield fmt"{node.name}* {{.{pragma}.}} = {typ}"
 
       for i in node.items:
         if i.kind == ckProcType:
@@ -422,6 +423,28 @@ when isMainModule:
       if pair[0].strip == "version":
         return pair[1].strip.replace("\"")
 
+  iterator walkFilesRec(path: string, recursively = true): string =
+    if recursively:
+      if existsFile(path):
+        yield path
+
+      else:
+        var (root, pattern) =
+          if existsDir(path): (path, "*.*")
+          else: splitPath(path)
+
+        for file in walkFiles(root / pattern):
+          yield file
+
+        if root.len == 0: root = "./"
+
+        for dir in walkDirRec(root, {pcDir}):
+          for file in walkFiles(dir / pattern):
+            yield file
+    else:
+      for file in walkFiles(path):
+        yield file
+
   proc help() =
     const version = getVersion()
     echo """
@@ -433,29 +456,41 @@ Usage: winimx [options] inputfile(s)
 Options:
   -s, --skip:MODULE         skip identifiers in the module
   -d, --dir:PATH            specify the working directory
+  -r, --recursively         walks over the directory recursively
+  -t, --test                output the file list to be prased
 
 Inputfile(s):
   This tool catch all the identifiers from input files and output the
   minified Winim module. The files can be nim source file or just keyword
-  list.""" % version
+  list. Wildcard is allowed.""" % version
 
   proc main() =
     var
       p = initOptParser()
       skips = newSeq[string]()
       codes = newSeq[string]()
+      recursively = false
+      test = false
 
     for kind, key, val in p.getopt():
       case kind
       of cmdArgument:
-        try:
-          codes.add readFile(key)
-        except IOError:
-          echo "Error: cannot open file: " & key
-          quit(1)
+        for file in walkFilesRec(key, recursively):
+          try:
+            if test:
+              echo file
+            else:
+              codes.add readFile(file)
+          except IOError:
+            echo "Error: cannot open file: " & file
+            quit(1)
 
       of cmdLongOption, cmdShortOption:
         case key
+        of "r", "recursively":
+          recursively = true
+        of "t", "test":
+          test = true
         of "s", "skip":
           skips.add val
         of "d", "dir":
@@ -467,10 +502,10 @@ Inputfile(s):
 
       of cmdEnd: assert(false)
 
-    if codes.len == 0:
+    if codes.len == 0 and not test and not recursively:
       help()
 
-    else:
+    elif not test:
       var minifier = initMinifier()
 
       for module in skips:

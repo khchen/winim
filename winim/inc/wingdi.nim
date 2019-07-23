@@ -199,7 +199,7 @@ type
     bmciColors*: array[1, RGBTRIPLE]
   LPBITMAPCOREINFO* = ptr BITMAPCOREINFO
   PBITMAPCOREINFO* = ptr BITMAPCOREINFO
-  BITMAPFILEHEADER* {.pure.} = object
+  BITMAPFILEHEADER* {.pure, packed.} = object
     bfType*: WORD
     bfSize*: DWORD
     bfReserved1*: WORD
@@ -241,7 +241,7 @@ type
     yExt*: LONG
     hMF*: HMETAFILE
   LPMETAFILEPICT* = ptr METAFILEPICT
-  METAHEADER* {.pure.} = object
+  METAHEADER* {.pure, packed.} = object
     mtType*: WORD
     mtHeaderSize*: WORD
     mtVersion*: WORD

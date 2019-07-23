@@ -247,6 +247,7 @@ type
     hInproc64*: INT64
   userHGLOBAL* {.pure.} = object
     fContext*: LONG
+    padding*: int32
     u*: userHGLOBAL_u
   wireHGLOBAL* = ptr userHGLOBAL
   RemotableHandle_u* {.pure, union.} = object
@@ -279,6 +280,7 @@ type
     hInproc64*: INT64
   userHBITMAP* {.pure.} = object
     fContext*: LONG
+    padding*: int32
     u*: userHBITMAP_u
   wireHBITMAP* = ptr userHBITMAP
   userHPALETTE_u* {.pure, union.} = object
@@ -287,6 +289,7 @@ type
     hInproc64*: INT64
   userHPALETTE* {.pure.} = object
     fContext*: LONG
+    padding*: int32
     u*: userHPALETTE_u
   wireHPALETTE* = ptr userHPALETTE
   BYTE_BLOB* {.pure.} = object
@@ -298,6 +301,7 @@ type
     hInproc64*: INT64
   userHENHMETAFILE* {.pure.} = object
     fContext*: LONG
+    padding*: int32
     u*: userHENHMETAFILE_u
   wireHENHMETAFILE* = ptr userHENHMETAFILE
   userHMETAFILE_u* {.pure, union.} = object
@@ -306,6 +310,7 @@ type
     hInproc64*: INT64
   userHMETAFILE* {.pure.} = object
     fContext*: LONG
+    padding*: int32
     u*: userHMETAFILE_u
   wireHMETAFILE* = ptr userHMETAFILE
   remoteMETAFILEPICT* {.pure.} = object
@@ -319,6 +324,7 @@ type
     hInproc64*: INT64
   userHMETAFILEPICT* {.pure.} = object
     fContext*: LONG
+    padding*: int32
     u*: userHMETAFILEPICT_u
   wireHMETAFILEPICT* = ptr userHMETAFILEPICT
   DATE* = float64
@@ -2710,12 +2716,12 @@ type
     EnumImplCategoriesOfClass*: proc(self: ptr ICatInformation, rclsid: REFCLSID, ppenumCatid: ptr ptr IEnumGUID): HRESULT {.stdcall.}
     EnumReqCategoriesOfClass*: proc(self: ptr ICatInformation, rclsid: REFCLSID, ppenumCatid: ptr ptr IEnumGUID): HRESULT {.stdcall.}
   LPCATINFORMATION* = ptr ICatInformation
-  SHITEMID* {.pure.} = object
+  SHITEMID* {.pure, packed.} = object
     cb*: USHORT
     abID*: array[1, BYTE]
   LPSHITEMID* = ptr SHITEMID
   LPCSHITEMID* = ptr SHITEMID
-  ITEMIDLIST* {.pure.} = object
+  ITEMIDLIST* {.pure, packed.} = object
     mkid*: SHITEMID
   ITEMIDLIST_RELATIVE* = ITEMIDLIST
   ITEMID_CHILD* = ITEMIDLIST

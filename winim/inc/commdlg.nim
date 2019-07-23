@@ -219,47 +219,97 @@ type
   LPCHOOSEFONTW* = ptr TCHOOSEFONTW
   LPPRINTHOOKPROC* = proc (P1: HWND, P2: UINT, P3: WPARAM, P4: LPARAM): UINT_PTR {.stdcall.}
   LPSETUPHOOKPROC* = proc (P1: HWND, P2: UINT, P3: WPARAM, P4: LPARAM): UINT_PTR {.stdcall.}
-  TPRINTDLGA* {.pure.} = object
-    lStructSize*: DWORD
-    hwndOwner*: HWND
-    hDevMode*: HGLOBAL
-    hDevNames*: HGLOBAL
-    hDC*: HDC
-    Flags*: DWORD
-    nFromPage*: WORD
-    nToPage*: WORD
-    nMinPage*: WORD
-    nMaxPage*: WORD
-    nCopies*: WORD
-    hInstance*: HINSTANCE
-    lCustData*: LPARAM
-    lpfnPrintHook*: LPPRINTHOOKPROC
-    lpfnSetupHook*: LPSETUPHOOKPROC
-    lpPrintTemplateName*: LPCSTR
-    lpSetupTemplateName*: LPCSTR
-    hPrintTemplate*: HGLOBAL
-    hSetupTemplate*: HGLOBAL
+when winimCpu64:
+  type
+    TPRINTDLGA* {.pure.} = object
+      lStructSize*: DWORD
+      hwndOwner*: HWND
+      hDevMode*: HGLOBAL
+      hDevNames*: HGLOBAL
+      hDC*: HDC
+      Flags*: DWORD
+      nFromPage*: WORD
+      nToPage*: WORD
+      nMinPage*: WORD
+      nMaxPage*: WORD
+      nCopies*: WORD
+      hInstance*: HINSTANCE
+      lCustData*: LPARAM
+      lpfnPrintHook*: LPPRINTHOOKPROC
+      lpfnSetupHook*: LPSETUPHOOKPROC
+      lpPrintTemplateName*: LPCSTR
+      lpSetupTemplateName*: LPCSTR
+      hPrintTemplate*: HGLOBAL
+      hSetupTemplate*: HGLOBAL
+when winimCpu32:
+  type
+    TPRINTDLGA* {.pure, packed.} = object
+      lStructSize*: DWORD
+      hwndOwner*: HWND
+      hDevMode*: HGLOBAL
+      hDevNames*: HGLOBAL
+      hDC*: HDC
+      Flags*: DWORD
+      nFromPage*: WORD
+      nToPage*: WORD
+      nMinPage*: WORD
+      nMaxPage*: WORD
+      nCopies*: WORD
+      hInstance*: HINSTANCE
+      lCustData*: LPARAM
+      lpfnPrintHook*: LPPRINTHOOKPROC
+      lpfnSetupHook*: LPSETUPHOOKPROC
+      lpPrintTemplateName*: LPCSTR
+      lpSetupTemplateName*: LPCSTR
+      hPrintTemplate*: HGLOBAL
+      hSetupTemplate*: HGLOBAL
+type
   LPPRINTDLGA* = ptr TPRINTDLGA
-  TPRINTDLGW* {.pure.} = object
-    lStructSize*: DWORD
-    hwndOwner*: HWND
-    hDevMode*: HGLOBAL
-    hDevNames*: HGLOBAL
-    hDC*: HDC
-    Flags*: DWORD
-    nFromPage*: WORD
-    nToPage*: WORD
-    nMinPage*: WORD
-    nMaxPage*: WORD
-    nCopies*: WORD
-    hInstance*: HINSTANCE
-    lCustData*: LPARAM
-    lpfnPrintHook*: LPPRINTHOOKPROC
-    lpfnSetupHook*: LPSETUPHOOKPROC
-    lpPrintTemplateName*: LPCWSTR
-    lpSetupTemplateName*: LPCWSTR
-    hPrintTemplate*: HGLOBAL
-    hSetupTemplate*: HGLOBAL
+when winimCpu64:
+  type
+    TPRINTDLGW* {.pure.} = object
+      lStructSize*: DWORD
+      hwndOwner*: HWND
+      hDevMode*: HGLOBAL
+      hDevNames*: HGLOBAL
+      hDC*: HDC
+      Flags*: DWORD
+      nFromPage*: WORD
+      nToPage*: WORD
+      nMinPage*: WORD
+      nMaxPage*: WORD
+      nCopies*: WORD
+      hInstance*: HINSTANCE
+      lCustData*: LPARAM
+      lpfnPrintHook*: LPPRINTHOOKPROC
+      lpfnSetupHook*: LPSETUPHOOKPROC
+      lpPrintTemplateName*: LPCWSTR
+      lpSetupTemplateName*: LPCWSTR
+      hPrintTemplate*: HGLOBAL
+      hSetupTemplate*: HGLOBAL
+when winimCpu32:
+  type
+    TPRINTDLGW* {.pure, packed.} = object
+      lStructSize*: DWORD
+      hwndOwner*: HWND
+      hDevMode*: HGLOBAL
+      hDevNames*: HGLOBAL
+      hDC*: HDC
+      Flags*: DWORD
+      nFromPage*: WORD
+      nToPage*: WORD
+      nMinPage*: WORD
+      nMaxPage*: WORD
+      nCopies*: WORD
+      hInstance*: HINSTANCE
+      lCustData*: LPARAM
+      lpfnPrintHook*: LPPRINTHOOKPROC
+      lpfnSetupHook*: LPSETUPHOOKPROC
+      lpPrintTemplateName*: LPCWSTR
+      lpSetupTemplateName*: LPCWSTR
+      hPrintTemplate*: HGLOBAL
+      hSetupTemplate*: HGLOBAL
+type
   LPPRINTDLGW* = ptr TPRINTDLGW
   PRINTPAGERANGE* {.pure.} = object
     nFromPage*: DWORD

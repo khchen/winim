@@ -32,7 +32,7 @@ import winim/mean # for core SDK + Shell + OLE API.
 ```
 or
 ```nimrod
-import winim/com # winim.mean + Windows COM support.
+import winim/com # winim/mean + Windows COM support.
 ```
 
 API modules can import one by one if needed, for example:

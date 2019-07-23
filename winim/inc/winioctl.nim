@@ -193,7 +193,7 @@ type
     Count*: WORD
     BlockNumber*: array[1, DWORD]
   PREASSIGN_BLOCKS* = ptr REASSIGN_BLOCKS
-  REASSIGN_BLOCKS_EX* {.pure.} = object
+  REASSIGN_BLOCKS_EX* {.pure, packed.} = object
     Reserved*: WORD
     Count*: WORD
     BlockNumber*: array[1, LARGE_INTEGER]
@@ -420,7 +420,7 @@ type
     bReserved*: BYTE
   PIDEREGS* = ptr IDEREGS
   LPIDEREGS* = ptr IDEREGS
-  SENDCMDINPARAMS* {.pure.} = object
+  SENDCMDINPARAMS* {.pure, packed.} = object
     cBufferSize*: DWORD
     irDriveRegs*: IDEREGS
     bDriveNumber*: BYTE
@@ -436,7 +436,7 @@ type
     dwReserved*: array[2, DWORD]
   PDRIVERSTATUS* = ptr DRIVERSTATUS
   LPDRIVERSTATUS* = ptr DRIVERSTATUS
-  SENDCMDOUTPARAMS* {.pure.} = object
+  SENDCMDOUTPARAMS* {.pure, packed.} = object
     cBufferSize*: DWORD
     DriverStatus*: DRIVERSTATUS
     bBuffer*: array[1, BYTE]

@@ -294,7 +294,7 @@ const
   ACMDRIVERDETAILS_LICENSING_CHARS* = 128
   ACMDRIVERDETAILS_FEATURES_CHARS* = 512
 type
-  ACMDRIVERDETAILSA* {.pure.} = object
+  ACMDRIVERDETAILSA* {.pure, packed.} = object
     cbStruct*: DWORD
     fccType*: FOURCC
     fccComp*: FOURCC
@@ -313,7 +313,7 @@ type
     szFeatures*: array[ACMDRIVERDETAILS_FEATURES_CHARS, char]
   PACMDRIVERDETAILSA* = ptr ACMDRIVERDETAILSA
   LPACMDRIVERDETAILSA* = ptr ACMDRIVERDETAILSA
-  ACMDRIVERDETAILSW* {.pure.} = object
+  ACMDRIVERDETAILSW* {.pure, packed.} = object
     cbStruct*: DWORD
     fccType*: FOURCC
     fccComp*: FOURCC
@@ -358,7 +358,7 @@ type
 const
   ACMFORMATDETAILS_FORMAT_CHARS* = 128
 type
-  ACMFORMATDETAILSA* {.pure.} = object
+  ACMFORMATDETAILSA* {.pure, packed.} = object
     cbStruct*: DWORD
     dwFormatIndex*: DWORD
     dwFormatTag*: DWORD
@@ -368,7 +368,7 @@ type
     szFormat*: array[ACMFORMATDETAILS_FORMAT_CHARS, char]
   PACMFORMATDETAILSA* = ptr ACMFORMATDETAILSA
   LPACMFORMATDETAILSA* = ptr ACMFORMATDETAILSA
-  ACMFORMATDETAILSW* {.pure.} = object
+  ACMFORMATDETAILSW* {.pure, packed.} = object
     cbStruct*: DWORD
     dwFormatIndex*: DWORD
     dwFormatTag*: DWORD
@@ -379,7 +379,7 @@ type
   PACMFORMATDETAILSW* = ptr ACMFORMATDETAILSW
   LPACMFORMATDETAILSW* = ptr ACMFORMATDETAILSW
   ACMFORMATCHOOSEHOOKPROCA* = proc (hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM): UINT {.stdcall.}
-  ACMFORMATCHOOSEA* {.pure.} = object
+  ACMFORMATCHOOSEA* {.pure, packed.} = object
     cbStruct*: DWORD
     fdwStyle*: DWORD
     hwndOwner*: HWND
@@ -399,7 +399,7 @@ type
   PACMFORMATCHOOSEA* = ptr ACMFORMATCHOOSEA
   LPACMFORMATCHOOSEA* = ptr ACMFORMATCHOOSEA
   ACMFORMATCHOOSEHOOKPROCW* = proc (hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM): UINT {.stdcall.}
-  ACMFORMATCHOOSEW* {.pure.} = object
+  ACMFORMATCHOOSEW* {.pure, packed.} = object
     cbStruct*: DWORD
     fdwStyle*: DWORD
     hwndOwner*: HWND
@@ -444,7 +444,7 @@ type
 const
   ACMFILTERDETAILS_FILTER_CHARS* = 128
 type
-  ACMFILTERDETAILSA* {.pure.} = object
+  ACMFILTERDETAILSA* {.pure, packed.} = object
     cbStruct*: DWORD
     dwFilterIndex*: DWORD
     dwFilterTag*: DWORD
@@ -454,7 +454,7 @@ type
     szFilter*: array[ACMFILTERDETAILS_FILTER_CHARS, char]
   PACMFILTERDETAILSA* = ptr ACMFILTERDETAILSA
   LPACMFILTERDETAILSA* = ptr ACMFILTERDETAILSA
-  ACMFILTERDETAILSW* {.pure.} = object
+  ACMFILTERDETAILSW* {.pure, packed.} = object
     cbStruct*: DWORD
     dwFilterIndex*: DWORD
     dwFilterTag*: DWORD
@@ -465,7 +465,7 @@ type
   PACMFILTERDETAILSW* = ptr ACMFILTERDETAILSW
   LPACMFILTERDETAILSW* = ptr ACMFILTERDETAILSW
   ACMFILTERCHOOSEHOOKPROCA* = proc (hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM): UINT {.stdcall.}
-  ACMFILTERCHOOSEA* {.pure.} = object
+  ACMFILTERCHOOSEA* {.pure, packed.} = object
     cbStruct*: DWORD
     fdwStyle*: DWORD
     hwndOwner*: HWND
@@ -485,7 +485,7 @@ type
   PACMFILTERCHOOSEA* = ptr ACMFILTERCHOOSEA
   LPACMFILTERCHOOSEA* = ptr ACMFILTERCHOOSEA
   ACMFILTERCHOOSEHOOKPROCW* = proc (hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM): UINT {.stdcall.}
-  ACMFILTERCHOOSEW* {.pure.} = object
+  ACMFILTERCHOOSEW* {.pure, packed.} = object
     cbStruct*: DWORD
     fdwStyle*: DWORD
     hwndOwner*: HWND
@@ -511,7 +511,7 @@ when winimCpu32:
   const
     VFW_DRVRESERVED* = 10
 type
-  ACMSTREAMHEADER* {.pure.} = object
+  ACMSTREAMHEADER* {.pure, packed.} = object
     cbStruct*: DWORD
     fdwStatus*: DWORD
     dwUser*: DWORD_PTR

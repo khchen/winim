@@ -2249,7 +2249,7 @@ type
     ShortName*: array[8, BYTE]
     Name*: IMAGE_SYMBOL_N_Name
     LongName*: array[2, DWORD]
-  IMAGE_SYMBOL* {.pure.} = object
+  IMAGE_SYMBOL* {.pure, packed.} = object
     N*: IMAGE_SYMBOL_N
     Value*: DWORD
     SectionNumber*: SHORT
@@ -2272,7 +2272,7 @@ type
     StorageClass*: BYTE
     NumberOfAuxSymbols*: BYTE
   PIMAGE_SYMBOL_EX* = ptr IMAGE_SYMBOL_EX
-  IMAGE_AUX_SYMBOL_TOKEN_DEF* {.pure.} = object
+  IMAGE_AUX_SYMBOL_TOKEN_DEF* {.pure, packed.} = object
     bAuxType*: BYTE
     bReserved*: BYTE
     SymbolTableIndex*: DWORD

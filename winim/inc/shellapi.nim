@@ -199,25 +199,53 @@ type
     rc*: RECT
     lParam*: LPARAM
   PAPPBARDATA* = ptr APPBARDATA
-  SHFILEOPSTRUCTA* {.pure.} = object
-    hwnd*: HWND
-    wFunc*: UINT
-    pFrom*: LPCSTR
-    pTo*: LPCSTR
-    fFlags*: FILEOP_FLAGS
-    fAnyOperationsAborted*: WINBOOL
-    hNameMappings*: LPVOID
-    lpszProgressTitle*: PCSTR
+when winimCpu64:
+  type
+    SHFILEOPSTRUCTA* {.pure.} = object
+      hwnd*: HWND
+      wFunc*: UINT
+      pFrom*: LPCSTR
+      pTo*: LPCSTR
+      fFlags*: FILEOP_FLAGS
+      fAnyOperationsAborted*: WINBOOL
+      hNameMappings*: LPVOID
+      lpszProgressTitle*: PCSTR
+when winimCpu32:
+  type
+    SHFILEOPSTRUCTA* {.pure, packed.} = object
+      hwnd*: HWND
+      wFunc*: UINT
+      pFrom*: LPCSTR
+      pTo*: LPCSTR
+      fFlags*: FILEOP_FLAGS
+      fAnyOperationsAborted*: WINBOOL
+      hNameMappings*: LPVOID
+      lpszProgressTitle*: PCSTR
+type
   LPSHFILEOPSTRUCTA* = ptr SHFILEOPSTRUCTA
-  SHFILEOPSTRUCTW* {.pure.} = object
-    hwnd*: HWND
-    wFunc*: UINT
-    pFrom*: LPCWSTR
-    pTo*: LPCWSTR
-    fFlags*: FILEOP_FLAGS
-    fAnyOperationsAborted*: WINBOOL
-    hNameMappings*: LPVOID
-    lpszProgressTitle*: PCWSTR
+when winimCpu64:
+  type
+    SHFILEOPSTRUCTW* {.pure.} = object
+      hwnd*: HWND
+      wFunc*: UINT
+      pFrom*: LPCWSTR
+      pTo*: LPCWSTR
+      fFlags*: FILEOP_FLAGS
+      fAnyOperationsAborted*: WINBOOL
+      hNameMappings*: LPVOID
+      lpszProgressTitle*: PCWSTR
+when winimCpu32:
+  type
+    SHFILEOPSTRUCTW* {.pure, packed.} = object
+      hwnd*: HWND
+      wFunc*: UINT
+      pFrom*: LPCWSTR
+      pTo*: LPCWSTR
+      fFlags*: FILEOP_FLAGS
+      fAnyOperationsAborted*: WINBOOL
+      hNameMappings*: LPVOID
+      lpszProgressTitle*: PCWSTR
+type
   LPSHFILEOPSTRUCTW* = ptr SHFILEOPSTRUCTW
   SHNAMEMAPPINGA* {.pure.} = object
     pszOldPath*: LPSTR
@@ -605,7 +633,7 @@ type
     szTip*: array[260, WCHAR]
     dwFlags*: THUMBBUTTONFLAGS
   LPTHUMBBUTTON* = ptr THUMBBUTTON
-  DELEGATEITEMID* {.pure.} = object
+  DELEGATEITEMID* {.pure, packed.} = object
     cbSize*: WORD
     wOuter*: WORD
     cbInner*: WORD
@@ -931,7 +959,7 @@ const
   MAX_COLUMN_NAME_LEN* = 80
   MAX_COLUMN_DESC_LEN* = 128
 type
-  SHCOLUMNINFO* {.pure.} = object
+  SHCOLUMNINFO* {.pure, packed.} = object
     scid*: SHCOLUMNID
     vt*: VARTYPE
     fmt*: DWORD
@@ -4727,7 +4755,7 @@ type
   PREVIEWHANDLERFRAMEINFO* {.pure.} = object
     haccel*: HACCEL
     cAccelEntries*: UINT
-  EXP_PROPERTYSTORAGE* {.pure.} = object
+  EXP_PROPERTYSTORAGE* {.pure, packed.} = object
     cbSize*: DWORD
     dwSignature*: DWORD
     abPropertyStorage*: array[1, BYTE]

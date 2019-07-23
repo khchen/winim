@@ -1,3 +1,8 @@
+Version 3.2.2
+-------------
+* Fix bugs about struct member alignment.
+* winimx: allow wildcard and walking over the directory.
+
 Version 3.2.1
 -------------
 * winstr: remove TChar (already defined in windef).

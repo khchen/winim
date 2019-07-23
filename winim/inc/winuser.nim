@@ -385,7 +385,7 @@ type
     uCount*: UINT
     dwTimeout*: DWORD
   PFLASHWINFO* = ptr FLASHWINFO
-  DLGTEMPLATE* {.pure.} = object
+  DLGTEMPLATE* {.pure, packed.} = object
     style*: DWORD
     dwExtendedStyle*: DWORD
     cdit*: WORD
@@ -397,7 +397,7 @@ type
   LPDLGTEMPLATEW* = ptr DLGTEMPLATE
   LPCDLGTEMPLATEA* = ptr DLGTEMPLATE
   LPCDLGTEMPLATEW* = ptr DLGTEMPLATE
-  DLGITEMTEMPLATE* {.pure.} = object
+  DLGITEMTEMPLATE* {.pure, packed.} = object
     style*: DWORD
     dwExtendedStyle*: DWORD
     x*: int16
