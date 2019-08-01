@@ -11,7 +11,7 @@ proc compress*(src: cstring, srcLen: int, level = 6): string =
   var destLen = maxLen
   var ret = mz_compress2(result, addr destLen, src, culong srcLen, cint level)
   assert ret == 0
-  cast[ptr culong](addr result[destLen])[] = culong srcLen
+  cast[ptr culong](addr result[int destLen])[] = culong srcLen
   result.setLen(destLen + culong sizeof(culong))
 
 proc compress*(src: string, level = 6): string {.inline.} =

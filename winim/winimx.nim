@@ -285,49 +285,53 @@ when isMainModule:
           yield token
       else: pos.inc
 
-  iterator dependencies(node: CodeNode): string =
+  proc dependencies(node: CodeNode): seq[string] =
+    result = @[]
+
     case node.kind
     of ckConst:
       for word in node.typ.catchIdent(skipColon=true):
-        yield word
+        result.add word
 
       let value = node.body
       if not (value[0] == '"' and value[^1] == '"'): # skip string
         for word in value.catchIdent(skipColon=true):
-          yield word
+          result.add word
 
     of ckType:
       for word in node.typ.catchIdent(skipColon=true):
-        yield word
+        result.add word
 
     of ckObject:
       for item in node.items:
         if item.name == "lpVtbl": continue
         for word in item.typ.catchIdent(skipColon=true):
-          yield word
+          result.add word
+
+        result.add item.dependencies()
 
     of ckInterface:
       for word in node.parent.catchIdent(skipColon=true):
-        yield word
+        result.add word
 
       for item in node.items:
         for word in item.typ.catchIdent(skipColon=true):
-          yield word
+          result.add word
 
         for word in item.params.catchIdent(skipColon=true):
-          yield word
+          result.add word
 
     of ckApi, ckProcType, ckProc, ckTemplate, ckAccessProc, ckMethod:
       for word in node.typ.catchIdent(skipColon=true):
-        yield word
+        result.add word
 
       for word in node.params.catchIdent(skipColon=true):
-        yield word
+        result.add word
 
       if node.kind in {ckProc, ckTemplate}:
         for word in node.body.catchIdent(skipColon=true):
           if word & ":" notin node.params:
-            yield word
+            result.add word
 
     else: discard
 
@@ -381,10 +385,13 @@ when isMainModule:
         if node.isDiscard:
           node.isDiscard = false
 
-          for token in toSeq(node.dependencies).deduplicate:
+          for token in node.dependencies.deduplicate:
             minifier.incl(token)
 
       minifier.table[name] = @[]
+
+    elif name.endsWith("Vtbl"):
+      minifier.incl(name[0..^5])
 
   proc output(minifier: var Minifier, file: File) =
     file.writeLine """

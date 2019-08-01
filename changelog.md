@@ -1,7 +1,7 @@
 Version 3.2.2
 -------------
-* Fix bugs about struct member alignment.
 * winimx: allow wildcard and walking over the directory.
+* Fix bugs.
 
 Version 3.2.1
 -------------

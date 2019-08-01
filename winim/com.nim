@@ -1050,37 +1050,39 @@ proc Sink_GetIDsOfNames(self: ptr IDispatch, riid: REFIID, rgszNames: ptr LPOLES
   result = DispGetIDsOfNames(this.typeInfo, rgszNames, cNames, rgDispId)
 
 proc Sink_Invoke(self: ptr IDispatch, dispid: DISPID, riid: REFIID, lcid: LCID, wFlags: WORD, params: ptr DISPPARAMS, ret: ptr VARIANT, pExcepInfo: ptr EXCEPINFO, puArgErr: ptr UINT): HRESULT {.stdcall, thread.} =
+  var this = cast[Sink](self)
+  var
+    bname: BSTR
+    nameCount: UINT
+    vret: variant
+    name: string
+    args = cast[ptr UncheckedArray[VARIANT]](params.rgvarg)
+    sargs = newSeq[variant]()
+    total = params.cArgs + params.cNamedArgs
+
   {.gcsafe.}:
-    var this = cast[Sink](self)
-    var
-      bname: BSTR
-      nameCount: UINT
-      vret: variant
-      name: string
-      args = cast[ptr UncheckedArray[VARIANT]](params.rgvarg)
-      sargs = newSeq[variant]()
-      total = params.cArgs + params.cNamedArgs
-
     result = this.typeInfo.GetNames(dispid, &bname, 1, &nameCount)
-    if result == S_OK:
-      name = $bname
-      SysFreeString(bname)
 
-      for i in 1..total:
-        sargs.add(newVariant(args[total-i]))
+  if result == S_OK:
+    name = $bname
+    SysFreeString(bname)
 
-      try:
+    for i in 1..total:
+      sargs.add(newVariant(args[total-i]))
+
+    try:
+      {.gcsafe.}:
         vret = this.handler(this.parent, name, sargs)
 
-      except:
-        let e = getCurrentException()
-        echo "uncatched exception inside event hander: " & $e.name & " (" & $e.msg & ")"
+    except:
+      let e = getCurrentException()
+      echo "uncatched exception inside event hander: " & $e.name & " (" & $e.msg & ")"
 
-      finally:
-        if vret.notNil and ret.notNil:
-          result = VariantCopy(ret, &vret.raw)
-        else:
-          result = S_OK
+    finally:
+      if vret.notNil and ret.notNil:
+        result = VariantCopy(ret, &vret.raw)
+      else:
+        result = S_OK
 
 let
   SinkVtbl: IDispatchVtbl = IDispatchVtbl(
