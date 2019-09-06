@@ -5,9 +5,11 @@
 #
 #====================================================================
 
-import macros, os
+import macros
 
 when not defined(noRes):
+  import os
+
   when defined(cpu64):
     {.link: currentSourcePath().parentDir & "/../lib/winim64.res".}
 

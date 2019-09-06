@@ -10,7 +10,6 @@ import windef
 import winbase
 import winsock
 import wincrypt
-import security
 #include <http.h>
 type
   HTTP_VERB* = int32
@@ -465,7 +464,6 @@ const
   HTTP_SEND_RESPONSE_FLAG_BUFFER_DATA* = 0x00000004
   HTTP_FLUSH_RESPONSE_FLAG_RECURSIVE* = 0x00000001
   HTTP_NULL_ID* = 0
-  HTTP_BYTE_RANGE_TO_EOF* = ULONGLONG(-1)
   HTTP_VERSION_UNKNOWN* = [0'u8,0]
   HTTP_VERSION_0_9* = [0'u8,9]
   HTTP_VERSION_1_0* = [1'u8,0]
@@ -616,6 +614,7 @@ const
   headerWaitTimeout* = 1
   maxCacheResponseSize* = 0
   cacheRangeChunkSize* = 1
+  HTTP_BYTE_RANGE_TO_EOF* = not ULONGLONG(0)
 proc HttpInitialize*(Version: HTTPAPI_VERSION, Flags: ULONG, pReserved: PVOID): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
 proc HttpTerminate*(Flags: ULONG, pReserved: PVOID): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}
 proc HttpCreateHttpHandle*(pReqQueueHandle: PHANDLE, Options: ULONG): ULONG {.winapi, stdcall, dynlib: "httpapi", importc.}

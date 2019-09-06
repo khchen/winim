@@ -13,7 +13,6 @@ import winuser
 import wincon
 import winreg
 import winnetwk
-import wininet
 import objbase
 import iphlpapi
 import commctrl
@@ -2405,7 +2404,6 @@ const
   IRTIR_TASK_FINISHED* = 4
   IID_IRunnableTask* = DEFINE_GUID(0x85788d00'i32, 0x6807, 0x11d0, [0xb8'u8, 0x10, 0x00, 0xc0, 0x4f, 0xd7, 0x06, 0xec])
   TOID_NULL* = GUID_NULL
-  ITSAT_DEFAULT_LPARAM* = DWORD_PTR(-1)
   ITSAT_DEFAULT_PRIORITY* = 0x10000000
   ITSAT_MAX_PRIORITY* = 0x7fffffff
   ITSAT_MIN_PRIORITY* = 0x00000000
@@ -4574,6 +4572,7 @@ const
   CMIC_MASK_FLAG_SEP_VDM* = 0x00040000
   CMIC_MASK_HASTITLE* = 0x00020000
   SHELLSTATE_SIZE_WIN2K* = 32
+  ITSAT_DEFAULT_LPARAM* = not DWORD_PTR(0)
 type
   PFNCANSHAREFOLDERW* = proc (pszPath: PCWSTR): HRESULT {.stdcall.}
   PFNSHOWSHAREFOLDERUIW* = proc (hwndParent: HWND, pszPath: PCWSTR): HRESULT {.stdcall.}

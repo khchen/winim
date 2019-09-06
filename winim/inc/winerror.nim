@@ -5,7 +5,6 @@
 #
 #====================================================================
 
-import winimbase
 import windef
 #include <error.h>
 #include <winerror.h>

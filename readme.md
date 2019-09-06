@@ -132,7 +132,7 @@ Winimx is a standalone tool to generate the minfied Winim module. It also can be
 
 ## Cross Compile
 
-Windows programs using Winim module should be compiled successfully by gcc, tcc, vcc on Windows, and mingw32 on Linux. The target file can be PE (32 bits) or PE+ (64 bits).
+Windows programs using Winim module should be compiled successfully by gcc, tcc, vcc on Windows, and MinGW toolchain on Linux. The target file can be PE (32 bits) or PE+ (64 bits).
 
 The suggested Nim compiler is amd64 version. You can download both mingw32 and mingw64 from the Nim's website and put them into nim\dist\mingw32 and nim\dist\mingw64. Modify the *nim.cfg*:
 
@@ -146,10 +146,7 @@ The suggested Nim compiler is amd64 version. You can download both mingw32 and m
 
 Now, you can add --cpu:i386 for 32 bits target, and --cpu:amd64 for 64 bits target. To use tcc (Tiny C Compiler), [here](https://github.com/khchen/winim/tree/master/tcclib) are some more information.
 
-To cross compile under Linux, try following command:
-
-    sudo apt install gcc-mingw-w64-x86-64
-    nim c --os:windows --gcc.exe:x86_64-w64-mingw32-gcc --gcc.linkerexe:x86_64-w64-mingw32-gcc test.nim
+To cross compile from Linux or macOS. Here is the [instruction](https://nim-lang.github.io/Nim/nimc.html#cross-compilation-for-windows).
 
 ## Docs
 * https://khchen.github.io/winim/winim.html

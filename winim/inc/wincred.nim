@@ -8,7 +8,6 @@
 import winimbase
 import windef
 import security
-import lm
 #include <wincred.h>
 type
   CRED_MARSHAL_TYPE* = int32

@@ -5,7 +5,6 @@
 #
 #====================================================================
 
-import winimbase
 import windef
 #include <mcx.h>
 type

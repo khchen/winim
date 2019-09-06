@@ -1,3 +1,8 @@
+Version 3.2.3
+-------------
+* Update for Nim Compiler 0.20.99 (devel).
+* Fix "imported and not used" warnings.
+
 Version 3.2.2
 -------------
 * winimx: allow wildcard and walking over the directory.
@@ -122,7 +127,7 @@ Version 2.0.0
   (file size is too big, add only if needed.)
 * Remove -d:winstyle (always enabled)
 * winstr: add toHex, nullTerminate, nullTerminated, `<<<`, `>>>`,
-  mlen, mIndex, etc. Also some fix some bug.
+  mlen, mIndex, etc. Also fix some bugs.
 * com: add multithreads support.
 
 Version 1.2.1
