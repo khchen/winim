@@ -15,19 +15,18 @@ proc getGit(): ptr IGlobalInterfaceTable =
     &IID_IGlobalInterfaceTable, cast[ptr pointer](&result)):
     raise
 
-proc thread(cookie: DWORD): bool =
-  {.gcsafe.}:
-    CoInitialize(nil)
+proc thread(cookie: DWORD): bool {.thread.} =
+  CoInitialize(nil)
 
-    var git = getGit()
-    var disp: ptr IDispatch
-    if SUCCEEDED git.GetInterfaceFromGlobal(cookie, &IID_IDispatch, cast[ptr pointer](&disp)):
-      var dict = wrap(disp)
-      dict.add("child", "thread")
-      disp.Release()
+  var git = getGit()
+  var disp: ptr IDispatch
+  if SUCCEEDED git.GetInterfaceFromGlobal(cookie, &IID_IDispatch, cast[ptr pointer](&disp)):
+    var dict = wrap(disp)
+    dict.add("child", "thread")
+    disp.Release()
 
-    COM_FullRelease()
-    CoUninitialize()
+  COM_FullRelease()
+  CoUninitialize()
 
 proc main() =
   var dict = CreateObject("Scripting.Dictionary")

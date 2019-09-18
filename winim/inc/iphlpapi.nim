@@ -6074,7 +6074,7 @@ proc IsRouter*(self: MIB_IPNET_ROW2): BOOLEAN {.inline.} = self.union1.struct1.I
 proc `IsUnreachable=`*(self: var MIB_IPNET_ROW2, x: BOOLEAN) {.inline.} = self.union1.struct1.IsUnreachable = x
 proc IsUnreachable*(self: MIB_IPNET_ROW2): BOOLEAN {.inline.} = self.union1.struct1.IsUnreachable
 proc `Flags=`*(self: var MIB_IPNET_ROW2, x: UCHAR) {.inline.} = self.union1.Flags = x
-proc OnComplete*(self: ptr IConnectionRequestCallback, hrStatus: HRESULT): HRESULT {.winapi, inline.} = self.lpVtbl.OnComplete(self, hrStatus)
+proc OnComplete*(self: ptr IConnectionRequestCallback, hrStatus: HRESULT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.OnComplete(self, hrStatus)
 converter winimConverterIConnectionRequestCallbackToIUnknown*(x: ptr IConnectionRequestCallback): ptr IUnknown = cast[ptr IUnknown](x)
 when winimCpu64:
   type

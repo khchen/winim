@@ -637,12 +637,12 @@ proc PrintDlgExW*(P1: LPPRINTDLGEXW): HRESULT {.winapi, stdcall, dynlib: "comdlg
 proc CommDlgExtendedError*(): DWORD {.winapi, stdcall, dynlib: "comdlg32", importc.}
 proc PageSetupDlgA*(P1: LPPAGESETUPDLGA): WINBOOL {.winapi, stdcall, dynlib: "comdlg32", importc.}
 proc PageSetupDlgW*(P1: LPPAGESETUPDLGW): WINBOOL {.winapi, stdcall, dynlib: "comdlg32", importc.}
-proc InitDone*(self: ptr IPrintDialogCallback): HRESULT {.winapi, inline.} = self.lpVtbl.InitDone(self)
-proc SelectionChange*(self: ptr IPrintDialogCallback): HRESULT {.winapi, inline.} = self.lpVtbl.SelectionChange(self)
-proc HandleMessage*(self: ptr IPrintDialogCallback, hDlg: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM, pResult: ptr LRESULT): HRESULT {.winapi, inline.} = self.lpVtbl.HandleMessage(self, hDlg, uMsg, wParam, lParam, pResult)
-proc GetCurrentDevMode*(self: ptr IPrintDialogServices, pDevMode: LPDEVMODE, pcbSize: ptr UINT): HRESULT {.winapi, inline.} = self.lpVtbl.GetCurrentDevMode(self, pDevMode, pcbSize)
-proc GetCurrentPrinterName*(self: ptr IPrintDialogServices, pPrinterName: LPTSTR, pcchSize: ptr UINT): HRESULT {.winapi, inline.} = self.lpVtbl.GetCurrentPrinterName(self, pPrinterName, pcchSize)
-proc GetCurrentPortName*(self: ptr IPrintDialogServices, pPortName: LPTSTR, pcchSize: ptr UINT): HRESULT {.winapi, inline.} = self.lpVtbl.GetCurrentPortName(self, pPortName, pcchSize)
+proc InitDone*(self: ptr IPrintDialogCallback): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.InitDone(self)
+proc SelectionChange*(self: ptr IPrintDialogCallback): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.SelectionChange(self)
+proc HandleMessage*(self: ptr IPrintDialogCallback, hDlg: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM, pResult: ptr LRESULT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.HandleMessage(self, hDlg, uMsg, wParam, lParam, pResult)
+proc GetCurrentDevMode*(self: ptr IPrintDialogServices, pDevMode: LPDEVMODE, pcbSize: ptr UINT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetCurrentDevMode(self, pDevMode, pcbSize)
+proc GetCurrentPrinterName*(self: ptr IPrintDialogServices, pPrinterName: LPTSTR, pcchSize: ptr UINT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetCurrentPrinterName(self, pPrinterName, pcchSize)
+proc GetCurrentPortName*(self: ptr IPrintDialogServices, pPortName: LPTSTR, pcchSize: ptr UINT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetCurrentPortName(self, pPortName, pcchSize)
 converter winimConverterIPrintDialogCallbackToIUnknown*(x: ptr IPrintDialogCallback): ptr IUnknown = cast[ptr IUnknown](x)
 converter winimConverterIPrintDialogServicesToIUnknown*(x: ptr IPrintDialogServices): ptr IUnknown = cast[ptr IUnknown](x)
 when winimUnicode:

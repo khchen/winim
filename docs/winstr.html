@@ -834,8 +834,6 @@ function main() {
     title="pstring = pmstring"><wbr />pstring<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#TString"
     title="TString = wstring"><wbr />TString<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#TChar"
-    title="TChar = WCHAR"><wbr />TChar<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -945,15 +943,25 @@ function main() {
   <li><a class="reference" href="#%5B%5D%3D%2Cmstring%2CHSlice%5BT%2CU%5D%2Cmstring"
     title="`[]=`[T, U](s: var mstring; x: HSlice[T, U]; b: mstring)"><wbr />`[]=`<span class="attachedType" style="visibility:hidden">mstring</span></a></li>
   <li><a class="reference" href="#newWString"
-    title="newWString(s: cstring | string | int): wstring"><wbr />new<wbr />WString<span class="attachedType" style="visibility:hidden">wstring</span></a></li>
+    title="newWString(s: cstring | string): wstring"><wbr />new<wbr />WString<span class="attachedType" style="visibility:hidden">wstring</span></a></li>
+  <li><a class="reference" href="#newWString%2CNatural"
+    title="newWString(L: Natural): wstring"><wbr />new<wbr />WString<span class="attachedType" style="visibility:hidden">wstring</span></a></li>
   <li><a class="reference" href="#newMString"
-    title="newMString(s: string | cstring | int): mstring"><wbr />new<wbr />MString<span class="attachedType" style="visibility:hidden">mstring</span></a></li>
+    title="newMString(s: string | cstring): mstring"><wbr />new<wbr />MString<span class="attachedType" style="visibility:hidden">mstring</span></a></li>
+  <li><a class="reference" href="#newMString%2CNatural"
+    title="newMString(L: Natural): mstring"><wbr />new<wbr />MString<span class="attachedType" style="visibility:hidden">mstring</span></a></li>
   <li><a class="reference" href="#allocString"
-    title="allocString(s: string | cstring | wstring | mstring | int): pstring"><wbr />alloc<wbr />String<span class="attachedType" style="visibility:hidden">wstring</span></a></li>
+    title="allocString(s: string | cstring | wstring | mstring): pstring"><wbr />alloc<wbr />String<span class="attachedType" style="visibility:hidden">wstring</span></a></li>
+  <li><a class="reference" href="#allocString%2CNatural"
+    title="allocString(L: Natural): pstring"><wbr />alloc<wbr />String<span class="attachedType" style="visibility:hidden">pstring</span></a></li>
   <li><a class="reference" href="#allocWString"
-    title="allocWString(s: cstring | string | wstring | mstring | int): pwstring"><wbr />alloc<wbr />WString<span class="attachedType" style="visibility:hidden">wstring</span></a></li>
+    title="allocWString(s: cstring | string | wstring | mstring): pwstring"><wbr />alloc<wbr />WString<span class="attachedType" style="visibility:hidden">wstring</span></a></li>
+  <li><a class="reference" href="#allocWString%2CNatural"
+    title="allocWString(L: Natural): pwstring"><wbr />alloc<wbr />WString<span class="attachedType" style="visibility:hidden">pwstring</span></a></li>
   <li><a class="reference" href="#allocMString"
-    title="allocMString(s: string | cstring | wstring | mstring | int): pmstring"><wbr />alloc<wbr />MString<span class="attachedType" style="visibility:hidden">wstring</span></a></li>
+    title="allocMString(s: string | cstring | wstring | mstring): pmstring"><wbr />alloc<wbr />MString<span class="attachedType" style="visibility:hidden">wstring</span></a></li>
+  <li><a class="reference" href="#allocMString%2CNatural"
+    title="allocMString(L: Natural): pmstring"><wbr />alloc<wbr />MString<span class="attachedType" style="visibility:hidden">pmstring</span></a></li>
   <li><a class="reference" href="#%24"
     title="`$`(s: wstring | mstring | LPWSTR | BSTR): string"><wbr />`$`<span class="attachedType" style="visibility:hidden">wstring</span></a></li>
   <li><a class="reference" href="#%24_2"
@@ -1285,12 +1293,6 @@ Use mIndex in [] or []= for mstring means index by MBCS characters, not by bytes
 
 
 </dd>
-<a id="TChar"></a>
-<dt><pre><a href="winstr.html#TChar"><span class="Identifier">TChar</span></a> <span class="Other">=</span> <a href="windef.html#WCHAR"><span class="Identifier">WCHAR</span></a></pre></dt>
-<dd>
-
-
-</dd>
 
 </dl></div>
 <div class="section" id="12">
@@ -1603,31 +1605,61 @@ Converts a mstring to its hexadecimal representation. No prefix like <tt class="
 
 </dd>
 <a id="newWString"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#newWString"><span class="Identifier">newWString</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">cstring</span> <span class="Operator">|</span> <span class="Identifier">string</span> <span class="Operator">|</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#wstring"><span class="Identifier">wstring</span></a></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#newWString"><span class="Identifier">newWString</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">cstring</span> <span class="Operator">|</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#wstring"><span class="Identifier">wstring</span></a></pre></dt>
 <dd>
 Return a new wstring.
 
 </dd>
+<a id="newWString,Natural"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#newWString%2CNatural"><span class="Identifier">newWString</span></a><span class="Other">(</span><span class="Identifier">L</span><span class="Other">:</span> <span class="Identifier">Natural</span><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#wstring"><span class="Identifier">wstring</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+Return a new wstring buffer.
+
+</dd>
 <a id="newMString"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#newMString"><span class="Identifier">newMString</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Operator">|</span> <span class="Identifier">cstring</span> <span class="Operator">|</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#mstring"><span class="Identifier">mstring</span></a></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#newMString"><span class="Identifier">newMString</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Operator">|</span> <span class="Identifier">cstring</span><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#mstring"><span class="Identifier">mstring</span></a></pre></dt>
 <dd>
 Return a new mstring.
 
 </dd>
+<a id="newMString,Natural"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#newMString%2CNatural"><span class="Identifier">newMString</span></a><span class="Other">(</span><span class="Identifier">L</span><span class="Other">:</span> <span class="Identifier">Natural</span><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#mstring"><span class="Identifier">mstring</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+Return a new mstring buffer.
+
+</dd>
 <a id="allocString"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#allocString"><span class="Identifier">allocString</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Operator">|</span> <span class="Identifier">cstring</span> <span class="Operator">|</span> <a href="winstr.html#wstring"><span class="Identifier">wstring</span></a> <span class="Operator">|</span> <a href="winstr.html#mstring"><span class="Identifier">mstring</span></a> <span class="Operator">|</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#pstring"><span class="Identifier">pstring</span></a></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#allocString"><span class="Identifier">allocString</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Operator">|</span> <span class="Identifier">cstring</span> <span class="Operator">|</span> <a href="winstr.html#wstring"><span class="Identifier">wstring</span></a> <span class="Operator">|</span> <a href="winstr.html#mstring"><span class="Identifier">mstring</span></a><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#pstring"><span class="Identifier">pstring</span></a></pre></dt>
+<dd>
+Create a string buffer, need to be dealloc. Exists only for optimization purposes.
+
+</dd>
+<a id="allocString,Natural"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#allocString%2CNatural"><span class="Identifier">allocString</span></a><span class="Other">(</span><span class="Identifier">L</span><span class="Other">:</span> <span class="Identifier">Natural</span><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#pstring"><span class="Identifier">pstring</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Create a string buffer, need to be dealloc. Exists only for optimization purposes.
 
 </dd>
 <a id="allocWString"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#allocWString"><span class="Identifier">allocWString</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">cstring</span> <span class="Operator">|</span> <span class="Identifier">string</span> <span class="Operator">|</span> <a href="winstr.html#wstring"><span class="Identifier">wstring</span></a> <span class="Operator">|</span> <a href="winstr.html#mstring"><span class="Identifier">mstring</span></a> <span class="Operator">|</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#pwstring"><span class="Identifier">pwstring</span></a></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#allocWString"><span class="Identifier">allocWString</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">cstring</span> <span class="Operator">|</span> <span class="Identifier">string</span> <span class="Operator">|</span> <a href="winstr.html#wstring"><span class="Identifier">wstring</span></a> <span class="Operator">|</span> <a href="winstr.html#mstring"><span class="Identifier">mstring</span></a><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#pwstring"><span class="Identifier">pwstring</span></a></pre></dt>
+<dd>
+Create a wstring buffer, need to be dealloc. Exists only for optimization purposes.
+
+</dd>
+<a id="allocWString,Natural"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#allocWString%2CNatural"><span class="Identifier">allocWString</span></a><span class="Other">(</span><span class="Identifier">L</span><span class="Other">:</span> <span class="Identifier">Natural</span><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#pwstring"><span class="Identifier">pwstring</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Create a wstring buffer, need to be dealloc. Exists only for optimization purposes.
 
 </dd>
 <a id="allocMString"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#allocMString"><span class="Identifier">allocMString</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Operator">|</span> <span class="Identifier">cstring</span> <span class="Operator">|</span> <a href="winstr.html#wstring"><span class="Identifier">wstring</span></a> <span class="Operator">|</span> <a href="winstr.html#mstring"><span class="Identifier">mstring</span></a> <span class="Operator">|</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#pmstring"><span class="Identifier">pmstring</span></a></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#allocMString"><span class="Identifier">allocMString</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Operator">|</span> <span class="Identifier">cstring</span> <span class="Operator">|</span> <a href="winstr.html#wstring"><span class="Identifier">wstring</span></a> <span class="Operator">|</span> <a href="winstr.html#mstring"><span class="Identifier">mstring</span></a><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#pmstring"><span class="Identifier">pmstring</span></a></pre></dt>
+<dd>
+Create a mstring buffer, need to be dealloc. Exists only for optimization purposes.
+
+</dd>
+<a id="allocMString,Natural"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#allocMString%2CNatural"><span class="Identifier">allocMString</span></a><span class="Other">(</span><span class="Identifier">L</span><span class="Other">:</span> <span class="Identifier">Natural</span><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#pmstring"><span class="Identifier">pmstring</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Create a mstring buffer, need to be dealloc. Exists only for optimization purposes.
 
@@ -2027,7 +2059,7 @@ Generate wstring or mstring buffer depend on conditional symbol: useWinAnsi. Use
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-04-13 13:13:15 UTC</small>
+        <small>Made with Nim. Generated: 2019-09-16 07:34:31 UTC</small>
       </div>
     </div>
   </div>

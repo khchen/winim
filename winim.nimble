@@ -1,6 +1,6 @@
 # Package
 
-version       = "3.2.3"
+version       = "3.2.4"
 author        = "Ward"
 description   = "Winim - Nim\'s Windows API and COM Library"
 license       = "MIT"
@@ -52,7 +52,8 @@ task comexample, "Build all the COM examples":
   exec "nim c examples/com/WinHttp_WinHttpRequest"
   exec "nim c examples/com/winmgmts"
   exec "nim c examples/com/WScript"
-  exec "nim c examples/com/nimDispatch/test"
+  exec "nim c examples/com/nimDispatch/server"
+  exec "nim c examples/com/nimDispatch/client"
 
 # Clean
 

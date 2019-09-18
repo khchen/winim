@@ -7,18 +7,17 @@
 import winim/com
 import threadpool
 
-proc thread(stream: ptr IStream): bool =
-  {.gcsafe.}:
-    CoInitialize(nil)
+proc thread(stream: ptr IStream): bool {.thread.} =
+  CoInitialize(nil)
 
-    var disp: ptr IDispatch
-    if SUCCEEDED CoGetInterfaceAndReleaseStream(stream, &IID_IDispatch, cast[ptr pointer](&disp)):
-      var dict = wrap(disp)
-      dict.add("child", "thread")
-      disp.Release()
+  var disp: ptr IDispatch
+  if SUCCEEDED CoGetInterfaceAndReleaseStream(stream, &IID_IDispatch, cast[ptr pointer](&disp)):
+    var dict = wrap(disp)
+    dict.add("child", "thread")
+    disp.Release()
 
-    COM_FullRelease()
-    CoUninitialize()
+  COM_FullRelease()
+  CoUninitialize()
 
 proc main() =
   var dict = CreateObject("Scripting.Dictionary")

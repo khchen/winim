@@ -1,3 +1,8 @@
+Version 3.2.4
+-------------
+* Add {.gcsafe.} pragma block to COM methods indirect call.
+* examples/com/nimDispatch: rename files and add client.nim.
+
 Version 3.2.3
 -------------
 * Update for Nim Compiler 0.20.99 (devel).

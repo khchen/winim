@@ -38,27 +38,10 @@ proc `&`*[T](x: var T): ptr T {.inline.} =
 
   result = x.addr
 
-
-# todo: is there a better implement?
-template `&`*(name: object): ptr type(name) =
-  ## Template to get pointer for const object. For example:
+proc `&`*(x: object): ptr type(x) {.importc: "&", nodecl.}
+  ## Use `&` to gets pointer for const object. For example:
   ##
   ## .. code-block:: Nim
   ##    # pUk is "ptr IUnknown" for some object
   ##    var pDisp: ptr IDispatch
   ##    pUk.QueryInterface(&IID_IDispatch, &pDisp)
-
-  when not declared(`ConstAddr name`):
-    proc `ConstAddr name`(): ptr type(name) =
-      var
-        globalPtr {.global.}: ptr type(name)
-        globalVar {.global.}: type(name)
-
-      if globalPtr == nil:
-        globalVar = name
-        globalPtr = globalVar.addr
-
-      result = globalPtr
-
-  `ConstAddr name`()
-

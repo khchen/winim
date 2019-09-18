@@ -26,7 +26,7 @@ when isMainModule:
     isExit = true
 
   nimDisp.regist("nimDispatch")
-  echo "End this program by run test.vbs or test.py..."
+  echo "Run client.vbs, client.py, client.nim to end this server..."
 
   while not isExit:
     nimDisp.inloop()

@@ -862,7 +862,7 @@ proc invokeRaw(self: com, name: string, invokeType: WORD, vargs: varargs[variant
 
   if self.disp.Invoke(dispid, &IID_NULL, LOCALE_USER_DEFAULT, invokeType, &dp, &ret, &excep, nil).ERR:
     if cast[pointer](excep.pfnDeferredFillIn).notNil:
-      discard excep.pfnDeferredFillIn(&excep)
+      {.gcsafe.}: discard excep.pfnDeferredFillIn(&excep)
 
     if excep.bstrSource.notNil:
       var err = $toVariant(excep.bstrSource)
@@ -1060,8 +1060,7 @@ proc Sink_Invoke(self: ptr IDispatch, dispid: DISPID, riid: REFIID, lcid: LCID, 
     sargs = newSeq[variant]()
     total = params.cArgs + params.cNamedArgs
 
-  {.gcsafe.}:
-    result = this.typeInfo.GetNames(dispid, &bname, 1, &nameCount)
+  result = this.typeInfo.GetNames(dispid, &bname, 1, &nameCount)
 
   if result == S_OK:
     name = $bname
@@ -1071,8 +1070,7 @@ proc Sink_Invoke(self: ptr IDispatch, dispid: DISPID, riid: REFIID, lcid: LCID, 
       sargs.add(newVariant(args[total-i]))
 
     try:
-      {.gcsafe.}:
-        vret = this.handler(this.parent, name, sargs)
+      {.gcsafe.}: vret = this.handler(this.parent, name, sargs)
 
     except:
       let e = getCurrentException()

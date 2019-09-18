@@ -142,9 +142,9 @@ when isMainModule:
 
     of ckMethod:
       if node.params.len == 0:
-        yield fmt"proc {node.name}*(self: ptr {node.self}): {node.typ} {{.winapi, inline.}} = self.lpVtbl.{node.memberName}(self)"
+        yield fmt"proc {node.name}*(self: ptr {node.self}): {node.typ} {{.winapi, inline.}} = {{.gcsafe.}}: self.lpVtbl.{node.memberName}(self)"
       else:
-        yield fmt"proc {node.name}*(self: ptr {node.self}, {node.params}): {node.typ} {{.winapi, inline.}} = self.lpVtbl.{node.memberName}(self, {node.paramNames})"
+        yield fmt"proc {node.name}*(self: ptr {node.self}, {node.params}): {node.typ} {{.winapi, inline.}} = {{.gcsafe.}}: self.lpVtbl.{node.memberName}(self, {node.paramNames})"
 
     of ckType:
       yield fmt"{node.name}* = {node.typ}"

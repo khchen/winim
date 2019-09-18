@@ -4,6 +4,8 @@
 #                 (c) Copyright 2016-2019 Ward
 #====================================================================
 
+# Demonstrates RPC via Windows Component Object Model.
+
 import strutils
 import winim/com
 
