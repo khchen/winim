@@ -872,7 +872,7 @@ proc `$$`*[I](a: array[I, char]|array[I, WCHAR]|ptr array[I, char]|ptr array[I, 
   elif a is ptr array[I, char]:
     cast[string](`ANSI->string`(cast[ptr char](a), a[].len, alloc=false))
   else:
-    $a
+    winstr.`$`(a)
 
 proc `+$$`*(s: string|cstring|ptr char|wstring|mstring|LPWSTR|BSTR|char|WCHAR): wstring {.inline.} =
   ## Convert any stringable type to wstring.
