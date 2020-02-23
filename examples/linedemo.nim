@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2019 Ward
+#                 (c) Copyright 2016-2020 Ward
 #====================================================================
 
 import winim/lean
@@ -69,6 +69,7 @@ proc main() =
     0, 0, hInstance, nil)
 
   ShowWindow(hwnd, SW_SHOW)
+  InvalidateRect(hwnd, nil, true)
   UpdateWindow(hwnd)
 
   while GetMessage(msg, 0, 0, 0) != 0:

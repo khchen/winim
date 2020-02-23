@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2019 Ward
+#                 (c) Copyright 2016-2020 Ward
 #====================================================================
 
 # Demonstrates RPC via Windows Component Object Model.
@@ -11,41 +11,23 @@ import winim/com
 
 type
   NimMethod* = proc (vargs: varargs[variant]): variant
-  NimMethodTuple = tuple[name: string, callback: NimMethod]
-  INimDispatch* {.pure.} = object
+  NimDispatch* {.pure.} = ref object
     lpVtbl: ptr IDispatchVtbl
     vtbl: IDispatchVtbl
-    methods: seq[NimMethodTuple]
-    ref_count: int
+    methods: seq[tuple[name: string, callback: NimMethod]]
     cookie: DWORD
 
-converter converterINimDispatchToIUnknown*(x: ptr INimDispatch): ptr IUnknown = cast[ptr IUnknown](x)
-converter converterINimDispatchToIDispatch*(x: ptr INimDispatch): ptr IDispatch = cast[ptr IDispatch](x)
-
-proc init(nimDisp: ptr INimDispatch) =
+proc init(nimDisp: NimDispatch) =
   nimDisp.lpVtbl = &nimDisp.vtbl
-  nimDisp.methods = newSeq[NimMethodTuple]()
-  GC_ref(nimDisp.methods)
+  nimDisp.methods = @[]
 
-  nimDisp.vtbl.AddRef = proc(self: ptr IUnknown): ULONG {.stdcall.} =
-    let nimDisp = cast[ptr INimDispatch](self)
-    inc nimDisp.ref_count
-    return ULONG nimDisp.ref_count
+  nimDisp.vtbl.AddRef = proc(self: ptr IUnknown): ULONG {.stdcall.} = 1
 
-  nimDisp.vtbl.Release = proc(self: ptr IUnknown): ULONG {.stdcall.} =
-    let nimDisp = cast[ptr INimDispatch](self)
-    dec nimDisp.ref_count
-    if nimDisp.ref_count == 0:
-      GC_unref(nimDisp.methods)
-      dealloc(nimDisp)
-      return 0
-
-    return ULONG nimDisp.ref_count
+  nimDisp.vtbl.Release = proc(self: ptr IUnknown): ULONG {.stdcall.} = 1
 
   nimDisp.vtbl.QueryInterface = proc(self: ptr IUnknown, riid: REFIID, ppvObject: ptr pointer): HRESULT {.stdcall.} =
     if IsEqualIID(riid, &IID_IUnknown) or IsEqualIID(riid, &IID_IDispatch):
       ppvObject[] = self
-      self.AddRef()
       return S_OK
     else:
       ppvObject[] = nil
@@ -58,7 +40,7 @@ proc init(nimDisp: ptr INimDispatch) =
     ppTInfo[] = nil
 
   nimDisp.vtbl.GetIDsOfNames = proc(self: ptr IDispatch, riid: REFIID, rgszNames: ptr LPOLESTR, cNames: UINT, lcid: LCID, rgDispId: ptr DISPID): HRESULT {.stdcall.} =
-    let nimDisp = cast[ptr INimDispatch](self)
+    let nimDisp = cast[NimDispatch](self)
     let name = $rgszNames[]
     for i, tup in nimDisp.methods:
       if name.cmpIgnoreCase(tup.name) == 0:
@@ -71,7 +53,7 @@ proc init(nimDisp: ptr INimDispatch) =
       return DISP_E_UNKNOWNNAME
 
   nimDisp.vtbl.Invoke = proc(self: ptr IDispatch, dispIdMember: DISPID, riid: REFIID, lcid: LCID, wFlags: WORD, pDispParams: ptr DISPPARAMS, pVarResult: ptr VARIANT, pExcepInfo: ptr EXCEPINFO, puArgErr: ptr UINT): HRESULT {.stdcall.} =
-    let nimDisp = cast[ptr INimDispatch](self)
+    let nimDisp = cast[NimDispatch](self)
     let index = dispIdMember - 1
     if index <= nimDisp.methods.len:
       var args = newSeq[variant](pDispParams.cArgs)
@@ -89,10 +71,10 @@ proc init(nimDisp: ptr INimDispatch) =
 
     return DISP_E_MEMBERNOTFOUND
 
-proc add*(nimDisp: ptr INimDispatch, name: string, callback: NimMethod) =
+proc add*(nimDisp: NimDispatch, name: string, callback: NimMethod) =
   nimDisp.methods.add (name, callback)
 
-proc regist*(nimDisp: ptr INimDispatch, name: string): bool {.discardable.} =
+proc regist*(nimDisp: NimDispatch, name: string): bool {.discardable.} =
   if nimDisp.cookie != 0:
     return false
 
@@ -106,7 +88,7 @@ proc regist*(nimDisp: ptr INimDispatch, name: string): bool {.discardable.} =
         cast[ptr IUnknown](nimDisp), pMoniker, &nimDisp.cookie):
           return true
 
-proc revoke*(nimDisp: ptr INimDispatch): bool {.discardable.} =
+proc revoke*(nimDisp: NimDispatch): bool {.discardable.} =
   if nimDisp.cookie == 0:
     return false
 
@@ -116,11 +98,11 @@ proc revoke*(nimDisp: ptr INimDispatch): bool {.discardable.} =
     if SUCCEEDED pROT.Revoke(nimDisp.cookie):
       return true
 
-proc inloop*(nimDisp: ptr INimDispatch) =
+proc inloop*(nimDisp: NimDispatch) =
   var msg: MSG
   if PeekMessage(&msg, 0, 0, 0, PM_REMOVE) != 0:
     DispatchMessage(&msg)
 
-proc newNimDispatch*(): ptr INimDispatch =
-  result = cast[ptr INimDispatch](alloc0(sizeof(INimDispatch)))
+proc newNimDispatch*(): NimDispatch =
+  result = NimDispatch()
   result.init()

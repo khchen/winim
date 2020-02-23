@@ -1,3 +1,7 @@
+Version 3.3.0
+-------------
+* Rewrite winim/winstr for --gc:arc.
+
 Version 3.2.4
 -------------
 * Add {.gcsafe.} pragma block to COM methods indirect call.

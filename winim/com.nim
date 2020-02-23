@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2019 Ward
+#                 (c) Copyright 2016-2020 Ward
 #
 #           Windows COM Object And COM Event Supports
 #
@@ -117,15 +117,15 @@ proc getCurrentCOMError*(): ref COMError {.inline.} =
   result = (ref COMError)(getCurrentException())
 
 proc desc*(e: ref COMError): string =
-  var buffer = allocWString(4096)
-  defer: dealloc(buffer)
+  var buffer = newWString(4096)
 
   FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM or FORMAT_MESSAGE_IGNORE_INSERTS,
                nil,
                DWORD e.hresult,
                DWORD MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-               cast[wstring](buffer), 4096, nil)
-  result = $cast[wstring](buffer)
+               buffer, 4096, nil)
+
+  result = $buffer
 
 proc release(x: com) =
   if x.notNil and x.disp.notNil:
@@ -292,9 +292,8 @@ proc copy*(x: variant): variant =
 proc toVariant*(x: string|cstring|mstring): variant =
   result.init
   result.raw.vt = VT_BSTR.VARTYPE
-  var pws = allocWString(x)
-  result.raw.bstrVal = SysAllocString(&(cast[wstring](pws)))
-  free(pws)
+  var ws = newWString(x)
+  result.raw.bstrVal = SysAllocString(&ws)
 
 proc toVariant*(x: wstring): variant =
   result.init
@@ -840,10 +839,8 @@ proc invokeRaw(self: com, name: string, invokeType: WORD, vargs: varargs[variant
     dispid: DISPID
     ret: VARIANT
     excep: EXCEPINFO
-    wstr = allocWString(name)
-    pwstr = &(cast[wstring](wstr))
-
-  defer: free(wstr)
+    wstr = newWString(name)
+    pwstr = &wstr
 
   if self.disp.GetIDsOfNames(&IID_NULL, cast[ptr LPOLESTR](&pwstr), 1, LOCALE_USER_DEFAULT, &dispid).ERR:
     # if the method name is not recognized, maybe it is an enum name

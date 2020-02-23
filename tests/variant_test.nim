@@ -4,10 +4,12 @@
 #                 (c) Copyright 2016-2018 Ward
 #====================================================================
 
+{.push hint[XDeclaredButNotUsed]: off.}
+
 import winim/com except FAILED # conflict with TestStatus.FAILED
 import unittest
 
-suite "Winim COM Module Varient Test Suites":
+suite "Test Suites for Varient in winim/com":
   setup:
     template Check(x: untyped) =
       var v = toVariant(x)

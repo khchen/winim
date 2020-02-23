@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2019 Ward
+#                 (c) Copyright 2016-2020 Ward
 #
 #                Winim minified code generator
 #
@@ -398,7 +398,7 @@ when isMainModule:
       #====================================================================
       #
       #               Winim - Nim's Windows API Module
-      #                 (c) Copyright 2016-2019 Ward
+      #                 (c) Copyright 2016-2020 Ward
       #
       #====================================================================
 
@@ -456,7 +456,7 @@ when isMainModule:
     const version = getVersion()
     echo """
 Winimx - Winim minified code generator [Database: Winim $1]
-Copyright (c) 2019 by Ward
+Copyright (c) 2019-2020 by Ward
 
 Usage: winimx [options] inputfile(s)
 

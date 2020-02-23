@@ -1,15 +1,17 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2019 Ward
+#                 (c) Copyright 2016-2020 Ward
 #====================================================================
+
+{.push hint[XDeclaredButNotUsed]: off.}
 
 import winim/core except FAILED # conflict with TestStatus.FAILED
 import winim/inc/objbase # for SysAllocString
 import winim/[winstr, utils]
 import unittest, strutils, unicode
 
-suite "Winim Winstr Module Test Suites":
+suite "Test Suites for winim/winstr":
   setup:
     var
       str = "English Test 中文測試"
@@ -17,6 +19,7 @@ suite "Winim Winstr Module Test Suites":
       wstr = +$"English Test 中文測試"
       cstr = cstring "English Test 中文測試"
       astr = cstring cast[string](mstr)
+      mbstr = string(-$"English Test 中文測試")
 
       lpstr = &(-$"English Test 中文測試") # a.k.a cstring
       lpwstr = &(L"English Test 中文測試")
@@ -61,7 +64,7 @@ suite "Winim Winstr Module Test Suites":
 
       &nilstr == &""
       &nilmstr == &""
-      &nilwstr == nil
+      &nilwstr == &""
       &nilcstr == nil
 
   test "String Conversion":
@@ -72,6 +75,7 @@ suite "Winim Winstr Module Test Suites":
       toHex(wstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A"
       toHex(cstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
       toHex(astr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
+      toHex(mbstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
 
       # convert to string (to utf8)
       toHex($str) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
@@ -79,6 +83,7 @@ suite "Winim Winstr Module Test Suites":
       toHex($wstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
       toHex($cstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
       toHex($$astr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
+      toHex($$mbstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
 
       # convert to mstring (to ansi)
       toHex(-$str) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
@@ -86,6 +91,7 @@ suite "Winim Winstr Module Test Suites":
       toHex(-$wstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
       toHex(-$cstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
       toHex(-$$astr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
+      toHex(-$$mbstr) == "456E676C697368205465737420A4A4A4E5B4FAB8D5"
 
       # convert to wstring (to unicode)
       toHex(+$str) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A"
@@ -93,6 +99,7 @@ suite "Winim Winstr Module Test Suites":
       toHex(+$wstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A"
       toHex(+$cstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A"
       toHex(+$$astr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A"
+      toHex(+$$mbstr) == "45006E0067006C006900730068002000540065007300740020002D4E87652C6E668A"
 
       # convert from windows' string buffer to nim's string
       toHex($$lpstr) == "456E676C697368205465737420E4B8ADE69687E6B8ACE8A9A6"
@@ -227,32 +234,23 @@ suite "Winim Winstr Module Test Suites":
     var m = -$"12345"
     var w = +$"12345"
 
-    expect IndexError: discard s[5]
-    expect IndexError: discard m[5]
-    expect IndexError: discard w[5]
+    when not defined(nimv2):
+      expect IndexError: discard s[5]
+      expect IndexError: discard m[5]
+      expect IndexError: discard w[5]
 
-    expect IndexError: discard s[-1..0]
-    expect IndexError: discard m[-1..0]
-    expect IndexError: discard w[-1..0]
+      expect IndexError: discard s[-1..0]
+      expect IndexError: discard m[-1..0]
+      expect IndexError: discard w[-1..0]
 
-    expect IndexError: discard s[0..s.len+1]
-    expect IndexError: discard m[0..m.len+1]
-    expect IndexError: discard w[0..w.len]
+      expect IndexError: discard s[0..s.len+1]
+      expect IndexError: discard m[0..m.len+1]
+      expect IndexError: discard w[0..w.len]
 
     check:
       s.substr(-1, 10) == s
       m.substr(-1, 10) == m
       w.substr(-1, 10) == w
-
-  test "Assignment Behavior":
-    var newstr = str
-    var newmstr = mstr
-    var newwstr = wstr
-
-    check:
-      &newstr != &str # by value
-      &newmstr != &mstr # by value
-      &newwstr == &wstr # by ref
 
   test "Low Level Buffer Fill":
     var byteBuffer: array[10, byte]
@@ -356,7 +354,48 @@ suite "Winim Winstr Module Test Suites":
     pWcharBuffer <<< L"中文"
     check(wcharBuffer.toHex == "2D4E87650000")
 
-  test "mIndex (mString Index)":
+  test "Array/Pointer to String Conversion":
+    var utf8Buffer: array[7, char]
+    var mbcsBuffer: array[5, char]
+    var wcharBuffer: array[3, WCHAR]
+    var pUtf8Buffer = addr utf8Buffer
+    var pMbcsBuffer  = addr mbcsBuffer
+    var pWcharBuffer  = addr wcharBuffer
+
+    utf8Buffer.resetFF
+    pUtf8Buffer <<< "中文"
+    mbcsBuffer.resetFF
+    pMbcsBuffer <<< -$"中文"
+    wcharBuffer.resetFF
+    pWcharBuffer <<< L"中文"
+
+    check:
+      toHex(%$utf8Buffer) == "E4B8ADE6968700"
+      toHex(+$utf8Buffer) == "2D4E87650000"
+      toHex(-$utf8Buffer) == "A4A4A4E500"
+
+      toHex($$mbcsBuffer) == "E4B8ADE6968700"
+      toHex(+$$mbcsBuffer) == "2D4E87650000"
+      toHex(-$$mbcsBuffer) == "A4A4A4E500"
+
+      toHex(%$wcharBuffer) == "E4B8ADE6968700"
+      toHex(+$wcharBuffer) == "2D4E87650000"
+      toHex(-$wcharBuffer) == "A4A4A4E500"
+
+      toHex($pUtf8Buffer) == "E4B8ADE6968700"
+      toHex(+$pUtf8Buffer) == "2D4E87650000"
+      toHex(-$pUtf8Buffer) == "A4A4A4E500"
+
+      toHex($$pMbcsBuffer) == "E4B8ADE6968700"
+      toHex(+$$pMbcsBuffer) == "2D4E87650000"
+      toHex(-$$pMbcsBuffer) == "A4A4A4E500"
+
+      toHex($pWcharBuffer) == "E4B8ADE6968700"
+      toHex(+$pWcharBuffer) == "2D4E87650000"
+      toHex(-$pWcharBuffer) == "A4A4A4E500"
+
+
+  test "MBCS characters Index (mIndex)":
     check(wstr[13] == L"中"[0])
     check(mstr[mIndex 13] == -$"中")
 
