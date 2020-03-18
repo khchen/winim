@@ -1,3 +1,7 @@
+Version 3.3.1
+-------------
+* winstr: Fix bug.
+
 Version 3.3.0
 -------------
 * Rewrite winim/winstr for --gc:arc.
@@ -14,19 +18,19 @@ Version 3.2.3
 
 Version 3.2.2
 -------------
-* winimx: allow wildcard and walking over the directory.
+* winimx: Allow wildcard and walking over the directory.
 * Fix bugs.
 
 Version 3.2.1
 -------------
-* winstr: remove TChar (already defined in windef).
-* winimx: fix support for visual c compiler and i386 (x86) mode.
+* winstr: Remove TChar (already defined in windef).
+* winimx: Fix support for visual c compiler and i386 (x86) mode.
 * Remove miniz dependency.
 
 Version 3.2.0
 -------------
-* objbase: add "exdispid.h".
-* mshtml: add "mshtmhst.h".
+* objbase: Add "exdispid.h".
+* mshtml: Add "mshtmhst.h".
 * Add some missing converter for interface.
 
 Version 3.1.1
@@ -58,7 +62,7 @@ Version 2.6.0
 
 Version 2.5.2
 -------------
-* commctrl: add "commoncontrols.h".
+* commctrl: Add "commoncontrols.h".
 
 Version 2.5.1
 -------------
@@ -79,15 +83,15 @@ Version 2.4.3
 -------------
 * com: call CoInitialize() only when needed. This allow the user to
   selects different apartment or OleInitialize().
-* winbase: add InterlockedXXX functions.
-* example: add nimDispatch example. It create a IDispatch object on
+* winbase: Add InterlockedXXX functions.
+* example: Add nimDispatch example. It create a IDispatch object on
   local "running object table (ROT)". So that RPC via COM object is
   achieved.
 
 Version 2.4.2
 -------------
-* winuser: fix bugs about MAKEINTRESOURCE template.
-* commctrl: fix bugs about templates use NULL for handle (should be 0).
+* winuser: Fix bugs about MAKEINTRESOURCE template.
+* commctrl: Fix bugs about templates use NULL for handle (should be 0).
 
 Version 2.4.1
 -------------
@@ -141,20 +145,20 @@ Version 2.0.0
 
 Version 1.2.1
 --------------
-* winapi: add double quotes to resource file
-* winapi: fix bug about GetWindowLongPtr and NMHDR etc.
+* winapi: Add double quotes to resource file
+* winapi: Fix bug about GetWindowLongPtr and NMHDR etc.
 
 Version 1.2.0
 -------------
-* winapi: redefine const to int literals if possible
-* winapi: convert enum to const definition
-* winapi: add more definition in shobjidl.h, propsys.h, shtypes.h,
+* winapi: Redefine const to int literals if possible
+* winapi: Convert enum to const definition
+* winapi: Add more definition in shobjidl.h, propsys.h, shtypes.h,
   and structuredquerycondition.h
-* com: better error message on COMError exception
+* com: Better error message on COMError exception
 
 Version 1.1.0
 -------------
-* winapi: add -d:winstyle to enable windows visual styles
+* winapi: Add -d:winstyle to enable windows visual styles
 
 Version 1.0.0
 -------------

@@ -19,7 +19,7 @@ comScript:
   for i, j in ["Mammals", "Birds", "Reptiles", "Fishes", "Plants"]:
     obj.activeSheet.cells(1, i + 1) = j # this line needs comScript macro
 
-  for cell in obj.activeSheet.range("A1:E1"): #"
+  for cell in obj.activeSheet.range("A1:E1"):
     cell.interior.color = RGB(0xee, 0xdd, 0x82)
     cell.interior.pattern = 1
     cell.font.size = 13

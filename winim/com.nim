@@ -52,7 +52,7 @@ else:
   const hasTraceTable = true
 
 type
-  COMError* = object of Exception
+  COMError* = object of CatchableError
     hresult*: HRESULT
   COMException* = object of COMError
   VariantConversionError* = object of ValueError
@@ -67,6 +67,7 @@ proc free(x: pointer) =
     system.dealloc(x)
 
 converter voidpp_converter(x: ptr ptr object): ptr pointer = cast[ptr pointer](x)
+converter vartype_converter(x: VARENUM): VARTYPE = VARTYPE x
 
 # make these const store in global scope to avoid repeat init in every proc
 discard &IID_NULL
@@ -254,7 +255,7 @@ proc rawType*(x: variant): VARTYPE {.inline.} =
 
 proc rawTypeDesc*(x: variant): string =
   var dimensions: UINT = 0
-  if (x.raw.vt and VT_ARRAY.VARTYPE) != 0:
+  if (x.raw.vt and VT_ARRAY) != 0:
     dimensions = SafeArrayGetDim(x.raw.parray)
 
   result = x.raw.vt.typeDesc(dimensions)
@@ -291,89 +292,89 @@ proc copy*(x: variant): variant =
 
 proc toVariant*(x: string|cstring|mstring): variant =
   result.init
-  result.raw.vt = VT_BSTR.VARTYPE
+  result.raw.vt = VT_BSTR
   var ws = newWString(x)
   result.raw.bstrVal = SysAllocString(&ws)
 
 proc toVariant*(x: wstring): variant =
   result.init
-  result.raw.vt = VT_BSTR.VARTYPE
+  result.raw.vt = VT_BSTR
   result.raw.bstrVal = SysAllocString(&x)
 
 proc toVariant*(x: BSTR): variant =
   result.init
-  result.raw.vt = VT_BSTR.VARTYPE
+  result.raw.vt = VT_BSTR
   result.raw.bstrVal = SysAllocString(x)
 
 proc toVariant*(x: bool): variant =
   result.init
-  result.raw.vt = VT_BOOL.VARTYPE
+  result.raw.vt = VT_BOOL
   result.raw.boolVal = if x: VARIANT_TRUE else: VARIANT_FALSE
 
 proc toVariant*(x: SomeInteger|enum): variant =
   result.init
   when x.type is SomeSignedInt:
     when sizeof(x) == 1:
-      result.raw.vt = VT_I1.VARTYPE
+      result.raw.vt = VT_I1
       result.raw.bVal = cast[uint8](x)
     elif sizeof(x) == 2:
-      result.raw.vt = VT_I2.VARTYPE
+      result.raw.vt = VT_I2
       result.raw.iVal = x.int16
     elif sizeof(x) == 4:
-      result.raw.vt = VT_I4.VARTYPE
+      result.raw.vt = VT_I4
       result.raw.lVal = x.int32
     else:
-      result.raw.vt = VT_I8.VARTYPE
+      result.raw.vt = VT_I8
       result.raw.llVal = x.int64
   else:
     when sizeof(x) == 1:
-      result.raw.vt = VT_UI1.VARTYPE
+      result.raw.vt = VT_UI1
       result.raw.bVal = x.uint8
     elif sizeof(x) == 2:
-      result.raw.vt = VT_UI2.VARTYPE
+      result.raw.vt = VT_UI2
       result.raw.uiVal = x.uint16
     elif sizeof(x) == 4:
-      result.raw.vt = VT_UI4.VARTYPE
+      result.raw.vt = VT_UI4
       result.raw.ulVal = x.int32 # ULONG is declared as int32 for compatible
     else:
-      result.raw.vt = VT_UI8.VARTYPE
+      result.raw.vt = VT_UI8
       result.raw.ullVal = x.uint64
 
 proc toVariant*(x: SomeFloat): variant =
   result.init
   when sizeof(x) == 4:
-    result.raw.vt = VT_R4.VARTYPE
+    result.raw.vt = VT_R4
     result.raw.fltVal = x.float32
   else:
-    result.raw.vt = VT_R8.VARTYPE
+    result.raw.vt = VT_R8
     result.raw.dblVal = x.float64
 
 proc toVariant*(x: char): variant =
   result.init
-  result.raw.vt = VT_UI1.VARTYPE
+  result.raw.vt = VT_UI1
   result.raw.bVal = x.byte
 
 proc toVariant*(x: pointer): variant =
   result.init
-  result.raw.vt = VT_PTR.VARTYPE
+  result.raw.vt = VT_PTR
   result.raw.byref = x
 
 proc toVariant*(x: ptr IDispatch): variant =
   result.init
   x.AddRef()
-  result.raw.vt = VT_DISPATCH.VARTYPE
+  result.raw.vt = VT_DISPATCH
   result.raw.pdispVal = x
 
 proc toVariant*(x: com): variant =
   result.init
   x.disp.AddRef()
-  result.raw.vt = VT_DISPATCH.VARTYPE
+  result.raw.vt = VT_DISPATCH
   result.raw.pdispVal = x.disp
 
 proc toVariant*(x: ptr IUnknown): variant =
   result.init
   x.AddRef()
-  result.raw.vt = VT_UNKNOWN.VARTYPE
+  result.raw.vt = VT_UNKNOWN
   result.raw.punkVal = x
 
 proc toVariant*(x: SYSTEMTIME): variant =
@@ -383,7 +384,7 @@ proc toVariant*(x: SYSTEMTIME): variant =
   const ONETHOUSANDMILLISECONDS = 0.0000115740740740'f64
   var x = x
   result.init
-  result.raw.vt = VT_DATE.VARTYPE
+  result.raw.vt = VT_DATE
 
   let wMilliSeconds = float x.wMilliseconds
   x.wMilliseconds = 0
@@ -396,7 +397,7 @@ proc toVariant*(x: SYSTEMTIME): variant =
 
 proc toVariant*(x: FILETIME): variant =
   result.init
-  result.raw.vt = VT_DATE.VARTYPE
+  result.raw.vt = VT_DATE
 
   var st: SYSTEMTIME
   var date: float64
@@ -408,7 +409,7 @@ proc toVariant*(x: FILETIME): variant =
 proc toVariant*(x: ptr SomeInteger|ptr SomeFloat|ptr char|ptr bool|ptr BSTR): variant =
   result = toVariant(x[])
   result.raw.byref = cast[pointer](x)
-  result.raw.vt = result.raw.vt or VT_BYREF.VARTYPE
+  result.raw.vt = result.raw.vt or VT_BYREF
 
 proc toVariant*(x: VARIANT): variant =
   result.init
@@ -418,7 +419,7 @@ proc toVariant*(x: VARIANT): variant =
 proc toVariant*(x: variant): variant =
   result.init
   if x.isNil: # nil.variant for missing optional parameters
-    result.raw.vt = VT_ERROR.VARTYPE
+    result.raw.vt = VT_ERROR
     result.raw.scode = DISP_E_PARAMNOTFOUND
   else:
     result = x.copy
@@ -426,9 +427,9 @@ proc toVariant*(x: variant): variant =
 template toVariant1D(x: typed, vt: VARENUM) =
   var sab: array[1, SAFEARRAYBOUND]
   sab[0].cElements = x.len.ULONG
-  result.raw.parray = SafeArrayCreate(vt.VARTYPE, 1, &sab[0])
+  result.raw.parray = SafeArrayCreate(VARTYPE vt, 1, &sab[0])
   if result.raw.parray == nil:
-    raise newException(VariantConversionError, vcErrorMsg("openarray", (vt.VARTYPE or VT_ARRAY.VARTYPE).typeDesc(1)))
+    raise newException(VariantConversionError, vcErrorMsg("openarray", VARTYPE(vt or VT_ARRAY).typeDesc(1)))
 
   for i in 0..<x.len:
     var
@@ -449,9 +450,9 @@ template toVariant2D(x: typed, vt: VARENUM) =
   for i in 0..<x.len:
     if x[i].len.ULONG > sab[1].cElements: sab[1].cElements = x[i].len.ULONG
 
-  result.raw.parray = SafeArrayCreate(vt.VARTYPE, 2, &sab[0])
+  result.raw.parray = SafeArrayCreate(VARTYPE vt, 2, &sab[0])
   if result.raw.parray == nil:
-    raise newException(VariantConversionError, vcErrorMsg("openarray", (vt.VARTYPE or VT_ARRAY.VARTYPE).typeDesc(2)))
+    raise newException(VariantConversionError, vcErrorMsg("openarray", VARTYPE(vt or VT_ARRAY).typeDesc(2)))
 
   for i in 0..<x.len:
     for j in 0..<x[i].len:
@@ -475,9 +476,9 @@ template toVariant3D(x: typed, vt: VARENUM) =
     for j in 0..<x[i].len:
       if x[i][j].len.ULONG > sab[2].cElements: sab[2].cElements = x[i][j].len.ULONG
 
-  result.raw.parray = SafeArrayCreate(vt.VARTYPE, 3, &sab[0])
+  result.raw.parray = SafeArrayCreate(VARTYPE vt, 3, &sab[0])
   if result.raw.parray == nil:
-    raise newException(VariantConversionError, vcErrorMsg("openarray", (vt.VARTYPE or VT_ARRAY.VARTYPE).typeDesc(3)))
+    raise newException(VariantConversionError, vcErrorMsg("openarray", VARTYPE(vt or VT_ARRAY).typeDesc(3)))
 
   for i in 0..<x.len:
     for j in 0..<x[i].len:
@@ -495,12 +496,12 @@ template toVariant3D(x: typed, vt: VARENUM) =
 
 proc toVariant*[T](x: openarray[T], vt: VARENUM = VT_VARIANT): variant =
   result.init
-  result.raw.vt = VT_ARRAY.VARTYPE or vt.VARTYPE
+  result.raw.vt = VARTYPE(VT_ARRAY or vt)
 
   when x[0].type is array|seq:
     when x[0][0].type is array|seq:
       when x[0][0][0].type is array|seq:
-        raise newException(VariantConversionError, vcErrorMsg("openarray", (vt.VARTYPE or VT_ARRAY.VARTYPE).typeDesc(4)))
+        raise newException(VariantConversionError, vcErrorMsg("openarray", VARTYPE(vt or VT_ARRAY).typeDesc(4)))
       else:
         toVariant3D(x, vt)
     else:
@@ -522,7 +523,7 @@ template fromVariant1D(x, dimensions: typed) =
     for i in 0..<xLen:
       var indices = i.LONG + xLbound
       result[i].init
-      if vt == VT_VARIANT.VARTYPE:
+      if vt == VT_VARIANT:
         discard SafeArrayGetElement(x.raw.parray, &indices, &result[i].raw)
       else:
         result[i].raw.vt = vt
@@ -553,7 +554,7 @@ template fromVariant2D(x, dimensions: typed) =
       for j in 0..<yLen:
         var indices = [i.LONG + xLbound, j.LONG + yLbound]
         result[i][j].init
-        if vt == VT_VARIANT.VARTYPE:
+        if vt == VT_VARIANT:
           discard SafeArrayGetElement(x.raw.parray, &indices[0], &result[i][j].raw)
         else:
           result[i][j].raw.vt = vt
@@ -590,7 +591,7 @@ template fromVariant3D(x, dimensions: typed) =
         for k in 0..<zLen:
           var indices = [i.LONG + xLbound, j.LONG + yLbound, k.LONG + zLbound]
           result[i][j][k].init
-          if vt == VT_VARIANT.VARTYPE:
+          if vt == VT_VARIANT:
             discard SafeArrayGetElement(x.raw.parray, &indices[0], &result[i][j][k].raw)
           else:
             result[i][j][k].raw.vt = vt
@@ -606,20 +607,20 @@ proc fromVariant*[T](x: variant): T =
     result = x.raw
 
   else:
-    const VT_BYREF_VARIANT = VT_BYREF.VARTYPE or VT_VARIANT.VARTYPE
+    const VT_BYREF_VARIANT = VT_BYREF or VT_VARIANT
     if (x.raw.vt and VT_BYREF_VARIANT) == VT_BYREF_VARIANT:
       var v: VARIANT = x.raw.pvarVal[]
       return fromVariant[T](newVariant(v))
 
     var dimensions: UINT = 0
-    if (x.raw.vt and VT_ARRAY.VARTYPE) != 0:
+    if (x.raw.vt and VT_ARRAY) != 0:
       dimensions = SafeArrayGetDim(x.raw.parray)
 
     when T is COMArray1D: fromVariant1D(x, dimensions)
     elif T is COMArray2D: fromVariant2D(x, dimensions)
     elif T is COMArray3D: fromVariant3D(x, dimensions)
     elif T is ptr and not (T is ptr IDispatch) and not (T is ptr IUnknown):
-      if (x.raw.vt and VT_BYREF.VARTYPE) != 0:
+      if (x.raw.vt and VT_BYREF) != 0:
         result = cast[T](x.raw.byref)
 
       else:
@@ -651,12 +652,12 @@ proc fromVariant*[T](x: variant): T =
         hr: HRESULT
         needClear: bool
 
-      if x.raw.vt == targetVt.VARTYPE:
+      if x.raw.vt == targetVt:
         hr = S_OK
         needClear = false
         ret = x.raw
       else:
-        hr = VariantChangeType(&ret, x.raw.unsafeaddr, 16, targetVt.VARTYPE)
+        hr = VariantChangeType(&ret, x.raw.unsafeaddr, 16, targetVt)
         needClear = true
 
       defer:
