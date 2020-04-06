@@ -279,6 +279,9 @@ proc unwrap*(x: com): ptr IDispatch {.inline.} =
 proc unwrap*(x: variant): VARIANT {.inline.} =
   result = x.raw
 
+proc isNull*(x: variant): bool {.inline.} =
+  result = (x.raw.vt == VT_NULL)
+
 proc newVariant*(x: VARIANT): variant =
   result.init
   if VariantCopy(&result.raw, x.unsafeaddr).FAILED:
@@ -638,7 +641,7 @@ proc fromVariant*[T](x: variant): T =
       elif T is wstring:        targetVt = VT_BSTR;     targetName = "wstring"
       elif T is char:           targetVt = VT_UI1;      targetName = "char"
       elif T is SomeInteger:    targetVt = VT_I8;       targetName = "integer"
-      elif T is SomeFloat:     targetVt = VT_R8;       targetName = "float"
+      elif T is SomeFloat:      targetVt = VT_R8;       targetName = "float"
       elif T is bool:           targetVt = VT_BOOL;     targetName = "bool"
       elif T is com:            targetVt = VT_DISPATCH; targetName = "com object"
       elif T is ptr IDispatch:  targetVt = VT_DISPATCH; targetName = "ptr IDispatch"
@@ -656,6 +659,12 @@ proc fromVariant*[T](x: variant): T =
         hr = S_OK
         needClear = false
         ret = x.raw
+      elif x.raw.vt == VT_NULL and targetVt == VT_BSTR:
+        # convert VT_NULL to empty string
+        hr = S_OK
+        needClear = true
+        ret.vt = VT_BSTR
+        ret.bstrVal = SysAllocString("")
       else:
         hr = VariantChangeType(&ret, x.raw.unsafeaddr, 16, targetVt)
         needClear = true

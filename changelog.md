@@ -1,3 +1,9 @@
+Version 3.3.2
+-------------
+* com: Add isNull() to test null variant (VT_NULL).
+* com: Null variant can convert to empty string instead of raising an error.
+* examples/com: Add diskinfo.nim.
+
 Version 3.3.1
 -------------
 * winstr: Fix bug.
