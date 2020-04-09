@@ -2353,7 +2353,7 @@ type
   IMAGE_RELOCATION_UNION1* {.pure, union.} = object
     VirtualAddress*: DWORD
     RelocCount*: DWORD
-  IMAGE_RELOCATION* {.pure.} = object
+  IMAGE_RELOCATION* {.pure, packed.} = object
     union1*: IMAGE_RELOCATION_UNION1
     SymbolTableIndex*: DWORD
     Type*: WORD
@@ -2361,7 +2361,7 @@ type
   IMAGE_LINENUMBER_Type* {.pure, union.} = object
     SymbolTableIndex*: DWORD
     VirtualAddress*: DWORD
-  IMAGE_LINENUMBER* {.pure.} = object
+  IMAGE_LINENUMBER* {.pure, packed.} = object
     Type*: IMAGE_LINENUMBER_Type
     Linenumber*: WORD
   PIMAGE_LINENUMBER* = ptr IMAGE_LINENUMBER
@@ -2799,7 +2799,7 @@ type
   PCOMPATIBILITY_CONTEXT_ELEMENT* = ptr COMPATIBILITY_CONTEXT_ELEMENT
   ACTIVATION_CONTEXT_COMPATIBILITY_INFORMATION* {.pure.} = object
     ElementCount*: DWORD
-    Elements*: ptr COMPATIBILITY_CONTEXT_ELEMENT
+    Elements*: UncheckedArray[COMPATIBILITY_CONTEXT_ELEMENT]
   PACTIVATION_CONTEXT_COMPATIBILITY_INFORMATION* = ptr ACTIVATION_CONTEXT_COMPATIBILITY_INFORMATION
 const
   MAX_SUPPORTED_OS_NUM* = 4
@@ -2904,12 +2904,12 @@ type
     ulSize*: DWORD
     szLogicalLogFile*: array[MAXLOGICALLOGNAMESIZE, WCHAR]
     ulNumRecords*: DWORD
-    pEventLogRecords*: ptr EVENTLOGRECORD
+    pEventLogRecords*: UncheckedArray[EVENTLOGRECORD]
   PEVENTSFORLOGFILE* = ptr EVENTSFORLOGFILE
   PACKEDEVENTINFO* {.pure.} = object
     ulSize*: DWORD
     ulNumEventsForLogFile*: DWORD
-    ulOffsets*: ptr DWORD
+    ulOffsets*: UncheckedArray[DWORD]
   PPACKEDEVENTINFO* = ptr PACKEDEVENTINFO
   TAPE_ERASE* {.pure.} = object
     Type*: DWORD
@@ -9209,6 +9209,7 @@ when winimCpu64:
   type
     SLIST_ENTRY* {.pure.} = object
       Next*: ptr SLIST_ENTRY
+      padding*: array[8, byte]
 when winimCpu32:
   type
     SLIST_HEADER_STRUCT1* {.pure.} = object

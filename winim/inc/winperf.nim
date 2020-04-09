@@ -20,7 +20,7 @@ type
     NumObjectTypes*: DWORD
     DefaultObject*: LONG
     SystemTime*: SYSTEMTIME
-    padding*: int32
+    padding*: array[4, byte]
     PerfTime*: LARGE_INTEGER
     PerfFreq*: LARGE_INTEGER
     PerfTime100nSec*: LARGE_INTEGER

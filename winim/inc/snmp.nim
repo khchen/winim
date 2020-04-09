@@ -26,7 +26,7 @@ type
   AsnNetworkAddress* = AsnOctetString
   AsnDisplayString* = AsnOctetString
   AsnOpaque* = AsnOctetString
-  AsnObjectIdentifier* {.pure.} = object
+  AsnObjectIdentifier* {.pure, packed.} = object
     idLength*: UINT
     ids*: ptr UINT
   AsnObjectName* = AsnObjectIdentifier
@@ -43,14 +43,15 @@ type
     gauge*: AsnGauge32
     ticks*: AsnTimeticks
     arbitrary*: AsnOpaque
-  AsnAny* {.pure.} = object
+  AsnAny* {.pure, packed.} = object
     asnType*: BYTE
+    padding*: array[3, byte]
     asnValue*: AsnAny_asnValue
   AsnObjectSyntax* = AsnAny
   SnmpVarBind* {.pure.} = object
     name*: AsnObjectName
     value*: AsnObjectSyntax
-  SnmpVarBindList* {.pure.} = object
+  SnmpVarBindList* {.pure, packed.} = object
     list*: ptr SnmpVarBind
     len*: UINT
   RFC1157VarBindList* = SnmpVarBindList

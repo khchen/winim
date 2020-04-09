@@ -202,7 +202,7 @@ type
     PartitionType*: GUID
     PartitionId*: GUID
     Attributes*: DWORD64
-    Name *: array[36, WCHAR]
+    Name*: array[36, WCHAR]
   PPARTITION_INFORMATION_GPT* = ptr PARTITION_INFORMATION_GPT
   PARTITION_INFORMATION_MBR* {.pure.} = object
     PartitionType*: BYTE

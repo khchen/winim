@@ -1,6 +1,6 @@
 # Package
 
-version       = "3.3.2"
+version       = "3.3.3"
 author        = "Ward"
 description   = "Winim - Nim\'s Windows API and COM Library"
 license       = "MIT"
@@ -32,6 +32,7 @@ task example, "Build all the examples":
 # COM Examples
 
 task comexample, "Build all the COM examples":
+  exec "nim c examples/com/binary"
   exec "nim c examples/com/constants"
   exec "nim c examples/com/diskinfo"
   exec "nim c examples/com/Excel_Application1"

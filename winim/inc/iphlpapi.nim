@@ -925,8 +925,8 @@ type
     HaveWins*: WINBOOL
     PrimaryWinsServer*: IP_ADDR_STRING
     SecondaryWinsServer*: IP_ADDR_STRING
-    LeaseObtained*: int32
-    LeaseExpires*: int32
+    LeaseObtained*: int
+    LeaseExpires*: int
   PIP_ADAPTER_INFO* = ptr IP_ADAPTER_INFO
   IP_PREFIX_ORIGIN* = NL_PREFIX_ORIGIN
   IP_SUFFIX_ORIGIN* = NL_SUFFIX_ORIGIN
@@ -1440,7 +1440,7 @@ type
   PNDIS_802_11_PMKID_CANDIDATE_LIST* = ptr NDIS_802_11_PMKID_CANDIDATE_LIST
   NDIS_802_11_NETWORK_TYPE_LIST* {.pure.} = object
     NumberOfItems*: ULONG
-    NetworkType *: array[1, NDIS_802_11_NETWORK_TYPE]
+    NetworkType*: array[1, NDIS_802_11_NETWORK_TYPE]
   PNDIS_802_11_NETWORK_TYPE_LIST* = ptr NDIS_802_11_NETWORK_TYPE_LIST
   NDIS_802_11_CONFIGURATION_FH* {.pure.} = object
     Length*: ULONG

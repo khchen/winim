@@ -606,7 +606,7 @@ type
     piid*: ptr IID
   CInterfaceProxyVtbl* {.pure.} = object
     header*: CInterfaceProxyHeader
-    Vtbl*: ptr pointer
+    Vtbl*: UncheckedArray[pointer]
   PCInterfaceProxyVtblList* = ptr CInterfaceProxyVtbl
   PIIDLookup* = proc (pIID: ptr IID, pIndex: ptr int32): int32 {.stdcall.}
   ProxyFileInfo* {.pure.} = object
@@ -965,7 +965,7 @@ type
     pTypeFormat*: PFORMAT_STRING
   MIDL_FORMAT_STRING* {.pure.} = object
     Pad*: int16
-    Format*: ptr uint8
+    Format*: UncheckedArray[uint8]
   CLIENT_CALL_RETURN* {.pure, union.} = object
     Pointer*: pointer
     Simple*: LONG_PTR
@@ -1019,7 +1019,7 @@ type
     BVal*: BinaryParam
   RPC_EE_INFO_PARAM* {.pure.} = object
     ParameterType*: ExtendedErrorParamTypes
-    padding*: int32
+    padding*: array[4, byte]
     u*: RPC_EE_INFO_PARAM_u
   RPC_EXTENDED_ERROR_INFO_u* {.pure, union.} = object
     SystemTime*: SYSTEMTIME
@@ -1034,7 +1034,7 @@ type
     DetectionLocation*: USHORT
     Flags*: USHORT
     NumberOfParameters*: int32
-    padding*: int32
+    padding*: array[4, byte]
     Parameters*: array[maxNumberOfEEInfoParams, RPC_EE_INFO_PARAM]
   RPC_ERROR_ENUM_HANDLE* {.pure.} = object
     Signature*: ULONG

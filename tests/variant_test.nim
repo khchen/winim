@@ -84,6 +84,7 @@ suite "Test Suites for Varient in winim/com":
     Check(cstring "English Test 中文測試")
     Check(-$"English Test 中文測試")
     Check(+$"English Test 中文測試")
+    Check(COMBinary "Binary\0String\0")
 
   test "SystemTime and FileTime":
     Check(st)
@@ -119,6 +120,7 @@ suite "Test Suites for Varient in winim/com":
     CheckConv(cstring "English Test 中文測試")
     CheckConv(-$"English Test 中文測試")
     CheckConv(+$"English Test 中文測試")
+    CheckConv(COMBinary "Binary\0String\0")
     CheckConv(st)
     CheckConv(ft)
 

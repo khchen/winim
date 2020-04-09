@@ -247,7 +247,7 @@ type
     hInproc64*: INT64
   userHGLOBAL* {.pure.} = object
     fContext*: LONG
-    padding*: int32
+    padding*: array[4, byte]
     u*: userHGLOBAL_u
   wireHGLOBAL* = ptr userHGLOBAL
   RemotableHandle_u* {.pure, union.} = object
@@ -280,7 +280,7 @@ type
     hInproc64*: INT64
   userHBITMAP* {.pure.} = object
     fContext*: LONG
-    padding*: int32
+    padding*: array[4, byte]
     u*: userHBITMAP_u
   wireHBITMAP* = ptr userHBITMAP
   userHPALETTE_u* {.pure, union.} = object
@@ -289,7 +289,7 @@ type
     hInproc64*: INT64
   userHPALETTE* {.pure.} = object
     fContext*: LONG
-    padding*: int32
+    padding*: array[4, byte]
     u*: userHPALETTE_u
   wireHPALETTE* = ptr userHPALETTE
   BYTE_BLOB* {.pure.} = object
@@ -301,7 +301,7 @@ type
     hInproc64*: INT64
   userHENHMETAFILE* {.pure.} = object
     fContext*: LONG
-    padding*: int32
+    padding*: array[4, byte]
     u*: userHENHMETAFILE_u
   wireHENHMETAFILE* = ptr userHENHMETAFILE
   userHMETAFILE_u* {.pure, union.} = object
@@ -310,7 +310,7 @@ type
     hInproc64*: INT64
   userHMETAFILE* {.pure.} = object
     fContext*: LONG
-    padding*: int32
+    padding*: array[4, byte]
     u*: userHMETAFILE_u
   wireHMETAFILE* = ptr userHMETAFILE
   remoteMETAFILEPICT* {.pure.} = object
@@ -324,7 +324,7 @@ type
     hInproc64*: INT64
   userHMETAFILEPICT* {.pure.} = object
     fContext*: LONG
-    padding*: int32
+    padding*: array[4, byte]
     u*: userHMETAFILEPICT_u
   wireHMETAFILEPICT* = ptr userHMETAFILEPICT
   DATE* = float64

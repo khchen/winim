@@ -346,7 +346,7 @@ type
   PMINIDUMP_DIRECTORY* = ptr MINIDUMP_DIRECTORY
   MINIDUMP_STRING* {.pure.} = object
     Length*: ULONG32
-    Buffer*: array[0, WCHAR]
+    Buffer*: UncheckedArray[WCHAR]
   PMINIDUMP_STRING* = ptr MINIDUMP_STRING
   CPU_INFORMATION_X86CpuInfo* {.pure.} = object
     VendorId*: array[3, ULONG32]
@@ -393,9 +393,9 @@ type
     Stack*: MINIDUMP_MEMORY_DESCRIPTOR
     ThreadContext*: MINIDUMP_LOCATION_DESCRIPTOR
   PMINIDUMP_THREAD* = ptr MINIDUMP_THREAD
-  MINIDUMP_THREAD_LIST* {.pure.} = object
+  MINIDUMP_THREAD_LIST* {.pure, packed.} = object
     NumberOfThreads*: ULONG32
-    Threads*: array[0, MINIDUMP_THREAD]
+    Threads*: UncheckedArray[MINIDUMP_THREAD]
   PMINIDUMP_THREAD_LIST* = ptr MINIDUMP_THREAD_LIST
   MINIDUMP_THREAD_EX* {.pure.} = object
     ThreadId*: ULONG32
@@ -407,9 +407,9 @@ type
     ThreadContext*: MINIDUMP_LOCATION_DESCRIPTOR
     BackingStore*: MINIDUMP_MEMORY_DESCRIPTOR
   PMINIDUMP_THREAD_EX* = ptr MINIDUMP_THREAD_EX
-  MINIDUMP_THREAD_EX_LIST* {.pure.} = object
+  MINIDUMP_THREAD_EX_LIST* {.pure, packed.} = object
     NumberOfThreads*: ULONG32
-    Threads*: array[0, MINIDUMP_THREAD_EX]
+    Threads*: UncheckedArray[MINIDUMP_THREAD_EX]
   PMINIDUMP_THREAD_EX_LIST* = ptr MINIDUMP_THREAD_EX_LIST
   MINIDUMP_EXCEPTION* {.pure.} = object
     ExceptionCode*: ULONG32
@@ -426,7 +426,7 @@ type
     ExceptionRecord*: MINIDUMP_EXCEPTION
     ThreadContext*: MINIDUMP_LOCATION_DESCRIPTOR
   PMINIDUMP_EXCEPTION_STREAM* = ptr MINIDUMP_EXCEPTION_STREAM
-  MINIDUMP_MODULE* {.pure.} = object
+  MINIDUMP_MODULE* {.pure, packed.} = object
     BaseOfImage*: ULONG64
     SizeOfImage*: ULONG32
     CheckSum*: ULONG32
@@ -438,25 +438,25 @@ type
     Reserved0*: ULONG64
     Reserved1*: ULONG64
   PMINIDUMP_MODULE* = ptr MINIDUMP_MODULE
-  MINIDUMP_MODULE_LIST* {.pure.} = object
+  MINIDUMP_MODULE_LIST* {.pure, packed.} = object
     NumberOfModules*: ULONG32
-    Modules*: array[0, MINIDUMP_MODULE]
+    Modules*: UncheckedArray[MINIDUMP_MODULE]
   PMINIDUMP_MODULE_LIST* = ptr MINIDUMP_MODULE_LIST
-  MINIDUMP_MEMORY_LIST* {.pure.} = object
+  MINIDUMP_MEMORY_LIST* {.pure, packed.} = object
     NumberOfMemoryRanges*: ULONG32
-    MemoryRanges*: array[0, MINIDUMP_MEMORY_DESCRIPTOR]
+    MemoryRanges*: UncheckedArray[MINIDUMP_MEMORY_DESCRIPTOR]
   PMINIDUMP_MEMORY_LIST* = ptr MINIDUMP_MEMORY_LIST
   MINIDUMP_MEMORY64_LIST* {.pure.} = object
     NumberOfMemoryRanges*: ULONG64
     BaseRva*: RVA64
-    MemoryRanges*: array[0, MINIDUMP_MEMORY_DESCRIPTOR64]
+    MemoryRanges*: UncheckedArray[MINIDUMP_MEMORY_DESCRIPTOR64]
   PMINIDUMP_MEMORY64_LIST* = ptr MINIDUMP_MEMORY64_LIST
-  MINIDUMP_EXCEPTION_INFORMATION* {.pure.} = object
+  MINIDUMP_EXCEPTION_INFORMATION* {.pure, packed.} = object
     ThreadId*: DWORD
     ExceptionPointers*: PEXCEPTION_POINTERS
     ClientPointers*: WINBOOL
   PMINIDUMP_EXCEPTION_INFORMATION* = ptr MINIDUMP_EXCEPTION_INFORMATION
-  MINIDUMP_EXCEPTION_INFORMATION64* {.pure.} = object
+  MINIDUMP_EXCEPTION_INFORMATION64* {.pure, packed.} = object
     ThreadId*: DWORD
     ExceptionRecord*: ULONG64
     ContextRecord*: ULONG64
@@ -521,11 +521,11 @@ type
     BufferSize*: ULONG
     Buffer*: PVOID
   PMINIDUMP_USER_STREAM* = ptr MINIDUMP_USER_STREAM
-  MINIDUMP_USER_STREAM_INFORMATION* {.pure.} = object
+  MINIDUMP_USER_STREAM_INFORMATION* {.pure, packed.} = object
     UserStreamCount*: ULONG
     UserStreamArray*: PMINIDUMP_USER_STREAM
   PMINIDUMP_USER_STREAM_INFORMATION* = ptr MINIDUMP_USER_STREAM_INFORMATION
-  MINIDUMP_THREAD_CALLBACK* {.pure.} = object
+  MINIDUMP_THREAD_CALLBACK* {.pure, packed.} = object
     ThreadId*: ULONG
     ThreadHandle*: HANDLE
     Context*: CONTEXT
@@ -533,7 +533,7 @@ type
     StackBase*: ULONG64
     StackEnd*: ULONG64
   PMINIDUMP_THREAD_CALLBACK* = ptr MINIDUMP_THREAD_CALLBACK
-  MINIDUMP_THREAD_EX_CALLBACK* {.pure.} = object
+  MINIDUMP_THREAD_EX_CALLBACK* {.pure, packed.} = object
     ThreadId*: ULONG
     ThreadHandle*: HANDLE
     Context*: CONTEXT
@@ -546,7 +546,7 @@ type
   MINIDUMP_INCLUDE_THREAD_CALLBACK* {.pure.} = object
     ThreadId*: ULONG
   PMINIDUMP_INCLUDE_THREAD_CALLBACK* = ptr MINIDUMP_INCLUDE_THREAD_CALLBACK
-  MINIDUMP_MODULE_CALLBACK* {.pure.} = object
+  MINIDUMP_MODULE_CALLBACK* {.pure, packed.} = object
     FullPath*: PWCHAR
     BaseOfImage*: ULONG64
     SizeOfImage*: ULONG
@@ -567,7 +567,7 @@ type
     Module*: MINIDUMP_MODULE_CALLBACK
     IncludeThread*: MINIDUMP_INCLUDE_THREAD_CALLBACK
     IncludeModule*: MINIDUMP_INCLUDE_MODULE_CALLBACK
-  MINIDUMP_CALLBACK_INPUT* {.pure.} = object
+  MINIDUMP_CALLBACK_INPUT* {.pure, packed.} = object
     ProcessId*: ULONG
     ProcessHandle*: HANDLE
     CallbackType*: ULONG
@@ -602,10 +602,10 @@ type
     SizeOfEntry*: ULONG
     NumberOfEntries*: ULONG64
   PMINIDUMP_MEMORY_INFO_LIST* = ptr MINIDUMP_MEMORY_INFO_LIST
-  MINIDUMP_CALLBACK_OUTPUT_UNION1_STRUCT1* {.pure.} = object
+  MINIDUMP_CALLBACK_OUTPUT_UNION1_STRUCT1* {.pure, packed.} = object
     MemoryBase*: ULONG64
     MemorySize*: ULONG
-  MINIDUMP_CALLBACK_OUTPUT_UNION1_STRUCT2* {.pure.} = object
+  MINIDUMP_CALLBACK_OUTPUT_UNION1_STRUCT2* {.pure, packed.} = object
     CheckCancel*: WINBOOL
     Cancel*: WINBOOL
   MINIDUMP_CALLBACK_OUTPUT_UNION1* {.pure, union.} = object
@@ -615,10 +615,10 @@ type
     struct1*: MINIDUMP_CALLBACK_OUTPUT_UNION1_STRUCT1
     struct2*: MINIDUMP_CALLBACK_OUTPUT_UNION1_STRUCT2
     Handle*: HANDLE
-  MINIDUMP_CALLBACK_OUTPUT_STRUCT1* {.pure.} = object
+  MINIDUMP_CALLBACK_OUTPUT_STRUCT1* {.pure, packed.} = object
     VmRegion*: MINIDUMP_MEMORY_INFO
     Continue*: WINBOOL
-  MINIDUMP_CALLBACK_OUTPUT* {.pure.} = object
+  MINIDUMP_CALLBACK_OUTPUT* {.pure, packed.} = object
     union1*: MINIDUMP_CALLBACK_OUTPUT_UNION1
     struct1*: MINIDUMP_CALLBACK_OUTPUT_STRUCT1
     Status*: HRESULT

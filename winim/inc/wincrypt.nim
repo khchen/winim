@@ -998,15 +998,29 @@ type
     dwValue*: DWORD
     Algid*: ALG_ID
     dwLength*: DWORD
-  CRYPT_OID_INFO* {.pure.} = object
-    cbSize*: DWORD
-    pszOID*: LPCSTR
-    pwszName*: LPCWSTR
-    dwGroupId*: DWORD
-    union1*: CRYPT_OID_INFO_UNION1
-    ExtraInfo*: CRYPT_DATA_BLOB
-    pwszCNGAlgid*: LPCWSTR
-    pwszCNGExtraAlgid*: LPCWSTR
+when winimCpu64:
+  type
+    CRYPT_OID_INFO* {.pure.} = object
+      cbSize*: DWORD
+      pszOID*: LPCSTR
+      pwszName*: LPCWSTR
+      dwGroupId*: DWORD
+      union1*: CRYPT_OID_INFO_UNION1
+      ExtraInfo*: CRYPT_DATA_BLOB
+      pwszCNGAlgid*: LPCWSTR
+      pwszCNGExtraAlgid*: LPCWSTR
+when winimCpu32:
+  type
+    CRYPT_OID_INFO* {.pure, packed.} = object
+      cbSize*: DWORD
+      pszOID*: LPCSTR
+      pwszName*: LPCWSTR
+      dwGroupId*: DWORD
+      union1*: CRYPT_OID_INFO_UNION1
+      ExtraInfo*: CRYPT_DATA_BLOB
+      pwszCNGAlgid*: LPCWSTR
+      pwszCNGExtraAlgid*: LPCWSTR
+type
   PCRYPT_OID_INFO* = ptr CRYPT_OID_INFO
   CCRYPT_OID_INFO* = CRYPT_OID_INFO
   PCCRYPT_OID_INFO* = ptr CRYPT_OID_INFO
@@ -1411,7 +1425,7 @@ type
     HighPart*: LONG
   PROOT_INFO_LUID* = ptr ROOT_INFO_LUID
   CRYPT_SMART_CARD_ROOT_INFO* {.pure.} = object
-    rgbCardID *: array[16, BYTE]
+    rgbCardID*: array[16, BYTE]
     luid*: ROOT_INFO_LUID
   PCRYPT_SMART_CARD_ROOT_INFO* = ptr CRYPT_SMART_CARD_ROOT_INFO
   CERT_SYSTEM_STORE_RELOCATE_PARA_UNION1* {.pure, union.} = object

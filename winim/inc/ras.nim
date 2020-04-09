@@ -75,25 +75,27 @@ const
   RAS_MaxDeviceType* = 16
   RAS_MaxDeviceName* = 128
 type
-  RASCONNW* {.pure.} = object
+  RASCONNW* {.pure, packed.} = object
     dwSize*: DWORD
     hrasconn*: HRASCONN
     szEntryName*: array[RAS_MaxEntryName + 1 , WCHAR]
     szDeviceType*: array[RAS_MaxDeviceType + 1 , WCHAR]
     szDeviceName*: array[RAS_MaxDeviceName + 1 , WCHAR]
-    szPhonebook *: array[MAX_PATH , WCHAR]
+    szPhonebook*: array[MAX_PATH , WCHAR]
+    padding*: array[2, byte]
     dwSubEntry*: DWORD
     guidEntry*: GUID
     dwFlags*: DWORD
     luid*: LUID
   LPRASCONNW* = ptr RASCONNW
-  RASCONNA* {.pure.} = object
+  RASCONNA* {.pure, packed.} = object
     dwSize*: DWORD
     hrasconn*: HRASCONN
     szEntryName*: array[RAS_MaxEntryName + 1 , CHAR]
     szDeviceType*: array[RAS_MaxDeviceType + 1 , CHAR]
     szDeviceName*: array[RAS_MaxDeviceName + 1 , CHAR]
-    szPhonebook *: array[MAX_PATH , CHAR]
+    szPhonebook*: array[MAX_PATH , CHAR]
+    padding*: array[1, byte]
     dwSubEntry*: DWORD
     guidEntry*: GUID
     dwFlags*: DWORD
@@ -138,7 +140,7 @@ type
 const
   RAS_MaxCallbackNumber* = RAS_MaxPhoneNumber
 type
-  RASDIALPARAMSW* {.pure.} = object
+  RASDIALPARAMSW* {.pure, packed.} = object
     dwSize*: DWORD
     szEntryName*: array[RAS_MaxEntryName + 1 , WCHAR]
     szPhoneNumber*: array[RAS_MaxPhoneNumber + 1 , WCHAR]
@@ -146,11 +148,12 @@ type
     szUserName*: array[UNLEN + 1 , WCHAR]
     szPassword*: array[PWLEN + 1 , WCHAR]
     szDomain*: array[DNLEN + 1 , WCHAR]
+    padding*: array[2, byte]
     dwSubEntry*: DWORD
     dwCallbackId*: ULONG_PTR
     dwIfIndex*: DWORD
   LPRASDIALPARAMSW* = ptr RASDIALPARAMSW
-  RASDIALPARAMSA* {.pure.} = object
+  RASDIALPARAMSA* {.pure, packed.} = object
     dwSize*: DWORD
     szEntryName*: array[RAS_MaxEntryName + 1 , CHAR]
     szPhoneNumber*: array[RAS_MaxPhoneNumber + 1 , CHAR]
@@ -158,6 +161,7 @@ type
     szUserName*: array[UNLEN + 1 , CHAR]
     szPassword*: array[PWLEN + 1 , CHAR]
     szDomain*: array[DNLEN + 1 , CHAR]
+    padding*: array[3, byte]
     dwSubEntry*: DWORD
     dwCallbackId*: ULONG_PTR
     dwIfIndex*: DWORD
@@ -170,10 +174,10 @@ when winimAnsi:
     RASDIALPARAMS* = RASDIALPARAMSA
 type
   LPRASDIALPARAMS* = ptr RASDIALPARAMS
-  RASEAPINFO* {.pure.} = object
+  RASEAPINFO* {.pure, packed.} = object
     dwSizeofEapInfo*: DWORD
     pbEapInfo*: ptr BYTE
-  RASDIALEXTENSIONS* {.pure.} = object
+  RASDIALEXTENSIONS* {.pure, packed.} = object
     dwSize*: DWORD
     dwfOptions*: DWORD
     hwndParent*: HWND
@@ -517,7 +521,7 @@ when winimAnsi:
     RASENTRY* = RASENTRYA
 type
   LPRASENTRY* = ptr RASENTRY
-  RASADPARAMS* {.pure.} = object
+  RASADPARAMS* {.pure, packed.} = object
     dwSize*: DWORD
     hwndOwner*: HWND
     dwFlags*: DWORD
@@ -673,7 +677,7 @@ when winimAnsi:
 type
   LPRASNOUSER* = ptr RASNOUSER
   RASPBDLGFUNCW* = proc (P1: ULONG_PTR, P2: DWORD, P3: LPWSTR, P4: LPVOID): VOID {.stdcall.}
-  RASPBDLGW* {.pure.} = object
+  RASPBDLGW* {.pure, packed.} = object
     dwSize*: DWORD
     hwndOwner*: HWND
     dwFlags*: DWORD
@@ -686,7 +690,7 @@ type
     reserved2*: ULONG_PTR
   LPRASPBDLGW* = ptr RASPBDLGW
   RASPBDLGFUNCA* = proc (P1: ULONG_PTR, P2: DWORD, P3: LPSTR, P4: LPVOID): VOID {.stdcall.}
-  RASPBDLGA* {.pure.} = object
+  RASPBDLGA* {.pure, packed.} = object
     dwSize*: DWORD
     hwndOwner*: HWND
     dwFlags*: DWORD
@@ -706,24 +710,26 @@ when winimAnsi:
     RASPBDLG* = RASPBDLGA
 type
   LPRASPBDLG* = ptr RASPBDLG
-  TRASENTRYDLGW* {.pure.} = object
+  TRASENTRYDLGW* {.pure, packed.} = object
     dwSize*: DWORD
     hwndOwner*: HWND
     dwFlags*: DWORD
     xDlg*: LONG
     yDlg*: LONG
     szEntry*: array[RAS_MaxEntryName + 1, WCHAR]
+    padding*: array[2, byte]
     dwError*: DWORD
     reserved*: ULONG_PTR
     reserved2*: ULONG_PTR
   LPRASENTRYDLGW* = ptr TRASENTRYDLGW
-  TRASENTRYDLGA* {.pure.} = object
+  TRASENTRYDLGA* {.pure, packed.} = object
     dwSize*: DWORD
     hwndOwner*: HWND
     dwFlags*: DWORD
     xDlg*: LONG
     yDlg*: LONG
     szEntry*: array[RAS_MaxEntryName + 1, CHAR]
+    padding*: array[3, byte]
     dwError*: DWORD
     reserved*: ULONG_PTR
     reserved2*: ULONG_PTR
@@ -736,7 +742,7 @@ when winimAnsi:
     TRASENTRYDLG* = TRASENTRYDLGA
 type
   LPRASENTRYDLG* = ptr TRASENTRYDLG
-  TRASDIALDLG* {.pure.} = object
+  TRASDIALDLG* {.pure, packed.} = object
     dwSize*: DWORD
     hwndOwner*: HWND
     dwFlags*: DWORD
@@ -2301,7 +2307,7 @@ type
     configClsid*: CLSID
     registrationDate*: FILETIME
     componentType*: UINT32
-  RASCUSTOMSCRIPTEXTENSIONS* {.pure.} = object
+  RASCUSTOMSCRIPTEXTENSIONS* {.pure, packed.} = object
     dwSize*: DWORD
     pfnRasSetCommSettings*: PFNRASSETCOMMSETTINGS
   LEGACY_IDENTITY_UI_PARAMS* {.pure.} = object

@@ -1,3 +1,10 @@
+Version 3.3.3
+-------------
+* com: Add COMBinary type and support to convert between variant and binary data.
+* examples/com: Add binary.nim.
+* Fix some incorrect alignment and struct size.
+* Fix #49.
+
 Version 3.3.2
 -------------
 * com: Add isNull() to test null variant (VT_NULL).

@@ -451,10 +451,6 @@ type
     lpvReserved*: LPVOID
     dwReserved*: DWORD
     fAutoLogonIfChallenged*: WINBOOL
-  WINHTTP_CONNECTION_INFO* {.pure.} = object
-    cbSize*: DWORD
-    LocalAddress*: SOCKADDR_STORAGE
-    RemoteAddress*: SOCKADDR_STORAGE
 proc WinHttpAddRequestHeaders*(P1: HINTERNET, P2: LPCWSTR, P3: DWORD, P4: DWORD): WINBOOL {.winapi, stdcall, dynlib: "winhttp", importc.}
 proc WinHttpDetectAutoProxyConfigUrl*(P1: DWORD, P2: ptr LPWSTR): WINBOOL {.winapi, stdcall, dynlib: "winhttp", importc.}
 proc WinHttpCheckPlatform*(): WINBOOL {.winapi, stdcall, dynlib: "winhttp", importc.}
@@ -482,3 +478,15 @@ proc WinHttpSetTimeouts*(P1: HINTERNET, P2: int32, P3: int32, P4: int32, P5: int
 proc WinHttpTimeFromSystemTime*(P1: ptr SYSTEMTIME, P2: LPWSTR): WINBOOL {.winapi, stdcall, dynlib: "winhttp", importc.}
 proc WinHttpTimeToSystemTime*(P1: LPCWSTR, P2: ptr SYSTEMTIME): WINBOOL {.winapi, stdcall, dynlib: "winhttp", importc.}
 proc WinHttpWriteData*(P1: HINTERNET, P2: LPCVOID, P3: DWORD, P4: LPDWORD): WINBOOL {.winapi, stdcall, dynlib: "winhttp", importc.}
+when winimCpu64:
+  type
+    WINHTTP_CONNECTION_INFO* {.pure.} = object
+      cbSize*: DWORD
+      LocalAddress*: SOCKADDR_STORAGE
+      RemoteAddress*: SOCKADDR_STORAGE
+when winimCpu32:
+  type
+    WINHTTP_CONNECTION_INFO* {.pure, packed.} = object
+      cbSize*: DWORD
+      LocalAddress*: SOCKADDR_STORAGE
+      RemoteAddress*: SOCKADDR_STORAGE

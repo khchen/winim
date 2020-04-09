@@ -1116,6 +1116,7 @@ type
     uStateEx*: UINT
     hwnd*: HWND
     iExpandedImage*: int32
+    iReserved*: int32
   LPTVITEMEXA* = ptr TVITEMEXA
   TVITEMEXW* {.pure.} = object
     mask*: UINT
@@ -1132,6 +1133,7 @@ type
     uStateEx*: UINT
     hwnd*: HWND
     iExpandedImage*: int32
+    iReserved*: int32
   LPTVITEMEXW* = ptr TVITEMEXW
   TVINSERTSTRUCTA_UNION1* {.pure, union.} = object
     itemex*: TVITEMEXA

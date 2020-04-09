@@ -37,8 +37,16 @@
 ##      #   bool|enum|SomeInteger|SomeReal
 ##      #   com|variant|VARIANT|ptr IUnknown|ptr IDispatch|pointer
 ##      #   SYSTEMTIME|FILETIME
-##      #   1D~3D array|seq
+##      #   1D~3D array|seq|COMBinary
 ##
+## *COMBinary* type can help to deal with binary data.
+## For example:
+##
+## .. code-block:: Nim
+##    var input = "binary\0string\0test\0"
+##    var v = toVariant(COMBinary input)
+##    var output = string fromVariant[COMBinary](v)
+##    assert input == output
 
 {.experimental, deadCodeElim: on.} # experimental for dot operators
 
@@ -87,6 +95,17 @@ type
   COMArray1D* = seq[variant]
   COMArray2D* = seq[seq[variant]]
   COMArray3D* = seq[seq[seq[variant]]]
+  COMBinary* = distinct string
+
+proc `len`*(x: COMBinary): int {.borrow.}
+proc high*(s: COMBinary): int {.borrow.}
+proc low*(s: COMBinary): int {.borrow.}
+proc cmp*(x, y: COMBinary): int {.borrow.}
+proc `==`*(x, y: COMBinary): bool {.borrow.}
+proc `<=` *(x, y: COMBinary): bool {.borrow.}
+proc `<` *(x, y: COMBinary): bool {.borrow.}
+proc substr*(s: COMBinary, first, last: int): COMBinary {.borrow.}
+proc substr*(s: COMBinary, first = 0): COMBinary {.borrow.}
 
 when hasTraceTable:
   import tables
@@ -427,6 +446,22 @@ proc toVariant*(x: variant): variant =
   else:
     result = x.copy
 
+proc toVariant*(x: COMBinary): variant =
+  result.init
+  result.raw.vt = VARTYPE(VT_ARRAY or VT_UI1)
+  result.raw.parray = SafeArrayCreateVector(VT_UI1, 0, ULONG len(string x))
+
+  block:
+    var pBuffer: pointer
+    if result.raw.parray == nil: break
+    if SafeArrayAccessData(result.raw.parray, &pBuffer) != S_OK: break
+    defer: SafeArrayUnaccessData(result.raw.parray)
+
+    copyMem(pBuffer, &(string x), x.len)
+    return
+
+  raise newException(VariantConversionError, vcErrorMsg("COMBinary", VARTYPE(VT_ARRAY or VT_UI1).typeDesc(1)))
+
 template toVariant1D(x: typed, vt: VARENUM) =
   var sab: array[1, SAFEARRAYBOUND]
   sab[0].cElements = x.len.ULONG
@@ -603,6 +638,29 @@ template fromVariant3D(x, dimensions: typed) =
   else:
     raise newException(VariantConversionError, vcErrorMsg(x.raw.vt.typeDesc(dimensions), "COMArray3D"))
 
+template fromVariantBinary(x: typed) =
+  var
+    vt: VARTYPE
+    xUbound, xLbound: LONG
+    pBuffer: pointer
+    ok = false
+
+  block:
+    if dimensions != 1: break
+    if SafeArrayGetVartype(x.raw.parray, &vt) != S_OK or vt notin {VT_UI1, VT_I1}: break
+    if SafeArrayGetLBound(x.raw.parray, 1, &xLbound) != S_OK: break
+    if SafeArrayGetUBound(x.raw.parray, 1, &xUbound) != S_OK: break
+    if SafeArrayAccessData(x.raw.parray, &pBuffer) != S_OK: break
+    defer: SafeArrayUnaccessData(x.raw.parray)
+
+    let xLen = xUbound - xLbound + 1
+    result = COMBinary newString(xLen)
+    copyMem(&(string result), pBuffer, xLen)
+    ok = true
+
+  if not ok:
+    raise newException(VariantConversionError, vcErrorMsg(x.raw.vt.typeDesc(dimensions), "COMBinary"))
+
 proc fromVariant*[T](x: variant): T =
   if x.isNil: return
 
@@ -622,6 +680,7 @@ proc fromVariant*[T](x: variant): T =
     when T is COMArray1D: fromVariant1D(x, dimensions)
     elif T is COMArray2D: fromVariant2D(x, dimensions)
     elif T is COMArray3D: fromVariant3D(x, dimensions)
+    elif T is COMBinary: fromVariantBinary(x)
     elif T is ptr and not (T is ptr IDispatch) and not (T is ptr IUnknown):
       if (x.raw.vt and VT_BYREF) != 0:
         result = cast[T](x.raw.byref)
@@ -765,6 +824,7 @@ converter variantConverterToVARIANT*(x: variant): VARIANT = fromVariant[VARIANT]
 converter variantConverterToCOMArray1D*(x: variant): COMArray1D = fromVariant[COMArray1D](x)
 converter variantConverterToCOMArray2D*(x: variant): COMArray2D = fromVariant[COMArray2D](x)
 converter variantConverterToCOMArray3D*(x: variant): COMArray3D = fromVariant[COMArray3D](x)
+converter variantConverterToCOMBinary*(x: variant): COMBinary = fromVariant[COMBinary](x)
 
 proc getEnumeration(self: com, name: string): variant =
   var

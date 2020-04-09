@@ -49,7 +49,7 @@ type
     QuestionType*: WORD
     QuestionClass*: WORD
   PDNS_WIRE_QUESTION* = ptr DNS_WIRE_QUESTION
-  DNS_WIRE_RECORD* {.pure.} = object
+  DNS_WIRE_RECORD* {.pure, packed.} = object
     RecordType*: WORD
     RecordClass*: WORD
     TimeToLive*: DWORD
@@ -430,7 +430,7 @@ type
     pFirstRR*: PDNS_RECORD
     pLastRR*: PDNS_RECORD
   PDNS_RRSET* = ptr DNS_RRSET
-  DNS_MESSAGE_BUFFER* {.pure.} = object
+  DNS_MESSAGE_BUFFER* {.pure, packed.} = object
     MessageHead*: DNS_HEADER
     MessageBody*: array[1, CHAR]
   PDNS_MESSAGE_BUFFER* = ptr DNS_MESSAGE_BUFFER

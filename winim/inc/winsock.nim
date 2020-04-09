@@ -648,7 +648,7 @@ type
     result*: int32
     fds*: ULONG
     timeout*: INT
-    fdArray*: array[0, WSAPOLLFD]
+    fdArray*: UncheckedArray[WSAPOLLFD]
   LPWSAPOLLDATA* = ptr WSAPOLLDATA
   TWSASENDMSG* {.pure.} = object
     lpMsg*: LPWSAMSG
@@ -1399,9 +1399,6 @@ type
   sockproto* {.pure.} = object
     sp_family*: uint16
     sp_protocol*: uint16
-  ms_timeval* {.pure.} = object
-    tv_sec*: int32
-    tv_usec*: int32
   IPV6_MREQ* {.pure.} = object
     ipv6mr_multiaddr*: IN6_ADDR
     ipv6mr_interface*: int32
@@ -1432,7 +1429,7 @@ type
     SecurityProtocol*: SOCKET_SECURITY_PROTOCOL
     PeerAddress*: SOCKADDR_STORAGE
     PeerTargetNameStringLen*: ULONG
-    AllStrings*: ptr uint16
+    AllStrings*: UncheckedArray[uint16]
   SOCKET_SECURITY_QUERY_INFO* {.pure.} = object
     SecurityProtocol*: SOCKET_SECURITY_PROTOCOL
     Flags*: ULONG
@@ -1456,7 +1453,7 @@ type
     UserNameStringLen*: ULONG
     DomainNameStringLen*: ULONG
     PasswordStringLen*: ULONG
-    AllStrings*: ptr uint16
+    AllStrings*: UncheckedArray[uint16]
 proc WSAFDIsSet*(P1: SOCKET, P2: ptr fd_set): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "__WSAFDIsSet".}
 proc accept*(s: SOCKET, `addr`: ptr sockaddr, addrlen: ptr int32): SOCKET {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc `bind`*(s: SOCKET, name: ptr sockaddr, namelen: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}

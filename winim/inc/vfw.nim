@@ -1387,7 +1387,7 @@ type
     bFirstEntry*: BYTE
     bNumEntries*: BYTE
     wFlags*: WORD
-    peNew*: ptr PALETTEENTRY
+    peNew*: UncheckedArray[PALETTEENTRY]
 proc VideoForWindowsVersion*(): DWORD {.winapi, stdcall, dynlib: "msvfw32", importc.}
 proc ICInfo*(fccType: DWORD, fccHandler: DWORD, lpicinfo: ptr TICINFO): WINBOOL {.winapi, stdcall, dynlib: "msvfw32", importc.}
 proc ICInstall*(fccType: DWORD, fccHandler: DWORD, lParam: LPARAM, szDesc: LPSTR, wFlags: UINT): WINBOOL {.winapi, stdcall, dynlib: "msvfw32", importc.}

@@ -43,7 +43,7 @@ type
     dwPreferredModemOptions*: DWORD
     dwNegotiatedModemOptions*: DWORD
     dwNegotiatedDCERate*: DWORD
-    abVariablePortion *: array[1, BYTE]
+    abVariablePortion*: array[1, BYTE]
   PMODEMSETTINGS* = ptr MODEMSETTINGS
   LPMODEMSETTINGS* = ptr MODEMSETTINGS
 const

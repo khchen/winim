@@ -740,7 +740,7 @@ type
     Type*: LONG
     pwszAlternateText*: LPCWSTR
     pIStream*: ptr IStream
-  ENDCOMPOSITIONNOTIFY* {.pure.} = object
+  ENDCOMPOSITIONNOTIFY* {.pure, packed.} = object
     nmhdr*: NMHDR
     dwCode*: DWORD
   CHARFORMATA* {.pure.} = object
@@ -817,7 +817,7 @@ type
   TEXTRANGEW* {.pure.} = object
     chrg*: CHARRANGE
     lpstrText*: LPWSTR
-  EDITSTREAM* {.pure.} = object
+  EDITSTREAM* {.pure, packed.} = object
     dwCookie*: DWORD_PTR
     dwError*: DWORD
     pfnCallback*: EDITSTREAMCALLBACK
@@ -883,7 +883,7 @@ type
     wBorderSpace*: WORD
     wBorderWidth*: WORD
     wBorders*: WORD
-  MSGFILTER* {.pure.} = object
+  MSGFILTER* {.pure, packed.} = object
     nmhdr*: NMHDR
     msg*: UINT
     wParam*: WPARAM
@@ -891,17 +891,19 @@ type
   REQRESIZE* {.pure.} = object
     nmhdr*: NMHDR
     rc*: RECT
-  SELCHANGE* {.pure.} = object
+  SELCHANGE* {.pure, packed.} = object
     nmhdr*: NMHDR
     chrg*: CHARRANGE
     seltyp*: WORD
-  GROUPTYPINGCHANGE* {.pure.} = object
+    padding*: array[2, byte]
+  GROUPTYPINGCHANGE* {.pure, packed.} = object
     nmhdr*: NMHDR
     fGroupTyping*: WINBOOL
-  CLIPBOARDFORMAT* {.pure.} = object
+  CLIPBOARDFORMAT* {.pure, packed.} = object
     nmhdr*: NMHDR
     cf*: CLIPFORMAT
-  GETCONTEXTMENUEX* {.pure.} = object
+    padding*: array[2, byte]
+  GETCONTEXTMENUEX* {.pure, packed.} = object
     chrg*: CHARRANGE
     dwFlags*: DWORD
     pt*: POINT
@@ -911,7 +913,7 @@ type
     hDrop*: HANDLE
     cp*: LONG
     fProtected*: WINBOOL
-  TENPROTECTED* {.pure.} = object
+  TENPROTECTED* {.pure, packed.} = object
     nmhdr*: NMHDR
     msg*: UINT
     wParam*: WPARAM
@@ -921,16 +923,16 @@ type
     nmhdr*: NMHDR
     cObjectCount*: LONG
     cch*: LONG
-  TENOLEOPFAILED* {.pure.} = object
+  TENOLEOPFAILED* {.pure, packed.} = object
     nmhdr*: NMHDR
     iob*: LONG
     lOper*: LONG
     hr*: HRESULT
-  OBJECTPOSITIONS* {.pure.} = object
+  OBJECTPOSITIONS* {.pure, packed.} = object
     nmhdr*: NMHDR
     cObjectCount*: LONG
     pcpPositions*: ptr LONG
-  TENLINK* {.pure.} = object
+  TENLINK* {.pure, packed.} = object
     nmhdr*: NMHDR
     msg*: UINT
     wParam*: WPARAM
@@ -939,24 +941,25 @@ type
   TENLOWFIRTF* {.pure.} = object
     nmhdr*: NMHDR
     szControl*: cstring
-  TENCORRECTTEXT* {.pure.} = object
+  TENCORRECTTEXT* {.pure, packed.} = object
     nmhdr*: NMHDR
     chrg*: CHARRANGE
     seltyp*: WORD
-  PUNCTUATION* {.pure.} = object
+    padding*: array[2, byte]
+  PUNCTUATION* {.pure, packed.} = object
     iSize*: UINT
     szPunctuation*: LPSTR
   COMPCOLOR* {.pure.} = object
     crText*: COLORREF
     crBackground*: COLORREF
     dwEffects*: DWORD
-  REPASTESPECIAL* {.pure.} = object
+  REPASTESPECIAL* {.pure, packed.} = object
     dwAspect*: DWORD
     dwParam*: DWORD_PTR
   SETTEXTEX* {.pure.} = object
     flags*: DWORD
     codepage*: UINT
-  GETTEXTEX* {.pure.} = object
+  GETTEXTEX* {.pure, packed.} = object
     cb*: DWORD
     flags*: DWORD
     codepage*: UINT
@@ -973,7 +976,7 @@ type
     khyph*: KHYPH
     ichHyph*: int32
     chHyph*: WCHAR
-  HYPHENATEINFO* {.pure.} = object
+  HYPHENATEINFO* {.pure, packed.} = object
     cbSize*: SHORT
     dxHyphenateZone*: SHORT
     pfnHyphenate*: proc(P1: ptr WCHAR, P2: LANGID, P3: int32, P4: ptr HYPHRESULT): void {.stdcall.}

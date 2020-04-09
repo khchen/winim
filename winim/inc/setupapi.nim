@@ -421,7 +421,7 @@ type
     ClassInstallHeader*: SP_CLASSINSTALL_HEADER
     PowerMessageWake*: array[LINE_LEN*2, WCHAR]
   PSP_POWERMESSAGEWAKE_PARAMS_W* = ptr SP_POWERMESSAGEWAKE_PARAMS_W
-  SP_DRVINFO_DATA_V2_A* {.pure.} = object
+  SP_DRVINFO_DATA_V2_A* {.pure, packed.} = object
     cbSize*: DWORD
     DriverType*: DWORD
     Reserved*: ULONG_PTR
@@ -431,7 +431,7 @@ type
     DriverDate*: FILETIME
     DriverVersion*: DWORDLONG
   PSP_DRVINFO_DATA_V2_A* = ptr SP_DRVINFO_DATA_V2_A
-  SP_DRVINFO_DATA_V2_W* {.pure.} = object
+  SP_DRVINFO_DATA_V2_W* {.pure, packed.} = object
     cbSize*: DWORD
     DriverType*: DWORD
     Reserved*: ULONG_PTR

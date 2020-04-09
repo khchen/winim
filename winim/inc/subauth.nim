@@ -23,7 +23,7 @@ type
     Length*: ULONG
     SecurityDescriptor*: PUCHAR
   PSR_SECURITY_DESCRIPTOR* = ptr SR_SECURITY_DESCRIPTOR
-  USER_ALL_INFORMATION* {.pure.} = object
+  USER_ALL_INFORMATION* {.pure, packed.} = object
     LastLogon*: LARGE_INTEGER
     LastLogoff*: LARGE_INTEGER
     PasswordLastSet*: LARGE_INTEGER

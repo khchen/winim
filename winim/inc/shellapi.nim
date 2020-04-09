@@ -313,10 +313,19 @@ type
     lpStartupInfo*: LPSTARTUPINFOW
     lpProcessInformation*: LPPROCESS_INFORMATION
   PSHCREATEPROCESSINFOW* = ptr SHCREATEPROCESSINFOW
-  SHQUERYRBINFO* {.pure.} = object
-    cbSize*: DWORD
-    i64Size*: int64
-    i64NumItems*: int64
+when winimCpu64:
+  type
+    SHQUERYRBINFO* {.pure.} = object
+      cbSize*: DWORD
+      i64Size*: int64
+      i64NumItems*: int64
+when winimCpu32:
+  type
+    SHQUERYRBINFO* {.pure, packed.} = object
+      cbSize*: DWORD
+      i64Size*: int64
+      i64NumItems*: int64
+type
   LPSHQUERYRBINFO* = ptr SHQUERYRBINFO
   NOTIFYICONDATAA_UNION1* {.pure, union.} = object
     uTimeout*: UINT
@@ -1030,13 +1039,13 @@ type
     fNC*: WINBOOL
     fWide*: WINBOOL
   LPDROPFILES* = ptr DROPFILES
-  SHChangeDWORDAsIDList* {.pure.} = object
+  SHChangeDWORDAsIDList* {.pure, packed.} = object
     cb*: USHORT
     dwItem1*: DWORD
     dwItem2*: DWORD
     cbZero*: USHORT
   LPSHChangeDWORDAsIDList* = ptr SHChangeDWORDAsIDList
-  SHChangeUpdateImageIDList* {.pure.} = object
+  SHChangeUpdateImageIDList* {.pure, packed.} = object
     cb*: USHORT
     iIconIndex*: int32
     iCurIndex*: int32
@@ -1082,7 +1091,7 @@ const
   PIFDEFFILESIZE* = 80
   PIFMAXFILEPATH* = 260
 type
-  PROPPRG* {.pure.} = object
+  PROPPRG* {.pure, packed.} = object
     flPrg*: WORD
     flPrgInit*: WORD
     achTitle*: array[PIFNAMESIZE, CHAR]
@@ -1146,7 +1155,7 @@ type
     pt*: POINT
   LPSFV_SETITEMPOS* = ptr SFV_SETITEMPOS
   PCSFV_SETITEMPOS* = ptr SFV_SETITEMPOS
-  SHELLSTATEA* {.pure.} = object
+  SHELLSTATEA* {.pure, packed.} = object
     fShowAllObjects* {.bitsize:1.}: WINBOOL
     fShowExtensions* {.bitsize:1.}: WINBOOL
     fNoConfirmRecycle* {.bitsize:1.}: WINBOOL
@@ -1178,8 +1187,9 @@ type
     fShowTypeOverlay* {.bitsize:1.}: WINBOOL
     fShowStatusBar* {.bitsize:1.}: WINBOOL
     fSpareFlags* {.bitsize:9.}: UINT
+    padding*: array[2, byte]
   LPSHELLSTATEA* = ptr SHELLSTATEA
-  SHELLSTATEW* {.pure.} = object
+  SHELLSTATEW* {.pure, packed.} = object
     fShowAllObjects* {.bitsize:1.}: WINBOOL
     fShowExtensions* {.bitsize:1.}: WINBOOL
     fNoConfirmRecycle* {.bitsize:1.}: WINBOOL
@@ -1211,6 +1221,7 @@ type
     fShowTypeOverlay* {.bitsize:1.}: WINBOOL
     fShowStatusBar* {.bitsize:1.}: WINBOOL
     fSpareFlags* {.bitsize:9.}: UINT
+    padding*: array[2, byte]
   LPSHELLSTATEW* = ptr SHELLSTATEW
   SHELLFLAGSTATE* {.pure.} = object
     fShowAllObjects* {.bitsize:1.}: WINBOOL
@@ -4767,7 +4778,7 @@ type
     `type`*: DROPIMAGETYPE
     szMessage*: array[MAX_PATH, WCHAR]
     szInsert*: array[MAX_PATH, WCHAR]
-  SHChangeNotifyEntry* {.pure.} = object
+  SHChangeNotifyEntry* {.pure, packed.} = object
     pidl*: PCIDLIST_ABSOLUTE
     fRecursive*: WINBOOL
   TSHARDAPPIDINFO* {.pure.} = object
