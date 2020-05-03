@@ -1,3 +1,7 @@
+Version 3.3.4
+-------------
+* Update for Nim Compiler 1.3.5 (devel).
+
 Version 3.3.3
 -------------
 * com: Add COMBinary type and support to convert between variant and binary data.

@@ -155,6 +155,10 @@
 import macros, strutils, inc/[winimbase, windef]
 export strutils.toHex, winimbase
 
+when not declared(IndexDefect):
+  type
+    IndexDefect = object of IndexError
+
 # generate from winimx (avoid importing objbase everytime)
 const
   CP_ACP = 0
@@ -406,14 +410,14 @@ proc substr*(s: wstring, first = 0): wstring {.inline.} =
 proc `[]`*(s: wstring, i: int): WCHAR {.inline.} =
   when compileOption("boundChecks"):
     if i >= s.len:
-      raise newException(IndexError, "index out of bounds")
+      raise newException(IndexDefect, "index out of bounds")
 
   result = s.raw(i)
 
 proc `[]=`*(s: var wstring, i: int, c: WCHAR|char) {.inline.} =
   when compileOption("boundChecks"):
     if i >= s.len:
-      raise newException(IndexError, "index out of bounds")
+      raise newException(IndexDefect, "index out of bounds")
 
   s.raw(i) = WCHAR c
 
@@ -422,7 +426,7 @@ proc `[]`*[T, U](s: wstring, x: HSlice[T, U]): wstring =
   let L = (s ^^ x.b) - a + 1
   when compileOption("boundChecks"):
     if a < 0 or a + L > s.len:
-      raise newException(IndexError, "index out of bounds")
+      raise newException(IndexDefect, "index out of bounds")
   result = s.substr(a, a + L-1)
 
 proc `[]=`*[T, U](s: var wstring, x: HSlice[T, U], b: wstring) =
@@ -447,7 +451,7 @@ proc `[]=`*[T, U](s: var wstring, x: HSlice[T, U], b: wstring) =
 proc `[]=`*(s: var wstring, i: int, u: wstring) =
   when compileOption("boundChecks"):
     if i >= s.len:
-      raise newException(IndexError, "index out of bounds")
+      raise newException(IndexDefect, "index out of bounds")
 
   if u.len == 0:
     s[i] = 0
@@ -625,7 +629,7 @@ proc `$`*(s: wstring|mstring|LPWSTR|BSTR): string {.inline.} =
 proc `%$`*[I](a: array[I, char]|array[I, WCHAR]): string {.inline.} =
   ## Convert any stringable type to string.
   ## This operator assume string|cstring|LPSTR|ptr char|char array is utf8 encoding.
-  ## *`$` for array cause ambiguous call since 0.2.0, use %$ instead*
+  ## *`$` for array cause ambiguous call since 0.20.0, use %$ instead*
   when a is array[I, char]:
     `UTF8->string`(&a, a.len)
   elif a is array[I, WCHAR]:
@@ -804,7 +808,7 @@ proc fillArray[I, T: char|byte|WCHAR](a: ptr array[I, T]|var array[I, T], s: mst
 
     # fill as much as possible before raise an exception
     if (not inclNull and a[].high < s.len-1) or (inclNull and a[].high < s.len):
-      raise newException(IndexError, "string length too long")
+      raise newException(IndexDefect, "string length too long")
 
   else:
     fillArray(a.unsafeaddr, s, inclNull)
@@ -830,7 +834,7 @@ proc fillStr[I, T: char|byte|WCHAR](s: var mstring|var string|var wstring, a: pt
 
     # fill as much as possible before raise an exception
     if a[].high > s.len - 1:
-      raise newException(IndexError, "string length too short")
+      raise newException(IndexDefect, "string length too short")
 
   else:
     fillStr(s, a.unsafeaddr)
