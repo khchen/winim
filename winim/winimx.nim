@@ -340,8 +340,9 @@ when isMainModule:
       nodes: seq[CodeNode]
       table: Table[string, seq[int]]
       skipModules: Table[string, bool]
+      used: bool
 
-  proc initMinifier(): Minifier =
+  proc initMinifier(used = false): Minifier =
 
     proc add(table: var Table[string, seq[int]], name: string, index: int) =
       if name in table:
@@ -376,6 +377,7 @@ when isMainModule:
     result.table = initTable[string, seq[int]]()
     result.skipModules = initTable[string, bool]()
     result.nodes = to[seq[CodeNode]](miniz.uncompress(db, dbLen))
+    result.used = used
     init(result.table, result.nodes)
 
   proc incl(minifier: var Minifier, name: string) =
@@ -401,8 +403,14 @@ when isMainModule:
       #                 (c) Copyright 2016-2020 Ward
       #
       #====================================================================
+    """.unindent
 
-      import winim/inc/winimbase""".unindent
+    if minifier.used:
+      file.writeLine """
+        when defined(nimHasUsed): {.used.}
+      """.unindent
+
+    file.writeLine "import winim/inc/winimbase"
 
     var imports = newSeq[string]()
     for module in minifier.skipModules.keys:
@@ -465,6 +473,7 @@ Options:
   -d, --dir:PATH            specify the working directory
   -r, --recursively         walks over the directory recursively
   -t, --test                output the file list to be prased
+  -u, --used                mark the output module as "used" by used pragma
 
 Inputfile(s):
   This tool catch all the identifiers from input files and output the
@@ -478,6 +487,7 @@ Inputfile(s):
       codes = newSeq[string]()
       recursively = false
       test = false
+      used = false
 
     for kind, key, val in p.getopt():
       case kind
@@ -498,6 +508,8 @@ Inputfile(s):
           recursively = true
         of "t", "test":
           test = true
+        of "u", "used":
+          used = true
         of "s", "skip":
           skips.add val
         of "d", "dir":
@@ -513,7 +525,7 @@ Inputfile(s):
       help()
 
     elif not test:
-      var minifier = initMinifier()
+      var minifier = initMinifier(used)
 
       for module in skips:
         minifier.skipModules[module] = true

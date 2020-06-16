@@ -12,6 +12,10 @@ import winim/inc/objbase # for SysAllocString
 import winim/[winstr, utils]
 import unittest, strutils, unicode
 
+when not declared(IndexDefect):
+  type
+    IndexDefect = IndexError
+
 suite "Test Suites for winim/winstr":
   setup:
     var
@@ -236,17 +240,17 @@ suite "Test Suites for winim/winstr":
     var w = +$"12345"
 
     when not defined(nimv2):
-      expect IndexError: discard s[5]
-      expect IndexError: discard m[5]
-      expect IndexError: discard w[5]
+      expect IndexDefect: discard s[5]
+      expect IndexDefect: discard m[5]
+      expect IndexDefect: discard w[5]
 
-      expect IndexError: discard s[-1..0]
-      expect IndexError: discard m[-1..0]
-      expect IndexError: discard w[-1..0]
+      expect IndexDefect: discard s[-1..0]
+      expect IndexDefect: discard m[-1..0]
+      expect IndexDefect: discard w[-1..0]
 
-      expect IndexError: discard s[0..s.len+1]
-      expect IndexError: discard m[0..m.len+1]
-      expect IndexError: discard w[0..w.len]
+      expect IndexDefect: discard s[0..s.len+1]
+      expect IndexDefect: discard m[0..m.len+1]
+      expect IndexDefect: discard w[0..w.len]
 
     check:
       s.substr(-1, 10) == s
@@ -284,22 +288,22 @@ suite "Test Suites for winim/winstr":
     check(byteArray.toHex == "A4A4A4E5FFFFFFFFFF")
 
     byteBuffer.resetFF
-    expect IndexError:
+    expect IndexDefect:
       byteBuffer << "01234567890"
     check(byteBuffer.toHex == "30313233343536373839")
 
     byteBuffer.resetFF
-    expect IndexError:
+    expect IndexDefect:
       byteBuffer <<< "0123456789"
     check(byteBuffer.toHex == "30313233343536373839")
 
     byteArray.resetFF
-    expect IndexError:
+    expect IndexDefect:
       byteArray << "0123456789AB"
     check(byteArray.toHex == "323334353637383941")
 
     byteArray.resetFF
-    expect IndexError:
+    expect IndexDefect:
       byteArray <<< "0123456789A"
     check(byteArray.toHex == "323334353637383941")
 
@@ -316,22 +320,22 @@ suite "Test Suites for winim/winstr":
     check(wcharArray.toHex == "2D4E8765FFFFFFFFFFFFFFFFFFFFFFFFFFFF")
 
     wcharBuffer.resetFF
-    expect IndexError:
+    expect IndexDefect:
       wcharBuffer << L"01234567890"
     check(wcharBuffer.toHex == "3000310032003300340035003600370038003900")
 
     wcharBuffer.resetFF
-    expect IndexError:
+    expect IndexDefect:
       wcharBuffer <<< L"0123456789"
     check(wcharBuffer.toHex == "3000310032003300340035003600370038003900")
 
     wcharArray.resetFF
-    expect IndexError:
+    expect IndexDefect:
       wcharArray << L"0123456789AB"
     check(wcharArray.toHex == "320033003400350036003700380039004100")
 
     wcharArray.resetFF
-    expect IndexError:
+    expect IndexDefect:
       wcharArray <<< L"0123456789A"
     check(wcharArray.toHex == "320033003400350036003700380039004100")
 

@@ -1,3 +1,7 @@
+Version 3.3.5
+-------------
+* winimx: able to mark the output module as "used" by used pragma.
+
 Version 3.3.4
 -------------
 * Update for Nim Compiler 1.3.5 (devel).
