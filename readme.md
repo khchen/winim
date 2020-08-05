@@ -19,24 +19,24 @@ Without git:
     3. Run "nimble install"
 
 ## Usage
-```nimrod
+```nim
 import winim # import all modules, except COM support.
 ```
 or
-```nimrod
+```nim
 import winim/lean # for core SDK only, this speed up compiling time.
 ```
 or
-```nimrod
+```nim
 import winim/mean # for core SDK + Shell + OLE API.
 ```
 or
-```nimrod
+```nim
 import winim/com # winim/mean + Windows COM support.
 ```
 
 API modules can import one by one if needed, for example:
-```nimrod
+```nim
 import winim/utils
 import winim/winstr
 import winim/inc/windef
@@ -44,23 +44,23 @@ import winim/inc/winbase
 import winim/inc/winuser
 ```
 or
-```nimrod
+```nim
 import winim/[utils, winstr]
 import winim/inc/[windef, winbase, winuser]
 ```
 
 WinHTTP and WinINet module are incompatible with each other. So they are not imported by default. Add one of them if needed:
-```nimrod
+```nim
 import winim/inc/winhttp
 ```
 or
-```nimrod
+```nim
 import winim/inc/wininet
 ```
 
 MSHTML module is too big. So it is not imported by default.
 Add this module only if needed:
-```nimrod
+```nim
 import winim/inc/mshtml
 ```
 
@@ -76,20 +76,20 @@ import winim/inc/mshtml
 ## Examples
 
 An hello world program:
-```nimrod
+```nim
 import winim/lean
 MessageBox(0, "Hello, world !", "Nim is Powerful", 0)
 ```
 
 Write codes work under both unicode and ansi mode:
-```nimrod
+```nim
 import winim/lean
 # T macro generate unicode string or ansi string depend on conditional symbol: useWinAnsi.
 MessageBox(0, T"Hello, world !", T"Nim is Powerful 中文測試", 0)
 ```
 
 Example to use the IShellLink interface:
-```nimrod
+```nim
 import os, winim/mean
 
 var
@@ -112,15 +112,15 @@ except:
 ```
 
 Use COM objects like a script langauge:
-```nimrod
+```nim
 import winim/com
 
 comScript:
   var dict = CreateObject("Scripting.Dictionary")
   dict.add("a", "the")
-  dict.add("b", "quick")
-  dict.add("c", "fox")
-  dict.item("c") = "dog" # this line needs comScript macro
+  dict.add("b", item:="quick")
+  dict.add(item:="fox", key:="c")
+  dict.item(key:="c") = "dog"
 
   for key in dict:
     echo key, " => ", dict.item(key)
