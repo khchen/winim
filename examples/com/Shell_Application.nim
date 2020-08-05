@@ -12,6 +12,8 @@ obj.MinimizeAll
 obj.FileRun
 obj.ControlPanelItem "INETCPL.cpl"
 
-var oFolder = obj.BrowseForFolder(0, "Select a Folder", 0, r"c:\")
-for i in oFolder.Items:
-  echo i
+comScript:
+  var oFolder = obj.BrowseForFolder(Title:="Select a Folder", RootFolder:=r"c:\")
+  if not oFolder.isNull:
+    for i in oFolder.Items:
+      echo i

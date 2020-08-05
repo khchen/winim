@@ -14,7 +14,7 @@ import unittest, strutils, unicode
 
 when not declared(IndexDefect):
   type
-    IndexDefect = IndexError
+    IndexDefect = ref IndexError
 
 suite "Test Suites for winim/winstr":
   setup:

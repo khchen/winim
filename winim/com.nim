@@ -15,9 +15,9 @@
 ##    comScript:
 ##      var dict = CreateObject("Scripting.Dictionary")
 ##      dict.add("a", "the")
-##      dict.add("b", "quick")
-##      dict.add("c", "fox")
-##      dict.item("c") = "dog"
+##      dict.add("b", item:="quick")
+##      dict.add(item:="fox", key:="c")
+##      dict.item(key:="c") = "dog"
 ##      for key in dict:
 ##        echo key, " => ", dict.item(key)
 ##
@@ -54,7 +54,7 @@ import strutils, macros
 import inc/winimbase, utils, winstr, core, shell, ole
 export winimbase, utils, winstr, core, shell, ole
 
-when defined(notrace):
+when defined(notrace) or defined(gcDestructors):
   const hasTraceTable = false
 else:
   const hasTraceTable = true
@@ -147,26 +147,26 @@ proc desc*(e: ref COMError): string =
 
   result = $buffer
 
-proc release(x: com) =
-  if x.notNil and x.disp.notNil:
+proc `=destroy`(x: var type(com()[])) =
+  if not x.disp.isNil:
     x.disp.Release()
     x.disp = nil
 
-proc release(x: variant) =
-  if x.notNil:
-    discard VariantClear(&x.raw)
+proc `=destroy`(x: var type(variant()[])) =
+  VariantClear(&x.raw)
 
-proc del*(x: com) =
-  when hasTraceTable:
-    comTrace.del(cast[pointer](x))
+when not defined(gcDestructors):
+  proc del*(x: com) =
+    when hasTraceTable:
+      comTrace.del(cast[pointer](x))
 
-  x.release()
+    `=destroy`(x[])
 
-proc del*(x: variant) =
-  when hasTraceTable:
-    varTrace.del(cast[pointer](x))
+  proc del*(x: variant) =
+    when hasTraceTable:
+      varTrace.del(cast[pointer](x))
 
-  x.release()
+    `=destroy`(x[])
 
 template init(x): untyped =
   # lazy initialize, in case of the it need different apartment or OleInitialize
@@ -174,7 +174,10 @@ template init(x): untyped =
     CoInitialize(nil)
     isInitialized = true
 
-  new(x, del)
+  when not defined(gcDestructors):
+    new(x, del)
+  else:
+    new(x)
 
   when hasTraceTable:
     if comTrace.isNil: comTrace = newTable[pointer, bool]()
@@ -186,20 +189,18 @@ template init(x): untyped =
     elif x.type is com:
       comTrace[cast[pointer](x)] = true
 
-
-when hasTraceTable:
-  proc COM_FullRelease*() =
-    ## Clean up all COM objects and variants.
-    ##
-    ## Usually, we let garbage collector to release the objects.
-    ## However, sometimes the garbage collector can't release all the object even we call GC_fullCollect().
-    ## Some object will create a endless process in this situation. (for example: Excel.Application).
-    ## So we need this function.
-    ##
-    ## Use -d:notrace to disable this function.
-
-    for k, v in varTrace: release cast[variant](k)
-    for k, v in comTrace: release cast[com](k)
+proc COM_FullRelease*() =
+  ## Clean up all COM objects and variants.
+  ##
+  ## Usually, we let garbage collector to release the objects.
+  ## However, sometimes the garbage collector can't release all the object even we call GC_fullCollect().
+  ## Some object will create a endless process in this situation. (for example: Excel.Application).
+  ## So we need this function.
+  ##
+  ## Use -d:notrace to disable this function.
+  when hasTraceTable:
+    for k, v in varTrace: `=destroy`(cast[variant](k)[])
+    for k, v in comTrace: `=destroy`(cast[com](k)[])
     varTrace.clear
     comTrace.clear
 
@@ -299,7 +300,7 @@ proc unwrap*(x: variant): VARIANT {.inline.} =
   result = x.raw
 
 proc isNull*(x: variant): bool {.inline.} =
-  result = (x.raw.vt == VT_NULL)
+  result = (x.raw.vt == VT_NULL or (x.raw.vt == VT_DISPATCH and x.raw.byref.isNil))
 
 proc newVariant*(x: VARIANT): variant =
   result.init
@@ -889,41 +890,105 @@ proc getValue(tinfo: ptr ITypeInfo, name: string): variant =
 
   raise newCOMError("constant not found: " & name)
 
-proc invokeRaw(self: com, name: string, invokeType: WORD, vargs: varargs[variant, toVariant]): variant =
-  if vargs.len > 128:
-    raise newCOMError("too mary parameters", DISP_E_BADPARAMCOUNT)
-
+proc desc*(self: com, name: string): string =
+  ## Gets the description (include name and arguments) for the specific method.
   var
-    i = 0
-    j = vargs.len - 1
-    args: array[128, VARIANT]
-
-  while i < vargs.len:
-    args[j] = vargs[i].raw
-    j.dec
-    i.inc
-
-  var
-    dp: DISPPARAMS
-    dispidNamed: DISPID = DISPID_PROPERTYPUT
     dispid: DISPID
-    ret: VARIANT
-    excep: EXCEPINFO
     wstr = newWString(name)
     pwstr = &wstr
+    tinfo: ptr ITypeInfo
+    count: UINT
+    names: array[128, BSTR]
 
-  if self.disp.GetIDsOfNames(&IID_NULL, cast[ptr LPOLESTR](&pwstr), 1, LOCALE_USER_DEFAULT, &dispid).ERR:
+  if self.disp.GetIDsOfNames(&IID_NULL, &pwstr, 1, LOCALE_USER_DEFAULT, &dispid).ERR:
+    raise newCOMError("unsupported method: " & name)
+
+  if self.disp.GetTypeInfo(0, 0, &tinfo).ERR: raise newCOMError("named arguments not allowed")
+  defer: tinfo.Release()
+
+  if tinfo.GetNames(dispid, &names[0], 128, &count).ERR: raise newCOMError("named arguments not allowed")
+  defer:
+    for i in 0..<count:
+      SysFreeString(names[i])
+
+  result = $names[0] & "("
+  for i in 1..<count:
+    result.add $names[i]
+    result.add ", "
+  result.removeSuffix ", "
+  result.add ")"
+
+proc invoke(self: com, name: string, invokeType: WORD, vargs: varargs[variant, toVariant],
+    kwargs: openarray[(string, variant)] = []): variant =
+
+  var
+    isSet = (invokeType and (DISPATCH_PROPERTYPUT or DISPATCH_PROPERTYPUTREF)) != 0
+    dispid: DISPID
+    wstr = newWString(name)
+    pwstr = &wstr
+    args: seq[VARIANT]
+
+  if self.disp.GetIDsOfNames(&IID_NULL, &pwstr, 1, LOCALE_USER_DEFAULT, &dispid).ERR:
     # if the method name is not recognized, maybe it is an enum name
     result = getEnumeration(self, name)
     if not result.isNil: return
 
     raise newCOMError("unsupported method: " & name)
 
-  if vargs.len != 0:
-    dp.rgvarg = &args[0]
-    dp.cArgs = vargs.len.DWORD
+  if kwargs.len != 0:
+    var
+      tinfo: ptr ITypeInfo
+      count: UINT
+      names: array[128, BSTR]
 
-    if (invokeType and (DISPATCH_PROPERTYPUT or DISPATCH_PROPERTYPUTREF)) != 0:
+    if self.disp.GetTypeInfo(0, 0, &tinfo).ERR: raise newCOMError("named arguments not allowed")
+    defer: tinfo.Release()
+
+    if tinfo.GetNames(dispid, &names[0], 128, &count).ERR: raise newCOMError("named arguments not allowed")
+    defer:
+      for i in 0..<count:
+        SysFreeString(names[i])
+
+    # names[0] is method name, names[1] is first argument's name, ...
+    args.setLen(count - (if isSet: 0 else: 1))
+
+    for _, tup in kwargs:
+      var found = false
+      for i in 1..<count:
+        if tup[0].cmpIgnoreCase($names[i]) == 0:
+          args[args.high - (i - 1)] = tup[1].raw # reverse order
+          found = true
+          break
+
+      if not found:
+        raise newCOMError($names[0] & "() got an unexpected argument: " & tup[0])
+
+  if args.len == 0:
+    args.setLen(vargs.len)
+
+  var index = 0
+  for i in countdown(args.high, 0): # reverse order
+    if index >= vargs.len: break
+    if args[i].vt == VT_EMPTY:
+      args[i] = vargs[index].raw
+      index.inc
+
+  var
+    dp: DISPPARAMS
+    dispidNamed: DISPID = DISPID_PROPERTYPUT
+    ret: VARIANT
+    excep: EXCEPINFO
+    skipArgs = 0
+
+  if args.len != 0:
+    for i in 0..args.high:
+      if args[i].vt == VT_EMPTY: skipArgs.inc
+      else: break
+
+    dp.rgvarg = &args[skipArgs]
+    dp.cArgs = DWORD(args.len - skipArgs)
+
+    if isSet:
       dp.rgdispidNamedArgs = &dispidNamed
       dp.cNamedArgs = 1
 
@@ -944,32 +1009,51 @@ proc invokeRaw(self: com, name: string, invokeType: WORD, vargs: varargs[variant
   result = newVariant(ret)
   discard VariantClear(&ret)
 
-proc invoke(self: com, name: string, invokeType: WORD, vargs: varargs[variant, toVariant]): variant =
-  if self.isNil: return nil
-
-  var
-    list = name.split(".")
-    obj = self
-
-  for i in 0..list.high-1:
-    obj = obj.invokeRaw(list[i], DISPATCH_METHOD or DISPATCH_PROPERTYGET).com
-
-  result = obj.invokeRaw(list[list.high], invokeType, vargs)
+proc call*(self: com, name: string, vargs: varargs[variant, toVariant],
+    kwargs: openarray[(string, variant)] = []): variant {.discardable, inline.} =
+  result = invoke(self, name, DISPATCH_METHOD, vargs, kwargs=kwargs)
 
 proc call*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable, inline.} =
-  result = invoke(self, name, DISPATCH_METHOD, vargs)
+  result = invoke(self, name, DISPATCH_METHOD, vargs, kwargs=[])
+
+proc set*(self: com, name: string, vargs: varargs[variant, toVariant],
+    kwargs: openarray[(string, variant)]): variant {.discardable, inline.} =
+  result = invoke(self, name, DISPATCH_PROPERTYPUT, vargs, kwargs=kwargs)
 
 proc set*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable, inline.} =
-  result = invoke(self, name, DISPATCH_PROPERTYPUT, vargs)
+  result = invoke(self, name, DISPATCH_PROPERTYPUT, vargs, kwargs=[])
+
+proc setRef*(self: com, name: string, vargs: varargs[variant, toVariant],
+    kwargs: openarray[(string, variant)]): variant {.discardable, inline.} =
+  result = invoke(self, name, DISPATCH_PROPERTYPUTREF, vargs, kwargs=kwargs)
 
 proc setRef*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable, inline.} =
-  result = invoke(self, name, DISPATCH_PROPERTYPUTREF, vargs)
+  result = invoke(self, name, DISPATCH_PROPERTYPUTREF, vargs, kwargs=[])
 
-proc get*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.inline.} =
-  result = invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
+proc get*(self: com, name: string, vargs: varargs[variant, toVariant],
+    kwargs: openarray[(string, variant)]): variant {.discardable, inline.} =
+  result = invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs, kwargs=kwargs)
 
-proc getT*[T](self: com, name: string, vargs: varargs[variant, toVariant]): T {.inline.} =
-  result = fromVariant[T](invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs))
+proc get*(self: com, name: string, vargs: varargs[variant, toVariant]): variant {.discardable, inline.} =
+  result = invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs, kwargs=[])
+
+proc `[]`*(self: variant, name: string): variant =
+  var tinfo = self.getVariantTypeInfo()
+  if tinfo.notNil:
+    defer: tinfo.Release()
+    return tinfo.getValue(name)
+
+  else:
+    return invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET)
+
+template `[]`*(self: com, name: string): variant =
+  discardable invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET)
+
+template `[]=`*(self: com, name: string, v: untyped) =
+  discardable invoke(self, name, DISPATCH_PROPERTYPUT, toVariant(v))
+
+template `.`*(self: variant, name: untyped): variant =
+  discardable `[]`(self, astToStr(name))
 
 iterator items*(x: com): variant =
   var
@@ -1003,6 +1087,30 @@ iterator items*(x: variant): variant =
       for v in obj:
         yield v
 
+proc standardizeKwargs(n: var NimNode) =
+  # if last argument is table constructor, name it as kwargs
+  if n[^1].kind == nnkTableConstr:
+    n[^1] = newTree(nnkExprEqExpr, ident("kwargs"), n[^1])
+
+  # if last argument is already named kwargs, just do nothing
+  elif n[^1].kind == nnkExprEqExpr and n[^1][0].eqIdent("kwargs") and
+      n[^1][1].kind == nnkTableConstr:
+    return
+
+  # otherwise, add empty array as kwargs
+  else:
+    n.add newTree(nnkExprEqExpr, ident("kwargs"), newNimNode(nnkBracket))
+
+macro `.`*(self: com, name: untyped, vargs: varargs[untyped]): untyped =
+  result = newCall("get", self, newStrLitNode($name))
+  for i in vargs: result.add i
+  result.standardizeKwargs()
+
+macro `.=`*(self: com, name: untyped, vargs: varargs[untyped]): untyped =
+  result = newCall("set", self, newStrLitNode($name))
+  for i in vargs: result.add i
+  result.standardizeKwargs()
+
 proc GetCLSID(progId: string, clsid: var GUID): HRESULT =
   if progId[0] == '{':
     result = CLSIDFromString(progId, &clsid)
@@ -1028,7 +1136,6 @@ proc CreateObject*(progId: string): com =
         return result
 
   raise newCOMError("unable to create object from " & progId)
-
 
 proc GetObject*(file: string, progId: string = ""): com =
   ## Retrieves a reference to a COM object from an existing process or filename.
@@ -1219,7 +1326,6 @@ proc connectRaw(self: com, riid: REFIID = nil, cookie: DWORD, handler: comEventH
 
   raise newCOMError("unable to connect/disconnect event")
 
-
 proc connect*(self: com, handler: comEventHandler, riid: REFIID = nil): DWORD {.discardable.} =
   ## Connect a COM object to a comEventHandler. Return a cookie to disconnect (if needed).
   ## Handler is a user defined proc to receive the COM event.
@@ -1237,49 +1343,56 @@ proc disconnect*(self: com, cookie: DWORD, riid: REFIID = nil): bool {.discardab
   if cookie != 0 and connectRaw(self, riid, cookie, nil) != 0:
     result = true
 
-template `.`*(self: com, name: untyped, vargs: varargs[variant, toVariant]): variant =
-  discardable invoke(self, astToStr(name), DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
+proc reformatAsgn(n: NimNode): NimNode =
+  # reformat code:
+  #   a.b(c, ...) = d -> a.b.set("c", ..., d)
+  expectKind(n, nnkAsgn)
 
-template `.=`*(self: com, name: untyped, vargs: varargs[variant, toVariant]): variant =
-  discardable invoke(self, astToStr(name), DISPATCH_PROPERTYPUT, vargs)
+  var
+    params = n[0]
+    dots = n[0][0]
 
-template `.()`*(self: com, name: untyped, vargs: varargs[variant, toVariant]): variant =
-  discardable invoke(self, astToStr(name), DISPATCH_METHOD or DISPATCH_PROPERTYGET, vargs)
+  params.insert(1, dots.last.toStrLit)
+  params.add(n.last)
+  dots.del(dots.len-1)
+  dots.add(newIdentNode("set"))
+  result = n[0]
 
-proc `[]`*(self: variant, name: string): variant =
-  var tinfo = self.getVariantTypeInfo()
-  if tinfo.notNil:
-    defer: tinfo.Release()
-    return tinfo.getValue(name)
+proc reformatCall(n: NimNode): NimNode =
+  # reformat code:
+  #   a(b, c:=d, e:=f, g, h) -> a(b, g, h, kwargs={"c": toVariant(d), "e": toVariant(f)})
+  expectKind(n, nnkCall)
 
-  else:
-    return invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET)
+  result = newNimNode(nnkCall)
+  var table = newNimNode(nnkTableConstr)
 
-template `[]`*(self: com, name: string): variant =
-  discardable invoke(self, name, DISPATCH_METHOD or DISPATCH_PROPERTYGET)
+  for i in 0..<n.len:
+    if n[i].kind == nnkInfix and n[i][0].eqIdent(":="):
+      table.add newTree(nnkExprColonExpr,
+          newStrLitNode($n[i][1]),
+          newCall(ident("toVariant"), (n[i][2])))
 
-template `[]=`*(self: com, name: string, v: untyped) =
-  discardable invoke(self, name, DISPATCH_PROPERTYPUT, toVariant(v))
+    else:
+      result.add n[i]
 
-template `.`*(self: variant, name: untyped): variant =
-  discardable `[]`(self, astToStr(name))
+  if table.len != 0:
+    result.add newTree(nnkExprEqExpr, ident("kwargs"), table)
 
 proc comReformat(n: NimNode): NimNode =
-  # reformat code: a.b.c(d, e) = f becomes a.b.c.set(d, e, f)
-
   result = n
 
+  proc hasInfixChildren(n: NimNode, infix: string): bool =
+    for i in n.children:
+      if i.kind == nnkInfix and i[0].eqIdent(infix):
+        return true
+
   if n.kind == nnkAsgn and n[0].kind == nnkCall and n[0][0].kind == nnkDotExpr:
-    let
-      params = n[0]
-      dots = n[0][0]
+    # deal with a.b(c) = d
+    result = comReformat(reformatAsgn(n))
 
-    params.insert(1, dots.last.toStrLit)
-    params.add(n.last)
-    dots.del(dots.len-1)
-    dots.add(newIdentNode("set"))
-
-    result = n[0]
+  elif n.kind == nnkCall and n.hasInfixChildren(":="):
+    # deal with a(b:=c)
+    result = comReformat(reformatCall(n))
 
   elif n.len != 0:
     for i in 0..<n.len:
@@ -1288,26 +1401,27 @@ proc comReformat(n: NimNode): NimNode =
       n.insert(i, node)
 
 macro comScript*(x: untyped): untyped =
-  ## Nim's dot operators `.=` only allow "a.b = c".
-  ## With this macro, "a.b(c, d) = e" is allowed.
-  ## Some assignment need this macro. For example:
+  ## Nim's dot operators `.=` only allow "a.b = c". With this macro, "a.b(c, d) = e"
+  ## is allowed. Some assignment needs this macro to work. Moreover, this macro
+  ## also translates named arguments to table constructor syntax which
+  ## methods/properties related functions can accept (here we use **:=** as
+  ## assignment to avoid syntax conflict). For example:
   ##
   ## .. code-block:: Nim
   ##    comScript:
   ##      dict.item("c") = "dog"
+  ##      dict.add(item:="fox", key:="c")
   ##      excel.activeSheet.cells(1, 1) = "text"
-
+  ##      excel.activeSheet.range(cell1:="A1") = "text"
   result = comReformat(x)
 
 when isMainModule:
 
   comScript:
     var dict = CreateObject("Scripting.Dictionary")
-
     dict.add("a", "the")
-    dict.add("b", "quick")
-    dict.add("c", "fox")
-    dict.item("c") = "dog" # this line needs comScript macro
-
+    dict.add("b", item:="quick")
+    dict.add(item:="fox", key:="c")
+    dict.item(key:="c") = "dog"
     for key in dict:
       echo key, " => ", dict.item(key)

@@ -12,6 +12,7 @@ comScript:
   var obj = CreateObject("Excel.Application")
   obj.visible = true
   obj.workbooks.add()
+  obj.displayalerts = false
 
   var
     s1 = "the quick fox jumps over the lazy brown dog".split(" ")

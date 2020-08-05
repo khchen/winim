@@ -1,6 +1,19 @@
+Version 3.4.0
+-------------
+* com: Methods and properties related functions can accept `table constructor`
+  (syntactic sugar for string-variant pairs array) as named arguments.
+  Furthermore, `comScript` macro can translate nim's named arguments to table
+  constructor syntax. In summary, method call in comScript block works like the
+  script language that accepts named arguments for method call (use *:=* as
+  assignment to avoid syntax conflict).
+* com: Objects and variants work fine with --gc:arc now. Since the programs
+  compiled by --gc:arc always clean all the resource before they end, COM_FullRelease()
+  is exists but just does nothing in this mode.
+* Add com_test.nim.
+
 Version 3.3.5
 -------------
-* winimx: able to mark the output module as "used" by used pragma.
+* winimx: Able to mark the output module as "used" by used pragma.
 
 Version 3.3.4
 -------------

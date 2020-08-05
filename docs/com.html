@@ -227,16 +227,30 @@ function main() {
     title="fromVariant[T](x: variant): T"><wbr />from<wbr />Variant<span class="attachedType">variant</span></a></li>
   <li><a class="reference" href="#%24%2Cvariant"
     title="`$`(x: variant): string"><wbr />`$`<span class="attachedType">variant</span></a></li>
+  <li><a class="reference" href="#desc%2Ccom%2Cstring"
+    title="desc(self: com; name: string): string"><wbr />desc<span class="attachedType">com</span></a></li>
+  <li><a class="reference" href="#call%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D%2CopenArray%5B%5D"
+    title="call(self: com; name: string; vargs: varargs[variant, toVariant];
+     kwargs: openArray[(string, variant)] = []): variant"><wbr />call<span class="attachedType">com</span></a></li>
   <li><a class="reference" href="#call%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D"
     title="call(self: com; name: string; vargs: varargs[variant, toVariant]): variant"><wbr />call<span class="attachedType">com</span></a></li>
+  <li><a class="reference" href="#set%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D%2CopenArray%5B%5D"
+    title="set(self: com; name: string; vargs: varargs[variant, toVariant];
+    kwargs: openArray[(string, variant)]): variant"><wbr />set<span class="attachedType">com</span></a></li>
   <li><a class="reference" href="#set%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D"
     title="set(self: com; name: string; vargs: varargs[variant, toVariant]): variant"><wbr />set<span class="attachedType">com</span></a></li>
+  <li><a class="reference" href="#setRef%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D%2CopenArray%5B%5D"
+    title="setRef(self: com; name: string; vargs: varargs[variant, toVariant];
+       kwargs: openArray[(string, variant)]): variant"><wbr />set<wbr />Ref<span class="attachedType">com</span></a></li>
   <li><a class="reference" href="#setRef%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D"
     title="setRef(self: com; name: string; vargs: varargs[variant, toVariant]): variant"><wbr />set<wbr />Ref<span class="attachedType">com</span></a></li>
+  <li><a class="reference" href="#get%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D%2CopenArray%5B%5D"
+    title="get(self: com; name: string; vargs: varargs[variant, toVariant];
+    kwargs: openArray[(string, variant)]): variant"><wbr />get<span class="attachedType">com</span></a></li>
   <li><a class="reference" href="#get%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D"
     title="get(self: com; name: string; vargs: varargs[variant, toVariant]): variant"><wbr />get<span class="attachedType">com</span></a></li>
-  <li><a class="reference" href="#getT%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D"
-    title="getT[T](self: com; name: string; vargs: varargs[variant, toVariant]): T"><wbr />get<wbr />T<span class="attachedType">com</span></a></li>
+  <li><a class="reference" href="#%5B%5D%2Cvariant%2Cstring"
+    title="`[]`(self: variant; name: string): variant"><wbr />`[]`<span class="attachedType">variant</span></a></li>
   <li><a class="reference" href="#CreateObject%2Cstring"
     title="CreateObject(progId: string): com"><wbr />Create<wbr />Object<span class="attachedType">com</span></a></li>
   <li><a class="reference" href="#GetObject%2Cstring%2Cstring"
@@ -249,8 +263,6 @@ function main() {
     title="connect(self: com; handler: comEventHandler; riid: REFIID = nil): DWORD"><wbr />connect<span class="attachedType">com</span></a></li>
   <li><a class="reference" href="#disconnect%2Ccom%2CDWORD%2CREFIID"
     title="disconnect(self: com; cookie: DWORD; riid: REFIID = nil): bool"><wbr />disconnect<span class="attachedType">com</span></a></li>
-  <li><a class="reference" href="#%5B%5D%2Cvariant%2Cstring"
-    title="`[]`(self: variant; name: string): variant"><wbr />`[]`<span class="attachedType">variant</span></a></li>
 
   </ul>
 </li>
@@ -331,7 +343,11 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#17" id="67">Macros</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#comScript.m%2Cuntyped"
+      <li><a class="reference" href="#..m%2Ccom%2Cuntyped%2Cvarargs%5Buntyped%5D"
+    title="`.`(self: com; name: untyped; vargs: varargs[untyped]): untyped"><wbr />`.`<span class="attachedType">com</span></a></li>
+  <li><a class="reference" href="#.%3D.m%2Ccom%2Cuntyped%2Cvarargs%5Buntyped%5D"
+    title="`.=`(self: com; name: untyped; vargs: varargs[untyped]): untyped"><wbr />`.=`<span class="attachedType">com</span></a></li>
+  <li><a class="reference" href="#comScript.m%2Cuntyped"
     title="comScript(x: untyped): untyped"><wbr />com<wbr />Script<span class="attachedType"></span></a></li>
 
   </ul>
@@ -339,13 +355,7 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#18" id="68">Templates</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#..t%2Ccom%2Cuntyped%2Cvarargs%5Bvariant%2CtoVariant%5D"
-    title="`.`(self: com; name: untyped; vargs: varargs[variant, toVariant]): variant"><wbr />`.`<span class="attachedType">com</span></a></li>
-  <li><a class="reference" href="#.%3D.t%2Ccom%2Cuntyped%2Cvarargs%5Bvariant%2CtoVariant%5D"
-    title="`.=`(self: com; name: untyped; vargs: varargs[variant, toVariant]): variant"><wbr />`.=`<span class="attachedType">com</span></a></li>
-  <li><a class="reference" href="#.%28%29.t%2Ccom%2Cuntyped%2Cvarargs%5Bvariant%2CtoVariant%5D"
-    title="`.()`(self: com; name: untyped; vargs: varargs[variant, toVariant]): variant"><wbr />`.()`<span class="attachedType">com</span></a></li>
-  <li><a class="reference" href="#%5B%5D.t%2Ccom%2Cstring"
+      <li><a class="reference" href="#%5B%5D.t%2Ccom%2Cstring"
     title="`[]`(self: com; name: string): variant"><wbr />`[]`<span class="attachedType">com</span></a></li>
   <li><a class="reference" href="#%5B%5D%3D.t%2Ccom%2Cstring%2Cuntyped"
     title="`[]=`(self: com; name: string; v: untyped)"><wbr />`[]=`<span class="attachedType">com</span></a></li>
@@ -365,9 +375,9 @@ function main() {
   <p class="module-desc">This module add windows COM support to Winim. So that we can use Nim to interact with COM object like a script language. For example:<pre class="listing"><span class="Identifier">comScript</span><span class="Punctuation">:</span>
   <span class="Keyword">var</span> <span class="Identifier">dict</span> <span class="Operator">=</span> <span class="Identifier">CreateObject</span><span class="Punctuation">(</span><span class="StringLit">&quot;Scripting.Dictionary&quot;</span><span class="Punctuation">)</span>
   <span class="Identifier">dict</span><span class="Operator">.</span><span class="Identifier">add</span><span class="Punctuation">(</span><span class="StringLit">&quot;a&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;the&quot;</span><span class="Punctuation">)</span>
-  <span class="Identifier">dict</span><span class="Operator">.</span><span class="Identifier">add</span><span class="Punctuation">(</span><span class="StringLit">&quot;b&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;quick&quot;</span><span class="Punctuation">)</span>
-  <span class="Identifier">dict</span><span class="Operator">.</span><span class="Identifier">add</span><span class="Punctuation">(</span><span class="StringLit">&quot;c&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;fox&quot;</span><span class="Punctuation">)</span>
-  <span class="Identifier">dict</span><span class="Operator">.</span><span class="Identifier">item</span><span class="Punctuation">(</span><span class="StringLit">&quot;c&quot;</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="StringLit">&quot;dog&quot;</span>
+  <span class="Identifier">dict</span><span class="Operator">.</span><span class="Identifier">add</span><span class="Punctuation">(</span><span class="StringLit">&quot;b&quot;</span><span class="Punctuation">,</span> <span class="Identifier">item</span><span class="Punctuation">:</span><span class="Operator">=</span><span class="StringLit">&quot;quick&quot;</span><span class="Punctuation">)</span>
+  <span class="Identifier">dict</span><span class="Operator">.</span><span class="Identifier">add</span><span class="Punctuation">(</span><span class="Identifier">item</span><span class="Punctuation">:</span><span class="Operator">=</span><span class="StringLit">&quot;fox&quot;</span><span class="Punctuation">,</span> <span class="Identifier">key</span><span class="Punctuation">:</span><span class="Operator">=</span><span class="StringLit">&quot;c&quot;</span><span class="Punctuation">)</span>
+  <span class="Identifier">dict</span><span class="Operator">.</span><span class="Identifier">item</span><span class="Punctuation">(</span><span class="Identifier">key</span><span class="Punctuation">:</span><span class="Operator">=</span><span class="StringLit">&quot;c&quot;</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="StringLit">&quot;dog&quot;</span>
   <span class="Keyword">for</span> <span class="Identifier">key</span> <span class="Keyword">in</span> <span class="Identifier">dict</span><span class="Punctuation">:</span>
     <span class="Identifier">echo</span> <span class="Identifier">key</span><span class="Punctuation">,</span> <span class="StringLit">&quot; =&gt; &quot;</span><span class="Punctuation">,</span> <span class="Identifier">dict</span><span class="Operator">.</span><span class="Identifier">item</span><span class="Punctuation">(</span><span class="Identifier">key</span><span class="Punctuation">)</span></pre><p>This module introduce two new types to deal with COM objects: &quot;com&quot; and &quot;variant&quot;. In summary, CreateObject() or GetObject() returned a &quot;com&quot; type value, and any input/ouput of COM method should be a &quot;variant&quot; type value.</p>
 <p>Most Nim's data type and Winim's string type can convert to/from &quot;variant&quot; type value. The conversion is usually done automatically. However, specific conversion is aslo welcome.</p>
@@ -787,10 +797,38 @@ function main() {
 
 
 </dd>
+<a id="desc,com,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#desc%2Ccom%2Cstring"><span class="Identifier">desc</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">]</span><span class="Other">,</span>
+                                       <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Gets the description (include name and arguments) for the specific method.
+
+</dd>
+<a id="call,com,string,varargs[variant,toVariant],openArray[]"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#call%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D%2CopenArray%5B%5D"><span class="Identifier">call</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">;</span>
+         <span class="Identifier">kwargs</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Other">(</span><span class="Identifier">string</span><span class="Other">,</span> <a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">)</span><span class="Other">]</span> <span class="Other">=</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+
+</dd>
 <a id="call,com,string,varargs[variant,toVariant]"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#call%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D"><span class="Identifier">call</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
     <span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">inline</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+
+</dd>
+<a id="set,com,string,varargs[variant,toVariant],openArray[]"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#set%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D%2CopenArray%5B%5D"><span class="Identifier">set</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">;</span>
+        <span class="Identifier">kwargs</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Other">(</span><span class="Identifier">string</span><span class="Other">,</span> <a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">)</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
@@ -800,7 +838,17 @@ function main() {
 <a id="set,com,string,varargs[variant,toVariant]"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#set%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D"><span class="Identifier">set</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
     <span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">inline</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+
+</dd>
+<a id="setRef,com,string,varargs[variant,toVariant],openArray[]"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#setRef%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D%2CopenArray%5B%5D"><span class="Identifier">setRef</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">;</span>
+           <span class="Identifier">kwargs</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Other">(</span><span class="Identifier">string</span><span class="Other">,</span> <a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">)</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
@@ -810,7 +858,17 @@ function main() {
 <a id="setRef,com,string,varargs[variant,toVariant]"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#setRef%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D"><span class="Identifier">setRef</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
     <span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">inline</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+
+</dd>
+<a id="get,com,string,varargs[variant,toVariant],openArray[]"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#get%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D%2CopenArray%5B%5D"><span class="Identifier">get</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">;</span>
+        <span class="Identifier">kwargs</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Other">(</span><span class="Identifier">string</span><span class="Other">,</span> <a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">)</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
@@ -818,16 +876,19 @@ function main() {
 
 </dd>
 <a id="get,com,string,varargs[variant,toVariant]"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#get%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D"><span class="Identifier">get</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span>
+<dt><pre><span class="Keyword">proc</span> <a href="#get%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D"><span class="Identifier">get</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 
 </dd>
-<a id="getT,com,string,varargs[variant,toVariant]"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getT%2Ccom%2Cstring%2Cvarargs%5Bvariant%2CtoVariant%5D"><span class="Identifier">getT</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="[],variant,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#%5B%5D%2Cvariant%2Cstring"><span class="Identifier">`[]`</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -879,15 +940,6 @@ Connect a COM object to a comEventHandler. Return a cookie to disconnect (if nee
 <dd>
 
 Disconnect a COM object from a comEventHandler.
-
-</dd>
-<a id="[],variant,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#%5B%5D%2Cvariant%2Cstring"><span class="Identifier">`[]`</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">VariantConversionError</span><span class="Other">,</span> <span class="Identifier">COMError</span><span class="Other">,</span> <span class="Identifier">COMException</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
 
 </dd>
 
@@ -1152,13 +1204,29 @@ Disconnect a COM object from a comEventHandler.
 <div class="section" id="17">
 <h1><a class="toc-backref" href="#17">Macros</a></h1>
 <dl class="item">
+<a id="..m,com,untyped,varargs[untyped]"></a>
+<dt><pre><span class="Keyword">macro</span> <a href="#..m%2Ccom%2Cuntyped%2Cvarargs%5Buntyped%5D"><span class="Identifier">`.`</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">untyped</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<dd>
+
+
+
+</dd>
+<a id=".=.m,com,untyped,varargs[untyped]"></a>
+<dt><pre><span class="Keyword">macro</span> <a href="#.%3D.m%2Ccom%2Cuntyped%2Cvarargs%5Buntyped%5D"><span class="Identifier">`.=`</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">untyped</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<dd>
+
+
+
+</dd>
 <a id="comScript.m,untyped"></a>
 <dt><pre><span class="Keyword">macro</span> <a href="#comScript.m%2Cuntyped"><span class="Identifier">comScript</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
 
-Nim's dot operators <tt class="docutils literal"><span class="pre">.=</span></tt> only allow &quot;a.b = c&quot;. With this macro, &quot;a.b(c, d) = e&quot; is allowed. Some assignment need this macro. For example:<pre class="listing"><span class="Identifier">comScript</span><span class="Punctuation">:</span>
+Nim's dot operators <tt class="docutils literal"><span class="pre">.=</span></tt> only allow &quot;a.b = c&quot;. With this macro, &quot;a.b(c, d) = e&quot; is allowed. Some assignment needs this macro to work. Moreover, this macro also translates named arguments to table constructor syntax which methods/properties related functions can accept (here we use <strong>:=</strong> as assignment to avoid syntax conflict). For example:<pre class="listing"><span class="Identifier">comScript</span><span class="Punctuation">:</span>
   <span class="Identifier">dict</span><span class="Operator">.</span><span class="Identifier">item</span><span class="Punctuation">(</span><span class="StringLit">&quot;c&quot;</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="StringLit">&quot;dog&quot;</span>
-  <span class="Identifier">excel</span><span class="Operator">.</span><span class="Identifier">activeSheet</span><span class="Operator">.</span><span class="Identifier">cells</span><span class="Punctuation">(</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">1</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="StringLit">&quot;text&quot;</span></pre>
+  <span class="Identifier">dict</span><span class="Operator">.</span><span class="Identifier">add</span><span class="Punctuation">(</span><span class="Identifier">item</span><span class="Punctuation">:</span><span class="Operator">=</span><span class="StringLit">&quot;fox&quot;</span><span class="Punctuation">,</span> <span class="Identifier">key</span><span class="Punctuation">:</span><span class="Operator">=</span><span class="StringLit">&quot;c&quot;</span><span class="Punctuation">)</span>
+  <span class="Identifier">excel</span><span class="Operator">.</span><span class="Identifier">activeSheet</span><span class="Operator">.</span><span class="Identifier">cells</span><span class="Punctuation">(</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">1</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="StringLit">&quot;text&quot;</span>
+  <span class="Identifier">excel</span><span class="Operator">.</span><span class="Identifier">activeSheet</span><span class="Operator">.</span><span class="Identifier">range</span><span class="Punctuation">(</span><span class="Identifier">cell1</span><span class="Punctuation">:</span><span class="Operator">=</span><span class="StringLit">&quot;A1&quot;</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="StringLit">&quot;text&quot;</span></pre>
 
 </dd>
 
@@ -1166,27 +1234,6 @@ Nim's dot operators <tt class="docutils literal"><span class="pre">.=</span></tt
 <div class="section" id="18">
 <h1><a class="toc-backref" href="#18">Templates</a></h1>
 <dl class="item">
-<a id="..t,com,untyped,varargs[variant,toVariant]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#..t%2Ccom%2Cuntyped%2Cvarargs%5Bvariant%2CtoVariant%5D"><span class="Identifier">`.`</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a></pre></dt>
-<dd>
-
-
-
-</dd>
-<a id=".=.t,com,untyped,varargs[variant,toVariant]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#.%3D.t%2Ccom%2Cuntyped%2Cvarargs%5Bvariant%2CtoVariant%5D"><span class="Identifier">`.=`</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a></pre></dt>
-<dd>
-
-
-
-</dd>
-<a id=".().t,com,untyped,varargs[variant,toVariant]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#.%28%29.t%2Ccom%2Cuntyped%2Cvarargs%5Bvariant%2CtoVariant%5D"><span class="Identifier">`.()`</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">vargs</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="com.html#variant"><span class="Identifier">variant</span></a><span class="Other">,</span> <span class="Identifier">toVariant</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a></pre></dt>
-<dd>
-
-
-
-</dd>
 <a id="[].t,com,string"></a>
 <dt><pre><span class="Keyword">template</span> <a href="#%5B%5D.t%2Ccom%2Cstring"><span class="Identifier">`[]`</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a></pre></dt>
 <dd>

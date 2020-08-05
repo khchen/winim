@@ -13,6 +13,7 @@ comScript:
   obj.displayFullScreen = true
   obj.visible = true
   obj.sheetsInNewWorkBook = 1
+  obj.displayalerts = false
 
   obj.workbooks.add()
   obj.activeSheet.name = "Critically Endangered"
@@ -45,7 +46,5 @@ comScript:
   var xchart = obj.activeWorkbook.charts.add()
   xchart.chartWizard(xrange, -4100, 7, 1, 1, 0, false, "Critically Endangered Plants and Animals")
   xchart.HasAxis(3) = false
-
-  obj.quit()
 
   COM_FullRelease() # make sure excel.exe will end it self

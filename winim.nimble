@@ -1,6 +1,6 @@
 # Package
 
-version       = "3.3.5"
+version       = "3.4.0"
 author        = "Ward"
 description   = "Winim - Nim\'s Windows API and COM Library"
 license       = "MIT"
@@ -16,6 +16,7 @@ requires "nim >= 0.19.0"
 task test, "Runs the test suite":
   exec "nim c -r tests/variant_test"
   exec "nim c -r tests/winstr_test"
+  exec "nim c -r tests/com_test"
 
 # Examples
 
