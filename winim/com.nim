@@ -992,9 +992,9 @@ proc invoke(self: com, name: string, invokeType: WORD, vargs: varargs[variant, t
       dp.rgdispidNamedArgs = &dispidNamed
       dp.cNamedArgs = 1
 
-  if self.disp.Invoke(dispid, &IID_NULL, LOCALE_USER_DEFAULT, invokeType, &dp, &ret, &excep, nil).ERR:
+  if self.disp.Invoke(dispid, &IID_NULL, LOCALE_USER_DEFAULT, invokeType, &dp, &ret, addr excep, nil).ERR:
     if cast[pointer](excep.pfnDeferredFillIn).notNil:
-      {.gcsafe.}: discard excep.pfnDeferredFillIn(&excep)
+      {.gcsafe.}: discard excep.pfnDeferredFillIn(addr excep)
 
     if excep.bstrSource.notNil:
       var err = $toVariant(excep.bstrSource)

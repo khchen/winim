@@ -1,3 +1,9 @@
+Version 3.4.1
+-------------
+* Update for Nim Compiler 1.4.0.
+* Fix #58 and #59.
+* winimx: Reduce database size by using json module instead of marshal module.
+
 Version 3.4.0
 -------------
 * com: Methods and properties related functions can accept `table constructor`

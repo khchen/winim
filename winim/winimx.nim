@@ -41,7 +41,7 @@ when defined(Nimdoc):
 
 when isMainModule:
   import
-    marshal, strutils, parseutils, sets, tables, sequtils, os,
+    json, strutils, parseutils, sets, tables, sequtils, os,
     parseopt, lean, lib/miniz
 
   import strformat except `&`
@@ -335,6 +335,49 @@ when isMainModule:
 
     else: discard
 
+  proc toCodeNode(jnode: JsonNode): CodeNode
+
+  proc toCodeNodes(jnode: JsonNode): seq[CodeNode] =
+    for n in jnode.getElems:
+      result.add n.toCodeNode
+
+  proc toCodeNode(jnode: JsonNode): CodeNode =
+    result = CodeNode(kind: parseEnum[CodeKind](jnode{"kind"}.getStr))
+    result.module = jnode{"module"}.getStr
+    result.version = parseEnum[CodeVersion](jnode{"version"}.getStr)
+    result.arch = parseEnum[CodeArch](jnode{"arch"}.getStr)
+    result.name = jnode{"name"}.getStr
+    result.parent = jnode{"parent"}.getStr
+    result.params = jnode{"params"}.getStr
+    result.typ = jnode{"typ"}.getStr
+    result.pragma = jnode{"pragma"}.getStr
+    result.nodel = jnode{"nodel"}.getBool
+    result.children = jnode{"children"}.toCodeNodes
+
+    result.isDiscard = jnode{"isDiscard"}.getBool
+    result.isXpIncompatible = jnode{"isXpIncompatible"}.getBool
+
+    case result.kind
+    of ckApi, ckProcType:
+      result.dll = jnode{"dll"}.getStr
+      result.alias = jnode{"alias"}.getStr
+      result.calling = jnode{"calling"}.getStr
+    of ckConst, ckTemplate, ckProc, ckAccessProc:
+      result.body = jnode{"body"}.getStr
+    of ckMethod:
+      result.self = jnode{"self"}.getStr
+      result.paramNames = jnode{"paramNames"}.getStr
+      result.memberName = jnode{"memberName"}.getStr
+    of ckObject, ckInterface:
+      result.items = jnode{"items"}.toCodeNodes
+      result.isUnion = jnode{"isUnion"}.getBool
+      result.isRef = jnode{"isRef"}.getBool
+      result.isPacked = jnode{"isPacked"}.getBool
+    of ckType:
+      result.bitsize = jnode{"bitsize"}.getStr
+    of ckConverter:
+      result.rawName = jnode{"rawName"}.getStr
+
   type
     Minifier = object
       nodes: seq[CodeNode]
@@ -376,7 +419,7 @@ when isMainModule:
 
     result.table = initTable[string, seq[int]]()
     result.skipModules = initTable[string, bool]()
-    result.nodes = to[seq[CodeNode]](miniz.uncompress(db, dbLen))
+    result.nodes = toCodeNodes(parseJson(miniz.uncompress(db, dbLen)))
     result.used = used
     init(result.table, result.nodes)
 
@@ -440,12 +483,12 @@ when isMainModule:
 
   iterator walkFilesRec(path: string, recursively = true): string =
     if recursively:
-      if existsFile(path):
+      if fileExists(path):
         yield path
 
       else:
         var (root, pattern) =
-          if existsDir(path): (path, "*.*")
+          if dirExists(path): (path, "*.*")
           else: splitPath(path)
 
         for file in walkFiles(root / pattern):
