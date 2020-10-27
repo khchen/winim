@@ -29,8 +29,8 @@ type
   PUINT16* = ptr uint16
   UINT32* = int32
   PUINT32* = ptr int32
-  UINT64* = uint64
-  PUINT64* = ptr uint64
+  UINT64* = int64
+  PUINT64* = ptr int64
   LONG32* = int32
   PLONG32* = ptr int32
   ULONG32* = int32
@@ -39,10 +39,10 @@ type
   PDWORD32* = ptr int32
   LONG64* = int64
   PLONG64* = ptr int64
-  ULONG64* = uint64
-  PULONG64* = ptr uint64
-  DWORD64* = uint64
-  PDWORD64* = ptr uint64
+  ULONG64* = int64
+  PULONG64* = ptr int64
+  DWORD64* = int64
+  PDWORD64* = ptr int64
   PVOID* = pointer
   CHAR* = char
   LONG* = int32
@@ -58,8 +58,8 @@ type
   BOOL* = int32
   LONGLONG* = int64
   PLONGLONG* = ptr int64
-  ULONGLONG* = uint64
-  PULONGLONG* = ptr uint64
+  ULONGLONG* = int64
+  PULONGLONG* = ptr int64
   PCHAR* = cstring
   LPCH* = cstring
   PCH* = cstring
@@ -191,8 +191,8 @@ type
   NEARPROC* = pointer
   PROC* = pointer
   EXCEPTION_DISPOSITION* = int
-  QWORD* = uint64
-  PQWORD* = ptr uint64
+  QWORD* = int64
+  PQWORD* = ptr int64
 when winimAnsi:
   type
     TCHAR* = char
@@ -203,14 +203,14 @@ when winimCpu64:
   type
     INT_PTR* = int64
     PINT_PTR* = ptr int64
-    UINT_PTR* = uint64
-    PUINT_PTR* = ptr uint64
+    UINT_PTR* = int64
+    PUINT_PTR* = ptr int64
     LONG_PTR* = int64
     PLONG_PTR* = ptr int64
-    ULONG_PTR* = uint64
-    PULONG_PTR* = ptr uint64
+    ULONG_PTR* = int64
+    PULONG_PTR* = ptr int64
     SHANDLE_PTR* = int64
-    HANDLE_PTR* = uint64
+    HANDLE_PTR* = int64
     UHALF_PTR* = int32
     PUHALF_PTR* = ptr int32
     HALF_PTR* = int32

@@ -39,10 +39,20 @@ proc `&`*[T](x: var T): ptr T {.inline.} =
 
   result = x.addr
 
-proc `&`*(x: object): ptr type(x) {.importc: "&", nodecl.}
-  ## Use `&` to gets pointer for const object. For example:
-  ##
-  ## .. code-block:: Nim
-  ##    # pUk is "ptr IUnknown" for some object
-  ##    var pDisp: ptr IDispatch
-  ##    pUk.QueryInterface(&IID_IDispatch, &pDisp)
+when not compiles(unsafeaddr GUID_NULL):
+  proc `&`*(x: object): ptr type(x) {.importc: "&", nodecl.}
+    ## Use `&` to gets pointer for const object. For example:
+    ##
+    ## .. code-block:: Nim
+    ##    # pUk is "ptr IUnknown" for some object
+    ##    var pDisp: ptr IDispatch
+    ##    pUk.QueryInterface(&IID_IDispatch, &pDisp)
+
+else:
+  template `&`*(x: object): ptr type(x) = unsafeaddr x
+    ## Use `&` to gets pointer for const object. For example:
+    ##
+    ## .. code-block:: Nim
+    ##    # pUk is "ptr IUnknown" for some object
+    ##    var pDisp: ptr IDispatch
+    ##    pUk.QueryInterface(&IID_IDispatch, &pDisp)

@@ -358,10 +358,10 @@ proc toVariant*(x: SomeInteger|enum): variant =
       result.raw.uiVal = x.uint16
     elif sizeof(x) == 4:
       result.raw.vt = VT_UI4
-      result.raw.ulVal = x.int32 # ULONG is declared as int32 for compatible
+      result.raw.ulVal = x.int32 # ULONG is declared as int32 for compatibility
     else:
       result.raw.vt = VT_UI8
-      result.raw.ullVal = x.uint64
+      result.raw.ullVal = x.int64 # ULONG64 is declared as int64 for compatibility
 
 proc toVariant*(x: SomeFloat): variant =
   result.init
@@ -992,9 +992,9 @@ proc invoke(self: com, name: string, invokeType: WORD, vargs: varargs[variant, t
       dp.rgdispidNamedArgs = &dispidNamed
       dp.cNamedArgs = 1
 
-  if self.disp.Invoke(dispid, &IID_NULL, LOCALE_USER_DEFAULT, invokeType, &dp, &ret, addr excep, nil).ERR:
+  if self.disp.Invoke(dispid, &IID_NULL, LOCALE_USER_DEFAULT, invokeType, &dp, &ret, &excep, nil).ERR:
     if cast[pointer](excep.pfnDeferredFillIn).notNil:
-      {.gcsafe.}: discard excep.pfnDeferredFillIn(addr excep)
+      {.gcsafe.}: discard excep.pfnDeferredFillIn(&excep)
 
     if excep.bstrSource.notNil:
       var err = $toVariant(excep.bstrSource)

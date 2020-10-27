@@ -1,6 +1,6 @@
 # Package
 
-version       = "3.4.1"
+version       = "3.4.2"
 author        = "Ward"
 description   = "Winim - Nim\'s Windows API and COM Library"
 license       = "MIT"
@@ -9,7 +9,7 @@ bin           = @["winim/winimx"]
 
 # Dependencies
 
-requires "nim >= 0.19.0"
+requires "nim >= 1.0.0"
 
 # Tests
 

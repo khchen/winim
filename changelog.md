@@ -1,3 +1,9 @@
+Version 3.4.2
+-------------
+* Don't maintain compatibility with Nim Compiler 0.19 anymore.
+* Use int64 instead of uint64 for compatibility.
+* Fix bugs.
+
 Version 3.4.1
 -------------
 * Update for Nim Compiler 1.4.0.

@@ -55,10 +55,10 @@ type
   RpcCallClientLocality* = int32
   PCInterfaceName* = cstring
   RPC_STATUS* = int32
-  MIDL_uhyper* = uint64
+  MIDL_uhyper* = int64
 when winimCpu64:
   type
-    size_t* = uint64
+    size_t* = int64
     ssize_t* = int64
 when winimCpu32:
   type

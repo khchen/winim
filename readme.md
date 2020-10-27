@@ -4,6 +4,15 @@ Winim contains Windows API, struct, and constant definitions for Nim. The defini
 
 The module also include some Windows string type utilities and Windows COM support. See winstr.nim and com.nim for details.
 
+For historical reasons and compatibility, winim only use signed integer types. For example:
+```nim
+type
+  UINT* = int32
+  DWORD* = int32
+  QWORD* = int64
+  UINT_PTR* = int64
+```
+
 If you are looking for Windows GUI framework, try [wNim](https://github.com/khchen/wNim).
 
 ## Install
