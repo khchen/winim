@@ -8,7 +8,10 @@
 import macros
 
 when not defined(noRes):
-  when defined(cpu64):
+  when defined(vcc):
+    {.link: "../lib/winimvcc.res".}
+
+  elif defined(cpu64):
     {.link: "../lib/winim64.res".}
 
   else:

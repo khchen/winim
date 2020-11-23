@@ -255,7 +255,8 @@ proc toHex*(s: cstring): string {.inline.} =
 proc `&`[I, T](a: array[I, T]|var array[I, T]): ptr array[I, T] {.inline.} =
   result = a.unsafeaddr
 
-converter NaturalToInt32(x: Natural): int32 = int32 x
+when defined(cpu64):
+  converter NaturalToInt32(x: Natural): int32 = int32 x
 
 # new string types
 

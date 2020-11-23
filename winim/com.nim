@@ -1396,9 +1396,7 @@ proc comReformat(n: NimNode): NimNode =
 
   elif n.len != 0:
     for i in 0..<n.len:
-      let node = comReformat(n[i])
-      n.del(i)
-      n.insert(i, node)
+      n[i] = comReformat(n[i])
 
 macro comScript*(x: untyped): untyped =
   ## Nim's dot operators `.=` only allow "a.b = c". With this macro, "a.b(c, d) = e"

@@ -1,3 +1,7 @@
+Version 3.4.3
+-------------
+* Add prebuilt resource file for vcc.
+
 Version 3.4.2
 -------------
 * Don't maintain compatibility with Nim Compiler 0.19 anymore.

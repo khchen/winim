@@ -1,3 +1,12 @@
+#====================================================================
+#
+#               Winim - Nim's Windows API Module
+#                 (c) Copyright 2016-2020 Ward
+#
+#====================================================================
+
+{.push hint[XDeclaredButNotUsed]: off.}
+
 import winim/com except FAILED # conflict with TestStatus.FAILED
 import unittest
 
