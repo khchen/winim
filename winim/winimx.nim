@@ -41,23 +41,29 @@ when defined(Nimdoc):
 
 when isMainModule:
   import
-    json, strutils, parseutils, sets, tables, sequtils, os,
-    parseopt, lean, lib/miniz
+    json, strutils, parseutils, sets, tables, sequtils, os, parseopt, lean,
+    lib/miniz
 
   import strformat except `&`
 
-  # use RCDATA resource instead of staticRead for vcc compatibility
+  when defined(vcc):
+    import macros
 
-  when defined(cpu64):
-    {.link: "lib/winimx64.res".}
+    macro staticReadArray(path: string): untyped =
+      let data = staticRead(path.strval)
+      var code = "[byte "
+      for i in 0..data.high:
+        code.add $byte(data[i])
+        code.add ","
+      code.add "]"
+      result = parseExpr(code)
+
+    const Database = staticReadArray("lib/winimx.db")
+    let database = Database
+
   else:
-    {.link: "lib/winimx32.res".}
-
-  let
-    resource = FindResource(0, "winimx.db", RT_RCDATA)
-    handle = LoadResource(0, resource)
-    db = cast[cstring](LockResource(handle))
-    dbLen = SizeofResource(0, resource)
+    const Database = staticRead("lib/winimx.db")
+    let database = Database
 
   type
     CodeClass = enum ccNone, ccType, ccConst
@@ -247,9 +253,6 @@ when isMainModule:
 
   iterator catchIdent(input: string, skipColon = false): string =
 
-    when declared(toHashSet): # toSet is deprecated since v0.20
-      template toSet[T](x: T): untyped = toHashSet(x)
-
     const keywords = ["addr", "and", "array", "as", "asm", "bind", "block", "bool",
       "break", "case", "cast", "cchar", "cdouble", "cfloat", "char", "cint",
       "clong", "clongdouble", "clonglong", "concept", "const", "continue",
@@ -264,7 +267,7 @@ when isMainModule:
       "return", "seq", "set", "shl", "shr", "static", "string", "template", "true",
       "try", "tuple", "type", "typed", "u16", "u32", "u64", "u8", "uint", "uint16",
       "uint32", "uint64", "uint8", "untyped", "using", "var", "varargs", "void",
-      "when", "while", "xor", "yield"].toSet()
+      "when", "while", "xor", "yield"].toHashSet()
 
     var pos = 0
     while pos < input.len:
@@ -417,9 +420,10 @@ when isMainModule:
         of ckMethod:
           table.add(node.self, i)
 
+    let json = miniz.uncompress(cast[cstring](unsafeaddr database[0]), database.len)
+    result.nodes = toCodeNodes(parseJson(json))
     result.table = initTable[string, seq[int]]()
     result.skipModules = initTable[string, bool]()
-    result.nodes = toCodeNodes(parseJson(miniz.uncompress(db, dbLen)))
     result.used = used
     init(result.table, result.nodes)
 

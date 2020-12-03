@@ -350,23 +350,22 @@ const
   IMFS_DEFAULT* = MFS_DEFAULT
   SOFTKEYBOARD_TYPE_T1* = 0x0001
   SOFTKEYBOARD_TYPE_C1* = 0x0002
-  LIBID_ActiveIMM* = DEFINE_GUID(0x4955dd30'i32, 0xb159, 0x11d0, [0x8f'u8, 0xcf, 0x00, 0xaa, 0x00, 0x6b, 0xcc, 0x59])
-  IID_IEnumInputContext* = DEFINE_GUID(0x09b5eab0'i32, 0xf997, 0x11d1, [0x93'u8, 0xd4, 0x00, 0x60, 0xb0, 0x67, 0xb8, 0x6e])
-  IID_IActiveIMMRegistrar* = DEFINE_GUID(0xb3458082'i32, 0xbd00, 0x11d1, [0x93'u8, 0x9b, 0x00, 0x60, 0xb0, 0x67, 0xb8, 0x6e])
-  IID_IActiveIMMMessagePumpOwner* = DEFINE_GUID(0xb5cf2cfa'i32, 0x8aeb, 0x11d1, [0x93'u8, 0x64, 0x00, 0x60, 0xb0, 0x67, 0xb8, 0x6e])
-  IID_IActiveIMMApp* = DEFINE_GUID(0x08c0e040'i32, 0x62d1, 0x11d1, [0x93'u8, 0x26, 0x00, 0x60, 0xb0, 0x67, 0xb8, 0x6e])
-  IID_IActiveIMMIME* = DEFINE_GUID(0x08c03411'i32, 0xf96b, 0x11d0, [0xa4'u8, 0x75, 0x00, 0xaa, 0x00, 0x6b, 0xcc, 0x59])
-  IID_IActiveIME* = DEFINE_GUID(0x6fe20962'i32, 0xd077, 0x11d0, [0x8f'u8, 0xe7, 0x00, 0xaa, 0x00, 0x6b, 0xcc, 0x59])
-  IID_IActiveIME2* = DEFINE_GUID(0xe1c4bf0e'i32, 0x2d53, 0x11d2, [0x93'u8, 0xe1, 0x00, 0x60, 0xb0, 0x67, 0xb8, 0x6e])
-  IID_IEnumRegisterWordA* = DEFINE_GUID(0x08c03412'i32, 0xf96b, 0x11d0, [0xa4'u8, 0x75, 0x00, 0xaa, 0x00, 0x6b, 0xcc, 0x59])
-  IID_IEnumRegisterWordW* = DEFINE_GUID(0x4955dd31'i32, 0xb159, 0x11d0, [0x8f'u8, 0xcf, 0x00, 0xaa, 0x00, 0x6b, 0xcc, 0x59])
-  CLSID_CActiveIMM* = DEFINE_GUID(0x4955dd33'i32, 0xb159, 0x11d0, [0x8f'u8, 0xcf, 0x00, 0xaa, 0x00, 0x6b, 0xcc, 0x59])
+  LIBID_ActiveIMM* = DEFINE_GUID("4955dd30-b159-11d0-8fcf-00aa006bcc59")
+  IID_IEnumInputContext* = DEFINE_GUID("09b5eab0-f997-11d1-93d4-0060b067b86e")
+  IID_IActiveIMMRegistrar* = DEFINE_GUID("b3458082-bd00-11d1-939b-0060b067b86e")
+  IID_IActiveIMMMessagePumpOwner* = DEFINE_GUID("b5cf2cfa-8aeb-11d1-9364-0060b067b86e")
+  IID_IActiveIMMApp* = DEFINE_GUID("08c0e040-62d1-11d1-9326-0060b067b86e")
+  IID_IActiveIMMIME* = DEFINE_GUID("08c03411-f96b-11d0-a475-00aa006bcc59")
+  IID_IActiveIME* = DEFINE_GUID("6fe20962-d077-11d0-8fe7-00aa006bcc59")
+  IID_IActiveIME2* = DEFINE_GUID("e1c4bf0e-2d53-11d2-93e1-0060b067b86e")
+  IID_IEnumRegisterWordA* = DEFINE_GUID("08c03412-f96b-11d0-a475-00aa006bcc59")
+  IID_IEnumRegisterWordW* = DEFINE_GUID("4955dd31-b159-11d0-8fcf-00aa006bcc59")
+  CLSID_CActiveIMM* = DEFINE_GUID("4955dd33-b159-11d0-8fcf-00aa006bcc59")
   IGP_GETIMEVERSION* = DWORD(-4)
 type
   IMCENUMPROC* = proc (P1: HIMC, P2: LPARAM): WINBOOL {.stdcall.}
   REGISTERWORDENUMPROCA* = proc (P1: LPCSTR, P2: DWORD, P3: LPCSTR, P4: LPVOID): int32 {.stdcall.}
   REGISTERWORDENUMPROCW* = proc (P1: LPCWSTR, P2: DWORD, P3: LPCWSTR, P4: LPVOID): int32 {.stdcall.}
-  CActiveIMM* {.pure.} = object
   INPUTCONTEXT_lfFont* {.pure, union.} = object
     A*: LOGFONTA
     W*: LOGFONTW

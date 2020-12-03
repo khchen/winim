@@ -9,5 +9,5 @@
 
 {.deadCodeElim: on.}
 
-import inc/[objbase, objext]
-export objbase, objext
+import inc/[objbase, objext, uiautomation]
+export objbase, objext, uiautomation

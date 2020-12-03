@@ -1,6 +1,6 @@
 # Package
 
-version       = "3.4.3"
+version       = "3.5.0"
 author        = "Ward"
 description   = "Winim - Nim\'s Windows API and COM Library"
 license       = "MIT"
@@ -29,6 +29,7 @@ task example, "Build all the examples":
   exec "nim c examples/linedemo"
   exec "nim c examples/scrnsize"
   exec "nim c examples/shortcut"
+  exec "nim c examples/uiautomation"
 
 # COM Examples
 
@@ -43,16 +44,16 @@ task comexample, "Build all the COM examples":
   exec "nim c examples/com/SAPI_SpVoice"
   exec "nim c examples/com/Scriptlet_TypeLib"
   exec "nim c examples/com/Shell_Application"
-  exec "nim c examples/com/thread1"
-  exec "nim c examples/com/thread2"
-  exec "nim c examples/com/thread3"
-  exec "nim c examples/com/thread4"
   exec "nim c examples/com/VBScript_RegExp"
   exec "nim c examples/com/WinHttp_WinHttpRequest"
   exec "nim c examples/com/winmgmts"
   exec "nim c examples/com/WScript"
   exec "nim c examples/com/nimDispatch/client"
   exec "nim c examples/com/nimDispatch/server"
+  exec "nim c examples/com/threads/thread1"
+  exec "nim c examples/com/threads/thread2"
+  exec "nim c examples/com/threads/thread3"
+  exec "nim c examples/com/threads/thread4"
 
 # Clean
 
@@ -61,4 +62,5 @@ task clean, "Delete all the executable files":
   exec "cmd /c IF EXIST examples\\*.exe del examples\\*.exe"
   exec "cmd /c IF EXIST examples\\com\\*.exe del examples\\com\\*.exe"
   exec "cmd /c IF EXIST examples\\com\\nimDispatch\\*.exe del examples\\com\\nimDispatch\\*.exe"
+  exec "cmd /c IF EXIST examples\\com\\threads\\*.exe del examples\\com\\threads\\*.exe"
   exec "cmd /c IF EXIST winim\\*.exe del winim\\*.exe"

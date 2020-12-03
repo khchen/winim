@@ -3707,10 +3707,10 @@ const
   ILDI_STANDBY* = 0x2
   ILDI_RESETACCESS* = 0x4
   ILDI_QUERYACCESS* = 0x8
-  IID_IImageList* = DEFINE_GUID(0x46eb5926'i32, 0x582e, 0x4017, [0x9f'u8, 0xdf, 0xe8, 0x99, 0x8d, 0xaa, 0x09, 0x50])
-  IID_IImageList2* = DEFINE_GUID(0x192b9d83'i32, 0x50fc, 0x457b, [0x90'u8, 0xa0, 0x2b, 0x82, 0xa8, 0xb5, 0xda, 0xe1])
-  LIBID_CommonControlObjects* = DEFINE_GUID(0xbcada15b'i32, 0xb428, 0x420c, [0x8d'u8, 0x28, 0x02, 0x35, 0x90, 0x92, 0x4c, 0x9f])
-  CLSID_ImageList* = DEFINE_GUID(0x7c476ba2'i32, 0x02b1, 0x48f4, [0x80'u8, 0x48, 0xb2, 0x46, 0x19, 0xdd, 0xc0, 0x58])
+  IID_IImageList* = DEFINE_GUID("46eb5926-582e-4017-9fdf-e8998daa0950")
+  IID_IImageList2* = DEFINE_GUID("192b9d83-50fc-457b-90a0-2b82a8b5dae1")
+  LIBID_CommonControlObjects* = DEFINE_GUID("bcada15b-b428-420c-8d28-023590924c9f")
+  CLSID_ImageList* = DEFINE_GUID("7c476ba2-02b1-48f4-8048-b24619ddc058")
   BCCL_NOGLYPH* = HIMAGELIST(-1)
   LPSTR_TEXTCALLBACKA* = cast[LPSTR](-1)
   LPSTR_TEXTCALLBACKW* = cast[LPWSTR](-1)
@@ -3844,8 +3844,8 @@ type
     Initialize*: proc(self: ptr IImageList2, cx: int32, cy: int32, flags: UINT, cInitial: int32, cGrow: int32): HRESULT {.stdcall.}
     Replace2*: proc(self: ptr IImageList2, i: int32, hbmImage: HBITMAP, hbmMask: HBITMAP, punk: ptr IUnknown, dwFlags: DWORD): HRESULT {.stdcall.}
     ReplaceFromImageList*: proc(self: ptr IImageList2, i: int32, pil: ptr IImageList, iSrc: int32, punk: ptr IUnknown, dwFlags: DWORD): HRESULT {.stdcall.}
-proc CreatePropertySheetPageA*(PropSheetPagePointer: LPCPROPSHEETPAGEA): HPROPSHEETPAGE {.winapi, stdcall, dynlib: "comctl32", importc.}
-proc CreatePropertySheetPageW*(PropSheetPagePointer: LPCPROPSHEETPAGEW): HPROPSHEETPAGE {.winapi, stdcall, dynlib: "comctl32", importc.}
+proc CreatePropertySheetPageA*(constPropSheetPagePointer: LPCPROPSHEETPAGEA): HPROPSHEETPAGE {.winapi, stdcall, dynlib: "comctl32", importc.}
+proc CreatePropertySheetPageW*(constPropSheetPagePointer: LPCPROPSHEETPAGEW): HPROPSHEETPAGE {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc DestroyPropertySheetPage*(P1: HPROPSHEETPAGE): WINBOOL {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc PropertySheetA*(P1: LPCPROPSHEETHEADERA): INT_PTR {.winapi, stdcall, dynlib: "comctl32", importc.}
 proc PropertySheetW*(P1: LPCPROPSHEETHEADERW): INT_PTR {.winapi, stdcall, dynlib: "comctl32", importc.}
@@ -4929,7 +4929,7 @@ when winimUnicode:
     WC_LISTBOX* = WC_LISTBOXW
     WC_COMBOBOX* = WC_COMBOBOXW
     WC_SCROLLBAR* = WC_SCROLLBARW
-  proc CreatePropertySheetPage*(PropSheetPagePointer: LPCPROPSHEETPAGEW): HPROPSHEETPAGE {.winapi, stdcall, dynlib: "comctl32", importc: "CreatePropertySheetPageW".}
+  proc CreatePropertySheetPage*(constPropSheetPagePointer: LPCPROPSHEETPAGEW): HPROPSHEETPAGE {.winapi, stdcall, dynlib: "comctl32", importc: "CreatePropertySheetPageW".}
   proc PropertySheet*(P1: LPCPROPSHEETHEADERW): INT_PTR {.winapi, stdcall, dynlib: "comctl32", importc: "PropertySheetW".}
   proc ImageList_LoadImage*(hi: HINSTANCE, lpbmp: LPCWSTR, cx: int32, cGrow: int32, crMask: COLORREF, uType: UINT, uFlags: UINT): HIMAGELIST {.winapi, stdcall, dynlib: "comctl32", importc: "ImageList_LoadImageW".}
   proc CreateStatusWindow*(style: LONG, lpszText: LPCWSTR, hwndParent: HWND, wID: UINT): HWND {.winapi, stdcall, dynlib: "comctl32", importc: "CreateStatusWindowW".}
@@ -5100,7 +5100,7 @@ when winimAnsi:
     WC_LISTBOX* = WC_LISTBOXA
     WC_COMBOBOX* = WC_COMBOBOXA
     WC_SCROLLBAR* = WC_SCROLLBARA
-  proc CreatePropertySheetPage*(PropSheetPagePointer: LPCPROPSHEETPAGEA): HPROPSHEETPAGE {.winapi, stdcall, dynlib: "comctl32", importc: "CreatePropertySheetPageA".}
+  proc CreatePropertySheetPage*(constPropSheetPagePointer: LPCPROPSHEETPAGEA): HPROPSHEETPAGE {.winapi, stdcall, dynlib: "comctl32", importc: "CreatePropertySheetPageA".}
   proc PropertySheet*(P1: LPCPROPSHEETHEADERA): INT_PTR {.winapi, stdcall, dynlib: "comctl32", importc: "PropertySheetA".}
   proc ImageList_LoadImage*(hi: HINSTANCE, lpbmp: LPCSTR, cx: int32, cGrow: int32, crMask: COLORREF, uType: UINT, uFlags: UINT): HIMAGELIST {.winapi, stdcall, dynlib: "comctl32", importc: "ImageList_LoadImageA".}
   proc CreateStatusWindow*(style: LONG, lpszText: LPCSTR, hwndParent: HWND, wID: UINT): HWND {.winapi, stdcall, dynlib: "comctl32", importc: "CreateStatusWindowA".}

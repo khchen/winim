@@ -1,3 +1,13 @@
+Version 3.5.0
+-------------
+* Add uiautomation and dwmapi module.
+* Add examples/uiautomation.nim
+* winstr: Add support to openArray and UncheckedArray.
+* winstr: Add setOpenArrayStringable() to overwrite the defualt behavior for `$`.
+* winstr: Improve compile-time unicode string generator.
+* winstr: Remove seldom used converters that convert array to pointer.
+* winimx: Fix support for visual c compiler.
+
 Version 3.4.3
 -------------
 * Add prebuilt resource file for vcc.
@@ -158,7 +168,7 @@ Version 2.3.0
 -------------
 * Add var version access proc for nested struct/union.
   It will be used in this situation:
-    ```nimrod
+    ```nim
     var insert: TVINSERTSTRUCT
     insert.item.mask = TVIF_TEXT or TVIF_PARAM
     ```

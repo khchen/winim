@@ -402,8 +402,8 @@ type
     hPageSetupTemplate*: HGLOBAL
   LPPAGESETUPDLGW* = ptr TPAGESETUPDLGW
 const
-  IID_IPrintDialogCallback* = DEFINE_GUID(0x5852a2c3'i32, 0x6530, 0x11d1, [0xb6'u8, 0xa3, 0x0, 0x0, 0xf8, 0x75, 0x7b, 0xf9])
-  IID_IPrintDialogServices* = DEFINE_GUID(0x509aaeda'i32, 0x5639, 0x11d1, [0xb6'u8, 0xa1, 0x0, 0x0, 0xf8, 0x75, 0x7b, 0xf9])
+  IID_IPrintDialogCallback* = DEFINE_GUID("5852a2c3-6530-11d1-b6a3-0000f8757bf9")
+  IID_IPrintDialogServices* = DEFINE_GUID("509aaeda-5639-11d1-b6a1-0000f8757bf9")
   OFN_READONLY* = 0x1
   OFN_OVERWRITEPROMPT* = 0x2
   OFN_HIDEREADONLY* = 0x4

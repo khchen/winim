@@ -315,6 +315,7 @@ const
   MF_CONV* = 0x40000000
   MF_MASK* = 0xFF000000'i32
 type
+  FNCALLBACK* = proc (wType: UINT, wFmt: UINT, hConv: HCONV, hsz1: HSZ, hsz2: HSZ, hData: HDDEDATA, dwData1: ULONG_PTR, dwData2: ULONG_PTR): HDDEDATA {.stdcall.}
   PFNCALLBACK* = proc (wType: UINT, wFmt: UINT, hConv: HCONV, hsz1: HSZ, hsz2: HSZ, hData: HDDEDATA, dwData1: ULONG_PTR, dwData2: ULONG_PTR): HDDEDATA {.stdcall.}
   DDEACK* {.pure.} = object
     bAppReturnCode* {.bitsize:8.}: uint16

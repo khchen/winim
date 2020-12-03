@@ -608,7 +608,8 @@ type
     header*: CInterfaceProxyHeader
     Vtbl*: UncheckedArray[pointer]
   PCInterfaceProxyVtblList* = ptr CInterfaceProxyVtbl
-  PIIDLookup* = proc (pIID: ptr IID, pIndex: ptr int32): int32 {.stdcall.}
+  IIDLookupRtn* = proc (pIID: ptr IID, pIndex: ptr int32): int32 {.stdcall.}
+  PIIDLookup* = IIDLookupRtn
   ProxyFileInfo* {.pure.} = object
     pProxyVtblList*: ptr PCInterfaceProxyVtblList
     pStubVtblList*: ptr PCInterfaceStubVtblList
@@ -955,6 +956,7 @@ type
     CertContext*: pointer
   I_RpcPerformCalloutFn* = proc (Context: pointer, CallOutState: ptr RDR_CALLOUT_STATE, Stage: RPC_HTTP_REDIRECTOR_STAGE): RPC_STATUS {.stdcall.}
   I_RpcFreeCalloutStateFn* = proc (CallOutState: ptr RDR_CALLOUT_STATE): void {.stdcall.}
+  RPCNOTIFICATION_ROUTINE* = proc (pAsync: ptr RPC_ASYNC_STATE, Context: pointer, Event: RPC_ASYNC_EVENT): void {.stdcall.}
   USER_MARSHAL_CB* {.pure.} = object
     Flags*: int32
     pStubMsg*: PMIDL_STUB_MESSAGE

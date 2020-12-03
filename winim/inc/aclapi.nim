@@ -744,18 +744,18 @@ const
   DOBJ_COND_NTACLS* = 0x00000008
   DOBJ_RIBBON_LAUNCH* = 0x00000010
   PSPCB_SI_INITDIALOG* = WM_USER+1
-  IID_ISecurityInformation* = DEFINE_GUID(0x965FC360'i32, 0x16FF, 0x11d0, [0x91'u8, 0xCB, 0x00, 0xAA, 0x00, 0xBB, 0xB7, 0x23])
-  IID_ISecurityInformation2* = DEFINE_GUID(0xc3ccfdb4'i32, 0x6f88, 0x11d2, [0xa3'u8, 0xce, 0x00, 0xc0, 0x4f, 0xb1, 0x78, 0x2a])
+  IID_ISecurityInformation* = DEFINE_GUID("965fc360-16ff-11d0-91cb-00aa00bbb723")
+  IID_ISecurityInformation2* = DEFINE_GUID("c3ccfdb4-6f88-11d2-a3ce-00c04fb1782a")
   CFSTR_ACLUI_SID_INFO_LIST* = "CFSTR_ACLUI_SID_INFO_LIST"
-  IID_IEffectivePermission* = DEFINE_GUID(0x3853DC76'i32, 0x9F35, 0x407c, [0x88'u8, 0xA1, 0xD1, 0x93, 0x44, 0x36, 0x5F, 0xBC])
-  IID_ISecurityObjectTypeInfo* = DEFINE_GUID(0xFC3066EB'i32, 0x79EF, 0x444b, [0x91'u8, 0x11, 0xD1, 0x8A, 0x75, 0xEB, 0xF2, 0xFA])
-  IID_ISecurityInformation3* = DEFINE_GUID(0xE2CDC9CC'i32, 0x31BD, 0x4f8f, [0x8C'u8, 0x8B, 0xB6, 0x41, 0xAF, 0x51, 0x6A, 0x1A])
+  IID_IEffectivePermission* = DEFINE_GUID("3853dc76-9f35-407c-88a1-d19344365fbc")
+  IID_ISecurityObjectTypeInfo* = DEFINE_GUID("fc3066eb-79ef-444b-9111-d18a75ebf2fa")
+  IID_ISecurityInformation3* = DEFINE_GUID("e2cdc9cc-31bd-4f8f-8c8b-b641af516a1a")
   SECURITY_OBJECT_ID_OBJECT_SD* = 1
   SECURITY_OBJECT_ID_SHARE* = 2
   SECURITY_OBJECT_ID_CENTRAL_POLICY* = 3
   SECURITY_OBJECT_ID_CENTRAL_ACCESS_RULE* = 4
-  IID_ISecurityInformation4* = DEFINE_GUID(0xEA961070'i32, 0xCD14, 0x4621, [0xAC'u8, 0xE4, 0xF6, 0x3C, 0x03, 0xE5, 0x83, 0xE4])
-  IID_IEffectivePermission2* = DEFINE_GUID(0x941FABCA'i32, 0xDD47, 0x4FCA, [0x90'u8, 0xBB, 0xB0, 0xE1, 0x02, 0x55, 0xF2, 0x0D])
+  IID_ISecurityInformation4* = DEFINE_GUID("ea961070-cd14-4621-ace4-f63c03e583e4")
+  IID_IEffectivePermission2* = DEFINE_GUID("941fabca-dd47-4fca-90bb-b0e10255f20d")
 type
   FN_PROGRESS* = proc (pObjectName: LPWSTR, Status: DWORD, pInvokeSetting: PPROG_INVOKE_SETTING, Args: PVOID, SecuritySet: WINBOOL): VOID {.stdcall.}
 proc SetEntriesInAclA*(cCountOfExplicitEntries: ULONG, pListOfExplicitEntries: PEXPLICIT_ACCESS_A, OldAcl: PACL, NewAcl: ptr PACL): DWORD {.winapi, stdcall, dynlib: "advapi32", importc.}

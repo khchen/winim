@@ -25,6 +25,20 @@ macro winapi*(x: untyped): untyped =
 
 proc discardable*[T](x: T): T {.discardable, inline.} = x
 
+macro DEFINE_GUID*(guid: string): untyped =
+  const
+    ranges = [0..7, 9..12, 14..17, 19..20, 21..22, 24..25, 26..27, 28..29, 30..31, 32..33, 34..35]
+    parts = ["'i32, 0x", ", 0x", ", [0x", "'u8, 0x", ", 0x", ", 0x", ", 0x", ", 0x", ", 0x", ", 0x", "])"]
+
+  let guid = guid.strVal
+  assert guid.len == 36
+
+  var code = "DEFINE_GUID(0x"
+  for i in 0..10:
+    code.add guid[ranges[i]]
+    code.add parts[i]
+  result = parseStmt(code)
+
 const
   winimAnsi* = defined(useWinAnsi) or defined(winansi)
   winimUnicode* = not winimAnsi

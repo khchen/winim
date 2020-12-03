@@ -688,8 +688,8 @@ const
   RECO_COPY* = 0x00000002
   RECO_CUT* = 0x00000003
   RECO_DRAG* = 0x00000004
-  IID_IRichEditOle* = DEFINE_GUID(0x00020D00'i32, 0, 0, [0xC0'u8, 0, 0, 0, 0, 0, 0, 0x46])
-  IID_IRichEditOleCallback* = DEFINE_GUID(0x00020D03'i32, 0, 0, [0xC0'u8, 0, 0, 0, 0, 0, 0, 0x46])
+  IID_IRichEditOle* = DEFINE_GUID("00020d00-0000-0000-c000-000000000046")
+  IID_IRichEditOleCallback* = DEFINE_GUID("00020d03-0000-0000-c000-000000000046")
 type
   AutoCorrectProc* = proc (langid: LANGID, pszBefore: ptr WCHAR, pszAfter: ptr WCHAR, cchAfter: LONG, pcchReplaced: ptr LONG): int32 {.stdcall.}
   EDITWORDBREAKPROCEX* = proc (pchText: cstring, cchText: LONG, bCharSet: BYTE, action: INT): LONG {.stdcall.}

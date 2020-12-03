@@ -1677,8 +1677,6 @@ type
   PCOPYFILE2_PROGRESS_ROUTINE* = proc (pMessage: ptr COPYFILE2_MESSAGE, pvCallbackContext: PVOID): COPYFILE2_MESSAGE_ACTION {.stdcall.}
   PQUERYACTCTXW_FUNC* = proc (dwFlags: DWORD, hActCtx: HANDLE, pvSubInstance: PVOID, ulInfoClass: ULONG, pvBuffer: PVOID, cbBuffer: SIZE_T, pcbWrittenOrRequired: ptr SIZE_T): WINBOOL {.stdcall.}
   APPLICATION_RECOVERY_CALLBACK* = proc (pvParameter: PVOID): DWORD {.stdcall.}
-  CONTRACT_DESCRIPTION* {.pure.} = object
-  BEM_REFERENCE* {.pure.} = object
   COPYFILE2_EXTENDED_PARAMETERS* {.pure.} = object
     dwSize*: DWORD
     dwCopyFlags*: DWORD

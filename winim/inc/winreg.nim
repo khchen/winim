@@ -30,6 +30,8 @@ type
     pv_value_context*: LPVOID
     pv_type*: DWORD
   PPVALUEW* = ptr PVALUEW
+  QUERYHANDLER* = proc (keycontext: LPVOID, val_list: PVALCONTEXT, num_vals: DWORD, outputbuffer: LPVOID, total_outlen: ptr DWORD, input_blen: DWORD): DWORD {.cdecl.}
+  PQUERYHANDLER* = QUERYHANDLER
   VALENTA* {.pure.} = object
     ve_valuename*: LPSTR
     ve_valuelen*: DWORD
@@ -42,7 +44,6 @@ type
     ve_valueptr*: DWORD_PTR
     ve_type*: DWORD
   PVALENTW* = ptr VALENTW
-  PQUERYHANDLER* = proc (keycontext: LPVOID, val_list: PVALCONTEXT, num_vals: DWORD, outputbuffer: LPVOID, total_outlen: ptr DWORD, input_blen: DWORD): DWORD {.cdecl.}
   REG_PROVIDER* {.pure.} = object
     pi_R0_1val*: PQUERYHANDLER
     pi_R0_allvals*: PQUERYHANDLER

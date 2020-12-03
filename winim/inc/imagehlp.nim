@@ -11,7 +11,7 @@ import winbase
 import winver
 import wintrust
 #include <imagehlp.h>
-#include <psdk_inc/_dbg_LOAD_IMAGE.h>
+#include <psdk_inc/_dbg_load_image.h>
 #include <psdk_inc/_dbg_common.h>
 type
   IMAGEHLP_STATUS_REASON* = int32

@@ -316,7 +316,7 @@ proc copy*(x: variant): variant =
 proc toVariant*(x: string|cstring|mstring): variant =
   result.init
   result.raw.vt = VT_BSTR
-  var ws = newWString(x)
+  var ws = +$x
   result.raw.bstrVal = SysAllocString(&ws)
 
 proc toVariant*(x: wstring): variant =
@@ -894,7 +894,7 @@ proc desc*(self: com, name: string): string =
   ## Gets the description (include name and arguments) for the specific method.
   var
     dispid: DISPID
-    wstr = newWString(name)
+    wstr = +$name
     pwstr = &wstr
     tinfo: ptr ITypeInfo
     count: UINT
@@ -924,7 +924,7 @@ proc invoke(self: com, name: string, invokeType: WORD, vargs: varargs[variant, t
   var
     isSet = (invokeType and (DISPATCH_PROPERTYPUT or DISPATCH_PROPERTYPUTREF)) != 0
     dispid: DISPID
-    wstr = newWString(name)
+    wstr = +$name
     pwstr = &wstr
     args: seq[VARIANT]
 

@@ -12,7 +12,7 @@ import rpc
 import winioctl
 #include <winscard.h>
 #include <winsmcrd.h>
-#include <SCardErr.h>
+#include <scarderr.h>
 type
   LPCBYTE* = ptr BYTE
   SCARDCONTEXT* = ULONG_PTR

@@ -210,7 +210,7 @@ const
   VIRTUAL_STORAGE_TYPE_DEVICE_UNKNOWN* = 0
   VIRTUAL_STORAGE_TYPE_DEVICE_ISO* = 1
   VIRTUAL_STORAGE_TYPE_DEVICE_VHD* = 2
-  VIRTUAL_STORAGE_TYPE_VENDOR_MICROSOFT* = DEFINE_GUID(0xEC984AEC'i32, 0xA0F9, 0x47e9, [0x90'u8, 0x1F, 0x71, 0x41, 0x5A, 0x66, 0x34, 0x5B])
+  VIRTUAL_STORAGE_TYPE_VENDOR_MICROSOFT* = DEFINE_GUID("ec984aec-a0f9-47e9-901f-71415a66345b")
 proc AttachVirtualDisk*(VirtualDiskHandle: HANDLE, SecurityDescriptor: PSECURITY_DESCRIPTOR, Flags: ATTACH_VIRTUAL_DISK_FLAG, ProviderSpecificFlags: ULONG, Parameters: PATTACH_VIRTUAL_DISK_PARAMETERS, Overlapped: LPOVERLAPPED): DWORD {.winapi, stdcall, dynlib: "virtdisk", importc.}
 proc CompactVirtualDisk*(VirtualDiskHandle: HANDLE, Flags: COMPACT_VIRTUAL_DISK_FLAG, Parameters: PCOMPACT_VIRTUAL_DISK_PARAMETERS, Overlapped: LPOVERLAPPED): DWORD {.winapi, stdcall, dynlib: "virtdisk", importc.}
 proc CreateVirtualDisk*(VirtualStorageType: PVIRTUAL_STORAGE_TYPE, Path: PCWSTR, VirtualDiskAccessMask: VIRTUAL_DISK_ACCESS_MASK, SecurityDescriptor: PSECURITY_DESCRIPTOR, Flags: CREATE_VIRTUAL_DISK_FLAG, ProviderSpecificFlags: ULONG, Parameters: PCREATE_VIRTUAL_DISK_PARAMETERS, Overlapped: LPOVERLAPPED, Handle: PHANDLE): DWORD {.winapi, stdcall, dynlib: "virtdisk", importc.}

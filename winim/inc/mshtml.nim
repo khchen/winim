@@ -288,9 +288,9 @@ type
     CreateInstanceWithContext*: proc(self: ptr IClassFactoryEx, punkContext: ptr IUnknown, punkOuter: ptr IUnknown, riid: REFIID, ppv: ptr pointer): HRESULT {.stdcall.}
   IClassFactory3* = IClassFactoryEx
 const
-  SID_VariantConversion* = DEFINE_GUID(0x1f101481'i32, 0xbccd, 0x11d0, [0x93'u8, 0x36, 0x0, 0xa0, 0xc9, 0xd, 0xca, 0xa9])
-  SID_GetCaller* = DEFINE_GUID(0x4717cc40'i32, 0xbcb9, 0x11d0, [0x93'u8, 0x36, 0x0, 0xa0, 0xc9, 0xd, 0xca, 0xa9])
-  SID_ProvideRuntimeContext* = DEFINE_GUID(0x74a5040c'i32, 0xdd0c, 0x48f0, [0xac'u8, 0x85, 0x19, 0x4c, 0x32, 0x59, 0x18, 0xa])
+  SID_VariantConversion* = DEFINE_GUID("1f101481-bccd-11d0-9336-00a0c90dcaa9")
+  SID_GetCaller* = DEFINE_GUID("4717cc40-bcb9-11d0-9336-00a0c90dcaa9")
+  SID_ProvideRuntimeContext* = DEFINE_GUID("74a5040c-dd0c-48f0-ac85-194c3259180a")
   SID_GetScriptSite* = IID_IActiveScriptSite
   fdexNameCaseSensitive* = 0x1
   fdexNameEnsure* = 0x2
@@ -320,12 +320,12 @@ const
   fdexEnumAll* = 0x2
   DISPATCH_CONSTRUCT* = 0x4000
   DISPID_STARTENUM* = DISPID_UNKNOWN
-  IID_IDispatchEx* = DEFINE_GUID(0xa6ef9860'i32, 0xc720, 0x11d0, [0x93'u8, 0x37, 0x00, 0xa0, 0xc9, 0x0d, 0xca, 0xa9])
-  IID_IDispError* = DEFINE_GUID(0xa6ef9861'i32, 0xc720, 0x11d0, [0x93'u8, 0x37, 0x00, 0xa0, 0xc9, 0x0d, 0xca, 0xa9])
-  IID_IVariantChangeType* = DEFINE_GUID(0xa6ef9862'i32, 0xc720, 0x11d0, [0x93'u8, 0x37, 0x00, 0xa0, 0xc9, 0x0d, 0xca, 0xa9])
-  IID_IObjectIdentity* = DEFINE_GUID(0xca04b7e6'i32, 0x0d21, 0x11d1, [0x8c'u8, 0xc5, 0x00, 0xc0, 0x4f, 0xc2, 0xb0, 0x85])
-  IID_ICanHandleException* = DEFINE_GUID(0xc5598e60'i32, 0xb307, 0x11d1, [0xb2'u8, 0x7d, 0x00, 0x60, 0x08, 0xc3, 0xfb, 0xfb])
-  IID_IProvideRuntimeContext* = DEFINE_GUID(0x10e2414a'i32, 0xec59, 0x49d2, [0xbc'u8, 0x51, 0x5a, 0xdd, 0x2c, 0x36, 0xfe, 0xbc])
+  IID_IDispatchEx* = DEFINE_GUID("a6ef9860-c720-11d0-9337-00a0c90dcaa9")
+  IID_IDispError* = DEFINE_GUID("a6ef9861-c720-11d0-9337-00a0c90dcaa9")
+  IID_IVariantChangeType* = DEFINE_GUID("a6ef9862-c720-11d0-9337-00a0c90dcaa9")
+  IID_IObjectIdentity* = DEFINE_GUID("ca04b7e6-0d21-11d1-8cc5-00c04fc2b085")
+  IID_ICanHandleException* = DEFINE_GUID("c5598e60-b307-11d1-b27d-006008c3fbfb")
+  IID_IProvideRuntimeContext* = DEFINE_GUID("10e2414a-ec59-49d2-bc51-5add2c36febc")
   DXGI_FORMAT_DEFINED* = 1
   DXGI_FORMAT_UNKNOWN* = 0
   DXGI_FORMAT_R32G32B32A32_TYPELESS* = 1
@@ -456,15 +456,15 @@ const
   DXGI_MODE_SCALING_UNSPECIFIED* = 0
   DXGI_MODE_SCALING_CENTERED* = 1
   DXGI_MODE_SCALING_STRETCHED* = 2
-  SID_SEditCommandTarget* = DEFINE_GUID(0x3050f4b5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x0, 0xaa, 0x0, 0xbd, 0xce, 0x0b])
-  CGID_EditStateCommands* = DEFINE_GUID(0x3050f4b6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x0, 0xaa, 0x0, 0xbd, 0xce, 0x0b])
-  SID_SHTMLEditHost* = DEFINE_GUID(0x3050f6a0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x0, 0xaa, 0x0, 0xbd, 0xce, 0x0b])
-  SID_SHTMLEditServices* = DEFINE_GUID(0x3050f7f9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x0, 0xaa, 0x0, 0xbd, 0xce, 0x0b])
-  IID_IHTMLWindow2* = DEFINE_GUID(0x332c4427'i32, 0x26cb, 0x11d0, [0xb4'u8, 0x83, 0x00, 0xc0, 0x4f, 0xd9, 0x01, 0x19])
+  SID_SEditCommandTarget* = DEFINE_GUID("3050f4b5-98b5-11cf-bb82-00aa00bdce0b")
+  CGID_EditStateCommands* = DEFINE_GUID("3050f4b6-98b5-11cf-bb82-00aa00bdce0b")
+  SID_SHTMLEditHost* = DEFINE_GUID("3050f6a0-98b5-11cf-bb82-00aa00bdce0b")
+  SID_SHTMLEditServices* = DEFINE_GUID("3050f7f9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLWindow2* = DEFINE_GUID("332c4427-26cb-11d0-b483-00c04fd90119")
   SID_SHTMLWindow* = IID_IHTMLWindow2
-  IID_IElementBehaviorFactory* = DEFINE_GUID(0x3050f429'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IElementBehaviorFactory* = DEFINE_GUID("3050f429-98b5-11cf-bb82-00aa00bdce0b")
   SID_SElementBehaviorFactory* = IID_IElementBehaviorFactory
-  IID_ITrackingProtection* = DEFINE_GUID(0x30510803'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_ITrackingProtection* = DEFINE_GUID("30510803-98b5-11cf-bb82-00aa00bdce0b")
   SID_STrackingProtection* = IID_ITrackingProtection
   COOKIEACTION_NONE* = 0x0
   COOKIEACTION_ACCEPT* = 0x1
@@ -487,10 +487,10 @@ const
   DEBUGDOMEVENTPROPAGATIONSTATUS_DEFAULTCANCELED* = 0x1
   DEBUGDOMEVENTPROPAGATIONSTATUS_STOPIMMEDIATEPROPAGATION* = 0x2
   DEBUGDOMEVENTPROPAGATIONSTATUS_STOPPROPAGATION* = 0x4
-  IID_IHTMLFiltersCollection* = DEFINE_GUID(0x3050f3ee'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IIE70DispatchEx* = DEFINE_GUID(0x3051046b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IIE80DispatchEx* = DEFINE_GUID(0x3051046c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  LIBID_MSHTML* = DEFINE_GUID(0x3050f1c5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLFiltersCollection* = DEFINE_GUID("3050f3ee-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IIE70DispatchEx* = DEFINE_GUID("3051046b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IIE80DispatchEx* = DEFINE_GUID("3051046c-98b5-11cf-bb82-00aa00bdce0b")
+  LIBID_MSHTML* = DEFINE_GUID("3050f1c5-98b5-11cf-bb82-00aa00bdce0b")
   htmlBlockAlignNotSet* = 0
   htmlBlockAlignLeft* = 1
   htmlBlockAlignCenter* = 2
@@ -1395,31 +1395,31 @@ const
   styleMsScrollTranslationNone* = 1
   styleMsScrollTranslationVtoH* = 2
   styleMsScrollTranslation_Max* = 0x7fffffff
-  IID_IHTMLDOMConstructor* = DEFINE_GUID(0x3051049b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLCSSStyleDeclaration* = DEFINE_GUID(0x30510740'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLCSSStyleDeclaration2* = DEFINE_GUID(0x305107d1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleEnabled* = DEFINE_GUID(0x305104c2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLCSSStyleDeclaration* = DEFINE_GUID(0x3059009a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLCSSStyleDeclaration* = DEFINE_GUID(0x3059009a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLCSSStyleDeclaration* = DEFINE_GUID(0x30510741'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyle* = DEFINE_GUID(0x3050f25e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyle2* = DEFINE_GUID(0x3050f4a2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyle3* = DEFINE_GUID(0x3050f656'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyle4* = DEFINE_GUID(0x3050f816'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyle5* = DEFINE_GUID(0x3050f33a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyle6* = DEFINE_GUID(0x30510480'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLRuleStyle* = DEFINE_GUID(0x3050f3cf'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLRuleStyle2* = DEFINE_GUID(0x3050f4ac'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLRuleStyle3* = DEFINE_GUID(0x3050f657'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLRuleStyle4* = DEFINE_GUID(0x3050f817'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLRuleStyle5* = DEFINE_GUID(0x3050f335'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLRuleStyle6* = DEFINE_GUID(0x30510471'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLStyle* = DEFINE_GUID(0x3050f55a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLStyle* = DEFINE_GUID(0x3050f55a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLStyle* = DEFINE_GUID(0x3050f285'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLRuleStyle* = DEFINE_GUID(0x3050f55c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLRuleStyle* = DEFINE_GUID(0x3050f55c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLRuleStyle* = DEFINE_GUID(0x3050f3d0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLDOMConstructor* = DEFINE_GUID("3051049b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLCSSStyleDeclaration* = DEFINE_GUID("30510740-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLCSSStyleDeclaration2* = DEFINE_GUID("305107d1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleEnabled* = DEFINE_GUID("305104c2-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLCSSStyleDeclaration* = DEFINE_GUID("3059009a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLCSSStyleDeclaration* = DEFINE_GUID("3059009a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLCSSStyleDeclaration* = DEFINE_GUID("30510741-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyle* = DEFINE_GUID("3050f25e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyle2* = DEFINE_GUID("3050f4a2-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyle3* = DEFINE_GUID("3050f656-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyle4* = DEFINE_GUID("3050f816-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyle5* = DEFINE_GUID("3050f33a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyle6* = DEFINE_GUID("30510480-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLRuleStyle* = DEFINE_GUID("3050f3cf-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLRuleStyle2* = DEFINE_GUID("3050f4ac-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLRuleStyle3* = DEFINE_GUID("3050f657-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLRuleStyle4* = DEFINE_GUID("3050f817-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLRuleStyle5* = DEFINE_GUID("3050f335-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLRuleStyle6* = DEFINE_GUID("30510471-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLStyle* = DEFINE_GUID("3050f55a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLStyle* = DEFINE_GUID("3050f55a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLStyle* = DEFINE_GUID("3050f285-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLRuleStyle* = DEFINE_GUID("3050f55c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLRuleStyle* = DEFINE_GUID("3050f55c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLRuleStyle* = DEFINE_GUID("3050f3d0-98b5-11cf-bb82-00aa00bdce0b")
   styleViewportSizeAuto* = 0
   styleViewportSizeDeviceWidth* = 1
   styleViewportSizeDeviceHeight* = 2
@@ -1428,34 +1428,34 @@ const
   styleUserZoomZoom* = 1
   styleUserZoomFixed* = 2
   styleUserZoom_Max* = 0x7fffffff
-  IID_IHTMLCSSRule* = DEFINE_GUID(0x305106e9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLCSSImportRule* = DEFINE_GUID(0x305106ea'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLCSSMediaRule* = DEFINE_GUID(0x305106eb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLCSSMediaList* = DEFINE_GUID(0x30510731'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLCSSNamespaceRule* = DEFINE_GUID(0x305106ee'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLMSCSSKeyframeRule* = DEFINE_GUID(0x3051080c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLMSCSSKeyframesRule* = DEFINE_GUID(0x3051080d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLCSSRule* = DEFINE_GUID(0x3059007d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLCSSRule* = DEFINE_GUID(0x3059007d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLCSSRule* = DEFINE_GUID(0x305106ef'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLCSSImportRule* = DEFINE_GUID(0x3059007e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLCSSImportRule* = DEFINE_GUID(0x3059007e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLCSSImportRule* = DEFINE_GUID(0x305106f0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLCSSMediaRule* = DEFINE_GUID(0x3059007f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLCSSMediaRule* = DEFINE_GUID(0x3059007f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLCSSMediaRule* = DEFINE_GUID(0x305106f1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLCSSMediaList* = DEFINE_GUID(0x30590097'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLCSSMediaList* = DEFINE_GUID(0x30590097'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLCSSMediaList* = DEFINE_GUID(0x30510732'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLCSSNamespaceRule* = DEFINE_GUID(0x30590080'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLCSSNamespaceRule* = DEFINE_GUID(0x30590080'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLCSSNamespaceRule* = DEFINE_GUID(0x305106f2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLMSCSSKeyframeRule* = DEFINE_GUID(0x305900de'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLMSCSSKeyframeRule* = DEFINE_GUID(0x305900de'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLMSCSSKeyframeRule* = DEFINE_GUID(0x3051080e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLMSCSSKeyframesRule* = DEFINE_GUID(0x305900df'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLMSCSSKeyframesRule* = DEFINE_GUID(0x305900df'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLMSCSSKeyframesRule* = DEFINE_GUID(0x3051080f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLCSSRule* = DEFINE_GUID("305106e9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLCSSImportRule* = DEFINE_GUID("305106ea-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLCSSMediaRule* = DEFINE_GUID("305106eb-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLCSSMediaList* = DEFINE_GUID("30510731-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLCSSNamespaceRule* = DEFINE_GUID("305106ee-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLMSCSSKeyframeRule* = DEFINE_GUID("3051080c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLMSCSSKeyframesRule* = DEFINE_GUID("3051080d-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLCSSRule* = DEFINE_GUID("3059007d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLCSSRule* = DEFINE_GUID("3059007d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLCSSRule* = DEFINE_GUID("305106ef-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLCSSImportRule* = DEFINE_GUID("3059007e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLCSSImportRule* = DEFINE_GUID("3059007e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLCSSImportRule* = DEFINE_GUID("305106f0-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLCSSMediaRule* = DEFINE_GUID("3059007f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLCSSMediaRule* = DEFINE_GUID("3059007f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLCSSMediaRule* = DEFINE_GUID("305106f1-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLCSSMediaList* = DEFINE_GUID("30590097-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLCSSMediaList* = DEFINE_GUID("30590097-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLCSSMediaList* = DEFINE_GUID("30510732-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLCSSNamespaceRule* = DEFINE_GUID("30590080-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLCSSNamespaceRule* = DEFINE_GUID("30590080-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLCSSNamespaceRule* = DEFINE_GUID("305106f2-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLMSCSSKeyframeRule* = DEFINE_GUID("305900de-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLMSCSSKeyframeRule* = DEFINE_GUID("305900de-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLMSCSSKeyframeRule* = DEFINE_GUID("3051080e-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLMSCSSKeyframesRule* = DEFINE_GUID("305900df-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLMSCSSKeyframesRule* = DEFINE_GUID("305900df-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLMSCSSKeyframesRule* = DEFINE_GUID("3051080f-98b5-11cf-bb82-00aa00bdce0b")
   styleTextLineThroughStyleUndefined* = 0
   styleTextLineThroughStyleSingle* = 1
   styleTextLineThroughStyleDouble* = 2
@@ -1488,71 +1488,71 @@ const
   styleTextDecorationLineThrough* = 3
   styleTextDecorationBlink* = 4
   styleTextDecoration_Max* = 0x7fffffff
-  IID_IHTMLRenderStyle* = DEFINE_GUID(0x3050f6ae'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLRenderStyle* = DEFINE_GUID(0x3050f58b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLRenderStyle* = DEFINE_GUID(0x3050f58b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLRenderStyle* = DEFINE_GUID(0x3050f6aa'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLRenderStyle* = DEFINE_GUID("3050f6ae-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLRenderStyle* = DEFINE_GUID("3050f58b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLRenderStyle* = DEFINE_GUID("3050f58b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLRenderStyle* = DEFINE_GUID("3050f6aa-98b5-11cf-bb82-00aa00bdce0b")
   textDecorationNone* = 0
   textDecorationUnderline* = 1
   textDecorationOverline* = 2
   textDecorationLineThrough* = 3
   textDecorationBlink* = 4
   textDecoration_Max* = 0x7fffffff
-  IID_IHTMLCurrentStyle* = DEFINE_GUID(0x3050f3db'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLCurrentStyle2* = DEFINE_GUID(0x3050f658'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLCurrentStyle3* = DEFINE_GUID(0x3050f818'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLCurrentStyle4* = DEFINE_GUID(0x3050f33b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLCurrentStyle5* = DEFINE_GUID(0x30510481'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLCurrentStyle* = DEFINE_GUID(0x3050f557'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLCurrentStyle* = DEFINE_GUID(0x3050f557'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLCurrentStyle* = DEFINE_GUID(0x3050f3dc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLRect* = DEFINE_GUID(0x3050f4a3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLRect2* = DEFINE_GUID(0x3051076c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLRectCollection* = DEFINE_GUID(0x3050f4a4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMNode* = DEFINE_GUID(0x3050f5da'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMNode2* = DEFINE_GUID(0x3050f80b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMNode3* = DEFINE_GUID(0x305106e0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMAttribute* = DEFINE_GUID(0x3050f4b0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMAttribute2* = DEFINE_GUID(0x3050f810'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMAttribute3* = DEFINE_GUID(0x30510468'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMAttribute4* = DEFINE_GUID(0x305106f9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMTextNode* = DEFINE_GUID(0x3050f4b1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMTextNode2* = DEFINE_GUID(0x3050f809'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMTextNode3* = DEFINE_GUID(0x3051073e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMImplementation* = DEFINE_GUID(0x3050f80d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMImplementation2* = DEFINE_GUID(0x3051073c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLDOMAttribute* = DEFINE_GUID(0x3050f564'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLDOMAttribute* = DEFINE_GUID(0x3050f564'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLDOMAttribute* = DEFINE_GUID(0x3050f4b2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLDOMTextNode* = DEFINE_GUID(0x3050f565'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLDOMTextNode* = DEFINE_GUID(0x3050f565'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLDOMTextNode* = DEFINE_GUID(0x3050f4ba'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLDOMImplementation* = DEFINE_GUID(0x3050f58f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLDOMImplementation* = DEFINE_GUID(0x3050f58f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLDOMImplementation* = DEFINE_GUID(0x3050f80e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAttributeCollection* = DEFINE_GUID(0x3050f4c3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAttributeCollection2* = DEFINE_GUID(0x3050f80a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAttributeCollection3* = DEFINE_GUID(0x30510469'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAttributeCollection4* = DEFINE_GUID(0x305106fa'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMChildrenCollection* = DEFINE_GUID(0x3050f5ab'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMChildrenCollection2* = DEFINE_GUID(0x30510791'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLAttributeCollection* = DEFINE_GUID(0x3050f56c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLAttributeCollection* = DEFINE_GUID(0x3050f56c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLAttributeCollection* = DEFINE_GUID(0x3050f4cc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispStaticNodeList* = DEFINE_GUID(0x3050f59b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispStaticNodeList* = DEFINE_GUID(0x3050f59b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_StaticNodeList* = DEFINE_GUID(0x30510467'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMChildrenCollection* = DEFINE_GUID(0x3050f577'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMChildrenCollection* = DEFINE_GUID(0x3050f577'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMChildrenCollection* = DEFINE_GUID(0x3050f5aa'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLElementEvents4* = DEFINE_GUID(0x3051075e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLElementEvents4* = DEFINE_GUID(0x3051075e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLElementEvents3* = DEFINE_GUID(0x3050f59f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLElementEvents3* = DEFINE_GUID(0x3050f59f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLElementEvents2* = DEFINE_GUID(0x3050f60f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLElementEvents2* = DEFINE_GUID(0x3050f60f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLElementEvents* = DEFINE_GUID(0x3050f33c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLElementEvents* = DEFINE_GUID(0x3050f33c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLCurrentStyle* = DEFINE_GUID("3050f3db-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLCurrentStyle2* = DEFINE_GUID("3050f658-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLCurrentStyle3* = DEFINE_GUID("3050f818-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLCurrentStyle4* = DEFINE_GUID("3050f33b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLCurrentStyle5* = DEFINE_GUID("30510481-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLCurrentStyle* = DEFINE_GUID("3050f557-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLCurrentStyle* = DEFINE_GUID("3050f557-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLCurrentStyle* = DEFINE_GUID("3050f3dc-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLRect* = DEFINE_GUID("3050f4a3-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLRect2* = DEFINE_GUID("3051076c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLRectCollection* = DEFINE_GUID("3050f4a4-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMNode* = DEFINE_GUID("3050f5da-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMNode2* = DEFINE_GUID("3050f80b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMNode3* = DEFINE_GUID("305106e0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMAttribute* = DEFINE_GUID("3050f4b0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMAttribute2* = DEFINE_GUID("3050f810-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMAttribute3* = DEFINE_GUID("30510468-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMAttribute4* = DEFINE_GUID("305106f9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMTextNode* = DEFINE_GUID("3050f4b1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMTextNode2* = DEFINE_GUID("3050f809-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMTextNode3* = DEFINE_GUID("3051073e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMImplementation* = DEFINE_GUID("3050f80d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMImplementation2* = DEFINE_GUID("3051073c-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLDOMAttribute* = DEFINE_GUID("3050f564-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLDOMAttribute* = DEFINE_GUID("3050f564-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDOMAttribute* = DEFINE_GUID("3050f4b2-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLDOMTextNode* = DEFINE_GUID("3050f565-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLDOMTextNode* = DEFINE_GUID("3050f565-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDOMTextNode* = DEFINE_GUID("3050f4ba-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLDOMImplementation* = DEFINE_GUID("3050f58f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLDOMImplementation* = DEFINE_GUID("3050f58f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDOMImplementation* = DEFINE_GUID("3050f80e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAttributeCollection* = DEFINE_GUID("3050f4c3-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAttributeCollection2* = DEFINE_GUID("3050f80a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAttributeCollection3* = DEFINE_GUID("30510469-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAttributeCollection4* = DEFINE_GUID("305106fa-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMChildrenCollection* = DEFINE_GUID("3050f5ab-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMChildrenCollection2* = DEFINE_GUID("30510791-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLAttributeCollection* = DEFINE_GUID("3050f56c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLAttributeCollection* = DEFINE_GUID("3050f56c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLAttributeCollection* = DEFINE_GUID("3050f4cc-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispStaticNodeList* = DEFINE_GUID("3050f59b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispStaticNodeList* = DEFINE_GUID("3050f59b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_StaticNodeList* = DEFINE_GUID("30510467-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMChildrenCollection* = DEFINE_GUID("3050f577-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMChildrenCollection* = DEFINE_GUID("3050f577-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMChildrenCollection* = DEFINE_GUID("3050f5aa-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLElementEvents4* = DEFINE_GUID("3051075e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLElementEvents4* = DEFINE_GUID("3051075e-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLElementEvents3* = DEFINE_GUID("3050f59f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLElementEvents3* = DEFINE_GUID("3050f59f-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLElementEvents2* = DEFINE_GUID("3050f60f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLElementEvents2* = DEFINE_GUID("3050f60f-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLElementEvents* = DEFINE_GUID("3050f33c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLElementEvents* = DEFINE_GUID("3050f33c-98b5-11cf-bb82-00aa00bdce0b")
   htmlListTypeNotSet* = 0
   htmlListTypeLargeAlpha* = 1
   htmlListTypeSmallAlpha* = 2
@@ -1660,100 +1660,100 @@ const
   htmlDraggableTrue* = 1
   htmlDraggableFalse* = 2
   htmlDraggable_Max* = 0x7fffffff
-  IID_IHTMLElement* = DEFINE_GUID(0x3050f1ff'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLElement2* = DEFINE_GUID(0x3050f434'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLElement3* = DEFINE_GUID(0x3050f673'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLElement4* = DEFINE_GUID(0x3050f80f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementSelector* = DEFINE_GUID(0x30510463'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLElementRender* = DEFINE_GUID(0x3050f669'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLUniqueName* = DEFINE_GUID(0x3050f4d0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLElement5* = DEFINE_GUID(0x3051045d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLElement6* = DEFINE_GUID(0x305106f8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLElement7* = DEFINE_GUID(0x305107aa'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLElementAppliedStyles* = DEFINE_GUID(0x305104bd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementTraversal* = DEFINE_GUID(0x30510736'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDatabinding* = DEFINE_GUID(0x3050f3f2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLElementDefaults* = DEFINE_GUID(0x3050f6c9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLDefaults* = DEFINE_GUID(0x3050f58c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLDefaults* = DEFINE_GUID(0x3050f58c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLDefaults* = DEFINE_GUID(0x3050f6c8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTCDefaultDispatch* = DEFINE_GUID(0x3050f4fd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTCPropertyBehavior* = DEFINE_GUID(0x3050f5df'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTCMethodBehavior* = DEFINE_GUID(0x3050f631'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTCEventBehavior* = DEFINE_GUID(0x3050f4ff'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTCAttachBehavior* = DEFINE_GUID(0x3050f5f4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTCAttachBehavior2* = DEFINE_GUID(0x3050f7eb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTCDescBehavior* = DEFINE_GUID(0x3050f5dc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTCDefaultDispatch* = DEFINE_GUID(0x3050f573'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTCDefaultDispatch* = DEFINE_GUID(0x3050f573'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTCDefaultDispatch* = DEFINE_GUID(0x3050f4fc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTCPropertyBehavior* = DEFINE_GUID(0x3050f57f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTCPropertyBehavior* = DEFINE_GUID(0x3050f57f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTCPropertyBehavior* = DEFINE_GUID(0x3050f5de'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTCMethodBehavior* = DEFINE_GUID(0x3050f587'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTCMethodBehavior* = DEFINE_GUID(0x3050f587'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTCMethodBehavior* = DEFINE_GUID(0x3050f630'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTCEventBehavior* = DEFINE_GUID(0x3050f574'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTCEventBehavior* = DEFINE_GUID(0x3050f574'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTCEventBehavior* = DEFINE_GUID(0x3050f4fe'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTCAttachBehavior* = DEFINE_GUID(0x3050f583'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTCAttachBehavior* = DEFINE_GUID(0x3050f583'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTCAttachBehavior* = DEFINE_GUID(0x3050f5f5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTCDescBehavior* = DEFINE_GUID(0x3050f57e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTCDescBehavior* = DEFINE_GUID(0x3050f57e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTCDescBehavior* = DEFINE_GUID(0x3050f5dd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLUrnCollection* = DEFINE_GUID(0x3050f5e2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLUrnCollection* = DEFINE_GUID(0x3050f551'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLUrnCollection* = DEFINE_GUID(0x3050f551'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLUrnCollection* = DEFINE_GUID(0x3050f580'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLGenericElement* = DEFINE_GUID(0x3050f4b7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLGenericElement* = DEFINE_GUID(0x3050f563'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLGenericElement* = DEFINE_GUID(0x3050f563'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLGenericElement* = DEFINE_GUID(0x3050f4b8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleSheetRule* = DEFINE_GUID(0x3050f357'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleSheetRuleApplied* = DEFINE_GUID(0x305104c1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleSheetRule2* = DEFINE_GUID(0x305106fd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleSheetRulesCollection* = DEFINE_GUID(0x3050f2e5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleSheetRulesCollection2* = DEFINE_GUID(0x305106e8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLStyleSheetRule* = DEFINE_GUID(0x3050f50e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLStyleSheetRule* = DEFINE_GUID(0x3050f50e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLStyleSheetRule* = DEFINE_GUID(0x3050f3ce'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLStyleSheetRulesCollection* = DEFINE_GUID(0x3050f52f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLStyleSheetRulesCollection* = DEFINE_GUID(0x3050f52f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLStyleSheetRulesCollection* = DEFINE_GUID(0x3050f3cd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleSheetPage* = DEFINE_GUID(0x3050f7ee'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleSheetPage2* = DEFINE_GUID(0x305106ed'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleSheetPagesCollection* = DEFINE_GUID(0x3050f7f0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLStyleSheetPage* = DEFINE_GUID(0x3050f540'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLStyleSheetPage* = DEFINE_GUID(0x3050f540'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLStyleSheetPage* = DEFINE_GUID(0x3050f7ef'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLStyleSheetPagesCollection* = DEFINE_GUID(0x3050f543'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLStyleSheetPagesCollection* = DEFINE_GUID(0x3050f543'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLStyleSheetPagesCollection* = DEFINE_GUID(0x3050f7f1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleSheet* = DEFINE_GUID(0x3050f2e3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleSheet2* = DEFINE_GUID(0x3050f3d1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleSheet3* = DEFINE_GUID(0x30510496'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleSheet4* = DEFINE_GUID(0x305106f4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLStyleSheet* = DEFINE_GUID(0x3050f58d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLStyleSheet* = DEFINE_GUID(0x3050f58d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLStyleSheet* = DEFINE_GUID(0x3050f2e4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleSheetsCollection* = DEFINE_GUID(0x3050f37e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleSheetsCollection2* = DEFINE_GUID(0x305106e7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLStyleSheetsCollection* = DEFINE_GUID(0x3050f547'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLStyleSheetsCollection* = DEFINE_GUID(0x3050f547'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLStyleSheetsCollection* = DEFINE_GUID(0x3050f37f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLLinkElementEvents2* = DEFINE_GUID(0x3050f61d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLLinkElementEvents2* = DEFINE_GUID(0x3050f61d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLLinkElementEvents* = DEFINE_GUID(0x3050f3cc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLLinkElementEvents* = DEFINE_GUID(0x3050f3cc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLLinkElement* = DEFINE_GUID(0x3050f205'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLLinkElement2* = DEFINE_GUID(0x3050f4e5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLLinkElement3* = DEFINE_GUID(0x3050f81e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLLinkElement4* = DEFINE_GUID(0x3051043a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLLinkElement5* = DEFINE_GUID(0x30510726'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLLinkElement* = DEFINE_GUID(0x3050f524'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLLinkElement* = DEFINE_GUID(0x3050f524'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLLinkElement* = DEFINE_GUID(0x3050f277'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLElement* = DEFINE_GUID("3050f1ff-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLElement2* = DEFINE_GUID("3050f434-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLElement3* = DEFINE_GUID("3050f673-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLElement4* = DEFINE_GUID("3050f80f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementSelector* = DEFINE_GUID("30510463-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLElementRender* = DEFINE_GUID("3050f669-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLUniqueName* = DEFINE_GUID("3050f4d0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLElement5* = DEFINE_GUID("3051045d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLElement6* = DEFINE_GUID("305106f8-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLElement7* = DEFINE_GUID("305107aa-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLElementAppliedStyles* = DEFINE_GUID("305104bd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementTraversal* = DEFINE_GUID("30510736-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDatabinding* = DEFINE_GUID("3050f3f2-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLElementDefaults* = DEFINE_GUID("3050f6c9-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLDefaults* = DEFINE_GUID("3050f58c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLDefaults* = DEFINE_GUID("3050f58c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDefaults* = DEFINE_GUID("3050f6c8-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTCDefaultDispatch* = DEFINE_GUID("3050f4fd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTCPropertyBehavior* = DEFINE_GUID("3050f5df-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTCMethodBehavior* = DEFINE_GUID("3050f631-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTCEventBehavior* = DEFINE_GUID("3050f4ff-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTCAttachBehavior* = DEFINE_GUID("3050f5f4-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTCAttachBehavior2* = DEFINE_GUID("3050f7eb-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTCDescBehavior* = DEFINE_GUID("3050f5dc-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTCDefaultDispatch* = DEFINE_GUID("3050f573-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTCDefaultDispatch* = DEFINE_GUID("3050f573-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTCDefaultDispatch* = DEFINE_GUID("3050f4fc-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTCPropertyBehavior* = DEFINE_GUID("3050f57f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTCPropertyBehavior* = DEFINE_GUID("3050f57f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTCPropertyBehavior* = DEFINE_GUID("3050f5de-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTCMethodBehavior* = DEFINE_GUID("3050f587-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTCMethodBehavior* = DEFINE_GUID("3050f587-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTCMethodBehavior* = DEFINE_GUID("3050f630-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTCEventBehavior* = DEFINE_GUID("3050f574-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTCEventBehavior* = DEFINE_GUID("3050f574-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTCEventBehavior* = DEFINE_GUID("3050f4fe-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTCAttachBehavior* = DEFINE_GUID("3050f583-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTCAttachBehavior* = DEFINE_GUID("3050f583-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTCAttachBehavior* = DEFINE_GUID("3050f5f5-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTCDescBehavior* = DEFINE_GUID("3050f57e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTCDescBehavior* = DEFINE_GUID("3050f57e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTCDescBehavior* = DEFINE_GUID("3050f5dd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLUrnCollection* = DEFINE_GUID("3050f5e2-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLUrnCollection* = DEFINE_GUID("3050f551-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLUrnCollection* = DEFINE_GUID("3050f551-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLUrnCollection* = DEFINE_GUID("3050f580-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLGenericElement* = DEFINE_GUID("3050f4b7-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLGenericElement* = DEFINE_GUID("3050f563-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLGenericElement* = DEFINE_GUID("3050f563-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLGenericElement* = DEFINE_GUID("3050f4b8-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleSheetRule* = DEFINE_GUID("3050f357-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleSheetRuleApplied* = DEFINE_GUID("305104c1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleSheetRule2* = DEFINE_GUID("305106fd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleSheetRulesCollection* = DEFINE_GUID("3050f2e5-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleSheetRulesCollection2* = DEFINE_GUID("305106e8-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLStyleSheetRule* = DEFINE_GUID("3050f50e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLStyleSheetRule* = DEFINE_GUID("3050f50e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLStyleSheetRule* = DEFINE_GUID("3050f3ce-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLStyleSheetRulesCollection* = DEFINE_GUID("3050f52f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLStyleSheetRulesCollection* = DEFINE_GUID("3050f52f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLStyleSheetRulesCollection* = DEFINE_GUID("3050f3cd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleSheetPage* = DEFINE_GUID("3050f7ee-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleSheetPage2* = DEFINE_GUID("305106ed-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleSheetPagesCollection* = DEFINE_GUID("3050f7f0-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLStyleSheetPage* = DEFINE_GUID("3050f540-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLStyleSheetPage* = DEFINE_GUID("3050f540-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLStyleSheetPage* = DEFINE_GUID("3050f7ef-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLStyleSheetPagesCollection* = DEFINE_GUID("3050f543-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLStyleSheetPagesCollection* = DEFINE_GUID("3050f543-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLStyleSheetPagesCollection* = DEFINE_GUID("3050f7f1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleSheet* = DEFINE_GUID("3050f2e3-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleSheet2* = DEFINE_GUID("3050f3d1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleSheet3* = DEFINE_GUID("30510496-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleSheet4* = DEFINE_GUID("305106f4-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLStyleSheet* = DEFINE_GUID("3050f58d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLStyleSheet* = DEFINE_GUID("3050f58d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLStyleSheet* = DEFINE_GUID("3050f2e4-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleSheetsCollection* = DEFINE_GUID("3050f37e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleSheetsCollection2* = DEFINE_GUID("305106e7-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLStyleSheetsCollection* = DEFINE_GUID("3050f547-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLStyleSheetsCollection* = DEFINE_GUID("3050f547-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLStyleSheetsCollection* = DEFINE_GUID("3050f37f-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLLinkElementEvents2* = DEFINE_GUID("3050f61d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLLinkElementEvents2* = DEFINE_GUID("3050f61d-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLLinkElementEvents* = DEFINE_GUID("3050f3cc-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLLinkElementEvents* = DEFINE_GUID("3050f3cc-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLLinkElement* = DEFINE_GUID("3050f205-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLLinkElement2* = DEFINE_GUID("3050f4e5-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLLinkElement3* = DEFINE_GUID("3050f81e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLLinkElement4* = DEFINE_GUID("3051043a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLLinkElement5* = DEFINE_GUID("30510726-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLLinkElement* = DEFINE_GUID("3050f524-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLLinkElement* = DEFINE_GUID("3050f524-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLLinkElement* = DEFINE_GUID("3050f277-98b5-11cf-bb82-00aa00bdce0b")
   htmlUnitCharacter* = 1
   htmlUnitWord* = 2
   htmlUnitSentence* = 3
@@ -1767,249 +1767,249 @@ const
   htmlDirectionForward* = 99999
   htmlDirectionBackward* = -99999
   htmlDirection_Max* = 0x7fffffff
-  IID_IHTMLTxtRange* = DEFINE_GUID(0x3050f220'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTextRangeMetrics* = DEFINE_GUID(0x3050f40b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTextRangeMetrics2* = DEFINE_GUID(0x3050f4a6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTxtRangeCollection* = DEFINE_GUID(0x3050f7ed'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMRange* = DEFINE_GUID(0x305104ae'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLDOMRange* = DEFINE_GUID(0x3050f5a3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLDOMRange* = DEFINE_GUID(0x3050f5a3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLDOMRange* = DEFINE_GUID(0x305106c3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLFormElementEvents2* = DEFINE_GUID(0x3050f614'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLFormElementEvents2* = DEFINE_GUID(0x3050f614'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLFormElementEvents* = DEFINE_GUID(0x3050f364'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLFormElementEvents* = DEFINE_GUID(0x3050f364'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFormElement* = DEFINE_GUID(0x3050f1f7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFormElement2* = DEFINE_GUID(0x3050f4f6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFormElement3* = DEFINE_GUID(0x3050f836'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLSubmitData* = DEFINE_GUID(0x3050f645'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFormElement4* = DEFINE_GUID(0x3051042c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLFormElement* = DEFINE_GUID(0x3050f510'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLFormElement* = DEFINE_GUID(0x3050f510'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLFormElement* = DEFINE_GUID(0x3050f251'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLControlElementEvents2* = DEFINE_GUID(0x3050f612'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLControlElementEvents2* = DEFINE_GUID(0x3050f612'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLControlElementEvents* = DEFINE_GUID(0x3050f4ea'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLControlElementEvents* = DEFINE_GUID(0x3050f4ea'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLTxtRange* = DEFINE_GUID("3050f220-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTextRangeMetrics* = DEFINE_GUID("3050f40b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTextRangeMetrics2* = DEFINE_GUID("3050f4a6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTxtRangeCollection* = DEFINE_GUID("3050f7ed-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMRange* = DEFINE_GUID("305104ae-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLDOMRange* = DEFINE_GUID("3050f5a3-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLDOMRange* = DEFINE_GUID("3050f5a3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDOMRange* = DEFINE_GUID("305106c3-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLFormElementEvents2* = DEFINE_GUID("3050f614-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLFormElementEvents2* = DEFINE_GUID("3050f614-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLFormElementEvents* = DEFINE_GUID("3050f364-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLFormElementEvents* = DEFINE_GUID("3050f364-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFormElement* = DEFINE_GUID("3050f1f7-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFormElement2* = DEFINE_GUID("3050f4f6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFormElement3* = DEFINE_GUID("3050f836-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLSubmitData* = DEFINE_GUID("3050f645-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFormElement4* = DEFINE_GUID("3051042c-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLFormElement* = DEFINE_GUID("3050f510-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLFormElement* = DEFINE_GUID("3050f510-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLFormElement* = DEFINE_GUID("3050f251-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLControlElementEvents2* = DEFINE_GUID("3050f612-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLControlElementEvents2* = DEFINE_GUID("3050f612-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLControlElementEvents* = DEFINE_GUID("3050f4ea-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLControlElementEvents* = DEFINE_GUID("3050f4ea-98b5-11cf-bb82-00aa00bdce0b")
   htmlStartfileopen* = 0
   htmlStartmouseover* = 1
   htmlStart_Max* = 0x7fffffff
-  IID_IHTMLControlElement* = DEFINE_GUID(0x3050f4e9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTextElement* = DEFINE_GUID(0x3050f218'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLTextElement* = DEFINE_GUID(0x3050f537'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLTextElement* = DEFINE_GUID(0x3050f537'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLTextElement* = DEFINE_GUID(0x3050f26a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLTextContainerEvents2* = DEFINE_GUID(0x3050f624'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLTextContainerEvents2* = DEFINE_GUID(0x3050f624'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLTextContainerEvents* = DEFINE_GUID(0x1ff6aa72'i32, 0x5842, 0x11cf, [0xa7'u8, 0x07, 0x00, 0xaa, 0x00, 0xc0, 0x09, 0x8d])
-  IID_HTMLTextContainerEvents* = DEFINE_GUID(0x1ff6aa72'i32, 0x5842, 0x11cf, [0xa7'u8, 0x07, 0x00, 0xaa, 0x00, 0xc0, 0x09, 0x8d])
-  IID_IHTMLTextContainer* = DEFINE_GUID(0x3050f230'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLControlRange* = DEFINE_GUID(0x3050f29c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLControlRange2* = DEFINE_GUID(0x3050f65e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLImgEvents2* = DEFINE_GUID(0x3050f616'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLImgEvents2* = DEFINE_GUID(0x3050f616'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLImgEvents* = DEFINE_GUID(0x3050f25b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLImgEvents* = DEFINE_GUID(0x3050f25b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLImgElement* = DEFINE_GUID(0x3050f240'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLImgElement2* = DEFINE_GUID(0x3050f826'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLImgElement3* = DEFINE_GUID(0x30510434'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLImgElement4* = DEFINE_GUID(0x305107f6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLMSImgElement* = DEFINE_GUID(0x30510793'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLImageElementFactory* = DEFINE_GUID(0x3050f38e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLImg* = DEFINE_GUID(0x3050f51c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLImg* = DEFINE_GUID(0x3050f51c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLImg* = DEFINE_GUID(0x3050f241'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLImageElementFactory* = DEFINE_GUID(0x3050f38f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLControlElement* = DEFINE_GUID("3050f4e9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTextElement* = DEFINE_GUID("3050f218-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLTextElement* = DEFINE_GUID("3050f537-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLTextElement* = DEFINE_GUID("3050f537-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLTextElement* = DEFINE_GUID("3050f26a-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLTextContainerEvents2* = DEFINE_GUID("3050f624-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLTextContainerEvents2* = DEFINE_GUID("3050f624-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLTextContainerEvents* = DEFINE_GUID("1ff6aa72-5842-11cf-a707-00aa00c0098d")
+  IID_HTMLTextContainerEvents* = DEFINE_GUID("1ff6aa72-5842-11cf-a707-00aa00c0098d")
+  IID_IHTMLTextContainer* = DEFINE_GUID("3050f230-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLControlRange* = DEFINE_GUID("3050f29c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLControlRange2* = DEFINE_GUID("3050f65e-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLImgEvents2* = DEFINE_GUID("3050f616-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLImgEvents2* = DEFINE_GUID("3050f616-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLImgEvents* = DEFINE_GUID("3050f25b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLImgEvents* = DEFINE_GUID("3050f25b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLImgElement* = DEFINE_GUID("3050f240-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLImgElement2* = DEFINE_GUID("3050f826-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLImgElement3* = DEFINE_GUID("30510434-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLImgElement4* = DEFINE_GUID("305107f6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLMSImgElement* = DEFINE_GUID("30510793-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLImageElementFactory* = DEFINE_GUID("3050f38e-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLImg* = DEFINE_GUID("3050f51c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLImg* = DEFINE_GUID("3050f51c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLImg* = DEFINE_GUID("3050f241-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLImageElementFactory* = DEFINE_GUID("3050f38f-98b5-11cf-bb82-00aa00bdce0b")
   bodyScrollyes* = 1
   bodyScrollno* = 2
   bodyScrollauto* = 4
   bodyScrolldefault* = 3
   bodyScroll_Max* = 0x7fffffff
-  IID_IHTMLBodyElement* = DEFINE_GUID(0x3050f1d8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLBodyElement2* = DEFINE_GUID(0x3050f5c5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLBodyElement3* = DEFINE_GUID(0x30510422'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLBodyElement4* = DEFINE_GUID(0x30510795'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLBodyElement5* = DEFINE_GUID(0x30510822'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLBody* = DEFINE_GUID(0x3050f507'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLBody* = DEFINE_GUID(0x3050f507'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLBody* = DEFINE_GUID(0x3050f24a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFontElement* = DEFINE_GUID(0x3050f1d9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLFontElement* = DEFINE_GUID(0x3050f512'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLFontElement* = DEFINE_GUID(0x3050f512'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLFontElement* = DEFINE_GUID(0x3050f27b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLAnchorEvents2* = DEFINE_GUID(0x3050f610'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLAnchorEvents2* = DEFINE_GUID(0x3050f610'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLAnchorEvents* = DEFINE_GUID(0x3050f29d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLAnchorEvents* = DEFINE_GUID(0x3050f29d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAnchorElement* = DEFINE_GUID(0x3050f1da'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAnchorElement2* = DEFINE_GUID(0x3050f825'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAnchorElement3* = DEFINE_GUID(0x3051041d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLAnchorElement* = DEFINE_GUID(0x3050f502'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLAnchorElement* = DEFINE_GUID(0x3050f502'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLAnchorElement* = DEFINE_GUID(0x3050f248'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLLabelEvents2* = DEFINE_GUID(0x3050f61c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLLabelEvents2* = DEFINE_GUID(0x3050f61c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLLabelEvents* = DEFINE_GUID(0x3050f329'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLLabelEvents* = DEFINE_GUID(0x3050f329'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLLabelElement* = DEFINE_GUID(0x3050f32a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLLabelElement2* = DEFINE_GUID(0x3050f832'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLLabelElement* = DEFINE_GUID(0x3050f522'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLLabelElement* = DEFINE_GUID(0x3050f522'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLLabelElement* = DEFINE_GUID(0x3050f32b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLListElement* = DEFINE_GUID(0x3050f20e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLListElement2* = DEFINE_GUID(0x3050f822'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLListElement* = DEFINE_GUID(0x3050f525'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLListElement* = DEFINE_GUID(0x3050f525'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLListElement* = DEFINE_GUID(0x3050f272'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLUListElement* = DEFINE_GUID(0x3050f1dd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLUListElement* = DEFINE_GUID(0x3050f538'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLUListElement* = DEFINE_GUID(0x3050f538'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLUListElement* = DEFINE_GUID(0x3050f269'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLOListElement* = DEFINE_GUID(0x3050f1de'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLOListElement* = DEFINE_GUID(0x3050f52a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLOListElement* = DEFINE_GUID(0x3050f52a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLOListElement* = DEFINE_GUID(0x3050f270'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLLIElement* = DEFINE_GUID(0x3050f1e0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLLIElement* = DEFINE_GUID(0x3050f523'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLLIElement* = DEFINE_GUID(0x3050f523'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLLIElement* = DEFINE_GUID(0x3050f273'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLBlockElement* = DEFINE_GUID(0x3050f208'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLBlockElement2* = DEFINE_GUID(0x3050f823'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLBlockElement3* = DEFINE_GUID(0x30510494'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLBlockElement* = DEFINE_GUID(0x3050f506'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLBlockElement* = DEFINE_GUID(0x3050f506'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLBlockElement* = DEFINE_GUID(0x3050f281'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDivElement* = DEFINE_GUID(0x3050f200'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLDivElement* = DEFINE_GUID(0x3050f50c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLDivElement* = DEFINE_GUID(0x3050f50c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLDivElement* = DEFINE_GUID(0x3050f27e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDDElement* = DEFINE_GUID(0x3050f1f2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLDDElement* = DEFINE_GUID(0x3050f50b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLDDElement* = DEFINE_GUID(0x3050f50b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLDDElement* = DEFINE_GUID(0x3050f27f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDTElement* = DEFINE_GUID(0x3050f1f3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLDTElement* = DEFINE_GUID(0x3050f50d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLDTElement* = DEFINE_GUID(0x3050f50d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLDTElement* = DEFINE_GUID(0x3050f27c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLBRElement* = DEFINE_GUID(0x3050f1f0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLBRElement* = DEFINE_GUID(0x3050f53a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLBRElement* = DEFINE_GUID(0x3050f53a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLBRElement* = DEFINE_GUID(0x3050f280'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDListElement* = DEFINE_GUID(0x3050f1f1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLDListElement* = DEFINE_GUID(0x3050f53b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLDListElement* = DEFINE_GUID(0x3050f53b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLDListElement* = DEFINE_GUID(0x3050f27d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLHRElement* = DEFINE_GUID(0x3050f1f4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLHRElement* = DEFINE_GUID(0x3050f53d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLHRElement* = DEFINE_GUID(0x3050f53d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLHRElement* = DEFINE_GUID(0x3050f252'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLParaElement* = DEFINE_GUID(0x3050f1f5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLParaElement* = DEFINE_GUID(0x3050f52c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLParaElement* = DEFINE_GUID(0x3050f52c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLParaElement* = DEFINE_GUID(0x3050f26f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLElementCollection* = DEFINE_GUID(0x3050f21f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLElementCollection2* = DEFINE_GUID(0x3050f5ee'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLElementCollection3* = DEFINE_GUID(0x3050f835'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLElementCollection4* = DEFINE_GUID(0x30510425'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLElementCollection* = DEFINE_GUID(0x3050f56b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLElementCollection* = DEFINE_GUID(0x3050f56b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLElementCollection* = DEFINE_GUID(0x3050f4cb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLHeaderElement* = DEFINE_GUID(0x3050f1f6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLHeaderElement* = DEFINE_GUID(0x3050f515'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLHeaderElement* = DEFINE_GUID(0x3050f515'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLHeaderElement* = DEFINE_GUID(0x3050f27a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLSelectElementEvents2* = DEFINE_GUID(0x3050f622'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLSelectElementEvents2* = DEFINE_GUID(0x3050f622'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLSelectElementEvents* = DEFINE_GUID(0x3050f302'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLSelectElementEvents* = DEFINE_GUID(0x3050f302'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLBodyElement* = DEFINE_GUID("3050f1d8-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLBodyElement2* = DEFINE_GUID("3050f5c5-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLBodyElement3* = DEFINE_GUID("30510422-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLBodyElement4* = DEFINE_GUID("30510795-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLBodyElement5* = DEFINE_GUID("30510822-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLBody* = DEFINE_GUID("3050f507-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLBody* = DEFINE_GUID("3050f507-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLBody* = DEFINE_GUID("3050f24a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFontElement* = DEFINE_GUID("3050f1d9-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLFontElement* = DEFINE_GUID("3050f512-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLFontElement* = DEFINE_GUID("3050f512-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLFontElement* = DEFINE_GUID("3050f27b-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLAnchorEvents2* = DEFINE_GUID("3050f610-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLAnchorEvents2* = DEFINE_GUID("3050f610-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLAnchorEvents* = DEFINE_GUID("3050f29d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLAnchorEvents* = DEFINE_GUID("3050f29d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAnchorElement* = DEFINE_GUID("3050f1da-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAnchorElement2* = DEFINE_GUID("3050f825-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAnchorElement3* = DEFINE_GUID("3051041d-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLAnchorElement* = DEFINE_GUID("3050f502-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLAnchorElement* = DEFINE_GUID("3050f502-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLAnchorElement* = DEFINE_GUID("3050f248-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLLabelEvents2* = DEFINE_GUID("3050f61c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLLabelEvents2* = DEFINE_GUID("3050f61c-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLLabelEvents* = DEFINE_GUID("3050f329-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLLabelEvents* = DEFINE_GUID("3050f329-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLLabelElement* = DEFINE_GUID("3050f32a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLLabelElement2* = DEFINE_GUID("3050f832-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLLabelElement* = DEFINE_GUID("3050f522-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLLabelElement* = DEFINE_GUID("3050f522-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLLabelElement* = DEFINE_GUID("3050f32b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLListElement* = DEFINE_GUID("3050f20e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLListElement2* = DEFINE_GUID("3050f822-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLListElement* = DEFINE_GUID("3050f525-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLListElement* = DEFINE_GUID("3050f525-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLListElement* = DEFINE_GUID("3050f272-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLUListElement* = DEFINE_GUID("3050f1dd-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLUListElement* = DEFINE_GUID("3050f538-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLUListElement* = DEFINE_GUID("3050f538-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLUListElement* = DEFINE_GUID("3050f269-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLOListElement* = DEFINE_GUID("3050f1de-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLOListElement* = DEFINE_GUID("3050f52a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLOListElement* = DEFINE_GUID("3050f52a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLOListElement* = DEFINE_GUID("3050f270-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLLIElement* = DEFINE_GUID("3050f1e0-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLLIElement* = DEFINE_GUID("3050f523-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLLIElement* = DEFINE_GUID("3050f523-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLLIElement* = DEFINE_GUID("3050f273-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLBlockElement* = DEFINE_GUID("3050f208-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLBlockElement2* = DEFINE_GUID("3050f823-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLBlockElement3* = DEFINE_GUID("30510494-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLBlockElement* = DEFINE_GUID("3050f506-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLBlockElement* = DEFINE_GUID("3050f506-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLBlockElement* = DEFINE_GUID("3050f281-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDivElement* = DEFINE_GUID("3050f200-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLDivElement* = DEFINE_GUID("3050f50c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLDivElement* = DEFINE_GUID("3050f50c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDivElement* = DEFINE_GUID("3050f27e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDDElement* = DEFINE_GUID("3050f1f2-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLDDElement* = DEFINE_GUID("3050f50b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLDDElement* = DEFINE_GUID("3050f50b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDDElement* = DEFINE_GUID("3050f27f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDTElement* = DEFINE_GUID("3050f1f3-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLDTElement* = DEFINE_GUID("3050f50d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLDTElement* = DEFINE_GUID("3050f50d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDTElement* = DEFINE_GUID("3050f27c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLBRElement* = DEFINE_GUID("3050f1f0-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLBRElement* = DEFINE_GUID("3050f53a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLBRElement* = DEFINE_GUID("3050f53a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLBRElement* = DEFINE_GUID("3050f280-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDListElement* = DEFINE_GUID("3050f1f1-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLDListElement* = DEFINE_GUID("3050f53b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLDListElement* = DEFINE_GUID("3050f53b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDListElement* = DEFINE_GUID("3050f27d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLHRElement* = DEFINE_GUID("3050f1f4-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLHRElement* = DEFINE_GUID("3050f53d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLHRElement* = DEFINE_GUID("3050f53d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLHRElement* = DEFINE_GUID("3050f252-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLParaElement* = DEFINE_GUID("3050f1f5-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLParaElement* = DEFINE_GUID("3050f52c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLParaElement* = DEFINE_GUID("3050f52c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLParaElement* = DEFINE_GUID("3050f26f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLElementCollection* = DEFINE_GUID("3050f21f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLElementCollection2* = DEFINE_GUID("3050f5ee-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLElementCollection3* = DEFINE_GUID("3050f835-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLElementCollection4* = DEFINE_GUID("30510425-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLElementCollection* = DEFINE_GUID("3050f56b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLElementCollection* = DEFINE_GUID("3050f56b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLElementCollection* = DEFINE_GUID("3050f4cb-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLHeaderElement* = DEFINE_GUID("3050f1f6-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLHeaderElement* = DEFINE_GUID("3050f515-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLHeaderElement* = DEFINE_GUID("3050f515-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLHeaderElement* = DEFINE_GUID("3050f27a-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLSelectElementEvents2* = DEFINE_GUID("3050f622-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLSelectElementEvents2* = DEFINE_GUID("3050f622-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLSelectElementEvents* = DEFINE_GUID("3050f302-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLSelectElementEvents* = DEFINE_GUID("3050f302-98b5-11cf-bb82-00aa00bdce0b")
   htmlSelectTypeSelectOne* = 1
   htmlSelectTypeSelectMultiple* = 2
   htmlSelectType_Max* = 0x7fffffff
   htmlSelectExFlagNone* = 0
   htmlSelectExFlagHideSelectionInDesign* = 0x1
   htmlSelectExFlag_Max* = 0x7fffffff
-  IID_IHTMLSelectElementEx* = DEFINE_GUID(0x3050f2d1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLSelectElement* = DEFINE_GUID(0x3050f244'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLSelectElement2* = DEFINE_GUID(0x3050f5ed'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLSelectElement4* = DEFINE_GUID(0x3050f838'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLSelectElement5* = DEFINE_GUID(0x3051049d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLSelectElement6* = DEFINE_GUID(0x30510760'i32, 0x98b6, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLSelectElement* = DEFINE_GUID(0x3050f531'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLSelectElement* = DEFINE_GUID(0x3050f531'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLSelectElement* = DEFINE_GUID(0x3050f245'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLWndSelectElement* = DEFINE_GUID(0x3050f597'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLWndSelectElement* = DEFINE_GUID(0x3050f597'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLWndSelectElement* = DEFINE_GUID(0x3050f2cf'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLSelectElementEx* = DEFINE_GUID("3050f2d1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLSelectElement* = DEFINE_GUID("3050f244-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLSelectElement2* = DEFINE_GUID("3050f5ed-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLSelectElement4* = DEFINE_GUID("3050f838-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLSelectElement5* = DEFINE_GUID("3051049d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLSelectElement6* = DEFINE_GUID("30510760-98b6-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLSelectElement* = DEFINE_GUID("3050f531-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLSelectElement* = DEFINE_GUID("3050f531-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLSelectElement* = DEFINE_GUID("3050f245-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLWndSelectElement* = DEFINE_GUID("3050f597-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLWndSelectElement* = DEFINE_GUID("3050f597-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLWndSelectElement* = DEFINE_GUID("3050f2cf-98b5-11cf-bb82-00aa00bdce0b")
   htmlSelectionNone* = 0
   htmlSelectionText* = 1
   htmlSelectionControl* = 2
   htmlSelectionTable* = 3
   htmlSelection_Max* = 0x7fffffff
-  IID_IHTMLSelectionObject* = DEFINE_GUID(0x3050f25a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLSelectionObject2* = DEFINE_GUID(0x3050f7ec'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLSelection* = DEFINE_GUID(0x305104b6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLOptionElement* = DEFINE_GUID(0x3050f211'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLOptionElement3* = DEFINE_GUID(0x3050f820'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLOptionElement4* = DEFINE_GUID(0x305107b4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLOptionElementFactory* = DEFINE_GUID(0x3050f38c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLOptionElement* = DEFINE_GUID(0x3050f52b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLOptionElement* = DEFINE_GUID(0x3050f52b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLOptionElement* = DEFINE_GUID(0x3050f24d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLOptionElementFactory* = DEFINE_GUID(0x3050f38d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLWndOptionElement* = DEFINE_GUID(0x3050f598'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLWndOptionElement* = DEFINE_GUID(0x3050f598'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLWndOptionElement* = DEFINE_GUID(0x3050f2d0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLButtonElementEvents2* = DEFINE_GUID(0x3050f617'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLButtonElementEvents2* = DEFINE_GUID(0x3050f617'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLButtonElementEvents* = DEFINE_GUID(0x3050f2b3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLButtonElementEvents* = DEFINE_GUID(0x3050f2b3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLInputTextElementEvents2* = DEFINE_GUID(0x3050f618'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLInputTextElementEvents2* = DEFINE_GUID(0x3050f618'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLOptionButtonElementEvents2* = DEFINE_GUID(0x3050f619'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLOptionButtonElementEvents2* = DEFINE_GUID(0x3050f619'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLInputFileElementEvents2* = DEFINE_GUID(0x3050f61a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLInputFileElementEvents2* = DEFINE_GUID(0x3050f61a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLInputImageEvents2* = DEFINE_GUID(0x3050f61b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLInputImageEvents2* = DEFINE_GUID(0x3050f61b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLInputTextElementEvents* = DEFINE_GUID(0x3050f2a7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLInputTextElementEvents* = DEFINE_GUID(0x3050f2a7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLOptionButtonElementEvents* = DEFINE_GUID(0x3050f2bd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLOptionButtonElementEvents* = DEFINE_GUID(0x3050f2bd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLInputFileElementEvents* = DEFINE_GUID(0x3050f2af'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLInputFileElementEvents* = DEFINE_GUID(0x3050f2af'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLInputImageEvents* = DEFINE_GUID(0x3050f2c3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLInputImageEvents* = DEFINE_GUID(0x3050f2c3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLInputElement* = DEFINE_GUID(0x3050f5d2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLInputElement2* = DEFINE_GUID(0x3050f821'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLInputElement3* = DEFINE_GUID(0x30510435'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLInputButtonElement* = DEFINE_GUID(0x3050f2b2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLInputHiddenElement* = DEFINE_GUID(0x3050f2a4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLInputTextElement* = DEFINE_GUID(0x3050f2a6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLInputTextElement2* = DEFINE_GUID(0x3050f2d2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLInputFileElement* = DEFINE_GUID(0x3050f2ad'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLOptionButtonElement* = DEFINE_GUID(0x3050f2bc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLInputImage* = DEFINE_GUID(0x3050f2c2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLInputRangeElement* = DEFINE_GUID(0x3050f2d4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLInputElement* = DEFINE_GUID(0x3050f57d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLInputElement* = DEFINE_GUID(0x3050f57d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLInputElement* = DEFINE_GUID(0x3050f5d8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTextAreaElement* = DEFINE_GUID(0x3050f2aa'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTextAreaElement2* = DEFINE_GUID(0x3050f2d3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLTextAreaElement* = DEFINE_GUID(0x3050f521'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLTextAreaElement* = DEFINE_GUID(0x3050f521'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLTextAreaElement* = DEFINE_GUID(0x3050f2ac'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLRichtextElement* = DEFINE_GUID(0x3050f54d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLRichtextElement* = DEFINE_GUID(0x3050f54d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLRichtextElement* = DEFINE_GUID(0x3050f2df'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLButtonElement* = DEFINE_GUID(0x3050f2bb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLButtonElement2* = DEFINE_GUID(0x305106f3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLButtonElement* = DEFINE_GUID(0x3050f51f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLButtonElement* = DEFINE_GUID(0x3050f51f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLButtonElement* = DEFINE_GUID(0x3050f2c6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLMarqueeElementEvents2* = DEFINE_GUID(0x3050f61f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLMarqueeElementEvents2* = DEFINE_GUID(0x3050f61f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLMarqueeElementEvents* = DEFINE_GUID(0x3050f2b8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLMarqueeElementEvents* = DEFINE_GUID(0x3050f2b8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLSelectionObject* = DEFINE_GUID("3050f25a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLSelectionObject2* = DEFINE_GUID("3050f7ec-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLSelection* = DEFINE_GUID("305104b6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLOptionElement* = DEFINE_GUID("3050f211-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLOptionElement3* = DEFINE_GUID("3050f820-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLOptionElement4* = DEFINE_GUID("305107b4-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLOptionElementFactory* = DEFINE_GUID("3050f38c-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLOptionElement* = DEFINE_GUID("3050f52b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLOptionElement* = DEFINE_GUID("3050f52b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLOptionElement* = DEFINE_GUID("3050f24d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLOptionElementFactory* = DEFINE_GUID("3050f38d-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLWndOptionElement* = DEFINE_GUID("3050f598-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLWndOptionElement* = DEFINE_GUID("3050f598-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLWndOptionElement* = DEFINE_GUID("3050f2d0-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLButtonElementEvents2* = DEFINE_GUID("3050f617-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLButtonElementEvents2* = DEFINE_GUID("3050f617-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLButtonElementEvents* = DEFINE_GUID("3050f2b3-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLButtonElementEvents* = DEFINE_GUID("3050f2b3-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLInputTextElementEvents2* = DEFINE_GUID("3050f618-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLInputTextElementEvents2* = DEFINE_GUID("3050f618-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLOptionButtonElementEvents2* = DEFINE_GUID("3050f619-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLOptionButtonElementEvents2* = DEFINE_GUID("3050f619-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLInputFileElementEvents2* = DEFINE_GUID("3050f61a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLInputFileElementEvents2* = DEFINE_GUID("3050f61a-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLInputImageEvents2* = DEFINE_GUID("3050f61b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLInputImageEvents2* = DEFINE_GUID("3050f61b-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLInputTextElementEvents* = DEFINE_GUID("3050f2a7-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLInputTextElementEvents* = DEFINE_GUID("3050f2a7-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLOptionButtonElementEvents* = DEFINE_GUID("3050f2bd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLOptionButtonElementEvents* = DEFINE_GUID("3050f2bd-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLInputFileElementEvents* = DEFINE_GUID("3050f2af-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLInputFileElementEvents* = DEFINE_GUID("3050f2af-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLInputImageEvents* = DEFINE_GUID("3050f2c3-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLInputImageEvents* = DEFINE_GUID("3050f2c3-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLInputElement* = DEFINE_GUID("3050f5d2-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLInputElement2* = DEFINE_GUID("3050f821-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLInputElement3* = DEFINE_GUID("30510435-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLInputButtonElement* = DEFINE_GUID("3050f2b2-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLInputHiddenElement* = DEFINE_GUID("3050f2a4-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLInputTextElement* = DEFINE_GUID("3050f2a6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLInputTextElement2* = DEFINE_GUID("3050f2d2-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLInputFileElement* = DEFINE_GUID("3050f2ad-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLOptionButtonElement* = DEFINE_GUID("3050f2bc-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLInputImage* = DEFINE_GUID("3050f2c2-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLInputRangeElement* = DEFINE_GUID("3050f2d4-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLInputElement* = DEFINE_GUID("3050f57d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLInputElement* = DEFINE_GUID("3050f57d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLInputElement* = DEFINE_GUID("3050f5d8-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTextAreaElement* = DEFINE_GUID("3050f2aa-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTextAreaElement2* = DEFINE_GUID("3050f2d3-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLTextAreaElement* = DEFINE_GUID("3050f521-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLTextAreaElement* = DEFINE_GUID("3050f521-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLTextAreaElement* = DEFINE_GUID("3050f2ac-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLRichtextElement* = DEFINE_GUID("3050f54d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLRichtextElement* = DEFINE_GUID("3050f54d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLRichtextElement* = DEFINE_GUID("3050f2df-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLButtonElement* = DEFINE_GUID("3050f2bb-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLButtonElement2* = DEFINE_GUID("305106f3-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLButtonElement* = DEFINE_GUID("3050f51f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLButtonElement* = DEFINE_GUID("3050f51f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLButtonElement* = DEFINE_GUID("3050f2c6-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLMarqueeElementEvents2* = DEFINE_GUID("3050f61f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLMarqueeElementEvents2* = DEFINE_GUID("3050f61f-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLMarqueeElementEvents* = DEFINE_GUID("3050f2b8-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLMarqueeElementEvents* = DEFINE_GUID("3050f2b8-98b5-11cf-bb82-00aa00bdce0b")
   htmlMarqueeBehaviorscroll* = 1
   htmlMarqueeBehaviorslide* = 2
   htmlMarqueeBehavioralternate* = 3
@@ -2019,74 +2019,74 @@ const
   htmlMarqueeDirectionup* = 5
   htmlMarqueeDirectiondown* = 7
   htmlMarqueeDirection_Max* = 0x7fffffff
-  IID_IHTMLMarqueeElement* = DEFINE_GUID(0x3050f2b5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLMarqueeElement* = DEFINE_GUID(0x3050f527'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLMarqueeElement* = DEFINE_GUID(0x3050f527'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLMarqueeElement* = DEFINE_GUID(0x3050f2b9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLHtmlElement* = DEFINE_GUID(0x3050f81c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLHeadElement* = DEFINE_GUID(0x3050f81d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLHeadElement2* = DEFINE_GUID(0x3051042f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTitleElement* = DEFINE_GUID(0x3050f322'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLMetaElement* = DEFINE_GUID(0x3050f203'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLMetaElement2* = DEFINE_GUID(0x3050f81f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLMetaElement3* = DEFINE_GUID(0x30510495'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLBaseElement* = DEFINE_GUID(0x3050f204'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLBaseElement2* = DEFINE_GUID(0x30510420'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLIsIndexElement* = DEFINE_GUID(0x3050f206'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLIsIndexElement2* = DEFINE_GUID(0x3050f82f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLNextIdElement* = DEFINE_GUID(0x3050f207'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLHtmlElement* = DEFINE_GUID(0x3050f560'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLHtmlElement* = DEFINE_GUID(0x3050f560'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLHtmlElement* = DEFINE_GUID(0x3050f491'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLHeadElement* = DEFINE_GUID(0x3050f561'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLHeadElement* = DEFINE_GUID(0x3050f561'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLHeadElement* = DEFINE_GUID(0x3050f493'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLTitleElement* = DEFINE_GUID(0x3050f516'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLTitleElement* = DEFINE_GUID(0x3050f516'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLTitleElement* = DEFINE_GUID(0x3050f284'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLMetaElement* = DEFINE_GUID(0x3050f517'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLMetaElement* = DEFINE_GUID(0x3050f517'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLMetaElement* = DEFINE_GUID(0x3050f275'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLBaseElement* = DEFINE_GUID(0x3050f518'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLBaseElement* = DEFINE_GUID(0x3050f518'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLBaseElement* = DEFINE_GUID(0x3050f276'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLIsIndexElement* = DEFINE_GUID(0x3050f519'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLIsIndexElement* = DEFINE_GUID(0x3050f519'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLIsIndexElement* = DEFINE_GUID(0x3050f278'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLNextIdElement* = DEFINE_GUID(0x3050f51a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLNextIdElement* = DEFINE_GUID(0x3050f51a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLNextIdElement* = DEFINE_GUID(0x3050f279'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLBaseFontElement* = DEFINE_GUID(0x3050f202'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLBaseFontElement* = DEFINE_GUID(0x3050f504'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLBaseFontElement* = DEFINE_GUID(0x3050f504'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLBaseFontElement* = DEFINE_GUID(0x3050f282'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLUnknownElement* = DEFINE_GUID(0x3050f209'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLUnknownElement* = DEFINE_GUID(0x3050f539'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLUnknownElement* = DEFINE_GUID(0x3050f539'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLUnknownElement* = DEFINE_GUID(0x3050f268'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IOmHistory* = DEFINE_GUID(0xfeceaaa2'i32, 0x8405, 0x11cf, [0x8b'u8, 0xa1, 0x00, 0xaa, 0x00, 0x47, 0x6d, 0xa6])
-  IID_IHTMLMimeTypesCollection* = DEFINE_GUID(0x3050f3fc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLPluginsCollection* = DEFINE_GUID(0x3050f3fd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLOpsProfile* = DEFINE_GUID(0x3050f401'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IOmNavigator* = DEFINE_GUID(0xfeceaaa5'i32, 0x8405, 0x11cf, [0x8b'u8, 0xa1, 0x00, 0xaa, 0x00, 0x47, 0x6d, 0xa6])
-  IID_INavigatorGeolocation* = DEFINE_GUID(0x305107cf'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_INavigatorDoNotTrack* = DEFINE_GUID(0x30510804'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLLocation* = DEFINE_GUID(0x163bb1e0'i32, 0x6e00, 0x11cf, [0x83'u8, 0x7a, 0x48, 0xdc, 0x04, 0xc1, 0x00, 0x00])
-  DIID_DispHTMLHistory* = DEFINE_GUID(0x3050f549'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLHistory* = DEFINE_GUID(0x3050f549'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLHistory* = DEFINE_GUID(0xfeceaaa3'i32, 0x8405, 0x11cf, [0x8b'u8, 0xa1, 0x00, 0xaa, 0x00, 0x47, 0x6d, 0xa6])
-  CLSID_CMimeTypes* = DEFINE_GUID(0x3050f3fe'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispCPlugins* = DEFINE_GUID(0x3050f54a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispCPlugins* = DEFINE_GUID(0x3050f54a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_CPlugins* = DEFINE_GUID(0x3050f3ff'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_COpsProfile* = DEFINE_GUID(0x3050f402'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLNavigator* = DEFINE_GUID(0x3050f54c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLNavigator* = DEFINE_GUID(0x3050f54c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLNavigator* = DEFINE_GUID(0xfeceaaa6'i32, 0x8405, 0x11cf, [0x8b'u8, 0xa1, 0x00, 0xaa, 0x00, 0x47, 0x6d, 0xa6])
-  DIID_DispHTMLLocation* = DEFINE_GUID(0x3050f54e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLLocation* = DEFINE_GUID(0x3050f54e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLLocation* = DEFINE_GUID(0x163bb1e1'i32, 0x6e00, 0x11cf, [0x83'u8, 0x7a, 0x48, 0xdc, 0x04, 0xc1, 0x00, 0x00])
-  IID_IHTMLBookmarkCollection* = DEFINE_GUID(0x3050f4ce'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLMarqueeElement* = DEFINE_GUID("3050f2b5-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLMarqueeElement* = DEFINE_GUID("3050f527-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLMarqueeElement* = DEFINE_GUID("3050f527-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLMarqueeElement* = DEFINE_GUID("3050f2b9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLHtmlElement* = DEFINE_GUID("3050f81c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLHeadElement* = DEFINE_GUID("3050f81d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLHeadElement2* = DEFINE_GUID("3051042f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTitleElement* = DEFINE_GUID("3050f322-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLMetaElement* = DEFINE_GUID("3050f203-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLMetaElement2* = DEFINE_GUID("3050f81f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLMetaElement3* = DEFINE_GUID("30510495-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLBaseElement* = DEFINE_GUID("3050f204-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLBaseElement2* = DEFINE_GUID("30510420-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLIsIndexElement* = DEFINE_GUID("3050f206-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLIsIndexElement2* = DEFINE_GUID("3050f82f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLNextIdElement* = DEFINE_GUID("3050f207-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLHtmlElement* = DEFINE_GUID("3050f560-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLHtmlElement* = DEFINE_GUID("3050f560-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLHtmlElement* = DEFINE_GUID("3050f491-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLHeadElement* = DEFINE_GUID("3050f561-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLHeadElement* = DEFINE_GUID("3050f561-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLHeadElement* = DEFINE_GUID("3050f493-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLTitleElement* = DEFINE_GUID("3050f516-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLTitleElement* = DEFINE_GUID("3050f516-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLTitleElement* = DEFINE_GUID("3050f284-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLMetaElement* = DEFINE_GUID("3050f517-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLMetaElement* = DEFINE_GUID("3050f517-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLMetaElement* = DEFINE_GUID("3050f275-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLBaseElement* = DEFINE_GUID("3050f518-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLBaseElement* = DEFINE_GUID("3050f518-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLBaseElement* = DEFINE_GUID("3050f276-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLIsIndexElement* = DEFINE_GUID("3050f519-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLIsIndexElement* = DEFINE_GUID("3050f519-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLIsIndexElement* = DEFINE_GUID("3050f278-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLNextIdElement* = DEFINE_GUID("3050f51a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLNextIdElement* = DEFINE_GUID("3050f51a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLNextIdElement* = DEFINE_GUID("3050f279-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLBaseFontElement* = DEFINE_GUID("3050f202-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLBaseFontElement* = DEFINE_GUID("3050f504-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLBaseFontElement* = DEFINE_GUID("3050f504-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLBaseFontElement* = DEFINE_GUID("3050f282-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLUnknownElement* = DEFINE_GUID("3050f209-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLUnknownElement* = DEFINE_GUID("3050f539-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLUnknownElement* = DEFINE_GUID("3050f539-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLUnknownElement* = DEFINE_GUID("3050f268-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IOmHistory* = DEFINE_GUID("feceaaa2-8405-11cf-8ba1-00aa00476da6")
+  IID_IHTMLMimeTypesCollection* = DEFINE_GUID("3050f3fc-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLPluginsCollection* = DEFINE_GUID("3050f3fd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLOpsProfile* = DEFINE_GUID("3050f401-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IOmNavigator* = DEFINE_GUID("feceaaa5-8405-11cf-8ba1-00aa00476da6")
+  IID_INavigatorGeolocation* = DEFINE_GUID("305107cf-98b5-11cf-bb82-00aa00bdce0b")
+  IID_INavigatorDoNotTrack* = DEFINE_GUID("30510804-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLLocation* = DEFINE_GUID("163bb1e0-6e00-11cf-837a-48dc04c10000")
+  DIID_DispHTMLHistory* = DEFINE_GUID("3050f549-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLHistory* = DEFINE_GUID("3050f549-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLHistory* = DEFINE_GUID("feceaaa3-8405-11cf-8ba1-00aa00476da6")
+  CLSID_CMimeTypes* = DEFINE_GUID("3050f3fe-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispCPlugins* = DEFINE_GUID("3050f54a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispCPlugins* = DEFINE_GUID("3050f54a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_CPlugins* = DEFINE_GUID("3050f3ff-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_COpsProfile* = DEFINE_GUID("3050f402-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLNavigator* = DEFINE_GUID("3050f54c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLNavigator* = DEFINE_GUID("3050f54c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLNavigator* = DEFINE_GUID("feceaaa6-8405-11cf-8ba1-00aa00476da6")
+  DIID_DispHTMLLocation* = DEFINE_GUID("3050f54e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLLocation* = DEFINE_GUID("3050f54e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLLocation* = DEFINE_GUID("163bb1e1-6e00-11cf-837a-48dc04c10000")
+  IID_IHTMLBookmarkCollection* = DEFINE_GUID("3050f4ce-98b5-11cf-bb82-00aa00bdce0b")
   htmlPersistStateNormal* = 0
   htmlPersistStateFavorite* = 1
   htmlPersistStateHistory* = 2
@@ -2108,116 +2108,116 @@ const
   htmlEffectAllowedNone* = 7
   htmlEffectAllowedUninitialized* = 8
   htmlEffectAllowed_Max* = 0x7fffffff
-  IID_IHTMLDataTransfer* = DEFINE_GUID(0x3050f4b3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLEventObj* = DEFINE_GUID(0x3050f32d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLEventObj2* = DEFINE_GUID(0x3050f48b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLEventObj3* = DEFINE_GUID(0x3050f680'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLEventObj4* = DEFINE_GUID(0x3050f814'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLEventObj5* = DEFINE_GUID(0x30510478'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLEventObj6* = DEFINE_GUID(0x30510734'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispCEventObj* = DEFINE_GUID(0x3050f558'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispCEventObj* = DEFINE_GUID(0x3050f558'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_CEventObj* = DEFINE_GUID(0x3050f48a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleMedia* = DEFINE_GUID(0x3051074b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLStyleMedia* = DEFINE_GUID(0x3059009e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLStyleMedia* = DEFINE_GUID(0x3059009e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLStyleMedia* = DEFINE_GUID(0x3051074c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLWindowEvents3* = DEFINE_GUID(0x3050f5a1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLWindowEvents3* = DEFINE_GUID(0x3050f5a1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLWindowEvents2* = DEFINE_GUID(0x3050f625'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLWindowEvents2* = DEFINE_GUID(0x3050f625'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLWindowEvents* = DEFINE_GUID(0x96a0a4e0'i32, 0xd062, 0x11cf, [0x94'u8, 0xb6, 0x00, 0xaa, 0x00, 0x60, 0x27, 0x5c])
-  IID_HTMLWindowEvents* = DEFINE_GUID(0x96a0a4e0'i32, 0xd062, 0x11cf, [0x94'u8, 0xb6, 0x00, 0xaa, 0x00, 0x60, 0x27, 0x5c])
-  IID_IHTMLFramesCollection2* = DEFINE_GUID(0x332c4426'i32, 0x26cb, 0x11d0, [0xb4'u8, 0x83, 0x00, 0xc0, 0x4f, 0xd9, 0x01, 0x19])
-  IID_IHTMLScreen* = DEFINE_GUID(0x3050f35c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLScreen2* = DEFINE_GUID(0x3050f84a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLScreen3* = DEFINE_GUID(0x305104a1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLScreen4* = DEFINE_GUID(0x3051076b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLWindow3* = DEFINE_GUID(0x3050f4ae'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLWindow4* = DEFINE_GUID(0x3050f6cf'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLWindow5* = DEFINE_GUID(0x3051040e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLWindow6* = DEFINE_GUID(0x30510453'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLWindow7* = DEFINE_GUID(0x305104b7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLWindow8* = DEFINE_GUID(0x305107ab'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_FramesCollection* = DEFINE_GUID(0x3050f7f6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLScreen* = DEFINE_GUID(0x3050f591'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLScreen* = DEFINE_GUID(0x3050f591'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLScreen* = DEFINE_GUID(0x3050f35d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLWindow2* = DEFINE_GUID(0x3050f55d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLWindow2* = DEFINE_GUID(0x3050f55d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLWindow2* = DEFINE_GUID(0xd48a6ec6'i32, 0x6a4a, 0x11cf, [0x94'u8, 0xa7, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00])
-  DIID_DispHTMLWindowProxy* = DEFINE_GUID(0x3050f55e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLWindowProxy* = DEFINE_GUID(0x3050f55e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLWindowProxy* = DEFINE_GUID(0x3050f391'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDocumentCompatibleInfo* = DEFINE_GUID(0x3051041a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDocumentCompatibleInfoCollection* = DEFINE_GUID(0x30510418'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLDocumentCompatibleInfo* = DEFINE_GUID(0x3050f53e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLDocumentCompatibleInfo* = DEFINE_GUID(0x3050f53e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLDocumentCompatibleInfo* = DEFINE_GUID(0x3051041b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLDocumentCompatibleInfoCollection* = DEFINE_GUID(0x3050f53f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLDocumentCompatibleInfoCollection* = DEFINE_GUID(0x3050f53f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLDocumentCompatibleInfoCollection* = DEFINE_GUID(0x30510419'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLDocumentEvents4* = DEFINE_GUID(0x30510737'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLDocumentEvents4* = DEFINE_GUID(0x30510737'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLDocumentEvents3* = DEFINE_GUID(0x3050f5a0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLDocumentEvents3* = DEFINE_GUID(0x3050f5a0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLDocumentEvents2* = DEFINE_GUID(0x3050f613'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLDocumentEvents2* = DEFINE_GUID(0x3050f613'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLDocumentEvents* = DEFINE_GUID(0x3050f260'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLDocumentEvents* = DEFINE_GUID(0x3050f260'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLDataTransfer* = DEFINE_GUID("3050f4b3-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLEventObj* = DEFINE_GUID("3050f32d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLEventObj2* = DEFINE_GUID("3050f48b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLEventObj3* = DEFINE_GUID("3050f680-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLEventObj4* = DEFINE_GUID("3050f814-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLEventObj5* = DEFINE_GUID("30510478-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLEventObj6* = DEFINE_GUID("30510734-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispCEventObj* = DEFINE_GUID("3050f558-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispCEventObj* = DEFINE_GUID("3050f558-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_CEventObj* = DEFINE_GUID("3050f48a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleMedia* = DEFINE_GUID("3051074b-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLStyleMedia* = DEFINE_GUID("3059009e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLStyleMedia* = DEFINE_GUID("3059009e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLStyleMedia* = DEFINE_GUID("3051074c-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLWindowEvents3* = DEFINE_GUID("3050f5a1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLWindowEvents3* = DEFINE_GUID("3050f5a1-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLWindowEvents2* = DEFINE_GUID("3050f625-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLWindowEvents2* = DEFINE_GUID("3050f625-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLWindowEvents* = DEFINE_GUID("96a0a4e0-d062-11cf-94b6-00aa0060275c")
+  IID_HTMLWindowEvents* = DEFINE_GUID("96a0a4e0-d062-11cf-94b6-00aa0060275c")
+  IID_IHTMLFramesCollection2* = DEFINE_GUID("332c4426-26cb-11d0-b483-00c04fd90119")
+  IID_IHTMLScreen* = DEFINE_GUID("3050f35c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLScreen2* = DEFINE_GUID("3050f84a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLScreen3* = DEFINE_GUID("305104a1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLScreen4* = DEFINE_GUID("3051076b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLWindow3* = DEFINE_GUID("3050f4ae-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLWindow4* = DEFINE_GUID("3050f6cf-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLWindow5* = DEFINE_GUID("3051040e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLWindow6* = DEFINE_GUID("30510453-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLWindow7* = DEFINE_GUID("305104b7-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLWindow8* = DEFINE_GUID("305107ab-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_FramesCollection* = DEFINE_GUID("3050f7f6-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLScreen* = DEFINE_GUID("3050f591-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLScreen* = DEFINE_GUID("3050f591-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLScreen* = DEFINE_GUID("3050f35d-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLWindow2* = DEFINE_GUID("3050f55d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLWindow2* = DEFINE_GUID("3050f55d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLWindow2* = DEFINE_GUID("d48a6ec6-6a4a-11cf-94a7-444553540000")
+  DIID_DispHTMLWindowProxy* = DEFINE_GUID("3050f55e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLWindowProxy* = DEFINE_GUID("3050f55e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLWindowProxy* = DEFINE_GUID("3050f391-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDocumentCompatibleInfo* = DEFINE_GUID("3051041a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDocumentCompatibleInfoCollection* = DEFINE_GUID("30510418-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLDocumentCompatibleInfo* = DEFINE_GUID("3050f53e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLDocumentCompatibleInfo* = DEFINE_GUID("3050f53e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDocumentCompatibleInfo* = DEFINE_GUID("3051041b-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLDocumentCompatibleInfoCollection* = DEFINE_GUID("3050f53f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLDocumentCompatibleInfoCollection* = DEFINE_GUID("3050f53f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDocumentCompatibleInfoCollection* = DEFINE_GUID("30510419-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLDocumentEvents4* = DEFINE_GUID("30510737-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLDocumentEvents4* = DEFINE_GUID("30510737-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLDocumentEvents3* = DEFINE_GUID("3050f5a0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLDocumentEvents3* = DEFINE_GUID("3050f5a0-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLDocumentEvents2* = DEFINE_GUID("3050f613-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLDocumentEvents2* = DEFINE_GUID("3050f613-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLDocumentEvents* = DEFINE_GUID("3050f260-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLDocumentEvents* = DEFINE_GUID("3050f260-98b5-11cf-bb82-00aa00bdce0b")
   htmlCompatModeBackCompat* = 0
   htmlCompatModeCSS1Compat* = 1
   htmlCompatMode_Max* = 0x7fffffff
-  IID_IHTMLDocument* = DEFINE_GUID(0x626fc520'i32, 0xa41e, 0x11cf, [0xa7'u8, 0x31, 0x00, 0xa0, 0xc9, 0x08, 0x26, 0x37])
-  IID_IHTMLDocument2* = DEFINE_GUID(0x332c4425'i32, 0x26cb, 0x11d0, [0xb4'u8, 0x83, 0x00, 0xc0, 0x4f, 0xd9, 0x01, 0x19])
-  IID_IHTMLDocument3* = DEFINE_GUID(0x3050f485'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDocument4* = DEFINE_GUID(0x3050f69a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDocument5* = DEFINE_GUID(0x3050f80c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDocument6* = DEFINE_GUID(0x30510417'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDocument7* = DEFINE_GUID(0x305104b8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDocument8* = DEFINE_GUID(0x305107d0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDocumentEvent* = DEFINE_GUID(0x305104bc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDocumentRange* = DEFINE_GUID(0x305104af'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDocumentSelector* = DEFINE_GUID(0x30510462'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDocumentTraversal* = DEFINE_GUID(0x30510744'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLDocument* = DEFINE_GUID(0x3050f55f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLDocument* = DEFINE_GUID(0x3050f55f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLDocument* = DEFINE_GUID(0x25336920'i32, 0x03f9, 0x11cf, [0x8f'u8, 0xd0, 0x00, 0xaa, 0x00, 0x68, 0x6f, 0x13])
-  DIID_DWebBridgeEvents* = DEFINE_GUID(0xa6d897ff'i32, 0x0a95, 0x11d1, [0xb0'u8, 0xba, 0x00, 0x60, 0x08, 0x16, 0x6e, 0x11])
-  IID_DWebBridgeEvents* = DEFINE_GUID(0xa6d897ff'i32, 0x0a95, 0x11d1, [0xb0'u8, 0xba, 0x00, 0x60, 0x08, 0x16, 0x6e, 0x11])
-  IID_IWebBridge* = DEFINE_GUID(0xae24fdad'i32, 0x03c6, 0x11d1, [0x8b'u8, 0x76, 0x00, 0x80, 0xc7, 0x44, 0xf3, 0x89])
-  IID_IWBScriptControl* = DEFINE_GUID(0xa5170870'i32, 0x0cf8, 0x11d1, [0x8b'u8, 0x91, 0x00, 0x80, 0xc7, 0x44, 0xf3, 0x89])
-  CLSID_Scriptlet* = DEFINE_GUID(0xae24fdae'i32, 0x03c6, 0x11d1, [0x8b'u8, 0x76, 0x00, 0x80, 0xc7, 0x44, 0xf3, 0x89])
+  IID_IHTMLDocument* = DEFINE_GUID("626fc520-a41e-11cf-a731-00a0c9082637")
+  IID_IHTMLDocument2* = DEFINE_GUID("332c4425-26cb-11d0-b483-00c04fd90119")
+  IID_IHTMLDocument3* = DEFINE_GUID("3050f485-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDocument4* = DEFINE_GUID("3050f69a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDocument5* = DEFINE_GUID("3050f80c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDocument6* = DEFINE_GUID("30510417-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDocument7* = DEFINE_GUID("305104b8-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDocument8* = DEFINE_GUID("305107d0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDocumentEvent* = DEFINE_GUID("305104bc-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDocumentRange* = DEFINE_GUID("305104af-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDocumentSelector* = DEFINE_GUID("30510462-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDocumentTraversal* = DEFINE_GUID("30510744-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLDocument* = DEFINE_GUID("3050f55f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLDocument* = DEFINE_GUID("3050f55f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDocument* = DEFINE_GUID("25336920-03f9-11cf-8fd0-00aa00686f13")
+  DIID_DWebBridgeEvents* = DEFINE_GUID("a6d897ff-0a95-11d1-b0ba-006008166e11")
+  IID_DWebBridgeEvents* = DEFINE_GUID("a6d897ff-0a95-11d1-b0ba-006008166e11")
+  IID_IWebBridge* = DEFINE_GUID("ae24fdad-03c6-11d1-8b76-0080c744f389")
+  IID_IWBScriptControl* = DEFINE_GUID("a5170870-0cf8-11d1-8b91-0080c744f389")
+  CLSID_Scriptlet* = DEFINE_GUID("ae24fdae-03c6-11d1-8b76-0080c744f389")
   BoolValue_Max* = 0x7fffffff
-  IID_IHTMLEmbedElement* = DEFINE_GUID(0x3050f25f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLEmbedElement2* = DEFINE_GUID(0x30510493'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLEmbed* = DEFINE_GUID(0x3050f52e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLEmbed* = DEFINE_GUID(0x3050f52e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLEmbed* = DEFINE_GUID(0x3050f25d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLMapEvents2* = DEFINE_GUID(0x3050f61e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLMapEvents2* = DEFINE_GUID(0x3050f61e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLMapEvents* = DEFINE_GUID(0x3050f3ba'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLMapEvents* = DEFINE_GUID(0x3050f3ba'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAreasCollection* = DEFINE_GUID(0x3050f383'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAreasCollection2* = DEFINE_GUID(0x3050f5ec'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAreasCollection3* = DEFINE_GUID(0x3050f837'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAreasCollection4* = DEFINE_GUID(0x30510492'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLMapElement* = DEFINE_GUID(0x3050f266'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLAreasCollection* = DEFINE_GUID(0x3050f56a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLAreasCollection* = DEFINE_GUID(0x3050f56a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLAreasCollection* = DEFINE_GUID(0x3050f4ca'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLMapElement* = DEFINE_GUID(0x3050f526'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLMapElement* = DEFINE_GUID(0x3050f526'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLMapElement* = DEFINE_GUID(0x3050f271'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLAreaEvents2* = DEFINE_GUID(0x3050f611'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLAreaEvents2* = DEFINE_GUID(0x3050f611'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLAreaEvents* = DEFINE_GUID(0x3050f366'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLAreaEvents* = DEFINE_GUID(0x3050f366'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAreaElement* = DEFINE_GUID(0x3050f265'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAreaElement2* = DEFINE_GUID(0x3051041f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLAreaElement* = DEFINE_GUID(0x3050f503'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLAreaElement* = DEFINE_GUID(0x3050f503'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLAreaElement* = DEFINE_GUID(0x3050f283'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLEmbedElement* = DEFINE_GUID("3050f25f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLEmbedElement2* = DEFINE_GUID("30510493-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLEmbed* = DEFINE_GUID("3050f52e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLEmbed* = DEFINE_GUID("3050f52e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLEmbed* = DEFINE_GUID("3050f25d-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLMapEvents2* = DEFINE_GUID("3050f61e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLMapEvents2* = DEFINE_GUID("3050f61e-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLMapEvents* = DEFINE_GUID("3050f3ba-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLMapEvents* = DEFINE_GUID("3050f3ba-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAreasCollection* = DEFINE_GUID("3050f383-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAreasCollection2* = DEFINE_GUID("3050f5ec-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAreasCollection3* = DEFINE_GUID("3050f837-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAreasCollection4* = DEFINE_GUID("30510492-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLMapElement* = DEFINE_GUID("3050f266-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLAreasCollection* = DEFINE_GUID("3050f56a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLAreasCollection* = DEFINE_GUID("3050f56a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLAreasCollection* = DEFINE_GUID("3050f4ca-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLMapElement* = DEFINE_GUID("3050f526-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLMapElement* = DEFINE_GUID("3050f526-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLMapElement* = DEFINE_GUID("3050f271-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLAreaEvents2* = DEFINE_GUID("3050f611-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLAreaEvents2* = DEFINE_GUID("3050f611-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLAreaEvents* = DEFINE_GUID("3050f366-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLAreaEvents* = DEFINE_GUID("3050f366-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAreaElement* = DEFINE_GUID("3050f265-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAreaElement2* = DEFINE_GUID("3051041f-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLAreaElement* = DEFINE_GUID("3050f503-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLAreaElement* = DEFINE_GUID("3050f503-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLAreaElement* = DEFINE_GUID("3050f283-98b5-11cf-bb82-00aa00bdce0b")
   htmlCaptionAlignNotSet* = 0
   htmlCaptionAlignLeft* = 1
   htmlCaptionAlignCenter* = 2
@@ -2230,30 +2230,30 @@ const
   htmlCaptionVAlignTop* = 1
   htmlCaptionVAlignBottom* = 2
   htmlCaptionVAlign_Max* = 0x7fffffff
-  IID_IHTMLTableCaption* = DEFINE_GUID(0x3050f2eb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLTableCaption* = DEFINE_GUID(0x3050f508'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLTableCaption* = DEFINE_GUID(0x3050f508'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLTableCaption* = DEFINE_GUID(0x3050f2ec'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLCommentElement* = DEFINE_GUID(0x3050f20c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLCommentElement2* = DEFINE_GUID(0x3050f813'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLCommentElement3* = DEFINE_GUID(0x3051073f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLCommentElement* = DEFINE_GUID(0x3050f50a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLCommentElement* = DEFINE_GUID(0x3050f50a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLCommentElement* = DEFINE_GUID(0x3050f317'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLPhraseElement* = DEFINE_GUID(0x3050f20a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLPhraseElement2* = DEFINE_GUID(0x3050f824'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLPhraseElement3* = DEFINE_GUID(0x3051043d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLSpanElement* = DEFINE_GUID(0x3050f3f3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLPhraseElement* = DEFINE_GUID(0x3050f52d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLPhraseElement* = DEFINE_GUID(0x3050f52d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLPhraseElement* = DEFINE_GUID(0x3050f26e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLSpanElement* = DEFINE_GUID(0x3050f548'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLSpanElement* = DEFINE_GUID(0x3050f548'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLSpanElement* = DEFINE_GUID(0x3050f3f5'i32, 0x98b4, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLTableEvents2* = DEFINE_GUID(0x3050f623'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLTableEvents2* = DEFINE_GUID(0x3050f623'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLTableEvents* = DEFINE_GUID(0x3050f407'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLTableEvents* = DEFINE_GUID(0x3050f407'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLTableCaption* = DEFINE_GUID("3050f2eb-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLTableCaption* = DEFINE_GUID("3050f508-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLTableCaption* = DEFINE_GUID("3050f508-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLTableCaption* = DEFINE_GUID("3050f2ec-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLCommentElement* = DEFINE_GUID("3050f20c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLCommentElement2* = DEFINE_GUID("3050f813-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLCommentElement3* = DEFINE_GUID("3051073f-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLCommentElement* = DEFINE_GUID("3050f50a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLCommentElement* = DEFINE_GUID("3050f50a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLCommentElement* = DEFINE_GUID("3050f317-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLPhraseElement* = DEFINE_GUID("3050f20a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLPhraseElement2* = DEFINE_GUID("3050f824-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLPhraseElement3* = DEFINE_GUID("3051043d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLSpanElement* = DEFINE_GUID("3050f3f3-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLPhraseElement* = DEFINE_GUID("3050f52d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLPhraseElement* = DEFINE_GUID("3050f52d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLPhraseElement* = DEFINE_GUID("3050f26e-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLSpanElement* = DEFINE_GUID("3050f548-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLSpanElement* = DEFINE_GUID("3050f548-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLSpanElement* = DEFINE_GUID("3050f3f5-98b4-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLTableEvents2* = DEFINE_GUID("3050f623-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLTableEvents2* = DEFINE_GUID("3050f623-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLTableEvents* = DEFINE_GUID("3050f407-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLTableEvents* = DEFINE_GUID("3050f407-98b5-11cf-bb82-00aa00bdce0b")
   htmlFrameNotSet* = 0
   htmlFramevoid* = 1
   htmlFrameabove* = 2
@@ -2285,325 +2285,325 @@ const
   htmlCellVAlignBaseline* = 4
   htmlCellVAlignCenter* = htmlCellVAlignMiddle
   htmlCellVAlign_Max* = 0x7fffffff
-  IID_IHTMLTable* = DEFINE_GUID(0x3050f21e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTable2* = DEFINE_GUID(0x3050f4ad'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTable3* = DEFINE_GUID(0x3050f829'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTable4* = DEFINE_GUID(0x305106c2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTableCol* = DEFINE_GUID(0x3050f23a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTableCol2* = DEFINE_GUID(0x3050f82a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTableCol3* = DEFINE_GUID(0x305106c4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTableSection* = DEFINE_GUID(0x3050f23b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTableSection2* = DEFINE_GUID(0x3050f5c7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTableSection3* = DEFINE_GUID(0x3050f82b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTableSection4* = DEFINE_GUID(0x305106c5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTableRow* = DEFINE_GUID(0x3050f23c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTableRow2* = DEFINE_GUID(0x3050f4a1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTableRow3* = DEFINE_GUID(0x3050f82c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTableRow4* = DEFINE_GUID(0x305106c6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTableRowMetrics* = DEFINE_GUID(0x3050f413'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTableCell* = DEFINE_GUID(0x3050f23d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTableCell2* = DEFINE_GUID(0x3050f82d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTableCell3* = DEFINE_GUID(0x305106c7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLTable* = DEFINE_GUID(0x3050f532'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLTable* = DEFINE_GUID(0x3050f532'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLTable* = DEFINE_GUID(0x3050f26b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLTableCol* = DEFINE_GUID(0x3050f533'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLTableCol* = DEFINE_GUID(0x3050f533'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLTableCol* = DEFINE_GUID(0x3050f26c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLTableSection* = DEFINE_GUID(0x3050f534'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLTableSection* = DEFINE_GUID(0x3050f534'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLTableSection* = DEFINE_GUID(0x3050f2e9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLTableRow* = DEFINE_GUID(0x3050f535'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLTableRow* = DEFINE_GUID(0x3050f535'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLTableRow* = DEFINE_GUID(0x3050f26d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLTableCell* = DEFINE_GUID(0x3050f536'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLTableCell* = DEFINE_GUID(0x3050f536'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLTableCell* = DEFINE_GUID(0x3050f246'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLScriptEvents2* = DEFINE_GUID(0x3050f621'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLScriptEvents2* = DEFINE_GUID(0x3050f621'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLScriptEvents* = DEFINE_GUID(0x3050f3e2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLScriptEvents* = DEFINE_GUID(0x3050f3e2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLScriptElement* = DEFINE_GUID(0x3050f28b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLScriptElement2* = DEFINE_GUID(0x3050f828'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLScriptElement3* = DEFINE_GUID(0x30510447'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLScriptElement4* = DEFINE_GUID(0x30510801'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLScriptElement* = DEFINE_GUID(0x3050f530'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLScriptElement* = DEFINE_GUID(0x3050f530'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLScriptElement* = DEFINE_GUID(0x3050f28c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLNoShowElement* = DEFINE_GUID(0x3050f38a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLNoShowElement* = DEFINE_GUID(0x3050f528'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLNoShowElement* = DEFINE_GUID(0x3050f528'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLNoShowElement* = DEFINE_GUID(0x3050f38b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLObjectElementEvents2* = DEFINE_GUID(0x3050f620'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLObjectElementEvents2* = DEFINE_GUID(0x3050f620'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLObjectElementEvents* = DEFINE_GUID(0x3050f3c4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLObjectElementEvents* = DEFINE_GUID(0x3050f3c4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLObjectElement* = DEFINE_GUID(0x3050f24f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLObjectElement2* = DEFINE_GUID(0x3050f4cd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLObjectElement3* = DEFINE_GUID(0x3050f827'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLObjectElement4* = DEFINE_GUID(0x3051043e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLObjectElement5* = DEFINE_GUID(0x305104b5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLParamElement* = DEFINE_GUID(0x3050f83d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLParamElement2* = DEFINE_GUID(0x30510444'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLObjectElement* = DEFINE_GUID(0x3050f529'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLObjectElement* = DEFINE_GUID(0x3050f529'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLObjectElement* = DEFINE_GUID(0x3050f24e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLParamElement* = DEFINE_GUID(0x3050f590'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLParamElement* = DEFINE_GUID(0x3050f590'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLParamElement* = DEFINE_GUID(0x3050f83e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLFrameSiteEvents2* = DEFINE_GUID(0x3050f7ff'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLFrameSiteEvents2* = DEFINE_GUID(0x3050f7ff'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLFrameSiteEvents* = DEFINE_GUID(0x3050f800'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLFrameSiteEvents* = DEFINE_GUID(0x3050f800'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLTable* = DEFINE_GUID("3050f21e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTable2* = DEFINE_GUID("3050f4ad-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTable3* = DEFINE_GUID("3050f829-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTable4* = DEFINE_GUID("305106c2-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTableCol* = DEFINE_GUID("3050f23a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTableCol2* = DEFINE_GUID("3050f82a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTableCol3* = DEFINE_GUID("305106c4-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTableSection* = DEFINE_GUID("3050f23b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTableSection2* = DEFINE_GUID("3050f5c7-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTableSection3* = DEFINE_GUID("3050f82b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTableSection4* = DEFINE_GUID("305106c5-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTableRow* = DEFINE_GUID("3050f23c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTableRow2* = DEFINE_GUID("3050f4a1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTableRow3* = DEFINE_GUID("3050f82c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTableRow4* = DEFINE_GUID("305106c6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTableRowMetrics* = DEFINE_GUID("3050f413-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTableCell* = DEFINE_GUID("3050f23d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTableCell2* = DEFINE_GUID("3050f82d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTableCell3* = DEFINE_GUID("305106c7-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLTable* = DEFINE_GUID("3050f532-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLTable* = DEFINE_GUID("3050f532-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLTable* = DEFINE_GUID("3050f26b-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLTableCol* = DEFINE_GUID("3050f533-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLTableCol* = DEFINE_GUID("3050f533-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLTableCol* = DEFINE_GUID("3050f26c-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLTableSection* = DEFINE_GUID("3050f534-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLTableSection* = DEFINE_GUID("3050f534-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLTableSection* = DEFINE_GUID("3050f2e9-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLTableRow* = DEFINE_GUID("3050f535-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLTableRow* = DEFINE_GUID("3050f535-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLTableRow* = DEFINE_GUID("3050f26d-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLTableCell* = DEFINE_GUID("3050f536-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLTableCell* = DEFINE_GUID("3050f536-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLTableCell* = DEFINE_GUID("3050f246-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLScriptEvents2* = DEFINE_GUID("3050f621-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLScriptEvents2* = DEFINE_GUID("3050f621-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLScriptEvents* = DEFINE_GUID("3050f3e2-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLScriptEvents* = DEFINE_GUID("3050f3e2-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLScriptElement* = DEFINE_GUID("3050f28b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLScriptElement2* = DEFINE_GUID("3050f828-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLScriptElement3* = DEFINE_GUID("30510447-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLScriptElement4* = DEFINE_GUID("30510801-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLScriptElement* = DEFINE_GUID("3050f530-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLScriptElement* = DEFINE_GUID("3050f530-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLScriptElement* = DEFINE_GUID("3050f28c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLNoShowElement* = DEFINE_GUID("3050f38a-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLNoShowElement* = DEFINE_GUID("3050f528-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLNoShowElement* = DEFINE_GUID("3050f528-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLNoShowElement* = DEFINE_GUID("3050f38b-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLObjectElementEvents2* = DEFINE_GUID("3050f620-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLObjectElementEvents2* = DEFINE_GUID("3050f620-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLObjectElementEvents* = DEFINE_GUID("3050f3c4-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLObjectElementEvents* = DEFINE_GUID("3050f3c4-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLObjectElement* = DEFINE_GUID("3050f24f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLObjectElement2* = DEFINE_GUID("3050f4cd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLObjectElement3* = DEFINE_GUID("3050f827-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLObjectElement4* = DEFINE_GUID("3051043e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLObjectElement5* = DEFINE_GUID("305104b5-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLParamElement* = DEFINE_GUID("3050f83d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLParamElement2* = DEFINE_GUID("30510444-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLObjectElement* = DEFINE_GUID("3050f529-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLObjectElement* = DEFINE_GUID("3050f529-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLObjectElement* = DEFINE_GUID("3050f24e-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLParamElement* = DEFINE_GUID("3050f590-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLParamElement* = DEFINE_GUID("3050f590-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLParamElement* = DEFINE_GUID("3050f83e-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLFrameSiteEvents2* = DEFINE_GUID("3050f7ff-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLFrameSiteEvents2* = DEFINE_GUID("3050f7ff-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLFrameSiteEvents* = DEFINE_GUID("3050f800-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLFrameSiteEvents* = DEFINE_GUID("3050f800-98b5-11cf-bb82-00aa00bdce0b")
   frameScrollingyes* = 1
   frameScrollingno* = 2
   frameScrollingauto* = 4
   frameScrolling_Max* = 0x7fffffff
-  IID_IHTMLFrameBase* = DEFINE_GUID(0x3050f311'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFrameBase2* = DEFINE_GUID(0x3050f6db'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFrameBase3* = DEFINE_GUID(0x3050f82e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLFrameBase* = DEFINE_GUID(0x3050f541'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLFrameBase* = DEFINE_GUID(0x3050f541'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLFrameBase* = DEFINE_GUID(0x3050f312'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFrameElement* = DEFINE_GUID(0x3050f313'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFrameElement2* = DEFINE_GUID(0x3050f7f5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFrameElement3* = DEFINE_GUID(0x3051042d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLFrameElement* = DEFINE_GUID(0x3050f513'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLFrameElement* = DEFINE_GUID(0x3050f513'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLFrameElement* = DEFINE_GUID(0x3050f314'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLFrameBase* = DEFINE_GUID("3050f311-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFrameBase2* = DEFINE_GUID("3050f6db-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFrameBase3* = DEFINE_GUID("3050f82e-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLFrameBase* = DEFINE_GUID("3050f541-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLFrameBase* = DEFINE_GUID("3050f541-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLFrameBase* = DEFINE_GUID("3050f312-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFrameElement* = DEFINE_GUID("3050f313-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFrameElement2* = DEFINE_GUID("3050f7f5-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFrameElement3* = DEFINE_GUID("3051042d-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLFrameElement* = DEFINE_GUID("3050f513-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLFrameElement* = DEFINE_GUID("3050f513-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLFrameElement* = DEFINE_GUID("3050f314-98b5-11cf-bb82-00aa00bdce0b")
   sandboxAllowScripts* = 0
   sandboxAllowSameOrigin* = 1
   sandboxAllowTopNavigation* = 2
   sandboxAllowForms* = 3
   sandboxAllowPopups* = 4
   sandboxAllow_Max* = 0x7fffffff
-  IID_IHTMLIFrameElement* = DEFINE_GUID(0x3050f315'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLIFrameElement2* = DEFINE_GUID(0x3050f4e6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLIFrameElement3* = DEFINE_GUID(0x30510433'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLIFrame* = DEFINE_GUID(0x3050f51b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLIFrame* = DEFINE_GUID(0x3050f51b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLIFrame* = DEFINE_GUID(0x3050f316'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDivPosition* = DEFINE_GUID(0x3050f212'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFieldSetElement* = DEFINE_GUID(0x3050f3e7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFieldSetElement2* = DEFINE_GUID(0x3050f833'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLLegendElement* = DEFINE_GUID(0x3050f3ea'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLLegendElement2* = DEFINE_GUID(0x3050f834'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLDivPosition* = DEFINE_GUID(0x3050f50f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLDivPosition* = DEFINE_GUID(0x3050f50f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLDivPosition* = DEFINE_GUID(0x3050f249'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLFieldSetElement* = DEFINE_GUID(0x3050f545'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLFieldSetElement* = DEFINE_GUID(0x3050f545'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLFieldSetElement* = DEFINE_GUID(0x3050f3e8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLLegendElement* = DEFINE_GUID(0x3050f546'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLLegendElement* = DEFINE_GUID(0x3050f546'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLLegendElement* = DEFINE_GUID(0x3050f3e9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLSpanFlow* = DEFINE_GUID(0x3050f3e5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLSpanFlow* = DEFINE_GUID(0x3050f544'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLSpanFlow* = DEFINE_GUID(0x3050f544'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLSpanFlow* = DEFINE_GUID(0x3050f3e6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFrameSetElement* = DEFINE_GUID(0x3050f319'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFrameSetElement2* = DEFINE_GUID(0x3050f5c6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFrameSetElement3* = DEFINE_GUID(0x30510796'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLFrameSetSite* = DEFINE_GUID(0x3050f514'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLFrameSetSite* = DEFINE_GUID(0x3050f514'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLFrameSetSite* = DEFINE_GUID(0x3050f31a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLBGsound* = DEFINE_GUID(0x3050f369'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLBGsound* = DEFINE_GUID(0x3050f53c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLBGsound* = DEFINE_GUID(0x3050f53c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLBGsound* = DEFINE_GUID(0x3050f370'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFontNamesCollection* = DEFINE_GUID(0x3050f376'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLFontSizesCollection* = DEFINE_GUID(0x3050f377'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLOptionsHolder* = DEFINE_GUID(0x3050f378'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLStyleElementEvents2* = DEFINE_GUID(0x3050f615'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLStyleElementEvents2* = DEFINE_GUID(0x3050f615'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLStyleElementEvents* = DEFINE_GUID(0x3050f3cb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLStyleElementEvents* = DEFINE_GUID(0x3050f3cb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleElement* = DEFINE_GUID(0x3050f375'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleElement2* = DEFINE_GUID(0x3051072a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLStyleElement* = DEFINE_GUID(0x3050f511'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLStyleElement* = DEFINE_GUID(0x3050f511'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLStyleElement* = DEFINE_GUID(0x3050f37d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleFontFace* = DEFINE_GUID(0x3050f3d5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleFontFace2* = DEFINE_GUID(0x305106ec'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLStyleFontFace* = DEFINE_GUID(0x30590081'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLStyleFontFace* = DEFINE_GUID(0x30590081'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLStyleFontFace* = DEFINE_GUID(0x3050f3d4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLXDomainRequest* = DEFINE_GUID(0x30510454'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLXDomainRequestFactory* = DEFINE_GUID(0x30510456'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispXDomainRequest* = DEFINE_GUID(0x3050f599'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispXDomainRequest* = DEFINE_GUID(0x3050f599'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_XDomainRequest* = DEFINE_GUID(0x30510455'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_XDomainRequestFactory* = DEFINE_GUID(0x30510457'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStorage* = DEFINE_GUID(0x30510474'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStorage2* = DEFINE_GUID(0x30510799'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLStorage* = DEFINE_GUID(0x3050f59d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLStorage* = DEFINE_GUID(0x3050f59d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLStorage* = DEFINE_GUID(0x30510475'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IEventTarget* = DEFINE_GUID(0x305104b9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMEvent* = DEFINE_GUID(0x305104ba'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMEvent* = DEFINE_GUID(0x3050f5a2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMEvent* = DEFINE_GUID(0x3050f5a2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMEvent* = DEFINE_GUID(0x305104bb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMUIEvent* = DEFINE_GUID(0x305106ca'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMUIEvent* = DEFINE_GUID(0x30590072'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMUIEvent* = DEFINE_GUID(0x30590072'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMUIEvent* = DEFINE_GUID(0x305106cb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMMouseEvent* = DEFINE_GUID(0x305106ce'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMMouseEvent* = DEFINE_GUID(0x30590073'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMMouseEvent* = DEFINE_GUID(0x30590073'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMMouseEvent* = DEFINE_GUID(0x305106cf'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMDragEvent* = DEFINE_GUID(0x30510761'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMDragEvent* = DEFINE_GUID(0x305900a7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMDragEvent* = DEFINE_GUID(0x305900a7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMDragEvent* = DEFINE_GUID(0x30510762'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMMouseWheelEvent* = DEFINE_GUID(0x305106d0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMMouseWheelEvent* = DEFINE_GUID(0x30590074'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMMouseWheelEvent* = DEFINE_GUID(0x30590074'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMMouseWheelEvent* = DEFINE_GUID(0x305106d1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMWheelEvent* = DEFINE_GUID(0x305106d2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMWheelEvent* = DEFINE_GUID(0x30590075'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMWheelEvent* = DEFINE_GUID(0x30590075'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMWheelEvent* = DEFINE_GUID(0x305106d3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMTextEvent* = DEFINE_GUID(0x305106d4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMTextEvent* = DEFINE_GUID(0x30590076'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMTextEvent* = DEFINE_GUID(0x30590076'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMTextEvent* = DEFINE_GUID(0x305106d5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMKeyboardEvent* = DEFINE_GUID(0x305106d6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMKeyboardEvent* = DEFINE_GUID(0x30590077'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMKeyboardEvent* = DEFINE_GUID(0x30590077'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMKeyboardEvent* = DEFINE_GUID(0x305106d7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMCompositionEvent* = DEFINE_GUID(0x305106d8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMCompositionEvent* = DEFINE_GUID(0x30590078'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMCompositionEvent* = DEFINE_GUID(0x30590078'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMCompositionEvent* = DEFINE_GUID(0x305106d9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMMutationEvent* = DEFINE_GUID(0x305106da'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMMutationEvent* = DEFINE_GUID(0x30590079'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMMutationEvent* = DEFINE_GUID(0x30590079'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMMutationEvent* = DEFINE_GUID(0x305106db'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMBeforeUnloadEvent* = DEFINE_GUID(0x30510763'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMBeforeUnloadEvent* = DEFINE_GUID(0x305900a8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMBeforeUnloadEvent* = DEFINE_GUID(0x305900a8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMBeforeUnloadEvent* = DEFINE_GUID(0x30510764'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMFocusEvent* = DEFINE_GUID(0x305106cc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMFocusEvent* = DEFINE_GUID(0x30590071'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMFocusEvent* = DEFINE_GUID(0x30590071'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMFocusEvent* = DEFINE_GUID(0x305106cd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMCustomEvent* = DEFINE_GUID(0x305106de'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMCustomEvent* = DEFINE_GUID(0x3059007c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMCustomEvent* = DEFINE_GUID(0x3059007c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMCustomEvent* = DEFINE_GUID(0x305106df'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ICanvasGradient* = DEFINE_GUID(0x30510714'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ICanvasPattern* = DEFINE_GUID(0x30510716'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ICanvasTextMetrics* = DEFINE_GUID(0x30510718'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ICanvasImageData* = DEFINE_GUID(0x3051071a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ICanvasPixelArray* = DEFINE_GUID(0x3051071c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ICanvasRenderingContext2D* = DEFINE_GUID(0x305106ff'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLCanvasElement* = DEFINE_GUID(0x305106e4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispCanvasGradient* = DEFINE_GUID(0x3059008c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispCanvasGradient* = DEFINE_GUID(0x3059008c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_CanvasGradient* = DEFINE_GUID(0x30510715'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispCanvasPattern* = DEFINE_GUID(0x3059008d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispCanvasPattern* = DEFINE_GUID(0x3059008d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_CanvasPattern* = DEFINE_GUID(0x30510717'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispCanvasTextMetrics* = DEFINE_GUID(0x3059008e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispCanvasTextMetrics* = DEFINE_GUID(0x3059008e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_CanvasTextMetrics* = DEFINE_GUID(0x30510719'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispCanvasImageData* = DEFINE_GUID(0x3059008f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispCanvasImageData* = DEFINE_GUID(0x3059008f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_CanvasImageData* = DEFINE_GUID(0x3051071b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispCanvasRenderingContext2D* = DEFINE_GUID(0x30590082'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispCanvasRenderingContext2D* = DEFINE_GUID(0x30590082'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_CanvasRenderingContext2D* = DEFINE_GUID(0x30510700'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLCanvasElement* = DEFINE_GUID(0x3059007b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLCanvasElement* = DEFINE_GUID(0x3059007b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLCanvasElement* = DEFINE_GUID(0x305106e5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMProgressEvent* = DEFINE_GUID(0x3051071e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMProgressEvent* = DEFINE_GUID(0x30590091'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMProgressEvent* = DEFINE_GUID(0x30590091'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMProgressEvent* = DEFINE_GUID(0x3051071f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMMessageEvent* = DEFINE_GUID(0x30510720'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMMessageEvent* = DEFINE_GUID(0x30590092'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMMessageEvent* = DEFINE_GUID(0x30590092'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMMessageEvent* = DEFINE_GUID(0x30510721'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMSiteModeEvent* = DEFINE_GUID(0x30510765'i32, 0x98b6, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMSiteModeEvent* = DEFINE_GUID(0x305900a9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMSiteModeEvent* = DEFINE_GUID(0x305900a9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMSiteModeEvent* = DEFINE_GUID(0x30510766'i32, 0x98b6, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMStorageEvent* = DEFINE_GUID(0x30510722'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMStorageEvent* = DEFINE_GUID(0x30590093'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMStorageEvent* = DEFINE_GUID(0x30590093'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMStorageEvent* = DEFINE_GUID(0x30510723'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IXMLHttpRequestEventTarget* = DEFINE_GUID(0x30510830'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispXMLHttpRequestEventTarget* = DEFINE_GUID(0x305900e7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispXMLHttpRequestEventTarget* = DEFINE_GUID(0x305900e7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_XMLHttpRequestEventTarget* = DEFINE_GUID(0x30510831'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLXMLHttpRequestEvents* = DEFINE_GUID(0x30510498'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLXMLHttpRequestEvents* = DEFINE_GUID(0x30510498'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLXMLHttpRequest* = DEFINE_GUID(0x3051040a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLXMLHttpRequest2* = DEFINE_GUID(0x30510482'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLXMLHttpRequestFactory* = DEFINE_GUID(0x3051040c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLXMLHttpRequest* = DEFINE_GUID(0x3050f596'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLXMLHttpRequest* = DEFINE_GUID(0x3050f596'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLXMLHttpRequest* = DEFINE_GUID(0x3051040b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLXMLHttpRequestFactory* = DEFINE_GUID(0x3051040d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLIFrameElement* = DEFINE_GUID("3050f315-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLIFrameElement2* = DEFINE_GUID("3050f4e6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLIFrameElement3* = DEFINE_GUID("30510433-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLIFrame* = DEFINE_GUID("3050f51b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLIFrame* = DEFINE_GUID("3050f51b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLIFrame* = DEFINE_GUID("3050f316-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDivPosition* = DEFINE_GUID("3050f212-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFieldSetElement* = DEFINE_GUID("3050f3e7-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFieldSetElement2* = DEFINE_GUID("3050f833-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLLegendElement* = DEFINE_GUID("3050f3ea-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLLegendElement2* = DEFINE_GUID("3050f834-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLDivPosition* = DEFINE_GUID("3050f50f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLDivPosition* = DEFINE_GUID("3050f50f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDivPosition* = DEFINE_GUID("3050f249-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLFieldSetElement* = DEFINE_GUID("3050f545-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLFieldSetElement* = DEFINE_GUID("3050f545-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLFieldSetElement* = DEFINE_GUID("3050f3e8-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLLegendElement* = DEFINE_GUID("3050f546-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLLegendElement* = DEFINE_GUID("3050f546-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLLegendElement* = DEFINE_GUID("3050f3e9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLSpanFlow* = DEFINE_GUID("3050f3e5-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLSpanFlow* = DEFINE_GUID("3050f544-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLSpanFlow* = DEFINE_GUID("3050f544-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLSpanFlow* = DEFINE_GUID("3050f3e6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFrameSetElement* = DEFINE_GUID("3050f319-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFrameSetElement2* = DEFINE_GUID("3050f5c6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFrameSetElement3* = DEFINE_GUID("30510796-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLFrameSetSite* = DEFINE_GUID("3050f514-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLFrameSetSite* = DEFINE_GUID("3050f514-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLFrameSetSite* = DEFINE_GUID("3050f31a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLBGsound* = DEFINE_GUID("3050f369-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLBGsound* = DEFINE_GUID("3050f53c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLBGsound* = DEFINE_GUID("3050f53c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLBGsound* = DEFINE_GUID("3050f370-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFontNamesCollection* = DEFINE_GUID("3050f376-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLFontSizesCollection* = DEFINE_GUID("3050f377-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLOptionsHolder* = DEFINE_GUID("3050f378-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLStyleElementEvents2* = DEFINE_GUID("3050f615-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLStyleElementEvents2* = DEFINE_GUID("3050f615-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLStyleElementEvents* = DEFINE_GUID("3050f3cb-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLStyleElementEvents* = DEFINE_GUID("3050f3cb-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleElement* = DEFINE_GUID("3050f375-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleElement2* = DEFINE_GUID("3051072a-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLStyleElement* = DEFINE_GUID("3050f511-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLStyleElement* = DEFINE_GUID("3050f511-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLStyleElement* = DEFINE_GUID("3050f37d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleFontFace* = DEFINE_GUID("3050f3d5-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleFontFace2* = DEFINE_GUID("305106ec-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLStyleFontFace* = DEFINE_GUID("30590081-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLStyleFontFace* = DEFINE_GUID("30590081-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLStyleFontFace* = DEFINE_GUID("3050f3d4-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLXDomainRequest* = DEFINE_GUID("30510454-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLXDomainRequestFactory* = DEFINE_GUID("30510456-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispXDomainRequest* = DEFINE_GUID("3050f599-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispXDomainRequest* = DEFINE_GUID("3050f599-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_XDomainRequest* = DEFINE_GUID("30510455-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_XDomainRequestFactory* = DEFINE_GUID("30510457-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStorage* = DEFINE_GUID("30510474-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStorage2* = DEFINE_GUID("30510799-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLStorage* = DEFINE_GUID("3050f59d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLStorage* = DEFINE_GUID("3050f59d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLStorage* = DEFINE_GUID("30510475-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IEventTarget* = DEFINE_GUID("305104b9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMEvent* = DEFINE_GUID("305104ba-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMEvent* = DEFINE_GUID("3050f5a2-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMEvent* = DEFINE_GUID("3050f5a2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMEvent* = DEFINE_GUID("305104bb-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMUIEvent* = DEFINE_GUID("305106ca-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMUIEvent* = DEFINE_GUID("30590072-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMUIEvent* = DEFINE_GUID("30590072-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMUIEvent* = DEFINE_GUID("305106cb-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMMouseEvent* = DEFINE_GUID("305106ce-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMMouseEvent* = DEFINE_GUID("30590073-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMMouseEvent* = DEFINE_GUID("30590073-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMMouseEvent* = DEFINE_GUID("305106cf-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMDragEvent* = DEFINE_GUID("30510761-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMDragEvent* = DEFINE_GUID("305900a7-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMDragEvent* = DEFINE_GUID("305900a7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMDragEvent* = DEFINE_GUID("30510762-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMMouseWheelEvent* = DEFINE_GUID("305106d0-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMMouseWheelEvent* = DEFINE_GUID("30590074-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMMouseWheelEvent* = DEFINE_GUID("30590074-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMMouseWheelEvent* = DEFINE_GUID("305106d1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMWheelEvent* = DEFINE_GUID("305106d2-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMWheelEvent* = DEFINE_GUID("30590075-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMWheelEvent* = DEFINE_GUID("30590075-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMWheelEvent* = DEFINE_GUID("305106d3-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMTextEvent* = DEFINE_GUID("305106d4-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMTextEvent* = DEFINE_GUID("30590076-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMTextEvent* = DEFINE_GUID("30590076-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMTextEvent* = DEFINE_GUID("305106d5-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMKeyboardEvent* = DEFINE_GUID("305106d6-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMKeyboardEvent* = DEFINE_GUID("30590077-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMKeyboardEvent* = DEFINE_GUID("30590077-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMKeyboardEvent* = DEFINE_GUID("305106d7-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMCompositionEvent* = DEFINE_GUID("305106d8-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMCompositionEvent* = DEFINE_GUID("30590078-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMCompositionEvent* = DEFINE_GUID("30590078-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMCompositionEvent* = DEFINE_GUID("305106d9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMMutationEvent* = DEFINE_GUID("305106da-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMMutationEvent* = DEFINE_GUID("30590079-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMMutationEvent* = DEFINE_GUID("30590079-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMMutationEvent* = DEFINE_GUID("305106db-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMBeforeUnloadEvent* = DEFINE_GUID("30510763-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMBeforeUnloadEvent* = DEFINE_GUID("305900a8-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMBeforeUnloadEvent* = DEFINE_GUID("305900a8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMBeforeUnloadEvent* = DEFINE_GUID("30510764-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMFocusEvent* = DEFINE_GUID("305106cc-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMFocusEvent* = DEFINE_GUID("30590071-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMFocusEvent* = DEFINE_GUID("30590071-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMFocusEvent* = DEFINE_GUID("305106cd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMCustomEvent* = DEFINE_GUID("305106de-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMCustomEvent* = DEFINE_GUID("3059007c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMCustomEvent* = DEFINE_GUID("3059007c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMCustomEvent* = DEFINE_GUID("305106df-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ICanvasGradient* = DEFINE_GUID("30510714-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ICanvasPattern* = DEFINE_GUID("30510716-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ICanvasTextMetrics* = DEFINE_GUID("30510718-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ICanvasImageData* = DEFINE_GUID("3051071a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ICanvasPixelArray* = DEFINE_GUID("3051071c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ICanvasRenderingContext2D* = DEFINE_GUID("305106ff-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLCanvasElement* = DEFINE_GUID("305106e4-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispCanvasGradient* = DEFINE_GUID("3059008c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispCanvasGradient* = DEFINE_GUID("3059008c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_CanvasGradient* = DEFINE_GUID("30510715-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispCanvasPattern* = DEFINE_GUID("3059008d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispCanvasPattern* = DEFINE_GUID("3059008d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_CanvasPattern* = DEFINE_GUID("30510717-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispCanvasTextMetrics* = DEFINE_GUID("3059008e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispCanvasTextMetrics* = DEFINE_GUID("3059008e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_CanvasTextMetrics* = DEFINE_GUID("30510719-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispCanvasImageData* = DEFINE_GUID("3059008f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispCanvasImageData* = DEFINE_GUID("3059008f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_CanvasImageData* = DEFINE_GUID("3051071b-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispCanvasRenderingContext2D* = DEFINE_GUID("30590082-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispCanvasRenderingContext2D* = DEFINE_GUID("30590082-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_CanvasRenderingContext2D* = DEFINE_GUID("30510700-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLCanvasElement* = DEFINE_GUID("3059007b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLCanvasElement* = DEFINE_GUID("3059007b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLCanvasElement* = DEFINE_GUID("305106e5-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMProgressEvent* = DEFINE_GUID("3051071e-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMProgressEvent* = DEFINE_GUID("30590091-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMProgressEvent* = DEFINE_GUID("30590091-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMProgressEvent* = DEFINE_GUID("3051071f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMMessageEvent* = DEFINE_GUID("30510720-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMMessageEvent* = DEFINE_GUID("30590092-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMMessageEvent* = DEFINE_GUID("30590092-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMMessageEvent* = DEFINE_GUID("30510721-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMSiteModeEvent* = DEFINE_GUID("30510765-98b6-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMSiteModeEvent* = DEFINE_GUID("305900a9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMSiteModeEvent* = DEFINE_GUID("305900a9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMSiteModeEvent* = DEFINE_GUID("30510766-98b6-11cf-bb82-00aa00bdce0b")
+  IID_IDOMStorageEvent* = DEFINE_GUID("30510722-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMStorageEvent* = DEFINE_GUID("30590093-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMStorageEvent* = DEFINE_GUID("30590093-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMStorageEvent* = DEFINE_GUID("30510723-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IXMLHttpRequestEventTarget* = DEFINE_GUID("30510830-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispXMLHttpRequestEventTarget* = DEFINE_GUID("305900e7-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispXMLHttpRequestEventTarget* = DEFINE_GUID("305900e7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_XMLHttpRequestEventTarget* = DEFINE_GUID("30510831-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLXMLHttpRequestEvents* = DEFINE_GUID("30510498-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLXMLHttpRequestEvents* = DEFINE_GUID("30510498-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLXMLHttpRequest* = DEFINE_GUID("3051040a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLXMLHttpRequest2* = DEFINE_GUID("30510482-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLXMLHttpRequestFactory* = DEFINE_GUID("3051040c-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLXMLHttpRequest* = DEFINE_GUID("3050f596-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLXMLHttpRequest* = DEFINE_GUID("3050f596-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLXMLHttpRequest* = DEFINE_GUID("3051040b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLXMLHttpRequestFactory* = DEFINE_GUID("3051040d-98b5-11cf-bb82-00aa00bdce0b")
   SVG_ANGLETYPE_UNKNOWN* = 0
   SVG_ANGLETYPE_UNSPECIFIED* = 1
   SVG_ANGLETYPE_DEG* = 2
   SVG_ANGLETYPE_RAD* = 3
   SVG_ANGLETYPE_GRAD* = 4
   svgAngleType_Max* = 0x7fffffff
-  IID_ISVGAngle* = DEFINE_GUID(0x305104d3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGAngle* = DEFINE_GUID(0x30510584'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_ISVGAngle* = DEFINE_GUID("305104d3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGAngle* = DEFINE_GUID("30510584-98b5-11cf-bb82-00aa00bdce0b")
   svgExternalResourcesRequiredFalse* = 0
   svgExternalResourcesRequiredTrue* = 1
   svgExternalResourcesRequired_Max* = 0x7fffffff
-  IID_ISVGStylable* = DEFINE_GUID(0x305104da'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGLocatable* = DEFINE_GUID(0x305104db'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGTransformable* = DEFINE_GUID(0x305104dc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGTests* = DEFINE_GUID(0x305104dd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGLangSpace* = DEFINE_GUID(0x305104de'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGExternalResourcesRequired* = DEFINE_GUID(0x305104df'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGFitToViewBox* = DEFINE_GUID(0x305104e0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGZoomAndPan* = DEFINE_GUID(0x305104e1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGURIReference* = DEFINE_GUID(0x305104e3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGAnimatedAngle* = DEFINE_GUID(0x305104d4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGAnimatedAngle* = DEFINE_GUID(0x305105e4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGAnimatedTransformList* = DEFINE_GUID(0x305104f9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGAnimatedTransformList* = DEFINE_GUID(0x305105b1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGAnimatedBoolean* = DEFINE_GUID(0x305104c6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGAnimatedBoolean* = DEFINE_GUID(0x3051058b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGAnimatedEnumeration* = DEFINE_GUID(0x305104c9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGAnimatedEnumeration* = DEFINE_GUID(0x3051058e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGAnimatedInteger* = DEFINE_GUID(0x305104ca'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGAnimatedInteger* = DEFINE_GUID(0x3051058f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGAnimatedLength* = DEFINE_GUID(0x305104d0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGAnimatedLength* = DEFINE_GUID(0x30510581'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGAnimatedLengthList* = DEFINE_GUID(0x305104d2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGAnimatedLengthList* = DEFINE_GUID(0x30510582'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGAnimatedNumber* = DEFINE_GUID(0x305104cc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGAnimatedNumber* = DEFINE_GUID(0x30510588'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGAnimatedNumberList* = DEFINE_GUID(0x305104ce'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGAnimatedNumberList* = DEFINE_GUID(0x3051058a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGAnimatedRect* = DEFINE_GUID(0x305104d8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGAnimatedRect* = DEFINE_GUID(0x30510586'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGAnimatedString* = DEFINE_GUID(0x305104c7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGAnimatedString* = DEFINE_GUID(0x3051058c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGClipPathElement* = DEFINE_GUID(0x3051052d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGClipPathElement* = DEFINE_GUID(0x3059003b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGClipPathElement* = DEFINE_GUID(0x3059003b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGClipPathElement* = DEFINE_GUID(0x305105e6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGDocument* = DEFINE_GUID(0x305104e6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IGetSVGDocument* = DEFINE_GUID(0x305105ab'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_ISVGStylable* = DEFINE_GUID("305104da-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGLocatable* = DEFINE_GUID("305104db-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGTransformable* = DEFINE_GUID("305104dc-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGTests* = DEFINE_GUID("305104dd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGLangSpace* = DEFINE_GUID("305104de-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGExternalResourcesRequired* = DEFINE_GUID("305104df-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGFitToViewBox* = DEFINE_GUID("305104e0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGZoomAndPan* = DEFINE_GUID("305104e1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGURIReference* = DEFINE_GUID("305104e3-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGAnimatedAngle* = DEFINE_GUID("305104d4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGAnimatedAngle* = DEFINE_GUID("305105e4-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGAnimatedTransformList* = DEFINE_GUID("305104f9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGAnimatedTransformList* = DEFINE_GUID("305105b1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGAnimatedBoolean* = DEFINE_GUID("305104c6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGAnimatedBoolean* = DEFINE_GUID("3051058b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGAnimatedEnumeration* = DEFINE_GUID("305104c9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGAnimatedEnumeration* = DEFINE_GUID("3051058e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGAnimatedInteger* = DEFINE_GUID("305104ca-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGAnimatedInteger* = DEFINE_GUID("3051058f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGAnimatedLength* = DEFINE_GUID("305104d0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGAnimatedLength* = DEFINE_GUID("30510581-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGAnimatedLengthList* = DEFINE_GUID("305104d2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGAnimatedLengthList* = DEFINE_GUID("30510582-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGAnimatedNumber* = DEFINE_GUID("305104cc-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGAnimatedNumber* = DEFINE_GUID("30510588-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGAnimatedNumberList* = DEFINE_GUID("305104ce-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGAnimatedNumberList* = DEFINE_GUID("3051058a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGAnimatedRect* = DEFINE_GUID("305104d8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGAnimatedRect* = DEFINE_GUID("30510586-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGAnimatedString* = DEFINE_GUID("305104c7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGAnimatedString* = DEFINE_GUID("3051058c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGClipPathElement* = DEFINE_GUID("3051052d-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGClipPathElement* = DEFINE_GUID("3059003b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGClipPathElement* = DEFINE_GUID("3059003b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGClipPathElement* = DEFINE_GUID("305105e6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGDocument* = DEFINE_GUID("305104e6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IGetSVGDocument* = DEFINE_GUID("305105ab-98b5-11cf-bb82-00aa00bdce0b")
   svgFocusableNotSet* = 0
   svgFocusableAuto* = 1
   svgFocusableTrue* = 2
   svgFocusableFalse* = 3
   svgFocusable_Max* = 0x7fffffff
-  IID_ISVGElement* = DEFINE_GUID(0x305104c5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGElement* = DEFINE_GUID(0x30590000'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGElement* = DEFINE_GUID(0x30590000'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGElement* = DEFINE_GUID(0x30510564'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IICCSVGColor* = DEFINE_GUID(0x305104d6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_ISVGElement* = DEFINE_GUID("305104c5-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGElement* = DEFINE_GUID("30590000-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGElement* = DEFINE_GUID("30590000-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGElement* = DEFINE_GUID("30510564-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IICCSVGColor* = DEFINE_GUID("305104d6-98b5-11cf-bb82-00aa00bdce0b")
   SVG_LENGTHTYPE_UNKNOWN* = 0
   SVG_LENGTHTYPE_NUMBER* = 1
   SVG_LENGTHTYPE_PERCENTAGE* = 2
@@ -2616,21 +2616,21 @@ const
   SVG_LENGTHTYPE_PT* = 9
   SVG_LENGTHTYPE_PC* = 10
   svgLengthType_Max* = 0x7fffffff
-  IID_ISVGLength* = DEFINE_GUID(0x305104cf'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGLength* = DEFINE_GUID(0x3051057e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGLengthList* = DEFINE_GUID(0x305104d1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGLengthList* = DEFINE_GUID(0x30510580'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGMatrix* = DEFINE_GUID(0x305104f6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGMatrix* = DEFINE_GUID(0x305105ae'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGNumber* = DEFINE_GUID(0x305104cb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGNumber* = DEFINE_GUID(0x30510587'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGNumberList* = DEFINE_GUID(0x305104cd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGNumberList* = DEFINE_GUID(0x30510589'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPaint* = DEFINE_GUID(0x30510524'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPatternElement* = DEFINE_GUID(0x3051052c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPatternElement* = DEFINE_GUID(0x3059002c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPatternElement* = DEFINE_GUID(0x3059002c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPatternElement* = DEFINE_GUID(0x305105d4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_ISVGLength* = DEFINE_GUID("305104cf-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGLength* = DEFINE_GUID("3051057e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGLengthList* = DEFINE_GUID("305104d1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGLengthList* = DEFINE_GUID("30510580-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGMatrix* = DEFINE_GUID("305104f6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGMatrix* = DEFINE_GUID("305105ae-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGNumber* = DEFINE_GUID("305104cb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGNumber* = DEFINE_GUID("30510587-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGNumberList* = DEFINE_GUID("305104cd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGNumberList* = DEFINE_GUID("30510589-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPaint* = DEFINE_GUID("30510524-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPatternElement* = DEFINE_GUID("3051052c-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPatternElement* = DEFINE_GUID("3059002c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPatternElement* = DEFINE_GUID("3059002c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPatternElement* = DEFINE_GUID("305105d4-98b5-11cf-bb82-00aa00bdce0b")
   PATHSEG_UNKNOWN* = 0
   PATHSEG_CLOSEPATH* = 1
   PATHSEG_MOVETO_ABS* = 2
@@ -2652,95 +2652,95 @@ const
   PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS* = 18
   PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL* = 19
   svgPathSegType_Max* = 0x7fffffff
-  IID_ISVGPathSeg* = DEFINE_GUID(0x305104fc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegArcAbs* = DEFINE_GUID(0x30510506'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegArcRel* = DEFINE_GUID(0x30510507'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegClosePath* = DEFINE_GUID(0x305104fd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegMovetoAbs* = DEFINE_GUID(0x305104fe'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegMovetoRel* = DEFINE_GUID(0x305104ff'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegLinetoAbs* = DEFINE_GUID(0x30510500'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegLinetoRel* = DEFINE_GUID(0x30510501'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegCurvetoCubicAbs* = DEFINE_GUID(0x30510502'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegCurvetoCubicRel* = DEFINE_GUID(0x30510503'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegCurvetoCubicSmoothAbs* = DEFINE_GUID(0x3051050c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegCurvetoCubicSmoothRel* = DEFINE_GUID(0x3051050d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegCurvetoQuadraticAbs* = DEFINE_GUID(0x30510504'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegCurvetoQuadraticRel* = DEFINE_GUID(0x30510505'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegCurvetoQuadraticSmoothAbs* = DEFINE_GUID(0x3051050e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegCurvetoQuadraticSmoothRel* = DEFINE_GUID(0x3051050f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegLinetoHorizontalAbs* = DEFINE_GUID(0x30510508'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegLinetoHorizontalRel* = DEFINE_GUID(0x30510509'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegLinetoVerticalAbs* = DEFINE_GUID(0x3051050a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegLinetoVerticalRel* = DEFINE_GUID(0x3051050b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSeg* = DEFINE_GUID(0x305105b3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegArcAbs* = DEFINE_GUID(0x30590013'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegArcAbs* = DEFINE_GUID(0x30590013'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegArcAbs* = DEFINE_GUID(0x305105bb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegArcRel* = DEFINE_GUID(0x30590014'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegArcRel* = DEFINE_GUID(0x30590014'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegArcRel* = DEFINE_GUID(0x305105bc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegClosePath* = DEFINE_GUID(0x30590015'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegClosePath* = DEFINE_GUID(0x30590015'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegClosePath* = DEFINE_GUID(0x305105bd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegMovetoAbs* = DEFINE_GUID(0x30590024'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegMovetoAbs* = DEFINE_GUID(0x30590024'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegMovetoAbs* = DEFINE_GUID(0x305105cc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegMovetoRel* = DEFINE_GUID(0x30590025'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegMovetoRel* = DEFINE_GUID(0x30590025'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegMovetoRel* = DEFINE_GUID(0x305105cd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegLinetoAbs* = DEFINE_GUID(0x3059001e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegLinetoAbs* = DEFINE_GUID(0x3059001e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegLinetoAbs* = DEFINE_GUID(0x305105c6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegLinetoRel* = DEFINE_GUID(0x30590021'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegLinetoRel* = DEFINE_GUID(0x30590021'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegLinetoRel* = DEFINE_GUID(0x305105c9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegCurvetoCubicAbs* = DEFINE_GUID(0x30590016'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegCurvetoCubicAbs* = DEFINE_GUID(0x30590016'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegCurvetoCubicAbs* = DEFINE_GUID(0x305105be'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegCurvetoCubicRel* = DEFINE_GUID(0x30590017'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegCurvetoCubicRel* = DEFINE_GUID(0x30590017'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegCurvetoCubicRel* = DEFINE_GUID(0x305105bf'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegCurvetoCubicSmoothAbs* = DEFINE_GUID(0x30590018'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegCurvetoCubicSmoothAbs* = DEFINE_GUID(0x30590018'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegCurvetoCubicSmoothAbs* = DEFINE_GUID(0x305105c0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegCurvetoCubicSmoothRel* = DEFINE_GUID(0x30590019'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegCurvetoCubicSmoothRel* = DEFINE_GUID(0x30590019'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegCurvetoCubicSmoothRel* = DEFINE_GUID(0x305105c1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegCurvetoQuadraticAbs* = DEFINE_GUID(0x3059001a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegCurvetoQuadraticAbs* = DEFINE_GUID(0x3059001a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegCurvetoQuadraticAbs* = DEFINE_GUID(0x305105c2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegCurvetoQuadraticRel* = DEFINE_GUID(0x3059001b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegCurvetoQuadraticRel* = DEFINE_GUID(0x3059001b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegCurvetoQuadraticRel* = DEFINE_GUID(0x305105c3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegCurvetoQuadraticSmoothAbs* = DEFINE_GUID(0x3059001c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegCurvetoQuadraticSmoothAbs* = DEFINE_GUID(0x3059001c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegCurvetoQuadraticSmoothAbs* = DEFINE_GUID(0x305105c4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegCurvetoQuadraticSmoothRel* = DEFINE_GUID(0x3059001d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegCurvetoQuadraticSmoothRel* = DEFINE_GUID(0x3059001d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegCurvetoQuadraticSmoothRel* = DEFINE_GUID(0x305105c5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegLinetoHorizontalAbs* = DEFINE_GUID(0x3059001f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegLinetoHorizontalAbs* = DEFINE_GUID(0x3059001f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegLinetoHorizontalAbs* = DEFINE_GUID(0x305105c7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegLinetoHorizontalRel* = DEFINE_GUID(0x30590020'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegLinetoHorizontalRel* = DEFINE_GUID(0x30590020'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegLinetoHorizontalRel* = DEFINE_GUID(0x305105c8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegLinetoVerticalAbs* = DEFINE_GUID(0x30590022'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegLinetoVerticalAbs* = DEFINE_GUID(0x30590022'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegLinetoVerticalAbs* = DEFINE_GUID(0x305105ca'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathSegLinetoVerticalRel* = DEFINE_GUID(0x30590023'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathSegLinetoVerticalRel* = DEFINE_GUID(0x30590023'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegLinetoVerticalRel* = DEFINE_GUID(0x305105cb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathSegList* = DEFINE_GUID(0x30510510'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathSegList* = DEFINE_GUID(0x305105b4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPoint* = DEFINE_GUID(0x305104f4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPoint* = DEFINE_GUID(0x305105ba'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPointList* = DEFINE_GUID(0x305104f5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPointList* = DEFINE_GUID(0x305105b9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGRect* = DEFINE_GUID(0x305104d7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGRect* = DEFINE_GUID(0x30510583'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGStringList* = DEFINE_GUID(0x305104c8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGStringList* = DEFINE_GUID(0x3051058d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGViewSpec* = DEFINE_GUID(0x305104e2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_ISVGPathSeg* = DEFINE_GUID("305104fc-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegArcAbs* = DEFINE_GUID("30510506-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegArcRel* = DEFINE_GUID("30510507-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegClosePath* = DEFINE_GUID("305104fd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegMovetoAbs* = DEFINE_GUID("305104fe-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegMovetoRel* = DEFINE_GUID("305104ff-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegLinetoAbs* = DEFINE_GUID("30510500-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegLinetoRel* = DEFINE_GUID("30510501-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegCurvetoCubicAbs* = DEFINE_GUID("30510502-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegCurvetoCubicRel* = DEFINE_GUID("30510503-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegCurvetoCubicSmoothAbs* = DEFINE_GUID("3051050c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegCurvetoCubicSmoothRel* = DEFINE_GUID("3051050d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegCurvetoQuadraticAbs* = DEFINE_GUID("30510504-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegCurvetoQuadraticRel* = DEFINE_GUID("30510505-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegCurvetoQuadraticSmoothAbs* = DEFINE_GUID("3051050e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegCurvetoQuadraticSmoothRel* = DEFINE_GUID("3051050f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegLinetoHorizontalAbs* = DEFINE_GUID("30510508-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegLinetoHorizontalRel* = DEFINE_GUID("30510509-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegLinetoVerticalAbs* = DEFINE_GUID("3051050a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegLinetoVerticalRel* = DEFINE_GUID("3051050b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSeg* = DEFINE_GUID("305105b3-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegArcAbs* = DEFINE_GUID("30590013-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegArcAbs* = DEFINE_GUID("30590013-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegArcAbs* = DEFINE_GUID("305105bb-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegArcRel* = DEFINE_GUID("30590014-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegArcRel* = DEFINE_GUID("30590014-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegArcRel* = DEFINE_GUID("305105bc-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegClosePath* = DEFINE_GUID("30590015-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegClosePath* = DEFINE_GUID("30590015-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegClosePath* = DEFINE_GUID("305105bd-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegMovetoAbs* = DEFINE_GUID("30590024-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegMovetoAbs* = DEFINE_GUID("30590024-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegMovetoAbs* = DEFINE_GUID("305105cc-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegMovetoRel* = DEFINE_GUID("30590025-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegMovetoRel* = DEFINE_GUID("30590025-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegMovetoRel* = DEFINE_GUID("305105cd-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegLinetoAbs* = DEFINE_GUID("3059001e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegLinetoAbs* = DEFINE_GUID("3059001e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegLinetoAbs* = DEFINE_GUID("305105c6-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegLinetoRel* = DEFINE_GUID("30590021-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegLinetoRel* = DEFINE_GUID("30590021-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegLinetoRel* = DEFINE_GUID("305105c9-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegCurvetoCubicAbs* = DEFINE_GUID("30590016-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegCurvetoCubicAbs* = DEFINE_GUID("30590016-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegCurvetoCubicAbs* = DEFINE_GUID("305105be-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegCurvetoCubicRel* = DEFINE_GUID("30590017-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegCurvetoCubicRel* = DEFINE_GUID("30590017-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegCurvetoCubicRel* = DEFINE_GUID("305105bf-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegCurvetoCubicSmoothAbs* = DEFINE_GUID("30590018-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegCurvetoCubicSmoothAbs* = DEFINE_GUID("30590018-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegCurvetoCubicSmoothAbs* = DEFINE_GUID("305105c0-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegCurvetoCubicSmoothRel* = DEFINE_GUID("30590019-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegCurvetoCubicSmoothRel* = DEFINE_GUID("30590019-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegCurvetoCubicSmoothRel* = DEFINE_GUID("305105c1-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegCurvetoQuadraticAbs* = DEFINE_GUID("3059001a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegCurvetoQuadraticAbs* = DEFINE_GUID("3059001a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegCurvetoQuadraticAbs* = DEFINE_GUID("305105c2-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegCurvetoQuadraticRel* = DEFINE_GUID("3059001b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegCurvetoQuadraticRel* = DEFINE_GUID("3059001b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegCurvetoQuadraticRel* = DEFINE_GUID("305105c3-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegCurvetoQuadraticSmoothAbs* = DEFINE_GUID("3059001c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegCurvetoQuadraticSmoothAbs* = DEFINE_GUID("3059001c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegCurvetoQuadraticSmoothAbs* = DEFINE_GUID("305105c4-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegCurvetoQuadraticSmoothRel* = DEFINE_GUID("3059001d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegCurvetoQuadraticSmoothRel* = DEFINE_GUID("3059001d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegCurvetoQuadraticSmoothRel* = DEFINE_GUID("305105c5-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegLinetoHorizontalAbs* = DEFINE_GUID("3059001f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegLinetoHorizontalAbs* = DEFINE_GUID("3059001f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegLinetoHorizontalAbs* = DEFINE_GUID("305105c7-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegLinetoHorizontalRel* = DEFINE_GUID("30590020-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegLinetoHorizontalRel* = DEFINE_GUID("30590020-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegLinetoHorizontalRel* = DEFINE_GUID("305105c8-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegLinetoVerticalAbs* = DEFINE_GUID("30590022-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegLinetoVerticalAbs* = DEFINE_GUID("30590022-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegLinetoVerticalAbs* = DEFINE_GUID("305105ca-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathSegLinetoVerticalRel* = DEFINE_GUID("30590023-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathSegLinetoVerticalRel* = DEFINE_GUID("30590023-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegLinetoVerticalRel* = DEFINE_GUID("305105cb-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathSegList* = DEFINE_GUID("30510510-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathSegList* = DEFINE_GUID("305105b4-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPoint* = DEFINE_GUID("305104f4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPoint* = DEFINE_GUID("305105ba-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPointList* = DEFINE_GUID("305104f5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPointList* = DEFINE_GUID("305105b9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGRect* = DEFINE_GUID("305104d7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGRect* = DEFINE_GUID("30510583-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGStringList* = DEFINE_GUID("305104c8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGStringList* = DEFINE_GUID("3051058d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGViewSpec* = DEFINE_GUID("305104e2-98b5-11cf-bb82-00aa00bdce0b")
   SVG_TRANSFORM_UNKNOWN* = 0
   SVG_TRANSFORM_MATRIX* = 1
   SVG_TRANSFORM_TRANSLATE* = 2
@@ -2749,75 +2749,75 @@ const
   SVG_TRANSFORM_SKEWX* = 5
   SVG_TRANSFORM_SKEWY* = 6
   svgTransformType_Max* = 0x7fffffff
-  IID_ISVGTransform* = DEFINE_GUID(0x305104f7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGTransform* = DEFINE_GUID(0x305105af'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGSVGElement* = DEFINE_GUID(0x305104e7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGSVGElement* = DEFINE_GUID(0x30590001'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGSVGElement* = DEFINE_GUID(0x30590001'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGSVGElement* = DEFINE_GUID(0x30510574'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGUseElement* = DEFINE_GUID(0x305104ed'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGUseElement* = DEFINE_GUID(0x30590010'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGUseElement* = DEFINE_GUID(0x30590010'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGUseElement* = DEFINE_GUID(0x30510590'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLStyleSheetRulesAppliedCollection* = DEFINE_GUID(0x305104c0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IRulesApplied* = DEFINE_GUID(0x305104bf'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IRulesAppliedCollection* = DEFINE_GUID(0x305104be'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLStyleSheetRulesAppliedCollection* = DEFINE_GUID(0x3050f5a6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLStyleSheetRulesAppliedCollection* = DEFINE_GUID(0x3050f5a6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLStyleSheetRulesAppliedCollection* = DEFINE_GUID(0xeb36f845'i32, 0x2395, 0x4719, [0xb8'u8, 0x5c, 0xd0, 0xd8, 0x0e, 0x18, 0x4b, 0xd9])
-  DIID_DispRulesApplied* = DEFINE_GUID(0x3050f5a5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispRulesApplied* = DEFINE_GUID(0x3050f5a5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_RulesApplied* = DEFINE_GUID(0x7c803920'i32, 0x7a53, 0x4d26, [0x98'u8, 0xac, 0xfd, 0xd2, 0x3e, 0x6b, 0x9e, 0x01])
-  DIID_DispRulesAppliedCollection* = DEFINE_GUID(0x3050f5a4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispRulesAppliedCollection* = DEFINE_GUID(0x3050f5a4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_RulesAppliedCollection* = DEFINE_GUID(0x671926ee'i32, 0xc3cf, 0x40af, [0xbe'u8, 0x8f, 0x1c, 0xba, 0xee, 0x64, 0x86, 0xe8])
-  DIID_DispHTMLW3CComputedStyle* = DEFINE_GUID(0x30590070'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLW3CComputedStyle* = DEFINE_GUID(0x30590070'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLW3CComputedStyle* = DEFINE_GUID(0x305106c8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGTransformList* = DEFINE_GUID(0x305104f8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGTransformList* = DEFINE_GUID(0x305105b0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGAnimatedPoints* = DEFINE_GUID(0x30510517'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGCircleElement* = DEFINE_GUID(0x30510514'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGEllipseElement* = DEFINE_GUID(0x30510515'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGLineElement* = DEFINE_GUID(0x30510516'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGRectElement* = DEFINE_GUID(0x30510513'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPolygonElement* = DEFINE_GUID(0x30510519'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPolylineElement* = DEFINE_GUID(0x30510518'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGCircleElement* = DEFINE_GUID(0x3059000a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGCircleElement* = DEFINE_GUID(0x3059000a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGCircleElement* = DEFINE_GUID(0x30510578'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGEllipseElement* = DEFINE_GUID(0x3059000b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGEllipseElement* = DEFINE_GUID(0x3059000b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGEllipseElement* = DEFINE_GUID(0x30510579'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGLineElement* = DEFINE_GUID(0x3059000c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGLineElement* = DEFINE_GUID(0x3059000c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGLineElement* = DEFINE_GUID(0x3051057a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGRectElement* = DEFINE_GUID(0x30590009'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGRectElement* = DEFINE_GUID(0x30590009'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGRectElement* = DEFINE_GUID(0x30510577'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPolygonElement* = DEFINE_GUID(0x3059000d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPolygonElement* = DEFINE_GUID(0x3059000d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPolygonElement* = DEFINE_GUID(0x3051057b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPolylineElement* = DEFINE_GUID(0x3059000e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPolylineElement* = DEFINE_GUID(0x3059000e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPolylineElement* = DEFINE_GUID(0x3051057c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGGElement* = DEFINE_GUID(0x305104e8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGGElement* = DEFINE_GUID(0x30590002'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGGElement* = DEFINE_GUID(0x30590002'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGGElement* = DEFINE_GUID(0x3051056f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGSymbolElement* = DEFINE_GUID(0x305104ec'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGSymbolElement* = DEFINE_GUID(0x30590004'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGSymbolElement* = DEFINE_GUID(0x30590004'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGSymbolElement* = DEFINE_GUID(0x30510571'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGDefsElement* = DEFINE_GUID(0x305104e9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGDefsElement* = DEFINE_GUID(0x30590003'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGDefsElement* = DEFINE_GUID(0x30590003'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGDefsElement* = DEFINE_GUID(0x30510570'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGAnimatedPathData* = DEFINE_GUID(0x30510511'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGPathElement* = DEFINE_GUID(0x30510512'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGPathElement* = DEFINE_GUID(0x30590011'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGPathElement* = DEFINE_GUID(0x30590011'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPathElement* = DEFINE_GUID(0x305105b2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_ISVGTransform* = DEFINE_GUID("305104f7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGTransform* = DEFINE_GUID("305105af-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGSVGElement* = DEFINE_GUID("305104e7-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGSVGElement* = DEFINE_GUID("30590001-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGSVGElement* = DEFINE_GUID("30590001-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGSVGElement* = DEFINE_GUID("30510574-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGUseElement* = DEFINE_GUID("305104ed-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGUseElement* = DEFINE_GUID("30590010-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGUseElement* = DEFINE_GUID("30590010-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGUseElement* = DEFINE_GUID("30510590-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLStyleSheetRulesAppliedCollection* = DEFINE_GUID("305104c0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IRulesApplied* = DEFINE_GUID("305104bf-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IRulesAppliedCollection* = DEFINE_GUID("305104be-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLStyleSheetRulesAppliedCollection* = DEFINE_GUID("3050f5a6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLStyleSheetRulesAppliedCollection* = DEFINE_GUID("3050f5a6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLStyleSheetRulesAppliedCollection* = DEFINE_GUID("eb36f845-2395-4719-b85c-d0d80e184bd9")
+  DIID_DispRulesApplied* = DEFINE_GUID("3050f5a5-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispRulesApplied* = DEFINE_GUID("3050f5a5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_RulesApplied* = DEFINE_GUID("7c803920-7a53-4d26-98ac-fdd23e6b9e01")
+  DIID_DispRulesAppliedCollection* = DEFINE_GUID("3050f5a4-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispRulesAppliedCollection* = DEFINE_GUID("3050f5a4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_RulesAppliedCollection* = DEFINE_GUID("671926ee-c3cf-40af-be8f-1cbaee6486e8")
+  DIID_DispHTMLW3CComputedStyle* = DEFINE_GUID("30590070-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLW3CComputedStyle* = DEFINE_GUID("30590070-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLW3CComputedStyle* = DEFINE_GUID("305106c8-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGTransformList* = DEFINE_GUID("305104f8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGTransformList* = DEFINE_GUID("305105b0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGAnimatedPoints* = DEFINE_GUID("30510517-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGCircleElement* = DEFINE_GUID("30510514-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGEllipseElement* = DEFINE_GUID("30510515-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGLineElement* = DEFINE_GUID("30510516-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGRectElement* = DEFINE_GUID("30510513-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPolygonElement* = DEFINE_GUID("30510519-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPolylineElement* = DEFINE_GUID("30510518-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGCircleElement* = DEFINE_GUID("3059000a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGCircleElement* = DEFINE_GUID("3059000a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGCircleElement* = DEFINE_GUID("30510578-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGEllipseElement* = DEFINE_GUID("3059000b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGEllipseElement* = DEFINE_GUID("3059000b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGEllipseElement* = DEFINE_GUID("30510579-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGLineElement* = DEFINE_GUID("3059000c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGLineElement* = DEFINE_GUID("3059000c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGLineElement* = DEFINE_GUID("3051057a-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGRectElement* = DEFINE_GUID("30590009-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGRectElement* = DEFINE_GUID("30590009-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGRectElement* = DEFINE_GUID("30510577-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPolygonElement* = DEFINE_GUID("3059000d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPolygonElement* = DEFINE_GUID("3059000d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPolygonElement* = DEFINE_GUID("3051057b-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPolylineElement* = DEFINE_GUID("3059000e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPolylineElement* = DEFINE_GUID("3059000e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPolylineElement* = DEFINE_GUID("3051057c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGGElement* = DEFINE_GUID("305104e8-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGGElement* = DEFINE_GUID("30590002-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGGElement* = DEFINE_GUID("30590002-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGGElement* = DEFINE_GUID("3051056f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGSymbolElement* = DEFINE_GUID("305104ec-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGSymbolElement* = DEFINE_GUID("30590004-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGSymbolElement* = DEFINE_GUID("30590004-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGSymbolElement* = DEFINE_GUID("30510571-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGDefsElement* = DEFINE_GUID("305104e9-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGDefsElement* = DEFINE_GUID("30590003-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGDefsElement* = DEFINE_GUID("30590003-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGDefsElement* = DEFINE_GUID("30510570-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGAnimatedPathData* = DEFINE_GUID("30510511-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGPathElement* = DEFINE_GUID("30510512-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGPathElement* = DEFINE_GUID("30590011-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGPathElement* = DEFINE_GUID("30590011-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPathElement* = DEFINE_GUID("305105b2-98b5-11cf-bb82-00aa00bdce0b")
   SVG_PRESERVEASPECTRATIO_UNKNOWN* = 0
   SVG_PRESERVEASPECTRATIO_NONE* = 1
   SVG_PRESERVEASPECTRATIO_XMINYMIN* = 2
@@ -2834,47 +2834,47 @@ const
   SVG_MEETORSLICE_MEET* = 1
   SVG_MEETORSLICE_SLICE* = 2
   svgPreserveAspectMeetOrSliceType_Max* = 0x7fffffff
-  IID_ISVGPreserveAspectRatio* = DEFINE_GUID(0x305104fa'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGPreserveAspectRatio* = DEFINE_GUID(0x305105d0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGTextElement* = DEFINE_GUID(0x3051051c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGTextElement* = DEFINE_GUID(0x30590037'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGTextElement* = DEFINE_GUID(0x30590037'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGTextElement* = DEFINE_GUID(0x305105df'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGAnimatedPreserveAspectRatio* = DEFINE_GUID(0x305104fb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGAnimatedPreserveAspectRatio* = DEFINE_GUID(0x305105ce'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGImageElement* = DEFINE_GUID(0x305104f0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGImageElement* = DEFINE_GUID(0x30590027'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGImageElement* = DEFINE_GUID(0x30590027'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGImageElement* = DEFINE_GUID(0x305105cf'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_ISVGPreserveAspectRatio* = DEFINE_GUID("305104fa-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGPreserveAspectRatio* = DEFINE_GUID("305105d0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGTextElement* = DEFINE_GUID("3051051c-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGTextElement* = DEFINE_GUID("30590037-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGTextElement* = DEFINE_GUID("30590037-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGTextElement* = DEFINE_GUID("305105df-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGAnimatedPreserveAspectRatio* = DEFINE_GUID("305104fb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGAnimatedPreserveAspectRatio* = DEFINE_GUID("305105ce-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGImageElement* = DEFINE_GUID("305104f0-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGImageElement* = DEFINE_GUID("30590027-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGImageElement* = DEFINE_GUID("30590027-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGImageElement* = DEFINE_GUID("305105cf-98b5-11cf-bb82-00aa00bdce0b")
   SVG_UNITTYPE_UNKNOWN* = 0
   SVG_UNITTYPE_USERSPACEONUSE* = 1
   SVG_UNITTYPE_OBJECTBOUNDINGBOX* = 2
   svgUnitTypes_Max* = 0x7fffffff
-  IID_ISVGStopElement* = DEFINE_GUID(0x3051052b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGStopElement* = DEFINE_GUID(0x3059002d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGStopElement* = DEFINE_GUID(0x3059002d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGStopElement* = DEFINE_GUID(0x305105d5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_ISVGStopElement* = DEFINE_GUID("3051052b-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGStopElement* = DEFINE_GUID("3059002d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGStopElement* = DEFINE_GUID("3059002d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGStopElement* = DEFINE_GUID("305105d5-98b5-11cf-bb82-00aa00bdce0b")
   SVG_SPREADMETHOD_UNKNOWN* = 0
   SVG_SPREADMETHOD_PAD* = 1
   SVG_SPREADMETHOD_REFLECT* = 2
   SVG_SPREADMETHOD_REPEAT* = 3
   svgSpreadMethod_Max* = 0x7fffffff
-  IID_ISVGGradientElement* = DEFINE_GUID(0x30510528'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGGradientElement* = DEFINE_GUID(0x3059002e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGGradientElement* = DEFINE_GUID(0x3059002e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGGradientElement* = DEFINE_GUID(0x305105d6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGLinearGradientElement* = DEFINE_GUID(0x30510529'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGLinearGradientElement* = DEFINE_GUID(0x3059002a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGLinearGradientElement* = DEFINE_GUID(0x3059002a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGLinearGradientElement* = DEFINE_GUID(0x305105d2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGRadialGradientElement* = DEFINE_GUID(0x3051052a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGRadialGradientElement* = DEFINE_GUID(0x3059002b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGRadialGradientElement* = DEFINE_GUID(0x3059002b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGRadialGradientElement* = DEFINE_GUID(0x305105d3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGMaskElement* = DEFINE_GUID(0x3051052e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGMaskElement* = DEFINE_GUID(0x3059003c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGMaskElement* = DEFINE_GUID(0x3059003c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGMaskElement* = DEFINE_GUID(0x305105e7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_ISVGGradientElement* = DEFINE_GUID("30510528-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGGradientElement* = DEFINE_GUID("3059002e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGGradientElement* = DEFINE_GUID("3059002e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGGradientElement* = DEFINE_GUID("305105d6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGLinearGradientElement* = DEFINE_GUID("30510529-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGLinearGradientElement* = DEFINE_GUID("3059002a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGLinearGradientElement* = DEFINE_GUID("3059002a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGLinearGradientElement* = DEFINE_GUID("305105d2-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGRadialGradientElement* = DEFINE_GUID("3051052a-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGRadialGradientElement* = DEFINE_GUID("3059002b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGRadialGradientElement* = DEFINE_GUID("3059002b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGRadialGradientElement* = DEFINE_GUID("305105d3-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGMaskElement* = DEFINE_GUID("3051052e-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGMaskElement* = DEFINE_GUID("3059003c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGMaskElement* = DEFINE_GUID("3059003c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGMaskElement* = DEFINE_GUID("305105e7-98b5-11cf-bb82-00aa00bdce0b")
   SVG_FEBLEND_MODE_UNKNOWN* = 0
   SVG_FEBLEND_MODE_NORMAL* = 1
   SVG_FEBLEND_MODE_MULTIPLY* = 2
@@ -2939,22 +2939,22 @@ const
   svgMarkerOrient_Max* = 0x7fffffff
   svgMarkerOrientAttributeAuto* = 0
   svgMarkerOrientAttribute_Max* = 0x7fffffff
-  IID_ISVGMarkerElement* = DEFINE_GUID(0x30510525'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGMarkerElement* = DEFINE_GUID(0x30590036'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGMarkerElement* = DEFINE_GUID(0x30590036'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGMarkerElement* = DEFINE_GUID(0x305105de'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGZoomEvent* = DEFINE_GUID(0x3051054e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGZoomEvent* = DEFINE_GUID(0x30590031'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGZoomEvent* = DEFINE_GUID(0x30590031'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGZoomEvent* = DEFINE_GUID(0x305105d9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGAElement* = DEFINE_GUID(0x3051054b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGAElement* = DEFINE_GUID(0x30590033'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGAElement* = DEFINE_GUID(0x30590033'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGAElement* = DEFINE_GUID(0x305105db'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGViewElement* = DEFINE_GUID(0x3051054c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGViewElement* = DEFINE_GUID(0x30590034'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGViewElement* = DEFINE_GUID(0x30590034'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGViewElement* = DEFINE_GUID(0x305105dc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_ISVGMarkerElement* = DEFINE_GUID("30510525-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGMarkerElement* = DEFINE_GUID("30590036-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGMarkerElement* = DEFINE_GUID("30590036-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGMarkerElement* = DEFINE_GUID("305105de-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGZoomEvent* = DEFINE_GUID("3051054e-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGZoomEvent* = DEFINE_GUID("30590031-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGZoomEvent* = DEFINE_GUID("30590031-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGZoomEvent* = DEFINE_GUID("305105d9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGAElement* = DEFINE_GUID("3051054b-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGAElement* = DEFINE_GUID("30590033-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGAElement* = DEFINE_GUID("30590033-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGAElement* = DEFINE_GUID("305105db-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGViewElement* = DEFINE_GUID("3051054c-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGViewElement* = DEFINE_GUID("30590034-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGViewElement* = DEFINE_GUID("30590034-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGViewElement* = DEFINE_GUID("305105dc-98b5-11cf-bb82-00aa00bdce0b")
   htmlMediaNetworkStateEmpty* = 0
   htmlMediaNetworkStateIdle* = 1
   htmlMediaNetworkStateLoading* = 2
@@ -2971,135 +2971,135 @@ const
   htmlMediaErrDecode* = 2
   htmlMediaErrSrcNotSupported* = 3
   htmlMediaErr_Max* = 0x7fffffff
-  IID_IHTMLMediaError* = DEFINE_GUID(0x30510704'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTimeRanges* = DEFINE_GUID(0x30510705'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLTimeRanges2* = DEFINE_GUID(0x3051080b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLMediaElement* = DEFINE_GUID(0x30510706'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLMediaElement2* = DEFINE_GUID(0x30510809'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLMSMediaElement* = DEFINE_GUID(0x30510792'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLSourceElement* = DEFINE_GUID(0x30510707'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAudioElement* = DEFINE_GUID(0x30510708'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLVideoElement* = DEFINE_GUID(0x30510709'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAudioElementFactory* = DEFINE_GUID(0x305107eb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLMediaError* = DEFINE_GUID(0x30590086'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLMediaError* = DEFINE_GUID(0x30590086'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLMediaError* = DEFINE_GUID(0x3051070a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLTimeRanges* = DEFINE_GUID(0x30590087'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLTimeRanges* = DEFINE_GUID(0x30590087'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLTimeRanges* = DEFINE_GUID(0x3051070b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLMediaElement* = DEFINE_GUID(0x30590088'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLMediaElement* = DEFINE_GUID(0x30590088'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLMediaElement* = DEFINE_GUID(0x3051070c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLSourceElement* = DEFINE_GUID(0x30590089'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLSourceElement* = DEFINE_GUID(0x30590089'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLSourceElement* = DEFINE_GUID(0x3051070d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLAudioElement* = DEFINE_GUID(0x3059008a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLAudioElement* = DEFINE_GUID(0x3059008a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLAudioElement* = DEFINE_GUID(0x3051070e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLAudioElementFactory* = DEFINE_GUID(0x305107ec'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLVideoElement* = DEFINE_GUID(0x3059008b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLVideoElement* = DEFINE_GUID(0x3059008b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLVideoElement* = DEFINE_GUID(0x3051070f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGSwitchElement* = DEFINE_GUID(0x305104f1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGSwitchElement* = DEFINE_GUID(0x30590030'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGSwitchElement* = DEFINE_GUID(0x30590030'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGSwitchElement* = DEFINE_GUID(0x305105d8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGDescElement* = DEFINE_GUID(0x305104ea'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGDescElement* = DEFINE_GUID(0x30590005'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGDescElement* = DEFINE_GUID(0x30590005'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGDescElement* = DEFINE_GUID(0x30510572'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGTitleElement* = DEFINE_GUID(0x305104eb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGTitleElement* = DEFINE_GUID(0x30590006'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGTitleElement* = DEFINE_GUID(0x30590006'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGTitleElement* = DEFINE_GUID(0x30510573'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGMetadataElement* = DEFINE_GUID(0x30510560'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGMetadataElement* = DEFINE_GUID(0x3059002f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGMetadataElement* = DEFINE_GUID(0x3059002f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGMetadataElement* = DEFINE_GUID(0x305105d7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGElementInstance* = DEFINE_GUID(0x305104ee'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGElementInstance* = DEFINE_GUID(0x30590007'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGElementInstance* = DEFINE_GUID(0x30590007'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGElementInstance* = DEFINE_GUID(0x30510575'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGElementInstanceList* = DEFINE_GUID(0x305104ef'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGElementInstanceList* = DEFINE_GUID(0x30590008'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGElementInstanceList* = DEFINE_GUID(0x30590008'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGElementInstanceList* = DEFINE_GUID(0x30510576'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMException* = DEFINE_GUID(0x3051072b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IRangeException* = DEFINE_GUID(0x3051072d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGException* = DEFINE_GUID(0x3051072f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IEventException* = DEFINE_GUID(0x3051073a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMException* = DEFINE_GUID(0x30590094'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMException* = DEFINE_GUID(0x30590094'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMException* = DEFINE_GUID(0x3051072c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispRangeException* = DEFINE_GUID(0x30590095'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispRangeException* = DEFINE_GUID(0x30590095'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_RangeException* = DEFINE_GUID(0x3051072e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGException* = DEFINE_GUID(0x30590096'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGException* = DEFINE_GUID(0x30590096'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGException* = DEFINE_GUID(0x30510730'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispEventException* = DEFINE_GUID(0x30590099'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispEventException* = DEFINE_GUID(0x30590099'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_EventException* = DEFINE_GUID(0x3051073b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGScriptElement* = DEFINE_GUID(0x3051054d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGScriptElement* = DEFINE_GUID(0x30590039'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGScriptElement* = DEFINE_GUID(0x30590039'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGScriptElement* = DEFINE_GUID(0x305105e1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGStyleElement* = DEFINE_GUID(0x305104f3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGStyleElement* = DEFINE_GUID(0x30590029'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGStyleElement* = DEFINE_GUID(0x30590029'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGStyleElement* = DEFINE_GUID(0x305105d1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLMediaError* = DEFINE_GUID("30510704-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTimeRanges* = DEFINE_GUID("30510705-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLTimeRanges2* = DEFINE_GUID("3051080b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLMediaElement* = DEFINE_GUID("30510706-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLMediaElement2* = DEFINE_GUID("30510809-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLMSMediaElement* = DEFINE_GUID("30510792-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLSourceElement* = DEFINE_GUID("30510707-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAudioElement* = DEFINE_GUID("30510708-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLVideoElement* = DEFINE_GUID("30510709-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAudioElementFactory* = DEFINE_GUID("305107eb-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLMediaError* = DEFINE_GUID("30590086-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLMediaError* = DEFINE_GUID("30590086-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLMediaError* = DEFINE_GUID("3051070a-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLTimeRanges* = DEFINE_GUID("30590087-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLTimeRanges* = DEFINE_GUID("30590087-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLTimeRanges* = DEFINE_GUID("3051070b-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLMediaElement* = DEFINE_GUID("30590088-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLMediaElement* = DEFINE_GUID("30590088-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLMediaElement* = DEFINE_GUID("3051070c-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLSourceElement* = DEFINE_GUID("30590089-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLSourceElement* = DEFINE_GUID("30590089-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLSourceElement* = DEFINE_GUID("3051070d-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLAudioElement* = DEFINE_GUID("3059008a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLAudioElement* = DEFINE_GUID("3059008a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLAudioElement* = DEFINE_GUID("3051070e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLAudioElementFactory* = DEFINE_GUID("305107ec-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLVideoElement* = DEFINE_GUID("3059008b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLVideoElement* = DEFINE_GUID("3059008b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLVideoElement* = DEFINE_GUID("3051070f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGSwitchElement* = DEFINE_GUID("305104f1-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGSwitchElement* = DEFINE_GUID("30590030-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGSwitchElement* = DEFINE_GUID("30590030-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGSwitchElement* = DEFINE_GUID("305105d8-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGDescElement* = DEFINE_GUID("305104ea-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGDescElement* = DEFINE_GUID("30590005-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGDescElement* = DEFINE_GUID("30590005-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGDescElement* = DEFINE_GUID("30510572-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGTitleElement* = DEFINE_GUID("305104eb-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGTitleElement* = DEFINE_GUID("30590006-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGTitleElement* = DEFINE_GUID("30590006-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGTitleElement* = DEFINE_GUID("30510573-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGMetadataElement* = DEFINE_GUID("30510560-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGMetadataElement* = DEFINE_GUID("3059002f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGMetadataElement* = DEFINE_GUID("3059002f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGMetadataElement* = DEFINE_GUID("305105d7-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGElementInstance* = DEFINE_GUID("305104ee-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGElementInstance* = DEFINE_GUID("30590007-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGElementInstance* = DEFINE_GUID("30590007-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGElementInstance* = DEFINE_GUID("30510575-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGElementInstanceList* = DEFINE_GUID("305104ef-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGElementInstanceList* = DEFINE_GUID("30590008-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGElementInstanceList* = DEFINE_GUID("30590008-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGElementInstanceList* = DEFINE_GUID("30510576-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMException* = DEFINE_GUID("3051072b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IRangeException* = DEFINE_GUID("3051072d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGException* = DEFINE_GUID("3051072f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IEventException* = DEFINE_GUID("3051073a-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMException* = DEFINE_GUID("30590094-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMException* = DEFINE_GUID("30590094-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMException* = DEFINE_GUID("3051072c-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispRangeException* = DEFINE_GUID("30590095-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispRangeException* = DEFINE_GUID("30590095-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_RangeException* = DEFINE_GUID("3051072e-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGException* = DEFINE_GUID("30590096-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGException* = DEFINE_GUID("30590096-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGException* = DEFINE_GUID("30510730-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispEventException* = DEFINE_GUID("30590099-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispEventException* = DEFINE_GUID("30590099-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_EventException* = DEFINE_GUID("3051073b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGScriptElement* = DEFINE_GUID("3051054d-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGScriptElement* = DEFINE_GUID("30590039-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGScriptElement* = DEFINE_GUID("30590039-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGScriptElement* = DEFINE_GUID("305105e1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGStyleElement* = DEFINE_GUID("305104f3-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGStyleElement* = DEFINE_GUID("30590029-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGStyleElement* = DEFINE_GUID("30590029-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGStyleElement* = DEFINE_GUID("305105d1-98b5-11cf-bb82-00aa00bdce0b")
   LENGTHADJUST_UNKNOWN* = 0
   LENGTHADJUST_SPACING* = 1
   LENGTHADJUST_SPACINGANDGLYPHS* = 2
   lengthAdjust_Max* = 0x7fffffff
-  IID_ISVGTextContentElement* = DEFINE_GUID(0x3051051a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGTextContentElement* = DEFINE_GUID(0x30590035'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGTextContentElement* = DEFINE_GUID(0x30590035'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGTextContentElement* = DEFINE_GUID(0x305105dd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGTextPositioningElement* = DEFINE_GUID(0x3051051b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGTextPositioningElement* = DEFINE_GUID(0x30590038'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGTextPositioningElement* = DEFINE_GUID(0x30590038'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGTextPositioningElement* = DEFINE_GUID(0x305105e0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMDocumentType* = DEFINE_GUID(0x30510738'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMDocumentType* = DEFINE_GUID(0x30590098'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMDocumentType* = DEFINE_GUID(0x30590098'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMDocumentType* = DEFINE_GUID(0x30510739'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMNodeIterator* = DEFINE_GUID(0x30510746'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMTreeWalker* = DEFINE_GUID(0x30510748'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispNodeIterator* = DEFINE_GUID(0x3059009c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispNodeIterator* = DEFINE_GUID(0x3059009c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_NodeIterator* = DEFINE_GUID(0x30510745'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispTreeWalker* = DEFINE_GUID(0x3059009d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispTreeWalker* = DEFINE_GUID(0x3059009d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_TreeWalker* = DEFINE_GUID(0x30510747'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMProcessingInstruction* = DEFINE_GUID(0x30510742'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMProcessingInstruction* = DEFINE_GUID(0x3059009b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMProcessingInstruction* = DEFINE_GUID(0x3059009b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMProcessingInstruction* = DEFINE_GUID(0x30510743'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLPerformance* = DEFINE_GUID(0x3051074e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLPerformanceNavigation* = DEFINE_GUID(0x30510750'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLPerformanceTiming* = DEFINE_GUID(0x30510752'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLPerformance* = DEFINE_GUID(0x3059009f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLPerformance* = DEFINE_GUID(0x3059009f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLPerformance* = DEFINE_GUID(0x3051074f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLPerformanceNavigation* = DEFINE_GUID(0x305900a0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLPerformanceNavigation* = DEFINE_GUID(0x305900a0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLPerformanceNavigation* = DEFINE_GUID(0x30510751'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLPerformanceTiming* = DEFINE_GUID(0x305900a1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLPerformanceTiming* = DEFINE_GUID(0x305900a1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLPerformanceTiming* = DEFINE_GUID(0x30510753'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISVGTSpanElement* = DEFINE_GUID(0x3051051d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGTSpanElement* = DEFINE_GUID(0x3059003a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGTSpanElement* = DEFINE_GUID(0x3059003a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGTSpanElement* = DEFINE_GUID(0x305105e2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ITemplatePrinter* = DEFINE_GUID(0x3050f6b4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ITemplatePrinter2* = DEFINE_GUID(0x3050f83f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ITemplatePrinter3* = DEFINE_GUID(0x305104a3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IPrintManagerTemplatePrinter* = DEFINE_GUID(0xf633be14'i32, 0x9eff, 0x4c4d, [0x92'u8, 0x9e, 0x05, 0x71, 0x7b, 0x21, 0xb3, 0xe6])
-  CLSID_CTemplatePrinter* = DEFINE_GUID(0x3050f6b3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispCPrintManagerTemplatePrinter* = DEFINE_GUID(0x305900e9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispCPrintManagerTemplatePrinter* = DEFINE_GUID(0x305900e9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_CPrintManagerTemplatePrinter* = DEFINE_GUID(0x63619f54'i32, 0x9d71, 0x4c23, [0xa0'u8, 0x8d, 0x50, 0xd7, 0xf1, 0x8d, 0xb2, 0xe9])
+  IID_ISVGTextContentElement* = DEFINE_GUID("3051051a-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGTextContentElement* = DEFINE_GUID("30590035-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGTextContentElement* = DEFINE_GUID("30590035-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGTextContentElement* = DEFINE_GUID("305105dd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGTextPositioningElement* = DEFINE_GUID("3051051b-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGTextPositioningElement* = DEFINE_GUID("30590038-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGTextPositioningElement* = DEFINE_GUID("30590038-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGTextPositioningElement* = DEFINE_GUID("305105e0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMDocumentType* = DEFINE_GUID("30510738-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMDocumentType* = DEFINE_GUID("30590098-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMDocumentType* = DEFINE_GUID("30590098-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMDocumentType* = DEFINE_GUID("30510739-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMNodeIterator* = DEFINE_GUID("30510746-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMTreeWalker* = DEFINE_GUID("30510748-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispNodeIterator* = DEFINE_GUID("3059009c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispNodeIterator* = DEFINE_GUID("3059009c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_NodeIterator* = DEFINE_GUID("30510745-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispTreeWalker* = DEFINE_GUID("3059009d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispTreeWalker* = DEFINE_GUID("3059009d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_TreeWalker* = DEFINE_GUID("30510747-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMProcessingInstruction* = DEFINE_GUID("30510742-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMProcessingInstruction* = DEFINE_GUID("3059009b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMProcessingInstruction* = DEFINE_GUID("3059009b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMProcessingInstruction* = DEFINE_GUID("30510743-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLPerformance* = DEFINE_GUID("3051074e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLPerformanceNavigation* = DEFINE_GUID("30510750-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLPerformanceTiming* = DEFINE_GUID("30510752-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLPerformance* = DEFINE_GUID("3059009f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLPerformance* = DEFINE_GUID("3059009f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLPerformance* = DEFINE_GUID("3051074f-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLPerformanceNavigation* = DEFINE_GUID("305900a0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLPerformanceNavigation* = DEFINE_GUID("305900a0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLPerformanceNavigation* = DEFINE_GUID("30510751-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLPerformanceTiming* = DEFINE_GUID("305900a1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLPerformanceTiming* = DEFINE_GUID("305900a1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLPerformanceTiming* = DEFINE_GUID("30510753-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISVGTSpanElement* = DEFINE_GUID("3051051d-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGTSpanElement* = DEFINE_GUID("3059003a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGTSpanElement* = DEFINE_GUID("3059003a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGTSpanElement* = DEFINE_GUID("305105e2-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ITemplatePrinter* = DEFINE_GUID("3050f6b4-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ITemplatePrinter2* = DEFINE_GUID("3050f83f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ITemplatePrinter3* = DEFINE_GUID("305104a3-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IPrintManagerTemplatePrinter* = DEFINE_GUID("f633be14-9eff-4c4d-929e-05717b21b3e6")
+  CLSID_CTemplatePrinter* = DEFINE_GUID("3050f6b3-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispCPrintManagerTemplatePrinter* = DEFINE_GUID("305900e9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispCPrintManagerTemplatePrinter* = DEFINE_GUID("305900e9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_CPrintManagerTemplatePrinter* = DEFINE_GUID("63619f54-9d71-4c23-a08d-50d7f18db2e9")
   TEXTPATH_METHODTYPE_UNKNOWN* = 0
   TEXTPATH_METHODTYPE_ALIGN* = 1
   TEXTPATH_METHODTYPE_STRETCH* = 2
@@ -3108,67 +3108,67 @@ const
   TEXTPATH_SPACINGTYPE_AUTO* = 1
   TEXTPATH_SPACINGTYPE_EXACT* = 2
   textpathSpacingtype_Max* = 0x7fffffff
-  IID_ISVGTextPathElement* = DEFINE_GUID(0x3051051f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispSVGTextPathElement* = DEFINE_GUID(0x3059003d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispSVGTextPathElement* = DEFINE_GUID(0x3059003d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_SVGTextPathElement* = DEFINE_GUID(0x305105eb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMXmlSerializer* = DEFINE_GUID(0x3051077d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMXmlSerializerFactory* = DEFINE_GUID(0x3051077f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMParser* = DEFINE_GUID(0x30510781'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMParserFactory* = DEFINE_GUID(0x30510783'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispXMLSerializer* = DEFINE_GUID(0x305900ad'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispXMLSerializer* = DEFINE_GUID(0x305900ad'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_XMLSerializer* = DEFINE_GUID(0x3051077e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLDOMXmlSerializerFactory* = DEFINE_GUID(0x30510780'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMParser* = DEFINE_GUID(0x305900ae'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMParser* = DEFINE_GUID(0x305900ae'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMParser* = DEFINE_GUID(0x30510782'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMParserFactory* = DEFINE_GUID(0x30510784'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLSemanticElement* = DEFINE_GUID(0x305900ba'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLSemanticElement* = DEFINE_GUID(0x305900ba'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLSemanticElement* = DEFINE_GUID(0x305107b0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLProgressElement* = DEFINE_GUID(0x3050f2d6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLProgressElement* = DEFINE_GUID(0x305900af'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLProgressElement* = DEFINE_GUID(0x305900af'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLProgressElement* = DEFINE_GUID(0x3050f2d5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMMSTransitionEvent* = DEFINE_GUID(0x305107b5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMMSTransitionEvent* = DEFINE_GUID(0x305900bb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMMSTransitionEvent* = DEFINE_GUID(0x305900bb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMMSTransitionEvent* = DEFINE_GUID(0x305107b6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMMSAnimationEvent* = DEFINE_GUID(0x305107b7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMMSAnimationEvent* = DEFINE_GUID(0x305900bc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMMSAnimationEvent* = DEFINE_GUID(0x305900bc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMMSAnimationEvent* = DEFINE_GUID(0x305107b8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IWebGeolocation* = DEFINE_GUID(0x305107c5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IWebGeocoordinates* = DEFINE_GUID(0x305107c7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IWebGeopositionError* = DEFINE_GUID(0x305107c9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IWebGeoposition* = DEFINE_GUID(0x305107cd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispWebGeolocation* = DEFINE_GUID(0x305900bd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispWebGeolocation* = DEFINE_GUID(0x305900bd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_WebGeolocation* = DEFINE_GUID(0x305107c6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispWebGeocoordinates* = DEFINE_GUID(0x305900be'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispWebGeocoordinates* = DEFINE_GUID(0x305900be'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_WebGeocoordinates* = DEFINE_GUID(0x305107c8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispWebGeopositionError* = DEFINE_GUID(0x305900bf'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispWebGeopositionError* = DEFINE_GUID(0x305900bf'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_WebGeopositionError* = DEFINE_GUID(0x305107ca'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispWebGeoposition* = DEFINE_GUID(0x305900c1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispWebGeoposition* = DEFINE_GUID(0x305900c1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_WebGeoposition* = DEFINE_GUID(0x305107ce'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IClientCaps* = DEFINE_GUID(0x7e8bc44d'i32, 0xaeff, 0x11d1, [0x89'u8, 0xc2, 0x00, 0xc0, 0x4f, 0xb6, 0xbf, 0xc4])
-  CLSID_CClientCaps* = DEFINE_GUID(0x7e8bc44e'i32, 0xaeff, 0x11d1, [0x89'u8, 0xc2, 0x00, 0xc0, 0x4f, 0xb6, 0xbf, 0xc4])
-  IID_IDOMMSManipulationEvent* = DEFINE_GUID(0x30510816'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMMSManipulationEvent* = DEFINE_GUID(0x305900e1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMMSManipulationEvent* = DEFINE_GUID(0x305900e1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMMSManipulationEvent* = DEFINE_GUID(0x30510817'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMCloseEvent* = DEFINE_GUID(0x305107ff'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispDOMCloseEvent* = DEFINE_GUID(0x305900dc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispDOMCloseEvent* = DEFINE_GUID(0x305900dc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_DOMCloseEvent* = DEFINE_GUID(0x30510800'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLApplicationCache* = DEFINE_GUID(0x30510828'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispApplicationCache* = DEFINE_GUID(0x305900e4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispApplicationCache* = DEFINE_GUID(0x305900e4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_ApplicationCache* = DEFINE_GUID(0x30510829'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_ISVGTextPathElement* = DEFINE_GUID("3051051f-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispSVGTextPathElement* = DEFINE_GUID("3059003d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispSVGTextPathElement* = DEFINE_GUID("3059003d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_SVGTextPathElement* = DEFINE_GUID("305105eb-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMXmlSerializer* = DEFINE_GUID("3051077d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMXmlSerializerFactory* = DEFINE_GUID("3051077f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMParser* = DEFINE_GUID("30510781-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMParserFactory* = DEFINE_GUID("30510783-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispXMLSerializer* = DEFINE_GUID("305900ad-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispXMLSerializer* = DEFINE_GUID("305900ad-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_XMLSerializer* = DEFINE_GUID("3051077e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDOMXmlSerializerFactory* = DEFINE_GUID("30510780-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMParser* = DEFINE_GUID("305900ae-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMParser* = DEFINE_GUID("305900ae-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMParser* = DEFINE_GUID("30510782-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMParserFactory* = DEFINE_GUID("30510784-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLSemanticElement* = DEFINE_GUID("305900ba-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLSemanticElement* = DEFINE_GUID("305900ba-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLSemanticElement* = DEFINE_GUID("305107b0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLProgressElement* = DEFINE_GUID("3050f2d6-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLProgressElement* = DEFINE_GUID("305900af-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLProgressElement* = DEFINE_GUID("305900af-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLProgressElement* = DEFINE_GUID("3050f2d5-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMMSTransitionEvent* = DEFINE_GUID("305107b5-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMMSTransitionEvent* = DEFINE_GUID("305900bb-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMMSTransitionEvent* = DEFINE_GUID("305900bb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMMSTransitionEvent* = DEFINE_GUID("305107b6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMMSAnimationEvent* = DEFINE_GUID("305107b7-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMMSAnimationEvent* = DEFINE_GUID("305900bc-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMMSAnimationEvent* = DEFINE_GUID("305900bc-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMMSAnimationEvent* = DEFINE_GUID("305107b8-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IWebGeolocation* = DEFINE_GUID("305107c5-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IWebGeocoordinates* = DEFINE_GUID("305107c7-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IWebGeopositionError* = DEFINE_GUID("305107c9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IWebGeoposition* = DEFINE_GUID("305107cd-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispWebGeolocation* = DEFINE_GUID("305900bd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispWebGeolocation* = DEFINE_GUID("305900bd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_WebGeolocation* = DEFINE_GUID("305107c6-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispWebGeocoordinates* = DEFINE_GUID("305900be-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispWebGeocoordinates* = DEFINE_GUID("305900be-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_WebGeocoordinates* = DEFINE_GUID("305107c8-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispWebGeopositionError* = DEFINE_GUID("305900bf-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispWebGeopositionError* = DEFINE_GUID("305900bf-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_WebGeopositionError* = DEFINE_GUID("305107ca-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispWebGeoposition* = DEFINE_GUID("305900c1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispWebGeoposition* = DEFINE_GUID("305900c1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_WebGeoposition* = DEFINE_GUID("305107ce-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IClientCaps* = DEFINE_GUID("7e8bc44d-aeff-11d1-89c2-00c04fb6bfc4")
+  CLSID_CClientCaps* = DEFINE_GUID("7e8bc44e-aeff-11d1-89c2-00c04fb6bfc4")
+  IID_IDOMMSManipulationEvent* = DEFINE_GUID("30510816-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMMSManipulationEvent* = DEFINE_GUID("305900e1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMMSManipulationEvent* = DEFINE_GUID("305900e1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMMSManipulationEvent* = DEFINE_GUID("30510817-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMCloseEvent* = DEFINE_GUID("305107ff-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispDOMCloseEvent* = DEFINE_GUID("305900dc-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispDOMCloseEvent* = DEFINE_GUID("305900dc-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DOMCloseEvent* = DEFINE_GUID("30510800-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLApplicationCache* = DEFINE_GUID("30510828-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispApplicationCache* = DEFINE_GUID("305900e4-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispApplicationCache* = DEFINE_GUID("305900e4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ApplicationCache* = DEFINE_GUID("30510829-98b5-11cf-bb82-00aa00bdce0b")
   ELEMENT_CORNER_NONE* = 0
   ELEMENT_CORNER_TOP* = 1
   ELEMENT_CORNER_LEFT* = 2
@@ -3658,129 +3658,129 @@ const
   VIEW_OBJECT_COMPOSITION_MODE_LEGACY* = 0
   VIEW_OBJECT_COMPOSITION_MODE_SURFACEPRESENTER* = 1
   VIEW_OBJECT_COMPOSITION_MODE_Max* = 0x7fffffff
-  IID_ICSSFilterSite* = DEFINE_GUID(0x3050f3ed'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ICSSFilter* = DEFINE_GUID(0x3050f3ec'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISecureUrlHost* = DEFINE_GUID(0xc81984c4'i32, 0x74c8, 0x11d2, [0xba'u8, 0xa9, 0x00, 0xc0, 0x4f, 0xc2, 0x04, 0x0e])
-  IID_IMarkupServices* = DEFINE_GUID(0x3050f4a0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IMarkupServices2* = DEFINE_GUID(0x3050f682'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IMarkupContainer* = DEFINE_GUID(0x3050f5f9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IMarkupContainer2* = DEFINE_GUID(0x3050f648'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLChangePlayback* = DEFINE_GUID(0x3050f6e0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IMarkupPointer* = DEFINE_GUID(0x3050f49f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IMarkupPointer2* = DEFINE_GUID(0x3050f675'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IMarkupTextFrags* = DEFINE_GUID(0x3050f5fa'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLChangeLog* = DEFINE_GUID(0x3050f649'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLChangeSink* = DEFINE_GUID(0x3050f64a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IXMLGenericParse* = DEFINE_GUID(0xe4e23071'i32, 0x4d07, 0x11d2, [0xae'u8, 0x76, 0x00, 0x80, 0xc7, 0x3b, 0xc1, 0x99])
-  IID_IHTMLEditHost* = DEFINE_GUID(0x3050f6a0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLEditHost2* = DEFINE_GUID(0x3050f848'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0d])
-  IID_ISegment* = DEFINE_GUID(0x3050f683'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISegmentListIterator* = DEFINE_GUID(0x3050f692'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISegmentList* = DEFINE_GUID(0x3050f605'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISequenceNumber* = DEFINE_GUID(0x3050f6c1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IIMEServices* = DEFINE_GUID(0x3050f6ca'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLCaret* = DEFINE_GUID(0x3050f604'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHighlightRenderingServices* = DEFINE_GUID(0x3050f606'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISelectionServicesListener* = DEFINE_GUID(0x3050f699'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISelectionServices* = DEFINE_GUID(0x3050f684'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementSegment* = DEFINE_GUID(0x3050f68f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHighlightSegment* = DEFINE_GUID(0x3050f690'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLEditDesigner* = DEFINE_GUID(0x3050f662'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLEditServices* = DEFINE_GUID(0x3050f663'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLEditServices2* = DEFINE_GUID(0x3050f812'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ILineInfo* = DEFINE_GUID(0x3050f7e2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLComputedStyle* = DEFINE_GUID(0x3050f6c3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDisplayPointer* = DEFINE_GUID(0x3050f69e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDisplayServices* = DEFINE_GUID(0x3050f69d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHtmlDlgSafeHelper* = DEFINE_GUID(0x3050f81a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IBlockFormats* = DEFINE_GUID(0x3050f830'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IFontNames* = DEFINE_GUID(0x3050f839'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HtmlDlgSafeHelper* = DEFINE_GUID(0x3050f819'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_BlockFormats* = DEFINE_GUID(0x3050f831'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_FontNames* = DEFINE_GUID(0x3050f83a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDeveloperConsoleMessageReceiver* = DEFINE_GUID(0x30510808'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDebugCallbackNotificationHandler* = DEFINE_GUID(0x30510842'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IScriptEventHandler* = DEFINE_GUID(0x3051083a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IScriptEventHandlerSourceInfo* = DEFINE_GUID(0x30510841'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDOMEventRegistrationCallback* = DEFINE_GUID(0x3051083b'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IEventTarget2* = DEFINE_GUID(0x30510839'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_HTMLNamespaceEvents* = DEFINE_GUID(0x3050f6bd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_HTMLNamespaceEvents* = DEFINE_GUID(0x3050f6bd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLNamespace* = DEFINE_GUID(0x3050f6bb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLNamespaceCollection* = DEFINE_GUID(0x3050f6b8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLNamespace* = DEFINE_GUID(0x3050f54f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLNamespace* = DEFINE_GUID(0x3050f54f'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLNamespace* = DEFINE_GUID(0x3050f6bc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLNamespaceCollection* = DEFINE_GUID(0x3050f550'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLNamespaceCollection* = DEFINE_GUID(0x3050f550'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLNamespaceCollection* = DEFINE_GUID(0x3050f6b9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLPainter* = DEFINE_GUID(0x3050f6a6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLPainterEventInfo* = DEFINE_GUID(0x3050f6df'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLPainterOverlay* = DEFINE_GUID(0x3050f7e3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLPaintSite* = DEFINE_GUID(0x3050f6a7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLIPrintCollection* = DEFINE_GUID(0x3050f6b5'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IEnumPrivacyRecords* = DEFINE_GUID(0x3050f844'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IWPCBlockedUrls* = DEFINE_GUID(0x30510413'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDOMConstructorCollection* = DEFINE_GUID(0x3051049c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDialog* = DEFINE_GUID(0x3050f216'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDialog2* = DEFINE_GUID(0x3050f5e0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLDialog3* = DEFINE_GUID(0x3050f388'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLModelessInit* = DEFINE_GUID(0x3050f5e4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_ThreadDialogProcParam* = DEFINE_GUID(0x3050f5eb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLDialog* = DEFINE_GUID(0x3050f28a'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLPopup* = DEFINE_GUID(0x3050f666'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLPopup* = DEFINE_GUID(0x3050f589'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLPopup* = DEFINE_GUID(0x3050f589'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLPopup* = DEFINE_GUID(0x3050f667'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAppBehavior* = DEFINE_GUID(0x3050f5ca'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAppBehavior2* = DEFINE_GUID(0x3050f5c9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHTMLAppBehavior3* = DEFINE_GUID(0x3050f5cd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispHTMLAppBehavior* = DEFINE_GUID(0x3050f57c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispHTMLAppBehavior* = DEFINE_GUID(0x3050f57c'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLAppBehavior* = DEFINE_GUID(0x3050f5cb'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_OldHTMLDocument* = DEFINE_GUID(0xd48a6ec9'i32, 0x6a4a, 0x11cf, [0x94'u8, 0xa7, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00])
-  CLSID_OldHTMLFormElement* = DEFINE_GUID(0x0d04d285'i32, 0x6bec, 0x11cf, [0x8b'u8, 0x97, 0x00, 0xaa, 0x00, 0x47, 0x6d, 0xa6])
-  DIID_DispIHTMLInputButtonElement* = DEFINE_GUID(0x3050f51e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispIHTMLInputButtonElement* = DEFINE_GUID(0x3050f51e'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLInputButtonElement* = DEFINE_GUID(0x3050f2b4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispIHTMLInputTextElement* = DEFINE_GUID(0x3050f520'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispIHTMLInputTextElement* = DEFINE_GUID(0x3050f520'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLInputTextElement* = DEFINE_GUID(0x3050f2ab'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispIHTMLInputFileElement* = DEFINE_GUID(0x3050f542'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispIHTMLInputFileElement* = DEFINE_GUID(0x3050f542'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLInputFileElement* = DEFINE_GUID(0x3050f2ae'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispIHTMLOptionButtonElement* = DEFINE_GUID(0x3050f509'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispIHTMLOptionButtonElement* = DEFINE_GUID(0x3050f509'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLOptionButtonElement* = DEFINE_GUID(0x3050f2be'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  DIID_DispIHTMLInputImage* = DEFINE_GUID(0x3050f51d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_DispIHTMLInputImage* = DEFINE_GUID(0x3050f51d'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  CLSID_HTMLInputImage* = DEFINE_GUID(0x3050f2c4'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementNamespace* = DEFINE_GUID(0x3050f671'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementNamespaceTable* = DEFINE_GUID(0x3050f670'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementNamespaceFactory* = DEFINE_GUID(0x3050f672'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementNamespaceFactory2* = DEFINE_GUID(0x3050f805'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementNamespaceFactoryCallback* = DEFINE_GUID(0x3050f7fd'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementBehavior* = DEFINE_GUID(0x3050f425'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementBehaviorSite* = DEFINE_GUID(0x3050f427'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementBehaviorSiteOM* = DEFINE_GUID(0x3050f489'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementBehaviorSiteOM2* = DEFINE_GUID(0x3050f659'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementBehaviorRender* = DEFINE_GUID(0x3050f4aa'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementBehaviorSiteRender* = DEFINE_GUID(0x3050f4a7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementBehaviorCategory* = DEFINE_GUID(0x3050f4ed'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementBehaviorSiteCategory* = DEFINE_GUID(0x3050f4ee'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementBehaviorSubmit* = DEFINE_GUID(0x3050f646'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementBehaviorFocus* = DEFINE_GUID(0x3050f6b6'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementBehaviorLayout* = DEFINE_GUID(0x3050f6ba'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementBehaviorLayout2* = DEFINE_GUID(0x3050f846'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementBehaviorSiteLayout* = DEFINE_GUID(0x3050f6b7'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IElementBehaviorSiteLayout2* = DEFINE_GUID(0x3050f847'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IHostBehaviorInit* = DEFINE_GUID(0x3050f842'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IViewObjectPresentSite* = DEFINE_GUID(0x305106e1'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ISurfacePresenter* = DEFINE_GUID(0x305106e2'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ICanvasPixelArrayData* = DEFINE_GUID(0x305107f9'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IViewObjectPrint* = DEFINE_GUID(0x305106e3'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IViewObjectPresentNotifySite* = DEFINE_GUID(0x305107fa'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IViewObjectPresentNotify* = DEFINE_GUID(0x305107f8'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_ICSSFilterSite* = DEFINE_GUID("3050f3ed-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ICSSFilter* = DEFINE_GUID("3050f3ec-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISecureUrlHost* = DEFINE_GUID("c81984c4-74c8-11d2-baa9-00c04fc2040e")
+  IID_IMarkupServices* = DEFINE_GUID("3050f4a0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IMarkupServices2* = DEFINE_GUID("3050f682-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IMarkupContainer* = DEFINE_GUID("3050f5f9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IMarkupContainer2* = DEFINE_GUID("3050f648-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLChangePlayback* = DEFINE_GUID("3050f6e0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IMarkupPointer* = DEFINE_GUID("3050f49f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IMarkupPointer2* = DEFINE_GUID("3050f675-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IMarkupTextFrags* = DEFINE_GUID("3050f5fa-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLChangeLog* = DEFINE_GUID("3050f649-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLChangeSink* = DEFINE_GUID("3050f64a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IXMLGenericParse* = DEFINE_GUID("e4e23071-4d07-11d2-ae76-0080c73bc199")
+  IID_IHTMLEditHost* = DEFINE_GUID("3050f6a0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLEditHost2* = DEFINE_GUID("3050f848-98b5-11cf-bb82-00aa00bdce0d")
+  IID_ISegment* = DEFINE_GUID("3050f683-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISegmentListIterator* = DEFINE_GUID("3050f692-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISegmentList* = DEFINE_GUID("3050f605-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISequenceNumber* = DEFINE_GUID("3050f6c1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IIMEServices* = DEFINE_GUID("3050f6ca-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLCaret* = DEFINE_GUID("3050f604-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHighlightRenderingServices* = DEFINE_GUID("3050f606-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISelectionServicesListener* = DEFINE_GUID("3050f699-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISelectionServices* = DEFINE_GUID("3050f684-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementSegment* = DEFINE_GUID("3050f68f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHighlightSegment* = DEFINE_GUID("3050f690-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLEditDesigner* = DEFINE_GUID("3050f662-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLEditServices* = DEFINE_GUID("3050f663-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLEditServices2* = DEFINE_GUID("3050f812-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ILineInfo* = DEFINE_GUID("3050f7e2-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLComputedStyle* = DEFINE_GUID("3050f6c3-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDisplayPointer* = DEFINE_GUID("3050f69e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDisplayServices* = DEFINE_GUID("3050f69d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHtmlDlgSafeHelper* = DEFINE_GUID("3050f81a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IBlockFormats* = DEFINE_GUID("3050f830-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IFontNames* = DEFINE_GUID("3050f839-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HtmlDlgSafeHelper* = DEFINE_GUID("3050f819-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_BlockFormats* = DEFINE_GUID("3050f831-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_FontNames* = DEFINE_GUID("3050f83a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDeveloperConsoleMessageReceiver* = DEFINE_GUID("30510808-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDebugCallbackNotificationHandler* = DEFINE_GUID("30510842-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IScriptEventHandler* = DEFINE_GUID("3051083a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IScriptEventHandlerSourceInfo* = DEFINE_GUID("30510841-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDOMEventRegistrationCallback* = DEFINE_GUID("3051083b-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IEventTarget2* = DEFINE_GUID("30510839-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_HTMLNamespaceEvents* = DEFINE_GUID("3050f6bd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_HTMLNamespaceEvents* = DEFINE_GUID("3050f6bd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLNamespace* = DEFINE_GUID("3050f6bb-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLNamespaceCollection* = DEFINE_GUID("3050f6b8-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLNamespace* = DEFINE_GUID("3050f54f-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLNamespace* = DEFINE_GUID("3050f54f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLNamespace* = DEFINE_GUID("3050f6bc-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLNamespaceCollection* = DEFINE_GUID("3050f550-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLNamespaceCollection* = DEFINE_GUID("3050f550-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLNamespaceCollection* = DEFINE_GUID("3050f6b9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLPainter* = DEFINE_GUID("3050f6a6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLPainterEventInfo* = DEFINE_GUID("3050f6df-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLPainterOverlay* = DEFINE_GUID("3050f7e3-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLPaintSite* = DEFINE_GUID("3050f6a7-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLIPrintCollection* = DEFINE_GUID("3050f6b5-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IEnumPrivacyRecords* = DEFINE_GUID("3050f844-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IWPCBlockedUrls* = DEFINE_GUID("30510413-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDOMConstructorCollection* = DEFINE_GUID("3051049c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDialog* = DEFINE_GUID("3050f216-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDialog2* = DEFINE_GUID("3050f5e0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLDialog3* = DEFINE_GUID("3050f388-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLModelessInit* = DEFINE_GUID("3050f5e4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ThreadDialogProcParam* = DEFINE_GUID("3050f5eb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDialog* = DEFINE_GUID("3050f28a-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLPopup* = DEFINE_GUID("3050f666-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLPopup* = DEFINE_GUID("3050f589-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLPopup* = DEFINE_GUID("3050f589-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLPopup* = DEFINE_GUID("3050f667-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAppBehavior* = DEFINE_GUID("3050f5ca-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAppBehavior2* = DEFINE_GUID("3050f5c9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHTMLAppBehavior3* = DEFINE_GUID("3050f5cd-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispHTMLAppBehavior* = DEFINE_GUID("3050f57c-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispHTMLAppBehavior* = DEFINE_GUID("3050f57c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLAppBehavior* = DEFINE_GUID("3050f5cb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_OldHTMLDocument* = DEFINE_GUID("d48a6ec9-6a4a-11cf-94a7-444553540000")
+  CLSID_OldHTMLFormElement* = DEFINE_GUID("0d04d285-6bec-11cf-8b97-00aa00476da6")
+  DIID_DispIHTMLInputButtonElement* = DEFINE_GUID("3050f51e-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispIHTMLInputButtonElement* = DEFINE_GUID("3050f51e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLInputButtonElement* = DEFINE_GUID("3050f2b4-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispIHTMLInputTextElement* = DEFINE_GUID("3050f520-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispIHTMLInputTextElement* = DEFINE_GUID("3050f520-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLInputTextElement* = DEFINE_GUID("3050f2ab-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispIHTMLInputFileElement* = DEFINE_GUID("3050f542-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispIHTMLInputFileElement* = DEFINE_GUID("3050f542-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLInputFileElement* = DEFINE_GUID("3050f2ae-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispIHTMLOptionButtonElement* = DEFINE_GUID("3050f509-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispIHTMLOptionButtonElement* = DEFINE_GUID("3050f509-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLOptionButtonElement* = DEFINE_GUID("3050f2be-98b5-11cf-bb82-00aa00bdce0b")
+  DIID_DispIHTMLInputImage* = DEFINE_GUID("3050f51d-98b5-11cf-bb82-00aa00bdce0b")
+  IID_DispIHTMLInputImage* = DEFINE_GUID("3050f51d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLInputImage* = DEFINE_GUID("3050f2c4-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementNamespace* = DEFINE_GUID("3050f671-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementNamespaceTable* = DEFINE_GUID("3050f670-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementNamespaceFactory* = DEFINE_GUID("3050f672-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementNamespaceFactory2* = DEFINE_GUID("3050f805-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementNamespaceFactoryCallback* = DEFINE_GUID("3050f7fd-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementBehavior* = DEFINE_GUID("3050f425-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementBehaviorSite* = DEFINE_GUID("3050f427-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementBehaviorSiteOM* = DEFINE_GUID("3050f489-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementBehaviorSiteOM2* = DEFINE_GUID("3050f659-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementBehaviorRender* = DEFINE_GUID("3050f4aa-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementBehaviorSiteRender* = DEFINE_GUID("3050f4a7-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementBehaviorCategory* = DEFINE_GUID("3050f4ed-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementBehaviorSiteCategory* = DEFINE_GUID("3050f4ee-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementBehaviorSubmit* = DEFINE_GUID("3050f646-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementBehaviorFocus* = DEFINE_GUID("3050f6b6-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementBehaviorLayout* = DEFINE_GUID("3050f6ba-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementBehaviorLayout2* = DEFINE_GUID("3050f846-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementBehaviorSiteLayout* = DEFINE_GUID("3050f6b7-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IElementBehaviorSiteLayout2* = DEFINE_GUID("3050f847-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IHostBehaviorInit* = DEFINE_GUID("3050f842-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IViewObjectPresentSite* = DEFINE_GUID("305106e1-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ISurfacePresenter* = DEFINE_GUID("305106e2-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ICanvasPixelArrayData* = DEFINE_GUID("305107f9-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IViewObjectPrint* = DEFINE_GUID("305106e3-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IViewObjectPresentNotifySite* = DEFINE_GUID("305107fa-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IViewObjectPresentNotify* = DEFINE_GUID("305107f8-98b5-11cf-bb82-00aa00bdce0b")
   CONTEXT_MENU_DEFAULT* = 0
   CONTEXT_MENU_IMAGE* = 1
   CONTEXT_MENU_CONTROL* = 2
@@ -3815,7 +3815,7 @@ const
   CGID_MSHTML* = DEFINE_GUID(0xde4ba900'i32, 0x59ca, 0x11cf, [0x95'u8, 0x92, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00])
   CMDSETID_Forms3* = CGID_MSHTML
   SZ_HTML_CLIENTSITE_OBJECTPARAM* = "{d4db6850-5385-11d0-89e9-00a0c90a90ac}"
-  CGID_DocHostCommandHandler* = DEFINE_GUID(0xf38bc242'i32, 0xb950, 0x11d1, [0x89'u8, 0x18, 0x00, 0xc0, 0x4f, 0xc2, 0xc8, 0x36])
+  CGID_DocHostCommandHandler* = DEFINE_GUID("f38bc242-b950-11d1-8918-00c04fc2c836")
   DOCHOSTUIDBLCLK_DEFAULT* = 0
   DOCHOSTUIDBLCLK_SHOWPROPERTIES* = 1
   DOCHOSTUIDBLCLK_SHOWCODE* = 2
@@ -3852,306 +3852,929 @@ const
   DOCHOSTUIFLAG_BROWSER* = DOCHOSTUIFLAG_DISABLE_HELP_MENU or DOCHOSTUIFLAG_DISABLE_SCRIPT_INACTIVE
   DOCHOSTUITYPE_BROWSE* = 0
   DOCHOSTUITYPE_AUTHOR* = 1
-  IID_IHostDialogHelper* = DEFINE_GUID(0x53dec138'i32, 0xa51e, 0x11d2, [0x86'u8, 0x1e, 0x00, 0xc0, 0x4f, 0xa3, 0x5c, 0x89])
-  CLSID_HostDialogHelper* = DEFINE_GUID(0x429af92c'i32, 0xa51f, 0x11d2, [0x86'u8, 0x1e, 0x00, 0xc0, 0x4f, 0xa3, 0x5c, 0x89])
-  IID_IDocHostUIHandler* = DEFINE_GUID(0xbd3f23c0'i32, 0xd43e, 0x11cf, [0x89'u8, 0x3b, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x1a])
-  IID_IDocHostUIHandler2* = DEFINE_GUID(0x3050f6d0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_ICustomDoc* = DEFINE_GUID(0x3050f3f0'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
-  IID_IDocHostShowUI* = DEFINE_GUID(0xc4d244b0'i32, 0xd43e, 0x11cf, [0x89'u8, 0x3b, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x1a])
-  IID_IClassFactoryEx* = DEFINE_GUID(0x342d1ea0'i32, 0xae25, 0x11d1, [0x89'u8, 0xc5, 0x00, 0x60, 0x08, 0xc3, 0xfb, 0xfc])
+  IID_IHostDialogHelper* = DEFINE_GUID("53dec138-a51e-11d2-861e-00c04fa35c89")
+  CLSID_HostDialogHelper* = DEFINE_GUID("429af92c-a51f-11d2-861e-00c04fa35c89")
+  IID_IDocHostUIHandler* = DEFINE_GUID("bd3f23c0-d43e-11cf-893b-00aa00bdce1a")
+  IID_IDocHostUIHandler2* = DEFINE_GUID("3050f6d0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_ICustomDoc* = DEFINE_GUID("3050f3f0-98b5-11cf-bb82-00aa00bdce0b")
+  IID_IDocHostShowUI* = DEFINE_GUID("c4d244b0-d43e-11cf-893b-00aa00bdce1a")
+  IID_IClassFactoryEx* = DEFINE_GUID("342d1ea0-ae25-11d1-89c5-006008c3fbfc")
   IID_IClassFactory3* = IID_IClassFactoryEx
-  IID_IHTMLOMWindowServices* = DEFINE_GUID(0x3050f5fc'i32, 0x98b5, 0x11cf, [0xbb'u8, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b])
+  IID_IHTMLOMWindowServices* = DEFINE_GUID("3050f5fc-98b5-11cf-bb82-00aa00bdce0b")
   SID_SHTMLOMWindowServices* = IID_IHTMLOMWindowServices
 type
-  HTMLCSSStyleDeclaration* {.pure.} = object
-  HTMLStyle* {.pure.} = object
-  HTMLRuleStyle* {.pure.} = object
-  HTMLCSSRule* {.pure.} = object
-  HTMLCSSImportRule* {.pure.} = object
-  HTMLCSSMediaRule* {.pure.} = object
-  HTMLCSSMediaList* {.pure.} = object
-  HTMLCSSNamespaceRule* {.pure.} = object
-  HTMLMSCSSKeyframeRule* {.pure.} = object
-  HTMLMSCSSKeyframesRule* {.pure.} = object
-  HTMLRenderStyle* {.pure.} = object
-  HTMLCurrentStyle* {.pure.} = object
-  HTMLDOMAttribute* {.pure.} = object
-  HTMLDOMTextNode* {.pure.} = object
-  HTMLDOMImplementation* {.pure.} = object
-  HTMLAttributeCollection* {.pure.} = object
-  StaticNodeList* {.pure.} = object
-  DOMChildrenCollection* {.pure.} = object
-  HTMLDefaults* {.pure.} = object
-  HTCDefaultDispatch* {.pure.} = object
-  HTCPropertyBehavior* {.pure.} = object
-  HTCMethodBehavior* {.pure.} = object
-  HTCEventBehavior* {.pure.} = object
-  HTCAttachBehavior* {.pure.} = object
-  HTCDescBehavior* {.pure.} = object
-  HTMLUrnCollection* {.pure.} = object
-  HTMLGenericElement* {.pure.} = object
-  HTMLStyleSheetRule* {.pure.} = object
-  HTMLStyleSheetRulesCollection* {.pure.} = object
-  HTMLStyleSheetPage* {.pure.} = object
-  HTMLStyleSheetPagesCollection* {.pure.} = object
-  HTMLStyleSheet* {.pure.} = object
-  HTMLStyleSheetsCollection* {.pure.} = object
-  HTMLLinkElement* {.pure.} = object
-  HTMLDOMRange* {.pure.} = object
-  HTMLFormElement* {.pure.} = object
-  HTMLTextElement* {.pure.} = object
-  HTMLImg* {.pure.} = object
-  HTMLImageElementFactory* {.pure.} = object
-  HTMLBody* {.pure.} = object
-  HTMLFontElement* {.pure.} = object
-  HTMLAnchorElement* {.pure.} = object
-  HTMLLabelElement* {.pure.} = object
-  HTMLListElement* {.pure.} = object
-  HTMLUListElement* {.pure.} = object
-  HTMLOListElement* {.pure.} = object
-  HTMLLIElement* {.pure.} = object
-  HTMLBlockElement* {.pure.} = object
-  HTMLDivElement* {.pure.} = object
-  HTMLDDElement* {.pure.} = object
-  HTMLDTElement* {.pure.} = object
-  HTMLBRElement* {.pure.} = object
-  HTMLDListElement* {.pure.} = object
-  HTMLHRElement* {.pure.} = object
-  HTMLParaElement* {.pure.} = object
-  HTMLElementCollection* {.pure.} = object
-  HTMLHeaderElement* {.pure.} = object
-  HTMLSelectElement* {.pure.} = object
-  HTMLWndSelectElement* {.pure.} = object
-  HTMLOptionElement* {.pure.} = object
-  HTMLOptionElementFactory* {.pure.} = object
-  HTMLWndOptionElement* {.pure.} = object
-  HTMLInputElement* {.pure.} = object
-  HTMLTextAreaElement* {.pure.} = object
-  HTMLRichtextElement* {.pure.} = object
-  HTMLButtonElement* {.pure.} = object
-  HTMLMarqueeElement* {.pure.} = object
-  HTMLHtmlElement* {.pure.} = object
-  HTMLHeadElement* {.pure.} = object
-  HTMLTitleElement* {.pure.} = object
-  HTMLMetaElement* {.pure.} = object
-  HTMLBaseElement* {.pure.} = object
-  HTMLIsIndexElement* {.pure.} = object
-  HTMLNextIdElement* {.pure.} = object
-  HTMLBaseFontElement* {.pure.} = object
-  HTMLUnknownElement* {.pure.} = object
-  HTMLHistory* {.pure.} = object
-  CMimeTypes* {.pure.} = object
-  CPlugins* {.pure.} = object
-  COpsProfile* {.pure.} = object
-  HTMLNavigator* {.pure.} = object
-  HTMLLocation* {.pure.} = object
-  CEventObj* {.pure.} = object
-  HTMLStyleMedia* {.pure.} = object
-  FramesCollection* {.pure.} = object
-  HTMLScreen* {.pure.} = object
-  HTMLWindow2* {.pure.} = object
-  HTMLWindowProxy* {.pure.} = object
-  HTMLDocumentCompatibleInfo* {.pure.} = object
-  HTMLDocumentCompatibleInfoCollection* {.pure.} = object
-  HTMLDocument* {.pure.} = object
-  Scriptlet* {.pure.} = object
-  HTMLEmbed* {.pure.} = object
-  HTMLAreasCollection* {.pure.} = object
-  HTMLMapElement* {.pure.} = object
-  HTMLAreaElement* {.pure.} = object
-  HTMLTableCaption* {.pure.} = object
-  HTMLCommentElement* {.pure.} = object
-  HTMLPhraseElement* {.pure.} = object
-  HTMLSpanElement* {.pure.} = object
-  HTMLTable* {.pure.} = object
-  HTMLTableCol* {.pure.} = object
-  HTMLTableSection* {.pure.} = object
-  HTMLTableRow* {.pure.} = object
-  HTMLTableCell* {.pure.} = object
-  HTMLScriptElement* {.pure.} = object
-  HTMLNoShowElement* {.pure.} = object
-  HTMLObjectElement* {.pure.} = object
-  HTMLParamElement* {.pure.} = object
-  HTMLFrameBase* {.pure.} = object
-  HTMLFrameElement* {.pure.} = object
-  HTMLIFrame* {.pure.} = object
-  HTMLDivPosition* {.pure.} = object
-  HTMLFieldSetElement* {.pure.} = object
-  HTMLLegendElement* {.pure.} = object
-  HTMLSpanFlow* {.pure.} = object
-  HTMLFrameSetSite* {.pure.} = object
-  HTMLBGsound* {.pure.} = object
-  HTMLStyleElement* {.pure.} = object
-  HTMLStyleFontFace* {.pure.} = object
-  XDomainRequest* {.pure.} = object
-  XDomainRequestFactory* {.pure.} = object
-  HTMLStorage* {.pure.} = object
-  DOMEvent* {.pure.} = object
-  DOMUIEvent* {.pure.} = object
-  DOMMouseEvent* {.pure.} = object
-  DOMDragEvent* {.pure.} = object
-  DOMMouseWheelEvent* {.pure.} = object
-  DOMWheelEvent* {.pure.} = object
-  DOMTextEvent* {.pure.} = object
-  DOMKeyboardEvent* {.pure.} = object
-  DOMCompositionEvent* {.pure.} = object
-  DOMMutationEvent* {.pure.} = object
-  DOMBeforeUnloadEvent* {.pure.} = object
-  DOMFocusEvent* {.pure.} = object
-  DOMCustomEvent* {.pure.} = object
-  CanvasGradient* {.pure.} = object
-  CanvasPattern* {.pure.} = object
-  CanvasTextMetrics* {.pure.} = object
-  CanvasImageData* {.pure.} = object
-  CanvasRenderingContext2D* {.pure.} = object
-  HTMLCanvasElement* {.pure.} = object
-  DOMProgressEvent* {.pure.} = object
-  DOMMessageEvent* {.pure.} = object
-  DOMSiteModeEvent* {.pure.} = object
-  DOMStorageEvent* {.pure.} = object
-  XMLHttpRequestEventTarget* {.pure.} = object
-  HTMLXMLHttpRequest* {.pure.} = object
-  HTMLXMLHttpRequestFactory* {.pure.} = object
-  SVGAngle* {.pure.} = object
-  SVGAnimatedAngle* {.pure.} = object
-  SVGAnimatedTransformList* {.pure.} = object
-  SVGAnimatedBoolean* {.pure.} = object
-  SVGAnimatedEnumeration* {.pure.} = object
-  SVGAnimatedInteger* {.pure.} = object
-  SVGAnimatedLength* {.pure.} = object
-  SVGAnimatedLengthList* {.pure.} = object
-  SVGAnimatedNumber* {.pure.} = object
-  SVGAnimatedNumberList* {.pure.} = object
-  SVGAnimatedRect* {.pure.} = object
-  SVGAnimatedString* {.pure.} = object
-  SVGClipPathElement* {.pure.} = object
-  SVGElement* {.pure.} = object
-  SVGLength* {.pure.} = object
-  SVGLengthList* {.pure.} = object
-  SVGMatrix* {.pure.} = object
-  SVGNumber* {.pure.} = object
-  SVGNumberList* {.pure.} = object
-  SVGPatternElement* {.pure.} = object
-  SVGPathSeg* {.pure.} = object
-  SVGPathSegArcAbs* {.pure.} = object
-  SVGPathSegArcRel* {.pure.} = object
-  SVGPathSegClosePath* {.pure.} = object
-  SVGPathSegMovetoAbs* {.pure.} = object
-  SVGPathSegMovetoRel* {.pure.} = object
-  SVGPathSegLinetoAbs* {.pure.} = object
-  SVGPathSegLinetoRel* {.pure.} = object
-  SVGPathSegCurvetoCubicAbs* {.pure.} = object
-  SVGPathSegCurvetoCubicRel* {.pure.} = object
-  SVGPathSegCurvetoCubicSmoothAbs* {.pure.} = object
-  SVGPathSegCurvetoCubicSmoothRel* {.pure.} = object
-  SVGPathSegCurvetoQuadraticAbs* {.pure.} = object
-  SVGPathSegCurvetoQuadraticRel* {.pure.} = object
-  SVGPathSegCurvetoQuadraticSmoothAbs* {.pure.} = object
-  SVGPathSegCurvetoQuadraticSmoothRel* {.pure.} = object
-  SVGPathSegLinetoHorizontalAbs* {.pure.} = object
-  SVGPathSegLinetoHorizontalRel* {.pure.} = object
-  SVGPathSegLinetoVerticalAbs* {.pure.} = object
-  SVGPathSegLinetoVerticalRel* {.pure.} = object
-  SVGPathSegList* {.pure.} = object
-  SVGPoint* {.pure.} = object
-  SVGPointList* {.pure.} = object
-  SVGRect* {.pure.} = object
-  SVGStringList* {.pure.} = object
-  SVGTransform* {.pure.} = object
-  SVGSVGElement* {.pure.} = object
-  SVGUseElement* {.pure.} = object
-  HTMLStyleSheetRulesAppliedCollection* {.pure.} = object
-  RulesApplied* {.pure.} = object
-  RulesAppliedCollection* {.pure.} = object
-  HTMLW3CComputedStyle* {.pure.} = object
-  SVGTransformList* {.pure.} = object
-  SVGCircleElement* {.pure.} = object
-  SVGEllipseElement* {.pure.} = object
-  SVGLineElement* {.pure.} = object
-  SVGRectElement* {.pure.} = object
-  SVGPolygonElement* {.pure.} = object
-  SVGPolylineElement* {.pure.} = object
-  SVGGElement* {.pure.} = object
-  SVGSymbolElement* {.pure.} = object
-  SVGDefsElement* {.pure.} = object
-  SVGPathElement* {.pure.} = object
-  SVGPreserveAspectRatio* {.pure.} = object
-  SVGTextElement* {.pure.} = object
-  SVGAnimatedPreserveAspectRatio* {.pure.} = object
-  SVGImageElement* {.pure.} = object
-  SVGStopElement* {.pure.} = object
-  SVGGradientElement* {.pure.} = object
-  SVGLinearGradientElement* {.pure.} = object
-  SVGRadialGradientElement* {.pure.} = object
-  SVGMaskElement* {.pure.} = object
-  SVGMarkerElement* {.pure.} = object
-  SVGZoomEvent* {.pure.} = object
-  SVGAElement* {.pure.} = object
-  SVGViewElement* {.pure.} = object
-  HTMLMediaError* {.pure.} = object
-  HTMLTimeRanges* {.pure.} = object
-  HTMLMediaElement* {.pure.} = object
-  HTMLSourceElement* {.pure.} = object
-  HTMLAudioElement* {.pure.} = object
-  HTMLAudioElementFactory* {.pure.} = object
-  HTMLVideoElement* {.pure.} = object
-  SVGSwitchElement* {.pure.} = object
-  SVGDescElement* {.pure.} = object
-  SVGTitleElement* {.pure.} = object
-  SVGMetadataElement* {.pure.} = object
-  SVGElementInstance* {.pure.} = object
-  SVGElementInstanceList* {.pure.} = object
-  DOMException* {.pure.} = object
-  RangeException* {.pure.} = object
-  SVGException* {.pure.} = object
-  EventException* {.pure.} = object
-  SVGScriptElement* {.pure.} = object
-  SVGStyleElement* {.pure.} = object
-  SVGTextContentElement* {.pure.} = object
-  SVGTextPositioningElement* {.pure.} = object
-  DOMDocumentType* {.pure.} = object
-  NodeIterator* {.pure.} = object
-  TreeWalker* {.pure.} = object
-  DOMProcessingInstruction* {.pure.} = object
-  HTMLPerformance* {.pure.} = object
-  HTMLPerformanceNavigation* {.pure.} = object
-  HTMLPerformanceTiming* {.pure.} = object
-  SVGTSpanElement* {.pure.} = object
-  CTemplatePrinter* {.pure.} = object
-  CPrintManagerTemplatePrinter* {.pure.} = object
-  SVGTextPathElement* {.pure.} = object
-  XMLSerializer* {.pure.} = object
-  HTMLDOMXmlSerializerFactory* {.pure.} = object
-  DOMParser* {.pure.} = object
-  DOMParserFactory* {.pure.} = object
-  HTMLSemanticElement* {.pure.} = object
-  HTMLProgressElement* {.pure.} = object
-  DOMMSTransitionEvent* {.pure.} = object
-  DOMMSAnimationEvent* {.pure.} = object
-  WebGeolocation* {.pure.} = object
-  WebGeocoordinates* {.pure.} = object
-  WebGeopositionError* {.pure.} = object
-  WebGeoposition* {.pure.} = object
-  CClientCaps* {.pure.} = object
-  DOMMSManipulationEvent* {.pure.} = object
-  DOMCloseEvent* {.pure.} = object
-  ApplicationCache* {.pure.} = object
-  HtmlDlgSafeHelper* {.pure.} = object
-  BlockFormats* {.pure.} = object
-  FontNames* {.pure.} = object
-  HTMLNamespace* {.pure.} = object
-  HTMLNamespaceCollection* {.pure.} = object
-  ThreadDialogProcParam* {.pure.} = object
-  HTMLDialog* {.pure.} = object
-  HTMLPopup* {.pure.} = object
-  HTMLAppBehavior* {.pure.} = object
-  OldHTMLDocument* {.pure.} = object
-  OldHTMLFormElement* {.pure.} = object
-  HTMLInputButtonElement* {.pure.} = object
-  HTMLInputTextElement* {.pure.} = object
-  HTMLInputFileElement* {.pure.} = object
-  HTMLOptionButtonElement* {.pure.} = object
-  HTMLInputImage* {.pure.} = object
+  SHOWHTMLDIALOGFN* = proc (hwndParent: HWND, pmk: ptr IMoniker, pvarArgIn: ptr VARIANT, pchOptions: ptr WCHAR, pvArgOut: ptr VARIANT): HRESULT {.stdcall.}
+  SHOWHTMLDIALOGEXFN* = proc (hwndParent: HWND, pmk: ptr IMoniker, dwDialogFlags: DWORD, pvarArgIn: ptr VARIANT, pchOptions: ptr WCHAR, pvArgOut: ptr VARIANT): HRESULT {.stdcall.}
+  IHTMLFramesCollection2* {.pure.} = object
+    lpVtbl*: ptr IHTMLFramesCollection2Vtbl
+  IHTMLFramesCollection2Vtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    item*: proc(self: ptr IHTMLFramesCollection2, pvarIndex: ptr VARIANT, pvarResult: ptr VARIANT): HRESULT {.stdcall.}
+    get_length*: proc(self: ptr IHTMLFramesCollection2, p: ptr LONG): HRESULT {.stdcall.}
+  IHTMLImgElement* {.pure.} = object
+    lpVtbl*: ptr IHTMLImgElementVtbl
+  IHTMLImgElementVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    put_isMap*: proc(self: ptr IHTMLImgElement, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_isMap*: proc(self: ptr IHTMLImgElement, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_useMap*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
+    get_useMap*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    get_mimeType*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    get_fileSize*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    get_fileCreatedDate*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    get_fileModifiedDate*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    get_fileUpdatedDate*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    get_protocol*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    get_href*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    get_nameProp*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_border*: proc(self: ptr IHTMLImgElement, v: VARIANT): HRESULT {.stdcall.}
+    get_border*: proc(self: ptr IHTMLImgElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_vspace*: proc(self: ptr IHTMLImgElement, v: LONG): HRESULT {.stdcall.}
+    get_vspace*: proc(self: ptr IHTMLImgElement, p: ptr LONG): HRESULT {.stdcall.}
+    put_hspace*: proc(self: ptr IHTMLImgElement, v: LONG): HRESULT {.stdcall.}
+    get_hspace*: proc(self: ptr IHTMLImgElement, p: ptr LONG): HRESULT {.stdcall.}
+    put_alt*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
+    get_alt*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_src*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
+    get_src*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_lowsrc*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
+    get_lowsrc*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_vrml*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
+    get_vrml*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_dynsrc*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
+    get_dynsrc*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    get_readyState*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    get_complete*: proc(self: ptr IHTMLImgElement, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_loop*: proc(self: ptr IHTMLImgElement, v: VARIANT): HRESULT {.stdcall.}
+    get_loop*: proc(self: ptr IHTMLImgElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_align*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
+    get_align*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_onload*: proc(self: ptr IHTMLImgElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onload*: proc(self: ptr IHTMLImgElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onerror*: proc(self: ptr IHTMLImgElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onerror*: proc(self: ptr IHTMLImgElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onabort*: proc(self: ptr IHTMLImgElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onabort*: proc(self: ptr IHTMLImgElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_name*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
+    get_name*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_width*: proc(self: ptr IHTMLImgElement, v: LONG): HRESULT {.stdcall.}
+    get_width*: proc(self: ptr IHTMLImgElement, p: ptr LONG): HRESULT {.stdcall.}
+    put_height*: proc(self: ptr IHTMLImgElement, v: LONG): HRESULT {.stdcall.}
+    get_height*: proc(self: ptr IHTMLImgElement, p: ptr LONG): HRESULT {.stdcall.}
+    put_start*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
+    get_start*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
+  IHTMLImageElementFactory* {.pure.} = object
+    lpVtbl*: ptr IHTMLImageElementFactoryVtbl
+  IHTMLImageElementFactoryVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    create*: proc(self: ptr IHTMLImageElementFactory, width: VARIANT, height: VARIANT, a: ptr ptr IHTMLImgElement): HRESULT {.stdcall.}
+  IHTMLLocation* {.pure.} = object
+    lpVtbl*: ptr IHTMLLocationVtbl
+  IHTMLLocationVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    put_href*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
+    get_href*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
+    put_protocol*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
+    get_protocol*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
+    put_host*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
+    get_host*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
+    put_hostname*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
+    get_hostname*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
+    put_port*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
+    get_port*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
+    put_pathname*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
+    get_pathname*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
+    put_search*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
+    get_search*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
+    put_hash*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
+    get_hash*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
+    reload*: proc(self: ptr IHTMLLocation, flag: VARIANT_BOOL): HRESULT {.stdcall.}
+    replace*: proc(self: ptr IHTMLLocation, bstr: BSTR): HRESULT {.stdcall.}
+    assign*: proc(self: ptr IHTMLLocation, bstr: BSTR): HRESULT {.stdcall.}
+    toString*: proc(self: ptr IHTMLLocation, string: ptr BSTR): HRESULT {.stdcall.}
+  IOmHistory* {.pure.} = object
+    lpVtbl*: ptr IOmHistoryVtbl
+  IOmHistoryVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    get_length*: proc(self: ptr IOmHistory, p: ptr int16): HRESULT {.stdcall.}
+    back*: proc(self: ptr IOmHistory, pvargdistance: ptr VARIANT): HRESULT {.stdcall.}
+    forward*: proc(self: ptr IOmHistory, pvargdistance: ptr VARIANT): HRESULT {.stdcall.}
+    go*: proc(self: ptr IOmHistory, pvargdistance: ptr VARIANT): HRESULT {.stdcall.}
+  IHTMLMimeTypesCollection* {.pure.} = object
+    lpVtbl*: ptr IHTMLMimeTypesCollectionVtbl
+  IHTMLMimeTypesCollectionVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    get_length*: proc(self: ptr IHTMLMimeTypesCollection, p: ptr LONG): HRESULT {.stdcall.}
+  IHTMLPluginsCollection* {.pure.} = object
+    lpVtbl*: ptr IHTMLPluginsCollectionVtbl
+  IHTMLPluginsCollectionVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    get_length*: proc(self: ptr IHTMLPluginsCollection, p: ptr LONG): HRESULT {.stdcall.}
+    refresh*: proc(self: ptr IHTMLPluginsCollection, reload: VARIANT_BOOL): HRESULT {.stdcall.}
+  IHTMLOpsProfile* {.pure.} = object
+    lpVtbl*: ptr IHTMLOpsProfileVtbl
+  IHTMLOpsProfileVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    addRequest*: proc(self: ptr IHTMLOpsProfile, name: BSTR, reserved: VARIANT, success: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    clearRequest*: proc(self: ptr IHTMLOpsProfile): HRESULT {.stdcall.}
+    doRequest*: proc(self: ptr IHTMLOpsProfile, usage: VARIANT, fname: VARIANT, domain: VARIANT, path: VARIANT, expire: VARIANT, reserved: VARIANT): HRESULT {.stdcall.}
+    getAttribute*: proc(self: ptr IHTMLOpsProfile, name: BSTR, value: ptr BSTR): HRESULT {.stdcall.}
+    setAttribute*: proc(self: ptr IHTMLOpsProfile, name: BSTR, value: BSTR, prefs: VARIANT, success: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    commitChanges*: proc(self: ptr IHTMLOpsProfile, success: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    addReadRequest*: proc(self: ptr IHTMLOpsProfile, name: BSTR, reserved: VARIANT, success: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    doReadRequest*: proc(self: ptr IHTMLOpsProfile, usage: VARIANT, fname: VARIANT, domain: VARIANT, path: VARIANT, expire: VARIANT, reserved: VARIANT): HRESULT {.stdcall.}
+    doWriteRequest*: proc(self: ptr IHTMLOpsProfile, success: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+  IOmNavigator* {.pure.} = object
+    lpVtbl*: ptr IOmNavigatorVtbl
+  IOmNavigatorVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    get_appCodeName*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
+    get_appName*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
+    get_appVersion*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
+    get_userAgent*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
+    javaEnabled*: proc(self: ptr IOmNavigator, enabled: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    taintEnabled*: proc(self: ptr IOmNavigator, enabled: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_mimeTypes*: proc(self: ptr IOmNavigator, p: ptr ptr IHTMLMimeTypesCollection): HRESULT {.stdcall.}
+    get_plugins*: proc(self: ptr IOmNavigator, p: ptr ptr IHTMLPluginsCollection): HRESULT {.stdcall.}
+    get_cookieEnabled*: proc(self: ptr IOmNavigator, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_opsProfile*: proc(self: ptr IOmNavigator, p: ptr ptr IHTMLOpsProfile): HRESULT {.stdcall.}
+    toString*: proc(self: ptr IOmNavigator, string: ptr BSTR): HRESULT {.stdcall.}
+    get_cpuClass*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
+    get_systemLanguage*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
+    get_browserLanguage*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
+    get_userLanguage*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
+    get_platform*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
+    get_appMinorVersion*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
+    get_connectionSpeed*: proc(self: ptr IOmNavigator, p: ptr LONG): HRESULT {.stdcall.}
+    get_onLine*: proc(self: ptr IOmNavigator, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_userProfile*: proc(self: ptr IOmNavigator, p: ptr ptr IHTMLOpsProfile): HRESULT {.stdcall.}
+  IHTMLDocument* {.pure.} = object
+    lpVtbl*: ptr IHTMLDocumentVtbl
+  IHTMLDocumentVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    get_Script*: proc(self: ptr IHTMLDocument, p: ptr ptr IDispatch): HRESULT {.stdcall.}
+  IHTMLElementCollection* {.pure.} = object
+    lpVtbl*: ptr IHTMLElementCollectionVtbl
+  IHTMLElementCollectionVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    toString*: proc(self: ptr IHTMLElementCollection, String: ptr BSTR): HRESULT {.stdcall.}
+    put_length*: proc(self: ptr IHTMLElementCollection, v: LONG): HRESULT {.stdcall.}
+    get_length*: proc(self: ptr IHTMLElementCollection, p: ptr LONG): HRESULT {.stdcall.}
+    get_newEnum*: proc(self: ptr IHTMLElementCollection, p: ptr ptr IUnknown): HRESULT {.stdcall.}
+    item*: proc(self: ptr IHTMLElementCollection, name: VARIANT, index: VARIANT, pdisp: ptr ptr IDispatch): HRESULT {.stdcall.}
+    tags*: proc(self: ptr IHTMLElementCollection, tagName: VARIANT, pdisp: ptr ptr IDispatch): HRESULT {.stdcall.}
+  IHTMLStyle* {.pure.} = object
+    lpVtbl*: ptr IHTMLStyleVtbl
+  IHTMLStyleVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    put_fontFamily*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_fontFamily*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_fontStyle*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_fontStyle*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_fontVariant*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_fontVariant*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_fontWeight*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_fontWeight*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_fontSize*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_fontSize*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_font*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_font*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_color*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_color*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_background*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_background*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_backgroundColor*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_backgroundColor*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_backgroundImage*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_backgroundImage*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_backgroundRepeat*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_backgroundRepeat*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_backgroundAttachment*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_backgroundAttachment*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_backgroundPosition*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_backgroundPosition*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_backgroundPositionX*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_backgroundPositionX*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_backgroundPositionY*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_backgroundPositionY*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_wordSpacing*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_wordSpacing*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_letterSpacing*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_letterSpacing*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_textDecoration*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_textDecoration*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_textDecorationNone*: proc(self: ptr IHTMLStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_textDecorationNone*: proc(self: ptr IHTMLStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_textDecorationUnderline*: proc(self: ptr IHTMLStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_textDecorationUnderline*: proc(self: ptr IHTMLStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_textDecorationOverline*: proc(self: ptr IHTMLStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_textDecorationOverline*: proc(self: ptr IHTMLStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_textDecorationLineThrough*: proc(self: ptr IHTMLStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_textDecorationLineThrough*: proc(self: ptr IHTMLStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_textDecorationBlink*: proc(self: ptr IHTMLStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_textDecorationBlink*: proc(self: ptr IHTMLStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_verticalAlign*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_verticalAlign*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_textTransform*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_textTransform*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_textAlign*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_textAlign*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_textIndent*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_textIndent*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_lineHeight*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_lineHeight*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_marginTop*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_marginTop*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_marginRight*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_marginRight*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_marginBottom*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_marginBottom*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_marginLeft*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_marginLeft*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_margin*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_margin*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_paddingTop*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_paddingTop*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_paddingRight*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_paddingRight*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_paddingBottom*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_paddingBottom*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_paddingLeft*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_paddingLeft*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_padding*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_padding*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_border*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_border*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderTop*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderTop*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderRight*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderRight*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderBottom*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderBottom*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderLeft*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderLeft*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderColor*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderColor*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderTopColor*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderTopColor*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderRightColor*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderRightColor*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderBottomColor*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderBottomColor*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderLeftColor*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderLeftColor*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderWidth*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderWidth*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderTopWidth*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderTopWidth*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderRightWidth*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderRightWidth*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderBottomWidth*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderBottomWidth*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderLeftWidth*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderLeftWidth*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderStyle*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderStyle*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderTopStyle*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderTopStyle*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderRightStyle*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderRightStyle*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderBottomStyle*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderBottomStyle*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderLeftStyle*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderLeftStyle*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_width*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_width*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_height*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_height*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_styleFloat*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_styleFloat*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_clear*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_clear*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_display*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_display*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_visibility*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_visibility*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_listStyleType*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_listStyleType*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_listStylePosition*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_listStylePosition*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_listStyleImage*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_listStyleImage*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_listStyle*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_listStyle*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_whiteSpace*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_whiteSpace*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_top*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_top*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_left*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_left*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    get_position*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_zIndex*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_zIndex*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_overflow*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_overflow*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_pageBreakBefore*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_pageBreakBefore*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_pageBreakAfter*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_pageBreakAfter*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_cssText*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_cssText*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_pixelTop*: proc(self: ptr IHTMLStyle, v: LONG): HRESULT {.stdcall.}
+    get_pixelTop*: proc(self: ptr IHTMLStyle, p: ptr LONG): HRESULT {.stdcall.}
+    put_pixelLeft*: proc(self: ptr IHTMLStyle, v: LONG): HRESULT {.stdcall.}
+    get_pixelLeft*: proc(self: ptr IHTMLStyle, p: ptr LONG): HRESULT {.stdcall.}
+    put_pixelWidth*: proc(self: ptr IHTMLStyle, v: LONG): HRESULT {.stdcall.}
+    get_pixelWidth*: proc(self: ptr IHTMLStyle, p: ptr LONG): HRESULT {.stdcall.}
+    put_pixelHeight*: proc(self: ptr IHTMLStyle, v: LONG): HRESULT {.stdcall.}
+    get_pixelHeight*: proc(self: ptr IHTMLStyle, p: ptr LONG): HRESULT {.stdcall.}
+    put_posTop*: proc(self: ptr IHTMLStyle, v: float32): HRESULT {.stdcall.}
+    get_posTop*: proc(self: ptr IHTMLStyle, p: ptr float32): HRESULT {.stdcall.}
+    put_posLeft*: proc(self: ptr IHTMLStyle, v: float32): HRESULT {.stdcall.}
+    get_posLeft*: proc(self: ptr IHTMLStyle, p: ptr float32): HRESULT {.stdcall.}
+    put_posWidth*: proc(self: ptr IHTMLStyle, v: float32): HRESULT {.stdcall.}
+    get_posWidth*: proc(self: ptr IHTMLStyle, p: ptr float32): HRESULT {.stdcall.}
+    put_posHeight*: proc(self: ptr IHTMLStyle, v: float32): HRESULT {.stdcall.}
+    get_posHeight*: proc(self: ptr IHTMLStyle, p: ptr float32): HRESULT {.stdcall.}
+    put_cursor*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_cursor*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_clip*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_clip*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_filter*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
+    get_filter*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    setAttribute*: proc(self: ptr IHTMLStyle, strAttributeName: BSTR, AttributeValue: VARIANT, lFlags: LONG): HRESULT {.stdcall.}
+    getAttribute*: proc(self: ptr IHTMLStyle, strAttributeName: BSTR, lFlags: LONG, AttributeValue: ptr VARIANT): HRESULT {.stdcall.}
+    removeAttribute*: proc(self: ptr IHTMLStyle, strAttributeName: BSTR, lFlags: LONG, pfSuccess: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    toString*: proc(self: ptr IHTMLStyle, String: ptr BSTR): HRESULT {.stdcall.}
+  IHTMLFiltersCollection* {.pure.} = object
+    lpVtbl*: ptr IHTMLFiltersCollectionVtbl
+  IHTMLFiltersCollectionVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    get_length*: proc(self: ptr IHTMLFiltersCollection, p: ptr LONG): HRESULT {.stdcall.}
+    get_newEnum*: proc(self: ptr IHTMLFiltersCollection, p: ptr ptr IUnknown): HRESULT {.stdcall.}
+    item*: proc(self: ptr IHTMLFiltersCollection, pvarIndex: ptr VARIANT, pvarResult: ptr VARIANT): HRESULT {.stdcall.}
+  IHTMLElement* {.pure.} = object
+    lpVtbl*: ptr IHTMLElementVtbl
+  IHTMLElementVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    setAttribute*: proc(self: ptr IHTMLElement, strAttributeName: BSTR, AttributeValue: VARIANT, lFlags: LONG): HRESULT {.stdcall.}
+    getAttribute*: proc(self: ptr IHTMLElement, strAttributeName: BSTR, lFlags: LONG, AttributeValue: ptr VARIANT): HRESULT {.stdcall.}
+    removeAttribute*: proc(self: ptr IHTMLElement, strAttributeName: BSTR, lFlags: LONG, pfSuccess: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_className*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
+    get_className*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_id*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
+    get_id*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
+    get_tagName*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
+    get_parentElement*: proc(self: ptr IHTMLElement, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
+    get_style*: proc(self: ptr IHTMLElement, p: ptr ptr IHTMLStyle): HRESULT {.stdcall.}
+    put_onhelp*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onhelp*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onclick*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onclick*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_ondblclick*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_ondblclick*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onkeydown*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onkeydown*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onkeyup*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onkeyup*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onkeypress*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onkeypress*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onmouseout*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onmouseout*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onmouseover*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onmouseover*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onmousemove*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onmousemove*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onmousedown*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onmousedown*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onmouseup*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onmouseup*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    get_document*: proc(self: ptr IHTMLElement, p: ptr ptr IDispatch): HRESULT {.stdcall.}
+    put_title*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
+    get_title*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_language*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
+    get_language*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_onselectstart*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onselectstart*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    scrollIntoView*: proc(self: ptr IHTMLElement, varargStart: VARIANT): HRESULT {.stdcall.}
+    contains*: proc(self: ptr IHTMLElement, pChild: ptr IHTMLElement, pfResult: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_sourceIndex*: proc(self: ptr IHTMLElement, p: ptr LONG): HRESULT {.stdcall.}
+    get_recordNumber*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_lang*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
+    get_lang*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
+    get_offsetLeft*: proc(self: ptr IHTMLElement, p: ptr LONG): HRESULT {.stdcall.}
+    get_offsetTop*: proc(self: ptr IHTMLElement, p: ptr LONG): HRESULT {.stdcall.}
+    get_offsetWidth*: proc(self: ptr IHTMLElement, p: ptr LONG): HRESULT {.stdcall.}
+    get_offsetHeight*: proc(self: ptr IHTMLElement, p: ptr LONG): HRESULT {.stdcall.}
+    get_offsetParent*: proc(self: ptr IHTMLElement, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
+    put_innerHTML*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
+    get_innerHTML*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_innerText*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
+    get_innerText*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_outerHTML*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
+    get_outerHTML*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_outerText*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
+    get_outerText*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
+    insertAdjacentHTML*: proc(self: ptr IHTMLElement, where: BSTR, html: BSTR): HRESULT {.stdcall.}
+    insertAdjacentText*: proc(self: ptr IHTMLElement, where: BSTR, text: BSTR): HRESULT {.stdcall.}
+    get_parentTextEdit*: proc(self: ptr IHTMLElement, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
+    get_isTextEdit*: proc(self: ptr IHTMLElement, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    click*: proc(self: ptr IHTMLElement): HRESULT {.stdcall.}
+    get_filters*: proc(self: ptr IHTMLElement, p: ptr ptr IHTMLFiltersCollection): HRESULT {.stdcall.}
+    put_ondragstart*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_ondragstart*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    toString*: proc(self: ptr IHTMLElement, String: ptr BSTR): HRESULT {.stdcall.}
+    put_onbeforeupdate*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onbeforeupdate*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onafterupdate*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onafterupdate*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onerrorupdate*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onerrorupdate*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onrowexit*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onrowexit*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onrowenter*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onrowenter*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_ondatasetchanged*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_ondatasetchanged*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_ondataavailable*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_ondataavailable*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_ondatasetcomplete*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_ondatasetcomplete*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onfilterchange*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onfilterchange*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    get_children*: proc(self: ptr IHTMLElement, p: ptr ptr IDispatch): HRESULT {.stdcall.}
+    get_all*: proc(self: ptr IHTMLElement, p: ptr ptr IDispatch): HRESULT {.stdcall.}
+  IHTMLSelectionObject* {.pure.} = object
+    lpVtbl*: ptr IHTMLSelectionObjectVtbl
+  IHTMLSelectionObjectVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    createRange*: proc(self: ptr IHTMLSelectionObject, range: ptr ptr IDispatch): HRESULT {.stdcall.}
+    empty*: proc(self: ptr IHTMLSelectionObject): HRESULT {.stdcall.}
+    clear*: proc(self: ptr IHTMLSelectionObject): HRESULT {.stdcall.}
+    get_type*: proc(self: ptr IHTMLSelectionObject, p: ptr BSTR): HRESULT {.stdcall.}
+  IHTMLStyleSheetsCollection* {.pure.} = object
+    lpVtbl*: ptr IHTMLStyleSheetsCollectionVtbl
+  IHTMLStyleSheetsCollectionVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    get_length*: proc(self: ptr IHTMLStyleSheetsCollection, p: ptr LONG): HRESULT {.stdcall.}
+    get_newEnum*: proc(self: ptr IHTMLStyleSheetsCollection, p: ptr ptr IUnknown): HRESULT {.stdcall.}
+    item*: proc(self: ptr IHTMLStyleSheetsCollection, pvarIndex: ptr VARIANT, pvarResult: ptr VARIANT): HRESULT {.stdcall.}
+  IHTMLRuleStyle* {.pure.} = object
+    lpVtbl*: ptr IHTMLRuleStyleVtbl
+  IHTMLRuleStyleVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    put_fontFamily*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_fontFamily*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_fontStyle*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_fontStyle*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_fontVariant*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_fontVariant*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_fontWeight*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_fontWeight*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_fontSize*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_fontSize*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_font*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_font*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_color*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_color*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_background*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_background*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_backgroundColor*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_backgroundColor*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_backgroundImage*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_backgroundImage*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_backgroundRepeat*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_backgroundRepeat*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_backgroundAttachment*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_backgroundAttachment*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_backgroundPosition*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_backgroundPosition*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_backgroundPositionX*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_backgroundPositionX*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_backgroundPositionY*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_backgroundPositionY*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_wordSpacing*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_wordSpacing*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_letterSpacing*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_letterSpacing*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_textDecoration*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_textDecoration*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_textDecorationNone*: proc(self: ptr IHTMLRuleStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_textDecorationNone*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_textDecorationUnderline*: proc(self: ptr IHTMLRuleStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_textDecorationUnderline*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_textDecorationOverline*: proc(self: ptr IHTMLRuleStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_textDecorationOverline*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_textDecorationLineThrough*: proc(self: ptr IHTMLRuleStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_textDecorationLineThrough*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_textDecorationBlink*: proc(self: ptr IHTMLRuleStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_textDecorationBlink*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_verticalAlign*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_verticalAlign*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_textTransform*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_textTransform*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_textAlign*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_textAlign*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_textIndent*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_textIndent*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_lineHeight*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_lineHeight*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_marginTop*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_marginTop*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_marginRight*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_marginRight*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_marginBottom*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_marginBottom*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_marginLeft*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_marginLeft*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_margin*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_margin*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_paddingTop*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_paddingTop*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_paddingRight*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_paddingRight*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_paddingBottom*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_paddingBottom*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_paddingLeft*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_paddingLeft*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_padding*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_padding*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_border*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_border*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderTop*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderTop*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderRight*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderRight*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderBottom*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderBottom*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderLeft*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderLeft*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderColor*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderColor*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderTopColor*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderTopColor*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderRightColor*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderRightColor*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderBottomColor*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderBottomColor*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderLeftColor*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderLeftColor*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderWidth*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderWidth*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderTopWidth*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderTopWidth*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderRightWidth*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderRightWidth*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderBottomWidth*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderBottomWidth*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderLeftWidth*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_borderLeftWidth*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_borderStyle*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderStyle*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderTopStyle*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderTopStyle*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderRightStyle*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderRightStyle*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderBottomStyle*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderBottomStyle*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_borderLeftStyle*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_borderLeftStyle*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_width*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_width*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_height*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_height*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_styleFloat*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_styleFloat*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_clear*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_clear*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_display*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_display*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_visibility*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_visibility*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_listStyleType*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_listStyleType*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_listStylePosition*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_listStylePosition*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_listStyleImage*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_listStyleImage*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_listStyle*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_listStyle*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_whiteSpace*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_whiteSpace*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_top*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_top*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_left*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_left*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    get_position*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_zIndex*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
+    get_zIndex*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_overflow*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_overflow*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_pageBreakBefore*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_pageBreakBefore*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_pageBreakAfter*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_pageBreakAfter*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_cssText*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_cssText*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_cursor*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_cursor*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_clip*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_clip*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    put_filter*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
+    get_filter*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
+    setAttribute*: proc(self: ptr IHTMLRuleStyle, strAttributeName: BSTR, AttributeValue: VARIANT, lFlags: LONG): HRESULT {.stdcall.}
+    getAttribute*: proc(self: ptr IHTMLRuleStyle, strAttributeName: BSTR, lFlags: LONG, AttributeValue: ptr VARIANT): HRESULT {.stdcall.}
+    removeAttribute*: proc(self: ptr IHTMLRuleStyle, strAttributeName: BSTR, lFlags: LONG, pfSuccess: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+  IHTMLStyleSheetRule* {.pure.} = object
+    lpVtbl*: ptr IHTMLStyleSheetRuleVtbl
+  IHTMLStyleSheetRuleVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    put_selectorText*: proc(self: ptr IHTMLStyleSheetRule, v: BSTR): HRESULT {.stdcall.}
+    get_selectorText*: proc(self: ptr IHTMLStyleSheetRule, p: ptr BSTR): HRESULT {.stdcall.}
+    get_style*: proc(self: ptr IHTMLStyleSheetRule, p: ptr ptr IHTMLRuleStyle): HRESULT {.stdcall.}
+    get_readOnly*: proc(self: ptr IHTMLStyleSheetRule, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+  IHTMLStyleSheetRulesCollection* {.pure.} = object
+    lpVtbl*: ptr IHTMLStyleSheetRulesCollectionVtbl
+  IHTMLStyleSheetRulesCollectionVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    get_length*: proc(self: ptr IHTMLStyleSheetRulesCollection, p: ptr LONG): HRESULT {.stdcall.}
+    item*: proc(self: ptr IHTMLStyleSheetRulesCollection, index: LONG, ppHTMLStyleSheetRule: ptr ptr IHTMLStyleSheetRule): HRESULT {.stdcall.}
+  IHTMLStyleSheet* {.pure.} = object
+    lpVtbl*: ptr IHTMLStyleSheetVtbl
+  IHTMLStyleSheetVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    put_title*: proc(self: ptr IHTMLStyleSheet, v: BSTR): HRESULT {.stdcall.}
+    get_title*: proc(self: ptr IHTMLStyleSheet, p: ptr BSTR): HRESULT {.stdcall.}
+    get_parentStyleSheet*: proc(self: ptr IHTMLStyleSheet, p: ptr ptr IHTMLStyleSheet): HRESULT {.stdcall.}
+    get_owningElement*: proc(self: ptr IHTMLStyleSheet, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
+    put_disabled*: proc(self: ptr IHTMLStyleSheet, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_disabled*: proc(self: ptr IHTMLStyleSheet, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_readOnly*: proc(self: ptr IHTMLStyleSheet, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_imports*: proc(self: ptr IHTMLStyleSheet, p: ptr ptr IHTMLStyleSheetsCollection): HRESULT {.stdcall.}
+    put_href*: proc(self: ptr IHTMLStyleSheet, v: BSTR): HRESULT {.stdcall.}
+    get_href*: proc(self: ptr IHTMLStyleSheet, p: ptr BSTR): HRESULT {.stdcall.}
+    get_type*: proc(self: ptr IHTMLStyleSheet, p: ptr BSTR): HRESULT {.stdcall.}
+    get_id*: proc(self: ptr IHTMLStyleSheet, p: ptr BSTR): HRESULT {.stdcall.}
+    addImport*: proc(self: ptr IHTMLStyleSheet, bstrURL: BSTR, lIndex: LONG, plIndex: ptr LONG): HRESULT {.stdcall.}
+    addRule*: proc(self: ptr IHTMLStyleSheet, bstrSelector: BSTR, bstrStyle: BSTR, lIndex: LONG, plNewIndex: ptr LONG): HRESULT {.stdcall.}
+    removeImport*: proc(self: ptr IHTMLStyleSheet, lIndex: LONG): HRESULT {.stdcall.}
+    removeRule*: proc(self: ptr IHTMLStyleSheet, lIndex: LONG): HRESULT {.stdcall.}
+    put_media*: proc(self: ptr IHTMLStyleSheet, v: BSTR): HRESULT {.stdcall.}
+    get_media*: proc(self: ptr IHTMLStyleSheet, p: ptr BSTR): HRESULT {.stdcall.}
+    put_cssText*: proc(self: ptr IHTMLStyleSheet, v: BSTR): HRESULT {.stdcall.}
+    get_cssText*: proc(self: ptr IHTMLStyleSheet, p: ptr BSTR): HRESULT {.stdcall.}
+    get_rules*: proc(self: ptr IHTMLStyleSheet, p: ptr ptr IHTMLStyleSheetRulesCollection): HRESULT {.stdcall.}
+  IHTMLDocument2* {.pure.} = object
+    lpVtbl*: ptr IHTMLDocument2Vtbl
+  IHTMLDocument2Vtbl* {.pure, inheritable.} = object of IHTMLDocumentVtbl
+    get_all*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
+    get_body*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
+    get_activeElement*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
+    get_images*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
+    get_applets*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
+    get_links*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
+    get_forms*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
+    get_anchors*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
+    put_title*: proc(self: ptr IHTMLDocument2, v: BSTR): HRESULT {.stdcall.}
+    get_title*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    get_scripts*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
+    put_designMode*: proc(self: ptr IHTMLDocument2, v: BSTR): HRESULT {.stdcall.}
+    get_designMode*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    get_selection*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLSelectionObject): HRESULT {.stdcall.}
+    get_readyState*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    get_frames*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLFramesCollection2): HRESULT {.stdcall.}
+    get_embeds*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
+    get_plugins*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
+    put_alinkColor*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_alinkColor*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_bgColor*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_bgColor*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_fgColor*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_fgColor*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_linkColor*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_linkColor*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_vlinkColor*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_vlinkColor*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    get_referrer*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    get_location*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLLocation): HRESULT {.stdcall.}
+    get_lastModified*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    put_URL*: proc(self: ptr IHTMLDocument2, v: BSTR): HRESULT {.stdcall.}
+    get_URL*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    put_domain*: proc(self: ptr IHTMLDocument2, v: BSTR): HRESULT {.stdcall.}
+    get_domain*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    put_cookie*: proc(self: ptr IHTMLDocument2, v: BSTR): HRESULT {.stdcall.}
+    get_cookie*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    put_expando*: proc(self: ptr IHTMLDocument2, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_expando*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_charset*: proc(self: ptr IHTMLDocument2, v: BSTR): HRESULT {.stdcall.}
+    get_charset*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    put_defaultCharset*: proc(self: ptr IHTMLDocument2, v: BSTR): HRESULT {.stdcall.}
+    get_defaultCharset*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    get_mimeType*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    get_fileSize*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    get_fileCreatedDate*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    get_fileModifiedDate*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    get_fileUpdatedDate*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    get_security*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    get_protocol*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    get_nameProp*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
+    write*: proc(self: ptr IHTMLDocument2, psarray: ptr SAFEARRAY): HRESULT {.stdcall.}
+    writeln*: proc(self: ptr IHTMLDocument2, psarray: ptr SAFEARRAY): HRESULT {.stdcall.}
+    open*: proc(self: ptr IHTMLDocument2, url: BSTR, name: VARIANT, features: VARIANT, replace: VARIANT, pomWindowResult: ptr ptr IDispatch): HRESULT {.stdcall.}
+    close*: proc(self: ptr IHTMLDocument2): HRESULT {.stdcall.}
+    clear*: proc(self: ptr IHTMLDocument2): HRESULT {.stdcall.}
+    queryCommandSupported*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, pfRet: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    queryCommandEnabled*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, pfRet: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    queryCommandState*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, pfRet: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    queryCommandIndeterm*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, pfRet: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    queryCommandText*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, pcmdText: ptr BSTR): HRESULT {.stdcall.}
+    queryCommandValue*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, pcmdValue: ptr VARIANT): HRESULT {.stdcall.}
+    execCommand*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, showUI: VARIANT_BOOL, value: VARIANT, pfRet: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    execCommandShowHelp*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, pfRet: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    createElement*: proc(self: ptr IHTMLDocument2, eTag: BSTR, newElem: ptr ptr IHTMLElement): HRESULT {.stdcall.}
+    put_onhelp*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onhelp*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onclick*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onclick*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_ondblclick*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_ondblclick*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onkeyup*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onkeyup*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onkeydown*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onkeydown*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onkeypress*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onkeypress*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onmouseup*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onmouseup*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onmousedown*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onmousedown*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onmousemove*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onmousemove*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onmouseout*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onmouseout*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onmouseover*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onmouseover*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onreadystatechange*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onreadystatechange*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onafterupdate*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onafterupdate*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onrowexit*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onrowexit*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onrowenter*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onrowenter*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_ondragstart*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_ondragstart*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onselectstart*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onselectstart*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    elementFromPoint*: proc(self: ptr IHTMLDocument2, x: LONG, y: LONG, elementHit: ptr ptr IHTMLElement): HRESULT {.stdcall.}
+    get_parentWindow*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLWindow2): HRESULT {.stdcall.}
+    get_styleSheets*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLStyleSheetsCollection): HRESULT {.stdcall.}
+    put_onbeforeupdate*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onbeforeupdate*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onerrorupdate*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
+    get_onerrorupdate*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
+    toString*: proc(self: ptr IHTMLDocument2, String: ptr BSTR): HRESULT {.stdcall.}
+    createStyleSheet*: proc(self: ptr IHTMLDocument2, bstrHref: BSTR, lIndex: LONG, ppnewStyleSheet: ptr ptr IHTMLStyleSheet): HRESULT {.stdcall.}
+  IHTMLEventObj* {.pure.} = object
+    lpVtbl*: ptr IHTMLEventObjVtbl
+  IHTMLEventObjVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    get_srcElement*: proc(self: ptr IHTMLEventObj, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
+    get_altKey*: proc(self: ptr IHTMLEventObj, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_ctrlKey*: proc(self: ptr IHTMLEventObj, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_shiftKey*: proc(self: ptr IHTMLEventObj, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_returnValue*: proc(self: ptr IHTMLEventObj, v: VARIANT): HRESULT {.stdcall.}
+    get_returnValue*: proc(self: ptr IHTMLEventObj, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_cancelBubble*: proc(self: ptr IHTMLEventObj, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_cancelBubble*: proc(self: ptr IHTMLEventObj, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_fromElement*: proc(self: ptr IHTMLEventObj, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
+    get_toElement*: proc(self: ptr IHTMLEventObj, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
+    put_keyCode*: proc(self: ptr IHTMLEventObj, v: LONG): HRESULT {.stdcall.}
+    get_keyCode*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
+    get_button*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
+    get_type*: proc(self: ptr IHTMLEventObj, p: ptr BSTR): HRESULT {.stdcall.}
+    get_qualifier*: proc(self: ptr IHTMLEventObj, p: ptr BSTR): HRESULT {.stdcall.}
+    get_reason*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
+    get_x*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
+    get_y*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
+    get_clientX*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
+    get_clientY*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
+    get_offsetX*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
+    get_offsetY*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
+    get_screenX*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
+    get_screenY*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
+    get_srcFilter*: proc(self: ptr IHTMLEventObj, p: ptr ptr IDispatch): HRESULT {.stdcall.}
+  IHTMLScreen* {.pure.} = object
+    lpVtbl*: ptr IHTMLScreenVtbl
+  IHTMLScreenVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    get_colorDepth*: proc(self: ptr IHTMLScreen, p: ptr LONG): HRESULT {.stdcall.}
+    put_bufferDepth*: proc(self: ptr IHTMLScreen, v: LONG): HRESULT {.stdcall.}
+    get_bufferDepth*: proc(self: ptr IHTMLScreen, p: ptr LONG): HRESULT {.stdcall.}
+    get_width*: proc(self: ptr IHTMLScreen, p: ptr LONG): HRESULT {.stdcall.}
+    get_height*: proc(self: ptr IHTMLScreen, p: ptr LONG): HRESULT {.stdcall.}
+    put_updateInterval*: proc(self: ptr IHTMLScreen, v: LONG): HRESULT {.stdcall.}
+    get_updateInterval*: proc(self: ptr IHTMLScreen, p: ptr LONG): HRESULT {.stdcall.}
+    get_availHeight*: proc(self: ptr IHTMLScreen, p: ptr LONG): HRESULT {.stdcall.}
+    get_availWidth*: proc(self: ptr IHTMLScreen, p: ptr LONG): HRESULT {.stdcall.}
+    get_fontSmoothingEnabled*: proc(self: ptr IHTMLScreen, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+  IHTMLFormElement* {.pure.} = object
+    lpVtbl*: ptr IHTMLFormElementVtbl
+  IHTMLFormElementVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    put_action*: proc(self: ptr IHTMLFormElement, v: BSTR): HRESULT {.stdcall.}
+    get_action*: proc(self: ptr IHTMLFormElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_dir*: proc(self: ptr IHTMLFormElement, v: BSTR): HRESULT {.stdcall.}
+    get_dir*: proc(self: ptr IHTMLFormElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_encoding*: proc(self: ptr IHTMLFormElement, v: BSTR): HRESULT {.stdcall.}
+    get_encoding*: proc(self: ptr IHTMLFormElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_method*: proc(self: ptr IHTMLFormElement, v: BSTR): HRESULT {.stdcall.}
+    get_method*: proc(self: ptr IHTMLFormElement, p: ptr BSTR): HRESULT {.stdcall.}
+    get_elements*: proc(self: ptr IHTMLFormElement, p: ptr ptr IDispatch): HRESULT {.stdcall.}
+    put_target*: proc(self: ptr IHTMLFormElement, v: BSTR): HRESULT {.stdcall.}
+    get_target*: proc(self: ptr IHTMLFormElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_name*: proc(self: ptr IHTMLFormElement, v: BSTR): HRESULT {.stdcall.}
+    get_name*: proc(self: ptr IHTMLFormElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_onsubmit*: proc(self: ptr IHTMLFormElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onsubmit*: proc(self: ptr IHTMLFormElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onreset*: proc(self: ptr IHTMLFormElement, v: VARIANT): HRESULT {.stdcall.}
+    get_onreset*: proc(self: ptr IHTMLFormElement, p: ptr VARIANT): HRESULT {.stdcall.}
+    submit*: proc(self: ptr IHTMLFormElement): HRESULT {.stdcall.}
+    reset*: proc(self: ptr IHTMLFormElement): HRESULT {.stdcall.}
+    put_length*: proc(self: ptr IHTMLFormElement, v: LONG): HRESULT {.stdcall.}
+    get_length*: proc(self: ptr IHTMLFormElement, p: ptr LONG): HRESULT {.stdcall.}
+    get_newEnum*: proc(self: ptr IHTMLFormElement, p: ptr ptr IUnknown): HRESULT {.stdcall.}
+    item*: proc(self: ptr IHTMLFormElement, name: VARIANT, index: VARIANT, pdisp: ptr ptr IDispatch): HRESULT {.stdcall.}
+    tags*: proc(self: ptr IHTMLFormElement, tagName: VARIANT, pdisp: ptr ptr IDispatch): HRESULT {.stdcall.}
+  IHTMLOptionElement* {.pure.} = object
+    lpVtbl*: ptr IHTMLOptionElementVtbl
+  IHTMLOptionElementVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    put_selected*: proc(self: ptr IHTMLOptionElement, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_selected*: proc(self: ptr IHTMLOptionElement, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_value*: proc(self: ptr IHTMLOptionElement, v: BSTR): HRESULT {.stdcall.}
+    get_value*: proc(self: ptr IHTMLOptionElement, p: ptr BSTR): HRESULT {.stdcall.}
+    put_defaultSelected*: proc(self: ptr IHTMLOptionElement, v: VARIANT_BOOL): HRESULT {.stdcall.}
+    get_defaultSelected*: proc(self: ptr IHTMLOptionElement, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    put_index*: proc(self: ptr IHTMLOptionElement, v: LONG): HRESULT {.stdcall.}
+    get_index*: proc(self: ptr IHTMLOptionElement, p: ptr LONG): HRESULT {.stdcall.}
+    put_text*: proc(self: ptr IHTMLOptionElement, v: BSTR): HRESULT {.stdcall.}
+    get_text*: proc(self: ptr IHTMLOptionElement, p: ptr BSTR): HRESULT {.stdcall.}
+    get_form*: proc(self: ptr IHTMLOptionElement, p: ptr ptr IHTMLFormElement): HRESULT {.stdcall.}
+  IHTMLOptionElementFactory* {.pure.} = object
+    lpVtbl*: ptr IHTMLOptionElementFactoryVtbl
+  IHTMLOptionElementFactoryVtbl* {.pure, inheritable.} = object of IDispatchVtbl
+    create*: proc(self: ptr IHTMLOptionElementFactory, text: VARIANT, value: VARIANT, defaultselected: VARIANT, selected: VARIANT, a: ptr ptr IHTMLOptionElement): HRESULT {.stdcall.}
+  IHTMLWindow2* {.pure.} = object
+    lpVtbl*: ptr IHTMLWindow2Vtbl
+  IHTMLWindow2Vtbl* {.pure, inheritable.} = object of IHTMLFramesCollection2Vtbl
+    get_frames*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLFramesCollection2): HRESULT {.stdcall.}
+    put_defaultStatus*: proc(self: ptr IHTMLWindow2, v: BSTR): HRESULT {.stdcall.}
+    get_defaultStatus*: proc(self: ptr IHTMLWindow2, p: ptr BSTR): HRESULT {.stdcall.}
+    put_status*: proc(self: ptr IHTMLWindow2, v: BSTR): HRESULT {.stdcall.}
+    get_status*: proc(self: ptr IHTMLWindow2, p: ptr BSTR): HRESULT {.stdcall.}
+    setTimeout*: proc(self: ptr IHTMLWindow2, expression: BSTR, msec: LONG, language: ptr VARIANT, timerID: ptr LONG): HRESULT {.stdcall.}
+    clearTimeout*: proc(self: ptr IHTMLWindow2, timerID: LONG): HRESULT {.stdcall.}
+    alert*: proc(self: ptr IHTMLWindow2, message: BSTR): HRESULT {.stdcall.}
+    confirm*: proc(self: ptr IHTMLWindow2, message: BSTR, confirmed: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    prompt*: proc(self: ptr IHTMLWindow2, message: BSTR, defstr: BSTR, textdata: ptr VARIANT): HRESULT {.stdcall.}
+    get_Image*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLImageElementFactory): HRESULT {.stdcall.}
+    get_location*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLLocation): HRESULT {.stdcall.}
+    get_history*: proc(self: ptr IHTMLWindow2, p: ptr ptr IOmHistory): HRESULT {.stdcall.}
+    close*: proc(self: ptr IHTMLWindow2): HRESULT {.stdcall.}
+    put_opener*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
+    get_opener*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
+    get_navigator*: proc(self: ptr IHTMLWindow2, p: ptr ptr IOmNavigator): HRESULT {.stdcall.}
+    put_name*: proc(self: ptr IHTMLWindow2, v: BSTR): HRESULT {.stdcall.}
+    get_name*: proc(self: ptr IHTMLWindow2, p: ptr BSTR): HRESULT {.stdcall.}
+    get_parent*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLWindow2): HRESULT {.stdcall.}
+    open*: proc(self: ptr IHTMLWindow2, url: BSTR, name: BSTR, features: BSTR, replace: VARIANT_BOOL, pomWindowResult: ptr ptr IHTMLWindow2): HRESULT {.stdcall.}
+    get_self*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLWindow2): HRESULT {.stdcall.}
+    get_top*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLWindow2): HRESULT {.stdcall.}
+    get_window*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLWindow2): HRESULT {.stdcall.}
+    navigate*: proc(self: ptr IHTMLWindow2, url: BSTR): HRESULT {.stdcall.}
+    put_onfocus*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
+    get_onfocus*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onblur*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
+    get_onblur*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onload*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
+    get_onload*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onbeforeunload*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
+    get_onbeforeunload*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onunload*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
+    get_onunload*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onhelp*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
+    get_onhelp*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onerror*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
+    get_onerror*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onresize*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
+    get_onresize*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
+    put_onscroll*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
+    get_onscroll*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
+    get_document*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLDocument2): HRESULT {.stdcall.}
+    get_event*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLEventObj): HRESULT {.stdcall.}
+    get_newEnum*: proc(self: ptr IHTMLWindow2, p: ptr ptr IUnknown): HRESULT {.stdcall.}
+    showModalDialog*: proc(self: ptr IHTMLWindow2, dialog: BSTR, varArgIn: ptr VARIANT, varOptions: ptr VARIANT, varArgOut: ptr VARIANT): HRESULT {.stdcall.}
+    showHelp*: proc(self: ptr IHTMLWindow2, helpURL: BSTR, helpArg: VARIANT, features: BSTR): HRESULT {.stdcall.}
+    get_screen*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLScreen): HRESULT {.stdcall.}
+    get_Option*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLOptionElementFactory): HRESULT {.stdcall.}
+    focus*: proc(self: ptr IHTMLWindow2): HRESULT {.stdcall.}
+    get_closed*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    blur*: proc(self: ptr IHTMLWindow2): HRESULT {.stdcall.}
+    scroll*: proc(self: ptr IHTMLWindow2, x: LONG, y: LONG): HRESULT {.stdcall.}
+    get_clientInformation*: proc(self: ptr IHTMLWindow2, p: ptr ptr IOmNavigator): HRESULT {.stdcall.}
+    setInterval*: proc(self: ptr IHTMLWindow2, expression: BSTR, msec: LONG, language: ptr VARIANT, timerID: ptr LONG): HRESULT {.stdcall.}
+    clearInterval*: proc(self: ptr IHTMLWindow2, timerID: LONG): HRESULT {.stdcall.}
+    put_offscreenBuffering*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
+    get_offscreenBuffering*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
+    execScript*: proc(self: ptr IHTMLWindow2, code: BSTR, language: BSTR, pvarRet: ptr VARIANT): HRESULT {.stdcall.}
+    toString*: proc(self: ptr IHTMLWindow2, String: ptr BSTR): HRESULT {.stdcall.}
+    scrollBy*: proc(self: ptr IHTMLWindow2, x: LONG, y: LONG): HRESULT {.stdcall.}
+    scrollTo*: proc(self: ptr IHTMLWindow2, x: LONG, y: LONG): HRESULT {.stdcall.}
+    moveTo*: proc(self: ptr IHTMLWindow2, x: LONG, y: LONG): HRESULT {.stdcall.}
+    moveBy*: proc(self: ptr IHTMLWindow2, x: LONG, y: LONG): HRESULT {.stdcall.}
+    resizeTo*: proc(self: ptr IHTMLWindow2, x: LONG, y: LONG): HRESULT {.stdcall.}
+    resizeBy*: proc(self: ptr IHTMLWindow2, x: LONG, y: LONG): HRESULT {.stdcall.}
+    get_external*: proc(self: ptr IHTMLWindow2, p: ptr ptr IDispatch): HRESULT {.stdcall.}
+  SHOWMODELESSHTMLDIALOGFN* = proc (hwndParent: HWND, pmk: ptr IMoniker, pvarArgIn: ptr VARIANT, pvarOptions: ptr VARIANT, ppWindow: ptr ptr IHTMLWindow2): HRESULT {.stdcall.}
+  IEREGISTERXMLNSFN* = proc (lpszURI: LPCWSTR, clsid: GUID, fMachine: BOOL): HRESULT {.stdcall.}
+  IEISXMLNSREGISTEREDFN* = proc (lpszURI: LPCWSTR, pCLSID: ptr GUID): HRESULT {.stdcall.}
   DXGI_SAMPLE_DESC* {.pure.} = object
     Count*: UINT
     Quality*: UINT
@@ -4195,7 +4818,6 @@ type
     rcViewport*: RECT
     hrgnUpdate*: HRGN
     xform*: HTML_PAINT_XFORM
-  HostDialogHelper* {.pure.} = object
   DOCHOSTUIINFO* {.pure.} = object
     cbSize*: ULONG
     dwFlags*: DWORD
@@ -4238,12 +4860,6 @@ type
     lpVtbl*: ptr IProvideRuntimeContextVtbl
   IProvideRuntimeContextVtbl* {.pure, inheritable.} = object of IUnknownVtbl
     GetCurrentSourceContext*: proc(self: ptr IProvideRuntimeContext, pdwContext: ptr DWORD_PTR, pfExecutingGlobalCode: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-  IHTMLFiltersCollection* {.pure.} = object
-    lpVtbl*: ptr IHTMLFiltersCollectionVtbl
-  IHTMLFiltersCollectionVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    get_length*: proc(self: ptr IHTMLFiltersCollection, p: ptr LONG): HRESULT {.stdcall.}
-    get_newEnum*: proc(self: ptr IHTMLFiltersCollection, p: ptr ptr IUnknown): HRESULT {.stdcall.}
-    item*: proc(self: ptr IHTMLFiltersCollection, pvarIndex: ptr VARIANT, pvarResult: ptr VARIANT): HRESULT {.stdcall.}
   IIE70DispatchEx* {.pure.} = object
     lpVtbl*: ptr IIE70DispatchExVtbl
   IIE70DispatchExVtbl* {.pure, inheritable.} = object of IDispatchExVtbl
@@ -4874,188 +5490,6 @@ type
   DispHTMLCSSStyleDeclaration* {.pure.} = object
     lpVtbl*: ptr DispHTMLCSSStyleDeclarationVtbl
   DispHTMLCSSStyleDeclarationVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-  IHTMLStyle* {.pure.} = object
-    lpVtbl*: ptr IHTMLStyleVtbl
-  IHTMLStyleVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    put_fontFamily*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_fontFamily*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_fontStyle*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_fontStyle*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_fontVariant*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_fontVariant*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_fontWeight*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_fontWeight*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_fontSize*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_fontSize*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_font*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_font*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_color*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_color*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_background*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_background*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_backgroundColor*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_backgroundColor*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_backgroundImage*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_backgroundImage*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_backgroundRepeat*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_backgroundRepeat*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_backgroundAttachment*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_backgroundAttachment*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_backgroundPosition*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_backgroundPosition*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_backgroundPositionX*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_backgroundPositionX*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_backgroundPositionY*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_backgroundPositionY*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_wordSpacing*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_wordSpacing*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_letterSpacing*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_letterSpacing*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_textDecoration*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_textDecoration*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_textDecorationNone*: proc(self: ptr IHTMLStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_textDecorationNone*: proc(self: ptr IHTMLStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_textDecorationUnderline*: proc(self: ptr IHTMLStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_textDecorationUnderline*: proc(self: ptr IHTMLStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_textDecorationOverline*: proc(self: ptr IHTMLStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_textDecorationOverline*: proc(self: ptr IHTMLStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_textDecorationLineThrough*: proc(self: ptr IHTMLStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_textDecorationLineThrough*: proc(self: ptr IHTMLStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_textDecorationBlink*: proc(self: ptr IHTMLStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_textDecorationBlink*: proc(self: ptr IHTMLStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_verticalAlign*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_verticalAlign*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_textTransform*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_textTransform*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_textAlign*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_textAlign*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_textIndent*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_textIndent*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_lineHeight*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_lineHeight*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_marginTop*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_marginTop*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_marginRight*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_marginRight*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_marginBottom*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_marginBottom*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_marginLeft*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_marginLeft*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_margin*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_margin*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_paddingTop*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_paddingTop*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_paddingRight*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_paddingRight*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_paddingBottom*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_paddingBottom*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_paddingLeft*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_paddingLeft*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_padding*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_padding*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_border*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_border*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderTop*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderTop*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderRight*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderRight*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderBottom*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderBottom*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderLeft*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderLeft*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderColor*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderColor*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderTopColor*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderTopColor*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderRightColor*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderRightColor*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderBottomColor*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderBottomColor*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderLeftColor*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderLeftColor*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderWidth*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderWidth*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderTopWidth*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderTopWidth*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderRightWidth*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderRightWidth*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderBottomWidth*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderBottomWidth*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderLeftWidth*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderLeftWidth*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderStyle*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderStyle*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderTopStyle*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderTopStyle*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderRightStyle*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderRightStyle*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderBottomStyle*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderBottomStyle*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderLeftStyle*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderLeftStyle*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_width*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_width*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_height*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_height*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_styleFloat*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_styleFloat*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_clear*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_clear*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_display*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_display*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_visibility*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_visibility*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_listStyleType*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_listStyleType*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_listStylePosition*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_listStylePosition*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_listStyleImage*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_listStyleImage*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_listStyle*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_listStyle*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_whiteSpace*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_whiteSpace*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_top*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_top*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_left*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_left*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    get_position*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_zIndex*: proc(self: ptr IHTMLStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_zIndex*: proc(self: ptr IHTMLStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_overflow*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_overflow*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_pageBreakBefore*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_pageBreakBefore*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_pageBreakAfter*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_pageBreakAfter*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_cssText*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_cssText*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_pixelTop*: proc(self: ptr IHTMLStyle, v: LONG): HRESULT {.stdcall.}
-    get_pixelTop*: proc(self: ptr IHTMLStyle, p: ptr LONG): HRESULT {.stdcall.}
-    put_pixelLeft*: proc(self: ptr IHTMLStyle, v: LONG): HRESULT {.stdcall.}
-    get_pixelLeft*: proc(self: ptr IHTMLStyle, p: ptr LONG): HRESULT {.stdcall.}
-    put_pixelWidth*: proc(self: ptr IHTMLStyle, v: LONG): HRESULT {.stdcall.}
-    get_pixelWidth*: proc(self: ptr IHTMLStyle, p: ptr LONG): HRESULT {.stdcall.}
-    put_pixelHeight*: proc(self: ptr IHTMLStyle, v: LONG): HRESULT {.stdcall.}
-    get_pixelHeight*: proc(self: ptr IHTMLStyle, p: ptr LONG): HRESULT {.stdcall.}
-    put_posTop*: proc(self: ptr IHTMLStyle, v: float32): HRESULT {.stdcall.}
-    get_posTop*: proc(self: ptr IHTMLStyle, p: ptr float32): HRESULT {.stdcall.}
-    put_posLeft*: proc(self: ptr IHTMLStyle, v: float32): HRESULT {.stdcall.}
-    get_posLeft*: proc(self: ptr IHTMLStyle, p: ptr float32): HRESULT {.stdcall.}
-    put_posWidth*: proc(self: ptr IHTMLStyle, v: float32): HRESULT {.stdcall.}
-    get_posWidth*: proc(self: ptr IHTMLStyle, p: ptr float32): HRESULT {.stdcall.}
-    put_posHeight*: proc(self: ptr IHTMLStyle, v: float32): HRESULT {.stdcall.}
-    get_posHeight*: proc(self: ptr IHTMLStyle, p: ptr float32): HRESULT {.stdcall.}
-    put_cursor*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_cursor*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_clip*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_clip*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_filter*: proc(self: ptr IHTMLStyle, v: BSTR): HRESULT {.stdcall.}
-    get_filter*: proc(self: ptr IHTMLStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    setAttribute*: proc(self: ptr IHTMLStyle, strAttributeName: BSTR, AttributeValue: VARIANT, lFlags: LONG): HRESULT {.stdcall.}
-    getAttribute*: proc(self: ptr IHTMLStyle, strAttributeName: BSTR, lFlags: LONG, AttributeValue: ptr VARIANT): HRESULT {.stdcall.}
-    removeAttribute*: proc(self: ptr IHTMLStyle, strAttributeName: BSTR, lFlags: LONG, pfSuccess: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    toString*: proc(self: ptr IHTMLStyle, String: ptr BSTR): HRESULT {.stdcall.}
   IHTMLStyle2* {.pure.} = object
     lpVtbl*: ptr IHTMLStyle2Vtbl
   IHTMLStyle2Vtbl* {.pure, inheritable.} = object of IDispatchVtbl
@@ -5208,171 +5642,6 @@ type
     get_msBlockProgression*: proc(self: ptr IHTMLStyle6, p: ptr BSTR): HRESULT {.stdcall.}
     put_quotes*: proc(self: ptr IHTMLStyle6, v: BSTR): HRESULT {.stdcall.}
     get_quotes*: proc(self: ptr IHTMLStyle6, p: ptr BSTR): HRESULT {.stdcall.}
-  IHTMLRuleStyle* {.pure.} = object
-    lpVtbl*: ptr IHTMLRuleStyleVtbl
-  IHTMLRuleStyleVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    put_fontFamily*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_fontFamily*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_fontStyle*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_fontStyle*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_fontVariant*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_fontVariant*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_fontWeight*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_fontWeight*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_fontSize*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_fontSize*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_font*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_font*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_color*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_color*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_background*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_background*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_backgroundColor*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_backgroundColor*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_backgroundImage*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_backgroundImage*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_backgroundRepeat*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_backgroundRepeat*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_backgroundAttachment*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_backgroundAttachment*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_backgroundPosition*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_backgroundPosition*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_backgroundPositionX*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_backgroundPositionX*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_backgroundPositionY*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_backgroundPositionY*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_wordSpacing*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_wordSpacing*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_letterSpacing*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_letterSpacing*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_textDecoration*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_textDecoration*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_textDecorationNone*: proc(self: ptr IHTMLRuleStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_textDecorationNone*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_textDecorationUnderline*: proc(self: ptr IHTMLRuleStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_textDecorationUnderline*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_textDecorationOverline*: proc(self: ptr IHTMLRuleStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_textDecorationOverline*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_textDecorationLineThrough*: proc(self: ptr IHTMLRuleStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_textDecorationLineThrough*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_textDecorationBlink*: proc(self: ptr IHTMLRuleStyle, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_textDecorationBlink*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_verticalAlign*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_verticalAlign*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_textTransform*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_textTransform*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_textAlign*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_textAlign*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_textIndent*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_textIndent*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_lineHeight*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_lineHeight*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_marginTop*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_marginTop*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_marginRight*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_marginRight*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_marginBottom*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_marginBottom*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_marginLeft*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_marginLeft*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_margin*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_margin*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_paddingTop*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_paddingTop*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_paddingRight*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_paddingRight*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_paddingBottom*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_paddingBottom*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_paddingLeft*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_paddingLeft*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_padding*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_padding*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_border*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_border*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderTop*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderTop*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderRight*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderRight*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderBottom*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderBottom*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderLeft*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderLeft*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderColor*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderColor*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderTopColor*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderTopColor*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderRightColor*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderRightColor*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderBottomColor*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderBottomColor*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderLeftColor*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderLeftColor*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderWidth*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderWidth*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderTopWidth*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderTopWidth*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderRightWidth*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderRightWidth*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderBottomWidth*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderBottomWidth*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderLeftWidth*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_borderLeftWidth*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_borderStyle*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderStyle*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderTopStyle*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderTopStyle*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderRightStyle*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderRightStyle*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderBottomStyle*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderBottomStyle*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_borderLeftStyle*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_borderLeftStyle*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_width*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_width*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_height*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_height*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_styleFloat*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_styleFloat*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_clear*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_clear*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_display*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_display*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_visibility*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_visibility*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_listStyleType*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_listStyleType*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_listStylePosition*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_listStylePosition*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_listStyleImage*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_listStyleImage*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_listStyle*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_listStyle*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_whiteSpace*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_whiteSpace*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_top*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_top*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_left*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_left*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    get_position*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_zIndex*: proc(self: ptr IHTMLRuleStyle, v: VARIANT): HRESULT {.stdcall.}
-    get_zIndex*: proc(self: ptr IHTMLRuleStyle, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_overflow*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_overflow*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_pageBreakBefore*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_pageBreakBefore*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_pageBreakAfter*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_pageBreakAfter*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_cssText*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_cssText*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_cursor*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_cursor*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_clip*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_clip*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    put_filter*: proc(self: ptr IHTMLRuleStyle, v: BSTR): HRESULT {.stdcall.}
-    get_filter*: proc(self: ptr IHTMLRuleStyle, p: ptr BSTR): HRESULT {.stdcall.}
-    setAttribute*: proc(self: ptr IHTMLRuleStyle, strAttributeName: BSTR, AttributeValue: VARIANT, lFlags: LONG): HRESULT {.stdcall.}
-    getAttribute*: proc(self: ptr IHTMLRuleStyle, strAttributeName: BSTR, lFlags: LONG, AttributeValue: ptr VARIANT): HRESULT {.stdcall.}
-    removeAttribute*: proc(self: ptr IHTMLRuleStyle, strAttributeName: BSTR, lFlags: LONG, pfSuccess: ptr VARIANT_BOOL): HRESULT {.stdcall.}
   IHTMLRuleStyle2* {.pure.} = object
     lpVtbl*: ptr IHTMLRuleStyle2Vtbl
   IHTMLRuleStyle2Vtbl* {.pure, inheritable.} = object of IDispatchVtbl
@@ -5528,138 +5797,6 @@ type
   DispHTMLRuleStyle* {.pure.} = object
     lpVtbl*: ptr DispHTMLRuleStyleVtbl
   DispHTMLRuleStyleVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-  IHTMLElement* {.pure.} = object
-    lpVtbl*: ptr IHTMLElementVtbl
-  IHTMLElementVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    setAttribute*: proc(self: ptr IHTMLElement, strAttributeName: BSTR, AttributeValue: VARIANT, lFlags: LONG): HRESULT {.stdcall.}
-    getAttribute*: proc(self: ptr IHTMLElement, strAttributeName: BSTR, lFlags: LONG, AttributeValue: ptr VARIANT): HRESULT {.stdcall.}
-    removeAttribute*: proc(self: ptr IHTMLElement, strAttributeName: BSTR, lFlags: LONG, pfSuccess: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_className*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
-    get_className*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_id*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
-    get_id*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
-    get_tagName*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
-    get_parentElement*: proc(self: ptr IHTMLElement, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
-    get_style*: proc(self: ptr IHTMLElement, p: ptr ptr IHTMLStyle): HRESULT {.stdcall.}
-    put_onhelp*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onhelp*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onclick*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onclick*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_ondblclick*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_ondblclick*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onkeydown*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onkeydown*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onkeyup*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onkeyup*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onkeypress*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onkeypress*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onmouseout*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onmouseout*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onmouseover*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onmouseover*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onmousemove*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onmousemove*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onmousedown*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onmousedown*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onmouseup*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onmouseup*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    get_document*: proc(self: ptr IHTMLElement, p: ptr ptr IDispatch): HRESULT {.stdcall.}
-    put_title*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
-    get_title*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_language*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
-    get_language*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_onselectstart*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onselectstart*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    scrollIntoView*: proc(self: ptr IHTMLElement, varargStart: VARIANT): HRESULT {.stdcall.}
-    contains*: proc(self: ptr IHTMLElement, pChild: ptr IHTMLElement, pfResult: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    get_sourceIndex*: proc(self: ptr IHTMLElement, p: ptr LONG): HRESULT {.stdcall.}
-    get_recordNumber*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_lang*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
-    get_lang*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
-    get_offsetLeft*: proc(self: ptr IHTMLElement, p: ptr LONG): HRESULT {.stdcall.}
-    get_offsetTop*: proc(self: ptr IHTMLElement, p: ptr LONG): HRESULT {.stdcall.}
-    get_offsetWidth*: proc(self: ptr IHTMLElement, p: ptr LONG): HRESULT {.stdcall.}
-    get_offsetHeight*: proc(self: ptr IHTMLElement, p: ptr LONG): HRESULT {.stdcall.}
-    get_offsetParent*: proc(self: ptr IHTMLElement, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
-    put_innerHTML*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
-    get_innerHTML*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_innerText*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
-    get_innerText*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_outerHTML*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
-    get_outerHTML*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_outerText*: proc(self: ptr IHTMLElement, v: BSTR): HRESULT {.stdcall.}
-    get_outerText*: proc(self: ptr IHTMLElement, p: ptr BSTR): HRESULT {.stdcall.}
-    insertAdjacentHTML*: proc(self: ptr IHTMLElement, where: BSTR, html: BSTR): HRESULT {.stdcall.}
-    insertAdjacentText*: proc(self: ptr IHTMLElement, where: BSTR, text: BSTR): HRESULT {.stdcall.}
-    get_parentTextEdit*: proc(self: ptr IHTMLElement, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
-    get_isTextEdit*: proc(self: ptr IHTMLElement, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    click*: proc(self: ptr IHTMLElement): HRESULT {.stdcall.}
-    get_filters*: proc(self: ptr IHTMLElement, p: ptr ptr IHTMLFiltersCollection): HRESULT {.stdcall.}
-    put_ondragstart*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_ondragstart*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    toString*: proc(self: ptr IHTMLElement, String: ptr BSTR): HRESULT {.stdcall.}
-    put_onbeforeupdate*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onbeforeupdate*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onafterupdate*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onafterupdate*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onerrorupdate*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onerrorupdate*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onrowexit*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onrowexit*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onrowenter*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onrowenter*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_ondatasetchanged*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_ondatasetchanged*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_ondataavailable*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_ondataavailable*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_ondatasetcomplete*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_ondatasetcomplete*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onfilterchange*: proc(self: ptr IHTMLElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onfilterchange*: proc(self: ptr IHTMLElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    get_children*: proc(self: ptr IHTMLElement, p: ptr ptr IDispatch): HRESULT {.stdcall.}
-    get_all*: proc(self: ptr IHTMLElement, p: ptr ptr IDispatch): HRESULT {.stdcall.}
-  IHTMLStyleSheetsCollection* {.pure.} = object
-    lpVtbl*: ptr IHTMLStyleSheetsCollectionVtbl
-  IHTMLStyleSheetsCollectionVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    get_length*: proc(self: ptr IHTMLStyleSheetsCollection, p: ptr LONG): HRESULT {.stdcall.}
-    get_newEnum*: proc(self: ptr IHTMLStyleSheetsCollection, p: ptr ptr IUnknown): HRESULT {.stdcall.}
-    item*: proc(self: ptr IHTMLStyleSheetsCollection, pvarIndex: ptr VARIANT, pvarResult: ptr VARIANT): HRESULT {.stdcall.}
-  IHTMLStyleSheetRule* {.pure.} = object
-    lpVtbl*: ptr IHTMLStyleSheetRuleVtbl
-  IHTMLStyleSheetRuleVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    put_selectorText*: proc(self: ptr IHTMLStyleSheetRule, v: BSTR): HRESULT {.stdcall.}
-    get_selectorText*: proc(self: ptr IHTMLStyleSheetRule, p: ptr BSTR): HRESULT {.stdcall.}
-    get_style*: proc(self: ptr IHTMLStyleSheetRule, p: ptr ptr IHTMLRuleStyle): HRESULT {.stdcall.}
-    get_readOnly*: proc(self: ptr IHTMLStyleSheetRule, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-  IHTMLStyleSheetRulesCollection* {.pure.} = object
-    lpVtbl*: ptr IHTMLStyleSheetRulesCollectionVtbl
-  IHTMLStyleSheetRulesCollectionVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    get_length*: proc(self: ptr IHTMLStyleSheetRulesCollection, p: ptr LONG): HRESULT {.stdcall.}
-    item*: proc(self: ptr IHTMLStyleSheetRulesCollection, index: LONG, ppHTMLStyleSheetRule: ptr ptr IHTMLStyleSheetRule): HRESULT {.stdcall.}
-  IHTMLStyleSheet* {.pure.} = object
-    lpVtbl*: ptr IHTMLStyleSheetVtbl
-  IHTMLStyleSheetVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    put_title*: proc(self: ptr IHTMLStyleSheet, v: BSTR): HRESULT {.stdcall.}
-    get_title*: proc(self: ptr IHTMLStyleSheet, p: ptr BSTR): HRESULT {.stdcall.}
-    get_parentStyleSheet*: proc(self: ptr IHTMLStyleSheet, p: ptr ptr IHTMLStyleSheet): HRESULT {.stdcall.}
-    get_owningElement*: proc(self: ptr IHTMLStyleSheet, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
-    put_disabled*: proc(self: ptr IHTMLStyleSheet, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_disabled*: proc(self: ptr IHTMLStyleSheet, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    get_readOnly*: proc(self: ptr IHTMLStyleSheet, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    get_imports*: proc(self: ptr IHTMLStyleSheet, p: ptr ptr IHTMLStyleSheetsCollection): HRESULT {.stdcall.}
-    put_href*: proc(self: ptr IHTMLStyleSheet, v: BSTR): HRESULT {.stdcall.}
-    get_href*: proc(self: ptr IHTMLStyleSheet, p: ptr BSTR): HRESULT {.stdcall.}
-    get_type*: proc(self: ptr IHTMLStyleSheet, p: ptr BSTR): HRESULT {.stdcall.}
-    get_id*: proc(self: ptr IHTMLStyleSheet, p: ptr BSTR): HRESULT {.stdcall.}
-    addImport*: proc(self: ptr IHTMLStyleSheet, bstrURL: BSTR, lIndex: LONG, plIndex: ptr LONG): HRESULT {.stdcall.}
-    addRule*: proc(self: ptr IHTMLStyleSheet, bstrSelector: BSTR, bstrStyle: BSTR, lIndex: LONG, plNewIndex: ptr LONG): HRESULT {.stdcall.}
-    removeImport*: proc(self: ptr IHTMLStyleSheet, lIndex: LONG): HRESULT {.stdcall.}
-    removeRule*: proc(self: ptr IHTMLStyleSheet, lIndex: LONG): HRESULT {.stdcall.}
-    put_media*: proc(self: ptr IHTMLStyleSheet, v: BSTR): HRESULT {.stdcall.}
-    get_media*: proc(self: ptr IHTMLStyleSheet, p: ptr BSTR): HRESULT {.stdcall.}
-    put_cssText*: proc(self: ptr IHTMLStyleSheet, v: BSTR): HRESULT {.stdcall.}
-    get_cssText*: proc(self: ptr IHTMLStyleSheet, p: ptr BSTR): HRESULT {.stdcall.}
-    get_rules*: proc(self: ptr IHTMLStyleSheet, p: ptr ptr IHTMLStyleSheetRulesCollection): HRESULT {.stdcall.}
   IHTMLCSSRule* {.pure.} = object
     lpVtbl*: ptr IHTMLCSSRuleVtbl
   IHTMLCSSRuleVtbl* {.pure, inheritable.} = object of IDispatchVtbl
@@ -6003,15 +6140,6 @@ type
     appendChild*: proc(self: ptr IHTMLDOMAttribute2, newChild: ptr IHTMLDOMNode, node: ptr ptr IHTMLDOMNode): HRESULT {.stdcall.}
     hasChildNodes*: proc(self: ptr IHTMLDOMAttribute2, fChildren: ptr VARIANT_BOOL): HRESULT {.stdcall.}
     cloneNode*: proc(self: ptr IHTMLDOMAttribute2, fDeep: VARIANT_BOOL, clonedNode: ptr ptr IHTMLDOMAttribute): HRESULT {.stdcall.}
-  IHTMLElementCollection* {.pure.} = object
-    lpVtbl*: ptr IHTMLElementCollectionVtbl
-  IHTMLElementCollectionVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    toString*: proc(self: ptr IHTMLElementCollection, String: ptr BSTR): HRESULT {.stdcall.}
-    put_length*: proc(self: ptr IHTMLElementCollection, v: LONG): HRESULT {.stdcall.}
-    get_length*: proc(self: ptr IHTMLElementCollection, p: ptr LONG): HRESULT {.stdcall.}
-    get_newEnum*: proc(self: ptr IHTMLElementCollection, p: ptr ptr IUnknown): HRESULT {.stdcall.}
-    item*: proc(self: ptr IHTMLElementCollection, name: VARIANT, index: VARIANT, pdisp: ptr ptr IDispatch): HRESULT {.stdcall.}
-    tags*: proc(self: ptr IHTMLElementCollection, tagName: VARIANT, pdisp: ptr ptr IDispatch): HRESULT {.stdcall.}
   IHTMLElement2* {.pure.} = object
     lpVtbl*: ptr IHTMLElement2Vtbl
   IHTMLElement2Vtbl* {.pure, inheritable.} = object of IDispatchVtbl
@@ -6179,419 +6307,6 @@ type
     get_publicId*: proc(self: ptr IDOMDocumentType, p: ptr VARIANT): HRESULT {.stdcall.}
     get_systemId*: proc(self: ptr IDOMDocumentType, p: ptr VARIANT): HRESULT {.stdcall.}
     get_internalSubset*: proc(self: ptr IDOMDocumentType, p: ptr VARIANT): HRESULT {.stdcall.}
-  IHTMLFramesCollection2* {.pure.} = object
-    lpVtbl*: ptr IHTMLFramesCollection2Vtbl
-  IHTMLFramesCollection2Vtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    item*: proc(self: ptr IHTMLFramesCollection2, pvarIndex: ptr VARIANT, pvarResult: ptr VARIANT): HRESULT {.stdcall.}
-    get_length*: proc(self: ptr IHTMLFramesCollection2, p: ptr LONG): HRESULT {.stdcall.}
-  IHTMLImgElement* {.pure.} = object
-    lpVtbl*: ptr IHTMLImgElementVtbl
-  IHTMLImgElementVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    put_isMap*: proc(self: ptr IHTMLImgElement, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_isMap*: proc(self: ptr IHTMLImgElement, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_useMap*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
-    get_useMap*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    get_mimeType*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    get_fileSize*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    get_fileCreatedDate*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    get_fileModifiedDate*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    get_fileUpdatedDate*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    get_protocol*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    get_href*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    get_nameProp*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_border*: proc(self: ptr IHTMLImgElement, v: VARIANT): HRESULT {.stdcall.}
-    get_border*: proc(self: ptr IHTMLImgElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_vspace*: proc(self: ptr IHTMLImgElement, v: LONG): HRESULT {.stdcall.}
-    get_vspace*: proc(self: ptr IHTMLImgElement, p: ptr LONG): HRESULT {.stdcall.}
-    put_hspace*: proc(self: ptr IHTMLImgElement, v: LONG): HRESULT {.stdcall.}
-    get_hspace*: proc(self: ptr IHTMLImgElement, p: ptr LONG): HRESULT {.stdcall.}
-    put_alt*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
-    get_alt*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_src*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
-    get_src*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_lowsrc*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
-    get_lowsrc*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_vrml*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
-    get_vrml*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_dynsrc*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
-    get_dynsrc*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    get_readyState*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    get_complete*: proc(self: ptr IHTMLImgElement, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_loop*: proc(self: ptr IHTMLImgElement, v: VARIANT): HRESULT {.stdcall.}
-    get_loop*: proc(self: ptr IHTMLImgElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_align*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
-    get_align*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_onload*: proc(self: ptr IHTMLImgElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onload*: proc(self: ptr IHTMLImgElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onerror*: proc(self: ptr IHTMLImgElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onerror*: proc(self: ptr IHTMLImgElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onabort*: proc(self: ptr IHTMLImgElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onabort*: proc(self: ptr IHTMLImgElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_name*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
-    get_name*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_width*: proc(self: ptr IHTMLImgElement, v: LONG): HRESULT {.stdcall.}
-    get_width*: proc(self: ptr IHTMLImgElement, p: ptr LONG): HRESULT {.stdcall.}
-    put_height*: proc(self: ptr IHTMLImgElement, v: LONG): HRESULT {.stdcall.}
-    get_height*: proc(self: ptr IHTMLImgElement, p: ptr LONG): HRESULT {.stdcall.}
-    put_start*: proc(self: ptr IHTMLImgElement, v: BSTR): HRESULT {.stdcall.}
-    get_start*: proc(self: ptr IHTMLImgElement, p: ptr BSTR): HRESULT {.stdcall.}
-  IHTMLImageElementFactory* {.pure.} = object
-    lpVtbl*: ptr IHTMLImageElementFactoryVtbl
-  IHTMLImageElementFactoryVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    create*: proc(self: ptr IHTMLImageElementFactory, width: VARIANT, height: VARIANT, a: ptr ptr IHTMLImgElement): HRESULT {.stdcall.}
-  IHTMLLocation* {.pure.} = object
-    lpVtbl*: ptr IHTMLLocationVtbl
-  IHTMLLocationVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    put_href*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
-    get_href*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
-    put_protocol*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
-    get_protocol*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
-    put_host*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
-    get_host*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
-    put_hostname*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
-    get_hostname*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
-    put_port*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
-    get_port*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
-    put_pathname*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
-    get_pathname*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
-    put_search*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
-    get_search*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
-    put_hash*: proc(self: ptr IHTMLLocation, v: BSTR): HRESULT {.stdcall.}
-    get_hash*: proc(self: ptr IHTMLLocation, p: ptr BSTR): HRESULT {.stdcall.}
-    reload*: proc(self: ptr IHTMLLocation, flag: VARIANT_BOOL): HRESULT {.stdcall.}
-    replace*: proc(self: ptr IHTMLLocation, bstr: BSTR): HRESULT {.stdcall.}
-    assign*: proc(self: ptr IHTMLLocation, bstr: BSTR): HRESULT {.stdcall.}
-    toString*: proc(self: ptr IHTMLLocation, string: ptr BSTR): HRESULT {.stdcall.}
-  IOmHistory* {.pure.} = object
-    lpVtbl*: ptr IOmHistoryVtbl
-  IOmHistoryVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    get_length*: proc(self: ptr IOmHistory, p: ptr int16): HRESULT {.stdcall.}
-    back*: proc(self: ptr IOmHistory, pvargdistance: ptr VARIANT): HRESULT {.stdcall.}
-    forward*: proc(self: ptr IOmHistory, pvargdistance: ptr VARIANT): HRESULT {.stdcall.}
-    go*: proc(self: ptr IOmHistory, pvargdistance: ptr VARIANT): HRESULT {.stdcall.}
-  IHTMLMimeTypesCollection* {.pure.} = object
-    lpVtbl*: ptr IHTMLMimeTypesCollectionVtbl
-  IHTMLMimeTypesCollectionVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    get_length*: proc(self: ptr IHTMLMimeTypesCollection, p: ptr LONG): HRESULT {.stdcall.}
-  IHTMLPluginsCollection* {.pure.} = object
-    lpVtbl*: ptr IHTMLPluginsCollectionVtbl
-  IHTMLPluginsCollectionVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    get_length*: proc(self: ptr IHTMLPluginsCollection, p: ptr LONG): HRESULT {.stdcall.}
-    refresh*: proc(self: ptr IHTMLPluginsCollection, reload: VARIANT_BOOL): HRESULT {.stdcall.}
-  IHTMLOpsProfile* {.pure.} = object
-    lpVtbl*: ptr IHTMLOpsProfileVtbl
-  IHTMLOpsProfileVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    addRequest*: proc(self: ptr IHTMLOpsProfile, name: BSTR, reserved: VARIANT, success: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    clearRequest*: proc(self: ptr IHTMLOpsProfile): HRESULT {.stdcall.}
-    doRequest*: proc(self: ptr IHTMLOpsProfile, usage: VARIANT, fname: VARIANT, domain: VARIANT, path: VARIANT, expire: VARIANT, reserved: VARIANT): HRESULT {.stdcall.}
-    getAttribute*: proc(self: ptr IHTMLOpsProfile, name: BSTR, value: ptr BSTR): HRESULT {.stdcall.}
-    setAttribute*: proc(self: ptr IHTMLOpsProfile, name: BSTR, value: BSTR, prefs: VARIANT, success: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    commitChanges*: proc(self: ptr IHTMLOpsProfile, success: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    addReadRequest*: proc(self: ptr IHTMLOpsProfile, name: BSTR, reserved: VARIANT, success: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    doReadRequest*: proc(self: ptr IHTMLOpsProfile, usage: VARIANT, fname: VARIANT, domain: VARIANT, path: VARIANT, expire: VARIANT, reserved: VARIANT): HRESULT {.stdcall.}
-    doWriteRequest*: proc(self: ptr IHTMLOpsProfile, success: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-  IOmNavigator* {.pure.} = object
-    lpVtbl*: ptr IOmNavigatorVtbl
-  IOmNavigatorVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    get_appCodeName*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
-    get_appName*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
-    get_appVersion*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
-    get_userAgent*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
-    javaEnabled*: proc(self: ptr IOmNavigator, enabled: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    taintEnabled*: proc(self: ptr IOmNavigator, enabled: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    get_mimeTypes*: proc(self: ptr IOmNavigator, p: ptr ptr IHTMLMimeTypesCollection): HRESULT {.stdcall.}
-    get_plugins*: proc(self: ptr IOmNavigator, p: ptr ptr IHTMLPluginsCollection): HRESULT {.stdcall.}
-    get_cookieEnabled*: proc(self: ptr IOmNavigator, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    get_opsProfile*: proc(self: ptr IOmNavigator, p: ptr ptr IHTMLOpsProfile): HRESULT {.stdcall.}
-    toString*: proc(self: ptr IOmNavigator, string: ptr BSTR): HRESULT {.stdcall.}
-    get_cpuClass*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
-    get_systemLanguage*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
-    get_browserLanguage*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
-    get_userLanguage*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
-    get_platform*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
-    get_appMinorVersion*: proc(self: ptr IOmNavigator, p: ptr BSTR): HRESULT {.stdcall.}
-    get_connectionSpeed*: proc(self: ptr IOmNavigator, p: ptr LONG): HRESULT {.stdcall.}
-    get_onLine*: proc(self: ptr IOmNavigator, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    get_userProfile*: proc(self: ptr IOmNavigator, p: ptr ptr IHTMLOpsProfile): HRESULT {.stdcall.}
-  IHTMLDocument* {.pure.} = object
-    lpVtbl*: ptr IHTMLDocumentVtbl
-  IHTMLDocumentVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    get_Script*: proc(self: ptr IHTMLDocument, p: ptr ptr IDispatch): HRESULT {.stdcall.}
-  IHTMLSelectionObject* {.pure.} = object
-    lpVtbl*: ptr IHTMLSelectionObjectVtbl
-  IHTMLSelectionObjectVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    createRange*: proc(self: ptr IHTMLSelectionObject, range: ptr ptr IDispatch): HRESULT {.stdcall.}
-    empty*: proc(self: ptr IHTMLSelectionObject): HRESULT {.stdcall.}
-    clear*: proc(self: ptr IHTMLSelectionObject): HRESULT {.stdcall.}
-    get_type*: proc(self: ptr IHTMLSelectionObject, p: ptr BSTR): HRESULT {.stdcall.}
-  IHTMLDocument2* {.pure.} = object
-    lpVtbl*: ptr IHTMLDocument2Vtbl
-  IHTMLDocument2Vtbl* {.pure, inheritable.} = object of IHTMLDocumentVtbl
-    get_all*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
-    get_body*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
-    get_activeElement*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
-    get_images*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
-    get_applets*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
-    get_links*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
-    get_forms*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
-    get_anchors*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
-    put_title*: proc(self: ptr IHTMLDocument2, v: BSTR): HRESULT {.stdcall.}
-    get_title*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    get_scripts*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
-    put_designMode*: proc(self: ptr IHTMLDocument2, v: BSTR): HRESULT {.stdcall.}
-    get_designMode*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    get_selection*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLSelectionObject): HRESULT {.stdcall.}
-    get_readyState*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    get_frames*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLFramesCollection2): HRESULT {.stdcall.}
-    get_embeds*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
-    get_plugins*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLElementCollection): HRESULT {.stdcall.}
-    put_alinkColor*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_alinkColor*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_bgColor*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_bgColor*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_fgColor*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_fgColor*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_linkColor*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_linkColor*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_vlinkColor*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_vlinkColor*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    get_referrer*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    get_location*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLLocation): HRESULT {.stdcall.}
-    get_lastModified*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    put_URL*: proc(self: ptr IHTMLDocument2, v: BSTR): HRESULT {.stdcall.}
-    get_URL*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    put_domain*: proc(self: ptr IHTMLDocument2, v: BSTR): HRESULT {.stdcall.}
-    get_domain*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    put_cookie*: proc(self: ptr IHTMLDocument2, v: BSTR): HRESULT {.stdcall.}
-    get_cookie*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    put_expando*: proc(self: ptr IHTMLDocument2, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_expando*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_charset*: proc(self: ptr IHTMLDocument2, v: BSTR): HRESULT {.stdcall.}
-    get_charset*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    put_defaultCharset*: proc(self: ptr IHTMLDocument2, v: BSTR): HRESULT {.stdcall.}
-    get_defaultCharset*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    get_mimeType*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    get_fileSize*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    get_fileCreatedDate*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    get_fileModifiedDate*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    get_fileUpdatedDate*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    get_security*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    get_protocol*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    get_nameProp*: proc(self: ptr IHTMLDocument2, p: ptr BSTR): HRESULT {.stdcall.}
-    write*: proc(self: ptr IHTMLDocument2, psarray: ptr SAFEARRAY): HRESULT {.stdcall.}
-    writeln*: proc(self: ptr IHTMLDocument2, psarray: ptr SAFEARRAY): HRESULT {.stdcall.}
-    open*: proc(self: ptr IHTMLDocument2, url: BSTR, name: VARIANT, features: VARIANT, replace: VARIANT, pomWindowResult: ptr ptr IDispatch): HRESULT {.stdcall.}
-    close*: proc(self: ptr IHTMLDocument2): HRESULT {.stdcall.}
-    clear*: proc(self: ptr IHTMLDocument2): HRESULT {.stdcall.}
-    queryCommandSupported*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, pfRet: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    queryCommandEnabled*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, pfRet: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    queryCommandState*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, pfRet: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    queryCommandIndeterm*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, pfRet: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    queryCommandText*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, pcmdText: ptr BSTR): HRESULT {.stdcall.}
-    queryCommandValue*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, pcmdValue: ptr VARIANT): HRESULT {.stdcall.}
-    execCommand*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, showUI: VARIANT_BOOL, value: VARIANT, pfRet: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    execCommandShowHelp*: proc(self: ptr IHTMLDocument2, cmdID: BSTR, pfRet: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    createElement*: proc(self: ptr IHTMLDocument2, eTag: BSTR, newElem: ptr ptr IHTMLElement): HRESULT {.stdcall.}
-    put_onhelp*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onhelp*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onclick*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onclick*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_ondblclick*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_ondblclick*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onkeyup*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onkeyup*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onkeydown*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onkeydown*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onkeypress*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onkeypress*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onmouseup*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onmouseup*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onmousedown*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onmousedown*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onmousemove*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onmousemove*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onmouseout*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onmouseout*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onmouseover*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onmouseover*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onreadystatechange*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onreadystatechange*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onafterupdate*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onafterupdate*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onrowexit*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onrowexit*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onrowenter*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onrowenter*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_ondragstart*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_ondragstart*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onselectstart*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onselectstart*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    elementFromPoint*: proc(self: ptr IHTMLDocument2, x: LONG, y: LONG, elementHit: ptr ptr IHTMLElement): HRESULT {.stdcall.}
-    get_parentWindow*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLWindow2): HRESULT {.stdcall.}
-    get_styleSheets*: proc(self: ptr IHTMLDocument2, p: ptr ptr IHTMLStyleSheetsCollection): HRESULT {.stdcall.}
-    put_onbeforeupdate*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onbeforeupdate*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onerrorupdate*: proc(self: ptr IHTMLDocument2, v: VARIANT): HRESULT {.stdcall.}
-    get_onerrorupdate*: proc(self: ptr IHTMLDocument2, p: ptr VARIANT): HRESULT {.stdcall.}
-    toString*: proc(self: ptr IHTMLDocument2, String: ptr BSTR): HRESULT {.stdcall.}
-    createStyleSheet*: proc(self: ptr IHTMLDocument2, bstrHref: BSTR, lIndex: LONG, ppnewStyleSheet: ptr ptr IHTMLStyleSheet): HRESULT {.stdcall.}
-  IHTMLEventObj* {.pure.} = object
-    lpVtbl*: ptr IHTMLEventObjVtbl
-  IHTMLEventObjVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    get_srcElement*: proc(self: ptr IHTMLEventObj, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
-    get_altKey*: proc(self: ptr IHTMLEventObj, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    get_ctrlKey*: proc(self: ptr IHTMLEventObj, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    get_shiftKey*: proc(self: ptr IHTMLEventObj, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_returnValue*: proc(self: ptr IHTMLEventObj, v: VARIANT): HRESULT {.stdcall.}
-    get_returnValue*: proc(self: ptr IHTMLEventObj, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_cancelBubble*: proc(self: ptr IHTMLEventObj, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_cancelBubble*: proc(self: ptr IHTMLEventObj, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    get_fromElement*: proc(self: ptr IHTMLEventObj, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
-    get_toElement*: proc(self: ptr IHTMLEventObj, p: ptr ptr IHTMLElement): HRESULT {.stdcall.}
-    put_keyCode*: proc(self: ptr IHTMLEventObj, v: LONG): HRESULT {.stdcall.}
-    get_keyCode*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
-    get_button*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
-    get_type*: proc(self: ptr IHTMLEventObj, p: ptr BSTR): HRESULT {.stdcall.}
-    get_qualifier*: proc(self: ptr IHTMLEventObj, p: ptr BSTR): HRESULT {.stdcall.}
-    get_reason*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
-    get_x*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
-    get_y*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
-    get_clientX*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
-    get_clientY*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
-    get_offsetX*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
-    get_offsetY*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
-    get_screenX*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
-    get_screenY*: proc(self: ptr IHTMLEventObj, p: ptr LONG): HRESULT {.stdcall.}
-    get_srcFilter*: proc(self: ptr IHTMLEventObj, p: ptr ptr IDispatch): HRESULT {.stdcall.}
-  IHTMLScreen* {.pure.} = object
-    lpVtbl*: ptr IHTMLScreenVtbl
-  IHTMLScreenVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    get_colorDepth*: proc(self: ptr IHTMLScreen, p: ptr LONG): HRESULT {.stdcall.}
-    put_bufferDepth*: proc(self: ptr IHTMLScreen, v: LONG): HRESULT {.stdcall.}
-    get_bufferDepth*: proc(self: ptr IHTMLScreen, p: ptr LONG): HRESULT {.stdcall.}
-    get_width*: proc(self: ptr IHTMLScreen, p: ptr LONG): HRESULT {.stdcall.}
-    get_height*: proc(self: ptr IHTMLScreen, p: ptr LONG): HRESULT {.stdcall.}
-    put_updateInterval*: proc(self: ptr IHTMLScreen, v: LONG): HRESULT {.stdcall.}
-    get_updateInterval*: proc(self: ptr IHTMLScreen, p: ptr LONG): HRESULT {.stdcall.}
-    get_availHeight*: proc(self: ptr IHTMLScreen, p: ptr LONG): HRESULT {.stdcall.}
-    get_availWidth*: proc(self: ptr IHTMLScreen, p: ptr LONG): HRESULT {.stdcall.}
-    get_fontSmoothingEnabled*: proc(self: ptr IHTMLScreen, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-  IHTMLFormElement* {.pure.} = object
-    lpVtbl*: ptr IHTMLFormElementVtbl
-  IHTMLFormElementVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    put_action*: proc(self: ptr IHTMLFormElement, v: BSTR): HRESULT {.stdcall.}
-    get_action*: proc(self: ptr IHTMLFormElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_dir*: proc(self: ptr IHTMLFormElement, v: BSTR): HRESULT {.stdcall.}
-    get_dir*: proc(self: ptr IHTMLFormElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_encoding*: proc(self: ptr IHTMLFormElement, v: BSTR): HRESULT {.stdcall.}
-    get_encoding*: proc(self: ptr IHTMLFormElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_method*: proc(self: ptr IHTMLFormElement, v: BSTR): HRESULT {.stdcall.}
-    get_method*: proc(self: ptr IHTMLFormElement, p: ptr BSTR): HRESULT {.stdcall.}
-    get_elements*: proc(self: ptr IHTMLFormElement, p: ptr ptr IDispatch): HRESULT {.stdcall.}
-    put_target*: proc(self: ptr IHTMLFormElement, v: BSTR): HRESULT {.stdcall.}
-    get_target*: proc(self: ptr IHTMLFormElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_name*: proc(self: ptr IHTMLFormElement, v: BSTR): HRESULT {.stdcall.}
-    get_name*: proc(self: ptr IHTMLFormElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_onsubmit*: proc(self: ptr IHTMLFormElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onsubmit*: proc(self: ptr IHTMLFormElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onreset*: proc(self: ptr IHTMLFormElement, v: VARIANT): HRESULT {.stdcall.}
-    get_onreset*: proc(self: ptr IHTMLFormElement, p: ptr VARIANT): HRESULT {.stdcall.}
-    submit*: proc(self: ptr IHTMLFormElement): HRESULT {.stdcall.}
-    reset*: proc(self: ptr IHTMLFormElement): HRESULT {.stdcall.}
-    put_length*: proc(self: ptr IHTMLFormElement, v: LONG): HRESULT {.stdcall.}
-    get_length*: proc(self: ptr IHTMLFormElement, p: ptr LONG): HRESULT {.stdcall.}
-    get_newEnum*: proc(self: ptr IHTMLFormElement, p: ptr ptr IUnknown): HRESULT {.stdcall.}
-    item*: proc(self: ptr IHTMLFormElement, name: VARIANT, index: VARIANT, pdisp: ptr ptr IDispatch): HRESULT {.stdcall.}
-    tags*: proc(self: ptr IHTMLFormElement, tagName: VARIANT, pdisp: ptr ptr IDispatch): HRESULT {.stdcall.}
-  IHTMLOptionElement* {.pure.} = object
-    lpVtbl*: ptr IHTMLOptionElementVtbl
-  IHTMLOptionElementVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    put_selected*: proc(self: ptr IHTMLOptionElement, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_selected*: proc(self: ptr IHTMLOptionElement, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_value*: proc(self: ptr IHTMLOptionElement, v: BSTR): HRESULT {.stdcall.}
-    get_value*: proc(self: ptr IHTMLOptionElement, p: ptr BSTR): HRESULT {.stdcall.}
-    put_defaultSelected*: proc(self: ptr IHTMLOptionElement, v: VARIANT_BOOL): HRESULT {.stdcall.}
-    get_defaultSelected*: proc(self: ptr IHTMLOptionElement, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    put_index*: proc(self: ptr IHTMLOptionElement, v: LONG): HRESULT {.stdcall.}
-    get_index*: proc(self: ptr IHTMLOptionElement, p: ptr LONG): HRESULT {.stdcall.}
-    put_text*: proc(self: ptr IHTMLOptionElement, v: BSTR): HRESULT {.stdcall.}
-    get_text*: proc(self: ptr IHTMLOptionElement, p: ptr BSTR): HRESULT {.stdcall.}
-    get_form*: proc(self: ptr IHTMLOptionElement, p: ptr ptr IHTMLFormElement): HRESULT {.stdcall.}
-  IHTMLOptionElementFactory* {.pure.} = object
-    lpVtbl*: ptr IHTMLOptionElementFactoryVtbl
-  IHTMLOptionElementFactoryVtbl* {.pure, inheritable.} = object of IDispatchVtbl
-    create*: proc(self: ptr IHTMLOptionElementFactory, text: VARIANT, value: VARIANT, defaultselected: VARIANT, selected: VARIANT, a: ptr ptr IHTMLOptionElement): HRESULT {.stdcall.}
-  IHTMLWindow2* {.pure.} = object
-    lpVtbl*: ptr IHTMLWindow2Vtbl
-  IHTMLWindow2Vtbl* {.pure, inheritable.} = object of IHTMLFramesCollection2Vtbl
-    get_frames*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLFramesCollection2): HRESULT {.stdcall.}
-    put_defaultStatus*: proc(self: ptr IHTMLWindow2, v: BSTR): HRESULT {.stdcall.}
-    get_defaultStatus*: proc(self: ptr IHTMLWindow2, p: ptr BSTR): HRESULT {.stdcall.}
-    put_status*: proc(self: ptr IHTMLWindow2, v: BSTR): HRESULT {.stdcall.}
-    get_status*: proc(self: ptr IHTMLWindow2, p: ptr BSTR): HRESULT {.stdcall.}
-    setTimeout*: proc(self: ptr IHTMLWindow2, expression: BSTR, msec: LONG, language: ptr VARIANT, timerID: ptr LONG): HRESULT {.stdcall.}
-    clearTimeout*: proc(self: ptr IHTMLWindow2, timerID: LONG): HRESULT {.stdcall.}
-    alert*: proc(self: ptr IHTMLWindow2, message: BSTR): HRESULT {.stdcall.}
-    confirm*: proc(self: ptr IHTMLWindow2, message: BSTR, confirmed: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    prompt*: proc(self: ptr IHTMLWindow2, message: BSTR, defstr: BSTR, textdata: ptr VARIANT): HRESULT {.stdcall.}
-    get_Image*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLImageElementFactory): HRESULT {.stdcall.}
-    get_location*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLLocation): HRESULT {.stdcall.}
-    get_history*: proc(self: ptr IHTMLWindow2, p: ptr ptr IOmHistory): HRESULT {.stdcall.}
-    close*: proc(self: ptr IHTMLWindow2): HRESULT {.stdcall.}
-    put_opener*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
-    get_opener*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
-    get_navigator*: proc(self: ptr IHTMLWindow2, p: ptr ptr IOmNavigator): HRESULT {.stdcall.}
-    put_name*: proc(self: ptr IHTMLWindow2, v: BSTR): HRESULT {.stdcall.}
-    get_name*: proc(self: ptr IHTMLWindow2, p: ptr BSTR): HRESULT {.stdcall.}
-    get_parent*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLWindow2): HRESULT {.stdcall.}
-    open*: proc(self: ptr IHTMLWindow2, url: BSTR, name: BSTR, features: BSTR, replace: VARIANT_BOOL, pomWindowResult: ptr ptr IHTMLWindow2): HRESULT {.stdcall.}
-    get_self*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLWindow2): HRESULT {.stdcall.}
-    get_top*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLWindow2): HRESULT {.stdcall.}
-    get_window*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLWindow2): HRESULT {.stdcall.}
-    navigate*: proc(self: ptr IHTMLWindow2, url: BSTR): HRESULT {.stdcall.}
-    put_onfocus*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
-    get_onfocus*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onblur*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
-    get_onblur*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onload*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
-    get_onload*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onbeforeunload*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
-    get_onbeforeunload*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onunload*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
-    get_onunload*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onhelp*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
-    get_onhelp*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onerror*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
-    get_onerror*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onresize*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
-    get_onresize*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
-    put_onscroll*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
-    get_onscroll*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
-    get_document*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLDocument2): HRESULT {.stdcall.}
-    get_event*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLEventObj): HRESULT {.stdcall.}
-    get_newEnum*: proc(self: ptr IHTMLWindow2, p: ptr ptr IUnknown): HRESULT {.stdcall.}
-    showModalDialog*: proc(self: ptr IHTMLWindow2, dialog: BSTR, varArgIn: ptr VARIANT, varOptions: ptr VARIANT, varArgOut: ptr VARIANT): HRESULT {.stdcall.}
-    showHelp*: proc(self: ptr IHTMLWindow2, helpURL: BSTR, helpArg: VARIANT, features: BSTR): HRESULT {.stdcall.}
-    get_screen*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLScreen): HRESULT {.stdcall.}
-    get_Option*: proc(self: ptr IHTMLWindow2, p: ptr ptr IHTMLOptionElementFactory): HRESULT {.stdcall.}
-    focus*: proc(self: ptr IHTMLWindow2): HRESULT {.stdcall.}
-    get_closed*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT_BOOL): HRESULT {.stdcall.}
-    blur*: proc(self: ptr IHTMLWindow2): HRESULT {.stdcall.}
-    scroll*: proc(self: ptr IHTMLWindow2, x: LONG, y: LONG): HRESULT {.stdcall.}
-    get_clientInformation*: proc(self: ptr IHTMLWindow2, p: ptr ptr IOmNavigator): HRESULT {.stdcall.}
-    setInterval*: proc(self: ptr IHTMLWindow2, expression: BSTR, msec: LONG, language: ptr VARIANT, timerID: ptr LONG): HRESULT {.stdcall.}
-    clearInterval*: proc(self: ptr IHTMLWindow2, timerID: LONG): HRESULT {.stdcall.}
-    put_offscreenBuffering*: proc(self: ptr IHTMLWindow2, v: VARIANT): HRESULT {.stdcall.}
-    get_offscreenBuffering*: proc(self: ptr IHTMLWindow2, p: ptr VARIANT): HRESULT {.stdcall.}
-    execScript*: proc(self: ptr IHTMLWindow2, code: BSTR, language: BSTR, pvarRet: ptr VARIANT): HRESULT {.stdcall.}
-    toString*: proc(self: ptr IHTMLWindow2, String: ptr BSTR): HRESULT {.stdcall.}
-    scrollBy*: proc(self: ptr IHTMLWindow2, x: LONG, y: LONG): HRESULT {.stdcall.}
-    scrollTo*: proc(self: ptr IHTMLWindow2, x: LONG, y: LONG): HRESULT {.stdcall.}
-    moveTo*: proc(self: ptr IHTMLWindow2, x: LONG, y: LONG): HRESULT {.stdcall.}
-    moveBy*: proc(self: ptr IHTMLWindow2, x: LONG, y: LONG): HRESULT {.stdcall.}
-    resizeTo*: proc(self: ptr IHTMLWindow2, x: LONG, y: LONG): HRESULT {.stdcall.}
-    resizeBy*: proc(self: ptr IHTMLWindow2, x: LONG, y: LONG): HRESULT {.stdcall.}
-    get_external*: proc(self: ptr IHTMLWindow2, p: ptr ptr IDispatch): HRESULT {.stdcall.}
   IHTMLDOMRange* {.pure.} = object
     lpVtbl*: ptr IHTMLDOMRangeVtbl
   IHTMLDOMRangeVtbl* {.pure, inheritable.} = object of IDispatchVtbl
