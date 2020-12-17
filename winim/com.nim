@@ -293,6 +293,10 @@ proc copy*(x: com): com {.inline.} =
 proc wrap*(x: ptr IDispatch): com {.inline.} =
   result = newCom(x)
 
+proc wrap*(x: VARIANT): variant {.inline.} =
+  result.init
+  result.raw = x
+
 proc unwrap*(x: com): ptr IDispatch {.inline.} =
   result = x.disp
 
@@ -300,7 +304,7 @@ proc unwrap*(x: variant): VARIANT {.inline.} =
   result = x.raw
 
 proc isNull*(x: variant): bool {.inline.} =
-  result = (x.raw.vt == VT_NULL or (x.raw.vt == VT_DISPATCH and x.raw.byref.isNil))
+  result = (x.raw.vt == VT_EMPTY or x.raw.vt == VT_NULL or (x.raw.vt == VT_DISPATCH and x.raw.byref.isNil))
 
 proc newVariant*(x: VARIANT): variant =
   result.init
@@ -699,6 +703,7 @@ proc fromVariant*[T](x: variant): T =
       elif T is cstring:        targetVt = VT_BSTR;     targetName = "cstring"
       elif T is mstring:        targetVt = VT_BSTR;     targetName = "mstring"
       elif T is wstring:        targetVt = VT_BSTR;     targetName = "wstring"
+      elif T is BSTR:           targetVt = VT_BSTR;     targetName = "BSTR"
       elif T is char:           targetVt = VT_UI1;      targetName = "char"
       elif T is SomeInteger:    targetVt = VT_I8;       targetName = "integer"
       elif T is SomeFloat:      targetVt = VT_R8;       targetName = "float"
@@ -891,7 +896,7 @@ proc getValue(tinfo: ptr ITypeInfo, name: string): variant =
   raise newCOMError("constant not found: " & name)
 
 proc desc*(self: com, name: string): string =
-  ## Gets the description (include name and arguments) for the specific method.
+  ## Gets the description (include name and arguments) for the specified method.
   var
     dispid: DISPID
     wstr = +$name

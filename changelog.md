@@ -1,3 +1,11 @@
+Version 3.6.0
+-------------
+* Add mscoree and winim/clr module. They provide Windows Common Language Runtime
+  (CLR) support to Winim. So that we can use Nim to interact with Windows .NET
+  Frameworks.
+* Add examples/clr.
+* Add tests/clr_test.nim.
+
 Version 3.5.0
 -------------
 * Add uiautomation and dwmapi module.

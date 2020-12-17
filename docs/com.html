@@ -101,6 +101,9 @@ function main() {
       <li>
         <a href="com.html">com</a>
       </li>
+      <li>
+        <a href="clr.html">clr</a>
+      </li>
     </ul>
   </div>
   <ul class="simple simple-toc" id="toc-list">
@@ -177,6 +180,8 @@ function main() {
     title="copy(x: com): com"><wbr />copy<span class="attachedType">com</span></a></li>
   <li><a class="reference" href="#wrap%2Cptr.IDispatch"
     title="wrap(x: ptr IDispatch): com"><wbr />wrap<span class="attachedType">com</span></a></li>
+  <li><a class="reference" href="#wrap%2CVARIANT"
+    title="wrap(x: VARIANT): variant"><wbr />wrap<span class="attachedType">variant</span></a></li>
   <li><a class="reference" href="#unwrap%2Ccom"
     title="unwrap(x: com): ptr IDispatch"><wbr />unwrap<span class="attachedType">com</span></a></li>
   <li><a class="reference" href="#unwrap%2Cvariant"
@@ -622,6 +627,13 @@ function main() {
 
 
 </dd>
+<a id="wrap,VARIANT"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#wrap%2CVARIANT"><span class="Identifier">wrap</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <a href="objbase.html#VARIANT"><span class="Identifier">VARIANT</span></a><span class="Other">)</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+
+</dd>
 <a id="unwrap,com"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#unwrap%2Ccom"><span class="Identifier">unwrap</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <a href="com.html#com"><span class="Identifier">com</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="objbase.html#IDispatch"><span class="Identifier">IDispatch</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
@@ -802,7 +814,7 @@ function main() {
                                        <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Gets the description (include name and arguments) for the specific method.
+Gets the description (include name and arguments) for the specified method.
 
 </dd>
 <a id="call,com,string,varargs[variant,toVariant],openArray[]"></a>

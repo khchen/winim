@@ -1,8 +1,8 @@
 # Winim
 
-Winim contains Windows API, struct, and constant definitions for Nim. The definitions are translated from MinGW's Windows headers.
+Winim contains Windows API, struct, and constant definitions for Nim. The definitions are translated from MinGW's Windows headers and Windows 10 SDK headers.
 
-The module also include some Windows string type utilities and Windows COM support. See winstr.nim and com.nim for details.
+The module also include some Windows string type utilities and Windows COM support. See winstr.nim and com.nim for details. Furthermore, winim provides ability to interact with Windows .NET Frameworks since version 3.6.0.
 
 For historical reasons and compatibility, winim only use signed integer types. For example:
 ```nim
@@ -135,6 +135,17 @@ comScript:
     echo key, " => ", dict.item(key)
 ```
 
+Interact with Windows .NET Frameworks.
+```nim
+import winim/clr
+
+var mscor = load("mscorlib")
+var rand = mscor.new("System.Random")
+echo rand.Next()
+```
+
+More examples: https://github.com/khchen/winim/tree/master/examples.
+
 ## Winimx
 
 Winimx is a standalone tool to generate the minfied Winim module. It also can be used to generate the necessary definitions at compile time. For more information, see the [document](https://khchen.github.io/winim/winimx.html).
@@ -163,6 +174,7 @@ To cross compile from Linux or macOS. Here is the [instruction](https://nim-lang
 * https://khchen.github.io/winim/utils.html
 * https://khchen.github.io/winim/winstr.html
 * https://khchen.github.io/winim/com.html
+* https://khchen.github.io/winim/clr.html
 
 ## License
 Read license.txt for more details.

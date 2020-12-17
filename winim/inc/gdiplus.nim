@@ -9,6 +9,7 @@ import winimbase
 import windef
 import wingdi
 import objbase
+#include <gdiplus.h>
 #include <gdiplus/gdiplus.h>
 #include <gdiplusenums.h>
 #include <gdiplustypes.h>

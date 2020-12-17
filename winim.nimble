@@ -1,6 +1,6 @@
 # Package
 
-version       = "3.5.0"
+version       = "3.6.0"
 author        = "Ward"
 description   = "Winim - Nim\'s Windows API and COM Library"
 license       = "MIT"
@@ -17,6 +17,7 @@ task test, "Runs the test suite":
   exec "nim c -r tests/variant_test"
   exec "nim c -r tests/winstr_test"
   exec "nim c -r tests/com_test"
+  exec "nim c -r tests/clr_test"
 
 # Examples
 
@@ -55,6 +56,17 @@ task comexample, "Build all the COM examples":
   exec "nim c examples/com/threads/thread3"
   exec "nim c examples/com/threads/thread4"
 
+# CLR Examples
+
+task clrexample, "Build all the CLR examples":
+  exec "nim c examples/clr/code_compiler.nim"
+  exec "nim c examples/clr/misc_examples.nim"
+  exec "nim c examples/clr/simple_gui.nim"
+  exec "nim c examples/clr/splitter.nim"
+  exec "nim c examples/clr/usage_demo1.nim"
+  exec "nim c examples/clr/usage_demo2.nim"
+  exec "nim c examples/clr/wpf.nim"
+
 # Clean
 
 task clean, "Delete all the executable files":
@@ -63,4 +75,5 @@ task clean, "Delete all the executable files":
   exec "cmd /c IF EXIST examples\\com\\*.exe del examples\\com\\*.exe"
   exec "cmd /c IF EXIST examples\\com\\nimDispatch\\*.exe del examples\\com\\nimDispatch\\*.exe"
   exec "cmd /c IF EXIST examples\\com\\threads\\*.exe del examples\\com\\threads\\*.exe"
+  exec "cmd /c IF EXIST examples\\clr\\*.exe del examples\\clr\\*.exe"
   exec "cmd /c IF EXIST winim\\*.exe del winim\\*.exe"
