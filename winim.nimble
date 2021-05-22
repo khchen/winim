@@ -1,11 +1,10 @@
 # Package
 
-version       = "3.6.0"
+version       = "3.6.1"
 author        = "Ward"
 description   = "Winim - Nim\'s Windows API and COM Library"
 license       = "MIT"
 skipDirs      = @["examples", "tests", "docs", "tcclib"]
-bin           = @["winim/winimx"]
 
 # Dependencies
 
@@ -26,7 +25,6 @@ task example, "Build all the examples":
   exec "nim c examples/getopenfilename"
   exec "nim c examples/hellomsg"
   exec "nim c examples/hellowin"
-  exec "nim c examples/hellowinimx"
   exec "nim c examples/linedemo"
   exec "nim c examples/scrnsize"
   exec "nim c examples/shortcut"

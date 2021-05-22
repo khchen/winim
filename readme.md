@@ -1,5 +1,4 @@
 # Winim
-
 Winim contains Windows API, struct, and constant definitions for Nim. The definitions are translated from MinGW's Windows headers and Windows 10 SDK headers.
 
 The module also include some Windows string type utilities and Windows COM support. See winstr.nim and com.nim for details. Furthermore, winim provides ability to interact with Windows .NET Frameworks since version 3.6.0.
@@ -22,7 +21,7 @@ With git on windows:
 
 Without git:
 
-    1. Download and unzip this moudle (by click "Clone or download" button).
+    1. Download and unzip this moudle (by click "Code" button).
     2. Start a console, change current dir to the folder which include "winim.nimble" file.
        (for example: C:\winim-master\winim-master>)
     3. Run "nimble install"
@@ -83,7 +82,6 @@ import winim/inc/mshtml
       add -d:notrace disable COM objects trace. See com.nim for details.
 
 ## Examples
-
 An hello world program:
 ```nim
 import winim/lean
@@ -146,12 +144,7 @@ echo rand.Next()
 
 More examples: https://github.com/khchen/winim/tree/master/examples.
 
-## Winimx
-
-Winimx is a standalone tool to generate the minfied Winim module. It also can be used to generate the necessary definitions at compile time. For more information, see the [document](https://khchen.github.io/winim/winimx.html).
-
 ## Cross Compile
-
 Windows programs using Winim module should be compiled successfully by gcc, tcc, vcc on Windows, and MinGW toolchain on Linux. The target file can be PE (32 bits) or PE+ (64 bits).
 
 The suggested Nim compiler is amd64 version. You can download both mingw32 and mingw64 from the Nim's website and put them into nim\dist\mingw32 and nim\dist\mingw64. Modify the *nim.cfg*:
@@ -170,7 +163,6 @@ To cross compile from Linux or macOS. Here is the [instruction](https://nim-lang
 
 ## Docs
 * https://khchen.github.io/winim/winim.html
-* https://khchen.github.io/winim/winimx.html
 * https://khchen.github.io/winim/utils.html
 * https://khchen.github.io/winim/winstr.html
 * https://khchen.github.io/winim/com.html
@@ -179,4 +171,4 @@ To cross compile from Linux or macOS. Here is the [instruction](https://nim-lang
 ## License
 Read license.txt for more details.
 
-Copyright (c) 2016-2020 Kai-Hung Chen, Ward. All rights reserved.
+Copyright (c) 2016-2021 Kai-Hung Chen, Ward. All rights reserved.

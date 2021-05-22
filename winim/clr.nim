@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2020 Ward
+#                 (c) Copyright 2016-2021 Ward
 #
 #         Windows .NET Common Language Runtime Supports
 #
@@ -23,7 +23,7 @@ runnableExamples:
     echo rand.Next()
 
   proc example2() =
-    ## Create an type object and call the static method
+    ## Create a type object and call the static method
     var mscor = load("mscorlib")
     var Int32 = mscor.GetType("System.Int32")
     echo @Int32.Parse("12345")
@@ -52,7 +52,7 @@ export com
 
 type
   CLRError* = object of CatchableError
-    ## Raised if an CLR error occurred.
+    ## Raised if a CLR error occurred.
     hresult*: HRESULT
 
   CLRVariant* = distinct variant

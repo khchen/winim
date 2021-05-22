@@ -1,3 +1,7 @@
+Version 3.6.1
+-------------
+* Remove winimx module and related examples.
+
 Version 3.6.0
 -------------
 * Add mscoree and winim/clr module. They provide Windows Common Language Runtime
