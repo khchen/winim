@@ -5908,7 +5908,7 @@ proc GetTeredoPort*(Port: ptr USHORT): NETIO_STATUS {.winapi, stdcall, dynlib: "
 proc CancelMibChangeNotify2*(NotificationHandle: HANDLE): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc FreeMibTable*(Memory: PVOID): VOID {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc CreateSortedAddressPairs*(SourceAddressList: PSOCKADDR_IN6, SourceAddressCount: ULONG, DestinationAddressList: PSOCKADDR_IN6, DestinationAddressCount: ULONG, AddressSortOptions: ULONG, SortedAddressPairList: ptr PSOCKADDR_IN6_PAIR, SortedAddressPairCount: ptr ULONG): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
-proc ConvertInterfaceNameToLuidA*(InterfaceName: cstring, InterfaceLuid: ptr NET_LUID): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
+proc ConvertInterfaceNameToLuidA*(InterfaceName: ptr CHAR, InterfaceLuid: ptr NET_LUID): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc ConvertInterfaceNameToLuidW*(InterfaceName: ptr WCHAR, InterfaceLuid: ptr NET_LUID): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc ConvertInterfaceLuidToNameA*(InterfaceLuid: ptr NET_LUID, InterfaceName: PSTR, Length: SIZE_T): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}
 proc ConvertInterfaceLuidToNameW*(InterfaceLuid: ptr NET_LUID, InterfaceName: PWSTR, Length: SIZE_T): NETIO_STATUS {.winapi, stdcall, dynlib: "iphlpapi", importc.}

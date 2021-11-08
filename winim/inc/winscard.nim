@@ -7,7 +7,6 @@
 
 import winimbase
 import windef
-import winerror
 import rpc
 import winioctl
 #include <winscard.h>

@@ -53,7 +53,7 @@ type
   RpcLocalAddressFormat* = int32
   RPC_NOTIFICATIONS* = int32
   RpcCallClientLocality* = int32
-  PCInterfaceName* = cstring
+  PCInterfaceName* = ptr char
   RPC_STATUS* = int32
   MIDL_uhyper* = int64
 when winimCpu64:
@@ -931,12 +931,12 @@ type
   RPCLT_PDU_FILTER_FUNC* = proc (Buffer: pointer, BufferLength: int32, fDatagram: int32): void {.stdcall.}
   RPC_SETFILTER_FUNC* = proc (pfnFilter: RPCLT_PDU_FILTER_FUNC): void {.stdcall.}
   RPC_BLOCKING_FN* = proc (hWnd: pointer, Context: pointer, hSyncEvent: pointer): RPC_STATUS {.stdcall.}
-  I_RpcProxyIsValidMachineFn* = proc (pszMachine: cstring, pszDotMachine: cstring, dwPortNumber: int32): RPC_STATUS {.stdcall.}
-  I_RpcProxyGetClientAddressFn* = proc (Context: pointer, Buffer: cstring, BufferLength: ptr int32): RPC_STATUS {.stdcall.}
+  I_RpcProxyIsValidMachineFn* = proc (pszMachine: ptr char, pszDotMachine: ptr char, dwPortNumber: int32): RPC_STATUS {.stdcall.}
+  I_RpcProxyGetClientAddressFn* = proc (Context: pointer, Buffer: ptr char, BufferLength: ptr int32): RPC_STATUS {.stdcall.}
   I_RpcProxyGetConnectionTimeoutFn* = proc (ConnectionTimeout: ptr int32): RPC_STATUS {.stdcall.}
   RPC_C_OPT_METADATA_DESCRIPTOR* {.pure.} = object
     BufferSize*: int32
-    Buffer*: cstring
+    Buffer*: ptr char
   RDR_CALLOUT_STATE* {.pure.} = object
     LastError*: RPC_STATUS
     LastEEInfo*: pointer

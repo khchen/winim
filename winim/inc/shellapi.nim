@@ -47,7 +47,7 @@ type
   AUTOCOMPLETEOPTIONS* = int32
   ACENUMOPTION* = int32
   FOLDER_ENUM_MODE* = int32
-  LPVIEWSETTINGS* = cstring
+  LPVIEWSETTINGS* = ptr char
   FOLDERFLAGS* = int32
   FOLDERVIEWMODE* = int32
   FOLDERLOGICALVIEWMODE* = int32
@@ -485,7 +485,7 @@ type
   IContextMenuVtbl* {.pure, inheritable.} = object of IUnknownVtbl
     QueryContextMenu*: proc(self: ptr IContextMenu, hmenu: HMENU, indexMenu: UINT, idCmdFirst: UINT, idCmdLast: UINT, uFlags: UINT): HRESULT {.stdcall.}
     InvokeCommand*: proc(self: ptr IContextMenu, pici: ptr CMINVOKECOMMANDINFO): HRESULT {.stdcall.}
-    GetCommandString*: proc(self: ptr IContextMenu, idCmd: UINT_PTR, uType: UINT, pReserved: ptr UINT, pszName: cstring, cchMax: UINT): HRESULT {.stdcall.}
+    GetCommandString*: proc(self: ptr IContextMenu, idCmd: UINT_PTR, uType: UINT, pReserved: ptr UINT, pszName: ptr CHAR, cchMax: UINT): HRESULT {.stdcall.}
   LPCONTEXTMENU* = ptr IContextMenu
   IContextMenu2* {.pure.} = object
     lpVtbl*: ptr IContextMenu2Vtbl
@@ -7391,7 +7391,7 @@ proc RemoveObjectAt*(self: ptr IObjectCollection, uiIndex: UINT): HRESULT {.wina
 proc Clear*(self: ptr IObjectCollection): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.Clear(self)
 proc QueryContextMenu*(self: ptr IContextMenu, hmenu: HMENU, indexMenu: UINT, idCmdFirst: UINT, idCmdLast: UINT, uFlags: UINT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.QueryContextMenu(self, hmenu, indexMenu, idCmdFirst, idCmdLast, uFlags)
 proc InvokeCommand*(self: ptr IContextMenu, pici: ptr CMINVOKECOMMANDINFO): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.InvokeCommand(self, pici)
-proc GetCommandString*(self: ptr IContextMenu, idCmd: UINT_PTR, uType: UINT, pReserved: ptr UINT, pszName: cstring, cchMax: UINT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetCommandString(self, idCmd, uType, pReserved, pszName, cchMax)
+proc GetCommandString*(self: ptr IContextMenu, idCmd: UINT_PTR, uType: UINT, pReserved: ptr UINT, pszName: ptr CHAR, cchMax: UINT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetCommandString(self, idCmd, uType, pReserved, pszName, cchMax)
 proc HandleMenuMsg*(self: ptr IContextMenu2, uMsg: UINT, wParam: WPARAM, lParam: LPARAM): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.HandleMenuMsg(self, uMsg, wParam, lParam)
 proc HandleMenuMsg2*(self: ptr IContextMenu3, uMsg: UINT, wParam: WPARAM, lParam: LPARAM, plResult: ptr LRESULT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.HandleMenuMsg2(self, uMsg, wParam, lParam, plResult)
 proc SetKeyState*(self: ptr IExecuteCommand, grfKeyState: DWORD): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.SetKeyState(self, grfKeyState)

@@ -66,35 +66,35 @@ type
   PFD_SET* = ptr fd_set
   LPFD_SET* = ptr fd_set
   hostent* {.pure.} = object
-    h_name*: cstring
-    h_aliases*: cstringArray
+    h_name*: ptr char
+    h_aliases*: ptr ptr char
     h_addrtype*: int16
     h_length*: int16
-    h_addr_list*: cstringArray
+    h_addr_list*: ptr ptr char
   HOSTENT* = hostent
   PHOSTENT* = ptr hostent
   LPHOSTENT* = ptr hostent
 when winimCpu64:
   type
     servent* {.pure.} = object
-      s_name*: cstring
-      s_aliases*: cstringArray
-      s_proto*: cstring
+      s_name*: ptr char
+      s_aliases*: ptr ptr char
+      s_proto*: ptr char
       s_port*: int16
 when winimCpu32:
   type
     servent* {.pure.} = object
-      s_name*: cstring
-      s_aliases*: cstringArray
+      s_name*: ptr char
+      s_aliases*: ptr ptr char
       s_port*: int16
-      s_proto*: cstring
+      s_proto*: ptr char
 type
   SERVENT* = servent
   PSERVENT* = ptr servent
   LPSERVENT* = ptr servent
   protoent* {.pure.} = object
-    p_name*: cstring
-    p_aliases*: cstringArray
+    p_name*: ptr char
+    p_aliases*: ptr ptr char
     p_proto*: int16
   PROTOENT* = protoent
   PPROTOENT* = ptr protoent
@@ -135,7 +135,7 @@ when winimCpu64:
       wHighVersion*: WORD
       iMaxSockets*: uint16
       iMaxUdpDg*: uint16
-      lpVendorInfo*: cstring
+      lpVendorInfo*: ptr char
       szDescription*: array[WSADESCRIPTION_LEN+1, char]
       szSystemStatus*: array[WSASYS_STATUS_LEN+1, char]
 when winimCpu32:
@@ -147,7 +147,7 @@ when winimCpu32:
       szSystemStatus*: array[WSASYS_STATUS_LEN+1, char]
       iMaxSockets*: uint16
       iMaxUdpDg*: uint16
-      lpVendorInfo*: cstring
+      lpVendorInfo*: ptr char
 type
   LPWSADATA* = ptr WSADATA
   SCOPE_ID_UNION1_STRUCT1* {.pure.} = object
@@ -164,7 +164,7 @@ type
   LPWSAOVERLAPPED* = ptr OVERLAPPED
   WSABUF* {.pure.} = object
     len*: int32
-    buf*: cstring
+    buf*: ptr char
   LPWSABUF* = ptr WSABUF
   FLOWSPEC* {.pure.} = object
     TokenRate*: ULONG
@@ -539,7 +539,7 @@ type
     ai_socktype*: int32
     ai_protocol*: int32
     ai_addrlen*: int
-    ai_canonname*: cstring
+    ai_canonname*: ptr char
     ai_addr*: ptr sockaddr
     ai_next*: ptr ADDRINFOA
   PADDRINFOA* = ptr ADDRINFOA
@@ -555,11 +555,11 @@ type
   PADDRINFOW* = ptr ADDRINFOW
   ADDRINFO* = ADDRINFOA
   LPADDRINFO* = ptr ADDRINFOA
-  LPFN_GETADDRINFO* = proc (nodename: cstring, servname: cstring, hints: ptr ADDRINFOA, res: ptr ptr ADDRINFOA): int32 {.stdcall.}
+  LPFN_GETADDRINFO* = proc (nodename: ptr char, servname: ptr char, hints: ptr ADDRINFOA, res: ptr ptr ADDRINFOA): int32 {.stdcall.}
   LPFN_GETADDRINFOA* = LPFN_GETADDRINFO
   LPFN_FREEADDRINFO* = proc (ai: ptr ADDRINFOA): void {.stdcall.}
   LPFN_FREEADDRINFOA* = LPFN_FREEADDRINFO
-  LPFN_GETNAMEINFO* = proc (sa: ptr sockaddr, salen: socklen_t, host: cstring, hostlen: DWORD, serv: cstring, servlen: DWORD, flags: int32): int32 {.stdcall.}
+  LPFN_GETNAMEINFO* = proc (sa: ptr sockaddr, salen: socklen_t, host: ptr char, hostlen: DWORD, serv: ptr char, servlen: DWORD, flags: int32): int32 {.stdcall.}
   LPFN_GETNAMEINFOA* = LPFN_GETNAMEINFO
   ADDRINFOEXA* {.pure.} = object
     ai_flags*: int32
@@ -1283,29 +1283,29 @@ type
   LPFN_IOCTLSOCKET* = proc (s: SOCKET, cmd: int32, argp: ptr int32): int32 {.stdcall.}
   LPFN_GETPEERNAME* = proc (s: SOCKET, name: ptr sockaddr, namelen: ptr int32): int32 {.stdcall.}
   LPFN_GETSOCKNAME* = proc (s: SOCKET, name: ptr sockaddr, namelen: ptr int32): int32 {.stdcall.}
-  LPFN_GETSOCKOPT* = proc (s: SOCKET, level: int32, optname: int32, optval: cstring, optlen: ptr int32): int32 {.stdcall.}
+  LPFN_GETSOCKOPT* = proc (s: SOCKET, level: int32, optname: int32, optval: ptr char, optlen: ptr int32): int32 {.stdcall.}
   LPFN_HTONL* = proc (hostlong: int32): int32 {.stdcall.}
   LPFN_HTONS* = proc (hostshort: uint16): uint16 {.stdcall.}
-  LPFN_INET_ADDR* = proc (cp: cstring): int32 {.stdcall.}
-  LPFN_INET_NTOA* = proc (`in`: IN_ADDR): cstring {.stdcall.}
+  LPFN_INET_ADDR* = proc (cp: ptr char): int32 {.stdcall.}
+  LPFN_INET_NTOA* = proc (`in`: IN_ADDR): ptr char {.stdcall.}
   LPFN_LISTEN* = proc (s: SOCKET, backlog: int32): int32 {.stdcall.}
   LPFN_NTOHL* = proc (netlong: int32): int32 {.stdcall.}
   LPFN_NTOHS* = proc (netshort: uint16): uint16 {.stdcall.}
-  LPFN_RECV* = proc (s: SOCKET, buf: cstring, len: int32, flags: int32): int32 {.stdcall.}
-  LPFN_RECVFROM* = proc (s: SOCKET, buf: cstring, len: int32, flags: int32, `from`: ptr sockaddr, fromlen: ptr int32): int32 {.stdcall.}
+  LPFN_RECV* = proc (s: SOCKET, buf: ptr char, len: int32, flags: int32): int32 {.stdcall.}
+  LPFN_RECVFROM* = proc (s: SOCKET, buf: ptr char, len: int32, flags: int32, `from`: ptr sockaddr, fromlen: ptr int32): int32 {.stdcall.}
   LPFN_SELECT* = proc (nfds: int32, readfds: ptr fd_set, writefds: ptr fd_set, exceptfds: ptr fd_set, timeout: PTIMEVAL): int32 {.stdcall.}
-  LPFN_SEND* = proc (s: SOCKET, buf: cstring, len: int32, flags: int32): int32 {.stdcall.}
-  LPFN_SENDTO* = proc (s: SOCKET, buf: cstring, len: int32, flags: int32, to: ptr sockaddr, tolen: int32): int32 {.stdcall.}
-  LPFN_SETSOCKOPT* = proc (s: SOCKET, level: int32, optname: int32, optval: cstring, optlen: int32): int32 {.stdcall.}
+  LPFN_SEND* = proc (s: SOCKET, buf: ptr char, len: int32, flags: int32): int32 {.stdcall.}
+  LPFN_SENDTO* = proc (s: SOCKET, buf: ptr char, len: int32, flags: int32, to: ptr sockaddr, tolen: int32): int32 {.stdcall.}
+  LPFN_SETSOCKOPT* = proc (s: SOCKET, level: int32, optname: int32, optval: ptr char, optlen: int32): int32 {.stdcall.}
   LPFN_SHUTDOWN* = proc (s: SOCKET, how: int32): int32 {.stdcall.}
   LPFN_SOCKET* = proc (af: int32, `type`: int32, protocol: int32): SOCKET {.stdcall.}
-  LPFN_GETHOSTBYADDR* = proc (`addr`: cstring, len: int32, `type`: int32): ptr hostent {.stdcall.}
-  LPFN_GETHOSTBYNAME* = proc (name: cstring): ptr hostent {.stdcall.}
-  LPFN_GETHOSTNAME* = proc (name: cstring, namelen: int32): int32 {.stdcall.}
-  LPFN_GETSERVBYPORT* = proc (port: int32, proto: cstring): ptr servent {.stdcall.}
-  LPFN_GETSERVBYNAME* = proc (name: cstring, proto: cstring): ptr servent {.stdcall.}
+  LPFN_GETHOSTBYADDR* = proc (`addr`: ptr char, len: int32, `type`: int32): ptr hostent {.stdcall.}
+  LPFN_GETHOSTBYNAME* = proc (name: ptr char): ptr hostent {.stdcall.}
+  LPFN_GETHOSTNAME* = proc (name: ptr char, namelen: int32): int32 {.stdcall.}
+  LPFN_GETSERVBYPORT* = proc (port: int32, proto: ptr char): ptr servent {.stdcall.}
+  LPFN_GETSERVBYNAME* = proc (name: ptr char, proto: ptr char): ptr servent {.stdcall.}
   LPFN_GETPROTOBYNUMBER* = proc (number: int32): ptr protoent {.stdcall.}
-  LPFN_GETPROTOBYNAME* = proc (name: cstring): ptr protoent {.stdcall.}
+  LPFN_GETPROTOBYNAME* = proc (name: ptr char): ptr protoent {.stdcall.}
   LPFN_WSASTARTUP* = proc (wVersionRequested: WORD, lpWSAData: LPWSADATA): int32 {.stdcall.}
   LPFN_WSACLEANUP* = proc (): int32 {.stdcall.}
   LPFN_WSASETLASTERROR* = proc (iError: int32): void {.stdcall.}
@@ -1314,12 +1314,12 @@ type
   LPFN_WSAUNHOOKBLOCKINGHOOK* = proc (): int32 {.stdcall.}
   LPFN_WSASETBLOCKINGHOOK* = proc (lpBlockFunc: FARPROC): FARPROC {.stdcall.}
   LPFN_WSACANCELBLOCKINGCALL* = proc (): int32 {.stdcall.}
-  LPFN_WSAASYNCGETSERVBYNAME* = proc (hWnd: HWND, wMsg: int32, name: cstring, proto: cstring, buf: cstring, buflen: int32): HANDLE {.stdcall.}
-  LPFN_WSAASYNCGETSERVBYPORT* = proc (hWnd: HWND, wMsg: int32, port: int32, proto: cstring, buf: cstring, buflen: int32): HANDLE {.stdcall.}
-  LPFN_WSAASYNCGETPROTOBYNAME* = proc (hWnd: HWND, wMsg: int32, name: cstring, buf: cstring, buflen: int32): HANDLE {.stdcall.}
-  LPFN_WSAASYNCGETPROTOBYNUMBER* = proc (hWnd: HWND, wMsg: int32, number: int32, buf: cstring, buflen: int32): HANDLE {.stdcall.}
-  LPFN_WSAASYNCGETHOSTBYNAME* = proc (hWnd: HWND, wMsg: int32, name: cstring, buf: cstring, buflen: int32): HANDLE {.stdcall.}
-  LPFN_WSAASYNCGETHOSTBYADDR* = proc (hWnd: HWND, wMsg: int32, `addr`: cstring, len: int32, `type`: int32, buf: cstring, buflen: int32): HANDLE {.stdcall.}
+  LPFN_WSAASYNCGETSERVBYNAME* = proc (hWnd: HWND, wMsg: int32, name: ptr char, proto: ptr char, buf: ptr char, buflen: int32): HANDLE {.stdcall.}
+  LPFN_WSAASYNCGETSERVBYPORT* = proc (hWnd: HWND, wMsg: int32, port: int32, proto: ptr char, buf: ptr char, buflen: int32): HANDLE {.stdcall.}
+  LPFN_WSAASYNCGETPROTOBYNAME* = proc (hWnd: HWND, wMsg: int32, name: ptr char, buf: ptr char, buflen: int32): HANDLE {.stdcall.}
+  LPFN_WSAASYNCGETPROTOBYNUMBER* = proc (hWnd: HWND, wMsg: int32, number: int32, buf: ptr char, buflen: int32): HANDLE {.stdcall.}
+  LPFN_WSAASYNCGETHOSTBYNAME* = proc (hWnd: HWND, wMsg: int32, name: ptr char, buf: ptr char, buflen: int32): HANDLE {.stdcall.}
+  LPFN_WSAASYNCGETHOSTBYADDR* = proc (hWnd: HWND, wMsg: int32, `addr`: ptr char, len: int32, `type`: int32, buf: ptr char, buflen: int32): HANDLE {.stdcall.}
   LPFN_WSACANCELASYNCREQUEST* = proc (hAsyncTaskHandle: HANDLE): int32 {.stdcall.}
   LPFN_WSAASYNCSELECT* = proc (s: SOCKET, hWnd: HWND, wMsg: int32, lEvent: int32): int32 {.stdcall.}
   LPFN_WSAACCEPT* = proc (s: SOCKET, `addr`: ptr sockaddr, addrlen: LPINT, lpfnCondition: LPCONDITIONPROC, dwCallbackData: DWORD_PTR): SOCKET {.stdcall.}
@@ -1392,8 +1392,8 @@ type
   LPFN_WSAPOLL* = proc (fdarray: LPWSAPOLLFD, nfds: ULONG, timeout: INT): INT {.stdcall.}
   LPFN_WSASENDMSG* = proc (s: SOCKET, lpMsg: LPWSAMSG, dwFlags: DWORD, lpNumberOfBytesSent: LPDWORD, lpOverlapped: LPWSAOVERLAPPED, lpCompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE): INT {.stdcall.}
   netent* {.pure.} = object
-    n_name*: cstring
-    n_aliases*: cstringArray
+    n_name*: ptr char
+    n_aliases*: ptr ptr char
     n_addrtype*: int16
     n_net*: int32
   sockproto* {.pure.} = object
@@ -1462,29 +1462,29 @@ proc connect*(s: SOCKET, name: ptr sockaddr, namelen: int32): int32 {.winapi, st
 proc ioctlsocket*(s: SOCKET, cmd: int32, argp: ptr int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc getpeername*(s: SOCKET, name: ptr sockaddr, namelen: ptr int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc getsockname*(s: SOCKET, name: ptr sockaddr, namelen: ptr int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc getsockopt*(s: SOCKET, level: int32, optname: int32, optval: cstring, optlen: ptr int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc getsockopt*(s: SOCKET, level: int32, optname: int32, optval: ptr char, optlen: ptr int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc htonl*(hostlong: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc htons*(hostshort: uint16): uint16 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc inet_addr*(cp: cstring): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc inet_ntoa*(`in`: IN_ADDR): cstring {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc inet_addr*(cp: ptr char): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc inet_ntoa*(`in`: IN_ADDR): ptr char {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc listen*(s: SOCKET, backlog: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc ntohl*(netlong: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc ntohs*(netshort: uint16): uint16 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc recv*(s: SOCKET, buf: cstring, len: int32, flags: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc recvfrom*(s: SOCKET, buf: cstring, len: int32, flags: int32, `from`: ptr sockaddr, fromlen: ptr int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc recv*(s: SOCKET, buf: ptr char, len: int32, flags: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc recvfrom*(s: SOCKET, buf: ptr char, len: int32, flags: int32, `from`: ptr sockaddr, fromlen: ptr int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc select*(nfds: int32, readfds: ptr fd_set, writefds: ptr fd_set, exceptfds: ptr fd_set, timeout: PTIMEVAL): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc send*(s: SOCKET, buf: cstring, len: int32, flags: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc sendto*(s: SOCKET, buf: cstring, len: int32, flags: int32, to: ptr sockaddr, tolen: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc setsockopt*(s: SOCKET, level: int32, optname: int32, optval: cstring, optlen: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc send*(s: SOCKET, buf: ptr char, len: int32, flags: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc sendto*(s: SOCKET, buf: ptr char, len: int32, flags: int32, to: ptr sockaddr, tolen: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc setsockopt*(s: SOCKET, level: int32, optname: int32, optval: ptr char, optlen: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc shutdown*(s: SOCKET, how: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc socket*(af: int32, `type`: int32, protocol: int32): SOCKET {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc gethostbyaddr*(`addr`: cstring, len: int32, `type`: int32): ptr hostent {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc gethostbyname*(name: cstring): ptr hostent {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc gethostname*(name: cstring, namelen: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc getservbyport*(port: int32, proto: cstring): ptr servent {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc getservbyname*(name: cstring, proto: cstring): ptr servent {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc gethostbyaddr*(`addr`: ptr char, len: int32, `type`: int32): ptr hostent {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc gethostbyname*(name: ptr char): ptr hostent {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc gethostname*(name: ptr char, namelen: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc getservbyport*(port: int32, proto: ptr char): ptr servent {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc getservbyname*(name: ptr char, proto: ptr char): ptr servent {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc getprotobynumber*(number: int32): ptr protoent {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc getprotobyname*(name: cstring): ptr protoent {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc getprotobyname*(name: ptr char): ptr protoent {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc WSAStartup*(wVersionRequested: WORD, lpWSAData: LPWSADATA): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc WSACleanup*(): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc WSASetLastError*(iError: int32): void {.winapi, stdcall, dynlib: "ws2_32", importc.}
@@ -1493,12 +1493,12 @@ proc WSAIsBlocking*(): WINBOOL {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc WSAUnhookBlockingHook*(): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc WSASetBlockingHook*(lpBlockFunc: FARPROC): FARPROC {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc WSACancelBlockingCall*(): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc WSAAsyncGetServByName*(hWnd: HWND, wMsg: int32, name: cstring, proto: cstring, buf: cstring, buflen: int32): HANDLE {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc WSAAsyncGetServByPort*(hWnd: HWND, wMsg: int32, port: int32, proto: cstring, buf: cstring, buflen: int32): HANDLE {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc WSAAsyncGetProtoByName*(hWnd: HWND, wMsg: int32, name: cstring, buf: cstring, buflen: int32): HANDLE {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc WSAAsyncGetProtoByNumber*(hWnd: HWND, wMsg: int32, number: int32, buf: cstring, buflen: int32): HANDLE {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc WSAAsyncGetHostByName*(hWnd: HWND, wMsg: int32, name: cstring, buf: cstring, buflen: int32): HANDLE {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc WSAAsyncGetHostByAddr*(hWnd: HWND, wMsg: int32, `addr`: cstring, len: int32, `type`: int32, buf: cstring, buflen: int32): HANDLE {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc WSAAsyncGetServByName*(hWnd: HWND, wMsg: int32, name: ptr char, proto: ptr char, buf: ptr char, buflen: int32): HANDLE {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc WSAAsyncGetServByPort*(hWnd: HWND, wMsg: int32, port: int32, proto: ptr char, buf: ptr char, buflen: int32): HANDLE {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc WSAAsyncGetProtoByName*(hWnd: HWND, wMsg: int32, name: ptr char, buf: ptr char, buflen: int32): HANDLE {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc WSAAsyncGetProtoByNumber*(hWnd: HWND, wMsg: int32, number: int32, buf: ptr char, buflen: int32): HANDLE {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc WSAAsyncGetHostByName*(hWnd: HWND, wMsg: int32, name: ptr char, buf: ptr char, buflen: int32): HANDLE {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc WSAAsyncGetHostByAddr*(hWnd: HWND, wMsg: int32, `addr`: ptr char, len: int32, `type`: int32, buf: ptr char, buflen: int32): HANDLE {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc WSACancelAsyncRequest*(hAsyncTaskHandle: HANDLE): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc WSAAsyncSelect*(s: SOCKET, hWnd: HWND, wMsg: int32, lEvent: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc WSAAccept*(s: SOCKET, `addr`: ptr sockaddr, addrlen: LPINT, lpfnCondition: LPCONDITIONPROC, dwCallbackData: DWORD_PTR): SOCKET {.winapi, stdcall, dynlib: "ws2_32", importc.}
@@ -1559,15 +1559,15 @@ proc WSAEnumNameSpaceProvidersExA*(lpdwBufferLength: LPDWORD, lpnspBuffer: LPWSA
 proc WSAEnumNameSpaceProvidersExW*(lpdwBufferLength: LPDWORD, lpnspBuffer: LPWSANAMESPACE_INFOEXW): INT {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc WSAPoll*(fdarray: ptr WSAPOLLFD, nfds: ULONG, timeout: INT): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc WSASendMsg*(s: SOCKET, lpMsg: LPWSAMSG, dwFlags: DWORD, lpNumberOfBytesSent: LPDWORD, lpOverlapped: LPWSAOVERLAPPED, lpCompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc getaddrinfo*(nodename: cstring, servname: cstring, hints: ptr ADDRINFOA, res: ptr ptr ADDRINFOA): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc getaddrinfo*(nodename: ptr char, servname: ptr char, hints: ptr ADDRINFOA, res: ptr ptr ADDRINFOA): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc GetAddrInfoW*(pNodeName: PCWSTR, pServiceName: PCWSTR, pHints: ptr ADDRINFOW, ppResult: ptr PADDRINFOW): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc GetAddrInfoA*(nodename: cstring, servname: cstring, hints: ptr ADDRINFOA, res: ptr ptr ADDRINFOA): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "getaddrinfo".}
+proc GetAddrInfoA*(nodename: ptr char, servname: ptr char, hints: ptr ADDRINFOA, res: ptr ptr ADDRINFOA): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "getaddrinfo".}
 proc freeaddrinfo*(pAddrInfo: LPADDRINFO): void {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc FreeAddrInfoW*(pAddrInfo: PADDRINFOW): void {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc FreeAddrInfoA*(pAddrInfo: LPADDRINFO): void {.winapi, stdcall, dynlib: "ws2_32", importc: "freeaddrinfo".}
-proc getnameinfo*(sa: ptr sockaddr, salen: socklen_t, host: cstring, hostlen: DWORD, serv: cstring, servlen: DWORD, flags: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
+proc getnameinfo*(sa: ptr sockaddr, salen: socklen_t, host: ptr char, hostlen: DWORD, serv: ptr char, servlen: DWORD, flags: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc GetNameInfoW*(pSockaddr: ptr SOCKADDR, SockaddrLength: socklen_t, pNodeBuffer: PWCHAR, NodeBufferSize: DWORD, pServiceBuffer: PWCHAR, ServiceBufferSize: DWORD, Flags: INT): INT {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc GetNameInfoA*(sa: ptr sockaddr, salen: socklen_t, host: cstring, hostlen: DWORD, serv: cstring, servlen: DWORD, flags: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "getnameinfo".}
+proc GetNameInfoA*(sa: ptr sockaddr, salen: socklen_t, host: ptr char, hostlen: DWORD, serv: ptr char, servlen: DWORD, flags: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "getnameinfo".}
 proc RtlIpv6AddressToStringA*(Addr: ptr IN6_ADDR, S: LPSTR): LPSTR {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc RtlIpv6AddressToStringW*(Addr: ptr IN6_ADDR, S: LPWSTR): LPWSTR {.winapi, stdcall, dynlib: "ntdll", importc.}
 proc RtlIpv6AddressToStringExA*(Address: ptr IN6_ADDR, ScopeId: ULONG, Port: USHORT, AddressString: LPSTR, AddressStringLength: PULONG): LONG {.winapi, stdcall, dynlib: "ntdll", importc.}
@@ -1596,7 +1596,7 @@ proc InetNtopW*(Family: INT, pAddr: PVOID, pStringBuf: LPWSTR, StringBufSIze: in
 proc inet_ntop*(Family: INT, pAddr: PVOID, pStringBuf: LPSTR, StringBufSize: int): LPCSTR {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc InetPtonW*(Family: INT, pStringBuf: LPCWSTR, pAddr: PVOID): INT {.winapi, stdcall, dynlib: "ws2_32", importc.}
 proc inet_pton*(Family: INT, pStringBuf: LPCSTR, pAddr: PVOID): INT {.winapi, stdcall, dynlib: "ws2_32", importc.}
-proc WSARecvEx*(s: SOCKET, buf: cstring, len: int32, flags: ptr int32): int32 {.winapi, stdcall, dynlib: "mswsock", importc.}
+proc WSARecvEx*(s: SOCKET, buf: ptr char, len: int32, flags: ptr int32): int32 {.winapi, stdcall, dynlib: "mswsock", importc.}
 proc TransmitFile*(hSocket: SOCKET, hFile: HANDLE, nNumberOfBytesToWrite: DWORD, nNumberOfBytesPerSend: DWORD, lpOverlapped: LPOVERLAPPED, lpTransmitBuffers: LPTRANSMIT_FILE_BUFFERS, dwReserved: DWORD): WINBOOL {.winapi, stdcall, dynlib: "mswsock", importc.}
 proc AcceptEx*(sListenSocket: SOCKET, sAcceptSocket: SOCKET, lpOutputBuffer: PVOID, dwReceiveDataLength: DWORD, dwLocalAddressLength: DWORD, dwRemoteAddressLength: DWORD, lpdwBytesReceived: LPDWORD, lpOverlapped: LPOVERLAPPED): WINBOOL {.winapi, stdcall, dynlib: "mswsock", importc.}
 proc GetAcceptExSockaddrs*(lpOutputBuffer: PVOID, dwReceiveDataLength: DWORD, dwLocalAddressLength: DWORD, dwRemoteAddressLength: DWORD, LocalSockaddr: ptr ptr sockaddr, LocalSockaddrLength: LPINT, RemoteSockaddr: ptr ptr sockaddr, RemoteSockaddrLength: LPINT): VOID {.winapi, stdcall, dynlib: "mswsock", importc.}
@@ -1778,9 +1778,9 @@ when winimAnsi:
   proc WSASetService*(lpqsRegInfo: LPWSAQUERYSETA, essoperation: WSAESETSERVICEOP, dwControlFlags: DWORD): INT {.winapi, stdcall, dynlib: "ws2_32", importc: "WSASetServiceA".}
   proc WSAConnectByName*(s: SOCKET, nodename: LPSTR, servicename: LPSTR, LocalAddressLength: LPDWORD, LocalAddress: LPSOCKADDR, RemoteAddressLength: LPDWORD, RemoteAddress: LPSOCKADDR, timeout: PTIMEVAL, Reserved: LPWSAOVERLAPPED): WINBOOL {.winapi, stdcall, dynlib: "ws2_32", importc: "WSAConnectByNameA".}
   proc WSAEnumNameSpaceProvidersEx*(lpdwBufferLength: LPDWORD, lpnspBuffer: LPWSANAMESPACE_INFOEXA): INT {.winapi, stdcall, dynlib: "ws2_32", importc: "WSAEnumNameSpaceProvidersExA".}
-  proc GetAddrInfo*(nodename: cstring, servname: cstring, hints: ptr ADDRINFOA, res: ptr ptr ADDRINFOA): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "getaddrinfo".}
+  proc GetAddrInfo*(nodename: ptr char, servname: ptr char, hints: ptr ADDRINFOA, res: ptr ptr ADDRINFOA): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "getaddrinfo".}
   proc FreeAddrInfo*(pAddrInfo: LPADDRINFO): void {.winapi, stdcall, dynlib: "ws2_32", importc: "freeaddrinfo".}
-  proc GetNameInfo*(sa: ptr sockaddr, salen: socklen_t, host: cstring, hostlen: DWORD, serv: cstring, servlen: DWORD, flags: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "getnameinfo".}
+  proc GetNameInfo*(sa: ptr sockaddr, salen: socklen_t, host: ptr char, hostlen: DWORD, serv: ptr char, servlen: DWORD, flags: int32): int32 {.winapi, stdcall, dynlib: "ws2_32", importc: "getnameinfo".}
   proc RtlIpv6AddressToString*(Addr: ptr IN6_ADDR, S: LPSTR): LPSTR {.winapi, stdcall, dynlib: "ntdll", importc: "RtlIpv6AddressToStringA".}
   proc RtlIpv6AddressToStringEx*(Address: ptr IN6_ADDR, ScopeId: ULONG, Port: USHORT, AddressString: LPSTR, AddressStringLength: PULONG): LONG {.winapi, stdcall, dynlib: "ntdll", importc: "RtlIpv6AddressToStringExA".}
   proc RtlIpv4AddressToString*(Addr: ptr IN_ADDR, S: LPSTR): LPSTR {.winapi, stdcall, dynlib: "ntdll", importc: "RtlIpv4AddressToStringA".}

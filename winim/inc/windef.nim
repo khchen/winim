@@ -60,21 +60,10 @@ type
   PLONGLONG* = ptr int64
   ULONGLONG* = int64
   PULONGLONG* = ptr int64
-  PCHAR* = cstring
-  LPCH* = cstring
-  PCH* = cstring
-  LPCCH* = cstring
-  PCCH* = cstring
-  NPSTR* = cstring
-  LPSTR* = cstring
-  PSTR* = cstring
-  LPCSTR* = cstring
-  PCSTR* = cstring
-  PSZ* = cstring
-  PCSZ* = cstring
+  PCSZ* = ptr char
   WCHAR* = uint16
   CCHAR* = char
-  PCCHAR* = cstring
+  PCCHAR* = ptr char
   NT_PRODUCT_TYPE* = int32
   PNT_PRODUCT_TYPE* = ptr int32
   EVENT_TYPE* = int32
@@ -91,10 +80,6 @@ type
   UINT* = int32
   PUINT* = ptr int32
   UCSCHAR* = int32
-  PZZSTR* = cstring
-  PCZZSTR* = cstring
-  PNZCH* = cstring
-  PCNZCH* = cstring
   COMPARTMENT_ID* = int32
   PCOMPARTMENT_ID* = ptr int32
   SID_NAME_USE* = int32
@@ -196,7 +181,7 @@ type
 when winimAnsi:
   type
     TCHAR* = char
-    PTCHAR* = cstring
+    PTCHAR* = ptr char
     TBYTE* = uint8
     PTBYTE* = ptr uint8
 when winimCpu64:
@@ -259,9 +244,20 @@ type
   DWORDLONG* = ULONGLONG
   PDWORDLONG* = ptr ULONGLONG
   USN* = LONGLONG
+  PCHAR* = ptr CHAR
+  LPCH* = ptr CHAR
+  PCH* = ptr CHAR
+  LPCCH* = ptr CHAR
+  PCCH* = ptr CHAR
+  NPSTR* = ptr CHAR
+  LPSTR* = ptr CHAR
+  PSTR* = ptr CHAR
   PZPSTR* = ptr PSTR
   PCZPSTR* = ptr PSTR
+  LPCSTR* = ptr CHAR
+  PCSTR* = ptr CHAR
   PZPCSTR* = ptr PCSTR
+  PSZ* = ptr CHAR
   PWCHAR* = ptr WCHAR
   LPWCH* = ptr WCHAR
   PWCH* = ptr WCHAR
@@ -312,6 +308,10 @@ type
   PCUUCSSTR* = ptr UCSCHAR
   PUUCSCHAR* = ptr UCSCHAR
   PCUUCSCHAR* = ptr UCSCHAR
+  PZZSTR* = ptr CHAR
+  PCZZSTR* = ptr CHAR
+  PNZCH* = ptr CHAR
+  PCNZCH* = ptr CHAR
   KSPIN_LOCK* = ULONG_PTR
   PACCESS_TOKEN* = PVOID
   PSECURITY_DESCRIPTOR* = PVOID
@@ -629,7 +629,7 @@ type
   CSTRING* {.pure.} = object
     Length*: USHORT
     MaximumLength*: USHORT
-    Buffer*: cstring
+    Buffer*: ptr CHAR
   PCSTRING* = ptr CSTRING
   STRING* {.pure.} = object
     Length*: USHORT

@@ -1063,11 +1063,11 @@ type
     cLeashed*: int32
     cDowngraded*: int32
     cBlocked*: int32
-    pszLocation*: cstring
+    pszLocation*: ptr char
   OutgoingCookieState* {.pure.} = object
     cSent*: int32
     cSuppressed*: int32
-    pszLocation*: cstring
+    pszLocation*: ptr char
   InternetCookieHistory* {.pure.} = object
     fAccepted*: WINBOOL
     fLeashed*: WINBOOL

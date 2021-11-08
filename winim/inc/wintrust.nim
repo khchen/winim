@@ -256,10 +256,10 @@ type
     pasProvPrivData*: ptr CRYPT_PROVIDER_PRIVDATA
     dwSubjectChoice*: DWORD
     union1*: CRYPT_PROVIDER_DATA_UNION1
-    pszUsageOID*: cstring
+    pszUsageOID*: ptr char
     fRecallWithState*: WINBOOL
     sftSystemTime*: FILETIME
-    pszCTLSignerUsageOID*: cstring
+    pszCTLSignerUsageOID*: ptr char
     dwProvFlags*: DWORD
     dwFinalError*: DWORD
     pRequestUsage*: PCERT_USAGE_MATCH
@@ -293,8 +293,8 @@ type
     cbStruct*: DWORD
     pgActionID*: ptr GUID
     pwszDllName*: ptr WCHAR
-    pwszLoadCallbackDataFunctionName*: cstring
-    pwszFreeCallbackDataFunctionName*: cstring
+    pwszLoadCallbackDataFunctionName*: ptr char
+    pwszFreeCallbackDataFunctionName*: ptr char
   PCRYPT_PROVIDER_REGDEFUSAGE* = ptr CRYPT_PROVIDER_REGDEFUSAGE
   CRYPT_PROVIDER_DEFUSAGE* {.pure.} = object
     cbStruct*: DWORD
@@ -601,8 +601,8 @@ const
   CRYPTCAT_E_CDF_ATTR_TOOFEWVALUES* = 0x00020002
   CRYPTCAT_E_CDF_ATTR_TYPECOMBO* = 0x00020004
 type
-  PFN_ALLOCANDFILLDEFUSAGE* = proc (pszUsageOID: cstring, psDefUsage: ptr CRYPT_PROVIDER_DEFUSAGE): WINBOOL {.stdcall.}
-  PFN_FREEDEFUSAGE* = proc (pszUsageOID: cstring, psDefUsage: ptr CRYPT_PROVIDER_DEFUSAGE): WINBOOL {.stdcall.}
+  PFN_ALLOCANDFILLDEFUSAGE* = proc (pszUsageOID: ptr char, psDefUsage: ptr CRYPT_PROVIDER_DEFUSAGE): WINBOOL {.stdcall.}
+  PFN_FREEDEFUSAGE* = proc (pszUsageOID: ptr char, psDefUsage: ptr CRYPT_PROVIDER_DEFUSAGE): WINBOOL {.stdcall.}
   pfnIsFileSupported* = proc (hFile: HANDLE, pgSubject: ptr GUID): WINBOOL {.stdcall.}
   pfnIsFileSupportedName* = proc (pwszFileName: ptr WCHAR, pgSubject: ptr GUID): WINBOOL {.stdcall.}
   PFN_CDF_PARSE_ERROR_CALLBACK* = proc (P1: DWORD, P2: DWORD, P3: ptr WCHAR): void {.stdcall.}
@@ -631,8 +631,8 @@ proc WintrustSetRegPolicyFlags*(dwPolicyFlags: DWORD): WINBOOL {.winapi, stdcall
 proc WintrustAddActionID*(pgActionID: ptr GUID, fdwFlags: DWORD, psProvInfo: ptr CRYPT_REGISTER_ACTIONID): WINBOOL {.winapi, stdcall, dynlib: "wintrust", importc.}
 proc WintrustRemoveActionID*(pgActionID: ptr GUID): WINBOOL {.winapi, stdcall, dynlib: "wintrust", importc.}
 proc WintrustLoadFunctionPointers*(pgActionID: ptr GUID, pPfns: ptr CRYPT_PROVIDER_FUNCTIONS): WINBOOL {.winapi, stdcall, dynlib: "wintrust", importc.}
-proc WintrustAddDefaultForUsage*(pszUsageOID: cstring, psDefUsage: ptr CRYPT_PROVIDER_REGDEFUSAGE): WINBOOL {.winapi, stdcall, dynlib: "wintrust", importc.}
-proc WintrustGetDefaultForUsage*(dwAction: DWORD, pszUsageOID: cstring, psUsage: ptr CRYPT_PROVIDER_DEFUSAGE): WINBOOL {.winapi, stdcall, dynlib: "wintrust", importc.}
+proc WintrustAddDefaultForUsage*(pszUsageOID: ptr char, psDefUsage: ptr CRYPT_PROVIDER_REGDEFUSAGE): WINBOOL {.winapi, stdcall, dynlib: "wintrust", importc.}
+proc WintrustGetDefaultForUsage*(dwAction: DWORD, pszUsageOID: ptr char, psUsage: ptr CRYPT_PROVIDER_DEFUSAGE): WINBOOL {.winapi, stdcall, dynlib: "wintrust", importc.}
 proc WTHelperGetProvSignerFromChain*(pProvData: ptr CRYPT_PROVIDER_DATA, idxSigner: DWORD, fCounterSigner: WINBOOL, idxCounterSigner: DWORD): ptr CRYPT_PROVIDER_SGNR {.winapi, stdcall, dynlib: "wintrust", importc.}
 proc WTHelperGetProvCertFromChain*(pSgnr: ptr CRYPT_PROVIDER_SGNR, idxCert: DWORD): ptr CRYPT_PROVIDER_CERT {.winapi, stdcall, dynlib: "wintrust", importc.}
 proc WTHelperProvDataFromStateData*(hStateData: HANDLE): ptr CRYPT_PROVIDER_DATA {.winapi, stdcall, dynlib: "wintrust", importc.}

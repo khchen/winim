@@ -817,12 +817,12 @@ type
   SecPkgCredentials_SSIProviderW* {.pure.} = object
     sProviderName*: ptr SEC_WCHAR
     ProviderInfoLength*: int32
-    ProviderInfo*: cstring
+    ProviderInfo*: ptr char
   PSecPkgCredentials_SSIProviderW* = ptr SecPkgCredentials_SSIProviderW
   SecPkgCredentials_SSIProviderA* {.pure.} = object
     sProviderName*: ptr SEC_CHAR
     ProviderInfoLength*: int32
-    ProviderInfo*: cstring
+    ProviderInfo*: ptr char
   PSecPkgCredentials_SSIProviderA* = ptr SecPkgCredentials_SSIProviderA
   SecPkgContext_Sizes* {.pure.} = object
     cbMaxToken*: int32
@@ -936,11 +936,11 @@ type
   PSecPkgContext_TargetInformation* = ptr SecPkgContext_TargetInformation
   SecPkgContext_AuthzID* {.pure.} = object
     AuthzIDLength*: int32
-    AuthzID*: cstring
+    AuthzID*: ptr char
   PSecPkgContext_AuthzID* = ptr SecPkgContext_AuthzID
   SecPkgContext_Target* {.pure.} = object
     TargetLength*: int32
-    Target*: cstring
+    Target*: ptr char
   PSecPkgContext_Target* = ptr SecPkgContext_Target
   ENUMERATE_SECURITY_PACKAGES_FN_W* = proc (P1: ptr int32, P2: ptr PSecPkgInfoW): SECURITY_STATUS {.stdcall.}
   QUERY_CREDENTIALS_ATTRIBUTES_FN_W* = proc (P1: PCredHandle, P2: int32, P3: pointer): SECURITY_STATUS {.stdcall.}

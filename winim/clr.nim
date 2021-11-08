@@ -72,8 +72,6 @@ var
   hresult {.threadvar.}: HRESULT
   CurrentAssembly {.threadvar.}: CLRVariant
 
-converter voidpp_converter(x: ptr ptr object): ptr pointer = cast[ptr pointer](x)
-
 proc isNil*(x: CLRVariant): bool {.borrow.}
   ## Check if `CLRVariant` is nil or not.
 

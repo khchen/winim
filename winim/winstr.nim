@@ -14,7 +14,7 @@
 ##    type
 ##      CHAR = char
 ##      WCHAR = uint16
-##      LPSTR|LPCSTR = cstring # however, it should be ansi string, not utf8 string
+##      LPSTR|LPCSTR = ptr CHAR # however, it should be ansi string, not utf8 string
 ##      LPWSTR|LPCWSTR = ptr WCHAR
 ##      BSTR = distinct ptr WCHAR # BSTR is not binary compatible with LPWSTR
 ##      (ptr) array[I, CHAR] # sometimes string defined as array[1, CHAR] but not only one char
@@ -98,9 +98,9 @@
 ##      # Use `&` to get the buffer address and then pass to Windows API.
 ##
 ##    converter winstrConverter(s: SomeString): SomeBuffer
-##      # With these converters, pass string to Windows API is more easy.
+##      # With these converters, passing string to Windows API is more easy.
 ##      #   Following converters don't need encoding conversion:
-##      #     string => LPSTR (built-in)|ptr char
+##      #     string => LPSTR|ptr char
 ##      #     mstring => LPSTR|ptr char
 ##      #     wstring => LPWSTR|BSTR
 ##      #     cstring => ptr char

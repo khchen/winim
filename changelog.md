@@ -1,3 +1,11 @@
+Version 3.7.0
+-------------
+* Because implicit conversion to 'cstring' will become an error in the future,
+  winim don't use cstring in type definitions anymore. All 'LPSTR' and similar
+  types are redefined to 'ptr char' now. Passing string to Windows API is still
+  easy via winstr module **(Breaking Change)**.
+* Fix #71.
+
 Version 3.6.1
 -------------
 * Remove winimx module and related examples.

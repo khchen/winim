@@ -527,7 +527,7 @@ type
     lpVtbl*: ptr IHostMallocVtbl
   IHostMallocVtbl* {.pure, inheritable.} = object of IUnknownVtbl
     Alloc*: proc(self: ptr IHostMalloc, cbSize: SIZE_T, eCriticalLevel: EMemoryCriticalLevel, ppMem: ptr pointer): HRESULT {.stdcall.}
-    DebugAlloc*: proc(self: ptr IHostMalloc, cbSize: SIZE_T, eCriticalLevel: EMemoryCriticalLevel, pszFileName: cstring, iLineNo: int32, ppMem: ptr pointer): HRESULT {.stdcall.}
+    DebugAlloc*: proc(self: ptr IHostMalloc, cbSize: SIZE_T, eCriticalLevel: EMemoryCriticalLevel, pszFileName: ptr char, iLineNo: int32, ppMem: ptr pointer): HRESULT {.stdcall.}
     Free*: proc(self: ptr IHostMalloc, pMem: pointer): HRESULT {.stdcall.}
   IHostMemoryManager* {.pure.} = object
     lpVtbl*: ptr IHostMemoryManagerVtbl
@@ -1276,7 +1276,7 @@ proc UnloadDomain*(self: ptr ICorRuntimeHost, pAppDomain: ptr IUnknown): HRESULT
 proc CurrentDomain*(self: ptr ICorRuntimeHost, pAppDomain: ptr ptr IUnknown): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.CurrentDomain(self, pAppDomain)
 proc OnMemoryNotification*(self: ptr ICLRMemoryNotificationCallback, eMemoryAvailable: EMemoryAvailable): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.OnMemoryNotification(self, eMemoryAvailable)
 proc Alloc*(self: ptr IHostMalloc, cbSize: SIZE_T, eCriticalLevel: EMemoryCriticalLevel, ppMem: ptr pointer): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.Alloc(self, cbSize, eCriticalLevel, ppMem)
-proc DebugAlloc*(self: ptr IHostMalloc, cbSize: SIZE_T, eCriticalLevel: EMemoryCriticalLevel, pszFileName: cstring, iLineNo: int32, ppMem: ptr pointer): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.DebugAlloc(self, cbSize, eCriticalLevel, pszFileName, iLineNo, ppMem)
+proc DebugAlloc*(self: ptr IHostMalloc, cbSize: SIZE_T, eCriticalLevel: EMemoryCriticalLevel, pszFileName: ptr char, iLineNo: int32, ppMem: ptr pointer): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.DebugAlloc(self, cbSize, eCriticalLevel, pszFileName, iLineNo, ppMem)
 proc Free*(self: ptr IHostMalloc, pMem: pointer): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.Free(self, pMem)
 proc CreateMalloc*(self: ptr IHostMemoryManager, dwMallocType: DWORD, ppMalloc: ptr ptr IHostMalloc): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.CreateMalloc(self, dwMallocType, ppMalloc)
 proc VirtualAlloc*(self: ptr IHostMemoryManager, pAddress: pointer, dwSize: SIZE_T, flAllocationType: DWORD, flProtect: DWORD, eCriticalLevel: EMemoryCriticalLevel, ppMem: ptr pointer): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.VirtualAlloc(self, pAddress, dwSize, flAllocationType, flProtect, eCriticalLevel, ppMem)

@@ -12,7 +12,7 @@ import imm
 #include <mmsystem.h>
 #include <mmreg.h>
 type
-  HPSTR* = cstring
+  HPSTR* = ptr char
   HDRVR* = HANDLE
   HWAVE* = HANDLE
   HWAVEIN* = HANDLE
@@ -4413,7 +4413,7 @@ proc mmioRenameA*(pszFileName: LPCSTR, pszNewFileName: LPCSTR, pmmioinfo: LPCMMI
 proc mmioRenameW*(pszFileName: LPCWSTR, pszNewFileName: LPCWSTR, pmmioinfo: LPCMMIOINFO, fdwRename: DWORD): MMRESULT {.winapi, stdcall, dynlib: "winmm", importc.}
 proc mmioClose*(hmmio: HMMIO, fuClose: UINT): MMRESULT {.winapi, stdcall, dynlib: "winmm", importc.}
 proc mmioRead*(hmmio: HMMIO, pch: HPSTR, cch: LONG): LONG {.winapi, stdcall, dynlib: "winmm", importc.}
-proc mmioWrite*(hmmio: HMMIO, pch: cstring, cch: LONG): LONG {.winapi, stdcall, dynlib: "winmm", importc.}
+proc mmioWrite*(hmmio: HMMIO, pch: ptr char, cch: LONG): LONG {.winapi, stdcall, dynlib: "winmm", importc.}
 proc mmioSeek*(hmmio: HMMIO, lOffset: LONG, iOrigin: int32): LONG {.winapi, stdcall, dynlib: "winmm", importc.}
 proc mmioGetInfo*(hmmio: HMMIO, pmmioinfo: LPMMIOINFO, fuInfo: UINT): MMRESULT {.winapi, stdcall, dynlib: "winmm", importc.}
 proc mmioSetInfo*(hmmio: HMMIO, pmmioinfo: LPCMMIOINFO, fuInfo: UINT): MMRESULT {.winapi, stdcall, dynlib: "winmm", importc.}

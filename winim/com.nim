@@ -66,7 +66,7 @@ type
   VariantConversionError* = object of ValueError
   SomeFloat = float | float32 | float64 # SomeReal is deprecated in devel
 
-proc notNil[T](x: T): bool =
+template notNil[T](x: T): bool =
   when T is BSTR: not cast[pointer](x).isNil
   else: not x.isNil
 
@@ -998,8 +998,9 @@ proc invoke(self: com, name: string, invokeType: WORD, vargs: varargs[variant, t
       dp.cNamedArgs = 1
 
   if self.disp.Invoke(dispid, &IID_NULL, LOCALE_USER_DEFAULT, invokeType, &dp, &ret, &excep, nil).ERR:
-    if cast[pointer](excep.pfnDeferredFillIn).notNil:
-      {.gcsafe.}: discard excep.pfnDeferredFillIn(&excep)
+    {.gcsafe.}:
+      if cast[pointer](excep.pfnDeferredFillIn).notNil:
+        discard excep.pfnDeferredFillIn(&excep)
 
     if excep.bstrSource.notNil:
       var err = $toVariant(excep.bstrSource)

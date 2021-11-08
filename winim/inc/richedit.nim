@@ -692,7 +692,7 @@ const
   IID_IRichEditOleCallback* = DEFINE_GUID("00020d03-0000-0000-c000-000000000046")
 type
   AutoCorrectProc* = proc (langid: LANGID, pszBefore: ptr WCHAR, pszAfter: ptr WCHAR, cchAfter: LONG, pcchReplaced: ptr LONG): int32 {.stdcall.}
-  EDITWORDBREAKPROCEX* = proc (pchText: cstring, cchText: LONG, bCharSet: BYTE, action: INT): LONG {.stdcall.}
+  EDITWORDBREAKPROCEX* = proc (pchText: ptr char, cchText: LONG, bCharSet: BYTE, action: INT): LONG {.stdcall.}
   EDITSTREAMCALLBACK* = proc (dwCookie: DWORD_PTR, pbBuff: LPBYTE, cb: LONG, pcb: ptr LONG): DWORD {.stdcall.}
   IMECOMPTEXT* {.pure.} = object
     cb*: LONG
@@ -940,7 +940,7 @@ type
     chrg*: CHARRANGE
   TENLOWFIRTF* {.pure.} = object
     nmhdr*: NMHDR
-    szControl*: cstring
+    szControl*: ptr char
   TENCORRECTTEXT* {.pure, packed.} = object
     nmhdr*: NMHDR
     chrg*: CHARRANGE

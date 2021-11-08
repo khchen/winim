@@ -991,7 +991,7 @@ type
     intVal*: INT
     uintVal*: UINT
     pdecVal*: ptr DECIMAL
-    pcVal*: cstring
+    pcVal*: ptr CHAR
     puiVal*: ptr USHORT
     pulVal*: ptr ULONG
     pullVal*: ptr ULONGLONG
@@ -1166,7 +1166,7 @@ type
     uintVal*: UINT
     decVal*: DECIMAL
     pdecVal*: ptr DECIMAL
-    pcVal*: cstring
+    pcVal*: ptr CHAR
     puiVal*: ptr USHORT
     pulVal*: ptr ULONG
     pullVal*: ptr ULONGLONG
@@ -2032,7 +2032,7 @@ type
   LPVERSIONEDSTREAM* = ptr VERSIONEDSTREAM
   CAC* {.pure.} = object
     cElems*: ULONG
-    pElems*: cstring
+    pElems*: ptr CHAR
   CAUB* {.pure.} = object
     cElems*: ULONG
     pElems*: ptr UCHAR
@@ -2149,7 +2149,7 @@ type
     calpstr*: CALPSTR
     calpwstr*: CALPWSTR
     capropvar*: CAPROPVARIANT
-    pcVal*: cstring
+    pcVal*: ptr CHAR
     pbVal*: ptr UCHAR
     piVal*: ptr SHORT
     puiVal*: ptr USHORT
@@ -6907,21 +6907,21 @@ proc VarBoolFromUI2*(uiIn: USHORT, pboolOut: ptr VARIANT_BOOL): HRESULT {.winapi
 proc VarBoolFromUI4*(ulIn: ULONG, pboolOut: ptr VARIANT_BOOL): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
 proc VarBoolFromUI8*(i64In: ULONG64, pboolOut: ptr VARIANT_BOOL): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
 proc VarBoolFromDec*(pdecIn: ptr DECIMAL, pboolOut: ptr VARIANT_BOOL): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
-proc VarI1FromUI1*(bIn: BYTE, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
-proc VarI1FromI2*(uiIn: SHORT, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
-proc VarI1FromI4*(lIn: LONG, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
-proc VarI1FromI8*(i64In: LONG64, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
-proc VarI1FromR4*(fltIn: FLOAT, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
-proc VarI1FromR8*(dblIn: DOUBLE, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
-proc VarI1FromDate*(dateIn: DATE, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
-proc VarI1FromCy*(cyIn: CY, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
-proc VarI1FromStr*(strIn: ptr OLECHAR, lcid: LCID, dwFlags: ULONG, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
-proc VarI1FromDisp*(pdispIn: ptr IDispatch, lcid: LCID, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
-proc VarI1FromBool*(boolIn: VARIANT_BOOL, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
-proc VarI1FromUI2*(uiIn: USHORT, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
-proc VarI1FromUI4*(ulIn: ULONG, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
-proc VarI1FromUI8*(i64In: ULONG64, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
-proc VarI1FromDec*(pdecIn: ptr DECIMAL, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc VarI1FromUI1*(bIn: BYTE, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc VarI1FromI2*(uiIn: SHORT, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc VarI1FromI4*(lIn: LONG, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc VarI1FromI8*(i64In: LONG64, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc VarI1FromR4*(fltIn: FLOAT, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc VarI1FromR8*(dblIn: DOUBLE, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc VarI1FromDate*(dateIn: DATE, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc VarI1FromCy*(cyIn: CY, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc VarI1FromStr*(strIn: ptr OLECHAR, lcid: LCID, dwFlags: ULONG, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc VarI1FromDisp*(pdispIn: ptr IDispatch, lcid: LCID, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc VarI1FromBool*(boolIn: VARIANT_BOOL, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc VarI1FromUI2*(uiIn: USHORT, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc VarI1FromUI4*(ulIn: ULONG, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc VarI1FromUI8*(i64In: ULONG64, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc VarI1FromDec*(pdecIn: ptr DECIMAL, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
 proc VarUI2FromUI1*(bIn: BYTE, puiOut: ptr USHORT): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
 proc VarUI2FromI2*(uiIn: SHORT, puiOut: ptr USHORT): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
 proc VarUI2FromI4*(lIn: LONG, puiOut: ptr USHORT): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc.}
@@ -6999,8 +6999,8 @@ proc VarBstrFromInt*(lIn: LONG, lcid: LCID, dwFlags: ULONG, pbstrOut: ptr BSTR):
 proc VarBstrFromUint*(ulIn: ULONG, lcid: LCID, dwFlags: ULONG, pbstrOut: ptr BSTR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc: "VarBstrFromUI4".}
 proc VarBoolFromInt*(lIn: LONG, pboolOut: ptr VARIANT_BOOL): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc: "VarBoolFromI4".}
 proc VarBoolFromUint*(ulIn: ULONG, pboolOut: ptr VARIANT_BOOL): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc: "VarBoolFromUI4".}
-proc VarI1FromInt*(lIn: LONG, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc: "VarI1FromI4".}
-proc VarI1FromUint*(ulIn: ULONG, pcOut: ptr int8): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc: "VarI1FromUI4".}
+proc VarI1FromInt*(lIn: LONG, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc: "VarI1FromI4".}
+proc VarI1FromUint*(ulIn: ULONG, pcOut: ptr CHAR): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc: "VarI1FromUI4".}
 proc VarUI2FromInt*(lIn: LONG, puiOut: ptr USHORT): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc: "VarUI2FromI4".}
 proc VarUI2FromUint*(ulIn: ULONG, puiOut: ptr USHORT): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc: "VarUI2FromUI4".}
 proc VarUI4FromInt*(lIn: LONG, pulOut: ptr ULONG): HRESULT {.winapi, stdcall, dynlib: "oleaut32", importc: "VarUI4FromI4".}
@@ -7641,9 +7641,9 @@ proc uintVal*(self: var VARIANT): var UINT {.inline.} = self.union1.struct1.unio
 proc `pdecVal=`*(self: var VARIANT, x: ptr DECIMAL) {.inline.} = self.union1.struct1.union1.pdecVal = x
 proc pdecVal*(self: VARIANT): ptr DECIMAL {.inline.} = self.union1.struct1.union1.pdecVal
 proc pdecVal*(self: var VARIANT): var ptr DECIMAL {.inline.} = self.union1.struct1.union1.pdecVal
-proc `pcVal=`*(self: var VARIANT, x: cstring) {.inline.} = self.union1.struct1.union1.pcVal = x
-proc pcVal*(self: VARIANT): cstring {.inline.} = self.union1.struct1.union1.pcVal
-proc pcVal*(self: var VARIANT): var cstring {.inline.} = self.union1.struct1.union1.pcVal
+proc `pcVal=`*(self: var VARIANT, x: ptr CHAR) {.inline.} = self.union1.struct1.union1.pcVal = x
+proc pcVal*(self: VARIANT): ptr CHAR {.inline.} = self.union1.struct1.union1.pcVal
+proc pcVal*(self: var VARIANT): var ptr CHAR {.inline.} = self.union1.struct1.union1.pcVal
 proc `puiVal=`*(self: var VARIANT, x: ptr USHORT) {.inline.} = self.union1.struct1.union1.puiVal = x
 proc puiVal*(self: VARIANT): ptr USHORT {.inline.} = self.union1.struct1.union1.puiVal
 proc puiVal*(self: var VARIANT): var ptr USHORT {.inline.} = self.union1.struct1.union1.puiVal
@@ -7782,9 +7782,9 @@ proc decVal*(self: var wireVARIANT): var DECIMAL {.inline.} = self.union1.decVal
 proc `pdecVal=`*(self: var wireVARIANT, x: ptr DECIMAL) {.inline.} = self.union1.pdecVal = x
 proc pdecVal*(self: wireVARIANT): ptr DECIMAL {.inline.} = self.union1.pdecVal
 proc pdecVal*(self: var wireVARIANT): var ptr DECIMAL {.inline.} = self.union1.pdecVal
-proc `pcVal=`*(self: var wireVARIANT, x: cstring) {.inline.} = self.union1.pcVal = x
-proc pcVal*(self: wireVARIANT): cstring {.inline.} = self.union1.pcVal
-proc pcVal*(self: var wireVARIANT): var cstring {.inline.} = self.union1.pcVal
+proc `pcVal=`*(self: var wireVARIANT, x: ptr CHAR) {.inline.} = self.union1.pcVal = x
+proc pcVal*(self: wireVARIANT): ptr CHAR {.inline.} = self.union1.pcVal
+proc pcVal*(self: var wireVARIANT): var ptr CHAR {.inline.} = self.union1.pcVal
 proc `puiVal=`*(self: var wireVARIANT, x: ptr USHORT) {.inline.} = self.union1.puiVal = x
 proc puiVal*(self: wireVARIANT): ptr USHORT {.inline.} = self.union1.puiVal
 proc puiVal*(self: var wireVARIANT): var ptr USHORT {.inline.} = self.union1.puiVal
@@ -7989,9 +7989,9 @@ proc calpwstr*(self: var PROPVARIANT): var CALPWSTR {.inline.} = self.union1.str
 proc `capropvar=`*(self: var PROPVARIANT, x: CAPROPVARIANT) {.inline.} = self.union1.struct1.union1.capropvar = x
 proc capropvar*(self: PROPVARIANT): CAPROPVARIANT {.inline.} = self.union1.struct1.union1.capropvar
 proc capropvar*(self: var PROPVARIANT): var CAPROPVARIANT {.inline.} = self.union1.struct1.union1.capropvar
-proc `pcVal=`*(self: var PROPVARIANT, x: cstring) {.inline.} = self.union1.struct1.union1.pcVal = x
-proc pcVal*(self: PROPVARIANT): cstring {.inline.} = self.union1.struct1.union1.pcVal
-proc pcVal*(self: var PROPVARIANT): var cstring {.inline.} = self.union1.struct1.union1.pcVal
+proc `pcVal=`*(self: var PROPVARIANT, x: ptr CHAR) {.inline.} = self.union1.struct1.union1.pcVal = x
+proc pcVal*(self: PROPVARIANT): ptr CHAR {.inline.} = self.union1.struct1.union1.pcVal
+proc pcVal*(self: var PROPVARIANT): var ptr CHAR {.inline.} = self.union1.struct1.union1.pcVal
 proc `pbVal=`*(self: var PROPVARIANT, x: ptr UCHAR) {.inline.} = self.union1.struct1.union1.pbVal = x
 proc pbVal*(self: PROPVARIANT): ptr UCHAR {.inline.} = self.union1.struct1.union1.pbVal
 proc pbVal*(self: var PROPVARIANT): var ptr UCHAR {.inline.} = self.union1.struct1.union1.pbVal

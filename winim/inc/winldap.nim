@@ -643,8 +643,8 @@ type
     ldapai_info_version*: int32
     ldapai_api_version*: int32
     ldapai_protocol_version*: int32
-    ldapai_extensions*: cstringArray
-    ldapai_vendor_name*: cstring
+    ldapai_extensions*: ptr ptr char
+    ldapai_vendor_name*: ptr char
     ldapai_vendor_version*: int32
   LDAPAPIInfoW* {.pure.} = object
     ldapai_info_version*: int32
@@ -655,7 +655,7 @@ type
     ldapai_vendor_version*: int32
   LDAPAPIFeatureInfoA* {.pure.} = object
     ldapaif_info_version*: int32
-    ldapaif_name*: cstring
+    ldapaif_name*: ptr char
     ldapaif_version*: int32
   LDAPAPIFeatureInfoW* {.pure.} = object
     ldapaif_info_version*: int32
@@ -669,8 +669,8 @@ proc ber_bvdup*(pBerVal: ptr BERVAL): ptr BERVAL {.winapi, cdecl, dynlib: "wldap
 proc ber_alloc_t*(options: INT): ptr BerElement {.winapi, cdecl, dynlib: "wldap32", importc.}
 proc ber_skip_tag*(pBerElement: ptr BerElement, pLen: ptr ULONG): ULONG {.winapi, cdecl, dynlib: "wldap32", importc.}
 proc ber_peek_tag*(pBerElement: ptr BerElement, pLen: ptr ULONG): ULONG {.winapi, cdecl, dynlib: "wldap32", importc.}
-proc ber_first_element*(pBerElement: ptr BerElement, pLen: ptr ULONG, ppOpaque: cstringArray): ULONG {.winapi, cdecl, dynlib: "wldap32", importc.}
-proc ber_next_element*(pBerElement: ptr BerElement, pLen: ptr ULONG, opaque: cstring): ULONG {.winapi, cdecl, dynlib: "wldap32", importc.}
+proc ber_first_element*(pBerElement: ptr BerElement, pLen: ptr ULONG, ppOpaque: ptr ptr CHAR): ULONG {.winapi, cdecl, dynlib: "wldap32", importc.}
+proc ber_next_element*(pBerElement: ptr BerElement, pLen: ptr ULONG, opaque: ptr CHAR): ULONG {.winapi, cdecl, dynlib: "wldap32", importc.}
 proc ber_flatten*(pBerElement: ptr BerElement, pBerVal: ptr PBERVAL): INT {.winapi, cdecl, dynlib: "wldap32", importc.}
 proc ber_printf*(pBerElement: ptr BerElement, fmt: PSTR): INT {.winapi, cdecl, varargs, dynlib: "wldap32", importc.}
 proc ber_scanf*(pBerElement: ptr BerElement, fmt: PSTR): ULONG {.winapi, cdecl, varargs, dynlib: "wldap32", importc.}
