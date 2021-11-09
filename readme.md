@@ -1,3 +1,5 @@
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/khchen0915?country.x=TW&locale.x=zh_TW)
+
 # Winim
 Winim contains Windows API, struct, and constant definitions for Nim. The definitions are translated from MinGW's Windows headers and Windows 10 SDK headers.
 
@@ -172,3 +174,8 @@ To cross compile from Linux or macOS. Here is the [instruction](https://nim-lang
 Read license.txt for more details.
 
 Copyright (c) 2016-2021 Kai-Hung Chen, Ward. All rights reserved.
+
+## Donate
+If this project help you reduce time to develop, you can give me a cup of coffee :)
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://paypal.me/khchen0915?country.x=TW&locale.x=zh_TW)
