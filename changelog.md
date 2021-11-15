@@ -1,3 +1,7 @@
+Version 3.7.1
+-------------
+* Fix #77.
+
 Version 3.7.0
 -------------
 * Because implicit conversion to 'cstring' will become an error in the future,
