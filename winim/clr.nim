@@ -352,7 +352,8 @@ proc invoke*(v: CLRInterface, name: string, flags: int,
 macro `.`*(v: CLRVariant, name: untyped, vargs: varargs[untyped]): untyped =
   ## Dot operator for `CLRVariant`. Invoke a method, get a property, or get a field.
   result = newCall("invoke", v, newStrLitNode($name),
-    newIntLitNode(BindingFlags_InvokeMethod or BindingFlags_GetProperty or BindingFlags_GetField))
+    newIntLitNode(BindingFlags_InvokeMethod or BindingFlags_GetProperty or
+      BindingFlags_GetField or BindingFlags_OptionalParamBinding))
 
   for i in vargs: result.add i
 
@@ -366,8 +367,9 @@ macro `.=`*(v: CLRVariant, name: untyped, vargs: varargs[untyped]): untyped =
 macro `.`*(v: CLRType, name: untyped, vargs: varargs[untyped]): untyped =
   ## Dot operator for `CLRType`. Invoke a static method, get a static property, or get a static field.
   result = newCall("invoke", v, newStrLitNode($name),
-    newIntLitNode(BindingFlags_InvokeMethod or BindingFlags_GetProperty or BindingFlags_GetField or
-      BindingFlags_FlattenHierarchy or BindingFlags_Static or BindingFlags_Public or BindingFlags_NonPublic))
+    newIntLitNode(BindingFlags_InvokeMethod or BindingFlags_GetProperty or
+      BindingFlags_GetField or BindingFlags_FlattenHierarchy or BindingFlags_Static or
+      BindingFlags_Public or BindingFlags_NonPublic or BindingFlags_OptionalParamBinding))
 
   for i in vargs: result.add i
 
@@ -375,14 +377,16 @@ macro `.=`*(v: CLRType, name: untyped, vargs: varargs[untyped]): untyped =
   ## Dot assignment operator for `CLRType`. Set a static property or field.
   result = newCall("invoke", v, newStrLitNode($name),
     newIntLitNode(BindingFlags_SetProperty or BindingFlags_SetField or
-      BindingFlags_FlattenHierarchy or BindingFlags_Static or BindingFlags_Public or BindingFlags_NonPublic))
+      BindingFlags_FlattenHierarchy or BindingFlags_Static or BindingFlags_Public or
+      BindingFlags_NonPublic))
 
   for i in vargs: result.add i
 
 macro `.`*(v: CLRInterface, name: untyped, vargs: varargs[untyped]): untyped =
   ## Dot operator for `CLRInterface`.
   result = newCall("invoke", v, newStrLitNode($name),
-    newIntLitNode(BindingFlags_InvokeMethod or BindingFlags_GetProperty or BindingFlags_GetField))
+    newIntLitNode(BindingFlags_InvokeMethod or BindingFlags_GetProperty or
+      BindingFlags_GetField or BindingFlags_OptionalParamBinding))
 
   for i in vargs: result.add i
 

@@ -1,3 +1,8 @@
+Version 3.7.2
+-------------
+* winim/clr: Add `OptionalParamBinding` binding flag so that to call methods with
+  parameters that have default values will be easier.
+
 Version 3.7.1
 -------------
 * Fix #77.
