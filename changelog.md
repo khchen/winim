@@ -1,3 +1,10 @@
+Version 3.8.0
+-------------
+* winim/clr: CLRVariant can be converted to .net object automatically in `invoke`.
+* winim/clr: Improved iterator(items/pairs) to iterate over System.Array, Enumerable,
+  Collection, etc.
+* winim/clr: Remove syntax sugar for x.toObject(string) (almost useless).
+
 Version 3.7.2
 -------------
 * winim/clr: Add `OptionalParamBinding` binding flag so that to call methods with

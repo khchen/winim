@@ -34,7 +34,6 @@ function main() {
     }
   }
 
-  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
   function switchTheme(e) {
       if (e.target.checked) {
           document.documentElement.setAttribute('data-theme', 'dark');
@@ -45,30 +44,29 @@ function main() {
       }
   }
 
-  toggleSwitch.addEventListener('change', switchTheme, false);
+  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+  if (toggleSwitch !== null) {
+    toggleSwitch.addEventListener('change', switchTheme, false);
+  }
 
+  var currentTheme = localStorage.getItem('theme');
+  if (!currentTheme && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    currentTheme = 'dark';
+  }
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
 
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', "dark");
-    toggleSwitch.checked = true;
-  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    document.documentElement.setAttribute('data-theme', "light");
-    toggleSwitch.checked = false;
-  } else {
-    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-    if (currentTheme) {
-      document.documentElement.setAttribute('data-theme', currentTheme);
-
-      if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-      }
+    if (currentTheme === 'dark' && toggleSwitch !== null) {
+      toggleSwitch.checked = true;
     }
   }
 }
+
+window.addEventListener('DOMContentLoaded', main);
 </script>
 
 </head>
-<body onload="main()">
+<body>
 <div class="document" id="documentId">
   <div class="container">
     <h1 class="title">winim</h1>
@@ -83,24 +81,12 @@ function main() {
   </div>
   <div id="global-links">
     <ul class="simple">
-      <li>
-        <a href="https://github.com/khchen/winim">Github Page</a>
-      </li>
-      <li>
-        <a href="winim.html">winim</a>
-      </li>
-      <li>
-        <a href="winstr.html">winstr</a>
-      </li>
-      <li>
-        <a href="utils.html">utils</a>
-      </li>
-      <li>
-        <a href="com.html">com</a>
-      </li>
-      <li>
-        <a href="clr.html">clr</a>
-      </li>
+      <li><a href="https://github.com/khchen/winim">Github Page</a></li>
+      <li><a href="winim.html">winim</a></li>
+      <li><a href="winstr.html">winstr</a></li>
+      <li><a href="utils.html">utils</a></li>
+      <li><a href="com.html">com</a></li>
+      <li><a href="clr.html">clr</a></li>
     </ul>
   </div>
   <ul class="simple simple-toc" id="toc-list">
@@ -110,6 +96,7 @@ function main() {
 </ul>
 
   </div>
+  
   <div class="nine columns" id="content">
   <div id="tocRoot"></div>
   
@@ -120,8 +107,7 @@ function main() {
 <span class="Keyword">import</span> <span class="Identifier">winim</span><span class="Operator">/</span><span class="Identifier">lean</span> <span class="Comment"># for core SDK only</span>
 <span class="Keyword">import</span> <span class="Identifier">winim</span><span class="Operator">/</span><span class="Identifier">mean</span> <span class="Comment"># for core SDK + Shell + OLE</span>
 <span class="Keyword">import</span> <span class="Identifier">winim</span><span class="Operator">/</span><span class="Identifier">com</span> <span class="Comment"># for core SDK + Shell + OLE + COM support</span></pre></dd>
-</dl>
-<dl class="docutils"><dt>To compile:</dt>
+<dt>To compile:</dt>
 <dd><pre class="listing"><span class="Identifier">nim</span> <span class="Identifier">c</span> <span class="Identifier">source</span><span class="Operator">.</span><span class="Identifier">nim</span>
   <span class="Identifier">add</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">winansi</span> <span class="Keyword">or</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">useWinAnsi</span> <span class="Keyword">for</span> <span class="Identifier">Ansi</span> <span class="Identifier">version</span> <span class="Punctuation">(</span><span class="Identifier">Unicode</span> <span class="Identifier">by</span> <span class="Identifier">default</span><span class="Punctuation">)</span><span class="Operator">.</span>
   <span class="Identifier">add</span> <span class="Operator">-</span><span class="Identifier">d</span><span class="Punctuation">:</span><span class="Identifier">noDiscardableApi</span> <span class="Keyword">if</span> <span class="Keyword">not</span> <span class="Identifier">like</span> <span class="Identifier">discardable</span> <span class="Identifier">windows</span> <span class="Identifier">API</span><span class="Operator">.</span>

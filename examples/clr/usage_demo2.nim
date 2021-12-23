@@ -156,7 +156,10 @@ var c2 = @TestClass2.new()
 c2.invoke("", BindingFlags_InvokeMethod or BindingFlags_Default)
 
 print "Invoking a method with ref parameters."
-echo "(Unsupported)"
+var m = c.GetType.GetMethod("Swap")
+var args = [1, 2][]
+m.Invoke(c, args)
+echo fmt"args[0] = {args[0]}, args[1] = {args[1]}"
 
 print "Creating an instance with a parameterless constructor."
 var flags = BindingFlags_Public or BindingFlags_Instance or BindingFlags_CreateInstance
@@ -179,7 +182,7 @@ echo fmt"Instance of {c.GetType().Name} created with initial value '{c.Name}'."
 
 print "DeclaredOnly instance members."
 flags = BindingFlags_DeclaredOnly or BindingFlags_Instance or BindingFlags_Public
-for i in TestClass.GetMembers(flags[BindingFlags])[Array]:
+for i in TestClass.GetMembers(flags[BindingFlags]):
   echo i.Name
 
 print "Using IgnoreCase and invoking the PrintName method."
@@ -188,10 +191,10 @@ flags = BindingFlags_IgnoreCase or BindingFlags_Static or BindingFlags_Public or
 
 print "Using FlattenHierarchy to get inherited static protected and public members."
 flags = BindingFlags_NonPublic or BindingFlags_Public or BindingFlags_Static or BindingFlags_FlattenHierarchy
-for i in MostDerived.GetFields(flags[BindingFlags])[Array]:
+for i in MostDerived.GetFields(flags[BindingFlags]):
   echo fmt"{i.Name} defined in {i.DeclaringType.Name}."
 
 print "Without FlattenHierarchy."
 flags = BindingFlags_NonPublic or BindingFlags_Public or BindingFlags_Static
-for i in MostDerived.GetFields(flags[BindingFlags])[Array]:
+for i in MostDerived.GetFields(flags[BindingFlags]):
   echo fmt"{i.Name} defined in {i.DeclaringType.Name}."

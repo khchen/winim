@@ -12,7 +12,7 @@ proc test1() =
   var mscor = load("mscorlib")
   var Array = mscor.GetType("System.Array")
 
-  for typ in mscor.GetTypes()[Array]:
+  for typ in mscor.GetTypes():
     echo typ.FullName
 
 proc test2() =
@@ -37,20 +37,20 @@ proc test2() =
     echo keyList.Item(int32 i), "\t", valueList.Item(int32 i)
 
   for i in list:
-    echo i
+    echo i.Key, "\t", i.Value
     assert i.isStruct
-    assert $i["_value"] == $(i[].Value)
+    assert $i["_value"] == $(i.Value)
 
 proc test3() =
   var mscor = load("mscorlib")
   var Encoding = mscor.GetType("System.Text.Encoding")
   var sha256 = mscor.new("System.Security.Cryptography.SHA256Managed")
 
-  var data = fromCLRVariant[COMArray1D](@Encoding.UTF8.GetBytes(L"Password"))
-  var hash = fromCLRVariant[COMArray1D](sha256.ComputeHash(toCLRVariant(data, VT_UI1)))
+  var data = @Encoding.UTF8.GetBytes("Password")
+  var hash = sha256.ComputeHash(data)
 
-  echo "UTF8 Encoding Byte[] = ", data
-  echo "SHA256 Byte[] = ", hash
+  echo "UTF8 Encoding Byte[] = ", fromCLRVariant[COMArray1D](data)
+  echo "SHA256 Byte[] = ", fromCLRVariant[COMArray1D](hash)
 
 proc test4() =
   var sys = load("System")
@@ -65,7 +65,19 @@ proc test4() =
   @Thread.Sleep(1000)
   notepad.CloseMainWindow()
 
+proc test5() =
+  var forms = load("System.Windows.Forms")
+  var OpenFileDialog = forms.GetType("System.Windows.Forms.OpenFileDialog")
+  var DialogResult = forms.GetType("System.Windows.Forms.DialogResult")
+
+  var ofd = @OpenFileDialog.new()
+  if ofd.ShowDialog().Equals(@DialogResult.OK):
+    echo ofd.FileName
+  else:
+    echo "cancelled"
+
 test1()
 test2()
 test3()
 test4()
+test5()

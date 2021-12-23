@@ -15,6 +15,9 @@
 ## Notice: `int` will be converted into `int32` before passing to CLR even in
 ## 64-bit environment.
 
+when NimVersion < "1.2":
+  {.fatal: "winim/clr require nim compiler version >= 1.2".}
+
 runnableExamples:
   proc example1() =
     ## Create a CLR object (aka. C# instance) and call the method
@@ -50,6 +53,10 @@ import strutils, macros
 import strformat except `&`
 export com
 
+const
+  VBCodeProvider* = "Microsoft.VisualBasic.VBCodeProvider"
+  CSharpCodeProvider* = "Microsoft.CSharp.CSharpCodeProvider"
+
 type
   CLRError* = object of CatchableError
     ## Raised if a CLR error occurred.
@@ -66,6 +73,9 @@ type
     ## Use `{}` to create interface object.
     obj*: CLRVariant
     intf*: CLRVariant
+
+# forward declarations
+proc toObject*[T](x: T): CLRVariant
 
 let Null = CLRVariant wrap(VARIANT())
 var
@@ -248,7 +258,7 @@ proc `@`*(v: CLRVariant): CLRType =
 proc com*(v: CLRVariant): com =
   ## Convert `CLRVariant` to winim's com object, aka. COM callable wrapper (CCW).
   if not v.isObject():
-    clrError("variant is not a object")
+    clrError("variant is not an object")
 
   result = newCom(cast[ptr IDispatch](v.unwrap.punkVal))
 
@@ -291,7 +301,9 @@ proc invoke*(v: CLRVariant, name: string, flags: int,
 
   obj = v.to(IObject)
   if obj.isNil:
-    clrError("variant is not a object")
+    obj = toObject(v).to(IObject)
+    if obj.isNil:
+      clrError("variant is not an object")
 
   if obj.GetType(&typ).ERR:
     clrError("unable to get type of object")
@@ -338,7 +350,9 @@ proc invoke*(v: CLRInterface, name: string, flags: int,
 
   obj = v.obj.to(IObject)
   if obj.isNil:
-    clrError("CLRInterface.obj is not a object")
+    obj = toObject(v.obj).to(IObject)
+    if obj.isNil:
+      clrError("CLRInterface.obj is not an object")
 
   typ = v.intf.to(IType)
   if typ.isNil:
@@ -428,30 +442,6 @@ macro clrScript*(x: untyped): untyped =
   ## Nim's dot operators `.=` only allow "a.b = c". With this macro, "a.b(c, d) = e"
   ## is allowed. Some assignment needs this macro to work.
   result = clrReformat(x)
-
-iterator items*(v: CLRVariant): CLRVariant =
-  ## Iterates over every member of `CLRVariant` via IEnumerable interface.
-  var enumerator: CLRVariant
-  try:
-    enumerator = v.GetEnumerator
-  except CLRError:
-    clrError("variant is not enumerable")
-
-  while enumerator.MoveNext:
-    yield enumerator.Current
-
-iterator pairs*(v: CLRVariant): (int, CLRVariant) =
-  ## Iterates over every member of `CLRVariant`. Yields (int, CLRVariant) pairs.
-  var enumerator: CLRVariant
-  try:
-    enumerator = v.GetEnumerator
-  except CLRError:
-    clrError("variant is not enumerable")
-
-  var i = 0
-  while enumerator.MoveNext:
-    yield (i, enumerator.Current)
-    i.inc
 
 iterator fields*(v: CLRVariant): string =
   ## Iterates over every field of CLR struct type.
@@ -675,7 +665,7 @@ proc new*(typ: CLRType, vargs: varargs[CLRVariant, toCLRVariant]): CLRVariant {.
   result = @Activator.CreateInstance(CLRVariant typ, arr)
 
 proc compile*(code: string, references: openArray[string] = ["System.dll"], filename = "",
-    compilerOptions = "", provider = "Microsoft.CSharp.CSharpCodeProvider", debug = false): CLRVariant {.discardable.} =
+    compilerOptions = "", provider = CSharpCodeProvider, debug = false): CLRVariant {.discardable.} =
   ## Compiles the specified code. Returns the `CompilerResults` object.
   var
     sys = load("System")
@@ -764,10 +754,6 @@ proc `[]`*[T](x: T): CLRVariant =
   ## Syntax sugar for x.toObject().
   toObject(x)
 
-proc `[]`*[T](x: T, typ: string): CLRVariant {.inline.} =
-  ## Syntax sugar for x.toObject(string).
-  toObject(x, typ)
-
 proc `[]`*[T](x: T, typ: CLRVariant): CLRVariant {.inline.} =
   ## Syntax sugar for x.toObject(CLRVariant).
   if typ.isNil:
@@ -779,3 +765,67 @@ proc `{}`*(v, i: CLRVariant): CLRInterface {.inline.} =
   ## Syntax suger to create CLRInterface (require nim compiler version >= 1.2.0).
   result.obj = v
   result.intf = i
+
+proc item(v: CLRVariant, i: int): CLRVariant =
+  var v = v
+  if not v.isObject:
+    v = v.toObject()
+
+  let iList = CLRInterface(obj: v, intf: v.GetType.GetInterface("System.Collections.IList"))
+  result = iList.Item(i)
+
+proc `[]`*(v: CLRVariant, i: SomeOrdinal): CLRVariant =
+  ## Index operator for `CLRVariant` (via `IList` interface).
+  try:
+    result = v.item(int i)
+  except CLRError:
+    clrError("variant is not indexable")
+
+iterator pairs*(v: CLRVariant): (int, CLRVariant) =
+  ## Iterates over every member of `CLRVariant`. Yields (int, CLRVariant) pairs.
+  ## Support System.Array, Enumerable, Collection, etc.
+  var v = v
+  if not v.isObject:
+    var Array {.threadvar.}: CLRVariant
+    if Array.isNil:
+      Array = load("mscorlib").GetType("System.Array")
+
+    try:
+      v = v[Array]
+    except CLRError:
+      clrError("variant is not enumerable")
+
+  proc ok(i: CLRInterface): bool {.inline.} = (not i.intf.isNil) and (not i.intf.isNull)
+
+  let
+    vtype = v.GetType
+    iCollection = CLRInterface(obj: v, intf: vtype.GetInterface("System.Collections.ICollection"))
+    iList = CLRInterface(obj: v, intf: vtype.GetInterface("System.Collections.IList"))
+    iEnumerable = CLRInterface(obj: v, intf: vtype.GetInterface("System.Collections.IEnumerable"))
+
+  if iCollection.ok and iList.ok:
+    for i in 0 ..< iCollection.Count:
+      yield (i, iList.Item(i))
+
+  elif iEnumerable.ok:
+    var
+      enumerator: CLRVariant
+      i = 0
+
+    try:
+      enumerator = iEnumerable.GetEnumerator
+    except CLRError:
+      clrError("variant is not enumerable")
+
+    while enumerator.MoveNext:
+      yield (i, enumerator.Current)
+      i.inc
+
+  else:
+    clrError("variant is not enumerable")
+
+iterator items*(v: CLRVariant): CLRVariant =
+  ## Iterates over every member of `CLRVariant`.
+  ## Support System.Array, Enumerable, Collection, etc.
+  for i, o in v:
+    yield o

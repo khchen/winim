@@ -55,7 +55,7 @@ proc test_vb() =
   """
 
   var res = compile(code, ["System.dll", "System.Windows.Forms.dll"],
-    provider="Microsoft.VisualBasic.VBCodeProvider")
+    provider=VBCodeProvider)
 
   if res.Errors.Count != 0:
     for error in res.Errors:

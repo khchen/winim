@@ -49,6 +49,7 @@ var n1 = @Int32.Parse("12345")
 dump n1
 dump n1.rawTypeDesc # should be VT_I4
 dump n1.isObject # should be false
+dump n1.GetType # v3.8.0 feature: CLRVariant can be converted to object automatically
 
 print "Convert value type to 'System.Int32' object"
 var n2 = n1[Int32]
@@ -72,8 +73,8 @@ var p1 = @Point.new(10, 20)
 dump p1
 dump p1.rawTypeDesc # should be VT_RECORD
 dump p1.isStruct # should be true
-dump p1["x"] # use `[]` operator to get the value if it is struct type
-dump p1["y"]
+dump (p1["x"], p1["y"]) # use `[]` operator to get the value if it is struct type
+dump (p1.X, p1.Y) # v3.8.0 feature
 
 print "Iterator over every field of struct type"
 for name in p1.fields: dump name
@@ -130,21 +131,12 @@ for i in arr2:
   dump i
   break
 
+# v3.8.0 feature: iterator over VT_ARRAY(1D)|VT_UNKNOWN
+for i in arr1:
+  dump i
+  break
+
 print "Invoke Explicit Interface Implementations of 'System.Array'"
-when NimVersion >= "1.2":
-  dump arr2{ICollection}.Count
-  dump arr2{ICollection}.Count.int == arr2.GetLength(0)
-  dump arr2{IList}.Item(0)
-
-else:
-  var i1: CLRInterface
-  i1.obj = arr2
-  i1.intf = ICollection
-
-  var i2: CLRInterface
-  i2.obj = arr2
-  i2.intf = IList
-
-  dump i1.Count
-  dump i1.Count.int == arr2.GetLength(0)
-  dump i2.Item(0)
+dump arr2{ICollection}.Count
+dump arr2{ICollection}.Count.int == arr2.GetLength(0)
+dump arr2{IList}.Item(0)
