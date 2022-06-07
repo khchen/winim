@@ -173,7 +173,7 @@ To cross compile from Linux or macOS. Here is the [instruction](https://nim-lang
 ## License
 Read license.txt for more details.
 
-Copyright (c) 2016-2021 Kai-Hung Chen, Ward. All rights reserved.
+Copyright (c) 2016-2022 Kai-Hung Chen, Ward. All rights reserved.
 
 ## Donate
 If this project help you reduce time to develop, you can give me a cup of coffee :)

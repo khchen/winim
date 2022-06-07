@@ -1,3 +1,9 @@
+Version 3.8.1
+-------------
+* winim/clr: `[]` (Syntax sugar for toObject) cause conflict too often, fixed.
+* winim/winstr: Converters for WideCString are seldom used and lead bugs, removed.
+* winim/winstr: Add some procs to convert WideCString/wstring to each other.
+
 Version 3.8.0
 -------------
 * winim/clr: CLRVariant can be converted to .net object automatically in `invoke`.

@@ -1,4 +1,4 @@
-# Windows SDK have a lot of symbols that conflient with nim's symbol rule.
+# Windows SDK have a lot of symbols that conflict with nim's symbol rule.
 # Here is a list for renamed symbols in Winim.
 
 _11 (AccessProc) => 11

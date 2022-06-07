@@ -97,4 +97,4 @@ https://docs.microsoft.com/en-us/windows/desktop/controls/cookbook-overview
 https://github.com/Amorph/tcc/blob/master/win32/tcc-win32.txt
 
 ## License
-Copyright (c) 2016-2021 Kai-Hung Chen, Ward. All rights reserved.
+Copyright (c) 2016-2022 Kai-Hung Chen, Ward. All rights reserved.

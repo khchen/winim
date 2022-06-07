@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2021 Ward
+#                 (c) Copyright 2016-2022 Ward
 #
 #                Windows String Type Utilities
 #
@@ -109,11 +109,6 @@
 ##      #   Some converters DO need encoding conversion (utf8 to unicode).
 ##      #   New memory block will be allocated. However, they are useful and convenience.
 ##      #     cstring|string => LPWSTR|BSTR
-##      #
-##      # Winim don't use built-in WideCString, but still support it by converter.
-##      #   WideCString => LPWSTR
-##      #   WideCString => wstring
-##      #   wstring => WideCString
 ##
 ##  There are also new string functions to deal with wstring and mstring just like built-in string type.
 ##
@@ -147,6 +142,18 @@
 ##    iterator mitems(s: var wstring): WCHAR
 ##    iterator pairs(s: wstring|mstring): tuple[key: int|mIndex, val: WCHAR|mstring]
 ##    iterator mpairs(s: var wstring): WCHAR
+##
+##  Winim don't use built-in `WideCString`, but still support it.
+##
+##  .. code-block:: Nim
+##    converter winstrConverter(s: WideCString): LPWSTR
+##      # WideCString can be sent to Windows API directly (unicode only).
+##
+##    proc `+$`(s: WideCString): wstring
+##      # Converts WideCString to wstring.
+##
+##    proc newWideCString(s: wstring): WideCString
+##      # Converts wstring to WideCString.
 
 {.deadCodeElim: on.}
 
@@ -999,21 +1006,35 @@ when defined(gcDestructors):
   converter winstrConverterWideCStringToLPWSTR*(x: WideCStringObj): LPWSTR = cast[LPWSTR](x[0].unsafeaddr)
     ## Converts `WideCString` to `LPWSTR` automatically.
 
-  converter winstrConverterWideCStringToWString*(x: WideCStringObj): wstring = +$cast[LPWSTR](x[0].unsafeaddr)
-    ## Converts `WideCString` to `wstring` automatically.
+  proc `+$`*(s: WideCStringObj): wstring {.inline.} =
+    ## Converts `WideCString` to `wstring`.
+    +$cast[LPWSTR](s[0].unsafeaddr)
 
-  converter winstrConverterWStringToWideCString*(x: wstring): WideCStringObj = newWideCString($x)
-    ## Converts `wstring` to `WideCString` automatically.
+  proc newWideCString*(s: wstring): WideCStringObj {.inline.} =
+    ## Converts `wstring` to `WideCString`.
+    when compiles(newWideCString(1)):
+      result = newWideCString(s.len)
+      copyMem(result[0].unsafeaddr, &s, s.len * 2)
+    else:
+      result = newWideCString("", s.len)
+      s >> result
 
 else:
   converter winstrConverterWideCStringToLPWSTR*(x: WideCString): LPWSTR = cast[LPWSTR](x[0].unsafeaddr)
     ## Converts `WideCString` to `LPWSTR` automatically.
 
-  converter winstrConverterWideCStringToWString*(x: WideCString): wstring = +$cast[LPWSTR](x[0].unsafeaddr)
-    ## Converts `WideCString` to `wstring` automatically.
+  proc `+$`*(s: WideCString): wstring {.inline.} =
+    ## Converts `WideCString` to `wstring`.
+    +$cast[LPWSTR](s[0].unsafeaddr)
 
-  converter winstrConverterWStringToWideCString*(x: wstring): WideCString = newWideCString($x)
-    ## Converts `wstring` to `WideCString` automatically.
+  proc newWideCString*(s: wstring): WideCString {.inline.} =
+    ## Converts `wstring` to `WideCString`.
+    when compiles(newWideCString(1)):
+      result = newWideCString(s.len)
+      copyMem(result[0].unsafeaddr, &s, s.len * 2)
+    else:
+      result = newWideCString("", s.len)
+      s >> result
 
 when defined(gcDestructors):
   # Here is the workaround for --gc:arc and --newruntime. It is a tricky problem,

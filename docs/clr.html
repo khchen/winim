@@ -142,7 +142,7 @@ window.addEventListener('DOMContentLoaded', main);
   <li><a class="reference" href="#%5B%5D%2CCLRVariant%2Cstring"
     title="`[]`(v: CLRVariant; name: string): CLRVariant">`[]`(v: CLRVariant; name: string): CLRVariant</a></li>
   <li><a class="reference" href="#%5B%5D%2CT"
-    title="`[]`[T](x: T): CLRVariant">`[]`[T](x: T): CLRVariant</a></li>
+    title="`[]`[T: variant | SomeNumber | string](x: T): CLRVariant">`[]`[T: variant | SomeNumber | string](x: T): CLRVariant</a></li>
   <li><a class="reference" href="#%5B%5D%2CT%2CCLRVariant"
     title="`[]`[T](x: T; typ: CLRVariant): CLRVariant">`[]`[T](x: T; typ: CLRVariant): CLRVariant</a></li>
 
@@ -630,7 +630,7 @@ Returns specified field as <tt class="docutils literal"><span class="pre"><span 
 </dd>
 </div>
 <div id="[],T">
-<dt><pre><span class="Keyword">proc</span> <a href="#%5B%5D%2CT"><span class="Identifier">`[]`</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <a href="clr.html#CLRVariant"><span class="Identifier">CLRVariant</span></a></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#%5B%5D%2CT"><span class="Identifier">`[]`</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">:</span> <a href="com.html#variant"><span class="Identifier">variant</span></a> <span class="Operator">|</span> <span class="Identifier">SomeNumber</span> <span class="Operator">|</span> <span class="Identifier">string</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <a href="clr.html#CLRVariant"><span class="Identifier">CLRVariant</span></a></pre></dt>
 <dd>
 
 Syntax sugar for x.toObject().

@@ -158,6 +158,8 @@ window.addEventListener('DOMContentLoaded', main);
   <ul class="simple nested-toc-section">+$
       <li><a class="reference" href="#%2B%24%2CStringable"
     title="`+$`(s: Stringable): wstring">`+$`(s: Stringable): wstring</a></li>
+  <li><a class="reference" href="#%2B%24%2CWideCString"
+    title="`+$`(s: WideCString): wstring">`+$`(s: WideCString): wstring</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">+$$
@@ -280,6 +282,11 @@ window.addEventListener('DOMContentLoaded', main);
   <ul class="simple nested-toc-section">newMStringOfCap
       <li><a class="reference" href="#newMStringOfCap%2CNatural"
     title="newMStringOfCap(L: Natural): mstring">newMStringOfCap(L: Natural): mstring</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">newWideCString
+      <li><a class="reference" href="#newWideCString%2Cwstring"
+    title="newWideCString(s: wstring): WideCString">newWideCString(s: wstring): WideCString</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">newWString
@@ -433,11 +440,6 @@ window.addEventListener('DOMContentLoaded', main);
     title="winstrConverterWideCStringToLPWSTR(x: WideCString): LPWSTR">winstrConverterWideCStringToLPWSTR(x: WideCString): LPWSTR</a></li>
 
   </ul>
-  <ul class="simple nested-toc-section">winstrConverterWideCStringToWString
-      <li><a class="reference" href="#winstrConverterWideCStringToWString.c%2CWideCString"
-    title="winstrConverterWideCStringToWString(x: WideCString): wstring">winstrConverterWideCStringToWString(x: WideCString): wstring</a></li>
-
-  </ul>
   <ul class="simple nested-toc-section">winstrConverterWStringToBSTR
       <li><a class="reference" href="#winstrConverterWStringToBSTR.c%2Cwstring"
     title="winstrConverterWStringToBSTR(x: wstring): BSTR">winstrConverterWStringToBSTR(x: wstring): BSTR</a></li>
@@ -446,11 +448,6 @@ window.addEventListener('DOMContentLoaded', main);
   <ul class="simple nested-toc-section">winstrConverterWStringToLPWSTR
       <li><a class="reference" href="#winstrConverterWStringToLPWSTR.c%2Cwstring"
     title="winstrConverterWStringToLPWSTR(x: wstring): LPWSTR">winstrConverterWStringToLPWSTR(x: wstring): LPWSTR</a></li>
-
-  </ul>
-  <ul class="simple nested-toc-section">winstrConverterWStringToWideCString
-      <li><a class="reference" href="#winstrConverterWStringToWideCString.c%2Cwstring"
-    title="winstrConverterWStringToWideCString(x: wstring): WideCString">winstrConverterWStringToWideCString(x: wstring): WideCString</a></li>
 
   </ul>
 
@@ -588,12 +585,7 @@ window.addEventListener('DOMContentLoaded', main);
   <span class="Comment">#</span>
   <span class="Comment">#   Some converters DO need encoding conversion (utf8 to unicode).</span>
   <span class="Comment">#   New memory block will be allocated. However, they are useful and convenience.</span>
-  <span class="Comment">#     cstring|string =&gt; LPWSTR|BSTR</span>
-  <span class="Comment">#</span>
-  <span class="Comment"># Winim don't use built-in WideCString, but still support it by converter.</span>
-  <span class="Comment">#   WideCString =&gt; LPWSTR</span>
-  <span class="Comment">#   WideCString =&gt; wstring</span>
-  <span class="Comment">#   wstring =&gt; WideCString</span></pre><p>There are also new string functions to deal with wstring and mstring just like built-in string type.</p>
+  <span class="Comment">#     cstring|string =&gt; LPWSTR|BSTR</span></pre><p>There are also new string functions to deal with wstring and mstring just like built-in string type.</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">newWString</span><span class="Punctuation">(</span><span class="Identifier">len</span><span class="Punctuation">:</span> <span class="Identifier">Natural</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">wstring</span>
   <span class="Comment"># Generate wstring buffer</span>
 <span class="Keyword">proc</span> <span class="Identifier">newMString</span><span class="Punctuation">(</span><span class="Identifier">len</span><span class="Punctuation">:</span> <span class="Identifier">Natural</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">mstring</span>
@@ -622,7 +614,15 @@ window.addEventListener('DOMContentLoaded', main);
 <span class="Keyword">iterator</span> <span class="Identifier">items</span><span class="Punctuation">(</span><span class="Identifier">s</span><span class="Punctuation">:</span> <span class="Identifier">wstring</span><span class="Operator">|</span><span class="Identifier">mstring</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">WCHAR</span><span class="Operator">|</span><span class="Identifier">mstring</span>
 <span class="Keyword">iterator</span> <span class="Identifier">mitems</span><span class="Punctuation">(</span><span class="Identifier">s</span><span class="Punctuation">:</span> <span class="Keyword">var</span> <span class="Identifier">wstring</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">WCHAR</span>
 <span class="Keyword">iterator</span> <span class="Identifier">pairs</span><span class="Punctuation">(</span><span class="Identifier">s</span><span class="Punctuation">:</span> <span class="Identifier">wstring</span><span class="Operator">|</span><span class="Identifier">mstring</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Keyword">tuple</span><span class="Punctuation">[</span><span class="Identifier">key</span><span class="Punctuation">:</span> <span class="Identifier">int</span><span class="Operator">|</span><span class="Identifier">mIndex</span><span class="Punctuation">,</span> <span class="Identifier">val</span><span class="Punctuation">:</span> <span class="Identifier">WCHAR</span><span class="Operator">|</span><span class="Identifier">mstring</span><span class="Punctuation">]</span>
-<span class="Keyword">iterator</span> <span class="Identifier">mpairs</span><span class="Punctuation">(</span><span class="Identifier">s</span><span class="Punctuation">:</span> <span class="Keyword">var</span> <span class="Identifier">wstring</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">WCHAR</span></pre></p>
+<span class="Keyword">iterator</span> <span class="Identifier">mpairs</span><span class="Punctuation">(</span><span class="Identifier">s</span><span class="Punctuation">:</span> <span class="Keyword">var</span> <span class="Identifier">wstring</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">WCHAR</span></pre><p>Winim don't use built-in <tt class="docutils literal"><span class="pre"><span class="Identifier">WideCString</span></span></tt>, but still support it.</p>
+<pre class="listing"><span class="Keyword">converter</span> <span class="Identifier">winstrConverter</span><span class="Punctuation">(</span><span class="Identifier">s</span><span class="Punctuation">:</span> <span class="Identifier">WideCString</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">LPWSTR</span>
+  <span class="Comment"># WideCString can be sent to Windows API directly (unicode only).</span>
+
+<span class="Keyword">proc</span> <span class="Punctuation">`</span><span class="Operator">+$</span><span class="Punctuation">`</span><span class="Punctuation">(</span><span class="Identifier">s</span><span class="Punctuation">:</span> <span class="Identifier">WideCString</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">wstring</span>
+  <span class="Comment"># Converts WideCString to wstring.</span>
+
+<span class="Keyword">proc</span> <span class="Identifier">newWideCString</span><span class="Punctuation">(</span><span class="Identifier">s</span><span class="Punctuation">:</span> <span class="Identifier">wstring</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">WideCString</span>
+  <span class="Comment"># Converts wstring to WideCString.</span></pre></p>
   
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
@@ -808,6 +808,14 @@ Convert any stringable type to <tt class="docutils literal"><span class="pre"><s
 <dd>
 
 Convert any stringable type to <tt class="docutils literal"><span class="pre"><span class="Identifier">wstring</span></span></tt>. This operator assume <tt class="docutils literal"><span class="pre"><span class="Identifier">string</span><span class="Operator">|</span><span class="Identifier">cstring</span><span class="Operator">|</span><span class="Keyword">ptr</span> <span class="Identifier">char</span><span class="Operator">|</span><span class="Identifier">openArray</span><span class="Punctuation">[</span><span class="Identifier">char</span><span class="Punctuation">]</span></span></tt> is utf8 encoding.
+
+</dd>
+</div>
+<div id="+$,WideCString">
+<dt><pre><span class="Keyword">proc</span> <a href="#%2B%24%2CWideCString"><span class="Identifier">`+$`</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">WideCString</span><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#wstring"><span class="Identifier">wstring</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Converts <tt class="docutils literal"><span class="pre"><span class="Identifier">WideCString</span></span></tt> to <tt class="docutils literal"><span class="pre"><span class="Identifier">wstring</span></span></tt>.
 
 </dd>
 </div>
@@ -1100,6 +1108,14 @@ Return a new <tt class="docutils literal"><span class="pre"><span class="Identif
 <dd>
 
 Returns a new <tt class="docutils literal"><span class="pre"><span class="Identifier">mstring</span></span></tt> of length 0 but with capacity L, counting by bytes.
+
+</dd>
+</div>
+<div id="newWideCString,wstring">
+<dt><pre><span class="Keyword">proc</span> <a href="#newWideCString%2Cwstring"><span class="Identifier">newWideCString</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <a href="winstr.html#wstring"><span class="Identifier">wstring</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">WideCString</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Converts <tt class="docutils literal"><span class="pre"><span class="Identifier">wstring</span></span></tt> to <tt class="docutils literal"><span class="pre"><span class="Identifier">WideCString</span></span></tt>.
 
 </dd>
 </div>
@@ -1409,15 +1425,6 @@ Converts <tt class="docutils literal"><span class="pre"><span class="Identifier"
 
 </dd>
 </div>
-<div id="winstrConverterWideCStringToWString.c,WideCString">
-<dt><pre><span class="Keyword">converter</span> <a href="#winstrConverterWideCStringToWString.c%2CWideCString"><span class="Identifier">winstrConverterWideCStringToWString</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">WideCString</span><span class="Other">)</span><span class="Other">:</span> <a href="winstr.html#wstring"><span class="Identifier">wstring</span></a> {.
-    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
-<dd>
-
-Converts <tt class="docutils literal"><span class="pre"><span class="Identifier">WideCString</span></span></tt> to <tt class="docutils literal"><span class="pre"><span class="Identifier">wstring</span></span></tt> automatically.
-
-</dd>
-</div>
 <div id="winstrConverterWStringToBSTR.c,wstring">
 <dt><pre><span class="Keyword">converter</span> <a href="#winstrConverterWStringToBSTR.c%2Cwstring"><span class="Identifier">winstrConverterWStringToBSTR</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <a href="winstr.html#wstring"><span class="Identifier">wstring</span></a><span class="Other">)</span><span class="Other">:</span> <a href="windef.html#BSTR"><span class="Identifier">BSTR</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
@@ -1432,15 +1439,6 @@ Converts <tt class="docutils literal"><span class="pre"><span class="Identifier"
 <dd>
 
 Converts <tt class="docutils literal"><span class="pre"><span class="Identifier">wstring</span></span></tt> to <tt class="docutils literal"><span class="pre"><span class="Identifier">LPWSTR</span></span></tt> automatically.
-
-</dd>
-</div>
-<div id="winstrConverterWStringToWideCString.c,wstring">
-<dt><pre><span class="Keyword">converter</span> <a href="#winstrConverterWStringToWideCString.c%2Cwstring"><span class="Identifier">winstrConverterWStringToWideCString</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <a href="winstr.html#wstring"><span class="Identifier">wstring</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">WideCString</span> {.
-    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
-<dd>
-
-Converts <tt class="docutils literal"><span class="pre"><span class="Identifier">wstring</span></span></tt> to <tt class="docutils literal"><span class="pre"><span class="Identifier">WideCString</span></span></tt> automatically.
 
 </dd>
 </div>

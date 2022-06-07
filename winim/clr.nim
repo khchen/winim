@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2021 Ward
+#                 (c) Copyright 2016-2022 Ward
 #
 #         Windows .NET Common Language Runtime Supports
 #
@@ -750,7 +750,7 @@ proc toObject*[T](x: T, typ: CLRVariant): CLRVariant =
   var RuntimeHelp = getRuntimeHelp()
   toObjectRaw(@RuntimeHelp.wrapAny(x, typ))
 
-proc `[]`*[T](x: T): CLRVariant =
+proc `[]`*[T: variant|SomeNumber|string](x: T): CLRVariant =
   ## Syntax sugar for x.toObject().
   toObject(x)
 
