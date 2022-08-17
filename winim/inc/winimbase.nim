@@ -5,6 +5,7 @@
 #
 #====================================================================
 
+{.push hint[Name]: off.}
 import macros
 
 when not defined(noRes):

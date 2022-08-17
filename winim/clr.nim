@@ -15,6 +15,8 @@
 ## Notice: `int` will be converted into `int32` before passing to CLR even in
 ## 64-bit environment.
 
+{.push hint[Name]: off.}
+
 when NimVersion < "1.2":
   {.fatal: "winim/clr require nim compiler version >= 1.2".}
 
@@ -733,7 +735,7 @@ proc toObjectRaw(iunknown: CLRVariant): CLRVariant =
 proc toObject*(x: pointer|proc): CLRVariant =
   ## Converts `pointer` or `proc` into a `System.IntPtr` object.
   var RuntimeHelp = getRuntimeHelp()
-  toObjectRaw(@RuntimeHelp.wrapIntPtr(cast[int](x)))
+  toObjectRaw(@RuntimeHelp.wrapIntPtr(cast[int64](x)))
 
 proc toObject*[T](x: T): CLRVariant =
   ## Try to convert any value types or struct types into a CLR object.
@@ -750,7 +752,7 @@ proc toObject*[T](x: T, typ: CLRVariant): CLRVariant =
   var RuntimeHelp = getRuntimeHelp()
   toObjectRaw(@RuntimeHelp.wrapAny(x, typ))
 
-proc `[]`*[T: variant|SomeNumber|string](x: T): CLRVariant =
+proc `[]`*[T: variant|SomeNumber|string|proc|array|seq](x: T): CLRVariant =
   ## Syntax sugar for x.toObject().
   toObject(x)
 

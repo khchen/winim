@@ -5,6 +5,7 @@
 #
 #====================================================================
 
+{.push hint[Name]: off.}
 import windef
 #include <error.h>
 #include <winerror.h>

@@ -5,6 +5,7 @@
 #
 #====================================================================
 
+{.push hint[Name]: off.}
 import winimbase
 import windef
 import winbase
@@ -15,6 +16,7 @@ import objbase
 #include <ivehandler.h>
 #include <metahost.h>
 #include <mscorlib.tlh>
+#include <extra.tlh>
 type
   COR_GC_STAT_TYPES* = int32
   COR_GC_THREAD_STATS_TYPES* = int32
@@ -52,6 +54,8 @@ type
   CLR_DEBUGGING_PROCESS_FLAGS* = int32
   BindingFlags* = int32
   MemberTypes* = int32
+  MethodImplAttributes* = int32
+  MethodAttributes* = int32
   CallingConventions* = int32
   TypeAttributes* = int32
   AssemblyBuilderAccess* = int32
@@ -350,6 +354,60 @@ const
   BindingFlags_OptionalParamBinding* = 262144
   BindingFlags_IgnoreReturn* = 16777216
   IID_IAssembly* = DEFINE_GUID("17156360-2f1a-384a-bc52-fde93c215c5b")
+  MemberTypes_Constructor* = 1
+  MemberTypes_Event* = 2
+  MemberTypes_Field* = 4
+  MemberTypes_Method* = 8
+  MemberTypes_Property* = 16
+  MemberTypes_TypeInfo* = 32
+  MemberTypes_Custom* = 64
+  MemberTypes_NestedType* = 128
+  MemberTypes_All* = 191
+  MethodImplAttributes_CodeTypeMask* = 3
+  MethodImplAttributes_IL* = 0
+  MethodImplAttributes_Native* = 1
+  MethodImplAttributes_OPTIL* = 2
+  MethodImplAttributes_Runtime* = 3
+  MethodImplAttributes_ManagedMask* = 4
+  MethodImplAttributes_Unmanaged* = 4
+  MethodImplAttributes_Managed* = 0
+  MethodImplAttributes_ForwardRef* = 16
+  MethodImplAttributes_PreserveSig* = 128
+  MethodImplAttributes_InternalCall* = 4096
+  MethodImplAttributes_Synchronized* = 32
+  MethodImplAttributes_NoInlining* = 8
+  MethodImplAttributes_NoOptimization* = 64
+  MethodImplAttributes_MaxMethodImplVal* = 65535
+  MethodAttributes_MemberAccessMask* = 7
+  MethodAttributes_PrivateScope* = 0
+  MethodAttributes_Private* = 1
+  MethodAttributes_FamANDAssem* = 2
+  methodAttributesIAssembly* = 3
+  MethodAttributes_Family* = 4
+  MethodAttributes_FamORAssem* = 5
+  MethodAttributes_Public* = 6
+  MethodAttributes_Static* = 16
+  MethodAttributes_Final* = 32
+  MethodAttributes_Virtual* = 64
+  MethodAttributes_HideBySig* = 128
+  MethodAttributes_CheckAccessOnOverride* = 512
+  MethodAttributes_VtableLayoutMask* = 256
+  MethodAttributes_ReuseSlot* = 0
+  MethodAttributes_NewSlot* = 256
+  MethodAttributes_Abstract* = 1024
+  MethodAttributes_SpecialName* = 2048
+  MethodAttributes_PinvokeImpl* = 8192
+  MethodAttributes_UnmanagedExport* = 8
+  MethodAttributes_RTSpecialName* = 4096
+  MethodAttributes_ReservedMask* = 53248
+  MethodAttributes_HasSecurity* = 16384
+  MethodAttributes_RequireSecObject* = 32768
+  CallingConventions_Standard* = 1
+  CallingConventions_VarArgs* = 2
+  CallingConventions_Any* = 3
+  CallingConventions_HasThis* = 32
+  CallingConventions_ExplicitThis* = 64
+  IID_IMethodInfo* = DEFINE_GUID("ffcc1b5d-ecb8-38dd-9b01-3dc8abc2aa5f")
 type
   FLockClrVersionCallback* = proc (): HRESULT {.stdcall.}
   FExecuteInAppDomainCallback* = proc (cookie: pointer): HRESULT {.stdcall.}
@@ -923,6 +981,47 @@ type
     StrongNameDigestGenerate*: proc(self: ptr ICLRStrongName3, wszFilePath: LPCWSTR, ppbDigestBlob: ptr ptr BYTE, pcbDigestBlob: ptr ULONG, dwFlags: DWORD): HRESULT {.stdcall.}
     StrongNameDigestSign*: proc(self: ptr ICLRStrongName3, wszKeyContainer: LPCWSTR, pbKeyBlob: ptr BYTE, cbKeyBlob: ULONG, pbDigestBlob: ptr BYTE, cbDigestBlob: ULONG, hashAlgId: DWORD, ppbSignatureBlob: ptr ptr BYTE, pcbSignatureBlob: ptr ULONG, dwFlags: DWORD): HRESULT {.stdcall.}
     StrongNameDigestEmbed*: proc(self: ptr ICLRStrongName3, wszFilePath: LPCWSTR, pbSignatureBlob: ptr BYTE, cbSignatureBlob: ULONG): HRESULT {.stdcall.}
+  IMethodInfo* {.pure.} = object
+    lpVtbl*: ptr IMethodInfoVtbl
+  IMethodInfoVtbl* {.pure, inheritable.} = object of IUnknownVtbl
+    GetTypeInfoCount*: proc(self: ptr IMethodInfo, pcTInfo: ptr int32): HRESULT {.stdcall.}
+    GetTypeInfo*: proc(self: ptr IMethodInfo, iTInfo: int32, lcid: int32, ppTInfo: int32): HRESULT {.stdcall.}
+    GetIDsOfNames*: proc(self: ptr IMethodInfo, riid: ptr GUID, rgszNames: int32, cNames: int32, lcid: int32, rgDispId: int32): HRESULT {.stdcall.}
+    Invoke*: proc(self: ptr IMethodInfo, dispIdMember: int32, riid: ptr GUID, lcid: int32, wFlags: int16, pDispParams: int32, pVarResult: int32, pExcepInfo: int32, puArgErr: int32): HRESULT {.stdcall.}
+    get_ToString*: proc(self: ptr IMethodInfo, pRetVal: ptr BSTR): HRESULT {.stdcall.}
+    Equals*: proc(self: ptr IMethodInfo, other: VARIANT, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    GetHashCode*: proc(self: ptr IMethodInfo, pRetVal: ptr int32): HRESULT {.stdcall.}
+    GetType*: proc(self: ptr IMethodInfo, pRetVal: ptr ptr IType): HRESULT {.stdcall.}
+    get_MemberType*: proc(self: ptr IMethodInfo, pRetVal: ptr MemberTypes): HRESULT {.stdcall.}
+    get_name*: proc(self: ptr IMethodInfo, pRetVal: ptr BSTR): HRESULT {.stdcall.}
+    get_DeclaringType*: proc(self: ptr IMethodInfo, pRetVal: ptr ptr IType): HRESULT {.stdcall.}
+    get_ReflectedType*: proc(self: ptr IMethodInfo, pRetVal: ptr ptr IType): HRESULT {.stdcall.}
+    GetCustomAttributes*: proc(self: ptr IMethodInfo, attributeType: ptr IType, inherit: VARIANT_BOOL, pRetVal: ptr ptr SAFEARRAY): HRESULT {.stdcall.}
+    GetCustomAttributes_2*: proc(self: ptr IMethodInfo, inherit: VARIANT_BOOL, pRetVal: ptr ptr SAFEARRAY): HRESULT {.stdcall.}
+    IsDefined*: proc(self: ptr IMethodInfo, attributeType: ptr IType, inherit: VARIANT_BOOL, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    GetParameters*: proc(self: ptr IMethodInfo, pRetVal: ptr ptr SAFEARRAY): HRESULT {.stdcall.}
+    GetMethodImplementationFlags*: proc(self: ptr IMethodInfo, pRetVal: ptr MethodImplAttributes): HRESULT {.stdcall.}
+    get_MethodHandle*: proc(self: ptr IMethodInfo, pRetVal: POBJECT): HRESULT {.stdcall.}
+    get_Attributes*: proc(self: ptr IMethodInfo, pRetVal: ptr MethodAttributes): HRESULT {.stdcall.}
+    get_CallingConvention*: proc(self: ptr IMethodInfo, pRetVal: ptr CallingConventions): HRESULT {.stdcall.}
+    Invoke_2*: proc(self: ptr IMethodInfo, obj: VARIANT, invokeAttr: BindingFlags, Binder: POBJECT, parameters: ptr SAFEARRAY, culture: POBJECT, pRetVal: ptr VARIANT): HRESULT {.stdcall.}
+    get_IsPublic*: proc(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_IsPrivate*: proc(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_IsFamily*: proc(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_IsAssembly*: proc(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_IsFamilyAndAssembly*: proc(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_IsFamilyOrAssembly*: proc(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_IsStatic*: proc(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_IsFinal*: proc(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_IsVirtual*: proc(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_IsHideBySig*: proc(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_IsAbstract*: proc(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_IsSpecialName*: proc(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    get_IsConstructor*: proc(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
+    Invoke_3*: proc(self: ptr IMethodInfo, obj: VARIANT, parameters: ptr SAFEARRAY, pRetVal: ptr VARIANT): HRESULT {.stdcall.}
+    get_returnType*: proc(self: ptr IMethodInfo, pRetVal: ptr ptr IType): HRESULT {.stdcall.}
+    get_ReturnTypeCustomAttributes*: proc(self: ptr IMethodInfo, pRetVal: ptr POBJECT): HRESULT {.stdcall.}
+    GetBaseDefinition*: proc(self: ptr IMethodInfo, pRetVal: ptr ptr IMethodInfo): HRESULT {.stdcall.}
   IAssembly* {.pure.} = object
     lpVtbl*: ptr IAssemblyVtbl
   IAssemblyVtbl* {.pure, inheritable.} = object of IDispatchVtbl
@@ -935,7 +1034,7 @@ type
     GetName*: proc(self: ptr IAssembly, pRetVal: ptr POBJECT): HRESULT {.stdcall.}
     GetName_2*: proc(self: ptr IAssembly, copiedName: VARIANT_BOOL, pRetVal: ptr POBJECT): HRESULT {.stdcall.}
     get_FullName*: proc(self: ptr IAssembly, pRetVal: ptr BSTR): HRESULT {.stdcall.}
-    get_EntryPoint*: proc(self: ptr IAssembly, pRetVal: ptr POBJECT): HRESULT {.stdcall.}
+    get_EntryPoint*: proc(self: ptr IAssembly, pRetVal: ptr ptr IMethodInfo): HRESULT {.stdcall.}
     GetType_2*: proc(self: ptr IAssembly, name: BSTR, pRetVal: ptr ptr IType): HRESULT {.stdcall.}
     GetType_3*: proc(self: ptr IAssembly, name: BSTR, throwOnError: VARIANT_BOOL, pRetVal: ptr ptr IType): HRESULT {.stdcall.}
     GetExportedTypes*: proc(self: ptr IAssembly, pRetVal: ptr ptr SAFEARRAY): HRESULT {.stdcall.}
@@ -1014,8 +1113,8 @@ type
     IsInstanceOfType*: proc(self: ptr IType, o: VARIANT, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
     IsAssignableFrom*: proc(self: ptr IType, c: ptr IType, pRetVal: ptr VARIANT_BOOL): HRESULT {.stdcall.}
     GetInterfaceMap*: proc(self: ptr IType, interfaceType: ptr IType, pRetVal: POBJECT): HRESULT {.stdcall.}
-    GetMethod*: proc(self: ptr IType, name: BSTR, bindingAttr: BindingFlags, Binder: POBJECT, types: ptr SAFEARRAY, modifiers: ptr SAFEARRAY, pRetVal: ptr POBJECT): HRESULT {.stdcall.}
-    GetMethod_2*: proc(self: ptr IType, name: BSTR, bindingAttr: BindingFlags, pRetVal: ptr POBJECT): HRESULT {.stdcall.}
+    GetMethod*: proc(self: ptr IType, name: BSTR, bindingAttr: BindingFlags, Binder: POBJECT, types: ptr SAFEARRAY, modifiers: ptr SAFEARRAY, pRetVal: ptr ptr IMethodInfo): HRESULT {.stdcall.}
+    GetMethod_2*: proc(self: ptr IType, name: BSTR, bindingAttr: BindingFlags, pRetVal: ptr ptr IMethodInfo): HRESULT {.stdcall.}
     GetMethods*: proc(self: ptr IType, bindingAttr: BindingFlags, pRetVal: ptr ptr SAFEARRAY): HRESULT {.stdcall.}
     GetField*: proc(self: ptr IType, name: BSTR, bindingAttr: BindingFlags, pRetVal: ptr POBJECT): HRESULT {.stdcall.}
     GetFields*: proc(self: ptr IType, bindingAttr: BindingFlags, pRetVal: ptr ptr SAFEARRAY): HRESULT {.stdcall.}
@@ -1033,10 +1132,10 @@ type
     GetConstructor_3*: proc(self: ptr IType, types: ptr SAFEARRAY, pRetVal: ptr POBJECT): HRESULT {.stdcall.}
     GetConstructors_2*: proc(self: ptr IType, pRetVal: ptr ptr SAFEARRAY): HRESULT {.stdcall.}
     get_TypeInitializer*: proc(self: ptr IType, pRetVal: ptr POBJECT): HRESULT {.stdcall.}
-    GetMethod_3*: proc(self: ptr IType, name: BSTR, bindingAttr: BindingFlags, Binder: POBJECT, callConvention: CallingConventions, types: ptr SAFEARRAY, modifiers: ptr SAFEARRAY, pRetVal: ptr POBJECT): HRESULT {.stdcall.}
-    GetMethod_4*: proc(self: ptr IType, name: BSTR, types: ptr SAFEARRAY, modifiers: ptr SAFEARRAY, pRetVal: ptr POBJECT): HRESULT {.stdcall.}
-    GetMethod_5*: proc(self: ptr IType, name: BSTR, types: ptr SAFEARRAY, pRetVal: ptr POBJECT): HRESULT {.stdcall.}
-    GetMethod_6*: proc(self: ptr IType, name: BSTR, pRetVal: ptr POBJECT): HRESULT {.stdcall.}
+    GetMethod_3*: proc(self: ptr IType, name: BSTR, bindingAttr: BindingFlags, Binder: POBJECT, callConvention: CallingConventions, types: ptr SAFEARRAY, modifiers: ptr SAFEARRAY, pRetVal: ptr ptr IMethodInfo): HRESULT {.stdcall.}
+    GetMethod_4*: proc(self: ptr IType, name: BSTR, types: ptr SAFEARRAY, modifiers: ptr SAFEARRAY, pRetVal: ptr ptr IMethodInfo): HRESULT {.stdcall.}
+    GetMethod_5*: proc(self: ptr IType, name: BSTR, types: ptr SAFEARRAY, pRetVal: ptr ptr IMethodInfo): HRESULT {.stdcall.}
+    GetMethod_6*: proc(self: ptr IType, name: BSTR, pRetVal: ptr ptr IMethodInfo): HRESULT {.stdcall.}
     GetMethods_2*: proc(self: ptr IType, pRetVal: ptr ptr SAFEARRAY): HRESULT {.stdcall.}
     GetField_2*: proc(self: ptr IType, name: BSTR, pRetVal: ptr POBJECT): HRESULT {.stdcall.}
     GetFields_2*: proc(self: ptr IType, pRetVal: ptr ptr SAFEARRAY): HRESULT {.stdcall.}
@@ -1570,8 +1669,8 @@ proc IsSubclassOf*(self: ptr IType, c: ptr IType, pRetVal: ptr VARIANT_BOOL): HR
 proc IsInstanceOfType*(self: ptr IType, o: VARIANT, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.IsInstanceOfType(self, o, pRetVal)
 proc IsAssignableFrom*(self: ptr IType, c: ptr IType, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.IsAssignableFrom(self, c, pRetVal)
 proc GetInterfaceMap*(self: ptr IType, interfaceType: ptr IType, pRetVal: POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetInterfaceMap(self, interfaceType, pRetVal)
-proc GetMethod*(self: ptr IType, name: BSTR, bindingAttr: BindingFlags, Binder: POBJECT, types: ptr SAFEARRAY, modifiers: ptr SAFEARRAY, pRetVal: ptr POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetMethod(self, name, bindingAttr, Binder, types, modifiers, pRetVal)
-proc GetMethod_2*(self: ptr IType, name: BSTR, bindingAttr: BindingFlags, pRetVal: ptr POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetMethod_2(self, name, bindingAttr, pRetVal)
+proc GetMethod*(self: ptr IType, name: BSTR, bindingAttr: BindingFlags, Binder: POBJECT, types: ptr SAFEARRAY, modifiers: ptr SAFEARRAY, pRetVal: ptr ptr IMethodInfo): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetMethod(self, name, bindingAttr, Binder, types, modifiers, pRetVal)
+proc GetMethod_2*(self: ptr IType, name: BSTR, bindingAttr: BindingFlags, pRetVal: ptr ptr IMethodInfo): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetMethod_2(self, name, bindingAttr, pRetVal)
 proc GetMethods*(self: ptr IType, bindingAttr: BindingFlags, pRetVal: ptr ptr SAFEARRAY): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetMethods(self, bindingAttr, pRetVal)
 proc GetField*(self: ptr IType, name: BSTR, bindingAttr: BindingFlags, pRetVal: ptr POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetField(self, name, bindingAttr, pRetVal)
 proc GetFields*(self: ptr IType, bindingAttr: BindingFlags, pRetVal: ptr ptr SAFEARRAY): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetFields(self, bindingAttr, pRetVal)
@@ -1589,10 +1688,10 @@ proc GetConstructor_2*(self: ptr IType, bindingAttr: BindingFlags, Binder: POBJE
 proc GetConstructor_3*(self: ptr IType, types: ptr SAFEARRAY, pRetVal: ptr POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetConstructor_3(self, types, pRetVal)
 proc GetConstructors_2*(self: ptr IType, pRetVal: ptr ptr SAFEARRAY): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetConstructors_2(self, pRetVal)
 proc get_TypeInitializer*(self: ptr IType, pRetVal: ptr POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_TypeInitializer(self, pRetVal)
-proc GetMethod_3*(self: ptr IType, name: BSTR, bindingAttr: BindingFlags, Binder: POBJECT, callConvention: CallingConventions, types: ptr SAFEARRAY, modifiers: ptr SAFEARRAY, pRetVal: ptr POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetMethod_3(self, name, bindingAttr, Binder, callConvention, types, modifiers, pRetVal)
-proc GetMethod_4*(self: ptr IType, name: BSTR, types: ptr SAFEARRAY, modifiers: ptr SAFEARRAY, pRetVal: ptr POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetMethod_4(self, name, types, modifiers, pRetVal)
-proc GetMethod_5*(self: ptr IType, name: BSTR, types: ptr SAFEARRAY, pRetVal: ptr POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetMethod_5(self, name, types, pRetVal)
-proc GetMethod_6*(self: ptr IType, name: BSTR, pRetVal: ptr POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetMethod_6(self, name, pRetVal)
+proc GetMethod_3*(self: ptr IType, name: BSTR, bindingAttr: BindingFlags, Binder: POBJECT, callConvention: CallingConventions, types: ptr SAFEARRAY, modifiers: ptr SAFEARRAY, pRetVal: ptr ptr IMethodInfo): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetMethod_3(self, name, bindingAttr, Binder, callConvention, types, modifiers, pRetVal)
+proc GetMethod_4*(self: ptr IType, name: BSTR, types: ptr SAFEARRAY, modifiers: ptr SAFEARRAY, pRetVal: ptr ptr IMethodInfo): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetMethod_4(self, name, types, modifiers, pRetVal)
+proc GetMethod_5*(self: ptr IType, name: BSTR, types: ptr SAFEARRAY, pRetVal: ptr ptr IMethodInfo): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetMethod_5(self, name, types, pRetVal)
+proc GetMethod_6*(self: ptr IType, name: BSTR, pRetVal: ptr ptr IMethodInfo): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetMethod_6(self, name, pRetVal)
 proc GetMethods_2*(self: ptr IType, pRetVal: ptr ptr SAFEARRAY): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetMethods_2(self, pRetVal)
 proc GetField_2*(self: ptr IType, name: BSTR, pRetVal: ptr POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetField_2(self, name, pRetVal)
 proc GetFields_2*(self: ptr IType, pRetVal: ptr ptr SAFEARRAY): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetFields_2(self, pRetVal)
@@ -1741,7 +1840,7 @@ proc get_EscapedCodeBase*(self: ptr IAssembly, pRetVal: ptr BSTR): HRESULT {.win
 proc GetName*(self: ptr IAssembly, pRetVal: ptr POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetName(self, pRetVal)
 proc GetName_2*(self: ptr IAssembly, copiedName: VARIANT_BOOL, pRetVal: ptr POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetName_2(self, copiedName, pRetVal)
 proc get_FullName*(self: ptr IAssembly, pRetVal: ptr BSTR): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_FullName(self, pRetVal)
-proc get_EntryPoint*(self: ptr IAssembly, pRetVal: ptr POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_EntryPoint(self, pRetVal)
+proc get_EntryPoint*(self: ptr IAssembly, pRetVal: ptr ptr IMethodInfo): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_EntryPoint(self, pRetVal)
 proc GetType_2*(self: ptr IAssembly, name: BSTR, pRetVal: ptr ptr IType): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetType_2(self, name, pRetVal)
 proc GetType_3*(self: ptr IAssembly, name: BSTR, throwOnError: VARIANT_BOOL, pRetVal: ptr ptr IType): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetType_3(self, name, throwOnError, pRetVal)
 proc GetExportedTypes*(self: ptr IAssembly, pRetVal: ptr ptr SAFEARRAY): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetExportedTypes(self, pRetVal)
@@ -1776,6 +1875,44 @@ proc GetModules_2*(self: ptr IAssembly, getResourceModules: VARIANT_BOOL, pRetVa
 proc GetModule*(self: ptr IAssembly, name: BSTR, pRetVal: ptr POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetModule(self, name, pRetVal)
 proc GetReferencedAssemblies*(self: ptr IAssembly, pRetVal: ptr ptr SAFEARRAY): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetReferencedAssemblies(self, pRetVal)
 proc get_GlobalAssemblyCache*(self: ptr IAssembly, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_GlobalAssemblyCache(self, pRetVal)
+proc GetTypeInfoCount*(self: ptr IMethodInfo, pcTInfo: ptr int32): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetTypeInfoCount(self, pcTInfo)
+proc GetTypeInfo*(self: ptr IMethodInfo, iTInfo: int32, lcid: int32, ppTInfo: int32): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetTypeInfo(self, iTInfo, lcid, ppTInfo)
+proc GetIDsOfNames*(self: ptr IMethodInfo, riid: ptr GUID, rgszNames: int32, cNames: int32, lcid: int32, rgDispId: int32): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetIDsOfNames(self, riid, rgszNames, cNames, lcid, rgDispId)
+proc Invoke*(self: ptr IMethodInfo, dispIdMember: int32, riid: ptr GUID, lcid: int32, wFlags: int16, pDispParams: int32, pVarResult: int32, pExcepInfo: int32, puArgErr: int32): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.Invoke(self, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+proc get_ToString*(self: ptr IMethodInfo, pRetVal: ptr BSTR): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_ToString(self, pRetVal)
+proc Equals*(self: ptr IMethodInfo, other: VARIANT, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.Equals(self, other, pRetVal)
+proc GetHashCode*(self: ptr IMethodInfo, pRetVal: ptr int32): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetHashCode(self, pRetVal)
+proc GetType*(self: ptr IMethodInfo, pRetVal: ptr ptr IType): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetType(self, pRetVal)
+proc get_MemberType*(self: ptr IMethodInfo, pRetVal: ptr MemberTypes): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_MemberType(self, pRetVal)
+proc get_name*(self: ptr IMethodInfo, pRetVal: ptr BSTR): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_name(self, pRetVal)
+proc get_DeclaringType*(self: ptr IMethodInfo, pRetVal: ptr ptr IType): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_DeclaringType(self, pRetVal)
+proc get_ReflectedType*(self: ptr IMethodInfo, pRetVal: ptr ptr IType): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_ReflectedType(self, pRetVal)
+proc GetCustomAttributes*(self: ptr IMethodInfo, attributeType: ptr IType, inherit: VARIANT_BOOL, pRetVal: ptr ptr SAFEARRAY): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetCustomAttributes(self, attributeType, inherit, pRetVal)
+proc GetCustomAttributes_2*(self: ptr IMethodInfo, inherit: VARIANT_BOOL, pRetVal: ptr ptr SAFEARRAY): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetCustomAttributes_2(self, inherit, pRetVal)
+proc IsDefined*(self: ptr IMethodInfo, attributeType: ptr IType, inherit: VARIANT_BOOL, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.IsDefined(self, attributeType, inherit, pRetVal)
+proc GetParameters*(self: ptr IMethodInfo, pRetVal: ptr ptr SAFEARRAY): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetParameters(self, pRetVal)
+proc GetMethodImplementationFlags*(self: ptr IMethodInfo, pRetVal: ptr MethodImplAttributes): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetMethodImplementationFlags(self, pRetVal)
+proc get_MethodHandle*(self: ptr IMethodInfo, pRetVal: POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_MethodHandle(self, pRetVal)
+proc get_Attributes*(self: ptr IMethodInfo, pRetVal: ptr MethodAttributes): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_Attributes(self, pRetVal)
+proc get_CallingConvention*(self: ptr IMethodInfo, pRetVal: ptr CallingConventions): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_CallingConvention(self, pRetVal)
+proc Invoke_2*(self: ptr IMethodInfo, obj: VARIANT, invokeAttr: BindingFlags, Binder: POBJECT, parameters: ptr SAFEARRAY, culture: POBJECT, pRetVal: ptr VARIANT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.Invoke_2(self, obj, invokeAttr, Binder, parameters, culture, pRetVal)
+proc get_IsPublic*(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_IsPublic(self, pRetVal)
+proc get_IsPrivate*(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_IsPrivate(self, pRetVal)
+proc get_IsFamily*(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_IsFamily(self, pRetVal)
+proc get_IsAssembly*(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_IsAssembly(self, pRetVal)
+proc get_IsFamilyAndAssembly*(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_IsFamilyAndAssembly(self, pRetVal)
+proc get_IsFamilyOrAssembly*(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_IsFamilyOrAssembly(self, pRetVal)
+proc get_IsStatic*(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_IsStatic(self, pRetVal)
+proc get_IsFinal*(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_IsFinal(self, pRetVal)
+proc get_IsVirtual*(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_IsVirtual(self, pRetVal)
+proc get_IsHideBySig*(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_IsHideBySig(self, pRetVal)
+proc get_IsAbstract*(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_IsAbstract(self, pRetVal)
+proc get_IsSpecialName*(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_IsSpecialName(self, pRetVal)
+proc get_IsConstructor*(self: ptr IMethodInfo, pRetVal: ptr VARIANT_BOOL): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_IsConstructor(self, pRetVal)
+proc Invoke_3*(self: ptr IMethodInfo, obj: VARIANT, parameters: ptr SAFEARRAY, pRetVal: ptr VARIANT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.Invoke_3(self, obj, parameters, pRetVal)
+proc get_returnType*(self: ptr IMethodInfo, pRetVal: ptr ptr IType): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_returnType(self, pRetVal)
+proc get_ReturnTypeCustomAttributes*(self: ptr IMethodInfo, pRetVal: ptr POBJECT): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.get_ReturnTypeCustomAttributes(self, pRetVal)
+proc GetBaseDefinition*(self: ptr IMethodInfo, pRetVal: ptr ptr IMethodInfo): HRESULT {.winapi, inline.} = {.gcsafe.}: self.lpVtbl.GetBaseDefinition(self, pRetVal)
 converter winimConverterIGCHostToIUnknown*(x: ptr IGCHost): ptr IUnknown = cast[ptr IUnknown](x)
 converter winimConverterIGCHost2ToIGCHost*(x: ptr IGCHost2): ptr IGCHost = cast[ptr IGCHost](x)
 converter winimConverterIGCHost2ToIUnknown*(x: ptr IGCHost2): ptr IUnknown = cast[ptr IUnknown](x)
@@ -1859,3 +1996,4 @@ converter winimConverterAppDomainToIDispatch*(x: ptr AppDomain): ptr IDispatch =
 converter winimConverterAppDomainToIUnknown*(x: ptr AppDomain): ptr IUnknown = cast[ptr IUnknown](x)
 converter winimConverterIAssemblyToIDispatch*(x: ptr IAssembly): ptr IDispatch = cast[ptr IDispatch](x)
 converter winimConverterIAssemblyToIUnknown*(x: ptr IAssembly): ptr IUnknown = cast[ptr IUnknown](x)
+converter winimConverterIMethodInfoToIUnknown*(x: ptr IMethodInfo): ptr IUnknown = cast[ptr IUnknown](x)

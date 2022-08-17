@@ -1546,6 +1546,7 @@ MetafileTypeEmfPlusOnly (Const) => metafileTypeEmfPlusOnly
 MetafileTypeInvalid (Const) => metafileTypeInvalid
 MetafileTypeWmf (Const) => metafileTypeWmf
 MetafileTypeWmfPlaceable (Const) => metafileTypeWmfPlaceable
+MethodAttributesIAssembly (Const) => methodAttributesIAssembly
 MibAddInstance (Const) => mibAddInstance
 MibDeleteInstance (Const) => mibDeleteInstance
 MibIfTableNormal (Const) => mibIfTableNormal

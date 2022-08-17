@@ -5,6 +5,7 @@
 #
 #====================================================================
 
+{.push hint[Name]: off.}
 #include <vssym32.h>
 #include <vsstyle.h>
 type

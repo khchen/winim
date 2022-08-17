@@ -48,6 +48,7 @@
 ##    var output = string fromVariant[COMBinary](v)
 ##    assert input == output
 
+{.push hint[Name]: off.}
 {.experimental, deadCodeElim: on.} # experimental for dot operators
 
 import strutils, macros

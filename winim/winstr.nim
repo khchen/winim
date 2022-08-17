@@ -155,6 +155,7 @@
 ##    proc newWideCString(s: wstring): WideCString
 ##      # Converts wstring to WideCString.
 
+{.push hint[Name]: off.}
 {.deadCodeElim: on.}
 
 import macros, strutils, inc/[winimbase, windef]

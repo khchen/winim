@@ -5,6 +5,7 @@
 #
 #====================================================================
 
+{.push hint[Name]: off.}
 import winimbase
 #include <ntdef.h>
 #include <basetsd.h>

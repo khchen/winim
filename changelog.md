@@ -1,3 +1,11 @@
+Version 3.9.0
+-------------
+* Remvoe annoying hints for symbol name in Nim Compiler 1.7.1 devel.
+* Add msi module (#85).
+* Add the IMethodInfo to mscoree.nim (#87).
+* Fix MIB_TCPROW2 in iphlpapi.nim (#88).
+* Fix examples/clr/simple_gui.nim (#89).
+
 Version 3.8.1
 -------------
 * winim/clr: `[]` (Syntax sugar for toObject) cause conflict too often, fixed.

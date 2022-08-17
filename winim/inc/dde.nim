@@ -5,6 +5,7 @@
 #
 #====================================================================
 
+{.push hint[Name]: off.}
 import winimbase
 import windef
 #include <cderr.h>

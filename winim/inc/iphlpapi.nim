@@ -5,6 +5,7 @@
 #
 #====================================================================
 
+{.push hint[Name]: off.}
 import winimbase
 import windef
 import winbase
@@ -318,6 +319,7 @@ type
     dwLocalPort*: DWORD
     dwRemoteAddr*: DWORD
     dwRemotePort*: DWORD
+    dwOwningPid*: DWORD
     dwOffloadState*: TCP_CONNECTION_OFFLOAD_STATE
   PMIB_TCPROW2* = ptr MIB_TCPROW2
   MIB_TCPTABLE2* {.pure.} = object
