@@ -10,7 +10,6 @@ import strformat except `&`
 
 proc test1() =
   var mscor = load("mscorlib")
-  var Array = mscor.GetType("System.Array")
 
   for typ in mscor.GetTypes():
     echo typ.FullName
