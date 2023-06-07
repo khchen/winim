@@ -7,8 +7,6 @@
 
 ##  This module contains utilities for happily coding in winim.
 
-{.deadCodeElim: on.}
-
 import inc/windef
 
 # todo: need more converter?

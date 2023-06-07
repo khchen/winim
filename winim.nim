@@ -28,8 +28,6 @@
 ##         add -d:mean or -d:win32_lean_and_mean same as import winim/mean.
 ##         add -d:notrace disable COM objects trace. See com.nim for details.
 
-{.deadCodeElim: on.}
-
 when defined(lean):
   import winim/[core]
   export core

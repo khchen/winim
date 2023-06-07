@@ -7,8 +7,6 @@
 #
 #====================================================================
 
-{.deadCodeElim: on.}
-
 import inc/[windef, winerror, winbase, wingdi, winuser, wincon, winnls,
   winver, winreg, winnetwk, winsvc, virtdisk, winsock, wincrypt]
 

@@ -45,7 +45,7 @@ try:
 
   value.SetValue("Hello World")
 
-except:
+except CatchableError, ReraiseDefect:
   echo "something wrong !"
 
 finally:

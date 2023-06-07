@@ -4,8 +4,6 @@
 #                 (c) Copyright 2016-2022 Ward
 #
 #====================================================================
-
-{.push hint[Name]: off.}
 import winimbase
 #include <ntdef.h>
 #include <basetsd.h>
@@ -9703,6 +9701,7 @@ when winimCpu64:
     CONTEXT_EXCEPTION_REPORTING* = 0x80000000'i32
     INITIAL_MXCSR* = 0x1f80
     INITIAL_FPCSR* = 0x027f
+    LEGACY_SAVE_AREA_LENGTH* = sizeof(XMM_SAVE_AREA32)
     RUNTIME_FUNCTION_INDIRECT* = 0x1
     OUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK_EXPORT_NAME* = "OutOfProcessFunctionTableCallback"
     UNW_FLAG_NHANDLER* = 0x0
@@ -9715,7 +9714,6 @@ when winimCpu64:
     IMAGE_SIZEOF_NT_OPTIONAL_HEADER* = IMAGE_SIZEOF_NT_OPTIONAL64_HEADER
     IMAGE_NT_OPTIONAL_HDR_MAGIC* = IMAGE_NT_OPTIONAL_HDR64_MAGIC
     IMAGE_ORDINAL_FLAG* = IMAGE_ORDINAL_FLAG64
-    LEGACY_SAVE_AREA_LENGTH* = 0x00000200
   type
     PGET_RUNTIME_FUNCTION_CALLBACK* = proc (ControlPc: DWORD64, Context: PVOID): PRUNTIME_FUNCTION {.stdcall.}
     POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK* = proc (Process: HANDLE, TableAddress: PVOID, Entries: PDWORD, Functions: ptr PRUNTIME_FUNCTION): DWORD {.stdcall.}

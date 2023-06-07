@@ -7,7 +7,5 @@
 #
 #====================================================================
 
-{.deadCodeElim: on.}
-
 import inc/[objbase, objext, uiautomation, mscoree]
 export objbase, objext, uiautomation, mscoree

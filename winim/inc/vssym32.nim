@@ -4,8 +4,6 @@
 #                 (c) Copyright 2016-2022 Ward
 #
 #====================================================================
-
-{.push hint[Name]: off.}
 #include <vssym32.h>
 #include <vsstyle.h>
 type

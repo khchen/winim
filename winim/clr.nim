@@ -48,7 +48,7 @@ runnableExamples:
     var o = res.CompiledAssembly.new("Test")
     o.Hello()
 
-{.experimental, deadCodeElim: on.} # experimental for dot operators
+{.experimental.} # experimental for dot operators
 
 import ole, com
 import strutils, macros

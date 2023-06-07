@@ -7,8 +7,6 @@
 #
 #====================================================================
 
-{.deadCodeElim: on.}
-
 import inc/[commctrl, commdlg, richedit, imm, shellapi, regstr, setupapi, vssym32,
   uxtheme, dwmapi, msi]
 

@@ -5,7 +5,5 @@
 #
 #====================================================================
 
-{.deadCodeElim: on.}
-
 import utils, winstr, core
 export utils, winstr, core

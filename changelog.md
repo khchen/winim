@@ -1,3 +1,9 @@
+Version 3.9.1
+-------------
+* Remove {.deadCodeElim.} and {.push hint[Name]:off.} pragmas.
+* Remove deprecated bare except and unnamed break in code.
+* Remove warning about anunlisted exception.
+
 Version 3.9.0
 -------------
 * Remvoe annoying hints for symbol name in Nim Compiler 1.7.1 devel.

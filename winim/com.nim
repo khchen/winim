@@ -48,8 +48,7 @@
 ##    var output = string fromVariant[COMBinary](v)
 ##    assert input == output
 
-{.push hint[Name]: off.}
-{.experimental, deadCodeElim: on.} # experimental for dot operators
+{.experimental.} # experimental for dot operators
 
 import strutils, macros
 import inc/winimbase, utils, winstr, core, shell, ole
@@ -148,7 +147,7 @@ proc desc*(e: ref COMError): string =
 
   result = $buffer
 
-proc `=destroy`(x: var type(com()[])) =
+proc `=destroy`(x: var type(com()[])) {.raises: [Exception].} =
   if not x.disp.isNil:
     x.disp.Release()
     x.disp = nil
@@ -283,7 +282,7 @@ proc rawTypeDesc*(x: variant): string =
 
 proc newCom*(x: ptr IDispatch): com =
   if x.notNil:
-    result.init
+    result.init()
     x.AddRef()
     result.disp = x
 
@@ -295,7 +294,7 @@ proc wrap*(x: ptr IDispatch): com {.inline.} =
   result = newCom(x)
 
 proc wrap*(x: VARIANT): variant {.inline.} =
-  result.init
+  result.init()
   result.raw = x
 
 proc unwrap*(x: com): ptr IDispatch {.inline.} =
@@ -308,39 +307,39 @@ proc isNull*(x: variant): bool {.inline.} =
   result = (x.raw.vt == VT_EMPTY or x.raw.vt == VT_NULL or (x.raw.vt == VT_DISPATCH and x.raw.byref.isNil))
 
 proc newVariant*(x: VARIANT): variant =
-  result.init
+  result.init()
   if VariantCopy(&result.raw, x.unsafeaddr).FAILED:
     raise newException(VariantConversionError, vcErrorMsg(x.vt.typeDesc))
 
 proc copy*(x: variant): variant =
   if x.notNil:
-    result.init
+    result.init()
     if VariantCopy(&result.raw, x.raw.unsafeaddr).FAILED:
       raise newException(VariantConversionError, vcErrorMsg(x.raw.vt.typeDesc))
 
 proc toVariant*(x: string|cstring|mstring): variant =
-  result.init
+  result.init()
   result.raw.vt = VT_BSTR
   var ws = +$x
   result.raw.bstrVal = SysAllocString(&ws)
 
 proc toVariant*(x: wstring): variant =
-  result.init
+  result.init()
   result.raw.vt = VT_BSTR
   result.raw.bstrVal = SysAllocString(&x)
 
 proc toVariant*(x: BSTR): variant =
-  result.init
+  result.init()
   result.raw.vt = VT_BSTR
   result.raw.bstrVal = SysAllocString(x)
 
 proc toVariant*(x: bool): variant =
-  result.init
+  result.init()
   result.raw.vt = VT_BOOL
   result.raw.boolVal = if x: VARIANT_TRUE else: VARIANT_FALSE
 
 proc toVariant*(x: SomeInteger|enum): variant =
-  result.init
+  result.init()
   when x.type is SomeSignedInt:
     when sizeof(x) == 1:
       result.raw.vt = VT_I1
@@ -369,7 +368,7 @@ proc toVariant*(x: SomeInteger|enum): variant =
       result.raw.ullVal = x.int64 # ULONG64 is declared as int64 for compatibility
 
 proc toVariant*(x: SomeFloat): variant =
-  result.init
+  result.init()
   when sizeof(x) == 4:
     result.raw.vt = VT_R4
     result.raw.fltVal = x.float32
@@ -378,29 +377,29 @@ proc toVariant*(x: SomeFloat): variant =
     result.raw.dblVal = x.float64
 
 proc toVariant*(x: char): variant =
-  result.init
+  result.init()
   result.raw.vt = VT_UI1
   result.raw.bVal = x.byte
 
 proc toVariant*(x: pointer): variant =
-  result.init
+  result.init()
   result.raw.vt = VT_PTR
   result.raw.byref = x
 
 proc toVariant*(x: ptr IDispatch): variant =
-  result.init
+  result.init()
   x.AddRef()
   result.raw.vt = VT_DISPATCH
   result.raw.pdispVal = x
 
 proc toVariant*(x: com): variant =
-  result.init
+  result.init()
   x.disp.AddRef()
   result.raw.vt = VT_DISPATCH
   result.raw.pdispVal = x.disp
 
 proc toVariant*(x: ptr IUnknown): variant =
-  result.init
+  result.init()
   x.AddRef()
   result.raw.vt = VT_UNKNOWN
   result.raw.punkVal = x
@@ -411,7 +410,7 @@ proc toVariant*(x: SYSTEMTIME): variant =
 
   const ONETHOUSANDMILLISECONDS = 0.0000115740740740'f64
   var x = x
-  result.init
+  result.init()
   result.raw.vt = VT_DATE
 
   let wMilliSeconds = float x.wMilliseconds
@@ -424,7 +423,7 @@ proc toVariant*(x: SYSTEMTIME): variant =
   result.raw.date = date + ONETHOUSANDMILLISECONDS / 1000 * wMilliSeconds
 
 proc toVariant*(x: FILETIME): variant =
-  result.init
+  result.init()
   result.raw.vt = VT_DATE
 
   var st: SYSTEMTIME
@@ -440,12 +439,12 @@ proc toVariant*(x: ptr SomeInteger|ptr SomeFloat|ptr char|ptr bool|ptr BSTR): va
   result.raw.vt = result.raw.vt or VT_BYREF
 
 proc toVariant*(x: VARIANT): variant =
-  result.init
+  result.init()
   if VariantCopy(&result.raw, x.unsafeaddr).FAILED:
     raise newException(VariantConversionError, vcErrorMsg(x.vt.typeDesc))
 
 proc toVariant*(x: variant): variant =
-  result.init
+  result.init()
   if x.isNil: # nil.variant for missing optional parameters
     result.raw.vt = VT_ERROR
     result.raw.scode = DISP_E_PARAMNOTFOUND
@@ -453,14 +452,14 @@ proc toVariant*(x: variant): variant =
     result = x.copy
 
 proc toVariant*(x: COMBinary): variant =
-  result.init
+  result.init()
   result.raw.vt = VARTYPE(VT_ARRAY or VT_UI1)
   result.raw.parray = SafeArrayCreateVector(VT_UI1, 0, ULONG len(string x))
 
-  block:
+  block okay:
     var pBuffer: pointer
-    if result.raw.parray == nil: break
-    if SafeArrayAccessData(result.raw.parray, &pBuffer) != S_OK: break
+    if result.raw.parray == nil: break okay
+    if SafeArrayAccessData(result.raw.parray, &pBuffer) != S_OK: break okay
     defer: SafeArrayUnaccessData(result.raw.parray)
 
     copyMem(pBuffer, &(string x), x.len)
@@ -539,7 +538,7 @@ template toVariant3D(x: typed, vt: VARENUM) =
           discard SafeArrayPutElement(result.raw.parray, &indices[0], &(v.raw.union1.struct1.union1.intVal))
 
 proc toVariant*[T](x: openarray[T], vt: VARENUM = VT_VARIANT): variant =
-  result.init
+  result.init()
   result.raw.vt = VARTYPE(VT_ARRAY or vt)
 
   when x[0].type is array|seq:
@@ -566,7 +565,7 @@ template fromVariant1D(x, dimensions: typed) =
     newSeq(result, xLen)
     for i in 0..<xLen:
       var indices = i.LONG + xLbound
-      result[i].init
+      result[i].init()
       if vt == VT_VARIANT:
         discard SafeArrayGetElement(x.raw.parray, &indices, &result[i].raw)
       else:
@@ -597,7 +596,7 @@ template fromVariant2D(x, dimensions: typed) =
       newSeq(result[i], yLen)
       for j in 0..<yLen:
         var indices = [i.LONG + xLbound, j.LONG + yLbound]
-        result[i][j].init
+        result[i][j].init()
         if vt == VT_VARIANT:
           discard SafeArrayGetElement(x.raw.parray, &indices[0], &result[i][j].raw)
         else:
@@ -634,7 +633,7 @@ template fromVariant3D(x, dimensions: typed) =
         newSeq(result[i][j], zLen)
         for k in 0..<zLen:
           var indices = [i.LONG + xLbound, j.LONG + yLbound, k.LONG + zLbound]
-          result[i][j][k].init
+          result[i][j][k].init()
           if vt == VT_VARIANT:
             discard SafeArrayGetElement(x.raw.parray, &indices[0], &result[i][j][k].raw)
           else:
@@ -651,12 +650,12 @@ template fromVariantBinary(x: typed) =
     pBuffer: pointer
     ok = false
 
-  block:
-    if dimensions != 1: break
-    if SafeArrayGetVartype(x.raw.parray, &vt) != S_OK or vt notin {VT_UI1, VT_I1}: break
-    if SafeArrayGetLBound(x.raw.parray, 1, &xLbound) != S_OK: break
-    if SafeArrayGetUBound(x.raw.parray, 1, &xUbound) != S_OK: break
-    if SafeArrayAccessData(x.raw.parray, &pBuffer) != S_OK: break
+  block okay:
+    if dimensions != 1: break okay
+    if SafeArrayGetVartype(x.raw.parray, &vt) != S_OK or vt notin {VT_UI1, VT_I1}: break okay
+    if SafeArrayGetLBound(x.raw.parray, 1, &xLbound) != S_OK: break okay
+    if SafeArrayGetUBound(x.raw.parray, 1, &xUbound) != S_OK: break okay
+    if SafeArrayAccessData(x.raw.parray, &pBuffer) != S_OK: break okay
     defer: SafeArrayUnaccessData(x.raw.parray)
 
     let xLen = xUbound - xLbound + 1
@@ -1127,7 +1126,7 @@ proc GetCLSID(progId: string, clsid: var GUID): HRESULT =
 proc CreateObject*(progId: string): com =
   ## Creates a reference to a COM object.
 
-  result.init
+  result.init()
   var
     clsid: GUID
     pCf: ptr IClassFactory
@@ -1147,7 +1146,7 @@ proc CreateObject*(progId: string): com =
 proc GetObject*(file: string, progId: string = ""): com =
   ## Retrieves a reference to a COM object from an existing process or filename.
 
-  result.init
+  result.init()
   var
     clsid: GUID
     pUk: ptr IUnknown
@@ -1253,7 +1252,7 @@ proc Sink_Invoke(self: ptr IDispatch, dispid: DISPID, riid: REFIID, lcid: LCID, 
     try:
       {.gcsafe.}: vret = this.handler(this.parent, name, sargs)
 
-    except:
+    except CatchableError:
       let e = getCurrentException()
       echo "uncatched exception inside event hander: " & $e.name & " (" & $e.msg & ")"
 
@@ -1302,14 +1301,14 @@ proc connectRaw(self: com, riid: REFIID = nil, cookie: DWORD, handler: comEventH
     if container.notNil: container.Release()
     if enu.notNil: enu.Release()
 
-  block:
-    if self.disp.GetTypeInfoCount(&count).ERR or count != 1: break
-    if self.disp.GetTypeInfo(0, 0, &dispTypeInfo).ERR: break
-    if dispTypeInfo.GetContainingTypeLib(&typeLib, &index).ERR: break
-    if self.disp.QueryInterface(&IID_IConnectionPointContainer, &container).ERR: break
+  block okay:
+    if self.disp.GetTypeInfoCount(&count).ERR or count != 1: break okay
+    if self.disp.GetTypeInfo(0, 0, &dispTypeInfo).ERR: break okay
+    if dispTypeInfo.GetContainingTypeLib(&typeLib, &index).ERR: break okay
+    if self.disp.QueryInterface(&IID_IConnectionPointContainer, &container).ERR: break okay
 
     if riid.isNil:
-      if container.EnumConnectionPoints(&enu).ERR: break
+      if container.EnumConnectionPoints(&enu).ERR: break okay
       enu.Reset()
       while enu.Next(1, &connection, nil) != S_FALSE:
         if connection.GetConnectionInterface(&iid).OK and
@@ -1320,9 +1319,9 @@ proc connectRaw(self: com, riid: REFIID = nil, cookie: DWORD, handler: comEventH
         connection = nil
 
     else:
-      if container.FindConnectionPoint(riid, &connection).ERR: break
-      if connection.GetConnectionInterface(&iid).ERR: break
-      if typeLib.GetTypeInfoOfGuid(riid, &typeInfo).ERR: break
+      if container.FindConnectionPoint(riid, &connection).ERR: break okay
+      if connection.GetConnectionInterface(&iid).ERR: break okay
+      if typeLib.GetTypeInfoOfGuid(riid, &typeInfo).ERR: break okay
 
     if handler.notNil:
       sink = newSink(self, iid, typeInfo, handler)
