@@ -1,3 +1,8 @@
+Version 3.9.2
+-------------
+* Update for Nim Compiler 2.0.
+* Fix examples/uiautomation.nim (not work in Win11).
+
 Version 3.9.1
 -------------
 * Remove {.deadCodeElim.} and {.push hint[Name]:off.} pragmas.

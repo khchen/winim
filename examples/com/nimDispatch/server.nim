@@ -1,7 +1,7 @@
 #====================================================================
 #
-#               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2022 Ward
+#          Winim - Windows API, COM, and CLR Module for Nim
+#               Copyright (c) Chen Kai-Hung, Ward
 #
 #====================================================================
 
@@ -27,7 +27,7 @@ when isMainModule:
     isExit = true
 
   nimDisp.regist("nimDispatch")
-  echo "Run client.vbs, client.py, client.nim to end this server..."
+  echo "Run client.vbs, client.py, or client.nim to end this server..."
 
   while not isExit:
     nimDisp.inloop()

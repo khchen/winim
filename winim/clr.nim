@@ -1,9 +1,9 @@
 #====================================================================
 #
-#               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2022 Ward
+#          Winim - Windows API, COM, and CLR Module for Nim
+#               Copyright (c) Chen Kai-Hung, Ward
 #
-#         Windows .NET Common Language Runtime Supports
+#           Windows .NET Common Language Runtime Supports
 #
 #====================================================================
 

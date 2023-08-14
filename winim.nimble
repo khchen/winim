@@ -1,8 +1,15 @@
+#====================================================================
+#
+#          Winim - Windows API, COM, and CLR Module for Nim
+#               Copyright (c) Chen Kai-Hung, Ward
+#
+#====================================================================
+
 # Package
 
-version       = "3.9.1"
+version       = "3.9.2"
 author        = "Ward"
-description   = "Winim - Nim\'s Windows API and COM Library"
+description   = "Winim - Windows API, COM, and CLR Module for Nim"
 license       = "MIT"
 skipDirs      = @["examples", "tests", "docs", "tcclib"]
 
@@ -65,13 +72,14 @@ task clrexample, "Build all the CLR examples":
   exec "nim c examples/clr/usage_demo2.nim"
   exec "nim c examples/clr/wpf.nim"
 
-# Clean
+# Sweep
 
-task clean, "Delete all the executable files":
+task sweep, "Delete all the executable files":
   exec "cmd /c IF EXIST tests\\*.exe del tests\\*.exe"
   exec "cmd /c IF EXIST examples\\*.exe del examples\\*.exe"
   exec "cmd /c IF EXIST examples\\com\\*.exe del examples\\com\\*.exe"
   exec "cmd /c IF EXIST examples\\com\\nimDispatch\\*.exe del examples\\com\\nimDispatch\\*.exe"
   exec "cmd /c IF EXIST examples\\com\\threads\\*.exe del examples\\com\\threads\\*.exe"
   exec "cmd /c IF EXIST examples\\clr\\*.exe del examples\\clr\\*.exe"
+  exec "cmd /c IF EXIST examples\\clr\\*.dll del examples\\clr\\*.dll"
   exec "cmd /c IF EXIST winim\\*.exe del winim\\*.exe"

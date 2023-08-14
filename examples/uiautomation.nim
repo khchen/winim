@@ -1,7 +1,7 @@
 #====================================================================
 #
-#               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2022 Ward
+#          Winim - Windows API, COM, and CLR Module for Nim
+#               Copyright (c) Chen Kai-Hung, Ward
 #
 #====================================================================
 
@@ -10,10 +10,23 @@ import osproc
 
 converter pointerConverter(x: ptr): ptr PVOID = cast[ptr PVOID](x)
 
-try:
-  CoInitialize(nil)
-  discard startProcess("notepad.exe")
+var className, propertyId: string
 
+CoInitialize(nil)
+
+try:
+  # using write.exe instead of notepad.exe in Windows 11
+  discard startProcess("write.exe")
+  (className, propertyId) = ("WordPadClass", "59648")
+
+except OSError:
+  discard startProcess("notepad.exe")
+  (className, propertyId) = ("Notepad", "15")
+
+finally:
+  Sleep(1000)
+
+try:
   var
     uia: ptr IUIAutomation
     desktop: ptr IUIAutomationElement
@@ -28,13 +41,13 @@ try:
   uia.GetRootElement(&desktop)
   if desktop.isNil: raise
 
-  uia.CreatePropertyCondition(UIA_ClassNamePropertyId, toVariant("Notepad"), &cond)
+  uia.CreatePropertyCondition(UIA_ClassNamePropertyId, toVariant(className), &cond)
   if cond.isNil: raise
 
   desktop.FindFirst(TreeScope_Descendants, cond, &notepad)
   if notepad.isNil: raise
 
-  uia.CreatePropertyCondition(UIA_AutomationIdPropertyId, toVariant("15"), &cond)
+  uia.CreatePropertyCondition(UIA_AutomationIdPropertyId, toVariant(propertyId), &cond)
   if cond.isNil: raise
 
   notepad.FindFirst(TreeScope_Descendants, cond, &edit)

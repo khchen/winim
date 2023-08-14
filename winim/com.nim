@@ -1,9 +1,9 @@
 #====================================================================
 #
-#               Winim - Nim's Windows API Module
-#                 (c) Copyright 2016-2022 Ward
+#          Winim - Windows API, COM, and CLR Module for Nim
+#               Copyright (c) Chen Kai-Hung, Ward
 #
-#           Windows COM Object And COM Event Supports
+#            Windows COM Object And COM Event Supports
 #
 #====================================================================
 
@@ -147,13 +147,22 @@ proc desc*(e: ref COMError): string =
 
   result = $buffer
 
-proc `=destroy`(x: var type(com()[])) {.raises: [Exception].} =
-  if not x.disp.isNil:
-    x.disp.Release()
-    x.disp = nil
+when (NimMajor, NimMinor) >= (2, 0):
+  proc `=destroy`(x: type(com()[])) {.raises: [Exception].} =
+    if not x.disp.isNil:
+      x.disp.Release()
 
-proc `=destroy`(x: var type(variant()[])) =
-  VariantClear(&x.raw)
+  proc `=destroy`(x: type(variant()[])) =
+    VariantClear(&x.raw)
+
+else:
+  proc `=destroy`(x: var type(com()[])) {.raises: [Exception].} =
+    if not x.disp.isNil:
+      x.disp.Release()
+      x.disp = nil
+
+  proc `=destroy`(x: var type(variant()[])) =
+    VariantClear(&x.raw)
 
 when not defined(gcDestructors):
   proc del*(x: com) =
