@@ -77,7 +77,7 @@ type
     intf*: CLRVariant
 
 # forward declarations
-proc toObject*[T](x: T): CLRVariant
+proc toObject*[T](x: T): CLRVariant {.gcsafe.}
 
 let Null = CLRVariant wrap(VARIANT())
 var
