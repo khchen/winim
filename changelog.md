@@ -1,3 +1,7 @@
+Version 3.9.3
+-------------
+* Fix destructors compatibility.
+
 Version 3.9.2
 -------------
 * Update for Nim Compiler 2.0.

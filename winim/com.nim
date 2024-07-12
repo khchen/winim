@@ -147,7 +147,8 @@ proc desc*(e: ref COMError): string =
 
   result = $buffer
 
-when (NimMajor, NimMinor) >= (2, 0):
+const arcLike = defined(gcArc) or defined(gcAtomicArc) or defined(gcOrc)
+when defined(nimAllowNonVarDestructor) and arcLike:
   proc `=destroy`(x: type(com()[])) {.raises: [Exception].} =
     if not x.disp.isNil:
       x.disp.Release()
