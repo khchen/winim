@@ -109,7 +109,6 @@ proc print(msg: string) =
 
 var mscor = load("mscorlib")
 var BindingFlags = mscor.GetType("System.Reflection.BindingFlags")
-var Array = mscor.GetType("System.Array")
 
 var res = compile(code)
 if res.Errors.Count != 0:
