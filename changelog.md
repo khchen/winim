@@ -1,3 +1,8 @@
+Version 3.9.4
+-------------
+* Update for Nim Compiler 2.2.
+* Merge pull request #93 & #94, thanks to retsyo.
+
 Version 3.9.3
 -------------
 * Fix destructors compatibility.

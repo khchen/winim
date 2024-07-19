@@ -7,7 +7,7 @@
 
 # Package
 
-version       = "3.9.3"
+version       = "3.9.4"
 author        = "Ward"
 description   = "Winim - Windows API, COM, and CLR Module for Nim"
 license       = "MIT"

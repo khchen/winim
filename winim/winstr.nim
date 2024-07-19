@@ -692,7 +692,7 @@ proc `$`*(s: Stringable): string {.inline.} =
     when sizeof(s[][0]) == 1: `UTF8->string`(s[])
     elif sizeof(s[][0]) == 2: `UNICODE->string`(s[])
     else: {.fatal: "invalid type".}
-  elif s is ptr UncheckedArray:
+  elif s is ptr UncheckedArray[auto]:
     when sizeof(s[0]) == 1: `UTF8->string`(s.getptr, lstrlenA(s.getptr))
     elif sizeof(s[0]) == 2: `UNICODE->string`(s.getptr, lstrlenW(s.getptr))
     else: {.fatal: "invalid type".}
@@ -717,7 +717,7 @@ proc `%$`*(s: Stringable): string {.inline.} =
     when sizeof(s[][0]) == 1: `UTF8->string`(s[])
     elif sizeof(s[][0]) == 2: `UNICODE->string`(s[])
     else: {.fatal: "invalid type".}
-  elif s is ptr UncheckedArray:
+  elif s is ptr UncheckedArray[auto]:
     when sizeof(s[0]) == 1: `UTF8->string`(s.getptr, lstrlenA(s.getptr))
     elif sizeof(s[0]) == 2: `UNICODE->string`(s.getptr, lstrlenW(s.getptr))
     else: {.fatal: "invalid type".}
@@ -742,7 +742,7 @@ proc `+$`*(s: Stringable): wstring {.inline.} =
     when sizeof(s[][0]) == 1: `UTF8->wstring`(s[])
     elif sizeof(s[][0]) == 2: `UNICODE->wstring`(s[])
     else: {.fatal: "invalid type".}
-  elif s is ptr UncheckedArray:
+  elif s is ptr UncheckedArray[auto]:
     when sizeof(s[0]) == 1: `UTF8->wstring`(s.getptr, lstrlenA(s.getptr))
     elif sizeof(s[0]) == 2: `UNICODE->wstring`(s.getptr, lstrlenW(s.getptr))
     else: {.fatal: "invalid type".}
@@ -767,7 +767,7 @@ proc `-$`*(s: Stringable): mstring {.inline.} =
     when sizeof(s[][0]) == 1: `UTF8->mstring`(s[])
     elif sizeof(s[][0]) == 2: `UNICODE->mstring`(s[])
     else: {.fatal: "invalid type".}
-  elif s is ptr UncheckedArray:
+  elif s is ptr UncheckedArray[auto]:
     when sizeof(s[0]) == 1: `UTF8->mstring`(s.getptr, lstrlenA(s.getptr))
     elif sizeof(s[0]) == 2: `UNICODE->mstring`(s.getptr, lstrlenW(s.getptr))
     else: {.fatal: "invalid type".}
@@ -786,7 +786,7 @@ proc `$$`*(s: Stringable): string {.inline.} =
   elif s is ptr array:
     when sizeof(s[][0]) == 1: `ANSI->string`(s[])
     else: `$`(s)
-  elif s is ptr UncheckedArray:
+  elif s is ptr UncheckedArray[auto]:
     when sizeof(s[0]) == 1: `ANSI->string`(s.getptr, lstrlenA(s.getptr))
     else: `$`(s)
   else: `$`(s)
@@ -802,7 +802,7 @@ proc `+$$`*(s: Stringable): wstring {.inline.} =
   elif s is ptr array:
     when sizeof(s[][0]) == 1: `ANSI->wstring`(s[])
     else: `+$`(s)
-  elif s is ptr UncheckedArray:
+  elif s is ptr UncheckedArray[auto]:
     when sizeof(s[0]) == 1: `ANSI->wstring`(s.getptr, lstrlenA(s.getptr))
     else: `+$`(s)
   else: `+$`(s)
@@ -818,7 +818,7 @@ proc `-$$`*(s: Stringable): mstring {.inline.} =
   elif s is ptr array:
     when sizeof(s[][0]) == 1: `ANSI->mstring`(s[])
     else: `-$`(s)
-  elif s is ptr UncheckedArray:
+  elif s is ptr UncheckedArray[auto]:
     when sizeof(s[0]) == 1: `ANSI->mstring`(s.getptr, lstrlenA(s.getptr))
     else: `-$`(s)
   else: `-$`(s)
@@ -869,7 +869,7 @@ template `<<`*[A: SomeBuffer|SomeString, B: SomeBuffer|SomeString](a: A, b: B) =
       var v = cast[ptr UncheckedArray[WCHAR]](a)
       fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=false)
 
-    elif A is ptr UncheckedArray:
+    elif A is ptr UncheckedArray[auto]:
       var v = a
       fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=false)
 
@@ -892,7 +892,7 @@ template `<<`*[A: SomeBuffer|SomeString, B: SomeBuffer|SomeString](a: A, b: B) =
     elif B is ptr WCHAR:
       fillString(a, cast[ptr UncheckedArray[WCHAR]](b).toOpenArray(0, int.high - 1))
 
-    elif B is ptr UncheckedArray:
+    elif B is ptr UncheckedArray[auto]:
       fillString(a, b.toOpenArray(0, int.high - 1))
 
     elif B is openArray | seq:
@@ -929,7 +929,7 @@ template `<<<`*[A: SomeBuffer|SomeString](a: A, b: SomeString) =
       var v = cast[ptr UncheckedArray[WCHAR]](a)
       fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=true)
 
-    elif A is ptr UncheckedArray:
+    elif A is ptr UncheckedArray[auto]:
       var v = a
       fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=true)
 
