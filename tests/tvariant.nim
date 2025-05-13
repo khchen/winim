@@ -127,8 +127,8 @@ suite "Test Suites for Varient in winim/com":
 
   test "VariantConversionError":
     st.wMonth = 9999
-    ft.dwLowDateTime = 0xffffffff'i32
-    ft.dwHighDateTime = 0xffffffff'i32
+    ft.dwLowDateTime = 0xffffffff'u32
+    ft.dwHighDateTime = 0xffffffff'u32
     V.vt = VT_RESERVED.VARTYPE
 
     expect VariantConversionError: discard toVariant(st)
