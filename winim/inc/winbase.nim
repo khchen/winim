@@ -1007,10 +1007,10 @@ const
   PIPE_ACCEPT_REMOTE_CLIENTS* = 0x0
   PIPE_REJECT_REMOTE_CLIENTS* = 0x8
   PIPE_UNLIMITED_INSTANCES* = 255
-  SECURITY_ANONYMOUS* = securityAnonymous shl 16
-  SECURITY_IDENTIFICATION* = securityIdentification shl 16
-  SECURITY_IMPERSONATION* = securityImpersonation shl 16
-  SECURITY_DELEGATION* = securityDelegation shl 16
+  SECURITY_ANONYMOUS* = ord(securityAnonymous) shl 16
+  SECURITY_IDENTIFICATION* = ord(securityIdentification) shl 16
+  SECURITY_IMPERSONATION* = ord(securityImpersonation) shl 16
+  SECURITY_DELEGATION* = ord(securityDelegation) shl 16
   SECURITY_CONTEXT_TRACKING* = 0x40000
   SECURITY_EFFECTIVE_ONLY* = 0x80000
   SECURITY_SQOS_PRESENT* = 0x100000

@@ -16,70 +16,80 @@ skipDirs      = @["examples", "tests", "docs", "tcclib"]
 # Dependencies
 
 requires "nim >= 1.0.0"
+from sugar import `=>`
+from sequtils import map, concat
 
-# Tests
 
-task test, "Runs the test suite":
-  exec "nim c -r tests/variant_test"
-  exec "nim c -r tests/winstr_test"
-  exec "nim c -r tests/com_test"
-  exec "nim c -r tests/clr_test"
+proc compile(file: string) =
+  echo "compile: " & file
+  exec "nim " & commandLineParams.join(" ") & " c " & file
 
 # Examples
 
+const exampleFiles = @[
+  "fileopendialog",
+  "getopenfilename",
+  "hellomsg",
+  "hellowin",
+  "linedemo",
+  "scrnsize",
+  "shortcut",
+  "uiautomation",
+].map(f => "examples/" & f)
+
 task example, "Build all the examples":
-  exec "nim c examples/fileopendialog"
-  exec "nim c examples/getopenfilename"
-  exec "nim c examples/hellomsg"
-  exec "nim c examples/hellowin"
-  exec "nim c examples/linedemo"
-  exec "nim c examples/scrnsize"
-  exec "nim c examples/shortcut"
-  exec "nim c examples/uiautomation"
+  for file in exampleFiles:
+    compile file
 
 # COM Examples
 
+const comexampleFiles = @[
+  "binary",
+  "constants",
+  "diskinfo",
+  "Excel_Application1",
+  "Excel_Application2",
+  "InternetExplorer_Application",
+  "MSXML_DOMDocument",
+  "SAPI_SpVoice",
+  "Scriptlet_TypeLib",
+  "Shell_Application",
+  "VBScript_RegExp",
+  "WinHttp_WinHttpRequest",
+  "winmgmts",
+  "WScript",
+  "nimDispatch/client",
+  "nimDispatch/server",
+  "threads/thread1",
+  "threads/thread2",
+  "threads/thread3",
+  "threads/thread4",
+].map(f => "examples/com/" & f)
+
 task comexample, "Build all the COM examples":
-  exec "nim c examples/com/binary"
-  exec "nim c examples/com/constants"
-  exec "nim c examples/com/diskinfo"
-  exec "nim c examples/com/Excel_Application1"
-  exec "nim c examples/com/Excel_Application2"
-  exec "nim c examples/com/InternetExplorer_Application"
-  exec "nim c examples/com/MSXML_DOMDocument"
-  exec "nim c examples/com/SAPI_SpVoice"
-  exec "nim c examples/com/Scriptlet_TypeLib"
-  exec "nim c examples/com/Shell_Application"
-  exec "nim c examples/com/VBScript_RegExp"
-  exec "nim c examples/com/WinHttp_WinHttpRequest"
-  exec "nim c examples/com/winmgmts"
-  exec "nim c examples/com/WScript"
-  exec "nim c examples/com/nimDispatch/client"
-  exec "nim c examples/com/nimDispatch/server"
-  exec "nim c examples/com/threads/thread1"
-  exec "nim c examples/com/threads/thread2"
-  exec "nim c examples/com/threads/thread3"
-  exec "nim c examples/com/threads/thread4"
+  for file in comexampleFiles:
+    compile file
 
 # CLR Examples
 
+const clrexampleFiles = @[
+  "code_compiler",
+  "misc_examples",
+  "simple_gui",
+  "splitter",
+  "usage_demo1",
+  "usage_demo2",
+  "wpf",
+].map(f => "examples/clr/" & f)
+
 task clrexample, "Build all the CLR examples":
-  exec "nim c examples/clr/code_compiler.nim"
-  exec "nim c examples/clr/misc_examples.nim"
-  exec "nim c examples/clr/simple_gui.nim"
-  exec "nim c examples/clr/splitter.nim"
-  exec "nim c examples/clr/usage_demo1.nim"
-  exec "nim c examples/clr/usage_demo2.nim"
-  exec "nim c examples/clr/wpf.nim"
+  for file in clrexampleFiles:
+    compile file
 
 # Sweep
 
 task sweep, "Delete all the executable files":
-  exec "cmd /c IF EXIST tests\\*.exe del tests\\*.exe"
-  exec "cmd /c IF EXIST examples\\*.exe del examples\\*.exe"
-  exec "cmd /c IF EXIST examples\\com\\*.exe del examples\\com\\*.exe"
-  exec "cmd /c IF EXIST examples\\com\\nimDispatch\\*.exe del examples\\com\\nimDispatch\\*.exe"
-  exec "cmd /c IF EXIST examples\\com\\threads\\*.exe del examples\\com\\threads\\*.exe"
-  exec "cmd /c IF EXIST examples\\clr\\*.exe del examples\\clr\\*.exe"
-  exec "cmd /c IF EXIST examples\\clr\\*.dll del examples\\clr\\*.dll"
-  exec "cmd /c IF EXIST winim\\*.exe del winim\\*.exe"
+  for file in concat(exampleFiles, comexampleFiles, clrexampleFiles):
+    rmFile toExe file
+  for file in ["tclr", "tcom", "tvariant", "twinstr"].map(f => "tests/" & f):
+    rmFile toExe file

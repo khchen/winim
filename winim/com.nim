@@ -372,10 +372,10 @@ proc toVariant*(x: SomeInteger|enum): variant =
       result.raw.uiVal = x.uint16
     elif sizeof(x) == 4:
       result.raw.vt = VT_UI4
-      result.raw.ulVal = x.int32 # ULONG is declared as int32 for compatibility
+      result.raw.ulVal = x.uint32
     else:
       result.raw.vt = VT_UI8
-      result.raw.ullVal = x.int64 # ULONG64 is declared as int64 for compatibility
+      result.raw.ullVal = x.uint64
 
 proc toVariant*(x: SomeFloat): variant =
   result.init()
@@ -859,7 +859,7 @@ proc getEnumeration(self: com, name: string): variant =
   for i in 0..<tlib.GetTypeInfoCount():
     if tlib.GetTypeInfoType(UINT i, &kind).ERR: continue
     if kind != TKIND_ENUM: continue
-    if tlib.GetDocumentation(UINT i, &bname, nil, nil, nil).ERR: continue
+    if tlib.GetDocumentation(INT i, &bname, nil, nil, nil).ERR: continue
     defer: SysFreeString(bname)
 
     if name.cmpIgnoreCase($bname) == 0:
@@ -971,7 +971,7 @@ proc invoke(self: com, name: string, invokeType: WORD, vargs: varargs[variant, t
       var found = false
       for i in 1..<count:
         if tup[0].cmpIgnoreCase($names[i]) == 0:
-          args[args.high - (i - 1)] = tup[1].raw # reverse order
+          args[args.high - int(i - 1)] = tup[1].raw # reverse order
           found = true
           break
 
@@ -1001,7 +1001,7 @@ proc invoke(self: com, name: string, invokeType: WORD, vargs: varargs[variant, t
       else: break
 
     dp.rgvarg = &args[skipArgs]
-    dp.cArgs = DWORD(args.len - skipArgs)
+    dp.cArgs = UINT(args.len - skipArgs)
 
     if isSet:
       dp.rgdispidNamedArgs = &dispidNamed

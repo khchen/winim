@@ -15,158 +15,1509 @@ import winimbase
 #include <guiddef.h>
 #include <ktmtypes.h>
 #include <winternl.h>
+template `===` (a: typedesc, b: typedesc): bool =
+  sizeof(a) == sizeof(b) and
+  high(a) == high(b) and
+  low(a) == low(b)
+
+doAssert cchar === char
+doAssert cschar === int8
+doAssert cshort === int16
+doAssert cushort === uint16
+doAssert cint === int32
+doAssert cuint === uint32
+doAssert clong === int32
+doAssert culong === uint32
 type
-  INT8* = int8
-  PINT8* = ptr int8
-  INT32* = int32
-  PINT32* = ptr int32
+  INT8* = cschar
+  PINT8* = ptr INT8
+  INT32* = cint
+  PINT32* = ptr INT32
   INT64* = int64
-  PINT64* = ptr int64
+  PINT64* = ptr INT64
   UINT8* = uint8
-  PUINT8* = ptr uint8
+  PUINT8* = ptr UINT8
   UINT16* = uint16
-  PUINT16* = ptr uint16
-  UINT32* = int32
-  PUINT32* = ptr int32
-  UINT64* = int64
-  PUINT64* = ptr int64
-  LONG32* = int32
-  PLONG32* = ptr int32
-  ULONG32* = int32
-  PULONG32* = ptr int32
-  DWORD32* = int32
-  PDWORD32* = ptr int32
+  PUINT16* = ptr UINT16
+  UINT32* = uint32
+  PUINT32* = ptr UINT32
+  UINT64* = uint64
+  PUINT64* = ptr UINT64
+  LONG32* = cint
+  PLONG32* = ptr LONG32
+  ULONG32* = culong
+  PULONG32* = ptr ULONG32
+  DWORD32* = cuint
+  PDWORD32* = ptr DWORD32
   LONG64* = int64
-  PLONG64* = ptr int64
-  ULONG64* = int64
-  PULONG64* = ptr int64
-  DWORD64* = int64
-  PDWORD64* = ptr int64
+  PLONG64* = ptr LONG64
+  ULONG64* = uint64
+  PULONG64* = ptr ULONG64
+  DWORD64* = uint64
+  PDWORD64* = ptr DWORD64
   PVOID* = pointer
-  CHAR* = char
-  LONG* = int32
-  INT* = int32
+  CHAR* = cchar
+  LONG* = clong
+  INT* = cint
   UCHAR* = uint8
-  PUCHAR* = ptr uint8
-  USHORT* = uint16
-  PUSHORT* = ptr uint16
-  ULONG* = int32
-  PULONG* = ptr int32
+  PUCHAR* = ptr UCHAR
+  USHORT* = cushort
+  PUSHORT* = ptr USHORT
+  ULONG* = culong
+  PULONG* = ptr ULONG
   SCHAR* = int8
-  WINBOOL* = int32
-  BOOL* = int32
+  WINBOOL* = cint
+  BOOL* = cint
   LONGLONG* = int64
-  PLONGLONG* = ptr int64
-  ULONGLONG* = int64
-  PULONGLONG* = ptr int64
+  PLONGLONG* = ptr LONGLONG
+  ULONGLONG* = uint64
+  PULONGLONG* = ptr ULONGLONG
   PCSZ* = ptr char
-  WCHAR* = uint16
-  CCHAR* = char
-  PCCHAR* = ptr char
-  NT_PRODUCT_TYPE* = int32
-  PNT_PRODUCT_TYPE* = ptr int32
-  EVENT_TYPE* = int32
-  TIMER_TYPE* = int32
-  WAIT_TYPE* = int32
+  WCHAR* = cushort
+  CCHAR* = cchar
+  PCCHAR* = ptr CCHAR
+  NT_PRODUCT_TYPE* {.size: sizeof(int32).} = enum
+    ntProductWinNt = 1,
+    ntProductLanManNt,
+    ntProductServer
+  PNT_PRODUCT_TYPE* = ptr NT_PRODUCT_TYPE
+  EVENT_TYPE* {.size: sizeof(int32).} = enum
+    notificationEvent,
+    synchronizationEvent
+  TIMER_TYPE* {.size: sizeof(int32).} = enum
+    notificationTimer,
+    synchronizationTimer
+  WAIT_TYPE* {.size: sizeof(int32).} = enum
+    waitAll,
+    waitAny,
+    waitNotification,
+    waitDequeue,
+    waitDpc
   BYTE* = uint8
-  WORD* = uint16
-  DWORD* = int32
-  PINT* = ptr int32
-  LPINT* = ptr int32
-  LPLONG* = ptr int32
+  WORD* = cushort
+  DWORD* = culong
+  PINT* = ptr INT
+  LPINT* = ptr INT
+  LPLONG* = ptr LONG
   LPVOID* = pointer
   LPCVOID* = pointer
-  UINT* = int32
-  PUINT* = ptr int32
-  UCSCHAR* = int32
-  COMPARTMENT_ID* = int32
-  PCOMPARTMENT_ID* = ptr int32
-  SID_NAME_USE* = int32
-  PSID_NAME_USE* = ptr int32
-  WELL_KNOWN_SID_TYPE* = int32
-  ACL_INFORMATION_CLASS* = int32
-  AUDIT_EVENT_TYPE* = int32
-  PAUDIT_EVENT_TYPE* = ptr int32
-  ACCESS_REASON_TYPE* = int32
-  SECURITY_IMPERSONATION_LEVEL* = int32
-  PSECURITY_IMPERSONATION_LEVEL* = ptr int32
-  TOKEN_TYPE* = int32
-  TOKEN_ELEVATION_TYPE* = int32
-  PTOKEN_ELEVATION_TYPE* = ptr int32
-  TOKEN_INFORMATION_CLASS* = int32
-  PTOKEN_INFORMATION_CLASS* = ptr int32
-  MANDATORY_LEVEL* = int32
-  PMANDATORY_LEVEL* = ptr int32
-  SE_LEARNING_MODE_DATA_TYPE* = int32
-  HARDWARE_COUNTER_TYPE* = int32
-  PHARDWARE_COUNTER_TYPE* = ptr int32
-  PROCESS_MITIGATION_POLICY* = int32
-  PPROCESS_MITIGATION_POLICY* = ptr int32
-  JOBOBJECT_RATE_CONTROL_TOLERANCE* = int32
-  JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL* = int32
-  JOBOBJECTINFOCLASS* = int32
-  FIRMWARE_TYPE* = int32
-  PFIRMWARE_TYPE* = ptr int32
-  LOGICAL_PROCESSOR_RELATIONSHIP* = int32
-  PROCESSOR_CACHE_TYPE* = int32
-  SYSTEM_POWER_STATE* = int32
-  PSYSTEM_POWER_STATE* = ptr int32
-  POWER_ACTION* = int32
-  PPOWER_ACTION* = ptr int32
-  DEVICE_POWER_STATE* = int32
-  PDEVICE_POWER_STATE* = ptr int32
-  MONITOR_DISPLAY_STATE* = int32
-  PMONITOR_DISPLAY_STATE* = ptr int32
-  USER_ACTIVITY_PRESENCE* = int32
-  PUSER_ACTIVITY_PRESENCE* = ptr int32
-  LATENCY_TIME* = int32
-  POWER_REQUEST_TYPE* = int32
-  PPOWER_REQUEST_TYPE* = ptr int32
-  POWER_INFORMATION_LEVEL* = int32
-  POWER_USER_PRESENCE_TYPE* = int32
-  PPOWER_USER_PRESENCE_TYPE* = ptr int32
-  POWER_MONITOR_REQUEST_REASON* = int32
-  SYSTEM_POWER_CONDITION* = int32
-  POWER_PLATFORM_ROLE* = int32
-  PPOWER_PLATFORM_ROLE* = ptr int32
+  UINT* = cuint
+  PUINT* = ptr UINT
+  UCSCHAR* = culong
+  COMPARTMENT_ID* {.size: sizeof(int32).} = enum
+    UNSPECIFIED_COMPARTMENT_ID,
+    DEFAULT_COMPARTMENT_ID
+  PCOMPARTMENT_ID* = ptr COMPARTMENT_ID
+  SID_NAME_USE* {.size: sizeof(int32).} = enum
+    sidTypeUser = 1,
+    sidTypeGroup,
+    sidTypeDomain,
+    sidTypeAlias,
+    sidTypeWellKnownGroup,
+    sidTypeDeletedAccount,
+    sidTypeInvalid,
+    sidTypeUnknown,
+    sidTypeComputer,
+    sidTypeLabel,
+    sidTypeLogonSession
+  PSID_NAME_USE* = ptr SID_NAME_USE
+  WELL_KNOWN_SID_TYPE* {.size: sizeof(int32).} = enum
+    winNullSid                                  = 0,
+    winWorldSid                                 = 1,
+    winLocalSid                                 = 2,
+    winCreatorOwnerSid                          = 3,
+    winCreatorGroupSid                          = 4,
+    winCreatorOwnerServerSid                    = 5,
+    winCreatorGroupServerSid                    = 6,
+    winNtAuthoritySid                           = 7,
+    winDialupSid                                = 8,
+    winNetworkSid                               = 9,
+    winBatchSid                                 = 10,
+    winInteractiveSid                           = 11,
+    winServiceSid                               = 12,
+    winAnonymousSid                             = 13,
+    winProxySid                                 = 14,
+    winEnterpriseControllersSid                 = 15,
+    winSelfSid                                  = 16,
+    winAuthenticatedUserSid                     = 17,
+    winRestrictedCodeSid                        = 18,
+    winTerminalServerSid                        = 19,
+    winRemoteLogonIdSid                         = 20,
+    winLogonIdsSid                              = 21,
+    winLocalSystemSid                           = 22,
+    winLocalServiceSid                          = 23,
+    winNetworkServiceSid                        = 24,
+    winBuiltinDomainSid                         = 25,
+    winBuiltinAdministratorsSid                 = 26,
+    winBuiltinUsersSid                          = 27,
+    winBuiltinGuestsSid                         = 28,
+    winBuiltinPowerUsersSid                     = 29,
+    winBuiltinAccountOperatorsSid               = 30,
+    winBuiltinSystemOperatorsSid                = 31,
+    winBuiltinPrintOperatorsSid                 = 32,
+    winBuiltinBackupOperatorsSid                = 33,
+    winBuiltinReplicatorSid                     = 34,
+    winBuiltinPreWindows2000CompatibleAccessSid = 35,
+    winBuiltinRemoteDesktopUsersSid             = 36,
+    winBuiltinNetworkConfigurationOperatorsSid  = 37,
+    winAccountAdministratorSid                  = 38,
+    winAccountGuestSid                          = 39,
+    winAccountKrbtgtSid                         = 40,
+    winAccountDomainAdminsSid                   = 41,
+    winAccountDomainUsersSid                    = 42,
+    winAccountDomainGuestsSid                   = 43,
+    winAccountComputersSid                      = 44,
+    winAccountControllersSid                    = 45,
+    winAccountCertAdminsSid                     = 46,
+    winAccountSchemaAdminsSid                   = 47,
+    winAccountEnterpriseAdminsSid               = 48,
+    winAccountPolicyAdminsSid                   = 49,
+    winAccountRasAndIasServersSid               = 50,
+    winNTLMAuthenticationSid                    = 51,
+    winDigestAuthenticationSid                  = 52,
+    winSChannelAuthenticationSid                = 53,
+    winThisOrganizationSid                      = 54,
+    winOtherOrganizationSid                     = 55,
+    winBuiltinIncomingForestTrustBuildersSid    = 56,
+    winBuiltinPerfMonitoringUsersSid            = 57,
+    winBuiltinPerfLoggingUsersSid               = 58,
+    winBuiltinAuthorizationAccessSid            = 59,
+    winBuiltinTerminalServerLicenseServersSid   = 60,
+    winBuiltinDCOMUsersSid                      = 61,
+    winBuiltinIUsersSid                         = 62,
+    winIUserSid                                 = 63,
+    winBuiltinCryptoOperatorsSid                = 64,
+    winUntrustedLabelSid                        = 65,
+    winLowLabelSid                              = 66,
+    winMediumLabelSid                           = 67,
+    winHighLabelSid                             = 68,
+    winSystemLabelSid                           = 69,
+    winWriteRestrictedCodeSid                   = 70,
+    winCreatorOwnerRightsSid                    = 71,
+    winCacheablePrincipalsGroupSid              = 72,
+    winNonCacheablePrincipalsGroupSid           = 73,
+    winEnterpriseReadonlyControllersSid         = 74,
+    winAccountReadonlyControllersSid            = 75,
+    winBuiltinEventLogReadersGroup              = 76,
+    winNewEnterpriseReadonlyControllersSid      = 77,
+    winBuiltinCertSvcDComAccessGroup            = 78,
+    winMediumPlusLabelSid                       = 79,
+    winLocalLogonSid                            = 80,
+    winConsoleLogonSid                          = 81,
+    winThisOrganizationCertificateSid           = 82,
+    winApplicationPackageAuthoritySid           = 83,
+    winBuiltinAnyPackageSid                     = 84,
+    winCapabilityInternetClientSid              = 85,
+    winCapabilityInternetClientServerSid        = 86,
+    winCapabilityPrivateNetworkClientServerSid  = 87,
+    winCapabilityPicturesLibrarySid             = 88,
+    winCapabilityVideosLibrarySid               = 89,
+    winCapabilityMusicLibrarySid                = 90,
+    winCapabilityDocumentsLibrarySid            = 91,
+    winCapabilitySharedUserCertificatesSid      = 92,
+    winCapabilityEnterpriseAuthenticationSid    = 93,
+    winCapabilityRemovableStorageSid            = 94,
+    winBuiltinRDSRemoteAccessServersSid         = 95,
+    winBuiltinRDSEndpointServersSid             = 96,
+    winBuiltinRDSManagementServersSid           = 97,
+    winUserModeDriversSid                       = 98,
+    winBuiltinHyperVAdminsSid                   = 99,
+    winAccountCloneableControllersSid           = 100,
+    winBuiltinAccessControlAssistanceOperatorsSid = 101,
+    winBuiltinRemoteManagementUsersSid          = 102,
+    winAuthenticationAuthorityAssertedSid       = 103,
+    winAuthenticationServiceAssertedSid         = 104,
+    winLocalAccountSid                          = 105,
+    winLocalAccountAndAdministratorSid          = 106,
+    winAccountProtectedUsersSid                 = 107,
+    winCapabilityAppointmentsSid                = 108,
+    winCapabilityContactsSid                    = 109,
+    winAccountDefaultSystemManagedSid           = 110,
+    winBuiltinDefaultSystemManagedGroupSid      = 111,
+    winBuiltinStorageReplicaAdminsSid           = 112,
+    winAccountKeyAdminsSid                      = 113,
+    winAccountEnterpriseKeyAdminsSid            = 114,
+    winAuthenticationKeyTrustSid                = 115,
+    winAuthenticationKeyPropertyMFASid          = 116,
+    winAuthenticationKeyPropertyAttestationSid  = 117,
+    winAuthenticationFreshKeyAuthSid            = 118,
+    winBuiltinDeviceOwnersSid                   = 119,
+    winBuiltinUserModeHardwareOperatorsSid      = 120,
+    winBuiltinOpenSSHUsersSid                   = 121
+  ACL_INFORMATION_CLASS* {.size: sizeof(int32).} = enum
+    aclRevisionInformation = 1,
+    aclSizeInformation
+  AUDIT_EVENT_TYPE* {.size: sizeof(int32).} = enum
+    auditEventObjectAccess,
+    auditEventDirectoryServiceAccess
+  PAUDIT_EVENT_TYPE* = ptr AUDIT_EVENT_TYPE
+  ACCESS_REASON_TYPE* {.size: sizeof(int32).} = enum
+    accessReasonNone                    = 0x00000000,   # Indicate no reason for the bit. The bit may not be checked, or just no known reason.
+
+    # The lowest 2 bytes store the index of the ACE that grant/deny this bit.
+    # If the corresponding access mask is zero, then it is deny ACE; otherwise,
+    # it is allow ACE.
+    accessReasonAllowedAce                  = 0x00010000,   # Granted a permission.
+    accessReasonDeniedAce                   = 0x00020000,   # Denied a permission.
+
+    accessReasonAllowedParentAce            = 0x00030000,   # Granted a permission from parent ACE
+    accessReasonDeniedParentAce             = 0x00040000,   # Denied a permission from parent ACE
+
+    accessReasonNotGrantedByCape            = 0x00050000,   # A CAPE didn't grant the permission
+    accessReasonNotGrantedByParentCape      = 0x00060000,   # A CAPE from the parent's SD didn't grant the permission
+
+    accessReasonNotGrantedToAppContainer    = 0x00070000,   # This is an AppContainer and no ACE granted the permission.
+
+    accessReasonMissingPrivilege            = 0x00100000,
+    accessReasonFromPrivilege               = 0x00200000,
+
+
+    accessReasonIntegrityLevel              = 0x00300000,
+
+    accessReasonOwnership                   = 0x00400000,
+
+    accessReasonNullDacl                    = 0x00500000,
+    accessReasonEmptyDacl                   = 0x00600000,
+
+    accessReasonNoSD                        = 0x00700000,
+    accessReasonNoGrant                     = 0x00800000,   # this access bit is not granted by any ACE.
+
+    accessReasonTrustLabel                  = 0x00900000,   # The trust label ACE did not grant this access.
+
+    accessReasonFilterAce                   = 0x00a00000    # The filtering ACE did not grant this access
+  SECURITY_IMPERSONATION_LEVEL* {.size: sizeof(int32).} = enum
+    securityAnonymous,
+    securityIdentification,
+    securityImpersonation,
+    securityDelegation 
+  PSECURITY_IMPERSONATION_LEVEL* = ptr SECURITY_IMPERSONATION_LEVEL
+  TOKEN_TYPE* {.size: sizeof(int32).} = enum
+    tokenPrimary = 1,
+    tokenImpersonation 
+  TOKEN_ELEVATION_TYPE* {.size: sizeof(int32).} = enum
+    tokenElevationTypeDefault = 1,
+    tokenElevationTypeFull,
+    tokenElevationTypeLimited
+  PTOKEN_ELEVATION_TYPE* = ptr TOKEN_ELEVATION_TYPE
+  TOKEN_INFORMATION_CLASS* {.size: sizeof(int32).} = enum
+    tokenUser = 1,
+    tokenGroups,
+    tokenPrivileges,
+    tokenOwner,
+    tokenPrimaryGroup,
+    tokenDefaultDacl,
+    tokenSource,
+    tokenType,
+    tokenImpersonationLevel,
+    tokenStatistics,
+    tokenRestrictedSids,
+    tokenSessionId,
+    tokenGroupsAndPrivileges,
+    tokenSessionReference,
+    tokenSandBoxInert,
+    tokenAuditPolicy,
+    tokenOrigin,
+    tokenElevationType,
+    tokenLinkedToken,
+    tokenElevation,
+    tokenHasRestrictions,
+    tokenAccessInformation,
+    tokenVirtualizationAllowed,
+    tokenVirtualizationEnabled,
+    tokenIntegrityLevel,
+    tokenUIAccess,
+    tokenMandatoryPolicy,
+    tokenLogonSid,
+    tokenIsAppContainer,
+    tokenCapabilities,
+    tokenAppContainerSid,
+    tokenAppContainerNumber,
+    tokenUserClaimAttributes,
+    tokenDeviceClaimAttributes,
+    tokenRestrictedUserClaimAttributes,
+    tokenRestrictedDeviceClaimAttributes,
+    tokenDeviceGroups,
+    tokenRestrictedDeviceGroups,
+    tokenSecurityAttributes,
+    tokenIsRestricted,
+    tokenProcessTrustLevel,
+    tokenPrivateNameSpace,
+    tokenSingletonAttributes,
+    tokenBnoIsolation,
+    tokenChildProcessFlags,
+    tokenIsLessPrivilegedAppContainer,
+    tokenIsSandboxed,
+    tokenIsAppSilo,
+    tokenLoggingInformation,
+    maxTokenInfoClass  # MaxTokenInfoClass should always be the last enum
+  PTOKEN_INFORMATION_CLASS* = ptr TOKEN_INFORMATION_CLASS
+  MANDATORY_LEVEL* {.size: sizeof(int32).} = enum
+    mandatoryLevelUntrusted = 0,
+    mandatoryLevelLow,
+    mandatoryLevelMedium,
+    mandatoryLevelHigh,
+    mandatoryLevelSystem,
+    mandatoryLevelSecureProcess,
+    mandatoryLevelCount
+  PMANDATORY_LEVEL* = ptr MANDATORY_LEVEL
+  SE_LEARNING_MODE_DATA_TYPE* {.size: sizeof(int32).} = enum
+      seLearningModeInvalidType = 0,
+      seLearningModeSettings,
+      seLearningModeMax
+  HARDWARE_COUNTER_TYPE* {.size: sizeof(int32).} = enum
+    pMCCounter,
+    maxHardwareCounterType
+  PHARDWARE_COUNTER_TYPE* = ptr HARDWARE_COUNTER_TYPE
+  PROCESS_MITIGATION_POLICY* {.size: sizeof(int32).} = enum
+    processDEPPolicy,
+    processASLRPolicy,
+    processDynamicCodePolicy,
+    processStrictHandleCheckPolicy,
+    processSystemCallDisablePolicy,
+    processMitigationOptionsMask,
+    processExtensionPointDisablePolicy,
+    processControlFlowGuardPolicy,
+    processSignaturePolicy,
+    processFontDisablePolicy,
+    processImageLoadPolicy,
+    processSystemCallFilterPolicy,
+    processPayloadRestrictionPolicy,
+    processChildProcessPolicy,
+    processSideChannelIsolationPolicy,
+    processUserShadowStackPolicy,
+    processRedirectionTrustPolicy,
+    processUserPointerAuthPolicy,
+    processSEHOPPolicy,
+    maxProcessMitigationPolicy
+  PPROCESS_MITIGATION_POLICY* = ptr PROCESS_MITIGATION_POLICY
+  JOBOBJECT_RATE_CONTROL_TOLERANCE* {.size: sizeof(int32).} = enum
+    toleranceLow = 1,
+    toleranceMedium,
+    toleranceHigh
+  JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL* {.size: sizeof(int32).} = enum
+    toleranceIntervalShort = 1,
+    toleranceIntervalMedium,
+    toleranceIntervalLong
+  JOBOBJECTINFOCLASS* {.size: sizeof(int32).} = enum
+    jobObjectBasicAccountingInformation = 1,
+    jobObjectBasicLimitInformation,
+    jobObjectBasicProcessIdList,
+    jobObjectBasicUIRestrictions,
+    jobObjectSecurityLimitInformation {.deprecated.},
+    jobObjectEndOfJobTimeInformation,
+    jobObjectAssociateCompletionPortInformation,
+    jobObjectBasicAndIoAccountingInformation,
+    jobObjectExtendedLimitInformation,
+    jobObjectJobSetInformation,
+    jobObjectGroupInformation,
+    jobObjectNotificationLimitInformation,
+    jobObjectLimitViolationInformation,
+    jobObjectGroupInformationEx,
+    jobObjectCpuRateControlInformation,
+    jobObjectCompletionFilter,
+    jobObjectCompletionCounter,
+
+    jobObjectReserved1Information = 18,
+    jobObjectReserved2Information,
+    jobObjectReserved3Information,
+    jobObjectReserved4Information,
+    jobObjectReserved5Information,
+    jobObjectReserved6Information,
+    jobObjectReserved7Information,
+    jobObjectReserved8Information,
+    jobObjectReserved9Information,
+    jobObjectReserved10Information,
+    jobObjectReserved11Information,
+    jobObjectReserved12Information,
+    jobObjectReserved13Information,
+    jobObjectReserved14Information = 31,
+    jobObjectNetRateControlInformation,
+    jobObjectNotificationLimitInformation2,
+    jobObjectLimitViolationInformation2,
+    jobObjectCreateSilo,
+    jobObjectSiloBasicInformation,
+    jobObjectReserved15Information = 37,
+    jobObjectReserved16Information = 38,
+    jobObjectReserved17Information = 39,
+    jobObjectReserved18Information = 40,
+    jobObjectReserved19Information = 41,
+    jobObjectReserved20Information = 42,
+    jobObjectReserved21Information = 43,
+    jobObjectReserved22Information = 44,
+    jobObjectReserved23Information = 45,
+    jobObjectReserved24Information = 46,
+    jobObjectReserved25Information = 47,
+    jobObjectReserved26Information = 48,
+    jobObjectReserved27Information = 49,
+    jobObjectReserved28Information = 50,
+    jobObjectNetworkAccountingInformation,
+    maxJobObjectInfoClass
+  FIRMWARE_TYPE* {.size: sizeof(int32).} = enum
+    firmwareTypeUnknown,
+    firmwareTypeBios,
+    firmwareTypeUefi,
+    firmwareTypeMax
+  PFIRMWARE_TYPE* = ptr FIRMWARE_TYPE
+  LOGICAL_PROCESSOR_RELATIONSHIP* {.size: sizeof(int32).} = enum
+    relationProcessorCore,
+    relationNumaNode,
+    relationCache,
+    relationProcessorPackage,
+    relationGroup,
+    relationProcessorDie,
+    relationNumaNodeEx,
+    relationProcessorModule,
+    relationAll = 0xffff
+  PROCESSOR_CACHE_TYPE* {.size: sizeof(int32).} = enum
+    cacheUnified,
+    cacheInstruction,
+    cacheData,
+    cacheTrace,
+    cacheUnknown
+  SYSTEM_POWER_STATE* {.size: sizeof(int32).} = enum
+    powerSystemUnspecified = 0,
+    powerSystemWorking     = 1,
+    powerSystemSleeping1   = 2,
+    powerSystemSleeping2   = 3,
+    powerSystemSleeping3   = 4,
+    powerSystemHibernate   = 5,
+    powerSystemShutdown    = 6,
+    powerSystemMaximum     = 7
+  PSYSTEM_POWER_STATE* = ptr SYSTEM_POWER_STATE
+  POWER_ACTION* {.size: sizeof(int32).} = enum
+    powerActionNone = 0,
+    powerActionReserved,
+    powerActionSleep,
+    powerActionHibernate,
+    powerActionShutdown,
+    powerActionShutdownReset,
+    powerActionShutdownOff,
+    powerActionWarmEject,
+    powerActionDisplayOff
+  PPOWER_ACTION* = ptr POWER_ACTION
+  DEVICE_POWER_STATE* {.size: sizeof(int32).} = enum
+    powerDeviceUnspecified = 0,
+    powerDeviceD0,
+    powerDeviceD1,
+    powerDeviceD2,
+    powerDeviceD3,
+    powerDeviceMaximum
+  PDEVICE_POWER_STATE* = ptr DEVICE_POWER_STATE
+  MONITOR_DISPLAY_STATE* {.size: sizeof(int32).} = enum
+    powerMonitorOff = 0,
+    powerMonitorOn,
+    powerMonitorDim
+  PMONITOR_DISPLAY_STATE* = ptr MONITOR_DISPLAY_STATE
+  USER_ACTIVITY_PRESENCE* {.size: sizeof(int32).} = enum
+    powerUserPresent = 0,
+    powerUserNotPresent,
+    powerUserInactive,
+    powerUserMaximum,
+  PUSER_ACTIVITY_PRESENCE* = ptr USER_ACTIVITY_PRESENCE
+  LATENCY_TIME* {.size: sizeof(int32).} = enum
+    LT_DONT_CARE,
+    LT_LOWEST_LATENCY
+  POWER_REQUEST_TYPE* {.size: sizeof(int32).} = enum
+    powerRequestDisplayRequired,
+    powerRequestSystemRequired,
+    powerRequestAwayModeRequired,
+    powerRequestExecutionRequired
+  PPOWER_REQUEST_TYPE* = ptr POWER_REQUEST_TYPE
+  POWER_INFORMATION_LEVEL* {.size: sizeof(int32).} = enum
+    systemPowerPolicyAc,
+    systemPowerPolicyDc,
+    verifySystemPolicyAc,
+    verifySystemPolicyDc,
+    systemPowerCapabilities,
+    systemBatteryState,
+    systemPowerStateHandler,
+    processorStateHandler,
+    systemPowerPolicyCurrent,
+    administratorPowerPolicy,
+    systemReserveHiberFile,
+    processorInformation,
+    systemPowerInformation,
+    processorStateHandler2,
+    lastWakeTime,                                   # Compare with KeQueryInterruptTime()
+    lastSleepTime,                                  # Compare with KeQueryInterruptTime()
+    systemExecutionState,
+    systemPowerStateNotifyHandler,
+    processorPowerPolicyAc,
+    processorPowerPolicyDc,
+    verifyProcessorPowerPolicyAc,
+    verifyProcessorPowerPolicyDc,
+    processorPowerPolicyCurrent,
+    systemPowerStateLogging,
+    systemPowerLoggingEntry,
+    setPowerSettingValue,
+    notifyUserPowerSetting,
+    powerInformationLevelUnused0,
+    systemMonitorHiberBootPowerOff,
+    systemVideoState,
+    traceApplicationPowerMessage,
+    traceApplicationPowerMessageEnd,
+    processorPerfStates,
+    processorIdleStates,
+    processorCap,
+    systemWakeSource,
+    systemHiberFileInformation,
+    traceServicePowerMessage,
+    processorLoad,
+    powerShutdownNotification,
+    monitorCapabilities,
+    sessionPowerInit,
+    sessionDisplayState,
+    powerRequestCreate,
+    powerRequestAction,
+    getPowerRequestList,
+    processorInformationEx,
+    notifyUserModeLegacyPowerEvent,
+    groupPark,
+    processorIdleDomains,
+    wakeTimerList,
+    systemHiberFileSize,
+    processorIdleStatesHv,
+    processorPerfStatesHv,
+    processorPerfCapHv,
+    processorSetIdle,
+    logicalProcessorIdling,
+    userPresence {.deprecated.},
+    powerSettingNotificationName,
+    getPowerSettingValue,
+    idleResiliency,
+    sessionRITState,
+    sessionConnectNotification,
+    sessionPowerCleanup,
+    sessionLockState,
+    systemHiberbootState,
+    platformInformation,
+    pdcInvocation,
+    monitorInvocation,
+    firmwareTableInformationRegistered,
+    setShutdownSelectedTime,
+    suspendResumeInvocation {.deprecated.},                        
+    plmPowerRequestCreate,
+    screenOff,
+    csDeviceNotification,
+    platformRole,
+    lastResumePerformance,
+    displayBurst,
+    exitLatencySamplingPercentage,
+    registerSpmPowerSettings,
+    platformIdleStates,
+    processorIdleVeto {.deprecated.},                              
+    platformIdleVeto {.deprecated.},                               
+    systemBatteryStatePrecise,
+    thermalEvent,
+    powerRequestActionInternal,
+    batteryDeviceState,
+    powerInformationInternal,
+    thermalStandby,
+    systemHiberFileType,
+    physicalPowerButtonPress,
+    queryPotentialDripsConstraint,
+    energyTrackerCreate,
+    energyTrackerQuery,
+    updateBlackBoxRecorder,
+    sessionAllowExternalDmaDevices,
+    sendSuspendResumeNotification,
+    blackBoxRecorderDirectAccessBuffer,
+    applyLowPowerScenarioSettings,
+    powerInformationLevelMaximum
+  POWER_USER_PRESENCE_TYPE* {.size: sizeof(int32).} = enum
+    userNotPresent = 0,
+    userPresent = 1,
+    userUnknown = 0xff
+  PPOWER_USER_PRESENCE_TYPE* = ptr POWER_USER_PRESENCE_TYPE
+  POWER_MONITOR_REQUEST_REASON* {.size: sizeof(int32).} = enum
+    monitorRequestReasonUnknown,
+    monitorRequestReasonPowerButton,
+    monitorRequestReasonRemoteConnection,
+    monitorRequestReasonScMonitorpower,
+    monitorRequestReasonUserInput,
+    monitorRequestReasonAcDcDisplayBurst,
+    monitorRequestReasonUserDisplayBurst,
+    monitorRequestReasonPoSetSystemState,
+    monitorRequestReasonSetThreadExecutionState,
+    monitorRequestReasonFullWake,
+    monitorRequestReasonSessionUnlock,
+    monitorRequestReasonScreenOffRequest,
+    monitorRequestReasonIdleTimeout,
+    monitorRequestReasonPolicyChange,
+    monitorRequestReasonSleepButton,
+    monitorRequestReasonLid,
+    monitorRequestReasonBatteryCountChange,
+    monitorRequestReasonGracePeriod,
+    monitorRequestReasonPnP,
+    monitorRequestReasonDP,
+    monitorRequestReasonSxTransition,
+    monitorRequestReasonSystemIdle,
+    monitorRequestReasonNearProximity,
+    monitorRequestReasonThermalStandby,
+    monitorRequestReasonResumePdc,
+    monitorRequestReasonResumeS4,
+    monitorRequestReasonTerminal,
+    monitorRequestReasonPdcSignal,
+    monitorRequestReasonAcDcDisplayBurstSuppressed,
+    monitorRequestReasonSystemStateEntered, # When CS exit happens because system
+                                            # transition to S4/S5, please note this
+                                            # reason is different than ReasonSxTransition.
+    monitorRequestReasonWinrt,
+    monitorRequestReasonUserInputKeyboard,
+    monitorRequestReasonUserInputMouse,
+    monitorRequestReasonUserInputTouchpad,
+    monitorRequestReasonUserInputPen,
+    monitorRequestReasonUserInputAccelerometer,
+    monitorRequestReasonUserInputHid,
+    monitorRequestReasonUserInputPoUserPresent,
+    monitorRequestReasonUserInputSessionSwitch,
+    monitorRequestReasonUserInputInitialization,
+    monitorRequestReasonPdcSignalWindowsMobilePwrNotif,         # PDC_SIGNAL_PROVIDER_PWRNOTIF_SVC
+    monitorRequestReasonPdcSignalWindowsMobileShell,            # PDC_SIGNAL_PROVIDER_UM_CS_CONTROL
+    monitorRequestReasonPdcSignalHeyCortana,                    # PDC_SIGNAL_PROVIDER_HEY_CORTANA
+    monitorRequestReasonPdcSignalHolographicShell,              # PDC_SIGNAL_PROVIDER_HOLOSI_CRITICAL_BATTERY_WAKE
+    monitorRequestReasonPdcSignalFingerprint,                   # PDC_SIGNAL_PROVIDER_WINBIO
+    monitorRequestReasonDirectedDrips,
+    monitorRequestReasonDim,
+    monitorRequestReasonBuiltinPanel,
+    monitorRequestReasonDisplayRequiredUnDim,
+    monitorRequestReasonBatteryCountChangeSuppressed,
+    monitorRequestReasonResumeModernStandby,
+    monitorRequestReasonTerminalInit,
+    monitorRequestReasonPdcSignalSensorsHumanPresence,          # PDC_SIGNAL_PROVIDER_SENSORS_HUMAN_PRESENCE_MONITOR
+    monitorRequestReasonBatteryPreCritical,
+    monitorRequestReasonUserInputTouch,
+    monitorRequestReasonAusterityBatteryDrain,
+    monitorRequestReasonDozeRestrictedStandby,
+    monitorRequestReasonSmartRestrictedStandby,
+    monitorRequestReasonMax
+  SYSTEM_POWER_CONDITION* {.size: sizeof(int32).} = enum
+    poAc,
+    poDc,
+    poHot,
+    poConditionMaximum
+  POWER_PLATFORM_ROLE* {.size: sizeof(int32).} = enum
+    platformRoleUnspecified = 0,
+    platformRoleDesktop,
+    platformRoleMobile,
+    platformRoleWorkstation,
+    platformRoleEnterpriseServer,
+    platformRoleSOHOServer,
+    platformRoleAppliancePC,
+    platformRolePerformanceServer, # v1 last supported
+    platformRoleSlate,             # v2 last supported
+    platformRoleMaximum
+  PPOWER_PLATFORM_ROLE* = ptr POWER_PLATFORM_ROLE
   IMAGE_AUX_SYMBOL_TYPE* = int32
-  IMPORT_OBJECT_TYPE* = int32
-  IMPORT_OBJECT_NAME_TYPE* = int32
+  IMPORT_OBJECT_TYPE* {.size: sizeof(int32).} = enum
+    IMPORT_OBJECT_CODE = 0,
+    IMPORT_OBJECT_DATA = 1,
+    IMPORT_OBJECT_CONST = 2
+  IMPORT_OBJECT_NAME_TYPE* {.size: sizeof(int32).} = enum
+    IMPORT_OBJECT_ORDINAL = 0,          # Import by ordinal
+    IMPORT_OBJECT_NAME = 1,             # Import name == public symbol name.
+    IMPORT_OBJECT_NAME_NO_PREFIX = 2,   # Import name == public symbol name skipping leading ?, @, or optionally _.
+    IMPORT_OBJECT_NAME_UNDECORATE = 3,  # Import name == public symbol name skipping leading ?, @, or optionally _
+                                        #  and truncating at first @.
+    IMPORT_OBJECT_NAME_EXPORTAS = 4     # Import name == a name is explicitly provided after the DLL name.
   ReplacesCorHdrNumericDefines* = int32
-  RTL_UMS_THREAD_INFO_CLASS* = int32
-  PRTL_UMS_THREAD_INFO_CLASS* = ptr int32
-  RTL_UMS_SCHEDULER_REASON* = int32
-  PRTL_UMS_SCHEDULER_REASON* = ptr int32
-  HEAP_INFORMATION_CLASS* = int32
-  ACTIVATION_CONTEXT_INFO_CLASS* = int32
-  ACTCTX_REQUESTED_RUN_LEVEL* = int32
-  ACTCTX_COMPATIBILITY_ELEMENT_TYPE* = int32
-  SERVICE_NODE_TYPE* = int32
-  SERVICE_LOAD_TYPE* = int32
-  SERVICE_ERROR_TYPE* = int32
-  TAPE_DRIVE_PROBLEM_TYPE* = int32
-  TP_CALLBACK_PRIORITY* = int32
-  TRANSACTION_OUTCOME* = int32
-  TRANSACTION_STATE* = int32
-  TRANSACTION_INFORMATION_CLASS* = int32
-  TRANSACTIONMANAGER_INFORMATION_CLASS* = int32
-  RESOURCEMANAGER_INFORMATION_CLASS* = int32
-  ENLISTMENT_INFORMATION_CLASS* = int32
-  KTMOBJECT_TYPE* = int32
-  PKTMOBJECT_TYPE* = ptr int32
+  RTL_UMS_THREAD_INFO_CLASS* {.size: sizeof(int32).} = enum
+    umsThreadInvalidInfoClass = 0,
+    umsThreadUserContext,
+    umsThreadPriority,              # Reserved
+    umsThreadAffinity,              # Reserved
+    umsThreadTeb,
+    umsThreadIsSuspended,
+    umsThreadIsTerminated,
+    umsThreadMaxInfoClass
+  PRTL_UMS_THREAD_INFO_CLASS* = ptr RTL_UMS_THREAD_INFO_CLASS
+  RTL_UMS_SCHEDULER_REASON* {.size: sizeof(int32).} = enum
+    umsSchedulerStartup = 0,
+    umsSchedulerThreadBlocked,
+    umsSchedulerThreadYield
+  PRTL_UMS_SCHEDULER_REASON* = ptr RTL_UMS_SCHEDULER_REASON
+  HEAP_INFORMATION_CLASS* {.size: sizeof(int32).} = enum
+    heapCompatibilityInformation = 0,
+    heapEnableTerminationOnCorruption = 1,
+    heapOptimizeResources = 3,
+    heapTag = 7
+  ACTIVATION_CONTEXT_INFO_CLASS* {.size: sizeof(int32).} = enum
+    activationContextBasicInformation                       = 1,
+    activationContextDetailedInformation                    = 2,
+    assemblyDetailedInformationInActivationContext          = 3,
+    fileInformationInAssemblyOfAssemblyInActivationContext  = 4,
+    runlevelInformationInActivationContext                  = 5,
+    compatibilityInformationInActivationContext             = 6,
+    activationContextManifestResourceName                   = 7,
+    maxActivationContextInfoClass,
+  ACTCTX_REQUESTED_RUN_LEVEL* {.size: sizeof(int32).} = enum
+    ACTCTX_RUN_LEVEL_UNSPECIFIED = 0,
+    ACTCTX_RUN_LEVEL_AS_INVOKER,
+    ACTCTX_RUN_LEVEL_HIGHEST_AVAILABLE,
+    ACTCTX_RUN_LEVEL_REQUIRE_ADMIN,
+    ACTCTX_RUN_LEVEL_NUMBERS
+  ACTCTX_COMPATIBILITY_ELEMENT_TYPE* {.size: sizeof(int32).} = enum
+    ACTCTX_COMPATIBILITY_ELEMENT_TYPE_UNKNOWN = 0,
+    ACTCTX_COMPATIBILITY_ELEMENT_TYPE_OS,
+    ACTCTX_COMPATIBILITY_ELEMENT_TYPE_MITIGATION,
+    ACTCTX_COMPATIBILITY_ELEMENT_TYPE_MAXVERSIONTESTED
+const
+  SERVICE_KERNEL_DRIVER* = 0x00000001
+  SERVICE_FILE_SYSTEM_DRIVER* = 0x00000002
+  SERVICE_ADAPTER* = 0x00000004
+  SERVICE_RECOGNIZER_DRIVER* = 0x00000008
+  SERVICE_DRIVER* = SERVICE_KERNEL_DRIVER or SERVICE_FILE_SYSTEM_DRIVER or SERVICE_RECOGNIZER_DRIVER
+  SERVICE_WIN32_OWN_PROCESS* = 0x00000010
+  SERVICE_WIN32_SHARE_PROCESS* = 0x00000020
+  SERVICE_WIN32* = SERVICE_WIN32_OWN_PROCESS or SERVICE_WIN32_SHARE_PROCESS
+  SERVICE_INTERACTIVE_PROCESS* = 0x00000100
+  SERVICE_TYPE_ALL* = SERVICE_WIN32 or SERVICE_ADAPTER or SERVICE_DRIVER or SERVICE_INTERACTIVE_PROCESS
+  SERVICE_BOOT_START* = 0x00000000
+  SERVICE_SYSTEM_START* = 0x00000001
+  SERVICE_AUTO_START* = 0x00000002
+  SERVICE_DEMAND_START* = 0x00000003
+  SERVICE_DISABLED* = 0x00000004
+  SERVICE_ERROR_IGNORE* = 0x00000000
+  SERVICE_ERROR_NORMAL* = 0x00000001
+  SERVICE_ERROR_SEVERE* = 0x00000002
+  SERVICE_ERROR_CRITICAL* = 0x00000003
+type
+  SERVICE_NODE_TYPE* {.size: sizeof(int32).} = enum
+    driverType               = SERVICE_KERNEL_DRIVER,
+    fileSystemType           = SERVICE_FILE_SYSTEM_DRIVER,
+    win32ServiceOwnProcess   = SERVICE_WIN32_OWN_PROCESS,
+    win32ServiceShareProcess = SERVICE_WIN32_SHARE_PROCESS,
+    adapterType              = SERVICE_ADAPTER,
+    recognizerType           = SERVICE_RECOGNIZER_DRIVER
+  SERVICE_LOAD_TYPE* {.size: sizeof(int32).} = enum
+    bootLoad    = SERVICE_BOOT_START,
+    systemLoad  = SERVICE_SYSTEM_START,
+    autoLoad    = SERVICE_AUTO_START,
+    demandLoad  = SERVICE_DEMAND_START,
+    disableLoad = SERVICE_DISABLED
+  SERVICE_ERROR_TYPE* {.size: sizeof(int32).} = enum
+    ignoreError   = SERVICE_ERROR_IGNORE,
+    normalError   = SERVICE_ERROR_NORMAL,
+    severeError   = SERVICE_ERROR_SEVERE,
+    criticalError = SERVICE_ERROR_CRITICAL
+  TAPE_DRIVE_PROBLEM_TYPE* {.size: sizeof(int32).} = enum
+   tapeDriveProblemNone, tapeDriveReadWriteWarning,
+   tapeDriveReadWriteError, tapeDriveReadWarning,
+   tapeDriveWriteWarning, TapeDriveReadError,
+   tapeDriveWriteError, tapeDriveHardwareError,
+   tapeDriveUnsupportedMedia, tapeDriveScsiConnectionError,
+   tapeDriveTimetoClean, tapeDriveCleanDriveNow,
+   tapeDriveMediaLifeExpired, tapeDriveSnappedTape
+  TP_CALLBACK_PRIORITY* {.size: sizeof(int32).} = enum
+    TP_CALLBACK_PRIORITY_HIGH,
+    TP_CALLBACK_PRIORITY_NORMAL,
+    TP_CALLBACK_PRIORITY_LOW,
+    TP_CALLBACK_PRIORITY_INVALID
+  TRANSACTION_OUTCOME* {.size: sizeof(int32).} = enum
+    transactionOutcomeUndetermined = 1,
+    transactionOutcomeCommitted,
+    transactionOutcomeAborted,
+  TRANSACTION_STATE* {.size: sizeof(int32).} = enum
+    transactionStateNormal = 1,
+    transactionStateIndoubt,
+    transactionStateCommittedNotify,
+  TRANSACTION_INFORMATION_CLASS* {.size: sizeof(int32).} = enum
+    transactionBasicInformation,
+    transactionPropertiesInformation,
+    transactionEnlistmentInformation,
+    transactionSuperiorEnlistmentInformation,
+
+    transactionBindInformation {.deprecated.}, # private and deprecated
+    transactionDTCPrivateInformation {.deprecated.} # private and deprecated
+  TRANSACTIONMANAGER_INFORMATION_CLASS* {.size: sizeof(int32).} = enum
+    transactionManagerBasicInformation,
+    transactionManagerLogInformation,
+    transactionManagerLogPathInformation,
+    transactionManagerRecoveryInformation = 4
+
+    # The following info-classes are intended for internal use only; they
+    # are considered deprecated, and no one else should take a dependency
+    # on them.
+    transactionManagerOnlineProbeInformation {.deprecated.} = 3,
+    transactionManagerOldestTransactionInformation {.deprecated.} = 5
+  RESOURCEMANAGER_INFORMATION_CLASS* {.size: sizeof(int32).} = enum
+    resourceManagerBasicInformation,
+    resourceManagerCompletionInformation,
+  ENLISTMENT_INFORMATION_CLASS* {.size: sizeof(int32).} = enum
+    enlistmentBasicInformation,
+    enlistmentRecoveryInformation,
+    enlistmentCrmInformation
+  KTMOBJECT_TYPE* {.size: sizeof(int32).} = enum
+    KTMOBJECT_TRANSACTION,
+    KTMOBJECT_TRANSACTION_MANAGER,
+    KTMOBJECT_RESOURCE_MANAGER,
+    KTMOBJECT_ENLISTMENT,
+    KTMOBJECT_INVALID
+  PKTMOBJECT_TYPE* = ptr KTMOBJECT_TYPE
   HFILE* = int32
-  FILE_INFORMATION_CLASS* = int32
-  PFILE_INFORMATION_CLASS* = ptr int32
-  FS_INFORMATION_CLASS* = int32
-  PFS_INFORMATION_CLASS* = ptr int32
-  THREAD_STATE* = int32
-  KWAIT_REASON* = int32
-  PROCESSINFOCLASS* = int32
-  THREADINFOCLASS* = int32
-  SYSTEM_INFORMATION_CLASS* = int32
-  OBJECT_INFORMATION_CLASS* = int32
-  POBJECT_INFORMATION_CLASS* = ptr int32
-  WINSTATIONINFOCLASS* = int32
+  FILE_INFORMATION_CLASS* {.size: sizeof(int32).} = enum
+    fileDirectoryInformation                         = 1,
+    fileFullDirectoryInformation                     = 2,
+    fileBothDirectoryInformation                     = 3,
+    fileBasicInformation                             = 4,
+    fileStandardInformation                          = 5,
+    fileInternalInformation                          = 6,
+    fileEaInformation                                = 7,
+    fileAccessInformation                            = 8,
+    fileNameInformation                              = 9,
+    fileRenameInformation                            = 10,
+    fileLinkInformation                              = 11,
+    fileNamesInformation                             = 12,
+    fileDispositionInformation                       = 13,
+    filePositionInformation                          = 14,
+    fileFullEaInformation                            = 15,
+    fileModeInformation                              = 16,
+    fileAlignmentInformation                         = 17,
+    fileAllInformation                               = 18,
+    fileAllocationInformation                        = 19,
+    fileEndOfFileInformation                         = 20,
+    fileAlternateNameInformation                     = 21,
+    fileStreamInformation                            = 22,
+    filePipeInformation                              = 23,
+    filePipeLocalInformation                         = 24,
+    filePipeRemoteInformation                        = 25,
+    fileMailslotQueryInformation                     = 26,
+    fileMailslotSetInformation                       = 27,
+    fileCompressionInformation                       = 28,
+    fileObjectIdInformation                          = 29,
+    fileCompletionInformation                        = 30,
+    fileMoveClusterInformation                       = 31,
+    fileQuotaInformation                             = 32,
+    fileReparsePointInformation                      = 33,
+    fileNetworkOpenInformation                       = 34,
+    fileAttributeTagInformation                      = 35,
+    fileTrackingInformation                          = 36,
+    fileIdBothDirectoryInformation                   = 37,
+    fileIdFullDirectoryInformation                   = 38,
+    fileValidDataLengthInformation                   = 39,
+    fileShortNameInformation                         = 40,
+    fileIoCompletionNotificationInformation          = 41,
+    fileIoStatusBlockRangeInformation                = 42,
+    fileIoPriorityHintInformation                    = 43,
+    fileSfioReserveInformation                       = 44,
+    fileSfioVolumeInformation                        = 45,
+    fileHardLinkInformation                          = 46,
+    fileProcessIdsUsingFileInformation               = 47,
+    fileNormalizedNameInformation                    = 48,
+    fileNetworkPhysicalNameInformation               = 49,
+    fileIdGlobalTxDirectoryInformation               = 50,
+    fileIsRemoteDeviceInformation                    = 51,
+    fileUnusedInformation                            = 52,
+    fileNumaNodeInformation                          = 53,
+    fileStandardLinkInformation                      = 54,
+    fileRemoteProtocolInformation                    = 55,
+
+    #  These are special versions of these operations (defined earlier)
+    #  which can be used by kernel mode drivers only to bypass security
+    #  access checks for Rename and HardLink operations.  These operations
+    #  are only recognized by the IOManager, a file system should never
+    #  receive these.
+
+    fileRenameInformationBypassAccessCheck           = 56,
+    fileLinkInformationBypassAccessCheck             = 57,
+
+    # End of special information classes reserved for IOManager.
+
+    fileVolumeNameInformation                        = 58,
+    fileIdInformation                                = 59,
+    fileIdExtdDirectoryInformation                   = 60,
+    fileReplaceCompletionInformation                 = 61,
+    fileHardLinkFullIdInformation                    = 62,
+    fileIdExtdBothDirectoryInformation               = 63,
+    fileDispositionInformationEx                     = 64,
+    fileRenameInformationEx                          = 65,
+    fileRenameInformationExBypassAccessCheck         = 66,
+    fileDesiredStorageClassInformation               = 67,
+    fileStatInformation                              = 68,
+    fileMemoryPartitionInformation                   = 69,
+    fileStatLxInformation                            = 70,
+    fileCaseSensitiveInformation                     = 71,
+    fileLinkInformationEx                            = 72,
+    fileLinkInformationExBypassAccessCheck           = 73,
+    fileStorageReserveIdInformation                  = 74,
+    fileCaseSensitiveInformationForceAccessCheck     = 75,
+    fileKnownFolderInformation                       = 76,
+    fileStatBasicInformation                         = 77,
+    fileId64ExtdDirectoryInformation                 = 78,
+    fileId64ExtdBothDirectoryInformation             = 79,
+    fileIdAllExtdDirectoryInformation                = 80,
+    fileIdAllExtdBothDirectoryInformation            = 81,
+    fileStreamReservationInformation                 = 82,
+
+    #  It is an internal special request.
+    #  This operation should only be issued to the IOManager
+    #  through the Filter Manager. NtSetInformationFile/NtQueryInformationFile
+    #  and a file system should never receive this.
+
+    fileMupProviderInfo                              = 83,
+
+    # End of special information classes reserved for filterMgr.
+
+    fileMaximumInformation
+  PFILE_INFORMATION_CLASS* = ptr FILE_INFORMATION_CLASS
+  FS_INFORMATION_CLASS* {.size: sizeof(int32).} = enum
+    fileFsVolumeInformation          = 1,
+    fileFsLabelInformation           = 2,
+    fileFsSizeInformation            = 3,
+    fileFsDeviceInformation          = 4,
+    fileFsAttributeInformation       = 5,
+    fileFsControlInformation         = 6,
+    fileFsFullSizeInformation        = 7,
+    fileFsObjectIdInformation        = 8,
+    fileFsDriverPathInformation      = 9,
+    fileFsVolumeFlagsInformation     = 10,
+    fileFsSectorSizeInformation      = 11,
+    fileFsDataCopyInformation        = 12,
+    fileFsMetadataSizeInformation    = 13,
+    fileFsFullSizeInformationEx      = 14,
+    fileFsGuidInformation            = 15,
+    fileFsMaximumInformation
+  PFS_INFORMATION_CLASS* = ptr FS_INFORMATION_CLASS
+  THREAD_STATE* {.size: sizeof(int32).} = enum
+    initialized,
+    ready,
+    running,
+    standby,
+    terminated,
+    waiting,
+    transition,
+    deferredReady,
+    gateWaitObsolete,
+    waitingForProcessInSwap,
+    maximumThreadState
+  KWAIT_REASON* {.size: sizeof(int32).} = enum
+    executive,
+    freePage,
+    pageIn,
+    poolAllocation,
+    delayExecution,
+    suspended,
+    userRequest,
+    wrExecutive,
+    wrFreePage,
+    wrPageIn,
+    wrPoolAllocation,
+    wrDelayExecution,
+    wrSuspended,
+    wrUserRequest,
+    wrSpare0,
+    wrQueue,
+    wrLpcReceive,
+    wrLpcReply,
+    wrVirtualMemory,
+    wrPageOut,
+    wrRendezvous,
+    wrKeyedEvent,
+    wrTerminated,
+    wrProcessInSwap,
+    wrCpuRateControl,
+    wrCalloutStack,
+    wrKernel,
+    wrResource,
+    wrPushLock,
+    wrMutex,
+    wrQuantumEnd,
+    wrDispatchInt,
+    wrPreempted,
+    wrYieldExecution,
+    wrFastMutex,
+    wrGuardedMutex,
+    wrRundown,
+    wrAlertByThreadId,
+    wrDeferredPreempt,
+    wrPhysicalFault,
+    wrIoRing,
+    wrMdlCache,
+    wrRcu,
+    maximumWaitReason
+  PROCESSINFOCLASS* {.size: sizeof(int32).} = enum
+    processBasicInformation, # q: PROCESS_BASIC_INFORMATION, PROCESS_EXTENDED_BASIC_INFORMATION
+    processQuotaLimits, # qs: QUOTA_LIMITS, QUOTA_LIMITS_EX
+    processIoCounters, # q: IO_COUNTERS
+    processVmCounters, # q: VM_COUNTERS, VM_COUNTERS_EX, VM_COUNTERS_EX2
+    processTimes, # q: KERNEL_USER_TIMES
+    processBasePriority, # s: KPRIORITY
+    processRaisePriority, # s: ULONG
+    processDebugPort, # q: HANDLE
+    processExceptionPort, # s: PROCESS_EXCEPTION_PORT (requires SeTcbPrivilege)
+    processAccessToken, # s: PROCESS_ACCESS_TOKEN
+    processLdtInformation, # qs: PROCESS_LDT_INFORMATION // 10
+    processLdtSize, # s: PROCESS_LDT_SIZE
+    processDefaultHardErrorMode, # qs: ULONG
+    processIoPortHandlers, # (kernel-mode only) // s: PROCESS_IO_PORT_HANDLER_INFORMATION
+    processPooledUsageAndLimits, # q: POOLED_USAGE_AND_LIMITS
+    processWorkingSetWatch, # q: PROCESS_WS_WATCH_INFORMATION[]; s: void
+    processUserModeIOPL, # qs: ULONG (requires SeTcbPrivilege)
+    processEnableAlignmentFaultFixup, # s: BOOLEAN
+    processPriorityClass, # qs: PROCESS_PRIORITY_CLASS
+    processWx86Information, # qs: ULONG (requires SeTcbPrivilege) (VdmAllowed)
+    processHandleCount, # q: ULONG, PROCESS_HANDLE_INFORMATION // 20
+    processAffinityMask, # (q >WIN7)s: KAFFINITY, qs: GROUP_AFFINITY
+    processPriorityBoost, # qs: ULONG
+    processDeviceMap, # qs: PROCESS_DEVICEMAP_INFORMATION, PROCESS_DEVICEMAP_INFORMATION_EX
+    processSessionInformation, # q: PROCESS_SESSION_INFORMATION
+    processForegroundInformation, # s: PROCESS_FOREGROUND_BACKGROUND
+    processWow64Information, # q: ULONG_PTR
+    processImageFileName, # q: UNICODE_STRING
+    processLUIDDeviceMapsEnabled, # q: ULONG
+    processBreakOnTermination, # qs: ULONG
+    processDebugObjectHandle, # q: HANDLE // 30
+    processDebugFlags, # qs: ULONG
+    processHandleTracing, # q: PROCESS_HANDLE_TRACING_QUERY; s: PROCESS_HANDLE_TRACING_ENABLE[_EX] or void to disable
+    processIoPriority, # qs: IO_PRIORITY_HINT
+    processExecuteFlags, # qs: ULONG (MEM_EXECUTE_OPTION_*)
+    processTlsInformation, # PROCESS_TLS_INFORMATION // ProcessResourceManagement
+    processCookie, # q: ULONG
+    processImageInformation, # q: SECTION_IMAGE_INFORMATION
+    processCycleTime, # q: PROCESS_CYCLE_TIME_INFORMATION // since VISTA
+    processPagePriority, # qs: PAGE_PRIORITY_INFORMATION
+    processInstrumentationCallback, # s: PVOID or PROCESS_INSTRUMENTATION_CALLBACK_INFORMATION // 40
+    processThreadStackAllocation, # s: PROCESS_STACK_ALLOCATION_INFORMATION, PROCESS_STACK_ALLOCATION_INFORMATION_EX
+    processWorkingSetWatchEx, # q: PROCESS_WS_WATCH_INFORMATION_EX[]; s: void
+    processImageFileNameWin32, # q: UNICODE_STRING
+    processImageFileMapping, # q: HANDLE (input)
+    processAffinityUpdateMode, # qs: PROCESS_AFFINITY_UPDATE_MODE
+    processMemoryAllocationMode, # qs: PROCESS_MEMORY_ALLOCATION_MODE
+    processGroupInformation, # q: USHORT[]
+    processTokenVirtualizationEnabled, # s: ULONG
+    processConsoleHostProcess, # qs: ULONG_PTR // ProcessOwnerInformation
+    processWindowInformation, # q: PROCESS_WINDOW_INFORMATION // 50
+    processHandleInformation, # q: PROCESS_HANDLE_SNAPSHOT_INFORMATION // since WIN8
+    processMitigationPolicy, # s: PROCESS_MITIGATION_POLICY_INFORMATION
+    processDynamicFunctionTableInformation, # s: PROCESS_DYNAMIC_FUNCTION_TABLE_INFORMATION
+    processHandleCheckingMode, # qs: ULONG; s: 0 disables, otherwise enables
+    processKeepAliveCount, # q: PROCESS_KEEPALIVE_COUNT_INFORMATION
+    processRevokeFileHandles, # s: PROCESS_REVOKE_FILE_HANDLES_INFORMATION
+    processWorkingSetControl, # s: PROCESS_WORKING_SET_CONTROL (requires SeDebugPrivilege)
+    processHandleTable, # q: ULONG[] // since WINBLUE
+    processCheckStackExtentsMode, # qs: ULONG // KPROCESS->CheckStackExtents (CFG)
+    processCommandLineInformation, # q: UNICODE_STRING // 60
+    processProtectionInformation, # q: PS_PROTECTION
+    processMemoryExhaustion, # s: PROCESS_MEMORY_EXHAUSTION_INFO // since THRESHOLD
+    processFaultInformation, # s: PROCESS_FAULT_INFORMATION
+    processTelemetryIdInformation, # q: PROCESS_TELEMETRY_ID_INFORMATION
+    processCommitReleaseInformation, # qs: PROCESS_COMMIT_RELEASE_INFORMATION
+    processDefaultCpuSetsInformation, # qs: SYSTEM_CPU_SET_INFORMATION[5]
+    processAllowedCpuSetsInformation, # qs: SYSTEM_CPU_SET_INFORMATION[5]
+    processSubsystemProcess,
+    processJobMemoryInformation, # q: PROCESS_JOB_MEMORY_INFO
+    processInPrivate, # q: BOOLEAN; s: void // ETW // since THRESHOLD2 // 70
+    processRaiseUMExceptionOnInvalidHandleClose, # qs: ULONG; s: 0 disables, otherwise enables
+    processIumChallengeResponse,
+    processChildProcessInformation, # q: PROCESS_CHILD_PROCESS_INFORMATION
+    processHighGraphicsPriorityInformation, # qs: BOOLEAN (requires SeTcbPrivilege)
+    processSubsystemInformation, # q: SUBSYSTEM_INFORMATION_TYPE // since REDSTONE2
+    processEnergyValues, # q: PROCESS_ENERGY_VALUES, PROCESS_EXTENDED_ENERGY_VALUES
+    processPowerThrottlingState, # qs: POWER_THROTTLING_PROCESS_STATE
+    processReserved3Information, # ProcessActivityThrottlePolicy // PROCESS_ACTIVITY_THROTTLE_POLICY
+    processWin32kSyscallFilterInformation, # q: WIN32K_SYSCALL_FILTER
+    processDisableSystemAllowedCpuSets, # s: BOOLEAN // 80
+    processWakeInformation, # q: PROCESS_WAKE_INFORMATION
+    processEnergyTrackingState, # qs: PROCESS_ENERGY_TRACKING_STATE
+    processManageWritesToExecutableMemory, # MANAGE_WRITES_TO_EXECUTABLE_MEMORY // since REDSTONE3
+    processCaptureTrustletLiveDump,
+    processTelemetryCoverage, # q: TELEMETRY_COVERAGE_HEADER; s: TELEMETRY_COVERAGE_POINT
+    processEnclaveInformation,
+    processEnableReadWriteVmLogging, # qs: PROCESS_READWRITEVM_LOGGING_INFORMATION
+    processUptimeInformation, # q: PROCESS_UPTIME_INFORMATION
+    processImageSection, # q: HANDLE
+    processDebugAuthInformation, # since REDSTONE4 // 90
+    processSystemResourceManagement, # s: PROCESS_SYSTEM_RESOURCE_MANAGEMENT
+    processSequenceNumber, # q: ULONGLONG
+    processLoaderDetour, # since REDSTONE5
+    processSecurityDomainInformation, # q: PROCESS_SECURITY_DOMAIN_INFORMATION
+    processCombineSecurityDomainsInformation, # s: PROCESS_COMBINE_SECURITY_DOMAINS_INFORMATION
+    processEnableLogging, # qs: PROCESS_LOGGING_INFORMATION
+    processLeapSecondInformation, # qs: PROCESS_LEAP_SECOND_INFORMATION
+    processFiberShadowStackAllocation, # s: PROCESS_FIBER_SHADOW_STACK_ALLOCATION_INFORMATION // since 19H1
+    processFreeFiberShadowStackAllocation, # s: PROCESS_FREE_FIBER_SHADOW_STACK_ALLOCATION_INFORMATION
+    processAltSystemCallInformation, # s: PROCESS_SYSCALL_PROVIDER_INFORMATION // since 20H1 // 100
+    processDynamicEHContinuationTargets, # s: PROCESS_DYNAMIC_EH_CONTINUATION_TARGETS_INFORMATION
+    processDynamicEnforcedCetCompatibleRanges, # s: PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE_INFORMATION // since 20H2
+    processCreateStateChange, # since WIN11
+    processApplyStateChange,
+    processEnableOptionalXStateFeatures, # s: ULONG64 // optional XState feature bitmask
+    processAltPrefetchParam, # qs: OVERRIDE_PREFETCH_PARAMETER // App Launch Prefetch (ALPF) // since 22H1
+    processAssignCpuPartitions,
+    processPriorityClassEx, # s: PROCESS_PRIORITY_CLASS_EX
+    processMembershipInformation, # q: PROCESS_MEMBERSHIP_INFORMATION
+    processEffectiveIoPriority, # q: IO_PRIORITY_HINT // 110
+    processEffectivePagePriority, # q: ULONG
+    processSchedulerSharedData, # since 24H2
+    processSlistRollbackInformation,
+    processNetworkIoCounters, # q: PROCESS_NETWORK_COUNTERS
+    processFindFirstThreadByTebValue, # PROCESS_TEB_VALUE_INFORMATION
+    maxProcessInfoClass
+  THREADINFOCLASS* {.size: sizeof(int32).} = enum
+    threadBasicInformation, # q: THREAD_BASIC_INFORMATION
+    threadTimes, # q: KERNEL_USER_TIMES
+    threadPriority, # s: KPRIORITY (requires SeIncreaseBasePriorityPrivilege)
+    threadBasePriority, # s: KPRIORITY
+    threadAffinityMask, # s: KAFFINITY
+    threadImpersonationToken, # s: HANDLE
+    threadDescriptorTableEntry, # q: DESCRIPTOR_TABLE_ENTRY (or WOW64_DESCRIPTOR_TABLE_ENTRY)
+    threadEnableAlignmentFaultFixup, # s: BOOLEAN
+    threadEventPair,
+    threadQuerySetWin32StartAddress, # q: ULONG_PTR
+    threadZeroTlsCell, # s: ULONG // TlsIndex // 10
+    threadPerformanceCount, # q: LARGE_INTEGER
+    threadAmILastThread, # q: ULONG
+    threadIdealProcessor, # s: ULONG
+    threadPriorityBoost, # qs: ULONG
+    threadSetTlsArrayAddress, # s: ULONG_PTR // Obsolete
+    threadIsIoPending, # q: ULONG
+    threadHideFromDebugger, # q: BOOLEAN; s: void
+    threadBreakOnTermination, # qs: ULONG
+    threadSwitchLegacyState, # s: void // NtCurrentThread // NPX/FPU
+    threadIsTerminated, # q: ULONG // 20
+    threadLastSystemCall, # q: THREAD_LAST_SYSCALL_INFORMATION
+    threadIoPriority, # qs: IO_PRIORITY_HINT (requires SeIncreaseBasePriorityPrivilege)
+    threadCycleTime, # q: THREAD_CYCLE_TIME_INFORMATION
+    threadPagePriority, # qs: PAGE_PRIORITY_INFORMATION
+    threadActualBasePriority, # s: LONG (requires SeIncreaseBasePriorityPrivilege)
+    threadTebInformation, # q: THREAD_TEB_INFORMATION (requires THREAD_GET_CONTEXT + THREAD_SET_CONTEXT)
+    threadCSwitchMon, # Obsolete
+    threadCSwitchPmu,
+    threadWow64Context, # qs: WOW64_CONTEXT, ARM_NT_CONTEXT since 20H1
+    threadGroupInformation, # qs: GROUP_AFFINITY // 30
+    threadUmsInformation, # q: THREAD_UMS_INFORMATION // Obsolete
+    threadCounterProfiling, # q: BOOLEAN; s: THREAD_PROFILING_INFORMATION?
+    threadIdealProcessorEx, # qs: PROCESSOR_NUMBER; s: previous PROCESSOR_NUMBER on return
+    threadCpuAccountingInformation, # q: BOOLEAN; s: HANDLE (NtOpenSession) // NtCurrentThread // since WIN8
+    threadSuspendCount, # q: ULONG // since WINBLUE
+    threadHeterogeneousCpuPolicy, # q: KHETERO_CPU_POLICY // since THRESHOLD
+    threadContainerId, # q: GUID
+    threadNameInformation, # qs: THREAD_NAME_INFORMATION
+    threadSelectedCpuSets,
+    threadSystemThreadInformation, # q: SYSTEM_THREAD_INFORMATION // 40
+    threadActualGroupAffinity, # q: GROUP_AFFINITY // since THRESHOLD2
+    threadDynamicCodePolicyInfo, # q: ULONG; s: ULONG (NtCurrentThread)
+    threadExplicitCaseSensitivity, # qs: ULONG; s: 0 disables, otherwise enables
+    threadWorkOnBehalfTicket, # RTL_WORK_ON_BEHALF_TICKET_EX
+    threadSubsystemInformation, # q: SUBSYSTEM_INFORMATION_TYPE // since REDSTONE2
+    threadDbgkWerReportActive, # s: ULONG; s: 0 disables, otherwise enables
+    threadAttachContainer, # s: HANDLE (job object) // NtCurrentThread
+    threadManageWritesToExecutableMemory, # MANAGE_WRITES_TO_EXECUTABLE_MEMORY // since REDSTONE3
+    threadPowerThrottlingState, # POWER_THROTTLING_THREAD_STATE // since REDSTONE3 (set), WIN11 22H2 (query)
+    threadWorkloadClass, # THREAD_WORKLOAD_CLASS // since REDSTONE5 // 50
+    threadCreateStateChange, # since WIN11
+    threadApplyStateChange,
+    threadStrongerBadHandleChecks, # since 22H1
+    threadEffectiveIoPriority, # q: IO_PRIORITY_HINT
+    threadEffectivePagePriority, # q: ULONG
+    threadUpdateLockOwnership, # since 24H2
+    threadSchedulerSharedDataSlot, # SCHEDULER_SHARED_DATA_SLOT_INFORMATION
+    threadTebInformationAtomic, # THREAD_TEB_INFORMATION
+    threadIndexInformation, # THREAD_INDEX_INFORMATION
+    maxThreadInfoClass
+  SYSTEM_INFORMATION_CLASS* {.size: sizeof(int32).} = enum
+    systemBasicInformation, # q: SYSTEM_BASIC_INFORMATION
+    systemProcessorInformation, # q: SYSTEM_PROCESSOR_INFORMATION
+    systemPerformanceInformation, # q: SYSTEM_PERFORMANCE_INFORMATION
+    systemTimeOfDayInformation, # q: SYSTEM_TIMEOFDAY_INFORMATION
+    systemPathInformation, # not implemented
+    systemProcessInformation, # q: SYSTEM_PROCESS_INFORMATION
+    systemCallCountInformation, # q: SYSTEM_CALL_COUNT_INFORMATION
+    systemDeviceInformation, # q: SYSTEM_DEVICE_INFORMATION
+    systemProcessorPerformanceInformation, # q: SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION (EX in: USHORT ProcessorGroup)
+    systemFlagsInformation, # q: SYSTEM_FLAGS_INFORMATION
+    systemCallTimeInformation, # not implemented // SYSTEM_CALL_TIME_INFORMATION // 10
+    systemModuleInformation, # q: RTL_PROCESS_MODULES
+    systemLocksInformation, # q: RTL_PROCESS_LOCKS
+    systemStackTraceInformation, # q: RTL_PROCESS_BACKTRACES
+    systemPagedPoolInformation, # not implemented
+    systemNonPagedPoolInformation, # not implemented
+    systemHandleInformation, # q: SYSTEM_HANDLE_INFORMATION
+    systemObjectInformation, # q: SYSTEM_OBJECTTYPE_INFORMATION mixed with SYSTEM_OBJECT_INFORMATION
+    systemPageFileInformation, # q: SYSTEM_PAGEFILE_INFORMATION
+    systemVdmInstemulInformation, # q: SYSTEM_VDM_INSTEMUL_INFO
+    systemVdmBopInformation, # not implemented // 20
+    systemFileCacheInformation, # q: SYSTEM_FILECACHE_INFORMATION; s (requires SeIncreaseQuotaPrivilege) (info for WorkingSetTypeSystemCache)
+    systemPoolTagInformation, # q: SYSTEM_POOLTAG_INFORMATION
+    systemInterruptInformation, # q: SYSTEM_INTERRUPT_INFORMATION (EX in: USHORT ProcessorGroup)
+    systemDpcBehaviorInformation, # q: SYSTEM_DPC_BEHAVIOR_INFORMATION; s: SYSTEM_DPC_BEHAVIOR_INFORMATION (requires SeLoadDriverPrivilege)
+    systemFullMemoryInformation, # not implemented // SYSTEM_MEMORY_USAGE_INFORMATION
+    systemLoadGdiDriverInformation, # s (kernel-mode only)
+    systemUnloadGdiDriverInformation, # s (kernel-mode only)
+    systemTimeAdjustmentInformation, # q: SYSTEM_QUERY_TIME_ADJUST_INFORMATION; s: SYSTEM_SET_TIME_ADJUST_INFORMATION (requires SeSystemtimePrivilege)
+    systemSummaryMemoryInformation, # not implemented // SYSTEM_MEMORY_USAGE_INFORMATION
+    systemMirrorMemoryInformation, # s (requires license value "Kernel-MemoryMirroringSupported") (requires SeShutdownPrivilege) // 30
+    systemPerformanceTraceInformation, # q; s: (type depends on EVENT_TRACE_INFORMATION_CLASS)
+    systemObsolete0, # not implemented
+    systemExceptionInformation, # q: SYSTEM_EXCEPTION_INFORMATION
+    systemCrashDumpStateInformation, # s: SYSTEM_CRASH_DUMP_STATE_INFORMATION (requires SeDebugPrivilege)
+    systemKernelDebuggerInformation, # q: SYSTEM_KERNEL_DEBUGGER_INFORMATION
+    systemContextSwitchInformation, # q: SYSTEM_CONTEXT_SWITCH_INFORMATION
+    systemRegistryQuotaInformation, # q: SYSTEM_REGISTRY_QUOTA_INFORMATION; s (requires SeIncreaseQuotaPrivilege)
+    systemExtendServiceTableInformation, # s (requires SeLoadDriverPrivilege) // loads win32k only
+    systemPrioritySeperation, # s (requires SeTcbPrivilege)
+    systemVerifierAddDriverInformation, # s (requires SeDebugPrivilege) // 40
+    systemVerifierRemoveDriverInformation, # s (requires SeDebugPrivilege)
+    systemProcessorIdleInformation, # q: SYSTEM_PROCESSOR_IDLE_INFORMATION (EX in: USHORT ProcessorGroup)
+    systemLegacyDriverInformation, # q: SYSTEM_LEGACY_DRIVER_INFORMATION
+    systemCurrentTimeZoneInformation, # q; s: RTL_TIME_ZONE_INFORMATION
+    systemLookasideInformation, # q: SYSTEM_LOOKASIDE_INFORMATION
+    systemTimeSlipNotification, # s: HANDLE (NtCreateEvent) (requires SeSystemtimePrivilege)
+    systemSessionCreate, # not implemented
+    systemSessionDetach, # not implemented
+    systemSessionInformation, # not implemented (SYSTEM_SESSION_INFORMATION)
+    systemRangeStartInformation, # q: SYSTEM_RANGE_START_INFORMATION // 50
+    systemVerifierInformation, # q: SYSTEM_VERIFIER_INFORMATION; s (requires SeDebugPrivilege)
+    systemVerifierThunkExtend, # s (kernel-mode only)
+    systemSessionProcessInformation, # q: SYSTEM_SESSION_PROCESS_INFORMATION
+    systemLoadGdiDriverInSystemSpace, # s: SYSTEM_GDI_DRIVER_INFORMATION (kernel-mode only) (same as SystemLoadGdiDriverInformation)
+    systemNumaProcessorMap, # q: SYSTEM_NUMA_INFORMATION
+    systemPrefetcherInformation, # q; s: PREFETCHER_INFORMATION // PfSnQueryPrefetcherInformation
+    systemExtendedProcessInformation, # q: SYSTEM_PROCESS_INFORMATION
+    systemRecommendedSharedDataAlignment, # q: ULONG // KeGetRecommendedSharedDataAlignment
+    systemComPlusPackage, # q; s: ULONG
+    systemNumaAvailableMemory, # q: SYSTEM_NUMA_INFORMATION // 60
+    systemProcessorPowerInformation, # q: SYSTEM_PROCESSOR_POWER_INFORMATION (EX in: USHORT ProcessorGroup)
+    systemEmulationBasicInformation, # q: SYSTEM_BASIC_INFORMATION
+    systemEmulationProcessorInformation, # q: SYSTEM_PROCESSOR_INFORMATION
+    systemExtendedHandleInformation, # q: SYSTEM_HANDLE_INFORMATION_EX
+    systemLostDelayedWriteInformation, # q: ULONG
+    systemBigPoolInformation, # q: SYSTEM_BIGPOOL_INFORMATION
+    systemSessionPoolTagInformation, # q: SYSTEM_SESSION_POOLTAG_INFORMATION
+    systemSessionMappedViewInformation, # q: SYSTEM_SESSION_MAPPED_VIEW_INFORMATION
+    systemHotpatchInformation, # q; s: SYSTEM_HOTPATCH_CODE_INFORMATION
+    systemObjectSecurityMode, # q: ULONG // 70
+    systemWatchdogTimerHandler, # s: SYSTEM_WATCHDOG_HANDLER_INFORMATION // (kernel-mode only)
+    systemWatchdogTimerInformation, # q: SYSTEM_WATCHDOG_TIMER_INFORMATION // (kernel-mode only)
+    systemLogicalProcessorInformation, # q: SYSTEM_LOGICAL_PROCESSOR_INFORMATION (EX in: USHORT ProcessorGroup)
+    systemWow64SharedInformationObsolete, # not implemented
+    systemRegisterFirmwareTableInformationHandler, # s: SYSTEM_FIRMWARE_TABLE_HANDLER // (kernel-mode only)
+    systemFirmwareTableInformation, # SYSTEM_FIRMWARE_TABLE_INFORMATION
+    systemModuleInformationEx, # q: RTL_PROCESS_MODULE_INFORMATION_EX
+    systemVerifierTriageInformation, # not implemented
+    systemSuperfetchInformation, # q; s: SUPERFETCH_INFORMATION // PfQuerySuperfetchInformation
+    systemMemoryListInformation, # q: SYSTEM_MEMORY_LIST_INFORMATION; s: SYSTEM_MEMORY_LIST_COMMAND (requires SeProfileSingleProcessPrivilege) // 80
+    systemFileCacheInformationEx, # q: SYSTEM_FILECACHE_INFORMATION; s (requires SeIncreaseQuotaPrivilege) (same as SystemFileCacheInformation)
+    systemThreadPriorityClientIdInformation, # s: SYSTEM_THREAD_CID_PRIORITY_INFORMATION (requires SeIncreaseBasePriorityPrivilege)
+    systemProcessorIdleCycleTimeInformation, # q: SYSTEM_PROCESSOR_IDLE_CYCLE_TIME_INFORMATION[] (EX in: USHORT ProcessorGroup)
+    systemVerifierCancellationInformation, # SYSTEM_VERIFIER_CANCELLATION_INFORMATION // name:wow64:whNT32QuerySystemVerifierCancellationInformation
+    systemProcessorPowerInformationEx, # not implemented
+    systemRefTraceInformation, # q; s: SYSTEM_REF_TRACE_INFORMATION // ObQueryRefTraceInformation
+    systemSpecialPoolInformation, # q; s: SYSTEM_SPECIAL_POOL_INFORMATION (requires SeDebugPrivilege) // MmSpecialPoolTag, then MmSpecialPoolCatchOverruns != 0
+    systemProcessIdInformation, # q: SYSTEM_PROCESS_ID_INFORMATION
+    systemErrorPortInformation, # s (requires SeTcbPrivilege)
+    systemBootEnvironmentInformation, # q: SYSTEM_BOOT_ENVIRONMENT_INFORMATION // 90
+    systemHypervisorInformation, # q: SYSTEM_HYPERVISOR_QUERY_INFORMATION
+    systemVerifierInformationEx, # q; s: SYSTEM_VERIFIER_INFORMATION_EX
+    systemTimeZoneInformation, # q; s: RTL_TIME_ZONE_INFORMATION (requires SeTimeZonePrivilege)
+    systemImageFileExecutionOptionsInformation, # s: SYSTEM_IMAGE_FILE_EXECUTION_OPTIONS_INFORMATION (requires SeTcbPrivilege)
+    systemCoverageInformation, # q: COVERAGE_MODULES s: COVERAGE_MODULE_REQUEST // ExpCovQueryInformation (requires SeDebugPrivilege)
+    systemPrefetchPatchInformation, # SYSTEM_PREFETCH_PATCH_INFORMATION
+    systemVerifierFaultsInformation, # s: SYSTEM_VERIFIER_FAULTS_INFORMATION (requires SeDebugPrivilege)
+    systemSystemPartitionInformation, # q: SYSTEM_SYSTEM_PARTITION_INFORMATION
+    systemSystemDiskInformation, # q: SYSTEM_SYSTEM_DISK_INFORMATION
+    systemProcessorPerformanceDistribution, # q: SYSTEM_PROCESSOR_PERFORMANCE_DISTRIBUTION (EX in: USHORT ProcessorGroup) // 100
+    systemNumaProximityNodeInformation, # q; s: SYSTEM_NUMA_PROXIMITY_MAP
+    systemDynamicTimeZoneInformation, # q; s: RTL_DYNAMIC_TIME_ZONE_INFORMATION (requires SeTimeZonePrivilege)
+    systemCodeIntegrityInformation, # q: SYSTEM_CODEINTEGRITY_INFORMATION // SeCodeIntegrityQueryInformation
+    systemProcessorMicrocodeUpdateInformation, # s: SYSTEM_PROCESSOR_MICROCODE_UPDATE_INFORMATION
+    systemProcessorBrandString, # q: CHAR[] // HaliQuerySystemInformation -> HalpGetProcessorBrandString, info class 23
+    systemVirtualAddressInformation, # q: SYSTEM_VA_LIST_INFORMATION[]; s: SYSTEM_VA_LIST_INFORMATION[] (requires SeIncreaseQuotaPrivilege) // MmQuerySystemVaInformation
+    systemLogicalProcessorAndGroupInformation, # q: SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX (EX in: LOGICAL_PROCESSOR_RELATIONSHIP RelationshipType) // since WIN7 // KeQueryLogicalProcessorRelationship
+    systemProcessorCycleTimeInformation, # q: SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION[] (EX in: USHORT ProcessorGroup)
+    systemStoreInformation, # q; s: SYSTEM_STORE_INFORMATION (requires SeProfileSingleProcessPrivilege) // SmQueryStoreInformation
+    systemRegistryAppendString, # s: SYSTEM_REGISTRY_APPEND_STRING_PARAMETERS // 110
+    systemAitSamplingValue, # s: ULONG (requires SeProfileSingleProcessPrivilege)
+    systemVhdBootInformation, # q: SYSTEM_VHD_BOOT_INFORMATION
+    systemCpuQuotaInformation, # q; s: PS_CPU_QUOTA_QUERY_INFORMATION
+    systemNativeBasicInformation, # q: SYSTEM_BASIC_INFORMATION
+    systemErrorPortTimeouts, # SYSTEM_ERROR_PORT_TIMEOUTS
+    systemLowPriorityIoInformation, # q: SYSTEM_LOW_PRIORITY_IO_INFORMATION
+    systemTpmBootEntropyInformation, # q: TPM_BOOT_ENTROPY_NT_RESULT // ExQueryTpmBootEntropyInformation
+    systemVerifierCountersInformation, # q: SYSTEM_VERIFIER_COUNTERS_INFORMATION
+    systemPagedPoolInformationEx, # q: SYSTEM_FILECACHE_INFORMATION; s (requires SeIncreaseQuotaPrivilege) (info for WorkingSetTypePagedPool)
+    systemSystemPtesInformationEx, # q: SYSTEM_FILECACHE_INFORMATION; s (requires SeIncreaseQuotaPrivilege) (info for WorkingSetTypeSystemPtes) // 120
+    systemNodeDistanceInformation, # q: USHORT[4*NumaNodes] // (EX in: USHORT NodeNumber)
+    systemAcpiAuditInformation, # q: SYSTEM_ACPI_AUDIT_INFORMATION // HaliQuerySystemInformation -> HalpAuditQueryResults, info class 26
+    systemBasicPerformanceInformation, # q: SYSTEM_BASIC_PERFORMANCE_INFORMATION // name:wow64:whNtQuerySystemInformation_SystemBasicPerformanceInformation
+    systemQueryPerformanceCounterInformation, # q: SYSTEM_QUERY_PERFORMANCE_COUNTER_INFORMATION // since WIN7 SP1
+    systemSessionBigPoolInformation, # q: SYSTEM_SESSION_POOLTAG_INFORMATION // since WIN8
+    systemBootGraphicsInformation, # q; s: SYSTEM_BOOT_GRAPHICS_INFORMATION (kernel-mode only)
+    systemScrubPhysicalMemoryInformation, # q; s: MEMORY_SCRUB_INFORMATION
+    systemBadPageInformation, # SYSTEM_BAD_PAGE_INFORMATION
+    systemProcessorProfileControlArea, # q; s: SYSTEM_PROCESSOR_PROFILE_CONTROL_AREA
+    systemCombinePhysicalMemoryInformation, # s: MEMORY_COMBINE_INFORMATION, MEMORY_COMBINE_INFORMATION_EX, MEMORY_COMBINE_INFORMATION_EX2 // 130
+    systemEntropyInterruptTimingInformation, # q; s: SYSTEM_ENTROPY_TIMING_INFORMATION
+    systemConsoleInformation, # q; s: SYSTEM_CONSOLE_INFORMATION
+    systemPlatformBinaryInformation, # q: SYSTEM_PLATFORM_BINARY_INFORMATION (requires SeTcbPrivilege)
+    systemPolicyInformation, # q: SYSTEM_POLICY_INFORMATION (Warbird/Encrypt/Decrypt/Execute)
+    systemHypervisorProcessorCountInformation, # q: SYSTEM_HYPERVISOR_PROCESSOR_COUNT_INFORMATION
+    systemDeviceDataInformation, # q: SYSTEM_DEVICE_DATA_INFORMATION
+    systemDeviceDataEnumerationInformation, # q: SYSTEM_DEVICE_DATA_INFORMATION
+    systemMemoryTopologyInformation, # q: SYSTEM_MEMORY_TOPOLOGY_INFORMATION
+    systemMemoryChannelInformation, # q: SYSTEM_MEMORY_CHANNEL_INFORMATION
+    systemBootLogoInformation, # q: SYSTEM_BOOT_LOGO_INFORMATION // 140
+    systemProcessorPerformanceInformationEx, # q: SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION_EX // (EX in: USHORT ProcessorGroup) // since WINBLUE
+    systemCriticalProcessErrorLogInformation,
+    systemSecureBootPolicyInformation, # q: SYSTEM_SECUREBOOT_POLICY_INFORMATION
+    systemPageFileInformationEx, # q: SYSTEM_PAGEFILE_INFORMATION_EX
+    systemSecureBootInformation, # q: SYSTEM_SECUREBOOT_INFORMATION
+    systemEntropyInterruptTimingRawInformation,
+    systemPortableWorkspaceEfiLauncherInformation, # q: SYSTEM_PORTABLE_WORKSPACE_EFI_LAUNCHER_INFORMATION
+    systemFullProcessInformation, # q: SYSTEM_PROCESS_INFORMATION with SYSTEM_PROCESS_INFORMATION_EXTENSION (requires admin)
+    systemKernelDebuggerInformationEx, # q: SYSTEM_KERNEL_DEBUGGER_INFORMATION_EX
+    systemBootMetadataInformation, # 150
+    systemSoftRebootInformation, # q: ULONG
+    systemElamCertificateInformation, # s: SYSTEM_ELAM_CERTIFICATE_INFORMATION
+    systemOfflineDumpConfigInformation, # q: OFFLINE_CRASHDUMP_CONFIGURATION_TABLE_V2
+    systemProcessorFeaturesInformation, # q: SYSTEM_PROCESSOR_FEATURES_INFORMATION
+    systemRegistryReconciliationInformation, # s: NULL (requires admin) (flushes registry hives)
+    systemEdidInformation, # q: SYSTEM_EDID_INFORMATION
+    systemManufacturingInformation, # q: SYSTEM_MANUFACTURING_INFORMATION // since THRESHOLD
+    systemEnergyEstimationConfigInformation, # q: SYSTEM_ENERGY_ESTIMATION_CONFIG_INFORMATION
+    systemHypervisorDetailInformation, # q: SYSTEM_HYPERVISOR_DETAIL_INFORMATION
+    systemProcessorCycleStatsInformation, # q: SYSTEM_PROCESSOR_CYCLE_STATS_INFORMATION (EX in: USHORT ProcessorGroup) // 160
+    systemVmGenerationCountInformation,
+    systemTrustedPlatformModuleInformation, # q: SYSTEM_TPM_INFORMATION
+    systemKernelDebuggerFlags, # SYSTEM_KERNEL_DEBUGGER_FLAGS
+    systemCodeIntegrityPolicyInformation, # q; s: SYSTEM_CODEINTEGRITYPOLICY_INFORMATION
+    systemIsolatedUserModeInformation, # q: SYSTEM_ISOLATED_USER_MODE_INFORMATION
+    systemHardwareSecurityTestInterfaceResultsInformation,
+    systemSingleModuleInformation, # q: SYSTEM_SINGLE_MODULE_INFORMATION
+    systemAllowedCpuSetsInformation, # s: SYSTEM_WORKLOAD_ALLOWED_CPU_SET_INFORMATION
+    systemVsmProtectionInformation, # q: SYSTEM_VSM_PROTECTION_INFORMATION (previously SystemDmaProtectionInformation)
+    systemInterruptCpuSetsInformation, # q: SYSTEM_INTERRUPT_CPU_SET_INFORMATION // 170
+    systemSecureBootPolicyFullInformation, # q: SYSTEM_SECUREBOOT_POLICY_FULL_INFORMATION
+    systemCodeIntegrityPolicyFullInformation,
+    systemAffinitizedInterruptProcessorInformation, # (requires SeIncreaseBasePriorityPrivilege)
+    systemRootSiloInformation, # q: SYSTEM_ROOT_SILO_INFORMATION
+    systemCpuSetInformation, # q: SYSTEM_CPU_SET_INFORMATION // since THRESHOLD2
+    systemCpuSetTagInformation, # q: SYSTEM_CPU_SET_TAG_INFORMATION
+    systemWin32WerStartCallout,
+    systemSecureKernelProfileInformation, # q: SYSTEM_SECURE_KERNEL_HYPERGUARD_PROFILE_INFORMATION
+    systemCodeIntegrityPlatformManifestInformation, # q: SYSTEM_SECUREBOOT_PLATFORM_MANIFEST_INFORMATION // since REDSTONE
+    systemInterruptSteeringInformation, # q: in: SYSTEM_INTERRUPT_STEERING_INFORMATION_INPUT, out: SYSTEM_INTERRUPT_STEERING_INFORMATION_OUTPUT // NtQuerySystemInformationEx // 180
+    systemSupportedProcessorArchitectures, # p: in opt: HANDLE, out: SYSTEM_SUPPORTED_PROCESSOR_ARCHITECTURES_INFORMATION[] // NtQuerySystemInformationEx
+    systemMemoryUsageInformation, # q: SYSTEM_MEMORY_USAGE_INFORMATION
+    systemCodeIntegrityCertificateInformation, # q: SYSTEM_CODEINTEGRITY_CERTIFICATE_INFORMATION
+    systemPhysicalMemoryInformation, # q: SYSTEM_PHYSICAL_MEMORY_INFORMATION // since REDSTONE2
+    systemControlFlowTransition, # (Warbird/Encrypt/Decrypt/Execute)
+    systemKernelDebuggingAllowed, # s: ULONG
+    systemActivityModerationExeState, # SYSTEM_ACTIVITY_MODERATION_EXE_STATE
+    systemActivityModerationUserSettings, # SYSTEM_ACTIVITY_MODERATION_USER_SETTINGS
+    systemCodeIntegrityPoliciesFullInformation,
+    systemCodeIntegrityUnlockInformation, # SYSTEM_CODEINTEGRITY_UNLOCK_INFORMATION // 190
+    systemIntegrityQuotaInformation,
+    systemFlushInformation, # q: SYSTEM_FLUSH_INFORMATION
+    systemProcessorIdleMaskInformation, # q: ULONG_PTR[ActiveGroupCount] // since REDSTONE3
+    systemSecureDumpEncryptionInformation,
+    systemWriteConstraintInformation, # SYSTEM_WRITE_CONSTRAINT_INFORMATION
+    systemKernelVaShadowInformation, # SYSTEM_KERNEL_VA_SHADOW_INFORMATION
+    systemHypervisorSharedPageInformation, # SYSTEM_HYPERVISOR_SHARED_PAGE_INFORMATION // since REDSTONE4
+    systemFirmwareBootPerformanceInformation,
+    systemCodeIntegrityVerificationInformation, # SYSTEM_CODEINTEGRITYVERIFICATION_INFORMATION
+    systemFirmwarePartitionInformation, # SYSTEM_FIRMWARE_PARTITION_INFORMATION // 200
+    systemSpeculationControlInformation, # SYSTEM_SPECULATION_CONTROL_INFORMATION // (CVE-2017-5715) REDSTONE3 and above.
+    systemDmaGuardPolicyInformation, # SYSTEM_DMA_GUARD_POLICY_INFORMATION
+    systemEnclaveLaunchControlInformation, # SYSTEM_ENCLAVE_LAUNCH_CONTROL_INFORMATION
+    systemWorkloadAllowedCpuSetsInformation, # SYSTEM_WORKLOAD_ALLOWED_CPU_SET_INFORMATION // since REDSTONE5
+    systemCodeIntegrityUnlockModeInformation, # SYSTEM_CODEINTEGRITY_UNLOCK_INFORMATION
+    systemLeapSecondInformation, # SYSTEM_LEAP_SECOND_INFORMATION
+    systemFlags2Information, # q: SYSTEM_FLAGS_INFORMATION
+    systemSecurityModelInformation, # SYSTEM_SECURITY_MODEL_INFORMATION // since 19H1
+    systemCodeIntegritySyntheticCacheInformation,
+    systemFeatureConfigurationInformation, # q: in: SYSTEM_FEATURE_CONFIGURATION_QUERY, out: SYSTEM_FEATURE_CONFIGURATION_INFORMATION; s: SYSTEM_FEATURE_CONFIGURATION_UPDATE // NtQuerySystemInformationEx // since 20H1 // 210
+    systemFeatureConfigurationSectionInformation, # q: in: SYSTEM_FEATURE_CONFIGURATION_SECTIONS_REQUEST, out: SYSTEM_FEATURE_CONFIGURATION_SECTIONS_INFORMATION // NtQuerySystemInformationEx
+    systemFeatureUsageSubscriptionInformation, # q: SYSTEM_FEATURE_USAGE_SUBSCRIPTION_DETAILS; s: SYSTEM_FEATURE_USAGE_SUBSCRIPTION_UPDATE
+    systemSecureSpeculationControlInformation, # SECURE_SPECULATION_CONTROL_INFORMATION
+    systemSpacesBootInformation, # since 20H2
+    systemFwRamdiskInformation, # SYSTEM_FIRMWARE_RAMDISK_INFORMATION
+    systemWheaIpmiHardwareInformation,
+    systemDifSetRuleClassInformation, # SYSTEM_DIF_VOLATILE_INFORMATION
+    systemDifClearRuleClassInformation,
+    systemDifApplyPluginVerificationOnDriver, # SYSTEM_DIF_PLUGIN_DRIVER_INFORMATION
+    systemDifRemovePluginVerificationOnDriver, # SYSTEM_DIF_PLUGIN_DRIVER_INFORMATION // 220
+    systemShadowStackInformation, # SYSTEM_SHADOW_STACK_INFORMATION
+    systemBuildVersionInformation, # q: in: ULONG (LayerNumber), out: SYSTEM_BUILD_VERSION_INFORMATION // NtQuerySystemInformationEx // 222
+    systemPoolLimitInformation, # SYSTEM_POOL_LIMIT_INFORMATION (requires SeIncreaseQuotaPrivilege)
+    systemCodeIntegrityAddDynamicStore,
+    systemCodeIntegrityClearDynamicStores,
+    systemDifPoolTrackingInformation,
+    systemPoolZeroingInformation, # q: SYSTEM_POOL_ZEROING_INFORMATION
+    systemDpcWatchdogInformation, # q; s: SYSTEM_DPC_WATCHDOG_CONFIGURATION_INFORMATION
+    systemDpcWatchdogInformation2, # q; s: SYSTEM_DPC_WATCHDOG_CONFIGURATION_INFORMATION_V2
+    systemSupportedProcessorArchitectures2, # q: in opt: HANDLE, out: SYSTEM_SUPPORTED_PROCESSOR_ARCHITECTURES_INFORMATION[] // NtQuerySystemInformationEx // 230
+    systemSingleProcessorRelationshipInformation, # q: SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX // (EX in: PROCESSOR_NUMBER Processor)
+    systemXfgCheckFailureInformation, # q: SYSTEM_XFG_FAILURE_INFORMATION
+    systemIommuStateInformation, # SYSTEM_IOMMU_STATE_INFORMATION // since 22H1
+    systemHypervisorMinrootInformation, # SYSTEM_HYPERVISOR_MINROOT_INFORMATION
+    systemHypervisorBootPagesInformation, # SYSTEM_HYPERVISOR_BOOT_PAGES_INFORMATION
+    systemPointerAuthInformation, # SYSTEM_POINTER_AUTH_INFORMATION
+    systemSecureKernelDebuggerInformation,
+    systemOriginalImageFeatureInformation, # q: in: SYSTEM_ORIGINAL_IMAGE_FEATURE_INFORMATION_INPUT, out: SYSTEM_ORIGINAL_IMAGE_FEATURE_INFORMATION_OUTPUT // NtQuerySystemInformationEx
+    systemMemoryNumaInformation, # SYSTEM_MEMORY_NUMA_INFORMATION_INPUT, SYSTEM_MEMORY_NUMA_INFORMATION_OUTPUT 
+    systemMemoryNumaPerformanceInformation, # SYSTEM_MEMORY_NUMA_PERFORMANCE_INFORMATION_INPUTSYSTEM_MEMORY_NUMA_PERFORMANCE_INFORMATION_INPUT, SYSTEM_MEMORY_NUMA_PERFORMANCE_INFORMATION_OUTPUT // since 24H2 // 240
+    systemCodeIntegritySignedPoliciesFullInformation,
+    systemSecureSecretsInformation,
+    systemTrustedAppsRuntimeInformation, # SYSTEM_TRUSTEDAPPS_RUNTIME_INFORMATION
+    systemBadPageInformationEx, # SYSTEM_BAD_PAGE_INFORMATION
+    systemResourceDeadlockTimeout, # ULONG
+    systemBreakOnContextUnwindFailureInformation, # ULONG (requires SeDebugPrivilege)
+    systemOslRamdiskInformation, # SYSTEM_OSL_RAMDISK_INFORMATION
+    maxSystemInfoClass
+  OBJECT_INFORMATION_CLASS* {.size: sizeof(int32).} = enum
+    objectBasicInformation, # q: OBJECT_BASIC_INFORMATION
+    objectNameInformation, # q: OBJECT_NAME_INFORMATION
+    objectTypeInformation, # q: OBJECT_TYPE_INFORMATION
+    objectTypesInformation, # q: OBJECT_TYPES_INFORMATION
+    objectHandleFlagInformation, # qs: OBJECT_HANDLE_FLAG_INFORMATION
+    objectSessionInformation, # s: void // change object session // (requires SeTcbPrivilege)
+    objectSessionObjectInformation, # s: void // change object session // (requires SeTcbPrivilege)
+    maxObjectInfoClass
+  POBJECT_INFORMATION_CLASS* = ptr OBJECT_INFORMATION_CLASS
+  WINSTATIONINFOCLASS* {.size: sizeof(int32).} = enum
+    winStationCreateData, # WINSTATIONCREATE
+    winStationConfiguration, # WINSTACONFIGWIRE + USERCONFIG
+    winStationPdParams, # PDPARAMS
+    winStationWd, # WDCONFIG
+    winStationPd, # PDCONFIG2 + PDPARAMS
+    winStationPrinter, # Not supported.
+    winStationClient, # WINSTATIONCLIENT
+    winStationModules,
+    winStationInformation, # WINSTATIONINFORMATION
+    winStationTrace,
+    winStationBeep,
+    winStationEncryptionOff,
+    winStationEncryptionPerm,
+    winStationNtSecurity, # s; (open secure desktop ctrl+alt+del)
+    winStationUserToken, # WINSTATIONUSERTOKEN
+    winStationUnused1,
+    winStationVideoData, # WINSTATIONVIDEODATA
+    winStationInitialProgram, # s; (set current process as initial program)
+    winStationCd, # CDCONFIG
+    winStationSystemTrace,
+    winStationVirtualData,
+    winStationClientData, # WINSTATIONCLIENTDATA
+    winStationSecureDesktopEnter,
+    winStationSecureDesktopExit,
+    winStationLoadBalanceSessionTarget, # ULONG
+    winStationLoadIndicator, # WINSTATIONLOADINDICATORDATA
+    winStationShadowInfo, # WINSTATIONSHADOW
+    winStationDigProductId, # WINSTATIONPRODID
+    winStationLockedState, # BOOL
+    winStationRemoteAddress, # WINSTATIONREMOTEADDRESS
+    winStationIdleTime, # ULONG
+    winStationLastReconnectType, # ULONG
+    winStationDisallowAutoReconnect, # BOOLEAN
+    winStationMprNotifyInfo,
+    winStationExecSrvSystemPipe, # WCHAR[48]
+    winStationSmartCardAutoLogon, # BOOLEAN
+    winStationIsAdminLoggedOn, # BOOLEAN
+    winStationReconnectedFromId, # ULONG
+    winStationEffectsPolicy, # ULONG
+    winStationType, # ULONG
+    winStationInformationEx, # WINSTATIONINFORMATIONEX
+    winStationValidationInfo
   HANDLE* = int
   VOID* = void
   PVOID64* = pointer
@@ -174,45 +1525,46 @@ type
   FARPROC* = pointer
   NEARPROC* = pointer
   PROC* = pointer
-  EXCEPTION_DISPOSITION* = int
+  EXCEPTION_DISPOSITION* = cint
   QWORD* = int64
   PQWORD* = ptr int64
 when winimAnsi:
   type
-    TCHAR* = char
-    PTCHAR* = ptr char
+    TCHAR* = cchar
     TBYTE* = uint8
-    PTBYTE* = ptr uint8
+when winimUnicode:
+  type
+    TCHAR* = WCHAR
+    TBYTE* = WCHAR
+type
+    PTCHAR* = ptr TCHAR
+    PTBYTE* = ptr TBYTE
 when winimCpu64:
   type
     INT_PTR* = int64
-    PINT_PTR* = ptr int64
-    UINT_PTR* = int64
-    PUINT_PTR* = ptr int64
+    UINT_PTR* = uint64
     LONG_PTR* = int64
-    PLONG_PTR* = ptr int64
-    ULONG_PTR* = int64
-    PULONG_PTR* = ptr int64
+    ULONG_PTR* = uint64
+    UHALF_PTR* = cuint
+    HALF_PTR* = cint
     SHANDLE_PTR* = int64
-    HANDLE_PTR* = int64
-    UHALF_PTR* = int32
-    PUHALF_PTR* = ptr int32
-    HALF_PTR* = int32
-    PHALF_PTR* = ptr int32
+    HANDLE_PTR* = uint64
 when winimCpu32:
   type
-    INT_PTR* = int32
-    PINT_PTR* = ptr int32
-    UINT_PTR* = int32
-    PUINT_PTR* = ptr int32
-    LONG_PTR* = int32
-    PLONG_PTR* = ptr int32
-    ULONG_PTR* = int32
-    PULONG_PTR* = ptr int32
-    UHALF_PTR* = uint16
-    PUHALF_PTR* = ptr uint16
-    SHANDLE_PTR* = int32
-    HANDLE_PTR* = int32
+    INT_PTR* = cint
+    UINT_PTR* = cuint
+    LONG_PTR* = clong
+    ULONG_PTR* = culong
+    UHALF_PTR* = cushort
+    SHANDLE_PTR* = LONG32
+    HANDLE_PTR* = LONG32
+type
+  PINT_PTR* = ptr INT_PTR
+  PUINT_PTR* = ptr UINT_PTR
+  PLONG_PTR* = ptr LONG_PTR
+  PULONG_PTR* = ptr ULONG_PTR
+  PUHALF_PTR* = ptr UHALF_PTR
+  PHALF_PTR* = ptr HALF_PTR
 type
   SIZE_T* = ULONG_PTR
   PSIZE_T* = ptr ULONG_PTR
@@ -229,10 +1581,10 @@ type
   FSHORT* = USHORT
   FLONG* = ULONG
   BOOLEAN* = UCHAR
-  PBOOLEAN* = ptr UCHAR
+  PBOOLEAN* = ptr BOOLEAN
   LOGICAL* = ULONG
-  PLOGICAL* = ptr ULONG
-  SHORT* = int16
+  PLOGICAL* = ptr LOGICAL
+  SHORT* = cshort
   PSHORT* = ptr SHORT
   PLONG* = ptr LONG
   NTSTATUS* = LONG
@@ -318,22 +1670,22 @@ type
   PCLAIMS_BLOB* = PVOID
   ACCESS_MASK* = DWORD
   SID_HASH_ENTRY* = ULONG_PTR
-  PSID_HASH_ENTRY* = ptr ULONG_PTR
+  PSID_HASH_ENTRY* = ptr SID_HASH_ENTRY
   SECURITY_DESCRIPTOR_CONTROL* = WORD
-  PSECURITY_DESCRIPTOR_CONTROL* = ptr WORD
+  PSECURITY_DESCRIPTOR_CONTROL* = ptr SECURITY_DESCRIPTOR_CONTROL
   ACCESS_REASON* = DWORD
   SECURITY_CONTEXT_TRACKING_MODE* = BOOLEAN
-  PSECURITY_CONTEXT_TRACKING_MODE* = ptr BOOLEAN
+  PSECURITY_CONTEXT_TRACKING_MODE* = ptr SECURITY_CONTEXT_TRACKING_MODE
   SECURITY_INFORMATION* = DWORD
-  PSECURITY_INFORMATION* = ptr DWORD
+  PSECURITY_INFORMATION* = ptr SECURITY_INFORMATION
   EXECUTION_STATE* = DWORD
-  PEXECUTION_STATE* = ptr DWORD
+  PEXECUTION_STATE* = ptr EXECUTION_STATE
   TP_VERSION* = DWORD
-  PTP_VERSION* = ptr DWORD
+  PTP_VERSION* = ptr TP_VERSION
   TP_WAIT_RESULT* = DWORD
   NOTIFICATION_MASK* = ULONG
   SAVEPOINT_ID* = ULONG
-  PSAVEPOINT_ID* = ptr ULONG
+  PSAVEPOINT_ID* = ptr SAVEPOINT_ID
   WPARAM* = UINT_PTR
   LPARAM* = LONG_PTR
   LRESULT* = LONG_PTR
@@ -382,10 +1734,6 @@ type
   OLECHAR* = WCHAR
 when winimUnicode:
   type
-    TCHAR* = WCHAR
-    PTCHAR* = ptr WCHAR
-    TBYTE* = WCHAR
-    PTBYTE* = ptr WCHAR
     LPTCH* = LPWSTR
     PTCH* = LPWSTR
     PTSTR* = LPWSTR
@@ -419,8 +1767,8 @@ when winimAnsi:
     PUZZTSTR* = PZZSTR
     PZPTSTR* = PZPSTR
 type
-  INT16* = int16
-  PINT16* = ptr int16
+  INT16* = cshort
+  PINT16* = ptr INT16
   PKAFFINITY* = ptr KAFFINITY
 const
   EXCEPTION_MAXIMUM_PARAMETERS* = 15
@@ -581,8 +1929,8 @@ type
   Exception_info_ptr* = ptr EXCEPTION_POINTERS
   DOUBLE* = float64
   PNTSTATUS* = ptr NTSTATUS
-  CSHORT* = int16
-  PCSHORT* = ptr int16
+  CSHORT* = cshort
+  PCSHORT* = ptr CSHORT
   QUAD_UNION1* {.pure, union.} = object
     UseThisFieldToCopy*: int64
     DoNotUseThisField*: float64
@@ -725,9 +2073,9 @@ type
     HighPart*: int64
   PFLOAT128* = ptr FLOAT128
   GUID* {.pure.} = object
-    Data1*: int32
-    Data2*: uint16
-    Data3*: uint16
+    Data1*: LONG32
+    Data2*: cushort
+    Data3*: cushort
     Data4*: array[8, uint8]
   LPGUID* = ptr GUID
   LPCGUID* = ptr GUID
@@ -2627,10 +3975,10 @@ type
     ImageBase*: ULONGLONG
   PNON_PAGED_DEBUG_INFO* = ptr NON_PAGED_DEBUG_INFO
   IMAGE_ARCHITECTURE_HEADER* {.pure.} = object
-    AmaskValue* {.bitsize:1.}: int32
-    Adummy1* {.bitsize:7.}: int32
-    AmaskShift* {.bitsize:8.}: int32
-    Adummy2* {.bitsize:16.}: int32
+    AmaskValue* {.bitsize:1.}: cuint
+    Adummy1 {.bitsize:7.}: cint
+    AmaskShift* {.bitsize:8.}: cuint
+    Adummy2 {.bitsize:16.}: cint
     FirstEntryRVA*: DWORD
   PIMAGE_ARCHITECTURE_HEADER* = ptr IMAGE_ARCHITECTURE_HEADER
   IMAGE_ARCHITECTURE_ENTRY* {.pure.} = object
@@ -3867,15 +5215,6 @@ const
   OBJ_KERNEL_HANDLE* = 0x00000200
   OBJ_FORCE_ACCESS_CHECK* = 0x00000400
   OBJ_VALID_ATTRIBUTES* = 0x000007F2
-  ntProductWinNt* = 1
-  ntProductLanManNt* = 2
-  ntProductServer* = 3
-  notificationEvent* = 0
-  synchronizationEvent* = 1
-  notificationTimer* = 0
-  synchronizationTimer* = 1
-  waitAll* = 0
-  waitAny* = 1
   MINCHAR* = 0x80
   MAXCHAR* = 0x7f
   MINSHORT* = 0x8000
@@ -5883,8 +7222,6 @@ const
   UCSCHAR_INVALID_CHARACTER* = 0xffffffff'i32
   MIN_UCSCHAR* = 0
   MAX_UCSCHAR* = 0x0010ffff
-  UNSPECIFIED_COMPARTMENT_ID* = 0
-  DEFAULT_COMPARTMENT_ID* = 1
   APPLICATION_ERROR_MASK* = 0x20000000
   ERROR_SEVERITY_SUCCESS* = 0x00000000
   ERROR_SEVERITY_INFORMATIONAL* = 0x40000000
@@ -5892,15 +7229,15 @@ const
   ERROR_SEVERITY_ERROR* = 0xC0000000'i32
   UNICODE_STRING_MAX_BYTES* = WORD 65534
   UNICODE_STRING_MAX_CHARS* = 32767
-template DEFINE_GUID*(data1: int32, data2: uint16, data3: uint16, data4: array[8, uint8]): GUID = GUID(Data1: data1, Data2: data2, Data3: data3, Data4: data4)
+template DEFINE_GUID*(data1: LONG32, data2: cushort, data3: cushort, data4: array[8, uint8]): GUID = GUID(Data1: data1, Data2: data2, Data3: data3, Data4: data4)
 const
   GUID_NULL* = DEFINE_GUID("00000000-0000-0000-0000-000000000000")
   IID_NULL* = GUID_NULL
   CLSID_NULL* = GUID_NULL
   FMTID_NULL* = GUID_NULL
-  MAXBYTE* = 0xff
-  MAXWORD* = 0xffff
-  MAXDWORD* = 0xffffffff'i32
+  MAXBYTE* = high(BYTE)
+  MAXWORD* = high(WORD)
+  MAXDWORD* = high(DWORD)
   PRODUCT_UNDEFINED* = 0x0
   PRODUCT_ULTIMATE* = 0x1
   PRODUCT_HOME_BASIC* = 0x2
@@ -6322,16 +7659,6 @@ const
   SID_REVISION* = 1
   SID_MAX_SUB_AUTHORITIES* = 15
   SID_RECOMMENDED_SUB_AUTHORITIES* = 1
-  sidTypeUser* = 1
-  sidTypeGroup* = 2
-  sidTypeDomain* = 3
-  sidTypeAlias* = 4
-  sidTypeWellKnownGroup* = 5
-  sidTypeDeletedAccount* = 6
-  sidTypeInvalid* = 7
-  sidTypeUnknown* = 8
-  sidTypeComputer* = 9
-  sidTypeLabel* = 10
   SECURITY_NULL_SID_AUTHORITY* = [0'u8,0,0,0,0,0]
   SECURITY_WORLD_SID_AUTHORITY* = [0'u8,0,0,0,0,1]
   SECURITY_LOCAL_SID_AUTHORITY* = [0'u8,0,0,0,0,2]
@@ -6496,111 +7823,6 @@ const
   SECURITY_TRUSTED_INSTALLER_RID3* = 1831038044
   SECURITY_TRUSTED_INSTALLER_RID4* = 1853292631
   SECURITY_TRUSTED_INSTALLER_RID5* = 2271478464
-  winNullSid* = 0
-  winWorldSid* = 1
-  winLocalSid* = 2
-  winCreatorOwnerSid* = 3
-  winCreatorGroupSid* = 4
-  winCreatorOwnerServerSid* = 5
-  winCreatorGroupServerSid* = 6
-  winNtAuthoritySid* = 7
-  winDialupSid* = 8
-  winNetworkSid* = 9
-  winBatchSid* = 10
-  winInteractiveSid* = 11
-  winServiceSid* = 12
-  winAnonymousSid* = 13
-  winProxySid* = 14
-  winEnterpriseControllersSid* = 15
-  winSelfSid* = 16
-  winAuthenticatedUserSid* = 17
-  winRestrictedCodeSid* = 18
-  winTerminalServerSid* = 19
-  winRemoteLogonIdSid* = 20
-  winLogonIdsSid* = 21
-  winLocalSystemSid* = 22
-  winLocalServiceSid* = 23
-  winNetworkServiceSid* = 24
-  winBuiltinDomainSid* = 25
-  winBuiltinAdministratorsSid* = 26
-  winBuiltinUsersSid* = 27
-  winBuiltinGuestsSid* = 28
-  winBuiltinPowerUsersSid* = 29
-  winBuiltinAccountOperatorsSid* = 30
-  winBuiltinSystemOperatorsSid* = 31
-  winBuiltinPrintOperatorsSid* = 32
-  winBuiltinBackupOperatorsSid* = 33
-  winBuiltinReplicatorSid* = 34
-  winBuiltinPreWindows2000CompatibleAccessSid* = 35
-  winBuiltinRemoteDesktopUsersSid* = 36
-  winBuiltinNetworkConfigurationOperatorsSid* = 37
-  winAccountAdministratorSid* = 38
-  winAccountGuestSid* = 39
-  winAccountKrbtgtSid* = 40
-  winAccountDomainAdminsSid* = 41
-  winAccountDomainUsersSid* = 42
-  winAccountDomainGuestsSid* = 43
-  winAccountComputersSid* = 44
-  winAccountControllersSid* = 45
-  winAccountCertAdminsSid* = 46
-  winAccountSchemaAdminsSid* = 47
-  winAccountEnterpriseAdminsSid* = 48
-  winAccountPolicyAdminsSid* = 49
-  winAccountRasAndIasServersSid* = 50
-  winNTLMAuthenticationSid* = 51
-  winDigestAuthenticationSid* = 52
-  winSChannelAuthenticationSid* = 53
-  winThisOrganizationSid* = 54
-  winOtherOrganizationSid* = 55
-  winBuiltinIncomingForestTrustBuildersSid* = 56
-  winBuiltinPerfMonitoringUsersSid* = 57
-  winBuiltinPerfLoggingUsersSid* = 58
-  winBuiltinAuthorizationAccessSid* = 59
-  winBuiltinTerminalServerLicenseServersSid* = 60
-  winBuiltinDCOMUsersSid* = 61
-  winBuiltinIUsersSid* = 62
-  winIUserSid* = 63
-  winBuiltinCryptoOperatorsSid* = 64
-  winUntrustedLabelSid* = 65
-  winLowLabelSid* = 66
-  winMediumLabelSid* = 67
-  winHighLabelSid* = 68
-  winSystemLabelSid* = 69
-  winWriteRestrictedCodeSid* = 70
-  winCreatorOwnerRightsSid* = 71
-  winCacheablePrincipalsGroupSid* = 72
-  winNonCacheablePrincipalsGroupSid* = 73
-  winEnterpriseReadonlyControllersSid* = 74
-  winAccountReadonlyControllersSid* = 75
-  winBuiltinEventLogReadersGroup* = 76
-  winNewEnterpriseReadonlyControllersSid* = 77
-  winBuiltinCertSvcDComAccessGroup* = 78
-  winMediumPlusLabelSid* = 79
-  winLocalLogonSid* = 80
-  winConsoleLogonSid* = 81
-  winThisOrganizationCertificateSid* = 82
-  winApplicationPackageAuthoritySid* = 83
-  winBuiltinAnyPackageSid* = 84
-  winCapabilityInternetClientSid* = 85
-  winCapabilityInternetClientServerSid* = 86
-  winCapabilityPrivateNetworkClientServerSid* = 87
-  winCapabilityPicturesLibrarySid* = 88
-  winCapabilityVideosLibrarySid* = 89
-  winCapabilityMusicLibrarySid* = 90
-  winCapabilityDocumentsLibrarySid* = 91
-  winCapabilitySharedUserCertificatesSid* = 92
-  winCapabilityEnterpriseAuthenticationSid* = 93
-  winCapabilityRemovableStorageSid* = 94
-  winBuiltinRDSRemoteAccessServersSid* = 95
-  winBuiltinRDSEndpointServersSid* = 96
-  winBuiltinRDSManagementServersSid* = 97
-  winUserModeDriversSid* = 98
-  winBuiltinHyperVAdminsSid* = 99
-  winAccountCloneableControllersSid* = 100
-  winBuiltinAccessControlAssistanceOperatorsSid* = 101
-  winBuiltinRemoteManagementUsersSid* = 102
-  winAuthenticationAuthorityAssertedSid* = 103
-  winAuthenticationServiceAssertedSid* = 104
   SE_GROUP_MANDATORY* = 0x00000001
   SE_GROUP_ENABLED_BY_DEFAULT* = 0x00000002
   SE_GROUP_ENABLED* = 0x00000004
@@ -6661,8 +7883,6 @@ const
   SYSTEM_MANDATORY_LABEL_VALID_MASK* = SYSTEM_MANDATORY_LABEL_NO_WRITE_UP or SYSTEM_MANDATORY_LABEL_NO_READ_UP or SYSTEM_MANDATORY_LABEL_NO_EXECUTE_UP
   ACE_OBJECT_TYPE_PRESENT* = 0x1
   ACE_INHERITED_OBJECT_TYPE_PRESENT* = 0x2
-  aclRevisionInformation* = 1
-  aclSizeInformation* = 2
   SECURITY_DESCRIPTOR_REVISION* = 1
   SECURITY_DESCRIPTOR_REVISION1* = 1
   SE_OWNER_DEFAULTED* = 0x0001
@@ -6683,8 +7903,6 @@ const
   ACCESS_PROPERTY_SET_GUID* = 1
   ACCESS_PROPERTY_GUID* = 2
   ACCESS_MAX_LEVEL* = 4
-  auditEventObjectAccess* = 0
-  auditEventDirectoryServiceAccess* = 1
   AUDIT_ALLOW_NO_PRIVILEGE* = 0x1
   ACCESS_DS_SOURCE_A* = "DS"
   ACCESS_DS_SOURCE_W* = "DS"
@@ -6700,22 +7918,6 @@ const
   ACCESS_REASON_DATA_MASK* = 0x0000ffff
   ACCESS_REASON_STAGING_MASK* = 0x80000000'i32
   ACCESS_REASON_EXDATA_MASK* = 0x7f000000
-  accessReasonNone* = 0x00000000
-  accessReasonAllowedAce* = 0x00010000
-  accessReasonDeniedAce* = 0x00020000
-  accessReasonAllowedParentAce* = 0x00030000
-  accessReasonDeniedParentAce* = 0x00040000
-  accessReasonNotGrantedByCape* = 0x00050000
-  accessReasonNotGrantedByParentCape* = 0x00060000
-  accessReasonNotGrantedToAppContainer* = 0x00070000
-  accessReasonMissingPrivilege* = 0x00100000
-  accessReasonFromPrivilege* = 0x00200000
-  accessReasonIntegrityLevel* = 0x00300000
-  accessReasonOwnership* = 0x00400000
-  accessReasonNullDacl* = 0x00500000
-  accessReasonEmptyDacl* = 0x00600000
-  accessReasonNoSD* = 0x00700000
-  accessReasonNoGrant* = 0x00800000
   SE_SECURITY_DESCRIPTOR_FLAG_NO_OWNER_ACE* = 0x00000001
   SE_SECURITY_DESCRIPTOR_FLAG_NO_LABEL_ACE* = 0x00000002
   SE_SECURITY_DESCRIPTOR_VALID_FLAGS* = 0x00000003
@@ -6754,10 +7956,6 @@ const
   SE_INC_WORKING_SET_NAME* = "SeIncreaseWorkingSetPrivilege"
   SE_TIME_ZONE_NAME* = "SeTimeZonePrivilege"
   SE_CREATE_SYMBOLIC_LINK_NAME* = "SeCreateSymbolicLinkPrivilege"
-  securityAnonymous* = 0
-  securityIdentification* = 1
-  securityImpersonation* = 2
-  securityDelegation* = 3
   SECURITY_MAX_IMPERSONATION_LEVEL* = securityDelegation
   SECURITY_MIN_IMPERSONATION_LEVEL* = securityAnonymous
   DEFAULT_IMPERSONATION_LEVEL* = securityImpersonation
@@ -6775,63 +7973,10 @@ const
   TOKEN_READ* = STANDARD_RIGHTS_READ or TOKEN_QUERY
   TOKEN_WRITE* = STANDARD_RIGHTS_WRITE or TOKEN_ADJUST_PRIVILEGES or TOKEN_ADJUST_GROUPS or TOKEN_ADJUST_DEFAULT
   TOKEN_EXECUTE* = STANDARD_RIGHTS_EXECUTE
-  tokenPrimary* = 1
-  tokenImpersonation* = 2
-  tokenElevationTypeDefault* = 1
-  tokenElevationTypeFull* = 2
-  tokenElevationTypeLimited* = 3
-  tokenUser* = 1
-  tokenGroups* = 2
-  tokenPrivileges* = 3
-  tokenOwner* = 4
-  tokenPrimaryGroup* = 5
-  tokenDefaultDacl* = 6
-  tokenSource* = 7
-  tokenType* = 8
-  tokenImpersonationLevel* = 9
-  tokenStatistics* = 10
-  tokenRestrictedSids* = 11
-  tokenSessionId* = 12
-  tokenGroupsAndPrivileges* = 13
-  tokenSessionReference* = 14
-  tokenSandBoxInert* = 15
-  tokenAuditPolicy* = 16
-  tokenOrigin* = 17
-  tokenElevationType* = 18
-  tokenLinkedToken* = 19
-  tokenElevation* = 20
-  tokenHasRestrictions* = 21
-  tokenAccessInformation* = 22
-  tokenVirtualizationAllowed* = 23
-  tokenVirtualizationEnabled* = 24
-  tokenIntegrityLevel* = 25
-  tokenUIAccess* = 26
-  tokenMandatoryPolicy* = 27
-  tokenLogonSid* = 28
-  tokenIsAppContainer* = 29
-  tokenCapabilities* = 30
-  tokenAppContainerSid* = 31
-  tokenAppContainerNumber* = 32
-  tokenUserClaimAttributes* = 33
-  tokenDeviceClaimAttributes* = 34
-  tokenRestrictedUserClaimAttributes* = 35
-  tokenRestrictedDeviceClaimAttributes* = 36
-  tokenDeviceGroups* = 37
-  tokenRestrictedDeviceGroups* = 38
-  tokenSecurityAttributes* = 39
-  tokenIsRestricted* = 40
-  maxTokenInfoClass* = 41
   TOKEN_MANDATORY_POLICY_OFF* = 0x0
   TOKEN_MANDATORY_POLICY_NO_WRITE_UP* = 0x1
   TOKEN_MANDATORY_POLICY_NEW_PROCESS_MIN* = 0x2
   TOKEN_MANDATORY_POLICY_VALID_MASK* = TOKEN_MANDATORY_POLICY_NO_WRITE_UP or TOKEN_MANDATORY_POLICY_NEW_PROCESS_MIN
-  mandatoryLevelUntrusted* = 0
-  mandatoryLevelLow* = 1
-  mandatoryLevelMedium* = 2
-  mandatoryLevelHigh* = 3
-  mandatoryLevelSystem* = 4
-  mandatoryLevelSecureProcess* = 5
-  mandatoryLevelCount* = 6
   CLAIM_SECURITY_ATTRIBUTE_TYPE_INVALID* = 0x00
   CLAIM_SECURITY_ATTRIBUTE_TYPE_INT64* = 0x01
   CLAIM_SECURITY_ATTRIBUTE_TYPE_UINT64* = 0x02
@@ -6868,9 +8013,6 @@ const
   PROTECTED_SACL_SECURITY_INFORMATION* = 0x40000000
   UNPROTECTED_DACL_SECURITY_INFORMATION* = 0x20000000
   UNPROTECTED_SACL_SECURITY_INFORMATION* = 0x10000000
-  seLearningModeInvalidType* = 0
-  seLearningModeSettings* = 1
-  seLearningModeMax* = 2
   SE_LEARNING_MODE_FLAG_PERMISSIVE* = 0x00000001
   PROCESS_TERMINATE* = 0x0001
   PROCESS_CREATE_THREAD* = 0x0002
@@ -6924,22 +8066,6 @@ const
   QUOTA_LIMITS_HARDWS_MAX_DISABLE* = 0x00000008
   QUOTA_LIMITS_USE_DEFAULT_LIMITS* = 0x00000010
   THREAD_PROFILING_FLAG_DISPATCH* = 0x1
-  pMCCounter* = 0
-  maxHardwareCounterType* = 1
-  processDEPPolicy* = 0
-  processASLRPolicy* = 1
-  processReserved1MitigationPolicy* = 2
-  processStrictHandleCheckPolicy* = 3
-  processSystemCallDisablePolicy* = 4
-  processMitigationOptionsMask* = 5
-  processExtensionPointDisablePolicy* = 6
-  maxProcessMitigationPolicy* = 7
-  toleranceLow* = 1
-  toleranceMedium* = 2
-  toleranceHigh* = 3
-  toleranceIntervalShort* = 1
-  toleranceIntervalMedium* = 2
-  toleranceIntervalLong* = 3
   JOB_OBJECT_TERMINATE_AT_END_OF_JOB* = 0
   JOB_OBJECT_POST_AT_END_OF_JOB* = 1
   JOB_OBJECT_MSG_END_OF_JOB_TIME* = 1
@@ -7003,36 +8129,6 @@ const
   JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP* = 0x4
   JOB_OBJECT_CPU_RATE_CONTROL_NOTIFY* = 0x8
   JOB_OBJECT_CPU_RATE_CONTROL_VALID_FLAGS* = 0xf
-  jobObjectBasicAccountingInformation* = 1
-  jobObjectBasicLimitInformation* = 2
-  jobObjectBasicProcessIdList* = 3
-  jobObjectBasicUIRestrictions* = 4
-  jobObjectSecurityLimitInformation* = 5
-  jobObjectEndOfJobTimeInformation* = 6
-  jobObjectAssociateCompletionPortInformation* = 7
-  jobObjectBasicAndIoAccountingInformation* = 8
-  jobObjectExtendedLimitInformation* = 9
-  jobObjectJobSetInformation* = 10
-  jobObjectGroupInformation* = 11
-  jobObjectNotificationLimitInformation* = 12
-  jobObjectLimitViolationInformation* = 13
-  jobObjectGroupInformationEx* = 14
-  jobObjectCpuRateControlInformation* = 15
-  jobObjectCompletionFilter* = 16
-  jobObjectCompletionCounter* = 17
-  jobObjectReserved1Information* = 18
-  jobObjectReserved2Information* = 19
-  jobObjectReserved3Information* = 20
-  jobObjectReserved4Information* = 21
-  jobObjectReserved5Information* = 22
-  jobObjectReserved6Information* = 23
-  jobObjectReserved7Information* = 24
-  jobObjectReserved8Information* = 25
-  maxJobObjectInfoClass* = 26
-  firmwareTypeUnknown* = 0
-  firmwareTypeBios* = 1
-  firmwareTypeUefi* = 2
-  firmwareTypeMax* = 3
   EVENT_MODIFY_STATE* = 0x0002
   EVENT_ALL_ACCESS* = STANDARD_RIGHTS_REQUIRED or SYNCHRONIZE or 0x3
   MUTANT_QUERY_STATE* = 0x0001
@@ -7045,17 +8141,7 @@ const
   TIME_ZONE_ID_UNKNOWN* = 0
   TIME_ZONE_ID_STANDARD* = 1
   TIME_ZONE_ID_DAYLIGHT* = 2
-  relationProcessorCore* = 0
-  relationNumaNode* = 1
-  relationCache* = 2
-  relationProcessorPackage* = 3
-  relationGroup* = 4
-  relationAll* = 0xffff
   LTP_PC_SMT* = 0x1
-  cacheUnified* = 0
-  cacheInstruction* = 1
-  cacheData* = 2
-  cacheTrace* = 3
   CACHE_FULLY_ASSOCIATIVE* = 0xFF
   PROCESSOR_INTEL_386* = 386
   PROCESSOR_INTEL_486* = 486
@@ -7423,43 +8509,12 @@ const
   GUID_PCIEXPRESS_SETTINGS_SUBGROUP* = DEFINE_GUID("501a4d13-42af-4429-9fd1-a8218c268e20")
   GUID_PCIEXPRESS_ASPM_POLICY* = DEFINE_GUID("ee12f906-d277-404b-b6da-e5fa1a576df5")
   GUID_ENABLE_SWITCH_FORCED_SHUTDOWN* = DEFINE_GUID("833a6b62-dfa4-46d1-82f8-e09e34d029d6")
-  powerSystemUnspecified* = 0
-  powerSystemWorking* = 1
-  powerSystemSleeping1* = 2
-  powerSystemSleeping2* = 3
-  powerSystemSleeping3* = 4
-  powerSystemHibernate* = 5
-  powerSystemShutdown* = 6
-  powerSystemMaximum* = 7
-  powerActionNone* = 0
-  powerActionReserved* = 1
-  powerActionSleep* = 2
-  powerActionHibernate* = 3
-  powerActionShutdown* = 4
-  powerActionShutdownReset* = 5
-  powerActionShutdownOff* = 6
-  powerActionWarmEject* = 7
-  powerDeviceUnspecified* = 0
-  powerDeviceD0* = 1
-  powerDeviceD1* = 2
-  powerDeviceD2* = 3
-  powerDeviceD3* = 4
-  powerDeviceMaximum* = 5
-  powerMonitorOff* = 0
-  powerMonitorOn* = 1
-  powerMonitorDim* = 2
-  powerUserPresent* = 0
-  powerUserNotPresent* = 1
-  powerUserInactive* = 2
-  powerUserMaximum* = 3
   powerUserInvalid* = powerUserMaximum
   ES_SYSTEM_REQUIRED* = DWORD 0x00000001
   ES_DISPLAY_REQUIRED* = DWORD 0x00000002
   ES_USER_PRESENT* = DWORD 0x00000004
   ES_AWAYMODE_REQUIRED* = DWORD 0x00000040
   ES_CONTINUOUS* = DWORD 0x80000000'i32
-  LT_DONT_CARE* = 0
-  LT_LOWEST_LATENCY* = 1
   DIAGNOSTIC_REASON_VERSION* = 0
   POWER_REQUEST_CONTEXT_VERSION* = 0
   DIAGNOSTIC_REASON_SIMPLE_STRING* = 0x00000001
@@ -7468,10 +8523,6 @@ const
   DIAGNOSTIC_REASON_INVALID_FLAGS* = not 0x80000003'i32
   POWER_REQUEST_CONTEXT_SIMPLE_STRING* = 0x00000001
   POWER_REQUEST_CONTEXT_DETAILED_STRING* = 0x00000002
-  powerRequestDisplayRequired* = 0
-  powerRequestSystemRequired* = 1
-  powerRequestAwayModeRequired* = 2
-  powerRequestExecutionRequired* = 3
   PDCAP_D0_SUPPORTED* = 0x00000001
   PDCAP_D1_SUPPORTED* = 0x00000002
   PDCAP_D2_SUPPORTED* = 0x00000004
@@ -7481,124 +8532,11 @@ const
   PDCAP_WAKE_FROM_D2_SUPPORTED* = 0x00000040
   PDCAP_WAKE_FROM_D3_SUPPORTED* = 0x00000080
   PDCAP_WARM_EJECT_SUPPORTED* = 0x00000100
-  systemPowerPolicyAc* = 0
-  systemPowerPolicyDc* = 1
-  verifySystemPolicyAc* = 2
-  verifySystemPolicyDc* = 3
-  systemPowerCapabilities* = 4
-  systemBatteryState* = 5
-  systemPowerStateHandler* = 6
-  processorStateHandler* = 7
-  systemPowerPolicyCurrent* = 8
-  administratorPowerPolicy* = 9
-  systemReserveHiberFile* = 10
-  processorInformation* = 11
-  systemPowerInformation* = 12
-  processorStateHandler2* = 13
-  lastWakeTime* = 14
-  lastSleepTime* = 15
-  systemExecutionState* = 16
-  systemPowerStateNotifyHandler* = 17
-  processorPowerPolicyAc* = 18
-  processorPowerPolicyDc* = 19
-  verifyProcessorPowerPolicyAc* = 20
-  verifyProcessorPowerPolicyDc* = 21
-  processorPowerPolicyCurrent* = 22
-  systemPowerStateLogging* = 23
-  systemPowerLoggingEntry* = 24
-  setPowerSettingValue* = 25
-  notifyUserPowerSetting* = 26
-  powerInformationLevelUnused0* = 27
-  systemMonitorHiberBootPowerOff* = 28
-  systemVideoState* = 29
-  traceApplicationPowerMessage* = 30
-  traceApplicationPowerMessageEnd* = 31
-  processorPerfStates* = 32
-  processorIdleStates* = 33
-  processorCap* = 34
-  systemWakeSource* = 35
-  systemHiberFileInformation* = 36
-  traceServicePowerMessage* = 37
-  processorLoad* = 38
-  powerShutdownNotification* = 39
-  monitorCapabilities* = 40
-  sessionPowerInit* = 41
-  sessionDisplayState* = 42
-  powerRequestCreate* = 43
-  powerRequestAction* = 44
-  getPowerRequestList* = 45
-  processorInformationEx* = 46
-  notifyUserModeLegacyPowerEvent* = 47
-  groupPark* = 48
-  processorIdleDomains* = 49
-  wakeTimerList* = 50
-  systemHiberFileSize* = 51
-  processorIdleStatesHv* = 52
-  processorPerfStatesHv* = 53
-  processorPerfCapHv* = 54
-  processorSetIdle* = 55
-  logicalProcessorIdling* = 56
-  userPresence* = 57
-  powerSettingNotificationName* = 58
-  getPowerSettingValue* = 59
-  idleResiliency* = 60
-  sessionRITState* = 61
-  sessionConnectNotification* = 62
-  sessionPowerCleanup* = 63
-  sessionLockState* = 64
-  systemHiberbootState* = 65
-  platformInformation* = 66
-  pdcInvocation* = 67
-  monitorInvocation* = 68
-  firmwareTableInformationRegistered* = 69
-  setShutdownSelectedTime* = 70
-  suspendResumeInvocation* = 71
-  plmPowerRequestCreate* = 72
-  screenOff* = 73
-  csDeviceNotification* = 74
-  platformRole* = 75
-  lastResumePerformance* = 76
-  displayBurst* = 77
-  exitLatencySamplingPercentage* = 78
-  applyLowPowerScenarioSettings* = 79
-  powerInformationLevelMaximum* = 80
-  userNotPresent* = 0
-  userPresent* = 1
-  userUnknown* = 0xff
-  monitorRequestReasonUnknown* = 0
-  monitorRequestReasonPowerButton* = 1
-  monitorRequestReasonRemoteConnection* = 2
-  monitorRequestReasonScMonitorpower* = 3
-  monitorRequestReasonUserInput* = 4
-  monitorRequestReasonAcDcDisplayBurst* = 5
-  monitorRequestReasonUserDisplayBurst* = 6
-  monitorRequestReasonPoSetSystemState* = 7
-  monitorRequestReasonSetThreadExecutionState* = 8
-  monitorRequestReasonFullWake* = 9
-  monitorRequestReasonSessionUnlock* = 10
-  monitorRequestReasonScreenOffRequest* = 11
-  monitorRequestReasonIdleTimeout* = 12
-  monitorRequestReasonPolicyChange* = 13
-  monitorRequestReasonMax* = 14
-  poAc* = 0
-  poDc* = 1
-  poHot* = 2
-  poConditionMaximum* = 3
   POWER_SETTING_VALUE_VERSION* = 0x1
-  platformRoleUnspecified* = 0
-  platformRoleDesktop* = 1
-  platformRoleMobile* = 2
-  platformRoleWorkstation* = 3
-  platformRoleEnterpriseServer* = 4
-  platformRoleSOHOServer* = 5
-  platformRoleAppliancePC* = 6
-  platformRolePerformanceServer* = 7
-  platformRoleSlate* = 8
-  platformRoleMaximum* = 9
   POWER_PLATFORM_ROLE_V1* = 0x00000001
-  POWER_PLATFORM_ROLE_V1_MAX* = platformRolePerformanceServer+1
+  POWER_PLATFORM_ROLE_V1_MAX* = ord(platformRolePerformanceServer)+1
   POWER_PLATFORM_ROLE_V2* = 0x00000002
-  POWER_PLATFORM_ROLE_V2_MAX* = platformRoleSlate+1
+  POWER_PLATFORM_ROLE_V2_MAX* = ord(platformRoleSlate)+1
   POWER_PLATFORM_ROLE_VERSION* = POWER_PLATFORM_ROLE_V2
   POWER_PLATFORM_ROLE_VERSION_MAX* = POWER_PLATFORM_ROLE_V2_MAX
   ACPI_PPM_SOFTWARE_ALL* = 0xfc
@@ -8214,13 +9152,6 @@ const
   IMAGE_SEPARATE_DEBUG_FLAGS_MASK* = 0x8000
   IMAGE_SEPARATE_DEBUG_MISMATCH* = 0x8000
   IMPORT_OBJECT_HDR_SIG2* = 0xffff
-  IMPORT_OBJECT_CODE* = 0
-  IMPORT_OBJECT_DATA* = 1
-  IMPORT_OBJECT_CONST* = 2
-  IMPORT_OBJECT_ORDINAL* = 0
-  IMPORT_OBJECT_NAME* = 1
-  IMPORT_OBJECT_NAME_NO_PREFIX* = 2
-  IMPORT_OBJECT_NAME_UNDECORATE* = 3
   COMIMAGE_FLAGS_ILONLY* = 0x00000001
   COMIMAGE_FLAGS_32BITREQUIRED* = 0x00000002
   COMIMAGE_FLAGS_IL_LIBRARY* = 0x00000004
@@ -8334,17 +9265,6 @@ const
   VER_PLATFORM_WIN32_WINDOWS* = 1
   VER_PLATFORM_WIN32_NT* = 2
   RTL_UMS_VERSION* = 0x0100
-  umsThreadInvalidInfoClass* = 0
-  umsThreadUserContext* = 1
-  umsThreadPriority* = 2
-  umsThreadAffinity* = 3
-  umsThreadTeb* = 4
-  umsThreadIsSuspended* = 5
-  umsThreadIsTerminated* = 6
-  umsThreadMaxInfoClass* = 7
-  umsSchedulerStartup* = 0
-  umsSchedulerThreadBlocked* = 1
-  umsSchedulerThreadYield* = 2
   VRL_PREDEFINED_CLASS_BEGIN* = 1
   VRL_CUSTOM_CLASS_BEGIN* = 1 shl 8
   VRL_CLASS_CONSISTENCY* = VRL_PREDEFINED_CLASS_BEGIN
@@ -8364,8 +9284,6 @@ const
   RTL_SRWLOCK_INIT* = [0'u8]
   RTL_CONDITION_VARIABLE_INIT* = [0'u8]
   RTL_CONDITION_VARIABLE_LOCKMODE_SHARED* = 0x1
-  heapCompatibilityInformation* = 0
-  heapEnableTerminationOnCorruption* = 1
   WT_EXECUTEDEFAULT* = 0x00000000
   WT_EXECUTEINIOTHREAD* = 0x00000001
   WT_EXECUTEINUITHREAD* = 0x00000002
@@ -8378,24 +9296,8 @@ const
   WT_TRANSFER_IMPERSONATION* = 0x00000100
   WT_EXECUTEDELETEWAIT* = 0x00000008
   WT_EXECUTEINLONGTHREAD* = 0x00000010
-  activationContextBasicInformation* = 1
-  activationContextDetailedInformation* = 2
-  assemblyDetailedInformationInActivationContext* = 3
-  fileInformationInAssemblyOfAssemblyInActivationContext* = 4
-  runlevelInformationInActivationContext* = 5
-  compatibilityInformationInActivationContext* = 6
-  activationContextManifestResourceName* = 7
-  maxActivationContextInfoClass* = 8
-  assemblyDetailedInformationInActivationContxt* = 3
-  fileInformationInAssemblyOfAssemblyInActivationContxt* = 4
-  ACTCTX_RUN_LEVEL_UNSPECIFIED* = 0
-  ACTCTX_RUN_LEVEL_AS_INVOKER* = 1
-  ACTCTX_RUN_LEVEL_HIGHEST_AVAILABLE* = 2
-  ACTCTX_RUN_LEVEL_REQUIRE_ADMIN* = 3
-  ACTCTX_RUN_LEVEL_NUMBERS* = 4
-  ACTCTX_COMPATIBILITY_ELEMENT_TYPE_UNKNOWN* = 0
-  ACTCTX_COMPATIBILITY_ELEMENT_TYPE_OS* = 1
-  ACTCTX_COMPATIBILITY_ELEMENT_TYPE_MITIGATION* = 2
+  assemblyDetailedInformationInActivationContxt* = assemblyDetailedInformationInActivationContext
+  fileInformationInAssemblyOfAssemblyInActivationContxt* = fileInformationInAssemblyOfAssemblyInActivationContext
   ACTIVATION_CONTEXT_PATH_TYPE_NONE* = 1
   ACTIVATION_CONTEXT_PATH_TYPE_WIN32_FILE* = 2
   ACTIVATION_CONTEXT_PATH_TYPE_URL* = 3
@@ -8576,40 +9478,6 @@ const
   REG_RESOURCE_REQUIREMENTS_LIST* = 10
   REG_QWORD* = 11
   REG_QWORD_LITTLE_ENDIAN* = 11
-  SERVICE_KERNEL_DRIVER* = 0x00000001
-  SERVICE_FILE_SYSTEM_DRIVER* = 0x00000002
-  SERVICE_ADAPTER* = 0x00000004
-  SERVICE_RECOGNIZER_DRIVER* = 0x00000008
-  SERVICE_DRIVER* = SERVICE_KERNEL_DRIVER or SERVICE_FILE_SYSTEM_DRIVER or SERVICE_RECOGNIZER_DRIVER
-  SERVICE_WIN32_OWN_PROCESS* = 0x00000010
-  SERVICE_WIN32_SHARE_PROCESS* = 0x00000020
-  SERVICE_WIN32* = SERVICE_WIN32_OWN_PROCESS or SERVICE_WIN32_SHARE_PROCESS
-  SERVICE_INTERACTIVE_PROCESS* = 0x00000100
-  SERVICE_TYPE_ALL* = SERVICE_WIN32 or SERVICE_ADAPTER or SERVICE_DRIVER or SERVICE_INTERACTIVE_PROCESS
-  SERVICE_BOOT_START* = 0x00000000
-  SERVICE_SYSTEM_START* = 0x00000001
-  SERVICE_AUTO_START* = 0x00000002
-  SERVICE_DEMAND_START* = 0x00000003
-  SERVICE_DISABLED* = 0x00000004
-  SERVICE_ERROR_IGNORE* = 0x00000000
-  SERVICE_ERROR_NORMAL* = 0x00000001
-  SERVICE_ERROR_SEVERE* = 0x00000002
-  SERVICE_ERROR_CRITICAL* = 0x00000003
-  driverType* = SERVICE_KERNEL_DRIVER
-  fileSystemType* = SERVICE_FILE_SYSTEM_DRIVER
-  win32ServiceOwnProcess* = SERVICE_WIN32_OWN_PROCESS
-  win32ServiceShareProcess* = SERVICE_WIN32_SHARE_PROCESS
-  adapterType* = SERVICE_ADAPTER
-  recognizerType* = SERVICE_RECOGNIZER_DRIVER
-  bootLoad* = SERVICE_BOOT_START
-  systemLoad* = SERVICE_SYSTEM_START
-  autoLoad* = SERVICE_AUTO_START
-  demandLoad* = SERVICE_DEMAND_START
-  disableLoad* = SERVICE_DISABLED
-  ignoreError* = SERVICE_ERROR_IGNORE
-  normalError* = SERVICE_ERROR_NORMAL
-  severeError* = SERVICE_ERROR_SEVERE
-  criticalError* = SERVICE_ERROR_CRITICAL
   CM_SERVICE_NETWORK_BOOT_LOAD* = 0x00000001
   CM_SERVICE_VIRTUAL_DISK_BOOT_LOAD* = 0x00000002
   CM_SERVICE_USB_DISK_BOOT_LOAD* = 0x00000004
@@ -8708,24 +9576,6 @@ const
   TAPE_CHECK_FOR_DRIVE_PROBLEM* = 2
   TAPE_QUERY_IO_ERROR_DATA* = 3
   TAPE_QUERY_DEVICE_ERROR_DATA* = 4
-  tapeDriveProblemNone* = 0
-  tapeDriveReadWriteWarning* = 1
-  tapeDriveReadWriteError* = 2
-  tapeDriveReadWarning* = 3
-  tapeDriveWriteWarning* = 4
-  tapeDriveReadError* = 5
-  tapeDriveWriteError* = 6
-  tapeDriveHardwareError* = 7
-  tapeDriveUnsupportedMedia* = 8
-  tapeDriveScsiConnectionError* = 9
-  tapeDriveTimetoClean* = 10
-  tapeDriveCleanDriveNow* = 11
-  tapeDriveMediaLifeExpired* = 12
-  tapeDriveSnappedTape* = 13
-  TP_CALLBACK_PRIORITY_HIGH* = 0
-  TP_CALLBACK_PRIORITY_NORMAL* = 1
-  TP_CALLBACK_PRIORITY_LOW* = 2
-  TP_CALLBACK_PRIORITY_INVALID* = 3
   TP_CALLBACK_PRIORITY_COUNT* = TP_CALLBACK_PRIORITY_INVALID
   TRANSACTION_MANAGER_VOLATILE* = 0x00000001
   TRANSACTION_MANAGER_COMMIT_DEFAULT* = 0x00000000
@@ -8822,34 +9672,6 @@ const
   ENLISTMENT_GENERIC_WRITE* = STANDARD_RIGHTS_WRITE or ENLISTMENT_SET_INFORMATION or ENLISTMENT_RECOVER or ENLISTMENT_SUBORDINATE_RIGHTS or ENLISTMENT_SUPERIOR_RIGHTS
   ENLISTMENT_GENERIC_EXECUTE* = STANDARD_RIGHTS_EXECUTE or ENLISTMENT_RECOVER or ENLISTMENT_SUBORDINATE_RIGHTS or ENLISTMENT_SUPERIOR_RIGHTS
   ENLISTMENT_ALL_ACCESS* = STANDARD_RIGHTS_REQUIRED or ENLISTMENT_GENERIC_READ or ENLISTMENT_GENERIC_WRITE or ENLISTMENT_GENERIC_EXECUTE
-  transactionOutcomeUndetermined* = 1
-  transactionOutcomeCommitted* = 2
-  transactionOutcomeAborted* = 3
-  transactionStateNormal* = 1
-  transactionStateIndoubt* = 2
-  transactionStateCommittedNotify* = 3
-  transactionBasicInformation* = 0
-  transactionPropertiesInformation* = 1
-  transactionEnlistmentInformation* = 2
-  transactionSuperiorEnlistmentInformation* = 3
-  transactionBindInformation* = 4
-  transactionDTCPrivateInformation* = 5
-  transactionManagerBasicInformation* = 0
-  transactionManagerLogInformation* = 1
-  transactionManagerLogPathInformation* = 2
-  transactionManagerOnlineProbeInformation* = 3
-  transactionManagerRecoveryInformation* = 4
-  transactionManagerOldestTransactionInformation* = 5
-  resourceManagerBasicInformation* = 0
-  resourceManagerCompletionInformation* = 1
-  enlistmentBasicInformation* = 0
-  enlistmentRecoveryInformation* = 1
-  enlistmentCrmInformation* = 2
-  KTMOBJECT_TRANSACTION* = 0
-  KTMOBJECT_TRANSACTION_MANAGER* = 1
-  KTMOBJECT_RESOURCE_MANAGER* = 2
-  KTMOBJECT_ENLISTMENT* = 3
-  KTMOBJECT_INVALID* = 4
   WOW64_CONTEXT_i386* = 0x00010000
   WOW64_CONTEXT_i486* = 0x00010000
   WOW64_CONTEXT_CONTROL* = WOW64_CONTEXT_i386 or 0x00000001
@@ -8904,189 +9726,7 @@ const
   DC_PAPERNAMES* = 16
   DC_ORIENTATION* = 17
   DC_COPIES* = 18
-  fileDirectoryInformation* = 1
-  fileFullDirectoryInformation* = 2
-  fileBothDirectoryInformation* = 3
-  fileBasicInformation* = 4
-  fileStandardInformation* = 5
-  fileInternalInformation* = 6
-  fileEaInformation* = 7
-  fileAccessInformation* = 8
-  fileNameInformation* = 9
-  fileRenameInformation* = 10
-  fileLinkInformation* = 11
-  fileNamesInformation* = 12
-  fileDispositionInformation* = 13
-  filePositionInformation* = 14
-  fileFullEaInformation* = 15
-  fileModeInformation* = 16
-  fileAlignmentInformation* = 17
-  fileAllInformation* = 18
-  fileAllocationInformation* = 19
-  fileEndOfFileInformation* = 20
-  fileAlternateNameInformation* = 21
-  fileStreamInformation* = 22
-  filePipeInformation* = 23
-  filePipeLocalInformation* = 24
-  filePipeRemoteInformation* = 25
-  fileMailslotQueryInformation* = 26
-  fileMailslotSetInformation* = 27
-  fileCompressionInformation* = 28
-  fileObjectIdInformation* = 29
-  fileCompletionInformation* = 30
-  fileMoveClusterInformation* = 31
-  fileQuotaInformation* = 32
-  fileReparsePointInformation* = 33
-  fileNetworkOpenInformation* = 34
-  fileAttributeTagInformation* = 35
-  fileTrackingInformation* = 36
-  fileIdBothDirectoryInformation* = 37
-  fileIdFullDirectoryInformation* = 38
-  fileValidDataLengthInformation* = 39
-  fileShortNameInformation* = 40
-  fileSfioReserveInformation* = 44
-  fileSfioVolumeInformation* = 45
-  fileHardLinkInformation* = 46
-  fileNormalizedNameInformation* = 48
-  fileIdGlobalTxDirectoryInformation* = 50
-  fileStandardLinkInformation* = 54
-  fileMaximumInformation* = 55
-  fileFsVolumeInformation* = 1
-  fileFsLabelInformation* = 2
-  fileFsSizeInformation* = 3
-  fileFsDeviceInformation* = 4
-  fileFsAttributeInformation* = 5
-  fileFsControlInformation* = 6
-  fileFsFullSizeInformation* = 7
-  fileFsObjectIdInformation* = 8
-  fileFsDriverPathInformation* = 9
-  fileFsVolumeFlagsInformation* = 10
-  fileFsMaximumInformation* = 11
-  stateInitialized* = 0
-  stateReady* = 1
-  stateRunning* = 2
-  stateStandby* = 3
-  stateTerminated* = 4
-  stateWait* = 5
-  stateTransition* = 6
-  stateUnknown* = 7
-  executive* = 0
-  freePage* = 1
-  pageIn* = 2
-  poolAllocation* = 3
-  delayExecution* = 4
-  suspended* = 5
-  userRequest* = 6
-  wrExecutive* = 7
-  wrFreePage* = 8
-  wrPageIn* = 9
-  wrPoolAllocation* = 10
-  wrDelayExecution* = 11
-  wrSuspended* = 12
-  wrUserRequest* = 13
-  wrEventPair* = 14
-  wrQueue* = 15
-  wrLpcReceive* = 16
-  wrLpcReply* = 17
-  wrVirtualMemory* = 18
-  wrPageOut* = 19
-  wrRendezvous* = 20
-  spare2* = 21
-  spare3* = 22
-  spare4* = 23
-  spare5* = 24
-  spare6* = 25
-  wrKernel* = 26
-  maximumWaitReason* = 27
-  processBasicInformation* = 0
-  processQuotaLimits* = 1
-  processIoCounters* = 2
-  processVmCounters* = 3
-  processTimes* = 4
-  processBasePriority* = 5
-  processRaisePriority* = 6
-  processDebugPort* = 7
-  processExceptionPort* = 8
-  processAccessToken* = 9
-  processLdtInformation* = 10
-  processLdtSize* = 11
-  processDefaultHardErrorMode* = 12
-  processIoPortHandlers* = 13
-  processPooledUsageAndLimits* = 14
-  processWorkingSetWatch* = 15
-  processUserModeIOPL* = 16
-  processEnableAlignmentFaultFixup* = 17
-  processPriorityClass* = 18
-  processWx86Information* = 19
-  processHandleCount* = 20
-  processAffinityMask* = 21
-  processPriorityBoost* = 22
-  processDeviceMap* = 23
-  processSessionInformation* = 24
-  processForegroundInformation* = 25
-  processWow64Information* = 26
-  processImageFileName* = 27
-  processLUIDDeviceMapsEnabled* = 28
-  processBreakOnTermination* = 29
-  processDebugObjectHandle* = 30
-  processDebugFlags* = 31
-  processHandleTracing* = 32
-  processIoPriority* = 33
-  processExecuteFlags* = 34
-  processTlsInformation* = 35
-  processCookie* = 36
-  processImageInformation* = 37
-  processCycleTime* = 38
-  processPagePriority* = 39
-  processInstrumentationCallback* = 40
-  processThreadStackAllocation* = 41
-  processWorkingSetWatchEx* = 42
-  processImageFileNameWin32* = 43
-  processImageFileMapping* = 44
-  processAffinityUpdateMode* = 45
-  processMemoryAllocationMode* = 46
-  processGroupInformation* = 47
-  processTokenVirtualizationEnabled* = 48
-  processConsoleHostProcess* = 49
-  processWindowInformation* = 50
-  maxProcessInfoClass* = 51
-  threadBasicInformation* = 0
-  threadTimes* = 1
-  threadPriority* = 2
-  threadBasePriority* = 3
-  threadAffinityMask* = 4
-  threadImpersonationToken* = 5
-  threadDescriptorTableEntry* = 6
-  threadEnableAlignmentFaultFixup* = 7
-  threadEventPair* = 8
-  threadQuerySetWin32StartAddress* = 9
-  threadZeroTlsCell* = 10
-  threadPerformanceCount* = 11
-  threadAmILastThread* = 12
-  threadIdealProcessor* = 13
-  threadPriorityBoost* = 14
-  threadSetTlsArrayAddress* = 15
-  threadIsIoPending* = 16
-  threadHideFromDebugger* = 17
-  systemBasicInformation* = 0
-  systemProcessorInformation* = 1
-  systemPerformanceInformation* = 2
-  systemTimeOfDayInformation* = 3
-  systemProcessInformation* = 5
-  systemProcessorPerformanceInformation* = 8
-  systemHandleInformation* = 16
-  systemPagefileInformation* = 18
-  systemInterruptInformation* = 23
-  systemExceptionInformation* = 33
-  systemRegistryQuotaInformation* = 37
-  systemLookasideInformation* = 45
-  objectBasicInformation* = 0
-  objectNameInformation* = 1
-  objectTypeInformation* = 2
-  objectAllInformation* = 3
-  objectDataInformation* = 4
   LOGONID_CURRENT* = ULONG(-1)
-  winStationInformation* = 8
   REPARSE_DATA_BUFFER_HEADER_SIZE* = 0x00000008
   REPARSE_GUID_DATA_BUFFER_HEADER_SIZE* = 0x00000018
   SECURITY_DESCRIPTOR_MIN_LENGTH* = 0x00000028
