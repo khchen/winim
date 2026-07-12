@@ -1,7 +1,7 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
@@ -20,16 +20,16 @@ proc main() =
 
   var pROT: ptr IRunningObjectTable
   GetRunningObjectTable(0, &pROT)
+  defer: pROT.Release()
 
   var pMoniker: ptr IMoniker
   CreateFileMoniker(monikerName, &pMoniker)
+  defer: pMoniker.Release()
 
   var cookie: DWORD
   pROT.Register(ROTFLAGS_REGISTRATIONKEEPSALIVE,
     cast[ptr IUnknown](unwrap(dict)), pMoniker, &cookie)
-
-  pMoniker.Release()
-  pROT.Release()
+  defer: pROT.Revoke(cookie)
 
   var fv = spawn thread()
   var msg: MSG

@@ -1,7 +1,7 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
@@ -13,9 +13,8 @@ proc thread(stream: ptr IStream): bool {.thread.} =
 
   var disp: ptr IDispatch
   if SUCCEEDED CoGetInterfaceAndReleaseStream(stream, &IID_IDispatch, cast[ptr pointer](&disp)):
-    var dict = wrap(disp)
+    var dict = adoptCom(disp)
     dict.add("child", "thread")
-    disp.Release()
 
   COM_FullRelease()
   CoUninitialize()

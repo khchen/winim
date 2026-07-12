@@ -1,7 +1,7 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
@@ -20,11 +20,11 @@ proc thread(cookie: DWORD): bool {.thread.} =
   CoInitialize(nil)
 
   var git = getGit()
+  defer: git.Release()
   var disp: ptr IDispatch
   if SUCCEEDED git.GetInterfaceFromGlobal(cookie, &IID_IDispatch, cast[ptr pointer](&disp)):
-    var dict = wrap(disp)
+    var dict = adoptCom(disp)
     dict.add("child", "thread")
-    disp.Release()
 
   COM_FullRelease()
   CoUninitialize()
@@ -34,6 +34,7 @@ proc main() =
   dict.add("main", "thread")
 
   var git = getGit()
+  defer: git.Release()
   var cookie: DWORD
   if SUCCEEDED git.RegisterInterfaceInGlobal(unwrap(dict), &IID_IDispatch, &cookie):
     var fv = spawn thread(cookie)
@@ -41,6 +42,7 @@ proc main() =
     while not fv.isReady():
       if PeekMessage(&msg, 0, 0, 0, PM_REMOVE) != 0:
         DispatchMessage(&msg)
+    git.RevokeInterfaceFromGlobal(cookie)
 
   for key in dict:
     echo key, " => ", dict.item(key)

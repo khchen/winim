@@ -1,7 +1,7 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
@@ -33,4 +33,4 @@ try:
     MessageBoxW(0, pszFilePath, L"File Path", MB_OK)
 
 except:
-  echo "something wrong !"
+  echo "Something went wrong!"

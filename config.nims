@@ -1,8 +1,8 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
-switch("threads", "on")
+switch("path", thisDir())

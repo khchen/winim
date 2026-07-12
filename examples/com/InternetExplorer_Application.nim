@@ -1,7 +1,7 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
@@ -36,7 +36,7 @@ proc handler(obj: com, name: string, params: varargs[variant]): variant =
 
 
 var obj = CreateObject("InternetExplorer.Application")
-# create InternetExplorerMedium instance to avoid it need admin
+# Create an InternetExplorerMedium instance to avoid needing admin rights.
 # var obj = CreateObject("{D5E8041D-920F-45e9-B8FB-B1DEB82C6E5E}")
 
 obj.visible = true

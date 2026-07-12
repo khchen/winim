@@ -1,7 +1,7 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
@@ -47,4 +47,4 @@ comScript:
   xchart.chartWizard(xrange, -4100, 7, 1, 1, 0, false, "Critically Endangered Plants and Animals")
   xchart.HasAxis(3) = false
 
-  COM_FullRelease() # make sure excel.exe will end it self
+  COM_FullRelease()

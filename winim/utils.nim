@@ -1,28 +1,28 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
-##  This module contains utilities for happily coding in winim.
+##  This module contains utilities for making Winim development easier.
 
 import inc/windef
 
 # todo: need more converter?
 
 converter winimConverterBooleanToBOOL*(x: bool): BOOL =
-  ## Converter between Windows' BOOL/WINBOOL and Nim's boolean type
+  ## Converts between Windows' BOOL/WINBOOL and Nim's Boolean type.
 
   result = if x: TRUE else: FALSE
 
 converter winimConverterBOOLToBoolean*(x: BOOL): bool =
-  ## Converter between Windows' BOOL/WINBOOL and Nim's boolean type
+  ## Converts between Windows' BOOL/WINBOOL and Nim's Boolean type.
 
   result = if x == FALSE: false else: true
 
 converter winimConverterVarObjectToPtrObject*[T: object](x: var T): ptr T =
-  ## Pass an object by address if target is "ptr object". For example:
+  ## Pass an object by address if the target is "ptr object". For example:
   ##
   ## .. code-block:: Nim
   ##    var msg: MSG
@@ -33,13 +33,13 @@ converter winimConverterVarObjectToPtrObject*[T: object](x: var T): ptr T =
   result = x.addr
 
 proc `&`*[T](x: var T): ptr T {.inline.} =
-  ## Use `&` like it in C/C++ to get address for anything.
+  ## Use `&` as in C/C++ to get the address of anything.
 
   result = x.addr
 
 when not compiles(unsafeaddr GUID_NULL):
   proc `&`*(x: object): ptr type(x) {.importc: "&", nodecl.}
-    ## Use `&` to gets pointer for const object. For example:
+    ## Use `&` to get a pointer for a const object. For example:
     ##
     ## .. code-block:: Nim
     ##    # pUk is "ptr IUnknown" for some object
@@ -48,7 +48,7 @@ when not compiles(unsafeaddr GUID_NULL):
 
 else:
   template `&`*(x: object): ptr type(x) = unsafeaddr x
-    ## Use `&` to gets pointer for const object. For example:
+    ## Use `&` to get a pointer for a const object. For example:
     ##
     ## .. code-block:: Nim
     ##    # pUk is "ptr IUnknown" for some object

@@ -1,11 +1,49 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
 import macros
+
+const webview2 {.strdefine.}: string = ""
+const webview2LoaderDllName* =
+  if webview2.len == 0 or webview2 == "true":
+    "WebView2Loader.dll"
+  elif webview2 == "lib":
+    ""
+  else:
+    webview2
+
+when webview2LoaderDllName.len == 0:
+  import std/os
+  when defined(vcc):
+    const webview2StaticLoader =
+      if defined(cpu64):
+        "WebView2LoaderStatic64.lib"
+      else:
+        "WebView2LoaderStatic32.lib"
+  else:
+    const webview2StaticLoader =
+      if defined(cpu64):
+        "WebView2LoaderStatic64Alt.lib"
+      else:
+        "WebView2LoaderStatic32Alt.lib"
+  {.passl: parentDir(currentSourcePath) / "../lib" / webview2StaticLoader.}
+
+  when defined(vcc):
+    {.passl: "advapi32.lib".}
+
+  elif defined(gcc) or defined(clang) or defined(tcc):
+    {.compile: "../lib/WebView2Abi.c".}
+    {.passl: "-ladvapi32".}
+    {.passl: "-lole32".}
+    {.passl: "-luser32".}
+    {.passl: "-lshlwapi".}
+
+  else:
+    {.error: "webview2=lib requires a supported compiler".}
 
 when not defined(noRes):
   when defined(vcc):
@@ -20,6 +58,16 @@ when not defined(noRes):
 macro winapi*(x: untyped): untyped =
   when not defined(noDiscardableApi):
     x.addPragma(newIdentNode("discardable"))
+
+  result = x
+
+macro wv2api*(x: untyped): untyped =
+  when not defined(noDiscardableApi):
+    x.addPragma(newIdentNode("discardable"))
+
+  if webview2LoaderDllName.len != 0:
+    x.addPragma(newTree(nnkExprColonExpr, newIdentNode("dynlib"),
+      newIdentNode("webview2LoaderDllName")))
 
   result = x
 

@@ -1,7 +1,7 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
@@ -13,7 +13,8 @@ const xaml = """
   <Window
          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-         Title="WpfApplication1" Height="300" Width="300">
+         Title="WpfApplication1" Height="300" Width="300"
+         WindowStartupLocation="CenterScreen">
       <Grid>
           <Grid.RowDefinitions>
               <RowDefinition Height="*"/>

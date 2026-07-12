@@ -1,7 +1,7 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
@@ -19,9 +19,11 @@ var Color = drawing.GetType("System.Drawing.Color")
 var Application = forms.GetType("System.Windows.Forms.Application")
 var Size = drawing.GetType("System.Drawing.Size")
 var Point = drawing.GetType("System.Drawing.Point")
+var FormStartPosition = forms.GetType("System.Windows.Forms.FormStartPosition")
 
 # Create an instance of each control being used.
 var form = forms.new("System.Windows.Forms.Form")
+form.StartPosition = @FormStartPosition.CenterScreen[FormStartPosition]
 var treeView = forms.new("System.Windows.Forms.TreeView")
 var listView = forms.new("System.Windows.Forms.ListView")
 var richTextBox = forms.new("System.Windows.Forms.RichTextBox")
@@ -54,7 +56,7 @@ splitter2.Height = 3
 
 # Use a different color to distinguish the two splitters.
 try:
-  # fail in .NET Framework 2.0
+  # This fails under .NET Framework 2.0.
   splitter2.BackColor = @Color.Blue[Color]
 
 except CLRError:
@@ -68,7 +70,7 @@ splitter2.TabStop = false
 
 # Set properties of Form's Splitter control.
 try:
-  # fail in .NET Framework 2.0
+  # This fails under .NET Framework 2.0.
   splitter1.Location = @Point.new(121, 0)
   splitter1.Size = @Size.new(3, 273)
   splitter1.BackColor = @Color.Red[Color]

@@ -1,7 +1,7 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
@@ -13,14 +13,14 @@ for drive in wmi.ExecQuery("SELECT * FROM Win32_DiskDrive"):
   echo fmt"Drive: {drive.caption} [{drive.serialnumber}] ({drive.deviceid})"
 
   for partition in wmi.ExecQuery(fmt"""
-      ASSOCIATORS OF {{Win32_DiskDrive.DeviceID='{drive.deviceid}'}}
-      WHERE AssocClass = Win32_DiskDriveToDiskPartition"""):
+        ASSOCIATORS OF {{Win32_DiskDrive.DeviceID='{drive.deviceid}'}}
+        WHERE AssocClass = Win32_DiskDriveToDiskPartition"""):
 
     var msg = "  " & $partition.DeviceID
 
     for disk in wmi.ExecQuery(fmt"""
-        ASSOCIATORS OF {{Win32_DiskPartition.DeviceID='{partition.deviceid}'}}
-        WHERE AssocClass = Win32_LogicalDiskToPartition"""):
-        msg.add fmt" is {disk.deviceid} [{disk.volumeserialnumber}]"
+          ASSOCIATORS OF {{Win32_DiskPartition.DeviceID='{partition.deviceid}'}}
+          WHERE AssocClass = Win32_LogicalDiskToPartition"""):
+      msg.add fmt" is {disk.deviceid} [{disk.volumeserialnumber}]"
 
     echo msg

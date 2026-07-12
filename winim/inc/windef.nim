@@ -1,9 +1,10 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
+
 import winimbase
 #include <ntdef.h>
 #include <basetsd.h>
@@ -44,7 +45,7 @@ type
   PDWORD64* = ptr int64
   PVOID* = pointer
   CHAR* = char
-  LONG* = int32
+  LONG* = clong
   INT* = int32
   UCHAR* = uint8
   PUCHAR* = ptr uint8
@@ -73,7 +74,7 @@ type
   DWORD* = int32
   PINT* = ptr int32
   LPINT* = ptr int32
-  LPLONG* = ptr int32
+  LPLONG* = ptr LONG
   LPVOID* = pointer
   LPCVOID* = pointer
   UINT* = int32

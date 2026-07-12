@@ -1,3 +1,10 @@
+#====================================================================
+#
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
+#
+#====================================================================
+
 import win32com.client
 
 obj = win32com.client.GetObject("nimDispatch")

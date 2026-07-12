@@ -1,7 +1,7 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
@@ -42,12 +42,14 @@ var drawing = load("System.Drawing")
 var forms = load("System.Windows.Forms")
 var Size = drawing.GetType("System.Drawing.Size")
 var Point = drawing.GetType("System.Drawing.Point")
+var FormStartPosition = forms.GetType("System.Windows.Forms.FormStartPosition")
 
 var form = forms.new("System.Windows.Forms.Form")
 form.Text = "Nim .NET"
+form.StartPosition = @FormStartPosition.CenterScreen[FormStartPosition]
 
 try:
-  # fail in .NET Framework 2.0
+  # This fails under .NET Framework 2.0.
   form.Size = @Size.new(640, 480)
 
 except CLRError:
@@ -58,7 +60,7 @@ except CLRError:
 var button = forms.new("System.Windows.Forms.Button")
 button.Text = "Button"
 try:
-  # fail in .NET Framework 2.0
+  # This fails under .NET Framework 2.0.
   button.Size = @Size.new(120, 30)
   button.Location = @Point.new(10, 10)
 

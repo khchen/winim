@@ -1,11 +1,18 @@
+<!--
+#====================================================================
+#
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
+#
+#====================================================================
+-->
+
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/khchen0915?country.x=TW&locale.x=zh_TW)
 
 # Winim
-Winim contains Windows API, struct, and constant definitions for Nim. The definitions are translated from MinGW's Windows headers and Windows 10 SDK headers.
+Winim contains Windows SDK APIs, structs, and constant definitions for Nim. It also includes Windows string-type utilities, Windows COM, legacy .NET Framework, and modern .NET support.
 
-The module also include some Windows string type utilities and Windows COM support. See winstr.nim and com.nim for details. Furthermore, winim provides ability to interact with Windows .NET Frameworks since version 3.6.0.
-
-For historical reasons and compatibility, winim only use signed integer types. For example:
+For historical reasons and compatibility, winim only uses signed integer types. For example:
 ```nim
 type
   UINT* = int32
@@ -14,113 +21,88 @@ type
   UINT_PTR* = int64
 ```
 
-If you are looking for Windows GUI framework, try [wNim](https://github.com/khchen/wNim).
+If you are looking for a Windows GUI framework, try [wNim](https://github.com/khchen/wNim).
 
 ## Install
-With git on windows:
+With Git on Windows:
 
     nimble install winim
 
-Without git:
+Without Git:
 
-    1. Download and unzip this moudle (by click "Code" button).
-    2. Start a console, change current dir to the folder which include "winim.nimble" file.
+    1. Download and unzip this module (by clicking the "Code" button).
+    2. Open a console and change the current directory to the folder that contains the "winim.nimble" file.
        (for example: C:\winim-master\winim-master>)
     3. Run "nimble install"
 
 ## Usage
 ```nim
-import winim # import all modules, except COM support.
+import winim # Import all modules except COM support.
 ```
-or
+Or
 ```nim
-import winim/lean # for core SDK only, this speed up compiling time.
+import winim/lean # Import the core SDK only; this speeds up compilation.
 ```
-or
+Or
 ```nim
-import winim/mean # for core SDK + Shell + OLE API.
+import winim/com # Windows COM support.
 ```
-or
+Or
 ```nim
-import winim/com # winim/mean + Windows COM support.
+import winim/clr # Windows legacy .NET Framework support.
+```
+Or
+```nim
+import winim/dotnet # Modern .NET support.
 ```
 
-API modules can import one by one if needed, for example:
+API modules can be imported one by one if needed, for example:
 ```nim
-import winim/utils
 import winim/winstr
-import winim/inc/windef
-import winim/inc/winbase
-import winim/inc/winuser
-```
-or
-```nim
-import winim/[utils, winstr]
 import winim/inc/[windef, winbase, winuser]
 ```
 
-WinHTTP and WinINet module are incompatible with each other. So they are not imported by default. Add one of them if needed:
+The WinHTTP and WinINet modules are incompatible with each other, so they are not imported by default. Add either module if needed:
 ```nim
 import winim/inc/winhttp
 ```
-or
+Or
 ```nim
 import winim/inc/wininet
 ```
 
-MSHTML module is too big. So it is not imported by default.
-Add this module only if needed:
+The MSHTML module is too large, so it is not imported by default.
+Import it only if needed:
 ```nim
 import winim/inc/mshtml
 ```
 
 ## Compile
     nim c source.nim
-      add -d:winansi or -d:useWinAnsi for Ansi version (Unicode by default)
-      add -d:noDiscardableApi if not like discardable windows API
-      add -d:noRes to disable the visual styles (not to link winim32.res or winim64.res).
-      add -d:lean same as import winim/lean
-      add -d:mean or -d:win32_lean_and_mean same as import winim/mean
-      add -d:notrace disable COM objects trace. See com.nim for details.
+      add -d:winansi or -d:useWinAnsi for the ANSI version (Unicode by default)
+      add -d:noDiscardableApi if you do not want discardable Windows APIs
+      add -d:noRes to disable the visual styles (so that winim32.res or winim64.res is not linked).
+      add -d:lean, the same as importing winim/lean
+      add -d:mean or -d:win32_lean_and_mean, the same as importing winim/mean
+      add -d:notrace to disable COM object tracing. See com.nim for details.
+      add -d:webview2=lib to use the static WebView2 loader, or
+          -d:webview2=dll_file_name to select a loader DLL.
 
 ## Examples
-An hello world program:
+A Hello World program:
 ```nim
 import winim/lean
-MessageBox(0, "Hello, world !", "Nim is Powerful", 0)
+MessageBox(0, "Hello, world!", "Nim is powerful", 0)
 ```
 
-Write codes work under both unicode and ansi mode:
+Write code that works under both Unicode and ANSI modes:
 ```nim
 import winim/lean
-# T macro generate unicode string or ansi string depend on conditional symbol: useWinAnsi.
-MessageBox(0, T"Hello, world !", T"Nim is Powerful 中文測試", 0)
+# The T macro generates a Unicode or ANSI string depending on the conditional symbol `useWinAnsi`.
+MessageBox(0, T"Hello, world!", T"Nim is powerful 中文測試", 0)
 ```
 
-Example to use the IShellLink interface:
-```nim
-import os, winim/mean
-
-var
-  pIL: ptr IShellLink
-  pPF: ptr IPersistFile
-
-try:
-  CoInitialize(nil)
-
-  if CoCreateInstance(&CLSID_ShellLink, nil, CLSCTX_LOCAL_SERVER, &IID_IShellLink, cast[ptr PVOID](&pIL)).FAILED: raise
-  defer: pIL.Release()
-
-  if pIL.QueryInterface(&IID_IPersistFile, cast[ptr PVOID](&pPF)).FAILED: raise
-  defer: pPF.Release()
-
-  if pIL.SetPath(getAppFilename()).FAILED or pPF.Save("link.lnk", true).FAILED: raise
-
-except:
-  echo "something wrong !!"
-```
-
-Use COM objects like a script langauge:
+Use COM objects like a scripting language:
 ```nim
 import winim/com
 
@@ -135,21 +117,47 @@ comScript:
     echo key, " => ", dict.item(key)
 ```
 
-Interact with Windows .NET Frameworks.
+Interact with the Windows .NET Framework:
 ```nim
 import winim/clr
+block:
+  clrStart()
+  defer: clrClose()
 
-var mscor = load("mscorlib")
-var rand = mscor.new("System.Random")
-echo rand.Next()
+  let core = load("mscorlib")
+  let random = core.new("System.Random")
+  echo random.Next()
 ```
+
+Interact with modern .NET:
+```nim
+import winim/dotnet
+block:
+  dotnetStart()
+  defer: dotnetClose()
+
+  let core = load("System.Private.CoreLib")
+  let random = core.new("System.Random")
+  echo random.Next()
+```
+
+## WebView2
+Winim includes WebView2 API bindings in `winim/inc/webview2`. The Evergreen WebView2 Runtime must be installed on the target machine.
+The default build loads `WebView2Loader.dll` beside the executable. Add
+`-d:webview2=lib` to use the static loader:
+
+    nim c -d:webview2=lib examples/webview2/webview2.nim
+
+You can also select a loader DLL with `-d:webview2=dll_file_name`. A modern
+.NET WebView2 example is also available at
+`examples/webview2/dotnet_webview2.nim`.
 
 More examples: https://github.com/khchen/winim/tree/master/examples.
 
-## Cross Compile
-Windows programs using Winim module should be compiled successfully by gcc, tcc, vcc on Windows, and MinGW toolchain on Linux. The target file can be PE (32 bits) or PE+ (64 bits).
+## Cross-Compilation
+Programs using the Winim module should compile successfully with GCC and VCC on Windows, and with the MinGW toolchain on Linux. The target can be a 32-bit PE or 64-bit PE+ file.
 
-The suggested Nim compiler is amd64 version. You can download both mingw32 and mingw64 from the Nim's website and put them into nim\dist\mingw32 and nim\dist\mingw64. Modify the *nim.cfg*:
+The amd64 version of the Nim compiler is recommended. You can download both the mingw32 and mingw64 toolchains from the Nim website and put them into nim\dist\mingw32 and nim\dist\mingw64. Modify *nim.cfg*:
 
     @if windows:
       @if i386:
@@ -159,9 +167,9 @@ The suggested Nim compiler is amd64 version. You can download both mingw32 and m
       @end
     @end
 
-Now, you can add --cpu:i386 for 32 bits target, and --cpu:amd64 for 64 bits target. To use tcc (Tiny C Compiler), [here](https://github.com/khchen/winim/tree/master/tcclib) are some more information.
+You can now add --cpu:i386 for a 32-bit target or --cpu:amd64 for a 64-bit target.
 
-To cross compile from Linux or macOS. Here is the [instruction](https://nim-lang.github.io/Nim/nimc.html#cross-compilation-for-windows).
+To cross-compile from Linux or macOS, see [these instructions](https://nim-lang.github.io/Nim/nimc.html#cross-compilation-for-windows).
 
 ## Docs
 * https://khchen.github.io/winim/winim.html
@@ -169,13 +177,14 @@ To cross compile from Linux or macOS. Here is the [instruction](https://nim-lang
 * https://khchen.github.io/winim/winstr.html
 * https://khchen.github.io/winim/com.html
 * https://khchen.github.io/winim/clr.html
+* https://khchen.github.io/winim/dotnet.html
 
 ## License
-Read license.txt for more details.
+See license.txt for more details.
 
-Copyright (c) Chen Kai-Hung, Ward. All rights reserved.
+Copyright (c) Chen Kai-Hung. All rights reserved.
 
 ## Donate
-If this project help you reduce time to develop, you can give me a cup of coffee :)
+If this project helps you save development time, you can buy me a cup of coffee. :)
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://paypal.me/khchen0915?country.x=TW&locale.x=zh_TW)

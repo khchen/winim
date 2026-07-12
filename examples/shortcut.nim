@@ -1,7 +1,7 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
@@ -27,7 +27,7 @@ proc save() =
     echo "save path to shortcut: ", link
 
   except:
-    echo "something wrong !!"
+    echo "Something went wrong!"
 
 proc load() =
   try:
@@ -45,7 +45,7 @@ proc load() =
     echo "load path from shortcut: ", buffer.null_terminated
 
   except:
-    echo "something wrong !!"
+    echo "Something went wrong!"
 
   finally:
     removeFile(link)

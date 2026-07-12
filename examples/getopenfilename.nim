@@ -1,7 +1,7 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
@@ -18,9 +18,9 @@ proc echoResult(str: string) =
     echo i
 
 proc ansiTest() =
-  # this proc always use ansi version API
-  # here we need to pass ansi string to API, aka mstring in winim
-  # use -$ to convert built-in string (utf8) to mstring (ansi)
+  # This proc always uses the ANSI version of the API.
+  # Here we need to pass an ANSI string to the API, namely an mstring in Winim.
+  # Use -$ to convert the built-in string (UTF-8) to an mstring (ANSI).
   var
     buffer = newMString(bufferSize)
     o = OPENFILENAMEA(
@@ -31,16 +31,16 @@ proc ansiTest() =
       Flags: OFN_EXPLORER or OFN_ALLOWMULTISELECT)
 
   if GetOpenFileNameA(o):
-    echoResult($buffer) # `$` here convert ansi string to utf8 string
+    echoResult($buffer) # `$` here converts an ANSI string to a UTF-8 string.
 
-# this version always use unicode string and use unicode version API
-# without L the code still works, but need runtime encoding conversion
+# This version always uses a Unicode string and the Unicode version of the API.
+# Without L, the code still works, but it needs runtime encoding conversion.
 
 proc unicodeTest() =
-  # this proc always use unicode version API
-  # here we need to pass unicode string to API, aka wstring in winim
-  # use +$ to convert built-in string (utf8) to mstring (ansi)
-  # however, use L we can do this convsersion on compile-time (+$ is for run-time)
+  # This proc always uses the Unicode version of the API.
+  # Here we need to pass a Unicode string to the API, namely a wstring in Winim.
+  # Use +$ to convert the built-in string (UTF-8) to a wstring (Unicode).
+  # However, using L performs this conversion at compile time (+$ does it at run time).
   var
     buffer = newWString(bufferSize)
     o = OPENFILENAMEW(
@@ -51,11 +51,11 @@ proc unicodeTest() =
       Flags: OFN_EXPLORER or OFN_ALLOWMULTISELECT)
 
   if GetOpenFileNameW(o):
-    echoResult($buffer) # `$` here convert unicode string to utf8 string
+    echoResult($buffer) # `$` here converts a Unicode string to a UTF-8 string.
 
 proc universalTest() =
-  # this proc use ansi or unicode version API depend on conditional symbol
-  # here we need to
+  # This proc uses the ANSI or Unicode version of the API depending on the conditional symbol.
+  # Here we need to use T for strings and buffers.
   var
     buffer = T(bufferSize)
     o = OPENFILENAME(

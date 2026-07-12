@@ -1,7 +1,7 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
@@ -40,7 +40,6 @@ proc getBinaryMethod3(obj: com): string =
 
 
 when isMainModule:
-
   const PNGSignature = "\x89\x50\x4E\x47\x0D\x0A\x1A\x0A"
 
   var obj = CreateObject("WinHttp.WinHttpRequest.5.1")

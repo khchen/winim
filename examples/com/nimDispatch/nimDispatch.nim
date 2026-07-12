@@ -1,7 +1,7 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
@@ -17,18 +17,26 @@ type
     vtbl: IDispatchVtbl
     methods: seq[tuple[name: string, callback: NimMethod]]
     cookie: DWORD
+    refCount: LONG
 
 proc init(nimDisp: NimDispatch) =
   nimDisp.lpVtbl = &nimDisp.vtbl
   nimDisp.methods = @[]
+  nimDisp.refCount = 1
 
-  nimDisp.vtbl.AddRef = proc(self: ptr IUnknown): ULONG {.stdcall.} = 1
+  nimDisp.vtbl.AddRef = proc(self: ptr IUnknown): ULONG {.stdcall.} =
+    let nimDisp = cast[NimDispatch](self)
+    result = ULONG InterlockedIncrement(&nimDisp.refCount)
 
-  nimDisp.vtbl.Release = proc(self: ptr IUnknown): ULONG {.stdcall.} = 1
+  nimDisp.vtbl.Release = proc(self: ptr IUnknown): ULONG {.stdcall.} =
+    let nimDisp = cast[NimDispatch](self)
+    result = ULONG InterlockedDecrement(&nimDisp.refCount)
 
   nimDisp.vtbl.QueryInterface = proc(self: ptr IUnknown, riid: REFIID, ppvObject: ptr pointer): HRESULT {.stdcall.} =
+    let nimDisp = cast[NimDispatch](self)
     if IsEqualIID(riid, &IID_IUnknown) or IsEqualIID(riid, &IID_IDispatch):
       ppvObject[] = self
+      discard nimDisp.vtbl.AddRef(self)
       return S_OK
     else:
       ppvObject[] = nil
@@ -39,24 +47,26 @@ proc init(nimDisp: NimDispatch) =
 
   nimDisp.vtbl.GetTypeInfo = proc(self: ptr IDispatch, iTInfo: UINT, lcid: LCID, ppTInfo: ptr ptr ITypeInfo): HRESULT {.stdcall.} =
     ppTInfo[] = nil
+    return DISP_E_BADINDEX
 
   nimDisp.vtbl.GetIDsOfNames = proc(self: ptr IDispatch, riid: REFIID, rgszNames: ptr LPOLESTR, cNames: UINT, lcid: LCID, rgDispId: ptr DISPID): HRESULT {.stdcall.} =
+    if cNames != 1:
+      return DISP_E_UNKNOWNNAME
+
     let nimDisp = cast[NimDispatch](self)
     let name = $rgszNames[]
     for i, tup in nimDisp.methods:
       if name.cmpIgnoreCase(tup.name) == 0:
         rgDispId[] = DISPID i + 1
-        break
+        return S_OK
 
-    if rgDispId[] != 0:
-      return S_OK
-    else:
-      return DISP_E_UNKNOWNNAME
+    rgDispId[] = DISPID_UNKNOWN
+    return DISP_E_UNKNOWNNAME
 
   nimDisp.vtbl.Invoke = proc(self: ptr IDispatch, dispIdMember: DISPID, riid: REFIID, lcid: LCID, wFlags: WORD, pDispParams: ptr DISPPARAMS, pVarResult: ptr VARIANT, pExcepInfo: ptr EXCEPINFO, puArgErr: ptr UINT): HRESULT {.stdcall.} =
     let nimDisp = cast[NimDispatch](self)
     let index = dispIdMember - 1
-    if index <= nimDisp.methods.len:
+    if index >= 0 and index < nimDisp.methods.len:
       var args = newSeq[variant](pDispParams.cArgs)
       let rgvarg = cast[ptr UncheckedArray[VARIANTARG]](pDispParams.rgvarg)
 
@@ -97,6 +107,7 @@ proc revoke*(nimDisp: NimDispatch): bool {.discardable.} =
   if SUCCEEDED GetRunningObjectTable(0, &pROT):
     defer: pROT.Release()
     if SUCCEEDED pROT.Revoke(nimDisp.cookie):
+      nimDisp.cookie = 0
       return true
 
 proc inloop*(nimDisp: NimDispatch) =

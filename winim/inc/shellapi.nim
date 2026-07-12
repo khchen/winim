@@ -1,9 +1,10 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
+
 import winimbase
 import windef
 import winbase
@@ -1723,10 +1724,10 @@ const
   CTF_WAIT_ALLOWCOM* = 0x00000040
   DLLVER_PLATFORM_WINDOWS* = 0x00000001
   DLLVER_PLATFORM_NT* = 0x00000002
-  DLLVER_MAJOR_MASK* = 0xFFFF000000000000
-  DLLVER_MINOR_MASK* = 0x0000FFFF00000000
-  DLLVER_BUILD_MASK* = 0x00000000FFFF0000'i32
-  DLLVER_QFE_MASK* = 0x000000000000FFFF
+  DLLVER_MAJOR_MASK* = 0xFFFF000000000000'i64
+  DLLVER_MINOR_MASK* = 0x0000FFFF00000000'i64
+  DLLVER_BUILD_MASK* = 0x00000000FFFF0000'i64
+  DLLVER_QFE_MASK* = 0x000000000000FFFF'i64
   CSIDL_FLAG_CREATE* = 0x8000
   CSIDL_PERSONAL* = 0x0005
   CSIDL_MYPICTURES* = 0x0027
@@ -3732,8 +3733,8 @@ const
   OI_ASYNC* = 0xffffeeee'i32
   IDO_SHGIOI_SHARE* = 0x0fffffff
   IDO_SHGIOI_LINK* = 0x0ffffffe
-  IDO_SHGIOI_SLOWFILE* = 0x0fffffffd'i32
-  IDO_SHGIOI_DEFAULT* = 0x0fffffffc'i32
+  IDO_SHGIOI_SLOWFILE* = 0x0ffffffd'i32
+  IDO_SHGIOI_DEFAULT* = 0x0ffffffc'i32
   SLDF_DEFAULT* = 0x00000000
   SLDF_HAS_ID_LIST* = 0x00000001
   SLDF_HAS_LINK_INFO* = 0x00000002

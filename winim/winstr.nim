@@ -1,37 +1,37 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #                Windows String Type Utilities
 #
 #====================================================================
 
-##  This module contains new string types and utilities to deal with strings in Windows.
-##  Windows SDK use following types to represent a char or a string:
+##  This module contains new string types and utilities for dealing with Windows strings.
+##  The Windows SDK uses the following types to represent a character or string:
 ##
 ##  .. code-block:: Nim
 ##    type
 ##      CHAR = char
 ##      WCHAR = uint16
-##      LPSTR|LPCSTR = ptr CHAR # however, it should be ansi string, not utf8 string
+##      LPSTR|LPCSTR = ptr CHAR # however, it should be an ANSI string, not a UTF-8 string
 ##      LPWSTR|LPCWSTR = ptr WCHAR
 ##      BSTR = distinct ptr WCHAR # BSTR is not binary compatible with LPWSTR
-##      (ptr) array[I, CHAR] # sometimes string defined as array[1, CHAR] but not only one char
-##      (ptr) array[I, WCHAR] # sometimes string defined as array[1, WCHAR] but not only one widechar
+##      (ptr) array[I, CHAR] # sometimes a string is defined as array[1, CHAR], but not necessarily only one character
+##      (ptr) array[I, WCHAR] # sometimes a string is defined as array[1, WCHAR], but not necessarily only one wide character
 ##
-##  By default, Nim's string type is utf8 encoding.
-##  However, Windows use wide character string (aka. unicode string) or multibyte character string
-##  (aka. ansi string). So, this module introduce following string types.
+##  By default, Nim's string type uses UTF-8 encoding.
+##  However, Windows uses wide-character strings (a.k.a. Unicode strings) or multibyte-character strings
+##  (a.k.a. ANSI strings). Therefore, this module introduces the following string types.
 ##
 ##  .. code-block:: Nim
 ##    type
-##      string # nim built-in string type, utf8 encoding by default, can be ansi string sometimes.
-##      cstring # compatible to the type char* in Ansi C
-##      wstring = distinct string # new string type to store unicode string
-##      mstring = distinct string # new string type to store ansi string
+##      string # Nim's built-in string type, UTF-8 encoded by default; can sometimes be an ANSI string.
+##      cstring # compatible with the type char* in ANSI C
+##      wstring = distinct string # a new string type to store Unicode strings
+##      mstring = distinct string # a new string type to store ANSI strings
 ##
-##  Some type classes are also defined for convenience to deal with strings.
+##  Some type classes are also defined for convenience when dealing with strings.
 ##
 ##  .. code-block:: Nim
 ##    type
@@ -41,7 +41,7 @@
 ##        ptr UncheckedArray[SomeChar] | openArray[SomeChar] | seq[SomeChar]
 ##      Stringable = SomeChar | SomeString | SomeBuffer | cstring | BSTR
 ##
-##  Here are the pseudocode for most useful functions introduced by this module.
+##  Here is pseudocode for the most useful functions introduced by this module.
 ##
 ##  .. code-block:: Nim
 ##    proc `&`(s: cstring|string|wstring|mstring): pointer
@@ -52,14 +52,14 @@
 ##    proc `+$`(x: Stringable): wstring
 ##    proc `-$`(x: Stringable): mstring
 ##      # Convert any stringable type to string, wstring, or mstring.
-##      # These operators assume string|cstring|ptr char|openArray[char] are utf8 encoding.
-##      # setOpenArrayStringable() can be used to switch the behavior of `$` operator.
+##      # These operators assume string|cstring|ptr char|openArray[char] are UTF-8-encoded strings.
+##      # Use `%$` to treat `openArray[SomeChar]` explicitly as a string.
 ##
 ##    proc `$$`(x: Stringable): string
 ##    proc `+$$`(x: Stringable): wstring
 ##    proc `-$$`(x: Stringable): mstring
 ##      # Convert any stringable type to string, wstring, or mstring.
-##      # These operators assume string|cstring|ptr char|openArray[char] are ansi encoding.
+##      # These operators assume string|cstring|ptr char|openArray[char] are ANSI-encoded strings.
 ##      # For mstring|wstring|LPWSTR etc, these operators are the same as `$`, `+$`, `-$`.
 ##
 ##    template `<<`(s: SomeString, b: SomeBuffer)
@@ -69,11 +69,11 @@
 ##    template `>>>`(a: typed, b: typed) = b <<< a
 ##      # String << Buffer or Buffer >> String: Fill string by buffer.
 ##      # Buffer << String or String >> Buffer: Fill buffer by string.
-##      # Buffer <<< String or String >>> Buffer: Fill buffer by string, include a null.
+##      # Buffer <<< String or String >>> Buffer: Fill a buffer with a string, including a null terminator.
 ##
-##      # These operators don't convert the encoding (copy byte by byte).
-##      # Please make sure both side have the same character size.
-##      # If destination don't have the length information (e.g. pointer or UncheckedArray),
+##      # These operators don't convert the encoding (they copy byte by byte).
+##      # Please make sure both sides have the same character size.
+##      # If the destination does not have length information (e.g. pointer or UncheckedArray),
 ##      # please make sure the buffer size is large enough.
 ##
 ##    proc nullTerminate(s: var SomeString)
@@ -84,33 +84,33 @@
 ##
 ##    template L(s: string): wstring
 ##      # Generate wstring at compile-time if possible.
-##      # Only const string or string literal can be converted to unicode string at compile-time,
+##      # Only a const string or string literal can be converted to a Unicode string at compile time;
 ##      # otherwise it is just `+$`.
 ##
 ##    template T(s: string): mstring|wstring
-##      # Generate wstring or mstring depend on conditional symbol: useWinAnsi.
-##      # For example: (this code works under both unicode and ansi mode)
+##      # Generate a wstring or mstring depending on the conditional symbol: useWinAnsi.
+##      # For example: (this code works under both Unicode and ANSI modes)
 ##
 ##        MessageBox(0, T"hello, world", T"Nim is Powerful 中文測試", 0)
 ##
 ##    template T(n: Natural): mstring|wstring
-##      # Generate wstring or mstring buffer depend on conditional symbol: useWinAnsi.
+##      # Generate a wstring or mstring buffer depending on the conditional symbol: useWinAnsi.
 ##      # Use `&` to get the buffer address and then pass to Windows API.
 ##
 ##    converter winstrConverter(s: SomeString): SomeBuffer
-##      # With these converters, passing string to Windows API is more easy.
-##      #   Following converters don't need encoding conversion:
+##      # With these converters, passing strings to the Windows API is easier.
+##      #   The following converters don't need encoding conversion:
 ##      #     string => LPSTR|ptr char
 ##      #     mstring => LPSTR|ptr char
 ##      #     wstring => LPWSTR|BSTR
 ##      #     cstring => ptr char
 ##      #     BSTR => LPWSTR
 ##      #
-##      #   Some converters DO need encoding conversion (utf8 to unicode).
-##      #   New memory block will be allocated. However, they are useful and convenience.
+##      #   Some converters do need encoding conversion (UTF-8 to Unicode).
+##      #   A new memory block will be allocated. However, these converters are useful and convenient.
 ##      #     cstring|string => LPWSTR|BSTR
 ##
-##  There are also new string functions to deal with wstring and mstring just like built-in string type.
+##  There are also new string functions for dealing with wstring and mstring like the built-in string type.
 ##
 ##  .. code-block:: Nim
 ##    proc newWString(len: Natural): wstring
@@ -143,11 +143,11 @@
 ##    iterator pairs(s: wstring|mstring): tuple[key: int|mIndex, val: WCHAR|mstring]
 ##    iterator mpairs(s: var wstring): WCHAR
 ##
-##  Winim don't use built-in `WideCString`, but still support it.
+##  Winim doesn't use the built-in `WideCString`, but still supports it.
 ##
 ##  .. code-block:: Nim
 ##    converter winstrConverter(s: WideCString): LPWSTR
-##      # WideCString can be sent to Windows API directly (unicode only).
+##      # WideCString can be sent directly to the Windows API (Unicode only).
 ##
 ##    proc `+$`(s: WideCString): wstring
 ##      # Converts WideCString to wstring.
@@ -155,23 +155,21 @@
 ##    proc newWideCString(s: wstring): WideCString
 ##      # Converts wstring to WideCString.
 
-import macros, strutils, inc/[winimbase, windef]
+import std/[hashes, macros, strutils], inc/[winimbase, windef]
 export strutils.toHex, winimbase
 
-when not declared(IndexDefect):
-  type
-    IndexDefect = object of IndexError
-
-# generate from winimx (avoid importing objbase everytime)
 const
   CP_ACP = 0
   CP_UTF8 = 65001
+  BSTRSlotCount = 32
 
 proc lstrlenA(lpString: LPCSTR): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc lstrlenW(lpString: LPCWSTR): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc MultiByteToWideChar(CodePage: UINT, dwFlags: DWORD, lpMultiByteStr: LPCCH, cbMultiByte: int32, lpWideCharStr: LPWSTR, cchWideChar: int32): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc WideCharToMultiByte(CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWCH, cchWideChar: int32, lpMultiByteStr: LPSTR, cbMultiByte: int32, lpDefaultChar: LPCCH, lpUsedDefaultChar: LPBOOL): int32 {.winapi, stdcall, dynlib: "kernel32", importc.}
 proc SysStringLen(P1: BSTR): UINT {.winapi, stdcall, dynlib: "oleaut32", importc.}
+proc GetLastError(): DWORD {.winapi, stdcall, dynlib: "kernel32", importc.}
+proc SetLastError(dwErrCode: DWORD) {.winapi, stdcall, dynlib: "kernel32", importc.}
 
 # helper functions
 
@@ -192,22 +190,26 @@ proc toHex*(s: cstring): string {.inline.} =
   result = toHex($s)
 
 when defined(cpu64):
-  converter NaturalToInt32(x: Natural): int32 = int32 x
+  converter NaturalToInt32(x: Natural): int32 {.inline.} =
+    if x > Natural(int32.high):
+      raise newException(RangeDefect, "Windows string length exceeds int32.high")
+    int32 x
 
 # new string types
 
 type
-  # for wstring, always add extra null wchar to ensure null-terminated.
+  # Winstr-created wstrings include an extra null WCHAR. A default-initialized
+  # wstring is also a valid logical empty value and is normalized by mutation.
 
   wstring* = distinct string
-    ## New string type to store wide character string (aka. unicode string).
+    ## New string type to store UTF-16 code units for Windows wide strings.
 
   mstring* = distinct string
-    ## New string type to store multibyte character string (aka. ansi string).
+    ## New string type to store multibyte character strings (a.k.a. ANSI strings).
 
   mIndex* = distinct int
-    ## Use `mIndex` in substr, [] or []= for `mstring` means
-    ## index by MBCS characters, not by bytes.
+    ## Using `mIndex` with `substr`, `[]`, or `[]=` on an `mstring` means indexing
+    ## by MBCS characters, not by bytes.
 
   SomeChar* = byte | char | WCHAR
     ## Type class matching all char types.
@@ -222,27 +224,59 @@ type
   Stringable* = SomeChar | SomeString | SomeBuffer | cstring | BSTR
     ## Type class matching all stringable types.
 
-template raw(s: wstring, L: Natural): var WCHAR =
+  BSTRSlots = object
+    data: seq[seq[byte]]
+    next: int
+
+var temporaryBSTRs {.threadvar.}: BSTRSlots
+
+when defined(gcDestructors):
+  const WStringSlotCount = 64
+
+  type WStringSlots = object
+    data: seq[wstring]
+    next: int
+
+  var temporaryWStrings {.threadvar.}: WStringSlots
+
+template raw(s: wstring, L: Natural): WCHAR =
   cast[ptr WCHAR](unsafeaddr(string(s)[L * 2]))[]
+
+template rawMut(s: var wstring, L: Natural): var WCHAR =
+  cast[ptr WCHAR](addr(string(s)[L * 2]))[]
+
+template prepareMutation(s: var wstring) =
+  system.prepareMutation(string(s))
+
+proc wcharBytes(L: Natural, inclNull = false): int {.inline.} =
+  let extra = int inclNull
+  if L > Natural(int.high div 2 - extra):
+    raise newException(RangeDefect, "wstring length is too large")
+  (int(L) + extra) * 2
+
+proc canonicalEmptyWString(error = DWORD(0), restoreError = false): wstring {.inline.} =
+  result = wstring(newString(2))
+  if restoreError:
+    SetLastError(error)
 
 template `^^`(s, i: untyped): untyped =
   (when i is BackwardsIndex: s.len - int(i) else: int(i))
 
-proc newWString*(L: Natural): wstring = wstring(newString((L + 1) * 2))
-  ## Returns a new `wstring` of length L, counting by wide characters.
+proc newWString*(L: Natural): wstring = wstring(newString(wcharBytes(L, inclNull=true)))
+  ## Returns a new `wstring` of length L, counted in UTF-16 code units.
 
 proc newMString*(L: Natural): mstring = mstring(newString(L))
   ## Returns a new `mstring` of length L, counting by bytes.
 
 proc len*(s: wstring): int {.inline.} = max(string(s).len div 2 - 1, 0)
-  ## Returns the length of `wstring`, counting by wide characters.
+  ## Returns the length of `wstring`, counting by UTF-16 code units.
 
 proc len*(s: mstring): int {.inline.} = string(s).len
   ## Returns the length of `mstring`, counting by bytes.
 
 proc newWStringOfCap*(L: Natural): wstring =
-  ## Returns a new `wstring` of length 0 but with capacity L, counting by wide characters.
-  result = wstring(newStringOfCap((L + 1) * 2))
+  ## Returns a new `wstring` of length 0 but with capacity L, counting by UTF-16 code units.
+  result = wstring(newStringOfCap(wcharBytes(L, inclNull=true)))
   string(result).add "\0\0"
 
 proc newMStringOfCap*(L: Natural): mstring =
@@ -250,58 +284,67 @@ proc newMStringOfCap*(L: Natural): mstring =
   result = mstring(newStringOfCap(L))
 
 proc setLen*(s: var wstring, L: Natural) {.inline.} =
-  ## Sets the length of `wstring` s to L, counting by wide characters.
-  setLen(string(s), (L + 1) * 2)
-  s.raw(s.len) = 0
+  ## Sets the length of `wstring` s to L, counting by UTF-16 code units.
+  setLen(string(s), wcharBytes(L, inclNull=true))
+  s.rawMut(s.len) = 0
 
 proc setLen*(s: var mstring, L: Natural) {.inline.} =
-  ## Sets the length of `mstring` s to L, counting by wide bytes.
+  ## Sets the length of `mstring` s to L, counting by bytes.
   setLen(string(s), L)
 
 proc `&`*(s: string): ptr char {.inline.} =
-  ## Get address of the first char of a `string`.
+  ## Gets the address of the first character of a `string`.
   result = cast[ptr char](cstring s)
 
 proc `&`*(s: cstring): ptr char {.inline.} =
-  ## Get address of the first char of a `cstring`.
+  ## Gets the address of the first character of a `cstring`.
   result = cast[ptr char](s)
 
 proc `&`*(s: wstring): ptr WCHAR {.inline.} =
-  ## Get address of the first WCHAR of a `wstring`.
+  ## Gets the address of the first WCHAR of a `wstring`.
   result = cast[ptr WCHAR](&(string(s)))
 
 proc `&`*(s: mstring): ptr char {.inline.} =
-  ## Get address of the first char of a `mstring`.
+  ## Gets the address of the first character of a `mstring`.
   result = &(string(s))
 
 proc `UTF8->wstring`(source: ptr char, L: Natural): wstring =
-  if not source.isNil:
-    var wLen = MultiByteToWideChar(CP_UTF8, 0, source, L, nil, 0)
-    result = newWString(wLen)
-    discard MultiByteToWideChar(CP_UTF8, 0, source, L, &result, wLen)
+  if source.isNil: return canonicalEmptyWString()
+  if L == 0: return canonicalEmptyWString()
+  let wLen = MultiByteToWideChar(CP_UTF8, 0, source, L, nil, 0)
+  if wLen == 0:
+    let error = GetLastError()
+    return canonicalEmptyWString(error, true)
+  result = newWString(wLen)
+  if MultiByteToWideChar(CP_UTF8, 0, source, L, &result, wLen) != wLen:
+    let error = GetLastError()
+    result = canonicalEmptyWString(error, true)
 
 proc `ANSI->wstring`(source: ptr char, L: Natural): wstring =
-  if not source.isNil:
-    var wLen = MultiByteToWideChar(CP_ACP, 0, source, L, nil, 0)
-    result = newWString(wLen)
-    discard MultiByteToWideChar(CP_ACP, 0, source, L, &result, wLen)
+  if source.isNil: return canonicalEmptyWString()
+  if L == 0: return canonicalEmptyWString()
+  let wLen = MultiByteToWideChar(CP_ACP, 0, source, L, nil, 0)
+  if wLen == 0:
+    let error = GetLastError()
+    return canonicalEmptyWString(error, true)
+  result = newWString(wLen)
+  if MultiByteToWideChar(CP_ACP, 0, source, L, &result, wLen) != wLen:
+    let error = GetLastError()
+    result = canonicalEmptyWString(error, true)
 
 proc `UNICODE->wstring`(source: ptr WCHAR, L: Natural): wstring =
-  if not source.isNil:
-    result = newWString(L)
-    copyMem(&result, source, L * 2)
+  if source.isNil: return canonicalEmptyWString()
+  result = newWString(L)
+  if L != 0:
+    copyMem(&result, source, wcharBytes(L))
+
+proc `UNICODE->mstring`(source: ptr WCHAR, L: Natural): mstring
+proc `UNICODE->string`(source: ptr WCHAR, L: Natural): string
 
 proc `UTF8->mstring`(source: ptr char, L: Natural): mstring =
-  if not source.isNil:
-    var wLen = MultiByteToWideChar(CP_UTF8, 0, source, L, nil, 0)
-    var buffer = cast[ptr WCHAR](alloc(wLen * 2))
-    if not buffer.isNil:
-      discard MultiByteToWideChar(CP_UTF8, 0, source, L, buffer, wLen)
-
-      var mLen = WideCharToMultiByte(CP_ACP, 0, buffer, wLen, nil, 0, nil, nil)
-      result = newMString(mLen)
-      discard WideCharToMultiByte(CP_ACP, 0, buffer, wLen, &result, mLen, nil, nil)
-      dealloc(buffer)
+  let wide = `UTF8->wstring`(source, L)
+  if L != 0 and wide.len == 0: return
+  result = `UNICODE->mstring`(&wide, wide.len)
 
 proc `ANSI->mstring`(source: ptr char, L: Natural): mstring =
   if not source.isNil:
@@ -309,10 +352,14 @@ proc `ANSI->mstring`(source: ptr char, L: Natural): mstring =
     copyMem(&result, source, L)
 
 proc `UNICODE->mstring`(source: ptr WCHAR, L: Natural): mstring =
-  if not source.isNil:
-    var mLen = WideCharToMultiByte(CP_ACP, 0, source, L, nil, 0, nil, nil)
-    result = newMString(mLen)
-    discard WideCharToMultiByte(CP_ACP, 0, source, L, &result, mLen, nil, nil)
+  if source.isNil or L == 0: return
+  let mLen = WideCharToMultiByte(CP_ACP, 0, source, L, nil, 0, nil, nil)
+  if mLen == 0: return
+  result = newMString(mLen)
+  if WideCharToMultiByte(CP_ACP, 0, source, L, &result, mLen, nil, nil) != mLen:
+    let error = GetLastError()
+    result.setLen(0)
+    SetLastError(error)
 
 proc `UTF8->string`(source: ptr char, L: Natural): string =
   if not source.isNil:
@@ -320,29 +367,27 @@ proc `UTF8->string`(source: ptr char, L: Natural): string =
     copyMem(&result, source, L)
 
 proc `ANSI->string`(source: ptr char, L: Natural): string =
-  if not source.isNil:
-    var wLen = MultiByteToWideChar(CP_ACP, 0, source, L, nil, 0)
-    var buffer = cast[ptr WCHAR](alloc(wLen * 2))
-    if not buffer.isNil:
-      discard MultiByteToWideChar(CP_ACP, 0, source, L, buffer, wLen)
-
-      var mLen = WideCharToMultiByte(CP_UTF8, 0, buffer, wLen, nil, 0, nil, nil)
-      result = newString(mLen)
-      discard WideCharToMultiByte(CP_UTF8, 0, buffer, wLen, &result, mLen, nil, nil)
-      dealloc(buffer)
+  let wide = `ANSI->wstring`(source, L)
+  if L != 0 and wide.len == 0: return
+  result = `UNICODE->string`(&wide, wide.len)
 
 proc `UNICODE->string`(source: ptr WCHAR, L: Natural): string =
-  if not source.isNil:
-    var mLen = WideCharToMultiByte(CP_UTF8, 0, source, L, nil, 0, nil, nil)
-    result = newString(mLen)
-    discard WideCharToMultiByte(CP_UTF8, 0, source, L, &result, mLen, nil, nil)
+  if source.isNil or L == 0: return
+  let mLen = WideCharToMultiByte(CP_UTF8, 0, source, L, nil, 0, nil, nil)
+  if mLen == 0: return
+  result = newString(mLen)
+  if WideCharToMultiByte(CP_UTF8, 0, source, L, &result, mLen, nil, nil) != mLen:
+    let error = GetLastError()
+    result.setLen(0)
+    SetLastError(error)
 
 template getptr[T](x: openArray[T]): untyped =
-  when sizeof(T) == 1:
-    cast[ptr char](unsafeaddr x[0])
-
-  elif sizeof(T) == 2:
-    cast[ptr WCHAR](unsafeaddr x[0])
+  if x.len == 0:
+    when sizeof(T) == 1: cast[ptr char](nil)
+    elif sizeof(T) == 2: cast[ptr WCHAR](nil)
+  else:
+    when sizeof(T) == 1: cast[ptr char](unsafeaddr x[0])
+    elif sizeof(T) == 2: cast[ptr WCHAR](unsafeaddr x[0])
 
 template getptr[T](x: ptr UncheckedArray[T]): untyped =
   when sizeof(T) == 1:
@@ -386,23 +431,41 @@ proc high*(s: wstring): int {.inline.} = s.len - 1
 proc low*(s: wstring): int {.inline.} = 0
   ## Returns the lowest possible index of `wstring`.
 
-proc cmp*(x, y: wstring): int {.borrow.}
-  ## Compare proc for `wstring` (in binary format only).
+proc cmp*(x, y: wstring): int =
+  ## Compares `wstring` values by ordinal UTF-16 code units.
+  let common = min(x.len, y.len)
+  for i in 0 ..< common:
+    let a = x.raw(i)
+    let b = y.raw(i)
+    if a < b: return -1
+    if a > b: return 1
+  system.cmp(x.len, y.len)
 
-proc `==`*(x, y: wstring): bool {.borrow.}
-  ## Checks for equality between two `wstring`.
+proc `==`*(x, y: wstring): bool =
+  ## Checks for equality between two `wstring` values.
+  if x.len != y.len: return false
+  x.len == 0 or equalMem(&x, &y, wcharBytes(Natural(x.len)))
 
-proc `<=`*(x, y: wstring): bool {.borrow.}
+proc `<=`*(x, y: wstring): bool {.inline.} = cmp(x, y) <= 0
   ## Lexicographic ``<=`` operator for `wstring`.
 
-proc `<`*(x, y: wstring): bool {.borrow.}
+proc `<`*(x, y: wstring): bool {.inline.} = cmp(x, y) < 0
   ## Lexicographic ``<`` operator for `wstring`.
 
 proc substr*(s: wstring, first, last: int): wstring =
   ## Copies a slice of `s` into a new `wstring` and returns it.
-  result = wstring(string(s).substr(first * 2, last * 2 + 3))
+  let
+    firstUnit = max(first, 0)
+    lastUnit = min(last, s.high)
+  if firstUnit > lastUnit:
+    return newWString(0)
+  let
+    firstByte = wcharBytes(Natural(firstUnit))
+    lastByte = wcharBytes(Natural(lastUnit + 1), inclNull=true) - 1
+  result = wstring(string(s).substr(firstByte, lastByte))
   if result.len != 0:
-    result.raw(result.len) = 0
+    prepareMutation(result)
+    result.rawMut(result.len) = 0
 
   else:
     result = newWString(0)
@@ -414,7 +477,7 @@ proc substr*(s: wstring, first = 0): wstring {.inline.} =
 proc `[]`*(s: wstring, i: int): WCHAR {.inline.} =
   ## Index operator for `wstring`.
   when compileOption("boundChecks"):
-    if i >= s.len:
+    if i < 0 or i >= s.len:
       raise newException(IndexDefect, "index out of bounds")
 
   result = s.raw(i)
@@ -422,15 +485,20 @@ proc `[]`*(s: wstring, i: int): WCHAR {.inline.} =
 proc `[]=`*(s: var wstring, i: int, c: WCHAR|char) {.inline.} =
   ## Index assignment operator for `wstring`.
   when compileOption("boundChecks"):
-    if i >= s.len:
+    if i < 0 or i >= s.len:
       raise newException(IndexDefect, "index out of bounds")
 
-  s.raw(i) = WCHAR c
+  prepareMutation(s)
+  s.rawMut(i) = WCHAR c
 
 proc `[]`*[T, U](s: wstring, x: HSlice[T, U]): wstring =
   ## Slice operation for `wstring`.
   let a = s ^^ x.a
   let L = (s ^^ x.b) - a + 1
+  if L < 0:
+    raise newException(RangeDefect, "slice length is negative")
+  if L == 0:
+    return newWString(0)
   when compileOption("boundChecks"):
     if a < 0 or a + L > s.len:
       raise newException(IndexDefect, "index out of bounds")
@@ -438,31 +506,54 @@ proc `[]`*[T, U](s: wstring, x: HSlice[T, U]): wstring =
 
 proc `[]=`*[T, U](s: var wstring, x: HSlice[T, U], b: wstring) =
   ## Slice assignment for `wstring`.
-  let a = s ^^ x.a
-  let L = (s ^^ x.b) - a + 1
+  let
+    a = s ^^ x.a
+    z = s ^^ x.b
+  when compileOption("boundChecks"):
+    if a < 0 or a > s.len or (z >= a and z >= s.len):
+      raise newException(IndexDefect, "index out of bounds")
+  let L = max(z - a + 1, 0)
+
+  if b.len > int.high - (s.len - L):
+    raise newException(RangeDefect, "wstring length is too large")
+
+  prepareMutation(s)
   if L == b.len:
-    for i in 0 ..< L: s[i+a] = b[i]
+    for i in 0 ..< L: s.rawMut(i+a) = b.raw(i)
   else:
-    var slen = s.len
-    var shift = b.len - L
-    var newLen = slen + shift
+    let slen = s.len
+    let shift = b.len - L
+    let newLen = slen + shift
     if shift > 0:
       setLen(s, newLen)
-      for i in countdown(newLen-1, a+shift+1): s[i] = s[i-shift]
+      for i in countdown(newLen-1, a+b.len):
+        s.rawMut(i) = s.raw(i-shift)
     else:
-      for i in countup(a+b.len, s.len-1+shift): s[i] = s[i-shift]
+      for i in countup(a+b.len, newLen-1):
+        s.rawMut(i) = s.raw(i-shift)
       setLen(s, newLen)
-    for i in 0 ..< b.len: s[i+a] = b[i]
+    for i in 0 ..< b.len: s.rawMut(i+a) = b.raw(i)
 
-    s.raw(s.len) = 0
+    s.rawMut(s.len) = 0
 
 proc add*(s: var wstring, c: char|WCHAR) =
   ## Appends `c` to `s` in place.
-  s.raw(s.len) = WCHAR c
+  if string(s).len < 2:
+    s = newWString(0)
+  prepareMutation(s)
+  s.rawMut(s.len) = WCHAR c
   string(s).add "\0\0"
 
 proc add*(s: var wstring, u: wstring) =
   ## Appends `u` to `s` in place.
+  if u.len == 0: return
+  if string(s).len < 2:
+    s = newWString(0)
+  if cast[pointer](&s) == cast[pointer](&u):
+    let oldLen = s.len
+    s.setLen(oldLen + u.len)
+    moveMem(cast[pointer](cast[uint](&s) + uint(oldLen * 2)), &s, oldLen * 2)
+    return
   setLen(string(s), string(s).len - 2)
   string(s).add(string(u))
 
@@ -491,8 +582,9 @@ iterator items*(s: wstring): WCHAR =
 iterator mitems*(s: var wstring): var WCHAR =
   ## Iterates over each `WCHAR` of `wstring` so that you can modify the yielded value.
   var i = 0
+  prepareMutation(s)
   while i < s.len:
-    yield s.raw(i)
+    yield s.rawMut(i)
     inc i
 
 iterator pairs*(s: wstring): tuple[key: int, val: WCHAR] =
@@ -505,28 +597,53 @@ iterator pairs*(s: wstring): tuple[key: int, val: WCHAR] =
 iterator mpairs*(s: var wstring): tuple[key: int, val: var WCHAR] =
   ## Iterates over each `WCHAR` of `wstring`. Yields `(int, var WCHAR)` pairs.
   var i = 0
+  prepareMutation(s)
   while i < s.len:
-    yield (i, s.raw(i))
+    yield (i, s.rawMut(i))
     inc i
 
 proc repr*(s: wstring): string =
   ## Returns string representation of `wstring`.
   result = $cast[int](&s).tohex & "(wstring)\""
-  if s.len != 0:
-    for w in s:
-      if w == 0:
-        result.add "\\0"
-
-      else:
-        result.add `UNICODE->string`(w.unsafeaddr, 1)
+  let converted = `UNICODE->string`(&s, s.len)
+  for c in converted:
+    if c == '\0': result.add "\\0"
+    else: result.add c
 
   result.add  "\""
 
+proc hash*(s: wstring): Hash =
+  var h: Hash
+  for i in 0 ..< s.len:
+    h = h !& hashes.hash(uint16(s.raw(i)))
+  result = !$h
+
 # mstring functions
+
+proc utf16CharWidth(s: wstring, offset: int): int {.inline.} =
+  if offset + 1 < s.len and s.raw(offset) in WCHAR(0xD800)..WCHAR(0xDBFF) and
+      s.raw(offset + 1) in WCHAR(0xDC00)..WCHAR(0xDFFF): 2
+  else: 1
+
+proc logicalLen(s: wstring): int =
+  var offset = 0
+  while offset < s.len:
+    inc result
+    inc offset, utf16CharWidth(s, offset)
+
+proc utf16Offset(s: wstring, index: int, allowEnd = false): int =
+  if index < 0:
+    raise newException(IndexDefect, "index out of bounds")
+  var logical = 0
+  while result < s.len and logical < index:
+    inc result, utf16CharWidth(s, result)
+    inc logical
+  if logical != index or (not allowEnd and result >= s.len):
+    raise newException(IndexDefect, "index out of bounds")
 
 proc mlen*(s: mstring): int =
   ## Returns the length of `mstring`, counting by MBCS characters.
-  result = int MultiByteToWideChar(CP_ACP, 0, &s, int32 s.len, nil, 0)
+  result = logicalLen(`ANSI->wstring`(&s, s.len))
 
 proc high*(s: mstring): int {.borrow.}
   ## Returns the highest possible index of `mstring`.
@@ -535,10 +652,10 @@ proc low*(s: mstring): int {.borrow.}
   ## Returns the lowest possible index of `mstring`.
 
 proc cmp*(x, y: mstring): int {.borrow.}
-  ## Compare proc for `mstring` (in binary format only).
+  ## Comparison proc for `mstring` (in binary format only).
 
 proc `==`*(x, y: mstring): bool {.borrow.}
-  ## Checks for equality between two `mstring`.
+  ## Checks for equality between two `mstring` values.
 
 proc `<=`*(x, y: mstring): bool {.borrow.}
   ## Lexicographic ``<=`` operator for `mstring`.
@@ -560,50 +677,81 @@ proc `[]=`*(s: var mstring, i: int, x: char|byte) {.inline.} = string(s)[i] = ca
 
 proc substr*(s: mstring, first, last: mIndex): mstring =
   ## Copies a slice of `s` into a new `mstring` and returns it, counting by MBCS characters.
-  var ws = `ANSI->wstring`(&s, s.len)
-  ws = ws.substr(int first, int last)
-  result = `UNICODE->mstring`(&ws, ws.len)
+  let ws = `ANSI->wstring`(&s, s.len)
+  let total = logicalLen(ws)
+  let firstIndex = max(int(first), 0)
+  let lastIndex = min(int(last), total - 1)
+  if firstIndex > lastIndex or firstIndex >= total: return
+  let a = utf16Offset(ws, firstIndex)
+  let z = utf16Offset(ws, lastIndex)
+  let part = ws.substr(a, z + utf16CharWidth(ws, z) - 1)
+  result = `UNICODE->mstring`(&part, part.len)
 
 proc substr*(s: mstring, first: mIndex = 0.mIndex): mstring =
   ## Copies a slice of `s` into a new `mstring` and returns it, counting by MBCS characters.
-  var ws = `ANSI->wstring`(&s, s.len)
-  ws = ws.substr(int first)
-  result = `UNICODE->mstring`(&ws, ws.len)
+  let ws = `ANSI->wstring`(&s, s.len)
+  let total = logicalLen(ws)
+  let firstIndex = max(int(first), 0)
+  if firstIndex >= total: return
+  let part = ws.substr(utf16Offset(ws, firstIndex))
+  result = `UNICODE->mstring`(&part, part.len)
 
 proc `[]`*(s: mstring, i: mIndex): mstring =
   ## Index operator for `mstring`, counting by MBCS characters.
   let ws = `ANSI->wstring`(&s, s.len)
-  var wchar = ws[int i]
-  result = `UNICODE->mstring`(addr wchar, 1)
+  let offset = utf16Offset(ws, int i)
+  result = `UNICODE->mstring`(cast[ptr WCHAR](unsafeaddr string(ws)[offset * 2]),
+      utf16CharWidth(ws, offset))
 
 proc `[]=`*(s: var mstring, i: mIndex, u: mstring) =
   ## Index assignment operator for `mstring`, counting by MBCS characters,
-  ## and only first MBCS characters of `u` will be used.
+  ## and only the first MBCS character of `u` will be used.
   var ws = `ANSI->wstring`(&s, s.len)
   let wu = `ANSI->wstring`(&u, u.len)
 
+  let offset = utf16Offset(ws, int i)
+  let destination = offset .. offset + utf16CharWidth(ws, offset) - 1
   if wu.len == 0:
-    ws[int i] = 0
-
+    var replacement = newWString(1)
+    replacement[0] = 0
+    ws[destination] = replacement
   else:
-    ws[int i] = wu[0]
+    ws[destination] = wu[0 .. utf16CharWidth(wu, 0) - 1]
 
   s = `UNICODE->mstring`(&ws, ws.len)
 
 proc `[]`*[T, U](s: mstring, x: HSlice[T, U]): mstring =
   ## Slice operation for `mstring`.
   when T is mIndex or U is mIndex:
-    var ws = `[]`(`ANSI->wstring`(&s, s.len), x)
-    result = `UNICODE->mstring`(&ws, ws.len)
+    let ws = `ANSI->wstring`(&s, s.len)
+    let total = logicalLen(ws)
+    let first = when T is BackwardsIndex: total - int(x.a) else: int(x.a)
+    let last = when U is BackwardsIndex: total - int(x.b) else: int(x.b)
+    if last < first - 1:
+      raise newException(RangeDefect, "slice length is negative")
+    if last == first - 1:
+      return
+    let a = utf16Offset(ws, first, allowEnd=true)
+    let z = utf16Offset(ws, last)
+    let part = ws[a .. z + utf16CharWidth(ws, z) - 1]
+    result = `UNICODE->mstring`(&part, part.len)
 
   else:
     result = mstring(`[]`(string(s), x))
 
 proc `[]=`*[T, U](s: var mstring, x: HSlice[T, U], u: mstring) =
-  ## Slice assignment for `mstrings`.
+  ## Slice assignment for `mstring`.
   when T is mIndex or U is mIndex:
     var ws = `ANSI->wstring`(&s, s.len)
-    `[]=`(ws, x, `ANSI->wstring`(&u, u.len))
+    let total = logicalLen(ws)
+    let first = when T is BackwardsIndex: total - int(x.a) else: int(x.a)
+    let last = when U is BackwardsIndex: total - int(x.b) else: int(x.b)
+    let a = utf16Offset(ws, first, allowEnd=true)
+    if last < first:
+      ws[a .. a - 1] = `ANSI->wstring`(&u, u.len)
+    else:
+      let z = utf16Offset(ws, last)
+      ws[a .. z + utf16CharWidth(ws, z) - 1] = `ANSI->wstring`(&u, u.len)
     s = `UNICODE->mstring`(&ws, ws.len)
   else:
     `[]=`(string(s), x, string(u))
@@ -636,43 +784,39 @@ proc toHex*(s: mstring): string {.inline.} =
 
 iterator items*(s: mstring): mstring =
   ## Iterates over each MBCS character of `mstring`.
-  var ws = `ANSI->wstring`(&s, s.len)
-  for wchar in ws.mitems:
-    yield `UNICODE->mstring`(addr wchar, 1)
+  let ws = `ANSI->wstring`(&s, s.len)
+  var offset = 0
+  while offset < ws.len:
+    let width = utf16CharWidth(ws, offset)
+    yield `UNICODE->mstring`(cast[ptr WCHAR](unsafeaddr string(ws)[offset * 2]), width)
+    inc offset, width
 
 iterator pairs*(s: mstring): tuple[key: mIndex, val: mstring] =
   ## Iterates over each MBCS character of `mstring`. Yields `(mIndex, mstring)` pairs.
-  var ws = `ANSI->wstring`(&s, s.len)
-  for i, wchar in ws.mpairs:
-    yield (mIndex i, `UNICODE->mstring`(addr wchar, 1))
+  let ws = `ANSI->wstring`(&s, s.len)
+  var offset, logical = 0
+  while offset < ws.len:
+    let width = utf16CharWidth(ws, offset)
+    yield (mIndex logical,
+        `UNICODE->mstring`(cast[ptr WCHAR](unsafeaddr string(ws)[offset * 2]), width))
+    inc offset, width
+    inc logical
 
 proc repr*(s: mstring): string =
   ## Returns string representation of `mstring`.
   result = $cast[int](&s).tohex & "(mstring)\""
-  if s.len != 0:
-    for m in s:
-      if m[0] == '\0':
-        result.add "\\0"
-
-      else:
-        result.add `ANSI->string`(&m, m.len)
+  let converted = `ANSI->string`(&s, s.len)
+  for c in converted:
+    if c == '\0': result.add "\\0"
+    else: result.add c
 
   result &= "\""
 
 # conversion functions
 
-var isOpenArrayStringable {.threadvar.}: bool
-
-proc setOpenArrayStringable*(flag: bool): bool {.inline, discardable.} =
-  ## Nim's system.`$` will return array representation for `openArray[SomeChar]`.
-  ## After turn this option on, winstr will overwrite the defualt behavior
-  ## for `$` and treats `openArray[SomeChar]` as string.
-  result = isOpenArrayStringable
-  isOpenArrayStringable = flag
-
 proc `$`*(s: Stringable): string {.inline.} =
-  ## Convert any stringable type to `string`.
-  ## This operator assume `string|cstring|ptr char|openArray[char]` is utf8 encoding.
+  ## Converts any stringable type to `string`.
+  ## This operator assumes `string|cstring|ptr char|openArray[char]` are UTF-8-encoded strings.
   when s is char|byte: system.`$`(s)
   elif s is WCHAR: system.`$`(s)
   elif s is string: s
@@ -682,12 +826,7 @@ proc `$`*(s: Stringable): string {.inline.} =
   elif s is ptr WCHAR: `UNICODE->string`(s, lstrlenW(s))
   elif s is BSTR: `UNICODE->string`(s, int SysStringLen(s))
   elif s is array|seq|openArray:
-    if isOpenArrayStringable:
-      when sizeof(s[0]) == 1: `UTF8->string`(s)
-      elif sizeof(s[0]) == 2: `UNICODE->string`(s)
-      else: {.fatal: "invalid type".}
-    else:
-      system.`$`(s)
+    system.`$`(s)
   elif s is ptr array:
     when sizeof(s[][0]) == 1: `UTF8->string`(s[])
     elif sizeof(s[][0]) == 2: `UNICODE->string`(s[])
@@ -699,8 +838,8 @@ proc `$`*(s: Stringable): string {.inline.} =
   else: {.fatal: "invalid type".}
 
 proc `%$`*(s: Stringable): string {.inline.} =
-  ## Convert any stringable type to `string`. Always treat `openArray[SomeChar]` as string.
-  ## This operator assume `string|cstring|ptr char|openArray[char]` is utf8 encoding.
+  ## Converts any stringable type to `string`. Always treats `openArray[SomeChar]` as a string.
+  ## This operator assumes `string|cstring|ptr char|openArray[char]` are UTF-8-encoded strings.
   when s is char|byte: system.`$`(s)
   elif s is WCHAR: `UNICODE->string`(unsafeaddr s, 1)
   elif s is string: s
@@ -724,8 +863,8 @@ proc `%$`*(s: Stringable): string {.inline.} =
   else: {.fatal: "invalid type".}
 
 proc `+$`*(s: Stringable): wstring {.inline.} =
-  ## Convert any stringable type to `wstring`.
-  ## This operator assume `string|cstring|ptr char|openArray[char]` is utf8 encoding.
+  ## Converts any stringable type to `wstring`.
+  ## This operator assumes `string|cstring|ptr char|openArray[char]` are UTF-8-encoded strings.
   when s is char|byte: `UTF8->wstring`(cast[ptr char](unsafeaddr s), 1)
   elif s is WCHAR: `UNICODE->wstring`(unsafeaddr s, 1)
   elif s is string: `UTF8->wstring`(&s, s.len)
@@ -749,8 +888,8 @@ proc `+$`*(s: Stringable): wstring {.inline.} =
   else: {.fatal: "invalid type".}
 
 proc `-$`*(s: Stringable): mstring {.inline.} =
-  ## Convert any stringable type to `mstring`.
-  ## This operator assume `string|cstring|ptr char|openArray[char]` is utf8 encoding.
+  ## Converts any stringable type to `mstring`.
+  ## This operator assumes `string|cstring|ptr char|openArray[char]` are UTF-8-encoded strings.
   when s is char|byte: `UTF8->mstring`(cast[ptr char](unsafeaddr s), 1)
   elif s is WCHAR: `UNICODE->mstring`(unsafeaddr s, 1)
   elif s is string: `UTF8->mstring`(&s, s.len)
@@ -774,8 +913,8 @@ proc `-$`*(s: Stringable): mstring {.inline.} =
   else: {.fatal: "invalid type".}
 
 proc `$$`*(s: Stringable): string {.inline.} =
-  ## Convert any stringable type to `string`.
-  ## This operator assume `string|cstring|ptr char|openArray[char]` is ansi encoding.
+  ## Converts any stringable type to `string`.
+  ## This operator assumes `string|cstring|ptr char|openArray[char]` are ANSI-encoded strings.
   # Only exception is `WCHAR(uint16)`: regard as number in `$`, but string in `$$`
   when s is WCHAR: `UNICODE->string`(unsafeaddr s, 1)
   elif s is string: `ANSI->string`(&s, s.len)
@@ -792,8 +931,8 @@ proc `$$`*(s: Stringable): string {.inline.} =
   else: `$`(s)
 
 proc `+$$`*(s: Stringable): wstring {.inline.} =
-  ## Convert any stringable type to `wstring`.
-  ## This operator assume `string|cstring|ptr char|openArray[char]` is ansi encoding.
+  ## Converts any stringable type to `wstring`.
+  ## This operator assumes `string|cstring|ptr char|openArray[char]` are ANSI-encoded strings.
   when s is string: `ANSI->wstring`(&s, s.len)
   elif s is cstring|ptr char|ptr byte: `ANSI->wstring`(cast[ptr char](s), cast[cstring](s).len)
   elif s is array|seq|openArray:
@@ -808,8 +947,8 @@ proc `+$$`*(s: Stringable): wstring {.inline.} =
   else: `+$`(s)
 
 proc `-$$`*(s: Stringable): mstring {.inline.} =
-  ## Convert any stringable type to `mstring`.
-  ## This operator assume `string|cstring|ptr char|openArray[char]` is ansi encoding.
+  ## Converts any stringable type to `mstring`.
+  ## This operator assumes `string|cstring|ptr char|openArray[char]` are ANSI-encoded strings.
   when s is string: `ANSI->mstring`(&s, s.len)
   elif s is cstring|ptr char|ptr byte: `ANSI->mstring`(cast[ptr char](s), cast[cstring](s).len)
   elif s is array|seq|openArray:
@@ -827,10 +966,15 @@ proc fillBuffer[T: SomeChar](a: var openArray[T], s: SomeString, skip = 0, inclN
   when sizeof(a[0]) != sizeof(s[0]):
     {.fatal: "type mismatch".}
 
-  for i in 0 .. min(a.high, s.len - skip - 1):
-    a[i] = cast[T](s[i + skip])
+  if skip < 0 or skip > s.len:
+    raise newException(IndexDefect, "invalid source offset")
 
-  if inclNull and a.high >= s.len:
+  let copyLen = min(a.len, s.len - skip)
+  if copyLen > 0:
+    moveMem(addr a[0], cast[pointer](cast[uint](&s) + uint(skip * sizeof(T))),
+        copyLen * sizeof(T))
+
+  if inclNull and a.high >= s.len - skip:
     a[s.len - skip] = cast[T](0)
 
   # fill as much as possible before raise an exception
@@ -841,45 +985,68 @@ proc fillString[T: SomeChar](s: var SomeString, a: openArray[T], skip = 0) =
   when sizeof(a[0]) != sizeof(s[0]):
     {.fatal: "type mismatch".}
 
-  for i in 0 .. min(a.high, s.len - skip - 1):
-    s[i + skip] = cast[s[0].type](a[i])
+  if skip < 0 or skip > s.len:
+    raise newException(IndexDefect, "invalid destination offset")
 
-template `<<`*[A: SomeBuffer|SomeString, B: SomeBuffer|SomeString](a: A, b: B) =
-  ## Fill operator for `SomeBuffer` and `SomeString`.
-  ## Please make sure both side have the same character size.
-  ## If destination don't have the length information (e.g. `pointer` or `UncheckedArray`),
-  ## please make sure the buffer size is large enough.
-  when A is SomeString and B is SomeString:
-    # treat string a as buffer
-    var v = cast[ptr UncheckedArray[a[0].type]](&a)
-    fillBuffer(v.toOpenArray(0, a.len - 1), b, inclNull=false)
+  let copyLen = min(a.len, s.len - skip)
+  if copyLen > 0:
+    let
+      source = cast[uint](unsafeaddr a[0])
+      sourceEnd = source + uint(copyLen * sizeof(T))
+      destination = cast[uint](&s)
+      destinationEnd = destination + uint(s.len * sizeof(T))
+      overlaps = source < destinationEnd and destination < sourceEnd
 
-  elif A is not SomeString and B is SomeString:
-    when A is array:
-      fillBuffer(a.toOpenArray(a.low, a.high), b, skip=a.low, inclNull=false)
+    var saved: seq[T]
+    if overlaps:
+      saved = newSeq[T](copyLen)
+      copyMem(addr saved[0], unsafeaddr a[0], copyLen * sizeof(T))
 
-    elif A is ptr array:
-      fillBuffer(a[].toOpenArray(a[].low, a[].high), b, skip=a[].low, inclNull=false)
-
-    elif A is ptr char | ptr byte:
-      var v = cast[ptr UncheckedArray[byte]](a)
-      fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=false)
-
-    elif A is ptr WCHAR:
-      var v = cast[ptr UncheckedArray[WCHAR]](a)
-      fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=false)
-
-    elif A is ptr UncheckedArray[auto]:
-      var v = a
-      fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=false)
-
-    elif A is openArray | seq:
-      fillBuffer(a, b, inclNull=false)
-
+    when s is wstring:
+      prepareMutation(s)
+    elif s is string:
+      system.prepareMutation(s)
     else:
-      {.fatal: "type mismatch".}
+      system.prepareMutation(string(s))
 
-  elif A is SomeString and B is not SomeString:
+    let target = cast[pointer](cast[uint](&s) + uint(skip * sizeof(T)))
+    if overlaps:
+      moveMem(target, addr saved[0], copyLen * sizeof(T))
+    else:
+      moveMem(target, unsafeaddr a[0], copyLen * sizeof(T))
+
+macro requireMutable(value: typed): untyped =
+  proc isMutable(node: NimNode): bool =
+    case node.kind
+    of nnkSym:
+      result = node.symKind in {nskVar, nskResult, nskTemp} or
+          (node.symKind == nskParam and node.getTypeInst.kind == nnkVarTy)
+    of nnkDotExpr, nnkBracketExpr:
+      result = isMutable(node[0])
+    of nnkDerefExpr, nnkHiddenDeref:
+      result = true
+    else:
+      result = false
+  if not isMutable(value):
+    error("string destination must be a mutable lvalue", value)
+  result = newEmptyNode()
+
+template fillOp[A: SomeString, B: SomeBuffer|SomeString](a: var A, b: B) =
+  ## Fill operator for `SomeBuffer` and `SomeString`.
+  ## Please make sure both sides have the same character size.
+  when B is SomeString:
+    # treat string a as buffer
+    if cast[pointer](&a) != cast[pointer](&b):
+      when a is wstring:
+        prepareMutation(a)
+      elif a is string:
+        system.prepareMutation(a)
+      else:
+        system.prepareMutation(string(a))
+      var v = cast[ptr UncheckedArray[a[0].type]](&a)
+      fillBuffer(v.toOpenArray(0, a.len - 1), b, inclNull=false)
+
+  else:
     when B is array:
       fillString(a, b.toOpenArray(b.low, b.high), skip=b.low)
 
@@ -901,43 +1068,72 @@ template `<<`*[A: SomeBuffer|SomeString, B: SomeBuffer|SomeString](a: A, b: B) =
     else:
       {.fatal: "type mismatch".}
 
+template fillOp[A: SomeBuffer](a: A, b: SomeString) =
+  ## Fills a buffer with a string without a terminating null.
+  when A is array:
+    fillBuffer(a.toOpenArray(a.low, a.high), b, skip=a.low, inclNull=false)
+  elif A is ptr array:
+    fillBuffer(a[].toOpenArray(a[].low, a[].high), b, skip=a[].low, inclNull=false)
+  elif A is ptr char | ptr byte:
+    var v = cast[ptr UncheckedArray[byte]](a)
+    fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=false)
+  elif A is ptr WCHAR:
+    var v = cast[ptr UncheckedArray[WCHAR]](a)
+    fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=false)
+  elif A is ptr UncheckedArray[auto]:
+    var v = a
+    fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=false)
+  elif A is openArray | seq:
+    fillBuffer(a, b, inclNull=false)
   else:
     {.fatal: "type mismatch".}
 
-template `<<<`*[A: SomeBuffer|SomeString](a: A, b: SomeString) =
-  ## Fill buffer by string, include a null.
-  ## Please make sure both side have the same character size.
-  ## If destination don't have the length information (e.g. `pointer` or `UncheckedArray`),
-  ## please make sure the buffer size is large enough.
-  when A is SomeString:
-    # treat string a as buffer
+template fillOpNull[A: SomeString](a: var A, b: SomeString) =
+  ## Fill a buffer with a string, including a null terminator.
+  ## Please make sure both sides have the same character size.
+  if cast[pointer](&a) == cast[pointer](&b):
+    raise newException(IndexDefect, "string length too long")
+  else:
+    when a is wstring:
+      prepareMutation(a)
+    elif a is string:
+      system.prepareMutation(a)
+    else:
+      system.prepareMutation(string(a))
     var v = cast[ptr UncheckedArray[a[0].type]](&a)
     fillBuffer(v.toOpenArray(0, a.len - 1), b, inclNull=true)
 
+template fillOpNull[A: SomeBuffer](a: A, b: SomeString) =
+  ## Fills a buffer with a string including a terminating null.
+  when A is array:
+    fillBuffer(a.toOpenArray(a.low, a.high), b, skip=a.low, inclNull=true)
+  elif A is ptr array:
+    fillBuffer(a[].toOpenArray(a[].low, a[].high), b, skip=a[].low, inclNull=true)
+  elif A is ptr char | ptr byte:
+    var v = cast[ptr UncheckedArray[byte]](a)
+    fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=true)
+  elif A is ptr WCHAR:
+    var v = cast[ptr UncheckedArray[WCHAR]](a)
+    fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=true)
+  elif A is ptr UncheckedArray[auto]:
+    var v = a
+    fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=true)
+  elif A is openArray | seq:
+    fillBuffer(a, b, inclNull=true)
   else:
-    when A is array:
-      fillBuffer(a.toOpenArray(a.low, a.high), b, skip=a.low, inclNull=true)
+    {.fatal: "type mismatch".}
 
-    elif A is ptr array:
-      fillBuffer(a[].toOpenArray(a[].low, a[].high), b, skip=a[].low, inclNull=true)
+macro `<<`*(a, b: typed): untyped =
+  result = quote do:
+    when `a` is SomeString:
+      requireMutable(`a`)
+    fillOp(`a`, `b`)
 
-    elif A is ptr char | ptr byte:
-      var v = cast[ptr UncheckedArray[byte]](a)
-      fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=true)
-
-    elif A is ptr WCHAR:
-      var v = cast[ptr UncheckedArray[WCHAR]](a)
-      fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=true)
-
-    elif A is ptr UncheckedArray[auto]:
-      var v = a
-      fillBuffer(v.toOpenArray(0, int.high - 1), b, inclNull=true)
-
-    elif A is openArray | seq:
-      fillBuffer(a, b, inclNull=true)
-
-    else:
-      {.fatal: "type mismatch".}
+macro `<<<`*(a, b: typed): untyped =
+  result = quote do:
+    when `a` is SomeString:
+      requireMutable(`a`)
+    fillOpNull(`a`, `b`)
 
 template `>>`*(a: typed, b: typed) =
   ## This is the same as `b << a`.
@@ -955,6 +1151,8 @@ proc nullTerminate*(s: var SomeString) {.inline.} =
       s.setLen(L)
 
   elif s is wstring:
+    if string(s).len < 2:
+      s = newWString(0)
     let L = lstrlenW(cast[LPWSTR](&s))
     if L < s.len:
       s.setLen(L)
@@ -977,32 +1175,80 @@ proc nullTerminated*[T: SomeString](s: T): T {.inline.} =
 
   else: {.fatal: "invalid type".}
 
+proc baddr(str: wstring): BSTR =
+  # Returns a thread-local, BSTR-layout-compatible copy of `str`.
+  # The result is a borrowed input value. It must not be retained or freed
+  # with `SysFreeString`.
+  if temporaryBSTRs.data.len == 0:
+    temporaryBSTRs.data = newSeq[seq[byte]](BSTRSlotCount)
+
+  if uint64(str.len) > uint64(uint32.high) div uint64(sizeof(WCHAR)):
+    raise newException(OverflowDefect, "string is too long for BSTR")
+
+  let
+    slot = temporaryBSTRs.next
+    byteLen = str.len * sizeof(WCHAR)
+    totalLen = 4 + byteLen + sizeof(WCHAR)
+    bstrLen = uint32(byteLen)
+  temporaryBSTRs.data[slot].setLen(totalLen)
+  copyMem(addr temporaryBSTRs.data[slot][0], unsafeAddr bstrLen, 4)
+  if byteLen != 0:
+    copyMem(addr temporaryBSTRs.data[slot][4], &str, byteLen)
+  temporaryBSTRs.data[slot][4 + byteLen] = 0
+  temporaryBSTRs.data[slot][5 + byteLen] = 0
+
+  temporaryBSTRs.next = slot + 1
+  if temporaryBSTRs.next == BSTRSlotCount:
+    temporaryBSTRs.next = 0
+
+  result = cast[BSTR](addr temporaryBSTRs.data[slot][4])
+
+proc baddr(str: string): BSTR = baddr(+$str)
+
+proc baddr(str: cstring): BSTR = baddr(+$str)
+
 # generics has problems on converters, define one by one
 
 converter winstrConverterWStringToLPWSTR*(x: wstring): LPWSTR = cast[LPWSTR](&x)
-  ## Converts `wstring` to `LPWSTR` automatically.
+  ## Borrows an `LPWSTR` for an immediate input call. The callee must not retain,
+  ## modify, or free it.
 
-converter winstrConverterWStringToBSTR*(x: wstring): BSTR = cast[BSTR](&x)
-  ## Converts `wstring` to `BSTR` automatically.
+converter winstrConverterWStringToBSTR*(x: wstring): BSTR = baddr(x)
+  ## Borrows a BSTR-layout-compatible input for an immediate call. The callee
+  ## must not retain or free it; a later conversion on this thread may reuse it.
+
+converter winstrConverterStringToBSTR*(x: string): BSTR = baddr(x)
+  ## Borrows a BSTR-layout-compatible input for an immediate call. The callee
+  ## must not retain or free it; a later conversion on this thread may reuse it.
+
+converter winstrConverterCStringToBSTR*(x: cstring): BSTR = baddr(x)
+  ## Borrows a BSTR-layout-compatible input for an immediate call. The callee
+  ## must not retain or free it; a later conversion on this thread may reuse it.
 
 converter winstrConverterBSTRToLPWSTR*(x: BSTR): LPWSTR = cast[LPWSTR](x)
-  ## Converts `BSTR` to `LPWSTR` automatically.
+  ## Borrows the BSTR buffer as `LPWSTR` for an immediate input call. The
+  ## callee must not retain, modify, or free it.
 
 converter winstrConverterStringToPtrChar*(x: string): ptr char = cast[ptr char](&x)
-  ## Converts `string` to `ptr char` automatically.
+  ## Borrows a UTF-8 `ptr char` for an immediate input call. The callee must not
+  ## retain, modify, or free it.
 
 converter winstrConverterCStringToPtrChar*(x: cstring): ptr char = cast[ptr char](x)
-  ## Converts `cstring` to `ptr char` automatically.
+  ## Borrows the `cstring` buffer as `ptr char`. Its lifetime is the source
+  ## lifetime, and the callee must not modify or free it.
 
 converter winstrConverterMStringToPtrChar*(x: mstring): ptr char = cast[ptr char](&x)
-  ## Converts `mstring` to `ptr char` automatically.
+  ## Borrows an ANSI/MBCS `ptr char` for an immediate input call. The callee
+  ## must not retain, modify, or free it.
 
 converter winstrConverterMStringToLPSTR*(x: mstring): LPSTR = cast[LPSTR](&x)
-  ## Converts `mstring` to `LPSTR` automatically.
+  ## Borrows an ANSI/MBCS `LPSTR` for an immediate input call. The callee must
+  ## not retain, modify, or free it.
 
 when defined(gcDestructors):
   converter winstrConverterWideCStringToLPWSTR*(x: WideCStringObj): LPWSTR = cast[LPWSTR](x[0].unsafeaddr)
-    ## Converts `WideCString` to `LPWSTR` automatically.
+    ## Borrows the `WideCString` buffer as `LPWSTR`; the pointer is valid only
+    ## while the source remains alive and must not be freed.
 
   proc `+$`*(s: WideCStringObj): wstring {.inline.} =
     ## Converts `WideCString` to `wstring`.
@@ -1035,58 +1281,45 @@ else:
       s >> result
 
 when defined(gcDestructors):
-  # Here is the workaround for --gc:arc and --newruntime. It is a tricky problem,
-  # wstring needs to be alive until converter ending so that the windows API can
+  # Here is a workaround for --gc:arc and --newruntime. It is a tricky problem:
+  # wstring needs to stay alive until the converter ends so that the Windows API can
   # use the pointer later.
 
-  import deques
-  var wstringQueue {.threadvar.}: Deque[wstring]
-  var wstringQueueInit {.threadvar.}: bool
-
   proc saddr(str: sink wstring): LPWSTR =
-    if not wstringQueueInit:
-      wstringQueue = initDeque[wstring]()
-      wstringQueueInit = true
+    if temporaryWStrings.data.len == 0:
+      temporaryWStrings.data = newSeq[wstring](WStringSlotCount)
+    let slot = temporaryWStrings.next
+    temporaryWStrings.data[slot] = move(str)
 
-    elif wstringQueue.len > 128:
-      wstringQueue.shrink(fromFirst=64)
+    temporaryWStrings.next = slot + 1
+    if temporaryWStrings.next == WStringSlotCount:
+      temporaryWStrings.next = 0
 
-    wstringQueue.addLast str
-    &wstringQueue[^1]
+    &temporaryWStrings.data[slot]
 
   converter winstrConverterStringToLPWSTR*(x: string): LPWSTR = saddr(+$x)
-    ## Converts `string` to `LPWSTR` automatically.
+    ## Borrows an `LPWSTR` for an immediate input call. The callee must not
+    ## retain, modify, or free it; a later conversion on this thread may reuse it.
 
   converter winstrConverterCStringToLPWSTR*(x: cstring): LPWSTR = saddr(+$x)
-    ## Converts `cstring` to `LPWSTR` automatically.
-
-  converter winstrConverterStringToBSTR*(x: string): BSTR = cast[BSTR](saddr(+$x))
-    ## Converts `string` to `BSTR` automatically.
-
-  converter winstrConverterCStringToBSTR*(x: cstring): BSTR = cast[BSTR](saddr(+$x))
-    ## Converts `cstring` to `BSTR` automatically.
+    ## Borrows an `LPWSTR` for an immediate input call. The callee must not
+    ## retain, modify, or free it; a later conversion on this thread may reuse it.
 
 else:
   converter winstrConverterStringToLPWSTR*(x: string): LPWSTR = cast[LPWSTR](&(+$x))
-    ## Converts `string` to `LPWSTR` automatically.
+    ## Borrows an `LPWSTR` for an immediate input call. The callee must not
+    ## retain, modify, or free it.
 
   converter winstrConverterCStringToLPWSTR*(x: cstring): LPWSTR = cast[LPWSTR](&(+$x))
-    ## Converts `cstring` to `LPWSTR` automatically.
+    ## Borrows an `LPWSTR` for an immediate input call. The callee must not
+    ## retain, modify, or free it.
 
-  converter winstrConverterStringToBSTR*(x: string): BSTR = cast[BSTR](&(+$x))
-    ## Converts `string` to `BSTR` automatically.
-
-  converter winstrConverterCStringToBSTR*(x: cstring): BSTR = cast[BSTR](&(+$x))
-    ## Converts `cstring` to `BSTR` automatically.
-
-proc newWString*(s: cstring|string|mstring): wstring {.inline,
-    deprecated: "use `+$` instead".} =
-  ## Return a new `wstring`.
+proc newWString*(s: cstring|string|mstring): wstring {.inline, deprecated: "use `+$` instead".} =
+  ## Returns a new `wstring`.
   result = +$s
 
-proc newMString*(s: string|cstring|wstring): mstring {.inline,
-  deprecated: "use `-$` instead".} =
-  ## Return a new `mstring`.
+proc newMString*(s: string|cstring|wstring): mstring {.inline, deprecated: "use `-$` instead".} =
+  ## Returns a new `mstring`.
   result = -$s
 
 proc ctNewWString(s: static[string]): wstring {.compiletime.} =
@@ -1108,37 +1341,55 @@ proc ctNewWString(s: static[string]): wstring {.compiletime.} =
   template ones(n: untyped): untyped = ((1 shl n)-1)
 
   template fastRuneAt(s: cstring, i, L: int, result: untyped, doInc = true) =
-    if ord(s[i]) <= 127:
-      result = ord(s[i])
+    let b0 = ord(s[i])
+    if b0 <= 0x7F:
+      result = b0
       when doInc: inc(i)
-    elif ord(s[i]) shr 5 == 0b110:
-      if i <= L - 2:
-        result = (ord(s[i]) and (ones(5))) shl 6 or (ord(s[i+1]) and ones(6))
+    elif b0 in 0xC2..0xDF and i <= L - 2 and ord(s[i+1]) in 0x80..0xBF:
+        result = (b0 and ones(5)) shl 6 or (ord(s[i+1]) and ones(6))
         when doInc: inc(i, 2)
-      else:
-        result = UNI_REPL
-        when doInc: inc(i)
-    elif ord(s[i]) shr 4 == 0b1110:
-      if i <= L - 3:
-        result = (ord(s[i]) and ones(4)) shl 12 or
-                 (ord(s[i+1]) and ones(6)) shl 6 or
-                 (ord(s[i+2]) and ones(6))
+    elif b0 in 0xE0..0xEF and i <= L - 3 and
+        ord(s[i+1]) in 0x80..0xBF and ord(s[i+2]) in 0x80..0xBF and
+        (b0 != 0xE0 or ord(s[i+1]) >= 0xA0) and
+        (b0 != 0xED or ord(s[i+1]) <= 0x9F):
+        result = (b0 and ones(4)) shl 12 or
+                (ord(s[i+1]) and ones(6)) shl 6 or
+                (ord(s[i+2]) and ones(6))
         when doInc: inc(i, 3)
-      else:
+    elif b0 in 0xE0..0xEF and i <= L - 2 and ord(s[i+1]) in 0x80..0xBF and
+        ((b0 == 0xE0 and ord(s[i+1]) < 0xA0) or
+         (b0 == 0xED and ord(s[i+1]) > 0x9F)):
         result = UNI_REPL
-        when doInc: inc(i)
-    elif ord(s[i]) shr 3 == 0b11110:
-      if i <= L - 4:
-        result = (ord(s[i]) and ones(3)) shl 18 or
-                 (ord(s[i+1]) and ones(6)) shl 12 or
-                 (ord(s[i+2]) and ones(6)) shl 6 or
-                 (ord(s[i+3]) and ones(6))
+        when doInc: inc(i, 2)
+    elif b0 in 0xE0..0xEF and i <= L - 2 and ord(s[i+1]) in 0x80..0xBF:
+        # MultiByteToWideChar replaces a truncated valid prefix as one unit.
+        result = UNI_REPL
+        when doInc: inc(i, 2)
+    elif b0 in 0xF0..0xF4 and i <= L - 4 and
+        ord(s[i+1]) in 0x80..0xBF and ord(s[i+2]) in 0x80..0xBF and
+        ord(s[i+3]) in 0x80..0xBF and
+        (b0 != 0xF0 or ord(s[i+1]) >= 0x90) and
+        (b0 != 0xF4 or ord(s[i+1]) <= 0x8F):
+        result = (b0 and ones(3)) shl 18 or
+                (ord(s[i+1]) and ones(6)) shl 12 or
+                (ord(s[i+2]) and ones(6)) shl 6 or
+                (ord(s[i+3]) and ones(6))
         when doInc: inc(i, 4)
-      else:
+    elif b0 in 0xF0..0xF4 and i <= L - 2 and ord(s[i+1]) in 0x80..0xBF and
+        ((b0 == 0xF0 and ord(s[i+1]) < 0x90) or
+         (b0 == 0xF4 and ord(s[i+1]) > 0x8F)):
         result = UNI_REPL
-        when doInc: inc(i)
+        when doInc: inc(i, 2)
+    elif b0 in 0xF0..0xF4 and i <= L - 3 and
+        ord(s[i+1]) in 0x80..0xBF and ord(s[i+2]) in 0x80..0xBF:
+        # MultiByteToWideChar replaces a three-byte truncated prefix as one unit.
+        result = UNI_REPL
+        when doInc: inc(i, 3)
+    elif b0 in 0xF0..0xF4 and i <= L - 2 and ord(s[i+1]) in 0x80..0xBF:
+        result = UNI_REPL
+        when doInc: inc(i, 2)
     else:
-      result = 0xFFFD
+      result = UNI_REPL
       when doInc: inc(i)
 
   iterator runes(s: cstring, L: int): int =
@@ -1173,7 +1424,7 @@ proc ctNewWString(s: static[string]): wstring {.compiletime.} =
   result = wstring ret
 
 template L*(x: static[string]): wstring =
-  ## Generate const wstring from `static[string]` at compile-time.
+  ## Generates a const wstring from `static[string]` at compile time.
   const wstr = ctNewWString(x)
   wstr
 
@@ -1181,7 +1432,7 @@ template L*(x: string): wstring = +$x
   ## Same as `+$` for dynamic string (string at run-time).
 
 template T*(x: string): untyped =
-  ## Generate wstring or mstring depend on conditional symbol: `useWinAnsi`.
+  ## Generates a wstring or mstring depending on the conditional symbol: `useWinAnsi`.
   # must export winimbase to use winimAnsi here.
   when winimAnsi:
     -$x
@@ -1189,8 +1440,8 @@ template T*(x: string): untyped =
     L(x)
 
 template T*(x: Natural): untyped =
-  ## Generate wstring or mstring buffer depend on conditional symbol: `useWinAnsi`.
-  ## Use `&` to get the buffer address and then pass to Windows API.
+  ## Generates a wstring or mstring buffer depending on the conditional symbol: `useWinAnsi`.
+  ## Uses `&` to get the buffer address and then passes it to the Windows API.
   when winimAnsi:
     newMString(x)
   else:
@@ -1198,10 +1449,10 @@ template T*(x: Natural): untyped =
 
 when winimAnsi:
   type
-    TString* = mstring ## `wstring` or `mstring` depend on conditional symbol: `useWinAnsi`.
+    TString* = mstring ## `wstring` or `mstring` depending on the conditional symbol: `useWinAnsi`.
 else:
   type
-    TString* = wstring ## `wstring` or `mstring` depend on conditional symbol: `useWinAnsi`.
+    TString* = wstring ## `wstring` or `mstring` depending on the conditional symbol: `useWinAnsi`.
 
 when isMainModule:
   let str = "the quick brown fox jumps over the lazy dog"

@@ -1,5 +1,5 @@
-# Windows SDK have a lot of symbols that conflict with nim's symbol rule.
-# Here is a list for renamed symbols in Winim.
+# The Windows SDK has many symbols that conflict with Nim's symbol rules.
+# Here is a list of renamed symbols in Winim.
 
 _11 (AccessProc) => 11
 _12 (AccessProc) => 12

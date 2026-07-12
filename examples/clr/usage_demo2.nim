@@ -1,7 +1,7 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
@@ -103,9 +103,9 @@ const code = """
   public class MostDerived : Derived {}
 """
 
-proc print(msg: string) =
-  echo "\n" & msg
-  echo repeat('-', msg.len)
+proc section(title: string) =
+  echo "\n" & title
+  echo repeat('-', title.len)
 
 var mscor = load("mscorlib")
 var BindingFlags = mscor.GetType("System.Reflection.BindingFlags")
@@ -120,80 +120,80 @@ var TestClass = assembly.GetType("TestClass")
 var TestClass2 = assembly.GetType("TestClass2")
 var MostDerived = assembly.GetType("MostDerived")
 
-print "Invoking a static method."
-@TestClass.SayHello()
+section "Invoke a static method"
+@TestClass.SayHello() # Hello
 
-print "Invoking an instance method."
+section "Invoke an instance method"
 var c = @TestClass.new()
-c.AddUp()
-c.AddUp()
+c.AddUp() # AddUp Called 1 times
+c.AddUp() # AddUp Called 2 times
 
-print "Invoking a method with parameters."
-echo "100.09 + 184.45 = ", c.ComputeSum(100.09, 184.45)
+section "Invoke a method with parameters"
+echo "100.09 + 184.45 = ", c.ComputeSum(100.09, 184.45) # 284.54
 
-print "Invoking a field (getting and setting.)"
-echo "Name == ", c.Name
+section "Get and set a field"
+echo "Name == ", c.Name # initialName
 c.Name = "NewName"
-echo "Name == ", c.Name
+echo "Name == ", c.Name # NewName
 
-print "Invoking an indexed property (getting and setting.)"
+section "Get and set an indexed property"
 var index = 3
-echo fmt"Item[{index}] == ", c.Item(index)
+echo fmt"Item[{index}] == ", c.Item(index) # 3
 clrScript:
   c.Item(index) = "NewValue"
-echo fmt"Item[{index}] == ", c.Item(index)
+echo fmt"Item[{index}] == ", c.Item(index) # NewValue
 
-print "Getting a field or property."
-echo c.Name
-echo c.Value
+section "Get a field or property"
+echo c.Name # NewName
+echo c.Value # the value
 
-print "Invoking a method with named parameters."
-echo "(Unsupported)"
+section "Invoke a method with named parameters"
+echo "(Unsupported)" # named parameters are unsupported
 
-print "Invoking a default member of a type."
+section "Invoke a type's default member"
 var c2 = @TestClass2.new()
-c2.invoke("", BindingFlags_InvokeMethod or BindingFlags_Default)
+c2.invoke("", BindingFlags_InvokeMethod or BindingFlags_Default) # the current date and time
 
-print "Invoking a method with ref parameters."
+section "Invoke a method with ref parameters"
 var m = c.GetType.GetMethod("Swap")
 var args = [1, 2][]
 m.Invoke(c, args)
-echo fmt"args[0] = {args[0]}, args[1] = {args[1]}"
+echo fmt"args[0] = {args[0]}, args[1] = {args[1]}" # args[0] = 2, args[1] = 1
 
-print "Creating an instance with a parameterless constructor."
+section "Create an instance with a parameterless constructor"
 var flags = BindingFlags_Public or BindingFlags_Instance or BindingFlags_CreateInstance
-# method 1: Use "new" keyword on CLRType (by calling Activator.CreateInstance)
+# Method 1: use CLRType.new (Activator.CreateInstance).
 c = @TestClass.new()
-# method 2: Use "new" keyword on assembly CLRVariant (by calling Assembly.CreateInstance)
+# Method 2: use assembly.new (Assembly.CreateInstance).
 c = assembly.new("TestClass")
-# method 3: Call "invoke" low level helper function
+# Method 3: call the low-level invoke helper.
 c = @TestClass.invoke("TestClass", flags)
-# method 4: Call InvokeMember method by yourself
+# Method 4: call InvokeMember directly.
 c = TestClass.InvokeMember("TestClass", flags[BindingFlags], nil, nil, nil)
-echo fmt"Instance of {c.GetType().Name} created."
+echo fmt"Instance of {c.GetType().Name} created." # Instance of TestClass created.
 
-print "Creating an instance with a constructor that has parameters."
+section "Create an instance with constructor arguments"
 c = @TestClass.new("Hello, World!")
 c = assembly.new("TestClass", "Hello, World!")
 c = @TestClass.invoke("TestClass", flags, "Hello, World!")
 c = TestClass.InvokeMember("TestClass", flags[BindingFlags], nil, nil, ["Hello, World!"])
-echo fmt"Instance of {c.GetType().Name} created with initial value '{c.Name}'."
+echo fmt"Instance of {c.GetType().Name} created with initial value '{c.Name}'." # Hello, World!
 
-print "DeclaredOnly instance members."
+section "List DeclaredOnly instance members"
 flags = BindingFlags_DeclaredOnly or BindingFlags_Instance or BindingFlags_Public
 for i in TestClass.GetMembers(flags[BindingFlags]):
-  echo i.Name
+  echo i.Name # member names
 
-print "Using IgnoreCase and invoking the PrintName method."
+section "Invoke PrintName with IgnoreCase"
 flags = BindingFlags_IgnoreCase or BindingFlags_Static or BindingFlags_Public or BindingFlags_InvokeMethod
-@TestClass.invoke("printname", flags, "Brad", "Smith")
+@TestClass.invoke("printname", flags, "Brad", "Smith") # Smith, Brad
 
-print "Using FlattenHierarchy to get inherited static protected and public members."
+section "List inherited members with FlattenHierarchy"
 flags = BindingFlags_NonPublic or BindingFlags_Public or BindingFlags_Static or BindingFlags_FlattenHierarchy
 for i in MostDerived.GetFields(flags[BindingFlags]):
-  echo fmt"{i.Name} defined in {i.DeclaringType.Name}."
+  echo fmt"{i.Name} defined in {i.DeclaringType.Name}." # field names and declaring types
 
-print "Without FlattenHierarchy."
+section "List members without FlattenHierarchy"
 flags = BindingFlags_NonPublic or BindingFlags_Public or BindingFlags_Static
 for i in MostDerived.GetFields(flags[BindingFlags]):
-  echo fmt"{i.Name} defined in {i.DeclaringType.Name}."
+  echo fmt"{i.Name} defined in {i.DeclaringType.Name}." # field names and declaring types

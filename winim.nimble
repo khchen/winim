@@ -1,32 +1,29 @@
 #====================================================================
 #
-#          Winim - Windows API, COM, and CLR Module for Nim
-#               Copyright (c) Chen Kai-Hung, Ward
+#         Winim - Windows API, COM, and .NET Binding for Nim
+#                   Copyright (c) Chen Kai-Hung
 #
 #====================================================================
 
 # Package
-
-version       = "3.9.4"
-author        = "Ward"
-description   = "Winim - Windows API, COM, and CLR Module for Nim"
+version       = "4.0.0"
+author        = "Chen Kai-Hung"
+description   = "Winim - Windows API, COM, and .NET Module for Nim"
 license       = "MIT"
-skipDirs      = @["examples", "tests", "docs", "tcclib"]
+skipDirs      = @["examples", "tests", "docs"]
 
 # Dependencies
-
-requires "nim >= 1.0.0"
+requires "nim >= 2.0.0"
 
 # Tests
-
 task test, "Runs the test suite":
-  exec "nim c -r tests/variant_test"
-  exec "nim c -r tests/winstr_test"
-  exec "nim c -r tests/com_test"
-  exec "nim c -r tests/clr_test"
+  exec "nim r tests/winstr"
+  exec "nim r tests/variant"
+  exec "nim r tests/com"
+  exec "nim r tests/clr"
+  exec "nim r tests/dotnet"
 
 # Examples
-
 task example, "Build all the examples":
   exec "nim c examples/fileopendialog"
   exec "nim c examples/getopenfilename"
@@ -37,9 +34,13 @@ task example, "Build all the examples":
   exec "nim c examples/shortcut"
   exec "nim c examples/uiautomation"
 
-# COM Examples
+  exec "nim c examples/clr/code_compiler"
+  exec "nim c examples/clr/simple_gui"
+  exec "nim c examples/clr/splitter"
+  exec "nim c examples/clr/usage_demo1"
+  exec "nim c examples/clr/usage_demo2"
+  exec "nim c examples/clr/wpf"
 
-task comexample, "Build all the COM examples":
   exec "nim c examples/com/binary"
   exec "nim c examples/com/constants"
   exec "nim c examples/com/diskinfo"
@@ -47,6 +48,7 @@ task comexample, "Build all the COM examples":
   exec "nim c examples/com/Excel_Application2"
   exec "nim c examples/com/InternetExplorer_Application"
   exec "nim c examples/com/MSXML_DOMDocument"
+  exec "nim c examples/com/Run_JavaScript"
   exec "nim c examples/com/SAPI_SpVoice"
   exec "nim c examples/com/Scriptlet_TypeLib"
   exec "nim c examples/com/Shell_Application"
@@ -61,25 +63,18 @@ task comexample, "Build all the COM examples":
   exec "nim c examples/com/threads/thread3"
   exec "nim c examples/com/threads/thread4"
 
-# CLR Examples
+  exec "nim c examples/dotnet/async_download"
+  exec "nim c examples/dotnet/dotnet_browser"
+  exec "nim c examples/dotnet/simple_gui"
+  exec "nim c examples/dotnet/usage_demo"
+  exec "nim c examples/dotnet/wpf"
 
-task clrexample, "Build all the CLR examples":
-  exec "nim c examples/clr/code_compiler.nim"
-  exec "nim c examples/clr/misc_examples.nim"
-  exec "nim c examples/clr/simple_gui.nim"
-  exec "nim c examples/clr/splitter.nim"
-  exec "nim c examples/clr/usage_demo1.nim"
-  exec "nim c examples/clr/usage_demo2.nim"
-  exec "nim c examples/clr/wpf.nim"
+  exec "nim c examples/webview2/dotnet_webview2"
+  when defined(cpu64):
+    exec "nim c -d:webview2=WebView2Loader64 examples/webview2/webview2"
+  else:
+    exec "nim c -d:webview2=WebView2Loader32 --cpu:i386 examples/webview2/webview2"
 
-# Sweep
-
-task sweep, "Delete all the executable files":
-  exec "cmd /c IF EXIST tests\\*.exe del tests\\*.exe"
-  exec "cmd /c IF EXIST examples\\*.exe del examples\\*.exe"
-  exec "cmd /c IF EXIST examples\\com\\*.exe del examples\\com\\*.exe"
-  exec "cmd /c IF EXIST examples\\com\\nimDispatch\\*.exe del examples\\com\\nimDispatch\\*.exe"
-  exec "cmd /c IF EXIST examples\\com\\threads\\*.exe del examples\\com\\threads\\*.exe"
-  exec "cmd /c IF EXIST examples\\clr\\*.exe del examples\\clr\\*.exe"
-  exec "cmd /c IF EXIST examples\\clr\\*.dll del examples\\clr\\*.dll"
-  exec "cmd /c IF EXIST winim\\*.exe del winim\\*.exe"
+# Cleanup
+task cleanup, "Delete all executable files under the project directory":
+  exec "cmd.exe /d /c del /s /q /f *.exe"
